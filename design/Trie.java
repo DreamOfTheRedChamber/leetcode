@@ -49,13 +49,13 @@ public class Trie
         }
         
         // handle leaf/internal node
-        if ( nextNodePos == word.length() - 1 )
+        if ( wordPos == word.length() - 1 )
         {
             nextNode.isLeaf = true;
         }
         else
         {
-            insertRecurse( word, nextNodePos + 1, nextNode );
+            insertRecurse( word, wordPos + 1, nextNode );
         }
     }
 
