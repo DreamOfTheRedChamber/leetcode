@@ -1,3 +1,4 @@
+package design;
 class TrieNode 
 {
     private final static int CHARSET_SIZE = 26;

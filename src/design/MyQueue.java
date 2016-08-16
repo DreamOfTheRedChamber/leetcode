@@ -1,3 +1,7 @@
+package design;
+
+import java.util.Stack;
+
 class MyQueue 
 {
     Stack<Integer> stackForPush = new Stack<>();

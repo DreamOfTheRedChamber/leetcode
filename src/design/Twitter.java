@@ -1,4 +1,4 @@
-package src.design;
+package design;
 
 import java.util.ArrayList;
 import java.util.HashMap;

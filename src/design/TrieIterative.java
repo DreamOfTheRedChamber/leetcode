@@ -1,3 +1,4 @@
+package design;
 class TrieNode 
 {
     private final static int CHARSET_SIZE = 26;
@@ -23,11 +24,6 @@ public class TrieIterative
     private TrieNode root;
 
     public TrieIterative() 
-    {
-        root = new TrieNode();
-    }
-
-    public Trie() 
     {
         root = new TrieNode();
     }

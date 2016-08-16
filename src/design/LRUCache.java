@@ -1,3 +1,8 @@
+package design;
+
+import java.util.HashMap;
+import java.util.Map;
+
 class ListNode
 {
     public int key;
