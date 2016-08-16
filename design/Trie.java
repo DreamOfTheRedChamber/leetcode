@@ -46,6 +46,7 @@ public class Trie
         if ( nextNode == null )
         {
             nextNode = new TrieNode( word.charAt( wordPos ) );
+            currNode.children[nextNodePos] = nextNode;
         }
         
         // handle leaf/internal node
