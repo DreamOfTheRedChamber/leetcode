@@ -1,13 +1,17 @@
-
 package design;
+
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class HitCounter
 {
-
+	private Queue<Integer> pastFiveMinHits;
+	private final static int FIVE_MINUTES = 299;
+	
 	/** Initialize your data structure here. */
 	public HitCounter( )
 	{
-
+		pastFiveMinHits = new LinkedList<>();
 	}
 
 	/**
@@ -18,7 +22,7 @@ public class HitCounter
 	 */
 	public void hit( int timestamp )
 	{
-
+		pastFiveMinHits.add( timestamp );
 	}
 
 	/**
@@ -29,7 +33,12 @@ public class HitCounter
 	 */
 	public int getHits( int timestamp )
 	{
-
+		while ( !pastFiveMinHits.isEmpty() 
+				&& pastFiveMinHits.peek() + FIVE_MINUTES <= timestamp )
+		{
+			pastFiveMinHits.poll();
+		}
+		return pastFiveMinHits.size();
 	}
 }
 
