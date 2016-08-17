@@ -7,9 +7,11 @@ public class TicTacToe
 	private int[] player1Row;
 	private int[] player1Col;
 	private int player1Diagnal;
+	private int player1ReverseDiagnal;
 	private int[] player2Row;
 	private int[] player2Col;
 	private int player2Diagnal;
+	private int player2ReverseDiagnal;
 	private int boardSize;
 	
 	/** Initialize your data structure here. */
@@ -45,11 +47,16 @@ public class TicTacToe
 			{
 				player1Diagnal += 1;
 			}
+			if ( row + col == boardSize - 1 )
+			{
+				player1ReverseDiagnal += 1;
+			}
 			
 			// check if win
 			if ( player1Row[row] == boardSize
 					|| player1Col[col] == boardSize
-					|| player1Diagnal == boardSize )
+					|| player1Diagnal == boardSize
+					|| player1ReverseDiagnal == boardSize )
 			{
 				return 1;
 			}
@@ -66,11 +73,16 @@ public class TicTacToe
 			{
 				player2Diagnal += 1;
 			}
+			if ( row + col == boardSize - 1 )
+			{
+				player2ReverseDiagnal += 1;
+			}
 			
 			// check if win
 			if ( player2Row[row] == boardSize
 					|| player2Col[row] == boardSize
-					|| player2Diagnal == boardSize )
+					|| player2Diagnal == boardSize 
+					|| player2ReverseDiagnal == boardSize )
 			{
 				return 2;
 			}
