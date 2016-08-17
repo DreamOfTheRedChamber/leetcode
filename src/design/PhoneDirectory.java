@@ -1,9 +1,16 @@
 
 package design;
 
+import java.util.HashSet;
+import java.util.PriorityQueue;
+import java.util.Set;
+
 public class PhoneDirectory
 {
-
+	private Set<Integer> usedNumbers;
+	private PriorityQueue<Integer> availableNumbers;
+	private final static int MIN_BOUND = 1;
+	private int maxNumbers;
 	/**
 	 * Initialize your data structure here
 	 * 
@@ -13,7 +20,13 @@ public class PhoneDirectory
 	 */
 	public PhoneDirectory( int maxNumbers )
 	{
-
+		usedNumbers = new HashSet<>();
+		availableNumbers = new PriorityQueue<>();
+		this.maxNumbers = maxNumbers;
+		for ( int i = MIN_BOUND; i < MIN_BOUND + maxNumbers; i++ )
+		{
+			availableNumbers.offer( i );
+		}
 	}
 
 	/**
@@ -23,19 +36,32 @@ public class PhoneDirectory
 	 */
 	public int get( )
 	{
-
+		int minAvailableNum = availableNumbers.poll();
+		usedNumbers.add( minAvailableNum );
+		return minAvailableNum;
 	}
 
 	/** Check if a number is available or not. */
 	public boolean check( int number )
 	{
-
+		if ( ( number < MIN_BOUND + maxNumbers )
+				&& ( number >= MIN_BOUND )
+				&& ( !usedNumbers.contains( number ) )
+				)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 
 	/** Recycle or release a number. */
 	public void release( int number )
 	{
-
+		usedNumbers.remove( number );
+		availableNumbers.add( number );
 	}
 }
 
