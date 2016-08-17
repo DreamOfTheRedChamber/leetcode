@@ -1,17 +1,16 @@
 package design;
 
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.PriorityQueue;
 
 public class HitCounter
 {
-	private Queue<Integer> pastFiveMinHits;
+	private PriorityQueue<Integer> pastFiveMinHits;
 	private final static int FIVE_MINUTES = 299;
 	
 	/** Initialize your data structure here. */
 	public HitCounter( )
 	{
-		pastFiveMinHits = new LinkedList<>();
+		pastFiveMinHits = new PriorityQueue<>();
 	}
 
 	/**
@@ -22,7 +21,7 @@ public class HitCounter
 	 */
 	public void hit( int timestamp )
 	{
-		pastFiveMinHits.add( timestamp );
+		pastFiveMinHits.offer( timestamp );
 	}
 
 	/**
