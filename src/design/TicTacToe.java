@@ -80,7 +80,7 @@ public class TicTacToe
 			
 			// check if win
 			if ( player2Row[row] == boardSize
-					|| player2Col[row] == boardSize
+					|| player2Col[col] == boardSize
 					|| player2Diagnal == boardSize 
 					|| player2ReverseDiagnal == boardSize )
 			{
