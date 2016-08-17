@@ -4,10 +4,22 @@ package design;
 public class TicTacToe
 {
 
+	private int[] player1Row;
+	private int[] player1Col;
+	private int player1Diagnal;
+	private int[] player2Row;
+	private int[] player2Col;
+	private int player2Diagnal;
+	private int boardSize;
+	
 	/** Initialize your data structure here. */
 	public TicTacToe( int n )
 	{
-
+		player1Row = new int[n];
+		player1Col = new int[n];
+		player2Row = new int[n];
+		player2Col = new int[n];
+		boardSize = n;
 	}
 
 	/**
@@ -24,7 +36,49 @@ public class TicTacToe
 	 */
 	public int move( int row, int col, int player )
 	{
-
+		if ( player == 1 )
+		{
+			// record current move
+			player1Row[row] += 1;
+			player1Col[col] += 1;
+			if ( row == col )
+			{
+				player1Diagnal += 1;
+			}
+			
+			// check if win
+			if ( player1Row[row] == boardSize
+					|| player1Col[col] == boardSize
+					|| player1Diagnal == boardSize )
+			{
+				return 1;
+			}
+			else
+			{
+				return 0;
+			}
+		}
+		else
+		{
+			player2Row[row] += 1;
+			player2Col[col] += 1;
+			if ( row == col )
+			{
+				player2Diagnal += 1;
+			}
+			
+			// check if win
+			if ( player2Row[row] == boardSize
+					|| player2Col[row] == boardSize
+					|| player2Diagnal == boardSize )
+			{
+				return 2;
+			}
+			else
+			{
+				return 0;
+			}
+		}
 	}
 }
 
