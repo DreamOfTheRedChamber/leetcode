@@ -13,6 +13,14 @@ public class GraphValidTree
 {
     public boolean validTree(int n, int[][] edges) 
     {
+    	if ( n <= 0 )
+    	{
+    		throw new IllegalArgumentException("");
+    	}
+    	if ( n == 1 )
+    	{
+    		return true;
+    	}
     	if ( n != edges.length + 1 )
     	{
     		return false;
