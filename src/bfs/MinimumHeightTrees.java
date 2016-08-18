@@ -31,6 +31,7 @@ public class MinimumHeightTrees
     	// remove leaves of the tree until 0~1 nodes, add to result
     	while ( graph.size() > 1 )
     	{
+    		// collect leaves
     		List<Integer> leaves = new ArrayList<>();
     		for ( Map.Entry<Integer, Set<Integer>> entry : graph.entrySet() )
     		{
@@ -42,9 +43,14 @@ public class MinimumHeightTrees
     			}
     		}
     		
+    		// remove vertex and edges
     		for ( Integer leaf : leaves )
     		{
-    			graph.remove( leaf );
+    			Set<Integer> neighbors = graph.remove( leaf );
+    			for ( Integer neighbor : neighbors )
+    			{
+    				graph.get( neighbor ).remove( leaf );
+    			}
     		}
     	}
     	
