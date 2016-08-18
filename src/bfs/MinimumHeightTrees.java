@@ -29,10 +29,11 @@ public class MinimumHeightTrees
     	}
     	
     	// remove leaves of the tree until 0~1 nodes, add to result
-    	while ( graph.size() > 1 )
+		List<Integer> leaves = null;
+    	while ( graph.size() != 0 )
     	{
     		// collect leaves
-    		List<Integer> leaves = new ArrayList<>();
+    		leaves = new ArrayList<>();
     		for ( Map.Entry<Integer, Set<Integer>> entry : graph.entrySet() )
     		{
     			int node = entry.getKey();
@@ -54,7 +55,7 @@ public class MinimumHeightTrees
     		}
     	}
     	
-    	return graph.keySet().stream().collect( Collectors.toList() );    	
+    	return leaves;  	
     }
 
 }
