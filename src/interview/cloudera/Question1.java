@@ -1,4 +1,4 @@
-package clouderaInterview;
+package interview.cloudera;
 
 /**
  * 第一题，把一个integer的数字顺序打乱后得到的新的integer叫做该integer的sibling   比如 123和231，132，213，321都是sibling，但和222就不是。
@@ -22,10 +22,10 @@ public static int solution(int N){
 
  */
 
-public class ClouderaOAQuestion1
+public class Question1
 {
 
-	public ClouderaOAQuestion1( )
+	public Question1( )
 	{
 		// TODO Auto-generated constructor stub
 	}

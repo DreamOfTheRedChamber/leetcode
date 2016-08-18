@@ -1,13 +1,13 @@
-package stack;
+package interview.slack;
 
 /**
  * 
  */
 
-public class TrappingRainWater
+public class SimplifyPath
 {
 
-	public TrappingRainWater( )
+	public SimplifyPath( )
 	{
 		// TODO Auto-generated constructor stub
 	}
