@@ -1,13 +1,17 @@
 package design;
-public class MedianFinder {
-
+public class MedianFinder 
+{
+	
+	
     // Adds a number into the data structure.
-    public void addNum(int num) {
+    public void addNum(int num) 
+    {
         
     }
 
     // Returns the median of current data stream
-    public double findMedian() {
+    public double findMedian() 
+    {
         
     }
 };

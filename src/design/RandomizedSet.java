@@ -1,16 +1,10 @@
 public class RandomizedSet
 {
-
-	private List<Integer> indexToValueList;
-	private Map<Integer, Integer> valueToIndexMap;
-	Random rand;
 	
 	/** Initialize your data structure here. */
 	public RandomizedSet( )
 	{
-		indexToValueList = new ArrayList<>();
-		valueToIndexMap = new HashMap<>();
-		rand = new Random();
+		
 	}
 
 	/**
@@ -19,16 +13,7 @@ public class RandomizedSet
 	 */
 	public boolean insert( int val )
 	{
-		if ( valueToIndexMap.containsKey( val ) )
-		{
-			return false;
-		}
-		else
-		{
-			indexToValueList.add( val );
-			valueToIndexMap.put( val, indexToValueList.size() - 1 );
-			return true;
-		}
+		
 	}
 
 	/**
@@ -37,24 +22,13 @@ public class RandomizedSet
 	 */
 	public boolean remove( int val )
 	{
-		if ( valueToIndexMap.containsKey( val ) )
-		{
-			int index = valueToIndexMap.get( val );
-			valueToIndexMap.remove( val );
-			indexToValueList.remove( index );
-			return true;
-		}
-		else
-		{
-			return false;
-		}
+
 	}
 
 	/** Get a random element from the set. */
 	public int getRandom( )
 	{
-		int nextRandom = rand.nextInt( indexToValueList.size() );
-		return indexToValueList.get( nextRandom );
+		
 	}
 }
 

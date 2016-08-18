@@ -4,12 +4,10 @@ package bfs;
  * 
  */
 
-public class CloneGraph
-{
+public class CloneGraph {
 
-    public UndirectedGraphNode cloneGraph(UndirectedGraphNode node) 
-    {
-        
-    }
+	public UndirectedGraphNode cloneGraph(UndirectedGraphNode node) {
+
+	}
 
 }

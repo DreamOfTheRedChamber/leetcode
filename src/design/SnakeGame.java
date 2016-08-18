@@ -1,4 +1,3 @@
-
 package design;
 
 public class SnakeGame
