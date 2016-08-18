@@ -5,6 +5,8 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import org.junit.Test;
+
 /**
  * 
  */
@@ -81,5 +83,12 @@ public class GraphValidTree
     	
     	visited.add( startNode );
     	return false;
+    }
+    
+    @Test
+    public void test()
+    {
+    	int[][] edges = new int[][]{{0, 1}, {0, 2}, {2, 3}, {2, 4}};
+    	System.out.println( validTree( 5, edges ) );
     }
 }
