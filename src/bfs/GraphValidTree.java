@@ -1,5 +1,7 @@
 package bfs;
 
+import static org.junit.Assert.assertTrue;
+
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -43,7 +45,7 @@ public class GraphValidTree
     	Set<Integer> visited = new HashSet<>();
     	Set<Integer> discovered = new HashSet<>();
     	int startNode = edges[0][0];
-    	boolean isCycleExist = depthFirstSearch( graph, startNode, discovered, visited );
+    	boolean isCycleExist = depthFirstSearch( graph, startNode, startNode, discovered, visited );
     	
     	if ( isCycleExist 
     			|| visited.size() < n )
@@ -57,15 +59,16 @@ public class GraphValidTree
     }
     
     /** 
+     * @param super startnode value in recursive dfs calling
      * @return does cycle exists
      */
-    private boolean depthFirstSearch( Map<Integer, Set<Integer>> graph, int startNode, Set<Integer> discovered, Set<Integer> visited )
+    private boolean depthFirstSearch( Map<Integer, Set<Integer>> graph, int startNode, int parentNode, Set<Integer> discovered, Set<Integer> visited )
     {
     	discovered.add( startNode );
     	
     	for ( Integer neighbor : graph.get( startNode ) )
     	{
-    		if ( neighbor == startNode )
+    		if ( neighbor == parentNode )
     		{
     			continue;
     		}    		
@@ -75,7 +78,7 @@ public class GraphValidTree
     			return true;
     		}
     		
-    		if ( depthFirstSearch( graph, neighbor, discovered, visited ) )
+    		if ( depthFirstSearch( graph, neighbor, startNode, discovered, visited ) )
     		{
     			return true;
     		}
@@ -86,9 +89,10 @@ public class GraphValidTree
     }
     
     @Test
-    public void test()
+    public void tests()
     {
-    	int[][] edges = new int[][]{{0, 1}, {0, 2}, {2, 3}, {2, 4}};
-    	System.out.println( validTree( 5, edges ) );
-    }
+    	assertTrue( !validTree( 4, new int[][]{{0, 1}, {1, 2}, {2, 3}, {3, 1}} ) );
+    	assertTrue( validTree( 5, new int[][]{{0, 1}, {0, 2}, {2, 3}, {2, 4}} ));
+    	assertTrue( !validTree( 6, new int[][]{{0, 1}, {0, 2}, {2, 3}, {2, 4}} ));
+    }    
 }
