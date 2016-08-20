@@ -60,7 +60,8 @@ public class ShortestDistanceFromAllBuildings
         	}
         }
         
-        if ( minDist == Integer.MAX_VALUE )
+        if ( minDist == Integer.MAX_VALUE 
+        		|| minDist == 0 )
         {
         	return -1;
         }
@@ -164,10 +165,16 @@ public class ShortestDistanceFromAllBuildings
     }
     
     @Test
+    public void obstacle()
+    {
+    	assertEquals( -1, shortestDistance( new int[][]{ {1, 2, 0} } ) );
+    }
+    
+    @Test
     public void normalElem()
     {
     	assertEquals( 7, shortestDistance( new int[][]{ {1, 0, 2, 0, 1}, {0, 0, 0, 0, 0}, {0, 0, 1, 0, 0} } ) );
-    }
+    }    
 }
 
 class Coor
