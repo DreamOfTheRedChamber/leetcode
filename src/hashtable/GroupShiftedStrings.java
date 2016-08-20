@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import org.junit.Test;
+
 /**
  * 
 Given a string, we can "shift" each of its letter to its successive letter, for example: "abc" -> "bcd". We can keep "shifting" which forms the sequence:
@@ -34,8 +36,8 @@ public class GroupShiftedStrings
         for ( String originalStr : strings )
         {
         	String shiftedStr = shiftString( originalStr );
-        	groupedStrings.putIfAbsent( originalStr, new ArrayList<>() );
-        	groupedStrings.get( originalStr ).add( shiftedStr );
+        	groupedStrings.putIfAbsent( shiftedStr, new ArrayList<>() );
+        	groupedStrings.get( shiftedStr ).add( originalStr );
         }
         
         return groupedStrings.values( )
@@ -51,9 +53,15 @@ public class GroupShiftedStrings
     	{
     		// map shifted char into 0-25
     		int shiftedInteger = ( ch - 'a' - shiftDist + 26 ) % 26;
-    		int shiftedCh = (char) ( 'a' + shiftedInteger );
+    		char shiftedCh = (char) ( 'a' + shiftedInteger );
     		shiftedStr.append( shiftedCh );
     	}
     	return shiftedStr.toString( );
+    }
+    
+    @Test
+    public void test()
+    {
+    	System.out.println( groupStrings( new String[]{"abc", "bcd", "acef", "xyz", "az", "ba", "a", "z"}) );
     }
 }
