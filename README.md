@@ -11,3 +11,9 @@
 
 ### boundary case
 * passed in a reference variable, check null pointer case
+* grid-based problem
+	- gridsize == 1, no solution inside grid
+
+### smells for refactoring and optimization
+* code length > 100
+* too many if statement checking for boundary cases
