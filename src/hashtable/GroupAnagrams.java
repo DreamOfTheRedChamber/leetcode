@@ -34,7 +34,7 @@ public class GroupAnagrams
         	char[] chArray = str.toCharArray( );
         	Arrays.sort( chArray );
         	groupedAnagrams.putIfAbsent( String.valueOf( chArray ), new ArrayList<>() );
-        	
+        	groupedAnagrams.get( String.valueOf( chArray ) ).add( str );
         }
         return groupedAnagrams.values( ).stream( ).collect( Collectors.toList( ) );
     }
