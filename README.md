@@ -28,6 +28,8 @@ PriorityQueue<NumAndFreq> mostFreqPrioQueue = new PriorityQueue<>( ( o1, o2 ) ->
 * Array
 	* Is array sorted
 	* Given two arrays, which one's size is bigger
+* Hashmap
+	* histogram-related problem, character set
 
 ### Graph related errors
 * detect cycle in undirected graph
