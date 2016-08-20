@@ -1,7 +1,11 @@
 package bfs;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.LinkedList;
 import java.util.Queue;
+
+import org.junit.Test;
 
 /**
  * 
@@ -15,6 +19,19 @@ public class ShortestDistanceFromAllBuildings
     	if ( grid.length == 0 )
     	{
     		throw new IllegalArgumentException();
+    	}
+    	
+    	if ( ( grid.length == 1 ) 
+    			&& ( grid[0].length == 1 ) )
+    	{
+    		if ( grid[0][0] != 0 )
+    		{
+    			return -1;
+    		}
+    		else
+    		{
+    			return 0;
+    		}
     	}
     	
         int[][] minDistSum = new int[grid.length][grid[0].length];
@@ -118,8 +135,26 @@ public class ShortestDistanceFromAllBuildings
     		}
     	}
     }
-
     
+    @Test
+    public void singleSpace()
+    {
+    	assertEquals( -1, shortestDistance( new int[][]{ { 1 } } ) );
+    	assertEquals( -1, shortestDistance( new int[][]{ { 2 } } ) );
+    	assertEquals( 0, shortestDistance( new int[][]{ { 0 } } ) );
+    }
+    
+    @Test
+    public void singleBuilding()
+    {
+    	assertEquals( 1, shortestDistance( new int[][]{ {0, 0, 1} }) );
+    }
+    
+    @Test
+    public void normalElem()
+    {
+    	assertEquals( 7, shortestDistance( new int[][]{ {1, 0, 2, 0, 1}, {0, 0, 0, 0, 0}, {0, 0, 1, 0, 0} } ) );
+    }
 }
 
 class Coor
