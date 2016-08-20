@@ -17,6 +17,10 @@ public class BinaryTreeLevelOrderTraversal
         List<List<Integer>> allLevelNums = new ArrayList<>();
         List<Integer> currLevelNums = new ArrayList<>();
 
+        if ( root == null )
+        {
+        	return allLevelNums;
+        }
     	Queue<TreeNode> currLevelNodes = new LinkedList<>();
         Queue<TreeNode> nextLevelNodes = new LinkedList<>();
 

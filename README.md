@@ -8,3 +8,6 @@
 ### Graph related errors
 * detect cycle in undirected graph
     - pass in super node inside dfs recursive call
+
+### boundary case
+* passed in a reference variable, check null pointer case
