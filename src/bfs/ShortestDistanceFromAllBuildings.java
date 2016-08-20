@@ -60,7 +60,14 @@ public class ShortestDistanceFromAllBuildings
         	}
         }
         
-        return minDist;
+        if ( minDist == Integer.MAX_VALUE )
+        {
+        	return -1;
+        }
+        else
+        {
+        	return minDist;
+        }
     }
 
     private void updateDistSum( int[][] grid, int[][] minDistSum, int startRow, int startCol )
@@ -148,6 +155,12 @@ public class ShortestDistanceFromAllBuildings
     public void singleBuilding()
     {
     	assertEquals( 1, shortestDistance( new int[][]{ {0, 0, 1} }) );
+    }
+    
+    @Test
+    public void noSpace()
+    {
+    	assertEquals( -1, shortestDistance( new int[][]{ { 1, 1, 1} } ) );
     }
     
     @Test
