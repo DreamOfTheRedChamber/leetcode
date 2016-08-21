@@ -15,12 +15,10 @@ public class ContainsDuplicate
     	Set<Integer> appearedNums = new HashSet<>();
     	for ( int num : nums )
     	{
-    		if ( appearedNums.contains( num ) )
+    		if ( !appearedNums.add( num ) )
     		{
     			return true;
-    		}
-    		
-    		appearedNums.add( num );
+    		}    		
     	}
     	return false;
     }
