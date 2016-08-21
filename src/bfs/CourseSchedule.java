@@ -31,13 +31,14 @@ public class CourseSchedule
     		graph.get( edge[1] ).add( edge[0] );
     	}
     	
+    	// topoSort with dfs for detecting cycles
     	Set<Integer> discovered = new HashSet<>();
     	Set<Integer> visited = new HashSet<>();
     	for ( Integer vertex : graph.keySet() )
     	{
     		if ( !visited.contains( vertex ) )
     		{
-    			if ( judgeCycleExist( graph, vertex, discovered, visited ) )
+    			if ( topoSort( graph, vertex, discovered, visited ) )
     			{
     				return false;
     			}
@@ -46,14 +47,17 @@ public class CourseSchedule
     	return true;
     }
     
-    private boolean judgeCycleExist( Map<Integer, Set<Integer>> graph, Integer startNode, Set<Integer> discovered, Set<Integer> visited )
+    /**
+     * @return whether a cycle is detected
+     */
+    private boolean topoSort ( Map<Integer, Set<Integer>> graph, Integer startNode, Set<Integer> discovered, Set<Integer> visited )
     {
     	discovered.add( startNode );
     	for ( Integer neighbor : graph.get( startNode ) )
     	{
     		if ( !discovered.contains( neighbor ) )
     		{
-    			if ( judgeCycleExist( graph, neighbor, discovered, visited ) )
+    			if ( topoSort( graph, neighbor, discovered, visited ) )
     			{
     				return true;
     			}
