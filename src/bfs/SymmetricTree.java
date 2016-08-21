@@ -1,5 +1,7 @@
 package bfs;
 
+import utility.TreeNode;
+
 /**
  * 
  */

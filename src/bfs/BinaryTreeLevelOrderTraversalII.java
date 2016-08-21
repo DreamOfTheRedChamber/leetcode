@@ -6,6 +6,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
+import utility.TreeNode;
+
 /**
  * 
  */
@@ -18,6 +20,10 @@ public class BinaryTreeLevelOrderTraversalII
         List<List<Integer>> allLevelNums = new ArrayList<>();
         List<Integer> currLevelNums = new ArrayList<>();
 
+        if ( root == null )
+        {
+        	return allLevelNums;
+        }
     	Queue<TreeNode> currLevelNodes = new LinkedList<>();
         Queue<TreeNode> nextLevelNodes = new LinkedList<>();
 
