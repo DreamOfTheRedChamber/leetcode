@@ -1,5 +1,9 @@
 package dfs;
 
+import java.util.List;
+
+import utility.NestedInteger;
+
 /**
  * // This is the interface that allows for creating nested lists.
  * // You should not implement it, or speculate about its implementation
@@ -31,8 +35,38 @@ package dfs;
 
 public class NestedListWeightSumII
 {
-    public int depthSumInverse(List<NestedInteger> nestedList) 
+    public int depthSumInverse( List<NestedInteger> nestedList )
     {
-        
+        return calcWeightSum( nestedList, calcMaxDepth( nestedList, 1 ) );
+    }
+    
+    private int calcWeightSum( List<NestedInteger> nestedList, int currDepth )
+    {
+    	int weightSum = 0;
+    	for ( NestedInteger num : nestedList )
+    	{
+    		if ( num.isInteger() )
+    		{
+    			weightSum += num.getInteger() * currDepth;
+    		}
+    		else
+    		{
+    			weightSum += calcWeightSum( num.getList(), currDepth - 1 );
+    		}
+    	}
+    	return weightSum;
+    }
+    
+    private int calcMaxDepth( List<NestedInteger> nestedList, int baseDepth )
+    {
+    	int maxDepth = baseDepth;
+    	for ( NestedInteger num : nestedList )
+    	{
+    		if ( !num.isInteger() )
+    		{
+    			maxDepth = Math.max( maxDepth, calcMaxDepth( num.getList() , baseDepth + 1 ) );
+    		}
+    	}
+    	return maxDepth;
     }
 }
