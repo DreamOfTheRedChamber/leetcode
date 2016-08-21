@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.junit.Test;
+
 /**
  * 
 Write a function to find all the 10-letter-long sequences (substrings) that occur more than once in a DNA molecule.
@@ -24,7 +26,7 @@ public class RepeatDNASequences
     {
     	// compute histogram
         Map<String, Integer> sequenceHistogram = new HashMap<>();
-    	for ( int i = 0; i < s.length() - 10; i++ )
+    	for ( int i = 0; i <= s.length() - 10; i++ )
         {
     		String sequence = s.substring( i, i + 10 );
         	sequenceHistogram.put( sequence, sequenceHistogram.getOrDefault( sequence, 0 ) + 1 );
@@ -40,6 +42,12 @@ public class RepeatDNASequences
     		}
     	}
     	return repeatedSequence;
+    }
+    
+    @Test
+    public void test()
+    {
+    	System.out.println( findRepeatedDnaSequences( "AAAAAAAAAAA" ));
     }
 
 }
