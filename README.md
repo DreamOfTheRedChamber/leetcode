@@ -31,9 +31,10 @@ PriorityQueue<NumAndFreq> mostFreqPrioQueue = new PriorityQueue<>( ( o1, o2 ) ->
 * Hashmap
 	* histogram-related problem, character set
 
-### Graph related errors
+### related errors
 * detect cycle in undirected graph
     - pass in super node inside dfs recursive call
+* increase/decrease position counter inside foreach loop
 
 ### boundary case
 * passed in a reference variable, check null pointer case
