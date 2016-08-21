@@ -58,6 +58,7 @@ public class IntersectionOfTwoArraysII
     	for ( int num : intersection )
     	{
     		result[pos] = num;
+    		pos++;
     	}
     	return result;
     }
