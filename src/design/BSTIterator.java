@@ -2,6 +2,8 @@ package design;
 
 import java.util.Stack;
 
+import utility.TreeNode;
+
 /**
  * Definition for binary tree
  * public class TreeNode {
