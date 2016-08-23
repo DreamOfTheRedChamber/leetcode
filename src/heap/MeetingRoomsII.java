@@ -10,6 +10,7 @@ return 2.
 
 public class MeetingRoomsII 
 {
+	// TODO: intervals - sort, overlap
     public int minMeetingRooms(Interval[] intervals) 
     {
         
