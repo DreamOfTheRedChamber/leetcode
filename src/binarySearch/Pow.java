@@ -1,7 +1,7 @@
 package math;
 
 /**
- * 
+ * Implement pow(x, n).
  */
 
 public class Pow
