@@ -1,5 +1,7 @@
 package heap;
 
+import java.util.PriorityQueue;
+
 /*
 Find the kth largest element in an unsorted array. Note that it is the kth largest element in the sorted order, not the kth distinct element.
 
@@ -12,8 +14,22 @@ You may assume k is always valid, 1 ≤ k ≤ array's length.
 
 public class KthLargestElementInAnArray 
 {
-    public int findKthLargest(int[] nums, int k) 
+    public int findKthLargest( int[] nums, int k )
     {
+        PriorityQueue<Integer> pQueue = new PriorityQueue<>( ( o1, o2 ) -> o2 - o1 );
+        for ( int num : nums )
+        {
+        	pQueue.add( num );
+        }
         
+        int count = 0;
+        int result = 0;
+        while ( count < k )
+        {
+        	result = pQueue.remove();
+        	count++;
+        }
+        
+        return result;
     }
 }
