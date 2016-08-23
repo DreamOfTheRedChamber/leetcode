@@ -25,7 +25,50 @@ public class SearchA2DMatrixII
 {
     public boolean searchMatrix(int[][] matrix, int target) 
     {
-        
+    	if ( matrix.length == 0 
+    			|| matrix[0].length == 0 )
+    	{
+    		return false;
+    	}
+    	
+    	// better with an object
+    	int[] candidateRows = findCandidateRows( matrix, target );
+    	if ( candidateRows[0] == -1 )
+    	{
+    		return false;
+    	}
+    	int[] candidateCols = findCandidateCols( matrix, target );
+    	if ( candidateRows[0] == -1 )
+    	{
+    		return false;
+    	}
+    	
+    	return true;
     }
-
+    
+    // TODO: multiple binary search, combine into one ?
+    private int[] findCandidateRows( int[][] matrix, int target )
+    {
+    	int[] rowIndexRange = new int[]{ -1, -1 };
+    	
+    	int lastSmallerRowHead = findLastSmallerRow( matrix, target );
+    	if ( lastSmallerRowHead == -1 )
+    	{
+    		return rowIndexRange;
+    	}
+    	
+    	int firstBiggerRowTail = findFirstBiggerRow( matrix, target );
+    	if ( lastSmallerRowHead <= firstBiggerRowTail )
+    	{
+    		rowIndexRange[0] = lastSmallerRowHead;
+    		rowIndexRange[1] = firstBiggerRowTail;
+    		return rowIndexRange;
+    	}
+    	else
+    	{    		
+    		return rowIndexRange;
+    	}
+    }    
+    
+    
 }
