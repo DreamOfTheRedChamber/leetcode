@@ -1,5 +1,8 @@
 package hashtable;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
 Given an array nums and a target value k, find the maximum length of a subarray that sums to k. If there isn't one, return 0 instead.
 
@@ -15,13 +18,25 @@ Follow Up:
 Can you do it in O(n) time?
  */
 
-//todo
 public class MaximumSizeSubarraySumEqualsK
 {
-
-    public int maxSubArrayLen(int[] nums, int k) 
+    public int maxSubArrayLen( int[] nums, int k )
     {
-        
+    	Map<Integer, Integer> prefixSumToIndex = new HashMap<>();
+    	int prefixSum = 0;
+    	int maxLength = 0;
+    	for ( int i = 0; i < nums.length; i++ )
+    	{
+    		prefixSum += nums[i];
+    		if ( prefixSumToIndex.containsKey( k - prefixSum ) )
+    		{
+    			maxLength = Math.max( maxLength, i - prefixSumToIndex.get( k - prefixSum ) );
+    		}
+    		if ( !prefixSumToIndex.containsKey( prefixSum ) )
+    		{
+    			prefixSumToIndex.put( prefixSum, i );
+    		}
+    	}
+    	return maxLength;
     }
-
 }
