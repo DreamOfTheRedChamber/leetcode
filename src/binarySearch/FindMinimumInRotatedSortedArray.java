@@ -13,6 +13,12 @@ public class FindMinimumInRotatedSortedArray
 {
     public int findMin( int[] nums ) 
     {
+    	if ( nums.length == 0 )
+    	{
+    		throw new IllegalArgumentException("");
+    	}
+    	
+    	// find first element smaller than end
         int start = 0;
         int end = nums.length - 1;
         while ( start + 1 < end )
@@ -27,6 +33,7 @@ public class FindMinimumInRotatedSortedArray
         		start = mid;
         	}        	
         }
+                
         if ( nums[start] < nums[end] )
         {
         	return nums[start];
