@@ -2,8 +2,9 @@ package heap;
 
 public class MergeKSortedLists 
 {
-    public ListNode mergeKLists(ListNode[] lists) {
-        
+    public ListNode mergeKLists(ListNode[] lists) 
+    {
+    	
     }
 
 }
