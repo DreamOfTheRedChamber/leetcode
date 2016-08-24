@@ -14,8 +14,38 @@ Your algorithm should run in linear runtime complexity. Could you implement it u
 
 public class SingleNumberIII 
 {
-    public int[] singleNumber(int[] nums) 
+    public int[] singleNumber( int[] nums )
     {
-        
+        // xor all numbers
+    	int twoNumXor = 0;
+    	for ( int num : nums )
+    	{
+    		twoNumXor ^= num;
+    	}
+    	
+    	// find lowest 1 bit pos: 
+    	int lowestOnePos = 0;
+    	// TODO: put bit operations in parentheses
+    	while ( ( twoNumXor & ( 1 << lowestOnePos ) ) == 0)
+    	{
+    		lowestOnePos++;
+    	}
+    	
+    	// category int[] nums into two according to previous lowest 1 bit    	
+    	// xor two categories separately
+    	int singleOne = 0;
+    	int singleTwo = 0;
+    	for ( int num : nums )
+    	{
+    		if ( ( num & ( 1 << lowestOnePos ) ) == 0 )
+    		{
+    			singleOne ^= num;
+    		}
+    		else
+    		{
+    			singleTwo ^= num;
+    		}
+    	}
+    	return new int[]{ singleOne, singleTwo };
     }
 }
