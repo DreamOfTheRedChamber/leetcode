@@ -10,10 +10,21 @@ Note:
 Your algorithm should run in linear runtime complexity. Could you implement it using only constant extra space complexity?
  * */
 
+//todo
 public class MissingNumber 
 {
     public int missingNumber(int[] nums) 
     {
+    	int missingNum = 0;
+        for ( int num : nums )
+        {
+        	missingNum ^= num;
+        }
+        for ( int i = 0; i <= nums.length; i++ )
+        {
+        	missingNum ^= i;
+        }
         
+        return missingNum;
     }
 }
