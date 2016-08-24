@@ -21,10 +21,9 @@ Given target = 5, return true.
 Given target = 20, return false.
  * */
 
-//todo
 public class SearchA2DMatrixII 
 {
-    public boolean searchMatrix(int[][] matrix, int target) 
+    public boolean searchMatrix( int[][] matrix, int target )
     {
     	if ( matrix.length == 0 
     			|| matrix[0].length == 0 )
@@ -32,44 +31,26 @@ public class SearchA2DMatrixII
     		return false;
     	}
     	
-    	// better with an object
-    	int[] candidateRows = findCandidateRows( matrix, target );
-    	if ( candidateRows[0] == -1 )
+    	// from right upper corner
+    	int xCoor = 0;
+    	int yCoor = matrix[0].length - 1;
+    	while ( xCoor <= matrix.length 
+    			&& yCoor >= 0 )
     	{
-    		return false;
-    	}
-    	int[] candidateCols = findCandidateCols( matrix, target );
-    	if ( candidateRows[0] == -1 )
-    	{
-    		return false;
+    		if ( matrix[xCoor][yCoor] == target )
+    		{
+    			return true;
+    		}
+    		else if ( matrix[xCoor][yCoor] < target )
+    		{
+    			yCoor--;
+    		}
+    		else
+    		{
+    			xCoor++;
+    		}
     	}
     	
-    	return true;
-    }
-    
-    // TODO: multiple binary search, combine into one ?
-    private int[] findCandidateRows( int[][] matrix, int target )
-    {
-    	int[] rowIndexRange = new int[]{ -1, -1 };
-    	
-    	int lastSmallerRowHead = findLastSmallerRow( matrix, target );
-    	if ( lastSmallerRowHead == -1 )
-    	{
-    		return rowIndexRange;
-    	}
-    	
-    	int firstBiggerRowTail = findFirstBiggerRow( matrix, target );
-    	if ( lastSmallerRowHead <= firstBiggerRowTail )
-    	{
-    		rowIndexRange[0] = lastSmallerRowHead;
-    		rowIndexRange[1] = firstBiggerRowTail;
-    		return rowIndexRange;
-    	}
-    	else
-    	{    		
-    		return rowIndexRange;
-    	}
+    	return false;
     }    
-    
-    
 }
