@@ -39,6 +39,7 @@ public class DivideTwoIntegers
     	dividend = Math.abs( dividend );
     	divisor = Math.abs( divisor );
     	
+    	// calc bitwise width of quotient
     	int quotientBitWidth = 0;
     	int shiftedDivisor = divisor;
     	while ( shiftedDivisor < dividend )
