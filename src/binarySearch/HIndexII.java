@@ -10,18 +10,39 @@ For example, given citations = [3, 0, 6, 1, 5], which means the researcher has 5
 Note: If there are several possible values for h, the maximum one is taken as the h-index.
 Follow up for H-Index: What if the citations array is sorted in ascending order? Could you optimize your algorithm?
 
-Show Hint 
-Show Company Tags
-Show Tags
-Show Similar Problems
-
  * */
 
-// todo
 public class HIndexII 
 {
-    public int hIndex(int[] citations) 
+    public int hIndex( int[] citations )
     {
-        
+    	if ( citations.length == 0 )
+    	{
+    		return 0;
+    	}
+    	
+    	// find last position where length - pos >= citations[pos]
+    	int start = 0;
+    	int end = citations.length - 1;
+    	while ( start + 1 < end )
+    	{
+    		int mid = ( end - start ) / 2 + start;
+    		if ( citations[mid] < citations.length - mid )
+    		{
+    			start = mid;
+    		}
+    		else
+    		{
+    			end = mid;
+    		}
+    	}
+    	if ( citations[end] >= citations.length - end )
+    	{
+    		return citations[end];
+    	}
+    	else
+    	{
+    		return citations[start];
+    	}
     }
 }
