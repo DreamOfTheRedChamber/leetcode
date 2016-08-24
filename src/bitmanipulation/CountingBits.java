@@ -16,9 +16,33 @@ Can you do it like a boss? Do it without using any builtin function like __built
 
 public class CountingBits 
 {
-	//todo
-    public int[] countBits(int num) 
+    public int[] countBits( int num )
     {
-        
+    	if ( num < 0 )
+    	{
+    		throw new IllegalArgumentException("");
+    	}
+        	
+    	int[] numOfOnes = new int[num + 1];
+    	numOfOnes[0] = 0;
+    	numOfOnes[1] = 1;
+    	
+    	// TODO: will it generate all nums?
+    	for ( int i = 1; i <= num; i++ )
+    	{    	
+    		//TODO: overflow
+    		int parentOne = ( i << 1 );
+    		if ( parentOne < num )
+    		{
+    			numOfOnes[parentOne] = numOfOnes[i];
+    		}
+    		int parentTwo = ( i << 1) + 1;
+    		if ( parentTwo < num )
+    		{
+    			numOfOnes[parentTwo] = numOfOnes[i] + 1;
+    		}
+    	}
+    	
+    	return numOfOnes;
     }
 }
