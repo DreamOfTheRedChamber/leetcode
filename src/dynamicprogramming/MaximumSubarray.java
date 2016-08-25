@@ -9,8 +9,20 @@ the contiguous subarray [4,-1,2,1] has the largest sum = 6.
 
 public class MaximumSubarray
 {
-    public int maxSubArray(int[] nums) 
+    public int maxSubArray( int[] nums )
     {
-        
+    	if ( nums.length == 0 )
+    	{
+    		throw new IllegalArgumentException("");
+    	}
+    	
+    	int maxEndingAtCurrPos = nums[0];
+    	int globalMaxSum = nums[0];
+    	for ( int i = 1; i < nums.length; i++ )
+    	{
+    		maxEndingAtCurrPos = Math.max( maxEndingAtCurrPos + nums[i], nums[i] );
+    		globalMaxSum = Math.max( globalMaxSum, maxEndingAtCurrPos );
+    	}
+    	return globalMaxSum;
     }
 }

@@ -17,18 +17,18 @@ public class MaxProduct
     	}
     	
     	int globalMaxProduct = nums[0];
-    	int maxProductEndingAtI = nums[0]; // ending at index i
-    	int minProductEndingAtI = nums[0];
+    	int maxEndingAtCurrPos = nums[0]; // ending at index i
+    	int minEndingAtCurrPos = nums[0];
     	for ( int i = 1; i < nums.length; i++ )
     	{
     		// max product ending at i
-    		maxProductEndingAtI = Math.max( Math.max( nums[i] * maxProductEndingAtI, // nums[i] > 0
-    										nums[i] * minProductEndingAtI), // nums[i] < 0
-    										nums[i] );			   // nums[i-1] == 0
-    		minProductEndingAtI = Math.min( Math.min( nums[i] * maxProductEndingAtI, 
-    										nums[i] * minProductEndingAtI), 
+    		maxEndingAtCurrPos = Math.max( Math.max( nums[i] * maxEndingAtCurrPos, // nums[i] > 0
+    										nums[i] * minEndingAtCurrPos), 		   // nums[i] < 0
+    										nums[i] );			   				   // nums[i-1] == 0
+    		minEndingAtCurrPos = Math.min( Math.min( nums[i] * maxEndingAtCurrPos, 
+    										nums[i] * minEndingAtCurrPos), 
     										nums[i] );
-    		globalMaxProduct = Math.max( globalMaxProduct, maxProductEndingAtI );
+    		globalMaxProduct = Math.max( globalMaxProduct, maxEndingAtCurrPos );
     	}
     	
     	return globalMaxProduct;
