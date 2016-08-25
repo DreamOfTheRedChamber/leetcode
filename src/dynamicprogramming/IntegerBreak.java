@@ -10,8 +10,23 @@ Note: You may assume that n is not less than 2 and not larger than 58.
 
 public class IntegerBreak
 {
-    public int integerBreak(int n) 
+    public int integerBreak( int n )
     {
-        
+    	if ( n <= 1 )
+    	{
+    		throw new IllegalArgumentException("");
+    	}
+    		
+    	// max product of breaking integer i
+        int[] maxProd = new int[n+1];
+        maxProd[1] = 1;
+        for ( int i = 2; i <= n; i++ )
+        {
+        	for ( int j = 1; j < i; j++ )
+        	{
+        		maxProd[i] += maxProd[i-j] * j;
+        	}
+        }
+        return maxProd[n];
     }
 }
