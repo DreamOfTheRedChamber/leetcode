@@ -27,12 +27,7 @@ public class Combinations
     {
     	List<List<Integer>> allCombs = new LinkedList<>();
     	List<Integer> oneComb = new LinkedList<>();
-    	for ( int i = 1; i <= n; i++ )
-    	{
-    		oneComb.add( i );
-    		generateCombs( allCombs, oneComb, i + 1, n, k - 1 );
-    		oneComb.remove( oneComb.size() - 1 );
-    	}
+    	generateCombs( allCombs, oneComb, 0, n, k );
     	return allCombs;
     }
     
@@ -41,7 +36,6 @@ public class Combinations
     	if ( k == 0 )
     	{
     		allCombs.add( new LinkedList<>( oneComb ) );
-    		return;
     	}
     	
     	for ( int i = start; i <= end; i++ )
@@ -55,6 +49,6 @@ public class Combinations
     @Test
     public void test()
     {
-    	System.out.print( combine(6 ,2) );
+    	System.out.print( combine(3 ,2) );
     }
 }
