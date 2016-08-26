@@ -20,36 +20,38 @@ public class NumberOfConnectedComponentsInAnUndirectedGraph
     	
     	// build graph
     	Map<Integer, Set<Integer>> graph = new HashMap<>();
+    	for ( int i = 0; i < n; i++ )
+    	{
+    		graph.put( i, new HashSet<>() );
+    	}    	
     	for ( int[] edge : edges )
     	{
-    		graph.putIfAbsent( edge[0], new HashSet<>() );
-    		graph.putIfAbsent( edge[1], new HashSet<>() );
     		graph.get( edge[0] ).add( edge[1] );
     		graph.get( edge[1] ).add( edge[0] );
     	}
     	
     	int numComponents = 0;
     	Set<Integer> visited = new HashSet<>();
-    	for ( Integer vertex : graph.keySet() )
+    	for ( Integer node : graph.keySet() )
     	{
-    		if ( !visited.contains( vertex ) )
+    		if ( !visited.contains( node ) )
     		{
     			numComponents++;
-    			markComponent( graph, visited, vertex );
+    			markComponent( graph, visited, node );
     		}
     	}
     	
     	return numComponents;
     }
     
-    private void markComponent( Map<Integer, Set<Integer>> graph, Set<Integer> visited, Integer startVertex )
+    private void markComponent( Map<Integer, Set<Integer>> graph, Set<Integer> visited, Integer startNode )
     {
-    	visited.add( startVertex );
-    	for ( Integer vertex : graph.get( startVertex) )
+    	visited.add( startNode );
+    	for ( Integer neighborNode : graph.get( startNode ) )
     	{
-    		if ( !visited.contains( vertex) )
+    		if ( !visited.contains( neighborNode ) )
     		{
-    			markComponent( graph, visited, startVertex );
+    			markComponent( graph, visited, neighborNode );
     		}
     	}
     }
