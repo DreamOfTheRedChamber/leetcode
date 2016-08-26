@@ -1,5 +1,10 @@
 package backtracking;
 
+import java.util.LinkedList;
+import java.util.List;
+
+import org.junit.Test;
+
 /*
 Given two integers n and k, return all possible combinations of k numbers out of 1 ... n.
 
@@ -18,7 +23,38 @@ If n = 4 and k = 2, a solution is:
 
 public class Combinations 
 {
-    public List<List<Integer>> combine(int n, int k) 
+    public List<List<Integer>> combine( int n, int k )
     {
+    	List<List<Integer>> allCombs = new LinkedList<>();
+    	List<Integer> oneComb = new LinkedList<>();
+    	for ( int i = 1; i <= n; i++ )
+    	{
+    		oneComb.add( i );
+    		generateCombs( allCombs, oneComb, i + 1, n, k - 1 );
+    		oneComb.remove( oneComb.size() - 1 );
+    	}
+    	return allCombs;
+    }
+    
+    private void generateCombs( List<List<Integer>> allCombs, List<Integer> oneComb, int start, int end, int k )
+    {
+    	if ( k == 0 )
+    	{
+    		allCombs.add( new LinkedList<>( oneComb ) );
+    		return;
+    	}
+    	
+    	for ( int i = start; i <= end; i++ )
+    	{
+    		oneComb.add( i );
+    		generateCombs( allCombs, oneComb, i + 1, end, k - 1 );
+    		oneComb.remove( oneComb.size() - 1 );
+    	}
+    }
+    
+    @Test
+    public void test()
+    {
+    	System.out.print( combine(6 ,2) );
     }
 }
