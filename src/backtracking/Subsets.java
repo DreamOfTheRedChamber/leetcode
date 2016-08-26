@@ -36,7 +36,7 @@ public class Subsets
     private void generateSubsets( List<List<Integer>> allSubsets, List<Integer> oneSubset, int[] nums, int startPos )
     {
     	// recursion base
-    	if ( startPos < nums.length )
+    	if ( startPos >= nums.length )
     	{
     		return;
     	}
