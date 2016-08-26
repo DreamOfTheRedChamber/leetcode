@@ -19,6 +19,7 @@ class NumAndFreq
 ```java
 PriorityQueue<NumAndFreq> mostFreqPrioQueue = new PriorityQueue<>( ( o1, o2 ) -> ( o2.freq - o1.freq ) );
 ```
+
 	- increasing order
 ```java
 PriorityQueue<NumAndFreq> mostFreqPrioQueue = new PriorityQueue<>( ( o1, o2 ) -> ( o1.freq - o2.freq ) );
@@ -41,6 +42,13 @@ PriorityQueue<NumAndFreq> mostFreqPrioQueue = new PriorityQueue<>( ( o1, o2 ) ->
 	{
 		\\...
 	}
+```
+* Print arrays in Java
+```java
+int[] array1D = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+int[][] array2D = { { 1, 2 }, {2, 5}, {3, 7} };
+System.out.println( Arrays.toString( array1D ) );
+System.out.println( Arrays.deepToString( array2D ));
 ```
 
 * Detect cycles inside directed graphs with dfs + visited set + discovered set.
