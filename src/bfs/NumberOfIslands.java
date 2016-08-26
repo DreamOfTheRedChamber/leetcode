@@ -6,7 +6,9 @@ package bfs;
 
 public class NumberOfIslands
 {
-
+	private final static int MARKED_LAND = 2;
+	private final static int LAND = 1;
+	
     public int numIslands(char[][] grid) 
     {
     	if ( grid.length == 0
@@ -22,10 +24,10 @@ public class NumberOfIslands
     	{
     		for ( int j = 0; j < width; j++ )
     		{
-    			if ( grid[i][j] == '1' )
+    			if ( grid[i][j] == LAND )
     			{
     				islandCount++;
-    				markIsland( grid, i, j );
+    				markEntireIsland( grid, i, j );
     			}
     		}
     	}
@@ -34,9 +36,9 @@ public class NumberOfIslands
     	{
     		for ( int j = 0; j < width; j++ )
     		{
-    			if ( grid[i][j] == '2' )
+    			if ( grid[i][j] == MARKED_LAND )
     			{
-    				grid[i][j] = '1';
+    				grid[i][j] = LAND;
     			}
     		}
     	}
@@ -44,7 +46,7 @@ public class NumberOfIslands
     	return islandCount;
     }
     
-    private void markIsland( char[][] grid, int xStart, int yStart )
+    private void markEntireIsland( char[][] grid, int xStart, int yStart )
     {
     	int heighth = grid.length;
     	int width = grid[0].length;
@@ -52,15 +54,16 @@ public class NumberOfIslands
     			|| xStart >= heighth
     			|| yStart < 0
     			|| yStart >= width
-    			|| grid[xStart][yStart] != '1' )
+    			|| grid[xStart][yStart] != LAND )
     	{
     		return;
     	}
     	
-    	markIsland( grid, xStart + 1, yStart );
-    	markIsland( grid, xStart - 1, yStart );
-    	markIsland( grid, xStart, yStart + 1 );
-    	markIsland( grid, xStart, yStart - 1 );
+    	grid[xStart][yStart] = MARKED_LAND;
+    	markEntireIsland( grid, xStart + 1, yStart );
+    	markEntireIsland( grid, xStart - 1, yStart );
+    	markEntireIsland( grid, xStart, yStart + 1 );
+    	markEntireIsland( grid, xStart, yStart - 1 );
     }
 
 }
