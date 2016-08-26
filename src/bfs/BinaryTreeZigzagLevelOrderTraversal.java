@@ -1,9 +1,9 @@
 package bfs;
 
 import java.util.ArrayList;
-import java.util.Deque;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Stack;
 
 import org.junit.Test;
 
@@ -15,49 +15,74 @@ import utility.TreeNode;
 
 public class BinaryTreeZigzagLevelOrderTraversal
 {
-
-    public List<List<Integer>> zigzagLevelOrder(TreeNode root) 
+	@Test
+	public void test()
+	{
+		TreeNode root = new TreeNode(3);
+		TreeNode node1 = new TreeNode(9);
+		TreeNode node2 = new TreeNode(20);
+		TreeNode node3 = new TreeNode(15);
+		TreeNode node4 = new TreeNode(7);
+		root.left = node1;
+		root.right = node2;
+		node2.left = node3;
+		node2.right = node4;
+		System.out.println( zigzagLevelOrder( root ) );
+	}
+	
+    public List<List<Integer>> zigzagLevelOrder( TreeNode root )
     {
-    	List<List<Integer>> result = new ArrayList<>();
+    	List<List<Integer>> allLevels = new ArrayList<>();
     	if ( root == null )
     	{
-    		return result;
+    		return allLevels;
     	}
     	
-    	Deque<TreeNode> bfsQueue = new LinkedList<>();
-    	bfsQueue.addFirst( root );
-    	boolean isOddLevel = true;
-    	while ( !bfsQueue.isEmpty() )
+    	Stack<TreeNode> oddLevelStack = new Stack<>();
+    	Stack<TreeNode> evenLevelStack = new Stack<>();
+    	oddLevelStack.push( root );
+    	
+    	while ( !oddLevelStack.isEmpty() 
+    			|| !evenLevelStack.isEmpty() )
     	{
-    		int levelSize = bfsQueue.size();
-    		List<Integer> levelNodes = new ArrayList<>();
-    		for ( int i = 0; i < levelSize; i++ )
-    		{
-    			TreeNode head = null;
-    			if ( isOddLevel )
+    		List<Integer> oneLevel = new LinkedList<>();
+    		// odd layer, push right child first, left child last
+    		if ( !oddLevelStack.isEmpty() )
+    		{    			
+    			while ( !oddLevelStack.isEmpty() )
     			{
-    				head = bfsQueue.removeLast();
-    			}
-    			else
-    			{
-    				head = bfsQueue.removeFirst();
-    			}
-    			levelNodes.add( head.val );
-    			
-    			if ( head.right != null )
-    			{
-    				bfsQueue.addLast( head.right );
-    			}
-    			if ( head.left != null )
-    			{
-    				bfsQueue.addFirst( head.left );
+    				TreeNode stackTop = oddLevelStack.pop();
+    				oneLevel.add( stackTop.val );
+    				if ( stackTop.left != null )
+    				{
+    					evenLevelStack.push( stackTop.left );
+    				}
+    				if ( stackTop.right != null )
+    				{
+    					evenLevelStack.push( stackTop.right );
+    				}
     			}
     		}
-    		isOddLevel = !isOddLevel;
-    		result.add( levelNodes );
+    		// even layer, push left child first, right child last
+    		else
+    		{
+    			while ( !evenLevelStack.isEmpty() )
+    			{
+    				TreeNode stackTop = evenLevelStack.pop();
+    				oneLevel.add( stackTop.val );
+    				if ( stackTop.right != null )
+    				{
+    					oddLevelStack.push( stackTop.right );
+    				}
+    				if ( stackTop.left != null )
+    				{
+    					oddLevelStack.push( stackTop.left );
+    				}
+    			}
+    		}
+    		allLevels.add( oneLevel );
     	}
-    	    	
-    	return result;
+    	return allLevels;
     }
 
 }
