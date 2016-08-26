@@ -58,7 +58,7 @@ class ListHeadTail
 * increase/decrease position counter inside foreach loop
 
 ### boundary case
-* passed in a reference variable, check null pointer case
+* passed in a reference variable (e.g. TreeNode, LinkNode, GraphNode...), check null pointer case
 * grid-based problem
 	- gridsize == 1, no solution inside grid
 
