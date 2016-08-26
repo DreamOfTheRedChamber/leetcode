@@ -6,30 +6,31 @@ package dynamicprogramming;
 
 public class PerfectSquares
 {
-    public int numSquares( int n )
+    public int numSquares(int n) 
     {
-    	if ( n == 1 )
+    	int[] minNum = new int[n+1];
+    	minNum[1] = 1;
+    	for ( int i = 1; i <= n; i++ )
     	{
-    		return 1;
+    		minNum[i] = Integer.MAX_VALUE;
+    		// recurse by subtracting all smaller squares smaller than i
+    		for ( int j = 1; j <= i; j++ )
+    		{
+    			int square = j * j;
+    			if ( square == n )
+    			{
+    				return 1;
+    			}
+    			else if ( square <= i )
+    			{
+    				minNum[i] = Math.min( minNum[i], 1 + minNum[i - square] );
+    			}
+    			else
+    			{
+    				break;
+    			}
+    		}
     	}
-    	
-        int[] minNumSquare = new int[n+1];
-        
-        for ( int i = 2; i <= n; i++ )
-        {
-        	for ( int j = 1; j * j <= i; j++ )
-        	{
-        		if ( j * j == i )
-        		{
-        			minNumSquare[i] = 1;
-        			break;
-        		}
-        		else
-        		{
-        			minNumSquare[i] = Math.min( minNumSquare[i], 1 + minNumSquare[i-j*j] );
-        		}
-        	}
-        }
-        return minNumSquare[n];
+    	return minNum[n];
     }
 }
