@@ -26,6 +26,22 @@ PriorityQueue<NumAndFreq> mostFreqPrioQueue = new PriorityQueue<>( ( o1, o2 ) ->
 
 * set.add(elem) return false if set already contains the elem
 
+* If the problem is a recursive problem. But public API does not satisfy the arguments needed by recursive algorithm, consider declare one by yourself. In the example below, declare a private recursive method cloneGraphRecurse(node, Map) for public API cloneGraph(node)
+```java
+	public UndirectedGraphNode cloneGraph(UndirectedGraphNode node) 
+	{
+		\\ validate input arguments before passing into 
+		if ( node == null )
+		{
+			return null;
+		}
+		return cloneGraphRecurse( node, new HashMap<Integer, UndirectedGraphNode>() );
+	}
+	private UndirectedGraphNode cloneGraphRecurse( UndirectedGraphNode node, Map<Integer, UndirectedGraphNode> labelToNodeMap )
+	{
+		\\...
+	}
+```
 
 ### questions to ask
 * Array
