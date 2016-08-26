@@ -2,10 +2,6 @@ package bfs;
 
 import org.junit.Test;
 
-/**
- * 
- */
-
 public class SurroundedRegions
 {
 	@Test
@@ -73,6 +69,7 @@ public class SurroundedRegions
     	printBoard( board );
     }
     
+    // use '#' to mark visited 'O'
     private void markUnsurrounded( char[][] board, int xStart, int yStart )
     {
     	int heighth = board.length;
@@ -81,7 +78,7 @@ public class SurroundedRegions
     			|| xStart >= heighth
     			|| yStart < 0 
     			|| yStart >= width
-    			|| board[xStart][yStart] != 'O' )
+    			|| board[xStart][yStart] != 'O' ) // avoid visiting visited 'O's and 'X's
     	{
     		return;
     	}

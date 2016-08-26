@@ -31,6 +31,7 @@ PriorityQueue<NumAndFreq> mostFreqPrioQueue = new PriorityQueue<>( ( o1, o2 ) ->
 * Array
 	* Is array sorted
 	* Given two arrays, which one's size is bigger
+	* Whether could modify entries inside array
 * Hashmap
 	* histogram-related problem, character set
 
@@ -55,7 +56,6 @@ class ListHeadTail
 * detect cycle in undirected graph
     - pass in super node inside dfs recursive call
 * increase/decrease position counter inside foreach loop
-* bfs vs dfs in a large 2D grid. bfs better because latter might result in stackoverflow (LC: Surrounded Regions)
 
 ### boundary case
 * passed in a reference variable, check null pointer case
