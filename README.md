@@ -43,6 +43,57 @@ PriorityQueue<NumAndFreq> mostFreqPrioQueue = new PriorityQueue<>( ( o1, o2 ) ->
 	}
 ```
 
+* Detect cycles inside directed graphs with dfs + visited set + discovered set.
+	* If during dfs in directed graph, a node discovered but not visited is encountered, then the directed graph has a cycle
+```java
+	public boolean hasCycle( Graph graph )
+	{
+	    // topoSort with dfs for detecting cycles
+    	Set<Integer> discovered = new HashSet<>();
+    	Set<Integer> visited = new HashSet<>();
+    	for ( Integer vertex : graph.keySet() )
+    	{
+    		if ( !visited.contains( vertex ) )
+    		{
+    			if ( topoSort( graph, vertex, discovered, visited ) )
+    			{
+    				return false;
+    			}
+    		}
+    	}
+    	return true;
+	}
+    /**
+     * @return whether a cycle is detected
+     */
+    private boolean topoSort ( Map<Integer, Set<Integer>> graph, Integer startNode, Set<Integer> discovered, Set<Integer> visited )
+    {
+    	discovered.add( startNode );
+    	for ( Integer neighbor : graph.get( startNode ) )
+    	{
+    		if ( !discovered.contains( neighbor ) )
+    		{
+    			if ( topoSort( graph, neighbor, discovered, visited ) )
+    			{
+    				return true;
+    			}
+    		}
+    		else if ( discovered.contains( neighbor ) 
+    				&& !visited.contains( neighbor ) )
+    		{
+    			return true;
+    		}
+    		else
+    		{
+    			// already visited, do nothing
+    			;
+    		}
+    	}
+    	visited.add( startNode );
+    	return false;
+    }
+```
+
 ### questions to ask
 * Array
 	* Is array sorted
@@ -68,6 +119,8 @@ class ListHeadTail
 	}
 }
 ```
+
+
 ### related errors
 * detect cycle in undirected graph
     - pass in super node inside dfs recursive call

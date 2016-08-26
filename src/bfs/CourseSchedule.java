@@ -13,12 +13,11 @@ public class CourseSchedule
 {
     public boolean canFinish(int numCourses, int[][] prerequisites) 
     {
-    	if ( numCourses < 0 
-    			|| prerequisites.length == 0 
-    			|| prerequisites[0].length != 2 )
+    	if ( numCourses < 0 )
     	{
     		throw new IllegalArgumentException("");
     	}
+    	// TODO: assertions on prerequisites
     	
     	// build graph
     	Map<Integer, Set<Integer>> graph = new HashMap<>();
