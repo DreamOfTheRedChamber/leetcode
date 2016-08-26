@@ -1,10 +1,13 @@
 package bfs;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
+
+import org.junit.Test;
 
 /**
  * 
@@ -13,13 +16,19 @@ import java.util.Set;
 public class CourseScheduleII
 {
 
+	@Test
+	public void test()
+	{
+		System.out.println( Arrays.toString( findOrder(2, new int[][]{ {1, 0}, {0, 1} } ) ) );
+	}
+	
     public int[] findOrder(int numCourses, int[][] prerequisites) 
     {
     	if ( numCourses < 0)
     	{
     		throw new IllegalArgumentException("");
     	}
-    	// assert for prere...
+    	// TODO: assertions for prere...
     	
     	// build graph
     	Map<Integer, Set<Integer>> graph = new HashMap<>();
@@ -76,7 +85,7 @@ public class CourseScheduleII
     		else if ( discovered.contains( neighborNode )
     				&& !visited.contains( neighborNode ) )
     		{
-    			return true;
+    			return false;
     		}
     		else
     		{
