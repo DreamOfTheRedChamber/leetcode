@@ -41,7 +41,8 @@ while (st.hasMoreElements())
 	System.out.println(st.nextElement());
 }
 ```
-	* String[] split( String regex )
+
+* String[] split( String regex )
 ```java
 String string = "004-034556";
 String[] parts = string.split("-");
@@ -97,6 +98,7 @@ class NumAndFreq
 ```java
 public TreeNode changePos( int position, String input )
 ```
+
 	* Solution1: declare a global instance variable as position
 	* Solution2: Use an array/collection/customized type to wrap the primitive number
 ```java
