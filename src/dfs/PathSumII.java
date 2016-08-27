@@ -32,6 +32,7 @@ public class PathSumII
     	{
         	currPath.add( currNode.val );
     		allPaths.add( new LinkedList<>( currPath ) );
+    		currPath.remove( currPath.size() - 1 );
     		return;
     	}
     		    	
@@ -43,5 +44,4 @@ public class PathSumII
     	depthFirstSearch( allPaths, currPath, currNode.right, target - currNode.val );
     	currPath.remove( currPath.size() - 1 );
     }
-
 }
