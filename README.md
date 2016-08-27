@@ -9,6 +9,7 @@
 	* [queue](#queue)
 	* [hashtable](#hashtable)
 	* [recursive functions](#recursive)
+	* [graph](#graph)
 	* [dynamic-programming](#dynamic-programming)
 * [questions to ask](#questions)
 * [error-prone cases](#error-prone)
@@ -17,15 +18,48 @@
 
 ### code snippets to remember <a id="snippets"></a>
 #### Java basic apis <a id="basic-apis"></a>
+
+* set.add(elem) return false if set already contains the elem
+
 #### array <a id="array"></a>
+* Print arrays in Java
+```java
+int[] array1D = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+int[][] array2D = { { 1, 2 }, {2, 5}, {3, 7} };
+System.out.println( Arrays.toString( array1D ) );
+System.out.println( Arrays.deepToString( array2D ));
+```
+
 #### string <a id="string"></a>
+* Break string based on splitters
+	* StringTokenizer ( like an iterator, has built-in hasNext() and next() func)
+```java
+String str = "This is String , split by StringTokenizer, created by mkyong";
+StringTokenizer st = new StringTokenizer( str, "," );
+while (st.hasMoreElements()) 
+{
+	System.out.println(st.nextElement());
+}
+```
+	* String[] split( String regex )
+```java
+String string = "004-034556";
+String[] parts = string.split("-");
+String part1 = parts[0]; // 004
+String part2 = parts[1]; // 034556
+```
+
 #### linkedList <a id="linkedlist"></a>
 #### binary search <a id="binary-search"></a>
 #### stack <a id="stack"></a>
 #### queue <a id="queue"></a>
+* Lambda expression inside PriorityQueue elements comparison
+```java
+PriorityQueue<NumAndFreq> mostFreqPrioQueue = new PriorityQueue<>( ( o1, o2 ) -> ( o2.freq - o1.freq ) ); // decreasing order
+PriorityQueue<NumAndFreq> mostFreqPrioQueue = new PriorityQueue<>( ( o1, o2 ) -> ( o1.freq - o2.freq ) ); // increasing order
+```	
 #### hashtable <a id="hashtable"></a>
 #### recursive functions <a id="recursive"></a>
-#### dynamic-programming <a id="dynamic-programming"></a>
 
 * Result wrapper class or customized PriorityQueue elems
 ```java
@@ -40,13 +74,6 @@ class NumAndFreq
 	}
 }
 ```
-* Lambda expression inside PriorityQueue elements comparison
-```java
-PriorityQueue<NumAndFreq> mostFreqPrioQueue = new PriorityQueue<>( ( o1, o2 ) -> ( o2.freq - o1.freq ) ); // decreasing order
-PriorityQueue<NumAndFreq> mostFreqPrioQueue = new PriorityQueue<>( ( o1, o2 ) -> ( o1.freq - o2.freq ) ); // increasing order
-```	
-
-* set.add(elem) return false if set already contains the elem
 
 * If the problem is a recursive problem. But public API does not satisfy the arguments needed by recursive algorithm, consider declare one by yourself. In the example below, declare a private recursive method cloneGraphRecurse(node, Map) for public API cloneGraph(node)
 ```java
@@ -64,14 +91,21 @@ PriorityQueue<NumAndFreq> mostFreqPrioQueue = new PriorityQueue<>( ( o1, o2 ) ->
 		\\...
 	}
 ```
-* Print arrays in Java
-```java
-int[] array1D = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
-int[][] array2D = { { 1, 2 }, {2, 5}, {3, 7} };
-System.out.println( Arrays.toString( array1D ) );
-System.out.println( Arrays.deepToString( array2D ));
-```
 
+* Modify java function primitive parameters ( Java so heavy, missing pointers inside C++, -_- )
+	* Example problem: deserialize tree from String input. Return value is occupied by something else ( in this case TreeNode), but still want to change int argument position
+```java
+public TreeNode changePos( int position, String input )
+```
+	* Solution1: declare a global instance variable as position
+	* Solution2: Use an array/collection/customized type to wrap the primitive number
+```java
+public TreeNode changePos( int[] position, String input ) // personally consider this more concise
+public TreeNode changePos( List<Integer> position, String input )
+public TreeNode changePos( Position position, String input )
+```	
+
+#### graph <a id="graph"></a>
 * Detect cycles inside directed graphs with dfs + visited set + discovered set.
 	* If during dfs in directed graph, a node discovered but not visited is encountered, then the directed graph has a cycle
 ```java
@@ -123,53 +157,11 @@ System.out.println( Arrays.deepToString( array2D ));
     }
 ```
 
-* Tree
-	* Recursion
-	* BFS queue
-	* return multiple results ( Java so heavy, missing tuple return values inside Python, -_- )
-```java
-class ListHeadTail
-{
-	public final ListNode head;
-	public final ListNode tail;
-	public ListHeadTail( ListNode head, ListNode tail )
-	{
-		this.head = head;
-		this.tail = tail;
-	}
-}
-```
 
-* Modify java function primitive parameters ( Java so heavy, missing pointers inside C++, -_- )
-	* Example problem: deserialize tree from String input. Return value is occupied by something else ( in this case TreeNode), but still want to change int argument position
-```java
-public TreeNode changePos( int position, String input )
-```
-	* Solution1: declare a global instance variable as position
-	* Solution2: Use an array/collection/customized type to wrap the primitive number
-```java
-public TreeNode changePos( int[] position, String input ) // personally consider this more concise
-public TreeNode changePos( List<Integer> position, String input )
-public TreeNode changePos( Position position, String input )
-```	
+#### dynamic-programming <a id="dynamic-programming"></a>
 
-* Break string based on splitters
-	* StringTokenizer ( like an iterator, has built-in hasNext() and next() func)
-```java
-String str = "This is String , split by StringTokenizer, created by mkyong";
-StringTokenizer st = new StringTokenizer( str, "," );
-while (st.hasMoreElements()) 
-{
-	System.out.println(st.nextElement());
-}
-```
-	* String[] split( String regex )
-```java
-String string = "004-034556";
-String[] parts = string.split("-");
-String part1 = parts[0]; // 004
-String part2 = parts[1]; // 034556
-```
+
+
 
 ### questions to ask <a id="questions"></a>
 * Array
@@ -198,3 +190,8 @@ String part2 = parts[1]; // 034556
 
 ### Leetcode sins <a id="sins"></a>
 * When problem occurs, too few stack trace
+* No online debuggers
+* No history track along time axis. Really bad synchronous workflow
+* Unable to mark different stages in solving a problem ( e.g. thought-out, implemented, optimized, on-line judged, summarized )
+* Cannot add enough comments along the code
+* Never-ending, too many problems
