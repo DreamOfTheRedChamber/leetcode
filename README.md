@@ -31,8 +31,7 @@ System.out.println( Arrays.deepToString( array2D ));
 ```
 
 #### string <a id="string"></a>
-* Break string based on splitters
-	* StringTokenizer ( like an iterator, has built-in hasNext() and next() func)
+* StringTokenizer ( like an iterator, has built-in hasNext() and next() func)
 ```java
 String str = "This is String , split by StringTokenizer, created by mkyong";
 StringTokenizer st = new StringTokenizer( str, "," );
@@ -96,14 +95,10 @@ class NumAndFreq
 * Modify java function primitive parameters ( Java so heavy, missing pointers inside C++, -_- )
 	* Example problem: deserialize tree from String input. Return value is occupied by something else ( in this case TreeNode), but still want to change int argument position
 ```java
-public TreeNode changePos( int position, String input )
-```
+public TreeNode changePos( int position, String input ) // problem
 
-	* Solution1: declare a global instance variable as position
-	* Solution2: Use an array/collection/customized type to wrap the primitive number
-```java
-public TreeNode changePos( int[] position, String input ) // personally consider this more concise
-public TreeNode changePos( List<Integer> position, String input )
+public TreeNode changePos( int[] position, String input ) // Solution1: declare a global instance variable as position
+public TreeNode changePos( List<Integer> position, String input ) // Solution2: Use an array/collection/customized type to wrap the primitive number
 public TreeNode changePos( Position position, String input )
 ```	
 
