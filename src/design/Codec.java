@@ -8,16 +8,6 @@ import utility.TreeNode;
  * Definition for a binary tree node. public class TreeNode { int val; TreeNode
  * left; TreeNode right; TreeNode(int x) { val = x; } }
  */
-class NodeAndPosWrapper
-{
-	public final TreeNode node;
-	public final int nextPos;
-	public NodeAndPosWrapper( TreeNode node, int nextPos )
-	{
-		this.node = node;
-		this.nextPos = nextPos;
-	}
-}
 
 public class Codec
 {
@@ -25,7 +15,7 @@ public class Codec
 	/**
 	 * Encodes a tree to a single string.
 	 * 
-	 * @return  ',' to separate nodes, '#' for null, actual int for other node
+	 * @return ',' to separate nodes, '#' for null, actual int for other node
 	 */
 	public String serialize( TreeNode root )
 	{
@@ -54,63 +44,30 @@ public class Codec
 	/**
 	 * Decodes your encoded data to tree.
 	 * 
-	 * @return  deserialized tree root node
+	 * @return deserialized tree root node
 	 */
 	public TreeNode deserialize( String data )
 	{
-		NodeAndPosWrapper result = deserializeRecurse( data, 0 );
-		return result.node;
+		return deserializeRecurse( new int[]{ 0 }, data.split( "," ) );
 	}
-	
-	private NodeAndPosWrapper deserializeRecurse( String data, int pos )
+
+	/**
+	 * @param pos  pointer position inside nodes
+	 */
+	private TreeNode deserializeRecurse( int[] pos, String[] nodes )
 	{
-		if ( pos > data.length() - 1 )
+		if ( nodes[pos[0]].equals( "#" ) )
 		{
-			return new NodeAndPosWrapper( null, pos );
-		}
-		
-		// parse for root value
-		if ( data.charAt( pos ) == '#' )
-		{
-			return new NodeAndPosWrapper( null, pos + 2 );
+			pos[0] = pos[0] + 1;
+			return null;
 		}
 		else
 		{
-			// parse integer
-			int rootValue = 0;
-			boolean isNeg = false;
-			int intStartPos = pos;
-			int intEndPos = pos;
-			while ( pos < data.length() 
-					&& data.charAt( pos ) != ',' )
-			{
-				if ( data.charAt( pos ) == '-' )
-				{
-					isNeg = true;
-					intStartPos++;
-					intEndPos++;
-				}
-				else 
-				{
-					intEndPos++;
-				}
-				pos++; //
-			}
-			
-			rootValue = Integer.parseInt( data.substring( intStartPos, intEndPos ) );
-			if ( isNeg )
-			{
-				rootValue = -rootValue;
-			}
-			
-			// build tree root
-			TreeNode root = new TreeNode( rootValue );
-			// recursively build left and right subtrees
-			NodeAndPosWrapper leftChildResult = deserializeRecurse( data,  pos + 1 );
-			NodeAndPosWrapper rightChildResult = deserializeRecurse( data, leftChildResult.nextPos );
-			root.left = leftChildResult.node;
-			root.right = rightChildResult.node;
-			return new NodeAndPosWrapper( root, rightChildResult.nextPos );
+			TreeNode root = new TreeNode( Integer.parseInt( nodes[pos[0]] ) );
+			pos[0] = pos[0] + 1;
+			root.left = deserializeRecurse( pos, nodes );
+			root.right = deserializeRecurse( pos, nodes );
+			return root;
 		}
 	}
 	
@@ -119,20 +76,18 @@ public class Codec
 	{
 		Codec codec = new Codec();
 		TreeNode node1 = new TreeNode( 1 );
-//		TreeNode node2 = new TreeNode( 2 );
-//		TreeNode node3 = new TreeNode( 3 );
-//		TreeNode node4 = new TreeNode( 4 );
-//		TreeNode node5 = new TreeNode( 5 );
-//		
-//		node1.left = node2;
-//		node1.right = node3;
-//		node3.left = node4;
-//		node3.right = node5;
-
-		String serializedResult = codec.serialize( node1 );
-		System.out.println( serializedResult );
-		TreeNode root = codec.deserialize( serializedResult );
-		System.out.println( root.val );
+		TreeNode node2 = new TreeNode( 2 );
+		TreeNode node3 = new TreeNode( 3 );
+		TreeNode node4 = new TreeNode( 4 );
+		TreeNode node5 = new TreeNode( 5 );
+		
+		node1.left = node2;
+		node1.right = node3;
+		node3.left = node4;
+		node3.right = node5;
+		
+		TreeNode result = deserialize( serialize( node1 ) );
+		System.out.println( result.val );
 	}
 }
 
