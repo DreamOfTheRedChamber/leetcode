@@ -1,11 +1,32 @@
 # loop through leetcode one more time, ; )
 * [code snippets to remember](#snippets)
+	* [Java basic apis](#basic-apis)
+	* [array](#array)
+	* [string](#string)
+	* [linkedlist](#linkedlist)
+	* [binary-search](#binary-search)
+	* [stack](#stack)
+	* [queue](#queue)
+	* [hashtable](#hashtable)
+	* [recursive functions](#recursive)
+	* [dynamic-programming](#dynamic-programming)
 * [questions to ask](#questions)
 * [error-prone cases](#error-prone)
 * [smells for refactoring and optimization](#bad-smells)
 * [leetcode sins](#sins)
 
 ### code snippets to remember <a id="snippets"></a>
+#### Java basic apis <a id="basic-apis"></a>
+#### array <a id="array"></a>
+#### string <a id="string"></a>
+#### linkedList <a id="linkedlist"></a>
+#### binary search <a id="binary-search"></a>
+#### stack <a id="stack"></a>
+#### queue <a id="queue"></a>
+#### hashtable <a id="hashtable"></a>
+#### recursive functions <a id="recursive"></a>
+#### dynamic-programming <a id="dynamic-programming"></a>
+
 * Result wrapper class or customized PriorityQueue elems
 ```java
 class NumAndFreq
