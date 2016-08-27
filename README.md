@@ -1,6 +1,11 @@
 # loop through leetcode one more time, ; )
+* [code snippets to remember](#snippets)
+* [questions to ask](#questions)
+* [error-prone cases](#error-prone)
+* [smells for refactoring and optimization](#bad-smells)
+* [leetcode sins](#sins)
 
-### code snippets to remember
+### code snippets to remember <a id="snippets"></a>
 * Result wrapper class or customized PriorityQueue elems
 ```java
 class NumAndFreq
@@ -145,7 +150,7 @@ String part1 = parts[0]; // 004
 String part2 = parts[1]; // 034556
 ```
 
-### questions to ask
+### questions to ask <a id="questions"></a>
 * Array
 	* Is array sorted
 	* Given two arrays, which one's size is bigger
@@ -153,7 +158,7 @@ String part2 = parts[1]; // 034556
 * Hashmap
 	* histogram-related problem, character set
 
-### related errors
+### error-prone cases <a id="error-prone"></a>
 * detect cycle in undirected graph
     - pass in super node inside dfs recursive call
 * increase/decrease position counter inside foreach loop
@@ -161,12 +166,14 @@ String part2 = parts[1]; // 034556
 	- List<Integer> input
 	- list.remove(index) will always take precedence because it does not require type casting
 
-### boundary case
 * passed in a reference variable (e.g. TreeNode, LinkNode, GraphNode...), check null pointer case
 * grid-based problem
 	- gridsize == 1, no solution inside grid
 
-### smells for refactoring and optimization
+### smells for refactoring and optimization <a id="bad-smells"></a>
 * code length > 100
 * too many if statement checking for boundary cases
 * code do not generalize well. Only work for current problem. e.g. merge 2 sorted list -> merge k sorted List
+
+### Leetcode sins <a id="sins"></a>
+* When problem occurs, too few stack trace
