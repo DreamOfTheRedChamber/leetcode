@@ -131,6 +131,24 @@ public TreeNode changePos( List<Integer> position, String input )
 public TreeNode changePos( Position position, String input )
 ```	
 
+* Break string based on splitters
+	* StringTokenizer ( like an iterator, has built-in hasNext() and next() func)
+```java
+String str = "This is String , split by StringTokenizer, created by mkyong";
+StringTokenizer st = new StringTokenizer( str, "," );
+while (st.hasMoreElements()) 
+{
+	System.out.println(st.nextElement());
+}
+```
+	* String[] split( String regex )
+```java
+String string = "004-034556";
+String[] parts = string.split("-");
+String part1 = parts[0]; // 004
+String part2 = parts[1]; // 034556
+```
+
 ### questions to ask
 * Array
 	* Is array sorted

@@ -1,5 +1,7 @@
 package design;
 
+import java.util.StringTokenizer;
+
 import org.junit.Test;
 
 import utility.TreeNode;
@@ -48,25 +50,28 @@ public class Codec
 	 */
 	public TreeNode deserialize( String data )
 	{
-		return deserializeRecurse( new int[]{ 0 }, data.split( "," ) );
+		return deserializeRecurse( new StringTokenizer( data, ",") );
 	}
 
 	/**
 	 * @param pos  pointer position inside nodes
 	 */
-	private TreeNode deserializeRecurse( int[] pos, String[] nodes )
+	private TreeNode deserializeRecurse( StringTokenizer tokenizer )
 	{
-		if ( nodes[pos[0]].equals( "#" ) )
+		if ( !tokenizer.hasMoreTokens() )
 		{
-			pos[0] = pos[0] + 1;
+			return null;
+		}
+		String nextToken = tokenizer.nextToken();
+		if ( nextToken.equals( "#" ) )
+		{
 			return null;
 		}
 		else
 		{
-			TreeNode root = new TreeNode( Integer.parseInt( nodes[pos[0]] ) );
-			pos[0] = pos[0] + 1;
-			root.left = deserializeRecurse( pos, nodes );
-			root.right = deserializeRecurse( pos, nodes );
+			TreeNode root = new TreeNode( Integer.parseInt( nextToken ) );
+			root.left = deserializeRecurse( tokenizer );
+			root.right = deserializeRecurse( tokenizer );
 			return root;
 		}
 	}
