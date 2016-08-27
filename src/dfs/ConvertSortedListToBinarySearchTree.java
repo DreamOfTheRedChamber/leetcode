@@ -27,7 +27,7 @@ public class ConvertSortedListToBinarySearchTree
     
     private TreeNode buildTreeRecurse( int start, int end )
     {
-    	if ( end > start )
+    	if ( start > end )
     	{
     		return null;
     	}
