@@ -16,24 +16,28 @@ public class CloneGraph
 
 	public UndirectedGraphNode cloneGraph(UndirectedGraphNode node) 
 	{
+		if ( node == null )
+		{
+			return null;
+		}
 		return cloneGraphRecurse( node, new HashMap<Integer, UndirectedGraphNode>() );
 	}
 
-	private UndirectedGraphNode cloneGraphRecurse( UndirectedGraphNode node, Map<Integer, UndirectedGraphNode> labelToVertexMap )
+	private UndirectedGraphNode cloneGraphRecurse( UndirectedGraphNode node, Map<Integer, UndirectedGraphNode> labelToNodeMap )
 	{
 		UndirectedGraphNode clonedNode = new UndirectedGraphNode( node.label );
-		labelToVertexMap.put( node.label, clonedNode );
+		labelToNodeMap.put( node.label, clonedNode );
 		for ( UndirectedGraphNode neighbor : node.neighbors )
 		{
-			// if clonedNeighbor exists
-			if ( !labelToVertexMap.containsKey( neighbor.label ) )
+			if ( !labelToNodeMap.containsKey( neighbor.label ) )
 			{
-				UndirectedGraphNode clonedNeighbor = cloneGraphRecurse( neighbor, labelToVertexMap );
+				// if clonedNeighbor does not exist
+				UndirectedGraphNode clonedNeighbor = cloneGraphRecurse( neighbor, labelToNodeMap );
 				clonedNode.neighbors.add( clonedNeighbor );
 			}
 			else
 			{
-				clonedNode.neighbors.add( labelToVertexMap.get( neighbor.label ) );
+				clonedNode.neighbors.add( labelToNodeMap.get( neighbor.label ) );
 			}			
 		}
 		return clonedNode;

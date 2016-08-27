@@ -15,36 +15,33 @@ public class PathSumII
     {
         List<List<Integer>> allPaths = new LinkedList<>();
         List<Integer> currPath = new LinkedList<>();
-        if ( root != null )
-        {
-        	currPath.add( root.val );
-        	depthFirstSearch( allPaths, currPath, root, sum - root.val );
-        }
+        depthFirstSearch( allPaths, currPath, root, sum );
         return allPaths;
     }
     
     private void depthFirstSearch( List<List<Integer>> allPaths, List<Integer> currPath, TreeNode currNode, int target )
     {
-    	// recurse boundaries
-    	if ( target == 0 )
+    	if ( currNode == null )
     	{
-    		allPaths.add( new LinkedList<>( currPath ) );
     		return;
     	}
     	
-    	if ( currNode.left != null )
+    	if ( currNode.left == null 
+    			&& currNode.right == null 
+    			&& target == currNode.val )
     	{
-    		currPath.add( currNode.left.val );
-    		depthFirstSearch( allPaths, currPath, currNode.left, target - currNode.left.val );
-    		currPath.remove( currPath.size() - 1 );
+        	currPath.add( currNode.val );
+    		allPaths.add( new LinkedList<>( currPath ) );
+    		return;
     	}
+    		    	
+    	currPath.add( currNode.val );
+    	depthFirstSearch( allPaths, currPath, currNode.left, target - currNode.val );
+    	currPath.remove( currPath.size() - 1 );
     	
-    	if ( currNode.right != null )
-    	{
-    		currPath.add( currNode.right.val );
-    		depthFirstSearch( allPaths, currPath, currNode.right, target - currNode.right.val );
-    		currPath.remove( currPath.size() - 1 );
-    	}
+    	currPath.add( currNode.val );
+    	depthFirstSearch( allPaths, currPath, currNode.right, target - currNode.val );
+    	currPath.remove( currPath.size() - 1 );
     }
 
 }

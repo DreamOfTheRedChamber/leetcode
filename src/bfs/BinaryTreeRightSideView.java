@@ -14,8 +14,12 @@ import utility.TreeNode;
 public class BinaryTreeRightSideView
 {
     public List<Integer> rightSideView( TreeNode root ) 
-    {
+    {    	
         List<Integer> rightMostNodes = new ArrayList<>();
+        if ( root == null )
+        {
+        	return rightMostNodes;
+        }
         Queue<TreeNode> bfsQueue = new LinkedList<>();
         bfsQueue.add( root );
         while ( !bfsQueue.isEmpty() )

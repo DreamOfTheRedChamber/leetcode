@@ -8,32 +8,41 @@ import utility.TreeNode;
 
 public class SymmetricTree
 {
-    public boolean isSymmetric(TreeNode root) 
+    public boolean isSymmetric( TreeNode root )
     {
     	if ( root == null )
     	{
     		return true;
     	}
-    	else if ( root.left == null || root.right == null )
+    	
+    	return isSymmetricRecurse( root.left, root.right );
+    }
+    
+    boolean isSymmetricRecurse( TreeNode left, TreeNode right )
+    {
+    	if ( left == null )
     	{
-    		return true;
+    		return right == null;
     	}
-    	else if ( root.left != null && root.right != null )
+    	else if ( right == null )
     	{
-    		if ( root.left.val == root.right.val 
-    				&& isSymmetric( root.left )
-    				&& isSymmetric( root.right ) )
-    		{
-    			return true;
-    		}
-    		else
-    		{
-    			return false;
-    		}
+    		return left == null;
+    	}
+    	else if ( left.val != right.val )
+    	{
+    		return false;
+    	}
+    	else if ( !isSymmetricRecurse( left.left, right.right ) )
+    	{
+    		return false;
+    	}
+    	else if ( !isSymmetricRecurse( left.right, right.left ) )
+    	{
+    		return false;
     	}
     	else
     	{
-    		return false;
-    	}    	    	
+    		return true;
+    	}
     }
 }
