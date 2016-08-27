@@ -15,6 +15,7 @@ public class ConstructBinaryTreeFromInorderAndPostorderTraversal
     
     private TreeNode buildTreeRecurse( int[] inorder, int[] postorder, int inorderStart, int inorderEnd, int postorderStart, int postorderEnd )
     {
+    	// trunning
     	if ( inorderStart > inorderEnd )
     	{
     		return null;

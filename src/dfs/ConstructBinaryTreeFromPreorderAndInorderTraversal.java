@@ -16,6 +16,7 @@ public class ConstructBinaryTreeFromPreorderAndInorderTraversal
 
     private TreeNode buildTreeRecurse( int[] preorder, int[] inorder, int preorderStart, int preorderEnd, int inorderStart, int inorderEnd )
     {
+    	// trunning
     	if ( preorderStart > preorderEnd )
     	{
     		return null;
