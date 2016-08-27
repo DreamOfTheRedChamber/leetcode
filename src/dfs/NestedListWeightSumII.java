@@ -37,7 +37,7 @@ public class NestedListWeightSumII
 {
     public int depthSumInverse( List<NestedInteger> nestedList )
     {
-        return calcWeightSum( nestedList, calcMaxDepth( nestedList, 1 ) );
+        return calcWeightSum( nestedList, calcMaxNestDepth( nestedList, 1 ) );
     }
     
     private int calcWeightSum( List<NestedInteger> nestedList, int currDepth )
@@ -57,14 +57,14 @@ public class NestedListWeightSumII
     	return weightSum;
     }
     
-    private int calcMaxDepth( List<NestedInteger> nestedList, int baseDepth )
+    private int calcMaxNestDepth( List<NestedInteger> nestedList, int baseDepth )
     {
     	int maxDepth = baseDepth;
     	for ( NestedInteger num : nestedList )
     	{
     		if ( !num.isInteger() )
     		{
-    			maxDepth = Math.max( maxDepth, calcMaxDepth( num.getList() , baseDepth + 1 ) );
+    			maxDepth = Math.max( maxDepth, calcMaxNestDepth( num.getList() , baseDepth + 1 ) );
     		}
     	}
     	return maxDepth;
