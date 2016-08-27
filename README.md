@@ -19,7 +19,6 @@ class NumAndFreq
 ```java
 PriorityQueue<NumAndFreq> mostFreqPrioQueue = new PriorityQueue<>( ( o1, o2 ) -> ( o2.freq - o1.freq ) );
 ```
-
 	- increasing order
 ```java
 PriorityQueue<NumAndFreq> mostFreqPrioQueue = new PriorityQueue<>( ( o1, o2 ) -> ( o1.freq - o2.freq ) );
@@ -102,19 +101,10 @@ System.out.println( Arrays.deepToString( array2D ));
     }
 ```
 
-### questions to ask
-* Array
-	* Is array sorted
-	* Given two arrays, which one's size is bigger
-	* Whether could modify entries inside array
-* Hashmap
-	* histogram-related problem, character set
-
-## common techniques for solving problems
 * Tree
 	* Recursion
 	* BFS queue
-	* return multiple results ( > 1 )
+	* return multiple results ( Java so heavy, missing tuple return values inside Python, -_- )
 ```java
 class ListHeadTail
 {
@@ -128,11 +118,34 @@ class ListHeadTail
 }
 ```
 
+* Modify java function primitive parameters ( Java so heavy, missing pointers inside C++, -_- )
+	* Example problem: deserialize tree from String input. Return value is occupied by something else ( in this case TreeNode), but still want to change int argument position
+```java
+public TreeNode changePos( int position, String input )
+```
+	* Solution1: declare a global instance variable as position
+	* Solution2: Use an array/collection/customized type to wrap the primitive number
+```java
+public TreeNode changePos( int[] position, String input ) // personally consider this more concise
+public TreeNode changePos( List<Integer> position, String input )
+public TreeNode changePos( Position position, String input )
+```	
+
+### questions to ask
+* Array
+	* Is array sorted
+	* Given two arrays, which one's size is bigger
+	* Whether could modify entries inside array
+* Hashmap
+	* histogram-related problem, character set
 
 ### related errors
 * detect cycle in undirected graph
     - pass in super node inside dfs recursive call
 * increase/decrease position counter inside foreach loop
+* java list remove interface. Two list.remove() interface ( list.remove(int index), list.remove( Object object ) )
+	- List<Integer> input
+	- list.remove(index) will always take precedence because it does not require type casting
 
 ### boundary case
 * passed in a reference variable (e.g. TreeNode, LinkNode, GraphNode...), check null pointer case
@@ -142,3 +155,4 @@ class ListHeadTail
 ### smells for refactoring and optimization
 * code length > 100
 * too many if statement checking for boundary cases
+* code do not generalize well. Only work for current problem. e.g. merge 2 sorted list -> merge k sorted List
