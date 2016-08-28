@@ -1,5 +1,9 @@
 package hashtable;
 
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
+
 /**
 Given an array of citations (each citation is a non-negative integer) of a researcher, write a function to compute the researcher's h-index.
 
@@ -17,27 +21,26 @@ public class HIndex
 
     public int hIndex( int[] citations )
     {
+    	// citation from 0 to Math.min(citations.length, Math.max(int[] citations)) 
     	int startPos = 0;
     	int endPos = citations.length;
    	
+    	// binary search between startpos to endPos
     	while ( startPos + 1 < endPos )
     	{
     		int midPos = ( endPos - startPos ) / 2 + startPos;
     		int numQualified = calcNumPapersWithHigherCitations( citations, midPos );
-    		if ( numQualified == midPos )
+    		if ( numQualified < midPos )
     		{
-    			return midPos;
-    		}
-    		else if ( numQualified < midPos )
-    		{
-    			endPos = midPos - 1;
+    			endPos = midPos;
     		}
     		else
     		{
-    			startPos = midPos + 1;
+    			startPos = midPos;
     		}
     	}
     	
+    	// always take the bigger when possible
     	int numQualified = calcNumPapersWithHigherCitations( citations, endPos );
     	if ( numQualified == endPos )
     	{
@@ -60,5 +63,12 @@ public class HIndex
     		}
     	}
     	return numQualifiedPapers;
+    }
+    
+    @Test
+    public void test()
+    {
+    	assertEquals( 1, hIndex( new int[]{ 1, 1 } ) );
+    	assertEquals( 3, hIndex( new int[]{ 3, 0, 6, 1, 5} ) );
     }
 }

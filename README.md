@@ -66,6 +66,39 @@ String part2 = parts[1]; // 034556
 
 #### linkedList <a id="linkedlist"></a>
 #### binary search <a id="binary-search"></a>
+* universal templates 
+```java
+public int binarySearch( int[] array, int target)
+{
+	int start = 0;
+	int end = array.length - 1;
+	while ( start + 1 < end )
+	{
+		int mid = ( end - start ) / 2 + start; // write in this way to avoid overflowing from " end + start "
+		if ( array[mid] < target )
+		{
+			start = mid; // instead of mid + 1 to generalize the algorithm well
+		}
+		else
+		{
+			end = mid;
+		}
+	}
+	// take result from start/end/non-exist
+	if ( array[end] == target )
+	{
+		return end;
+	}
+	else if ( array[start] == target )
+	{
+		return start;
+	}
+	else
+	{
+		return -1;
+	}
+}
+```
 #### stack <a id="stack"></a>
 * Binary tree inorder traversal
 ```java
