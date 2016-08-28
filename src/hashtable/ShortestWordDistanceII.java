@@ -38,46 +38,37 @@ public class ShortestWordDistanceII
 
     public int shortest(String word1, String word2) 
     {
-        List<Integer> word1Positions = wordToPositions.get( word1 );
-        List<Integer> word2Positions = wordToPositions.get( word2 );
-        Iterator<Integer> word1PosIterator = word1Positions.iterator( );
-        Iterator<Integer> word2PosIterator = word2Positions.iterator( );
-        int word1CurrPos = word1PosIterator.next( );
-        int word2CurrPos = word2PosIterator.next( );
-        int minDistance = Math.abs( word1CurrPos - word2CurrPos );
-        while ( word1PosIterator.hasNext( )
-        		|| word2PosIterator.hasNext( ) )
-        {
-        	if ( word1CurrPos == word2CurrPos )
-        	{
-        		throw new IllegalStateException("");
-        	}
-        	else if ( word1CurrPos < word2CurrPos )
-        	{
-        		if ( !word1PosIterator.hasNext( ) )
-        		{
-        			break;
-        		}
-        		else
-        		{
-        			word1CurrPos = word1PosIterator.next( );
-        			minDistance = Math.min( minDistance, Math.abs( word1CurrPos - word2CurrPos ) );
-        		}
-        	}
-        	else
-        	{
-        		if ( !word2PosIterator.hasNext( ) )
-        		{
-        			break;
-        		}
-        		else
-        		{
-        			word2CurrPos = word2PosIterator.next( );
-        			minDistance = Math.min( minDistance, Math.abs( word1CurrPos - word2CurrPos ) );
-        		}
-        	}
-        }
-        return minDistance;
+    	List<Integer> word1Positions = wordToPositions.get( word1 );
+    	List<Integer> word2Positions = wordToPositions.get( word2 );
+    	if (	word1Positions == null 
+    			|| word2Positions == null 
+    			|| word1Positions.size() == 0 
+    			|| word2Positions.size() == 0 )
+    	{
+    		throw new IllegalArgumentException(""); 
+    	}
+    	
+    	int currWord1Pos = 0;
+    	int currWord2Pos = 0;
+    	int minDis = Integer.MAX_VALUE;
+    	while ( currWord1Pos < word1Positions.size() 
+    			&& currWord2Pos < word2Positions.size() )
+    	{
+    		minDis = Math.min( minDis, Math.abs( word1Positions.get( currWord1Pos ) - word2Positions.get( currWord2Pos ) ) );
+    		if ( word1Positions.get( currWord1Pos ) < word2Positions.get( currWord2Pos ) )
+    		{
+    			currWord1Pos++;
+    		}
+    		else if ( word1Positions.get( currWord1Pos ) > word2Positions.get( currWord2Pos ) ) 
+    		{
+    			currWord2Pos++;
+    		}
+    		else
+    		{
+    			throw new IllegalStateException("");
+    		}    			
+    	}
+    	return minDis;
     }
 
 }
