@@ -165,6 +165,8 @@ public TreeNode changePos( Position position, String input )
 	* Is array sorted
 	* Given two arrays, which one's size is bigger
 	* Whether could modify entries inside array
+* LinkedList
+	* Convert tree to linkedlist, doubly or singly linkedlist
 * Hashmap
 	* histogram-related problem, character set
 

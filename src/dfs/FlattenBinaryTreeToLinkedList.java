@@ -23,8 +23,8 @@ public class FlattenBinaryTreeToLinkedList
     	
     	Stack<TreeNode> preorderStack = new Stack<>();
     	preorderStack.push( root );
-    	TreeNode listHead = new TreeNode( 0 );
-    	TreeNode listTail = listHead;
+    	TreeNode sentinelHead = new TreeNode( 0 );
+    	TreeNode sentinelTail = sentinelHead;
     	while ( !preorderStack.isEmpty() )
     	{
     		TreeNode stackTop = preorderStack.pop();
@@ -36,11 +36,12 @@ public class FlattenBinaryTreeToLinkedList
     		{
     			preorderStack.push( stackTop.left );
     		}
-    		listTail.right = stackTop;
-    		stackTop.left = listTail;
-    		listTail = stackTop;
-    	}
-    	listTail.right = null;
+    		sentinelTail.right = stackTop;
+    		sentinelTail = stackTop;
+
+    		stackTop.left = null;
+    		stackTop.right = null;
+    	}   	
     }
 
     @Test
@@ -57,6 +58,6 @@ public class FlattenBinaryTreeToLinkedList
     	node1.left = node2;
     	node1.right = node3;
     	node4.right = node5;
-    	
+    	flatten( node0 );
     }
 }
