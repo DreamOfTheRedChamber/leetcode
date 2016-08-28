@@ -1,6 +1,7 @@
 # loop through leetcode one more time, ; )
 * [code snippets to remember](#snippets)
 	* [Java basic apis](#basic-apis)
+	* [math](#math)
 	* [array](#array)
 	* [string](#string)
 	* [linkedlist](#linkedlist)
@@ -21,6 +22,20 @@
 
 * set.add(elem) return false if set already contains the elem
 
+#### math <a id="math"></a>
+* divide two integers ( useful names: dividend/numerator, divisor/denominator, quotient, residue )
+	* handle boundary cases ( 0, Integer.MIN_VALUE )
+		- return int quotient
+		- return double quotient
+	* record quotient symbol ( neg/pos )
+	* convert dividend and divisor to positive
+	* calculate integer part 
+	* calculate fraction part 
+		- quotient = ( residue * 10 ) / divisor
+		- residue = ( residue * 10 ) % divisor
+		- use hashmap to record residue and occuring positions to handle recurring
+	* concatenate symbol, integer part, dot, fraction part (possibly with parentheses)
+	
 #### array <a id="array"></a>
 * Print arrays in Java
 ```java
@@ -70,7 +85,7 @@ String part2 = parts[1]; // 034556
     	}
     	return inorderSeqs;
     }
-	\\
+	
     private void pushAllNodesOnLeftPath( TreeNode root, Stack<TreeNode> inorderStack )
     {
     	TreeNode currNode = root;

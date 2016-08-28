@@ -3,6 +3,8 @@ package hashtable;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.junit.Test;
+
 /**
 Given two integers representing the numerator and denominator of a fraction, return the fraction in string format.
 
@@ -28,43 +30,60 @@ public class FractionToRecurringDecimal
     		return "0";
     	}
     	
-    	boolean isNeg = ( numerator > 0 ) ^ ( denominator > 0 );
-    	Map<Integer, Integer> residueToPos = new HashMap<>();
     	StringBuilder result = new StringBuilder();
+    	boolean isNeg = ( numerator > 0 ) ^ ( denominator > 0 );
     	if ( isNeg )
     	{
     		result.append( "-" );
     	}
     	
+    	//TODO: how to handle integer boundary case ( convert to long )
+    	long absNumerator = Math.abs( (long) numerator );
+    	long absDenominator = Math.abs( (long) denominator );
+    	
+    	Map<Long, Integer> residueToPos = new HashMap<>();
+    	
     	// before dot
-    	int quotient = numerator / denominator;
-    	int residue = numerator % denominator;
-    	result.append( String.valueOf( quotient ) );
-    	if ( residue != 0 )
+    	long quotient = absNumerator / absDenominator;
+    	long residue = absNumerator % absDenominator;
+		result.append( String.valueOf( quotient ) );
+    	if ( residue == 0 )
     	{
-	    	result.append( "." );
-	    	int lengthBeforeDot = result.length( );
-	    	
-	    	// after dot
-	    	int posAfterDot = 1; // start from 1
-	     	while ( residue != 0 
-	    			&& !residueToPos.containsKey( residue ) )
-	     	{
-	     		residueToPos.put( residue, posAfterDot );
-	     		posAfterDot++;
-	     		residue = ( residue * 10 ) % numerator;
-	     		quotient = ( residue * 10 ) / numerator;
-	     		result.append( String.valueOf( quotient ) );
-	     	}
-	    	
-	     	// add parentheses
-	     	if ( residue != 0 
-	     			&& residueToPos.containsKey( residue ) )
-	     	{
-	     		result.append( ")" );
-	     		result.insert( lengthBeforeDot - 1 + residueToPos.get( residue ), "(" );
-	     	}
+    		return result.toString();
     	}
+
+    	result.append(".");
+		int lengthBeforeDot = result.length();
+
+		// after dot
+		int posAfterDot = 1; // start from 1
+		while ( residue != 0 
+				&& !residueToPos.containsKey( residue ) ) 
+		{
+			residueToPos.put( residue, posAfterDot );
+			posAfterDot++;
+			quotient = ( residue * 10 ) / absDenominator;
+			residue = ( residue * 10 ) % absDenominator;
+			result.append( String.valueOf( quotient ) );
+		}
+
+		// add parentheses
+		if ( residue != 0 
+				&& residueToPos.containsKey( residue ) ) 
+		{
+			result.append( ")" );
+			result.insert( lengthBeforeDot - 1 + residueToPos.get( residue ), "(");
+		}
+
     	return result.toString( );
+    }
+    
+    @Test
+    public void test()
+    {
+    	System.out.println( fractionToDecimal( 1, 5 ) );
+    	System.out.println( fractionToDecimal( 2, 1 ) );
+    	System.out.println( fractionToDecimal( 2, 3 ) );
+    	System.out.println( fractionToDecimal( -50, 8 ) );
     }
 }
