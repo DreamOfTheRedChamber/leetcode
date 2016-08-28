@@ -16,7 +16,7 @@ public class SumRootToLeafNumbers
         List<Integer> rootToLeafNumbers = new ArrayList<>();
         if ( root != null )
         {
-        	depthFirstSearch( rootToLeafNumbers, root, root.val );
+        	depthFirstSearch( rootToLeafNumbers, root, 0 );
         }
         
         int sum = 0;
