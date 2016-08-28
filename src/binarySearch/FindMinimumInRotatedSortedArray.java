@@ -33,7 +33,7 @@ public class FindMinimumInRotatedSortedArray
         		start = mid;
         	}        	
         }
-                
+        // start position takes more precedence than end position        
         if ( nums[start] < nums[end] )
         {
         	return nums[start];

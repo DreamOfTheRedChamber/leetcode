@@ -99,6 +99,13 @@ public int binarySearch( int[] array, int target)
 	}
 }
 ```
+
+* convert a range of binary search problem into variants of essence form
+	- find first element smaller than target
+		- find minimum element in rotated sorted array ( target: array[array.length-1])
+
+* how to handle duplicates in binary search
+
 #### stack <a id="stack"></a>
 * Binary tree inorder traversal
 ```java
