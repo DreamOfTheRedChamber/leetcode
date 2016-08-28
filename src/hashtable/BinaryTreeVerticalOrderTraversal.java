@@ -1,10 +1,10 @@
 package hashtable;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Queue;
 
 import utility.TreeNode;
 
@@ -67,6 +67,8 @@ return its vertical order traversal as:
 ]
  */
 
+
+
 public class BinaryTreeVerticalOrderTraversal
 {
 
@@ -75,7 +77,7 @@ public class BinaryTreeVerticalOrderTraversal
     	Map<Integer, List<Integer>> verticalOrderToNodes = new HashMap<>();
     	if ( root != null )
     	{
-    		traverseTree( verticalOrderToNodes, root, 0 );
+    		traverseTree( verticalOrderToNodes, root );
     	}
     	
     	int minVerticalOrder = 0;
@@ -94,20 +96,40 @@ public class BinaryTreeVerticalOrderTraversal
     	return verticalOrderNodes;
     }
     
-    private void traverseTree( Map<Integer, List<Integer>> verticalOrderToNodes, TreeNode root, int vOrder )
+    /** 
+     * traverse level by level, put node into its level
+     * 
+     * @param verticalOrderToNodes
+     * @param root
+     */
+    private void traverseTree( Map<Integer, List<Integer>> verticalOrderToNodes, TreeNode root )
     {
-    	verticalOrderToNodes.putIfAbsent( vOrder, new ArrayList<>() );
-    	verticalOrderToNodes.get( vOrder ).add( root.val );
-    	
-    	if ( root.left != null )
+    	Queue<PairWrapper> bfsQueue = new LinkedList<>();
+    	bfsQueue.add( new PairWrapper( root, 0 ) );
+    	while ( !bfsQueue.isEmpty() )
     	{
-    		traverseTree( verticalOrderToNodes, root.left, vOrder - 1 );
-    	}
-    	
-    	if ( root.right != null )
-    	{
-    		traverseTree( verticalOrderToNodes, root.right, vOrder + 1 );
+    		PairWrapper qHead = bfsQueue.poll();
+    		verticalOrderToNodes.putIfAbsent( qHead.colIndex, new LinkedList<>() );
+    		verticalOrderToNodes.get( qHead.colIndex ).add( qHead.node.val );
+    		if ( qHead.node.left != null )
+    		{
+    			bfsQueue.add( new PairWrapper( qHead.node.left, qHead.colIndex - 1 ) );
+    		}
+    		if ( qHead.node.right != null )
+    		{
+    			bfsQueue.add( new PairWrapper( qHead.node.right, qHead.colIndex + 1 ) );
+    		}
     	}
     }
+}
 
+class PairWrapper
+{
+	public final TreeNode node;
+	public final int colIndex;
+	public PairWrapper( TreeNode node, int colIndex )
+	{
+		this.node = node;
+		this.colIndex = colIndex;
+	}
 }
