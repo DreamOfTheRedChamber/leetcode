@@ -57,7 +57,24 @@ String part2 = parts[1]; // 034556
 ```java
 PriorityQueue<NumAndFreq> mostFreqPrioQueue = new PriorityQueue<>( ( o1, o2 ) -> ( o2.freq - o1.freq ) ); // decreasing order
 PriorityQueue<NumAndFreq> mostFreqPrioQueue = new PriorityQueue<>( ( o1, o2 ) -> ( o1.freq - o2.freq ) ); // increasing order
-```	
+```
+* use breath-first search queue for shortest path 
+```java
+ int bfsLevel = 0;
+Queue<Integer> bfsQueue = new LinkedList<>();
+bfsQueue.add( i * width + j );
+while ( !bfsQueue.isEmpty() )
+{
+	int levelSize = bfsQueue.size(); // the number of nodes in one level can be obtained from the size of queue
+	for ( int t = 0; t < levelSize; t++ )
+	{
+		int head = bfsQueue.remove();
+  		// ... other stuff
+    }
+	bfsLevel++;
+}
+``` 
+
 #### hashtable <a id="hashtable"></a>
 #### recursive functions <a id="recursive"></a>
 

@@ -75,11 +75,15 @@ public class BinaryTreeVerticalOrderTraversal
     public List<List<Integer>> verticalOrder( TreeNode root )
     {
     	Map<Integer, List<Integer>> verticalOrderToNodes = new HashMap<>();
-    	if ( root != null )
+    	List<List<Integer>> verticalOrderNodes = new LinkedList<>();
+
+    	if ( root == null )
     	{
-    		traverseTree( verticalOrderToNodes, root );
+    		return verticalOrderNodes;
     	}
-    	
+
+		traverseTree( verticalOrderToNodes, root );
+
     	int minVerticalOrder = 0;
     	int maxVerticalOrder = 0;
     	for ( int verticalOrder : verticalOrderToNodes.keySet() )
@@ -88,7 +92,6 @@ public class BinaryTreeVerticalOrderTraversal
     		maxVerticalOrder = Math.max( maxVerticalOrder, verticalOrder );
     	}
     	
-    	List<List<Integer>> verticalOrderNodes = new LinkedList<>();
     	for ( int i = minVerticalOrder; i <= maxVerticalOrder; i++ )
     	{
     		verticalOrderNodes.add( verticalOrderToNodes.get( i ) );
