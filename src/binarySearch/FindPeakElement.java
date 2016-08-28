@@ -1,5 +1,9 @@
 package binarySearch;
 
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
+
 /*
 A peak element is an element that is greater than its neighbors.
 
@@ -23,17 +27,14 @@ public class FindPeakElement
         	int mid = start + ( end - start ) / 2;
         	if ( nums[mid] < nums[mid-1] )
         	{
-        		end = mid - 1;
+        		end = mid;
         	}
-        	else if ( nums[mid] > nums[mid+1] )
+        	else 
         	{
-        		start = mid + 1;
-        	}
-        	else
-        	{
-        		return mid;
+        		start = mid;
         	}
         }
+        
         if ( nums[start] < nums[end] )
         {
         	return end;
@@ -42,5 +43,11 @@ public class FindPeakElement
         {
         	return start;
         }
+    }
+    
+    @Test
+    public void test()
+    {
+    	assertEquals( 2, findPeakElement( new int[]{1, 2, 3, 1}) );
     }
 }
