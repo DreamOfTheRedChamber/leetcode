@@ -2,9 +2,9 @@ package hashtable;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import utility.TreeNode;
 
@@ -72,27 +72,41 @@ public class BinaryTreeVerticalOrderTraversal
 
     public List<List<Integer>> verticalOrder( TreeNode root )
     {
-    	Map<Integer, List<Integer>> vOrderToNodes = new HashMap<>();
+    	Map<Integer, List<Integer>> verticalOrderToNodes = new HashMap<>();
     	if ( root != null )
     	{
-    		traverseTree( vOrderToNodes, root, 0 );
+    		traverseTree( verticalOrderToNodes, root, 0 );
     	}
-    	return vOrderToNodes.values( ).stream( ).collect( Collectors.toList( ) );
+    	
+    	int minVerticalOrder = 0;
+    	int maxVerticalOrder = 0;
+    	for ( int verticalOrder : verticalOrderToNodes.keySet() )
+    	{
+    		minVerticalOrder = Math.min( minVerticalOrder, verticalOrder );
+    		maxVerticalOrder = Math.max( maxVerticalOrder, verticalOrder );
+    	}
+    	
+    	List<List<Integer>> verticalOrderNodes = new LinkedList<>();
+    	for ( int i = minVerticalOrder; i <= maxVerticalOrder; i++ )
+    	{
+    		verticalOrderNodes.add( verticalOrderToNodes.get( i ) );
+    	}
+    	return verticalOrderNodes;
     }
     
-    private void traverseTree( Map<Integer, List<Integer>> vOrderToNodes, TreeNode root, int vOrder )
+    private void traverseTree( Map<Integer, List<Integer>> verticalOrderToNodes, TreeNode root, int vOrder )
     {
-    	vOrderToNodes.putIfAbsent( vOrder, new ArrayList<>() );
-    	vOrderToNodes.get( vOrder ).add( root.val );
+    	verticalOrderToNodes.putIfAbsent( vOrder, new ArrayList<>() );
+    	verticalOrderToNodes.get( vOrder ).add( root.val );
     	
     	if ( root.left != null )
     	{
-    		traverseTree( vOrderToNodes, root.left, vOrder - 1 );
+    		traverseTree( verticalOrderToNodes, root.left, vOrder - 1 );
     	}
     	
     	if ( root.right != null )
     	{
-    		traverseTree( vOrderToNodes, root.right, vOrder + 1 );
+    		traverseTree( verticalOrderToNodes, root.right, vOrder + 1 );
     	}
     }
 
