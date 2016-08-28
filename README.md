@@ -66,9 +66,9 @@ String part2 = parts[1]; // 034556
 
 #### linkedList <a id="linkedlist"></a>
 #### binary search <a id="binary-search"></a>
-* universal templates 
+* universal templates - iterative/recursive version 
 ```java
-public int binarySearch( int[] array, int target)
+public int binarySearchIterative( int[] array, int target)
 {
 	int start = 0;
 	int end = array.length - 1;
@@ -96,6 +96,41 @@ public int binarySearch( int[] array, int target)
 	else
 	{
 		return -1;
+	}
+}
+
+public int binarySearchRecursive( int[] array, int target, int start, int end )
+{
+	// truning
+	if ( start > end )
+	{
+		return -1;
+	}
+	// base condition
+	if ( start + 1 >= end )
+	{
+		if ( array[start] == target )
+		{
+			return start;
+		}
+		else if ( array[end] == target )
+		{
+			return end;
+		}
+		else
+		{
+			return -1;
+		}
+	}
+	// recursion body
+	int mid = ( end - start ) / 2 + start;
+	if ( array[mid] < target )
+	{
+		return binarySearchRecursive( array, target, mid, end );
+	}
+	else
+	{
+		return binarySearchRecursive( array, target, start, mid );
 	}
 }
 ```
@@ -356,4 +391,4 @@ public TreeNode changePos( Position position, String input )
 * No history track along time axis. Really bad synchronous workflow
 * Unable to mark different stages in solving a problem ( e.g. thought-out, implemented, optimized, on-line judged, summarized )
 * Cannot add enough comments along the code
-* Never-ending, too many problems
+* Never-ending, ever-increasing number of problems

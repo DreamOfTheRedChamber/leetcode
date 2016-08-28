@@ -14,85 +14,39 @@ return [3, 4].
 
 public class SearchForARange 
 {
-
 	public int[] searchRange( int[] nums, int target )
     {
+		return searchRangeRecurse( nums, target, 0, nums.length - 1 );
+    }
+	
+	private int[] searchRangeRecurse( int[] nums, int target, int start, int end )
+	{
 		if ( nums.length == 0 )
 		{
 			return new int[]{ -1, -1 };
 		}
-		int firstAppearPos = findFirstAppear( nums, target );
-		int lastAppearPos = ( firstAppearPos == -1 ) ? -1 : findLastAppear( nums, target );
-		return new int[]{ firstAppearPos, lastAppearPos };
-    }
-
-	private int findFirstAppear( int[] nums, int target )
-	{
-		int start = 0;
-		int end = nums.length - 1;
-		while ( start + 1 < end )
+		
+		if ( start > end )
 		{
-			int mid = ( end - start ) / 2 + start;
-			if ( nums[mid] == target )
-			{
-				end = mid;
-			}
-			else if ( nums[mid] < target )
-			{
-				start = mid + 1;
-			}
-			else
-			{
-				end = mid - 1;
-			}
+			return new int[]{ -1, -1 };
 		}
 		
-		if ( nums[start] == target )
+		int mid = ( end - start ) / 2 + start;
+		if ( nums[mid] < target )
 		{
-			return start;
+			return searchRangeRecurse( nums, target, mid + 1, end ); 
 		}
-		else if ( nums[end] == target )
+		else if ( nums[mid] > target )
 		{
-			return end;
+			return searchRangeRecurse( nums, target, start, mid - 1 );
 		}
 		else
 		{
-			return -1;
+			int[] leftRange = searchRangeRecurse( nums, target, start, mid - 1 );
+			int[] rightRange = searchRangeRecurse( nums, target, mid + 1, end );
+	        int leftEnd = (leftRange[0] == -1 ? mid : leftRange[0]);
+	        int rightEnd = (rightRange[1] == -1 ? mid : rightRange[1]);
+	        return new int[]{leftEnd, rightEnd};
 		}
-	}
-	
-	private int findLastAppear( int[] nums, int target )
-	{
-		int start = 0;
-		int end = nums.length - 1;
-		while ( start + 1 < end )
-		{
-			int mid = ( end - start ) / 2 + start;
-			if ( nums[mid] == target )
-			{
-				start = mid;
-			}
-			else if ( nums[mid] < target )
-			{
-				start = mid + 1;
-			}
-			else
-			{
-				end = mid - 1;
-			}
-		}
-		
-		if ( nums[end] == target )
-		{
-			return end;
-		}
-		else if ( nums[start] == target )
-		{
-			return start;
-		}
-		else
-		{
-			return -1;
-		}		
 	}
 }
