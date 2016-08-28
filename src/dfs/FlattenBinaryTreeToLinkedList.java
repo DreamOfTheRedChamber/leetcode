@@ -1,22 +1,16 @@
 package dfs;
 
-import utility.ListNode;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Stack;
+
+import org.junit.Test;
+
 import utility.TreeNode;
 
 /**
  * 
  */
-
-class ListHeadTail
-{
-	public final ListNode head;
-	public final ListNode tail;
-	public ListHeadTail( ListNode head, ListNode tail )
-	{
-		this.head = head;
-		this.tail = tail;
-	}
-}
 
 public class FlattenBinaryTreeToLinkedList
 {
@@ -26,34 +20,43 @@ public class FlattenBinaryTreeToLinkedList
     	{
     		return;
     	}
-    	flattenRecurse( root );
+    	
+    	Stack<TreeNode> preorderStack = new Stack<>();
+    	preorderStack.push( root );
+    	TreeNode listHead = new TreeNode( 0 );
+    	TreeNode listTail = listHead;
+    	while ( !preorderStack.isEmpty() )
+    	{
+    		TreeNode stackTop = preorderStack.pop();
+    		if ( stackTop.right != null )
+    		{
+    			preorderStack.push( stackTop.right );
+    		}
+    		if ( stackTop.left != null )
+    		{
+    			preorderStack.push( stackTop.left );
+    		}
+    		listTail.right = stackTop;
+    		stackTop.left = listTail;
+    		listTail = stackTop;
+    	}
+    	listTail.right = null;
     }
-    
-    private ListHeadTail flattenRecurse( TreeNode root )
+
+    @Test
+    public void test()
     {
-    	if ( root.left == null 
-    			&& root.right == null )
-    	{
-    		ListNode node = new ListNode( root.val );
-    		return new ListHeadTail( node, node );
-    	}
-    	else
-    	{
-    		ListNode head = new ListNode( root.val );
-    		ListNode tail = head;
-    		if ( root.left != null )
-    		{
-    			ListHeadTail leftChildList = flattenRecurse( root.left );
-    			tail.next = leftChildList.head;
-    			tail = leftChildList.tail;
-    		}
-    		if ( root.right != null )
-    		{
-    			ListHeadTail rightChildList = flattenRecurse( root.right );
-    			tail.next = rightChildList.head;
-    			tail = rightChildList.tail;
-    		}
-    		return new ListHeadTail( head, tail );
-    	}
+    	TreeNode node0 = new TreeNode( 0 );
+    	TreeNode node1 = new TreeNode( 1 );
+    	TreeNode node2 = new TreeNode( 2 );
+    	TreeNode node3 = new TreeNode( 3 );
+    	TreeNode node4 = new TreeNode( 4 );
+    	TreeNode node5 = new TreeNode( 5 );
+    	node0.left = node1;
+    	node0.right = node4;
+    	node1.left = node2;
+    	node1.right = node3;
+    	node4.right = node5;
+    	
     }
 }
