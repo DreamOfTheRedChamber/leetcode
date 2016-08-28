@@ -14,7 +14,7 @@ Design a class which receives a list of words in the constructor, and implements
 For example,
 Assume that words = ["practice", "makes", "perfect", "coding", "makes"].
 
-Given word1 = “coding”, word2 = “practice”, return 3.
+Given word1 = ï¿½codingï¿½, word2 = ï¿½practiceï¿½, return 3.
 Given word1 = "makes", word2 = "coding", return 1.
 
 Note:
@@ -61,7 +61,7 @@ public class ShortestWordDistanceII
         		else
         		{
         			word1CurrPos = word1PosIterator.next( );
-        			minDistance = Math.abs( word1CurrPos - word2CurrPos );
+        			minDistance = Math.min( minDistance, Math.abs( word1CurrPos - word2CurrPos ) );
         		}
         	}
         	else
@@ -73,7 +73,7 @@ public class ShortestWordDistanceII
         		else
         		{
         			word2CurrPos = word2PosIterator.next( );
-        			minDistance = Math.abs( word1CurrPos - word2CurrPos );
+        			minDistance = Math.min( minDistance, Math.abs( word1CurrPos - word2CurrPos ) );
         		}
         	}
         }
