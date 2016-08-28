@@ -52,6 +52,97 @@ String part2 = parts[1]; // 034556
 #### linkedList <a id="linkedlist"></a>
 #### binary search <a id="binary-search"></a>
 #### stack <a id="stack"></a>
+* Binary tree inorder traversal
+```java
+    public List<Integer> inorderTraversal( TreeNode root )
+    {
+    	List<Integer> inorderSeqs = new ArrayList<>();
+    	Stack<TreeNode> inorderStack = new Stack<>();
+    	pushAllNodesOnLeftPath( root, inorderStack );
+    	while ( !inorderStack.isEmpty( ) )
+    	{
+    		TreeNode top = inorderStack.pop( );
+    		inorderSeqs.add( top.val );
+    		if ( top.right != null )
+    		{
+    			pushAllNodesOnLeftPath( top.right, inorderStack );
+    		}
+    	}
+    	return inorderSeqs;
+    }
+	\\
+    private void pushAllNodesOnLeftPath( TreeNode root, Stack<TreeNode> inorderStack )
+    {
+    	TreeNode currNode = root;
+    	while ( currNode != null )
+    	{
+    		inorderStack.push( currNode );
+    		currNode = currNode.left;
+    	}
+    }
+```
+* Binary tree preorder traversal
+	* There are two classical ways to implement iterative preorder traversal. The first one follows basically the same code structure as iterative inorder traversal. The second one is more concise and has a more recursive like structure.
+```java
+    public List<Integer> preorderTraversal(TreeNode root) {
+     	List<Integer> result = new ArrayList<>();
+    	if ( root == null )
+    	{
+    		return result;
+    	}
+    	
+    	Stack<TreeNode> preorderStack = new Stack<>();
+    	pushAllLeftChildren( root, preorderStack, result );    	
+    	
+    	while ( !preorderStack.isEmpty() )
+    	{
+    		TreeNode top = preorderStack.pop();
+    		if ( top.right != null )
+    		{
+    			pushAllLeftChildren( top.right, preorderStack, result );
+    		}
+    	}   
+    	return result;       
+    }
+    
+    private void pushAllLeftChildren( TreeNode root, Stack<TreeNode> preorderStack, List<Integer> result )
+	{
+		TreeNode currNode = root;
+		while ( currNode != null )
+		{
+			result.add( currNode.val );
+			preorderStack.push( currNode );
+			currNode = currNode.left;
+		}
+	}
+	
+	public List<Integer> preorderTraversal(TreeNode root) 
+	{
+     	List<Integer> result = new ArrayList<>();
+    		if ( root == null )
+    		{
+    			return result;
+    		}
+    	
+	    	Stack<TreeNode> preorderBuf = new Stack<>();
+    		preorderBuf.push( root );
+    		while ( !preorderBuf.isEmpty() )
+    		{
+    			TreeNode stackTop = preorderBuf.pop();
+    			result.add( stackTop.val );
+    			if ( stackTop.right != null )
+    			{
+    				preorderBuf.push( stackTop.right );
+    			}
+    			if ( stackTop.left != null )
+    			{
+    				preorderBuf.push( stackTop.left );
+    			}
+    		}
+    		return result;       
+    }
+```
+
 #### queue <a id="queue"></a>
 * Lambda expression inside PriorityQueue elements comparison
 ```java

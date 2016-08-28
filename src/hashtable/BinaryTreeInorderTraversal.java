@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
+import org.junit.Test;
+
 import utility.TreeNode;
 
 /**
@@ -35,7 +37,7 @@ public class BinaryTreeInorderTraversal
     		inorderSeqs.add( top.val );
     		if ( top.right != null )
     		{
-    			pushAllNodesOnLeftPath( root.right, inorderStack );
+    			pushAllNodesOnLeftPath( top.right, inorderStack );
     		}
     	}
     	return inorderSeqs;
@@ -49,5 +51,16 @@ public class BinaryTreeInorderTraversal
     		inorderStack.push( currNode );
     		currNode = currNode.left;
     	}
+    }
+    
+    @Test
+    public void test()
+    {
+    	TreeNode node1 = new TreeNode( 3 );
+    	TreeNode node2 = new TreeNode( 1 );
+    	TreeNode node3 = new TreeNode( 2 );
+    	node1.left = node2;
+    	node2.right = node3;
+    	System.out.println( inorderTraversal( node1 ) );
     }
 }
