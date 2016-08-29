@@ -34,14 +34,14 @@ public class SearchA2DMatrixII
     	// from right upper corner
     	int xCoor = 0;
     	int yCoor = matrix[0].length - 1;
-    	while ( xCoor <= matrix.length 
+    	while ( xCoor < matrix.length 
     			&& yCoor >= 0 )
     	{
     		if ( matrix[xCoor][yCoor] == target )
     		{
     			return true;
     		}
-    		else if ( matrix[xCoor][yCoor] < target )
+    		else if ( matrix[xCoor][yCoor] > target )
     		{
     			yCoor--;
     		}
