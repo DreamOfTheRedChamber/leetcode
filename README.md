@@ -266,16 +266,21 @@ while ( !bfsQueue.isEmpty() )
 #### hashtable <a id="hashtable"></a>
 #### recursive functions <a id="recursive"></a>
 
-* Result wrapper class or customized PriorityQueue elems
+* Result wrapper class or customized classes
+	* Used a lot in PriorityQueue, Recurse(Tree) related problems
+	* the resultwrapper class should be a private inner class, rather than relying on the default package level visibility rule
 ```java
-class NumAndFreq
+public class Solution
 {
-	public final int num;
-	public final int freq;
-	public NumAndFreq( int num, int freq )
+	private class NumAndFreq
 	{
-		this.num = num;
-		this.freq = freq;
+		public final int num;
+		public final int freq;
+		public NumAndFreq( int num, int freq )
+		{
+			this.num = num;
+			this.freq = freq;
+		}
 	}
 }
 ```
@@ -388,6 +393,7 @@ public TreeNode changePos( Position position, String input )
 * passed in a reference variable (e.g. TreeNode, LinkNode, GraphNode...), check null pointer case
 * grid-based problem
 	- gridsize == 1, no solution inside grid
+* When a variable's name is really really long such as matrix[qHead.xCoor][qHead.yCoor+1] and it needs to be used in multiple places, it is really easy to create typos
 
 ### smells for refactoring and optimization <a id="bad-smells"></a>
 * code length > 100

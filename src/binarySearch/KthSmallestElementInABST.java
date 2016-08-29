@@ -16,22 +16,21 @@ Follow up:
 What if the BST is modified (insert/delete operations) often and you need to find the kth smallest frequently? How would you optimize the kthSmallest routine?
  * */
 
-// TODO: why cannot have private classes
-class ResultWrapper
-{
-	public final int numNodes;	// used internally only
-	public final TreeNode kthNode;
-	public final boolean isKthNodeFound;
-	public ResultWrapper( TreeNode kthNode,  int numNodes, boolean isKthNodeFound )
-	{
-		this.numNodes = numNodes;
-		this.kthNode = kthNode;
-		this.isKthNodeFound = isKthNodeFound;
-	}
-}
-
 public class KthSmallestElementInABST 
 {
+	private class ResultWrapper
+	{
+		public final int numNodes;	// do not rely on num count 
+		public final TreeNode kthNode;
+		public final boolean isKthNodeFound;
+		public ResultWrapper( TreeNode kthNode,  int numNodes, boolean isKthNodeFound )
+		{
+			this.numNodes = numNodes;
+			this.kthNode = kthNode;
+			this.isKthNodeFound = isKthNodeFound;
+		}
+	}
+	
     public int kthSmallest( TreeNode root, int k )
     {
     	if ( root == null 
