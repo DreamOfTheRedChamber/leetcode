@@ -16,8 +16,7 @@ public class ValidBinarySearchTree
         	return true;
         }
         
-        return isValidBSTRecurse( root.left, Integer.MIN_VALUE, root.val - 1 )
-        		&& isValidBSTRecurse( root.right, root.val + 1, Integer.MAX_VALUE );
+        return isValidBSTRecurse( root, Integer.MIN_VALUE, Integer.MAX_VALUE );
     }
     
     private boolean isValidBSTRecurse( TreeNode root, int lowerBound, int upperBound )
@@ -31,10 +30,32 @@ public class ValidBinarySearchTree
     	{
     		return false;
     	}
+    	else if ( root.val == Integer.MIN_VALUE )
+    	{
+    		if ( root.left != null )
+    		{
+    			return false;
+    		}
+    		else
+    		{
+    			return isValidBSTRecurse( root.right, root.val + 1, upperBound );
+    		}
+    	}
+    	else if ( root.val == Integer.MAX_VALUE )
+    	{
+    		if ( root.right != null )
+    		{
+    			return false;
+    		}
+    		else
+    		{
+    			return isValidBSTRecurse( root.left, lowerBound, root.val - 1 );
+    		}
+    	}
     	else
     	{
     		return isValidBSTRecurse( root.left, lowerBound, root.val - 1 )
-    				&& isValidBSTRecurse( root.right, root.val + 1, upperBound + 1 );
+    				&& isValidBSTRecurse( root.right, root.val + 1, upperBound );
     	}    	    	
     }
 
