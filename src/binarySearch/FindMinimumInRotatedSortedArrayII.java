@@ -1,5 +1,9 @@
 package binarySearch;
 
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
+
 public class FindMinimumInRotatedSortedArrayII 
 {
     public int findMin( int[] nums )
@@ -14,12 +18,11 @@ public class FindMinimumInRotatedSortedArrayII
     	while ( start + 1 < end )
     	{
     		int mid = ( end - start ) / 2 + start;
-        	// TODO: verify correctness of the abstraction
-    		if ( nums[mid] == nums[nums.length - 1] )
+    		if ( nums[mid] == nums[end] )
     		{
-    			end = end - 1;
+    			end -= 1;
     		}
-    		else if ( nums[mid] < nums[nums.length - 1] )
+    		else if ( nums[mid] < nums[end] )
     		{
     			end = mid;
     		}
@@ -28,7 +31,7 @@ public class FindMinimumInRotatedSortedArrayII
     			start = mid;
     		}
     	}
-    	
+    	   	
     	if ( nums[start] < nums[end] )
     	{
     		return nums[start];
@@ -37,5 +40,12 @@ public class FindMinimumInRotatedSortedArrayII
     	{
     		return nums[end];
     	}
+    }
+    
+    @Test
+    public void test()
+    {
+    	assertEquals( 1, findMin( new int[]{3, 3, 1, 3}) );
+    	assertEquals( 3, findMin( new int[]{3, 3, 3 }) );
     }
 }
