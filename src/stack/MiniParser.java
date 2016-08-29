@@ -1,5 +1,7 @@
 package stack;
 
+import utility.NestedInteger;
+
 /*
 Given a nested list of integers represented as a string, implement a parser to deserialize it.
 
@@ -57,10 +59,57 @@ Return a NestedInteger object containing a nested list with 2 elements:
  * }
  */
 
+// TODO: readme summarize customized integer parser from string
+// TODO: iterative/recursive method
 public class MiniParser 
 {
     public NestedInteger deserialize(String s) 
     {
-        
+    	if ( s == null )
+    	{
+    		throw new IllegalArgumentException("");
+    	}
+    	// other assertions
+    	
+    	return deserializeRecurse( s, new int[1] );
+    }
+    
+    private NestedInteger deserializeRecurse( String s, int[] startPos )
+    {
+    	if ( startPos[0] >= s.length() )
+    	{
+    		return null;
+    	}
+    	
+    	NestedInteger currLevelNestedInteger = new NestedInteger();
+    	int currPos = startPos[0] + 1; // skip '['
+    	while ( s.charAt( currPos ) != ']' )
+    	{
+    		if ( s.charAt( currPos ) == '[' )
+    		{
+    			startPos[0] = currPos;
+    			NestedInteger nextLevelNestedInteger = deserializeRecurse( s, startPos );
+    			currLevelNestedInteger.add( nextLevelNestedInteger );
+    		}
+    		else if ( s.charAt( currPos ) == ',' )
+    		{
+    			currPos++;
+    		}
+    		else
+    		{
+    			int value = 0;
+    			while ( s.charAt( currPos ) <= '9'
+    					&& s.charAt( currPos ) >= '0' )
+    			{
+    				// TODO: char to int, unnecessary cast
+    				value = value * 10 +  s.charAt( currPos ) - '0' ; 
+    				currPos++;
+    			}
+    			currLevelNestedInteger.add( value );
+    		}
+    	}
+    	startPos[0] = currPos;
+    	
+    	return currLevelNestedInteger;
     }
 }
