@@ -1,5 +1,14 @@
 package binarySearch;
 
+/**
+Follow up for "Search in Rotated Sorted Array":
+What if duplicates are allowed?
+
+Would this affect the run-time complexity? How and why?
+
+Write a function to determine if a given target is in the array.
+*/
+
 public class SearchInRotatedSortedArrayII 
 {
     public boolean search(int[] nums, int target) 
@@ -11,45 +20,35 @@ public class SearchInRotatedSortedArrayII
     	
     	int start = 0;
     	int end = nums.length - 1;
-    	int pivotEnd = nums.length - 1;
-    	while ( start + 1 < end 
-    			&& start + 1 < pivotEnd )
+    	while ( start + 1 < end )
     	{
     		int mid = ( end - start ) / 2 + start;
-    		// TODO: how to handle pivotEnd and end inconsistent problem
-    		if ( nums[mid] == nums[pivotEnd] )
+    		if ( nums[mid] == nums[end] )
     		{
-    			pivotEnd--;
-    		}    		
-    		else if ( nums[mid] < nums[pivotEnd] )
+    			end = end - 1;
+    		}
+    		else if ( nums[mid] < nums[end] )	// pivot point inside [start,mid]
     		{
-    			// TODO: put redundant logic into else, smart!!!
-    			if ( target == nums[mid] )
+    			if ( target > nums[mid] 
+    					&& target <= nums[end] )
     			{
-    				return true;
-    			}
-    			else if ( target < nums[mid] )
-    			{
-    				end = mid;
+    				start = mid;
     			}
     			else
     			{
-    				start = mid;
+    				end = mid;
     			}
     		}
-    		else
+    		else	// pivot point inside [mid, end]
     		{
-    			if ( target == nums[mid] )
+    			if ( target < nums[mid] 
+    					&& target >= nums[start] )
     			{
-    				return true;
-    			}
-    			else if ( target > nums[mid] )
-    			{
-    				start = mid;
+    				end = mid;
     			}
     			else
     			{
-    				end = mid;
+    				start = mid;
     			}
     		}
     	}
