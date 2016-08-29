@@ -16,17 +16,17 @@ public class KthLargestElementInAnArray
 {
     public int findKthLargest( int[] nums, int k )
     {
-        PriorityQueue<Integer> pQueue = new PriorityQueue<>( ( o1, o2 ) -> o2 - o1 );
+        PriorityQueue<Integer> maxQueue = new PriorityQueue<>( ( o1, o2 ) -> o2 - o1 );
         for ( int num : nums )
         {
-        	pQueue.add( num );
+        	maxQueue.add( num );
         }
         
         int count = 0;
         int result = 0;
         while ( count < k )
         {
-        	result = pQueue.remove();
+        	result = maxQueue.remove();
         	count++;
         }
         
