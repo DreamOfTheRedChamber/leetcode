@@ -1,5 +1,7 @@
 package binarySearch;
 
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
 
 /**
@@ -10,34 +12,43 @@ public class Pow
 {
     public double myPow( double x, int n )
     {
+    	// exception case
     	if ( x == 0 
     			&& n < 0 )
     	{
     		throw new ArithmeticException("");
     	}
     	
+    	// need to convert x and n to positive for processing    	
+
+    	// processing n
+    	// n == Integer.MIN_VALUE case
     	if ( n == Integer.MIN_VALUE )
     	{
     		return myPow( x, n + 1) / x;
     	}
-    	
-    	// convert x and n to positive
-    	boolean isNeg = ( x < 0 ) && ( Math.abs( n ) % 2 == 0 );
-    	x = Math.abs( x );
-    	n = Math.abs( n );
+    	// n < 0 && n != Integer.MIN_VALUE
     	if ( n < 0 )
     	{
-    		// TODO: overflow exception
-    		return isNeg ? -1 / myPow( x, n ) : 1 / myPow( x, n );
+        	n = Math.abs( n );
+    		return 1 / myPow( x, n );
     	}
     	
+    	// processing x
+    	boolean isNeg = ( x < 0 ) && ( Math.abs( n ) % 2 != 0 );
+    	x = Math.abs( x );
+    	    	
     	return isNeg ? -1 * myPowRecurse( x, n ) : myPowRecurse( x, n );
     }
     
     private double myPowRecurse( double x, int n )
     {
     	// assert n >= 0
-    	if ( n <= 1 )
+    	if ( n == 0 )
+    	{
+    		return 1;
+    	}    	
+    	if ( n == 1 )
     	{
     		return x;
     	}
@@ -51,5 +62,12 @@ public class Pow
     	{
     		return halfMyPow * halfMyPow;
     	}
+    }
+    
+    @Test
+    public void test()
+    {    	
+    	assertEquals( 1.0, myPow( 0.44528, 0 ), 1e-5 );
+    	assertEquals( -2529.955038927, myPow( -13.62608, 3 ), 1e-5 );
     }
 }

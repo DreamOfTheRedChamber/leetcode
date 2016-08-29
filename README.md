@@ -35,7 +35,11 @@
 		- residue = ( residue * 10 ) % divisor
 		- use hashmap to record residue and occuring positions to handle recurring
 	* concatenate symbol, integer part, dot, fraction part (possibly with parentheses)
-	
+* mod
+	* judge whether a value is even or odd
+		- Use num % 2 != 0 rather than num % 2 == 1 because of negative number mod ( e.g. -5 % 2 == -1 )
+		- To guarantee mod result is always positive, if knowing num range RANGE, could consider ( num + RANGE ) % RANGE 
+		
 #### array <a id="array"></a>
 * Print arrays in Java
 ```java
