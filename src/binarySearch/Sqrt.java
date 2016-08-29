@@ -8,27 +8,25 @@ Compute and return the square root of x.
 
 public class Sqrt
 {
-    public int mySqrt( int x )
+    public int mySqrt( int input )
     {
-    	if ( x < 0 )
+    	if ( input < 0 )
     	{
     		throw new IllegalArgumentException("");
     	}
-    	if ( x <= 1 )
+    	if ( input <= 1 )
     	{
-    		return 1;
+    		return input;
     	}
     	
     	int start = 1;
-    	int end = x / 2;
+    	int end = input / 2;
     	while ( start + 1 < end )
     	{
     		int mid = ( end - start ) / 2 + start;
-    		// TODO: techniques to avoid overflow
-    		// TODO: lowerbound or upperbound
-    		if ( x / mid < mid )
+    		if ( input / mid < mid ) // !!! when equals, find the result mid
     		{
-    			end = mid - 1;
+    			end = mid;
     		}
     		else
     		{
@@ -36,7 +34,7 @@ public class Sqrt
     		} 			
     	}
     	
-    	if ( x / end > end )
+    	if ( input / end >= end )
     	{
     		return end;
     	}
