@@ -1,8 +1,11 @@
 package heap;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.PriorityQueue;
+
+import org.junit.Test;
 
 /*
 You are given two integer arrays nums1 and nums2 sorted in ascending order and an integer k.
@@ -45,25 +48,36 @@ public class FindKPairsWithSmallestSums
         	return result;
         }
         
-        PriorityQueue<Pair> pairSumQueue = new PriorityQueue<>( ( o1, o2 ) -> o2.sum - o1.sum );
-        pairSumQueue.offer( new Pair( 0, 0, nums1[0] + nums2[0] ) );
+        // enqueue all pairs
+        PriorityQueue<Pair> pairSumQueue = new PriorityQueue<>( ( o1, o2 ) -> o1.sum - o2.sum );
+        for ( int i = 0; i < nums1.length; i++ )
+        {
+        	for ( int j = 0; j < nums2.length; j++ )
+        	{
+                pairSumQueue.offer( new Pair( i, j, nums1[i] + nums2[j] ) );        		
+        	}
+        }
+        
+        // take the smallest k pairs
         int numPairs = 0;
         while ( numPairs < k
         		&& !pairSumQueue.isEmpty() )
         {
-        	Pair qHead = pairSumQueue.remove();
+        	Pair qHead = pairSumQueue.remove();        	
         	result.add( new int[]{ nums1[qHead.num1Index], nums2[qHead.num2Index ] } );
-        	
-        	if ( qHead.num2Index + 1 < nums2.length )
-        	{
-        		pairSumQueue.offer( new Pair( qHead.num1Index, qHead.num2Index + 1, nums1[qHead.num1Index] + nums2[qHead.num2Index] ) );
-        	}        	
-        	if ( qHead.num1Index + 1 < nums1.length )
-        	{
-        		pairSumQueue.offer( new Pair( qHead.num1Index + 1, qHead.num2Index, nums1[qHead.num1Index+1] + nums2[qHead.num2Index] ) );        		
-        	}
+        	numPairs++;
         }
         return result;
+    }
+    
+    @Test
+    public void test()
+    {
+    	List<int[]> result = kSmallestPairs( new int[]{1, 1, 2}, new int[]{1, 2, 3}, 10 );
+    	for (int[] num : result )
+    	{
+    		System.out.println( Arrays.toString( num ));
+    	}
     }
 }
 
