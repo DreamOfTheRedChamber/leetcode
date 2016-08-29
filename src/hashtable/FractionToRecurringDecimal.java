@@ -37,7 +37,7 @@ public class FractionToRecurringDecimal
     		result.append( "-" );
     	}
     	
-    	//TODO: how to handle integer boundary case ( convert to long )
+    	// how to handle integer boundary case ( convert to long )
     	long absNumerator = Math.abs( (long) numerator );
     	long absDenominator = Math.abs( (long) denominator );
     	

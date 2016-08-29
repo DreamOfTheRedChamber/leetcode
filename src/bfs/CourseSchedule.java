@@ -17,7 +17,7 @@ public class CourseSchedule
     	{
     		throw new IllegalArgumentException("");
     	}
-    	// TODO: assertions on prerequisites
+    	// other assertions on prerequisites
     	
     	// build graph
     	Map<Integer, Set<Integer>> graph = new HashMap<>();

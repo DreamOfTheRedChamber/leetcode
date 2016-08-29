@@ -17,6 +17,7 @@ In a complete binary tree every level, except possibly the last, is completely f
 and all nodes in the last level are as far left as possible. 
 It can have between 1 and 2h nodes inclusive at the last level h.*/
 
+// TODO: provide a more concise solution
 public class CountCompleteTreeNodes 
 {
     public int countNodes( TreeNode root )
@@ -51,7 +52,6 @@ public class CountCompleteTreeNodes
         	}
         }
 
-        // TODO: int pow
         int numNonLeafNodes = ( int )( Math.pow( 2, treeDepth-1) ) - 1;
         if ( doesLeafExist( root, end, treeDepth ) )
         {

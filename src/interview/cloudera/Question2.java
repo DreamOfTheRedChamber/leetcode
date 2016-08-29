@@ -9,7 +9,6 @@ public class Question2
 
 	public Question2( )
 	{
-		// TODO Auto-generated constructor stub
 	}
 
 }

@@ -14,7 +14,6 @@ Here are few examples.
 
 public class SearchInsertPosition 
 {
-	// TODO: question array duplicates exist?
     public int searchInsert( int[] nums, int target )
     {
     	if ( nums.length == 0 )

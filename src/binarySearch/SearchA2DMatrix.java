@@ -94,7 +94,6 @@ public class SearchA2DMatrix
     		}
     		else //if ( matrix[mid][0] > target )
     		{
-    			// TODO: binary search conditions
     			end = mid - 1;
     		}
     	}
