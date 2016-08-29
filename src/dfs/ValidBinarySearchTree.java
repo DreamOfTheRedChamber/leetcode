@@ -16,46 +16,24 @@ public class ValidBinarySearchTree
         	return true;
         }
         
-        return isValidBSTRecurse( root, Integer.MIN_VALUE, Integer.MAX_VALUE );
+        return isValidBSTRecurse( root, Long.MIN_VALUE, Long.MAX_VALUE );
     }
     
-    private boolean isValidBSTRecurse( TreeNode root, int lowerBound, int upperBound )
+    private boolean isValidBSTRecurse( TreeNode root, long lowerBound, long upperBound )
     {
     	if ( root == null )
     	{
     		return true;
     	}
-    	else if ( root.val < lowerBound
-    			|| root.val > upperBound )
+    	else if ( root.val <= lowerBound
+    			|| root.val >= upperBound )
     	{
     		return false;
     	}
-    	else if ( root.val == Integer.MIN_VALUE )
-    	{
-    		if ( root.left != null )
-    		{
-    			return false;
-    		}
-    		else
-    		{
-    			return isValidBSTRecurse( root.right, root.val + 1, upperBound );
-    		}
-    	}
-    	else if ( root.val == Integer.MAX_VALUE )
-    	{
-    		if ( root.right != null )
-    		{
-    			return false;
-    		}
-    		else
-    		{
-    			return isValidBSTRecurse( root.left, lowerBound, root.val - 1 );
-    		}
-    	}
     	else
     	{
-    		return isValidBSTRecurse( root.left, lowerBound, root.val - 1 )
-    				&& isValidBSTRecurse( root.right, root.val + 1, upperBound );
+    		return isValidBSTRecurse( root.left, lowerBound, root.val )
+    				&& isValidBSTRecurse( root.right, root.val, upperBound );
     	}    	    	
     }
 
