@@ -1,7 +1,8 @@
 package stack;
 
 /*
-One way to serialize a binary tree is to use pre-order traversal. When we encounter a non-null node, we record the node's value. If it is a null node, we record using a sentinel value such as #.
+One way to serialize a binary tree is to use pre-order traversal. 
+When we encounter a non-null node, we record the node's value. If it is a null node, we record using a sentinel value such as #.
 
      _9_
     /   \
@@ -12,7 +13,8 @@ One way to serialize a binary tree is to use pre-order traversal. When we encoun
 # # # #   # #
 For example, the above binary tree can be serialized to the string "9,3,4,#,#,1,#,#,2,#,6,#,#", where # represents a null node.
 
-Given a string of comma separated values, verify whether it is a correct preorder traversal serialization of a binary tree. Find an algorithm without reconstructing the tree.
+Given a string of comma separated values, verify whether it is a correct preorder traversal serialization of a binary tree. 
+Find an algorithm without reconstructing the tree.
 
 Each comma separated value in the string must be either an integer or a character '#' representing null pointer.
 
@@ -31,10 +33,48 @@ Example 3:
 Return false
  * */
 
+// TODO: verify preorder serialization of binary search tree
 public class VerifyPreorderSerializationOfBinaryTree 
 {
-    public boolean isValidSerialization(String preorder) 
+    public boolean isValidSerialization( String preorder )
     {
-        
+    	if ( preorder == null )
+    	{
+    		throw new NullPointerException("");
+    	}    			
+    	if ( preorder.length() == 0 )
+    	{
+    		return true;
+    	}
+    	
+    	int[] currPos = new int[1];
+    	String[] nodeValues = preorder.split( "," );
+    	if ( !isValidSerializationRecurse( nodeValues, currPos ) )
+    	{ 
+    		return false;
+    	}
+    	return currPos[0] == preorder.length( );
+    }
+    
+    /**
+     * 
+     * @param nodeValues  parsed tree node values
+     * @param currPos  position inside nodeValues
+     * @return	whether nodeValues is enough to build a binary tree
+     */
+    private boolean isValidSerializationRecurse( String[] nodeValues, int[] currPos )
+    {
+    	if ( currPos[0] >= nodeValues.length )
+    	{
+    		return false;
+    	}    	
+    	if ( nodeValues[currPos[0]].equals( "#" ) )
+    	{
+    		return true;
+    	}
+    	
+    	currPos[0] += 1;
+    	return isValidSerializationRecurse( nodeValues, currPos )
+    			&& isValidSerializationRecurse( nodeValues, currPos );
     }
 }
