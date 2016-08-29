@@ -362,14 +362,16 @@ public TreeNode changePos( Position position, String input )
 
 
 ### questions to ask <a id="questions"></a>
-* Array
+* array
 	* Is array sorted
 	* Given two arrays, which one's size is bigger
 	* Whether could modify entries inside array
-* LinkedList
+* linkedList
 	* Convert tree to linkedlist, doubly or singly linkedlist
-* Hashmap
+* hashmap
 	* histogram-related problem, character set
+* binary search
+	* whether duplicates exist inside array
 
 ### error-prone cases <a id="error-prone"></a>
 * detect cycle in undirected graph

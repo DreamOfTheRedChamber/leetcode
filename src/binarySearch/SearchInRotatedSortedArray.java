@@ -1,15 +1,18 @@
 package binarySearch;
 
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
+
 /*
-Follow up for "Search in Rotated Sorted Array":
-What if duplicates are allowed?
+Suppose a sorted array is rotated at some pivot unknown to you beforehand.
 
-Would this affect the run-time complexity? How and why?
+(i.e., 0 1 2 4 5 6 7 might become 4 5 6 7 0 1 2).
 
-Write a function to determine if a given target is in the array.
+You are given a target value to search. If found in the array return its index, otherwise return -1.
+
+You may assume no duplicate exists in the array.
 */
-
-
 
 public class SearchInRotatedSortedArray 
 {
@@ -22,31 +25,31 @@ public class SearchInRotatedSortedArray
     	
     	int start = 0;
     	int end = nums.length - 1;
-    	int pivotEnd = nums.length - 1;
     	while ( start + 1 < end )
     	{
     		int mid = ( end - start ) / 2 + start;
-    		if ( nums[mid] < nums[pivotEnd] )
+    		if ( nums[mid] < nums[end] )	// pivot point inside [start,mid]
     		{
-    			// put redundant logic into else, smart!!!
-    			if ( target < nums[mid] )
+    			if ( target > nums[mid] 
+    					&& target <= nums[end] )
     			{
-    				end = mid;
+    				start = mid;
     			}
     			else
     			{
-    				start = mid;
+    				end = mid;
     			}
     		}
-    		else
+    		else	// pivot point inside [mid, end]
     		{
-    			if ( target > nums[mid] )
+    			if ( target < nums[mid] 
+    					&& target >= nums[start] )
     			{
-    				start = mid;
+    				end = mid;
     			}
     			else
     			{
-    				end = mid;
+    				start = mid;
     			}
     		}
     	}
@@ -63,5 +66,11 @@ public class SearchInRotatedSortedArray
     	{
     		return -1;
     	}
+    }
+
+    @Test
+    public void test()
+    {
+    	assertEquals( 1, search( new int[]{3, 5, 1}, 1 ) );
     }
 }
