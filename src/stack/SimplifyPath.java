@@ -16,6 +16,7 @@ public class SimplifyPath
 {
     public String simplifyPath( String path )
     {
+    	// whether the path always starts with '/'
     	String[] tokens = path.split( "/" );
     	Stack<String> tokenStack = new Stack<>();
     	
