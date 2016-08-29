@@ -39,15 +39,16 @@ public class SearchInsertPosition
     	
     	if ( nums[end] < target )
     	{
-    		return end;
+    		return end + 1;
     	}
-    	else if ( nums[start] < target )
+    	else if ( nums[start] < target 
+    			&& nums[end] >= target )
     	{
-    		return start;
+    		return end;
     	}
     	else
     	{
-    		return nums.length;
+    		return start;
     	}
     }
 }

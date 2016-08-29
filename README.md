@@ -85,6 +85,8 @@ public int binarySearchIterative( int[] array, int target)
 		}
 	}
 	// take result from start/end/non-exist
+	// sometimes need to compare target directly to array[end], array[start]
+	// sometimes need to see where target falls e.g. [~, array[start]), [array[start], array[end]), [array[end], ~)
 	if ( array[end] == target )
 	{
 		return end;
@@ -137,8 +139,9 @@ public int binarySearchRecursive( int[] array, int target, int start, int end )
 
 * convert a range of binary search problem into variants of essence form
 	- find first element smaller than target
-		- find minimum element in rotated sorted array ( target: array[array.length-1])
-
+		- e.g. find minimum element in rotated sorted array ( target: array[array.length-1])
+	- find last element smaller than target
+		- e.g. search insertion position
 * how to handle duplicates in binary search
 
 #### stack <a id="stack"></a>
