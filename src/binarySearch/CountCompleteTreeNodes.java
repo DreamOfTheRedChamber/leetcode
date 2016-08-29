@@ -1,7 +1,12 @@
 package binarySearch;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.Stack;
 
+import org.junit.Test;
+
+import utility.TreeFactory;
 import utility.TreeNode;
 
 /*
@@ -32,7 +37,7 @@ public class CountCompleteTreeNodes
         
         // binary search
         int start = 1;
-        int end = 2 * treeDepth;
+        int end = (int) Math.pow( 2, treeDepth );
         while ( start + 1 < end )
         {
         	int mid = ( end - start ) / 2 + start;
@@ -47,7 +52,7 @@ public class CountCompleteTreeNodes
         }
 
         // TODO: int pow
-        int numNonLeafNodes = ( int )( Math.pow( 2, treeDepth) ) - 1;
+        int numNonLeafNodes = ( int )( Math.pow( 2, treeDepth-1) ) - 1;
         if ( doesLeafExist( root, end, treeDepth ) )
         {
         	return numNonLeafNodes + end;
@@ -61,7 +66,7 @@ public class CountCompleteTreeNodes
     private boolean doesLeafExist( TreeNode root, int kthLeaf, int treeDepth )
     {
     	Stack<Boolean> rootToKthLeafPath = new Stack<>(); // false -> left, true -> right
-    	int numNonLeafNodes = ( int )( Math.pow( 2, treeDepth) ) - 1;
+    	int numNonLeafNodes = ( int )( Math.pow( 2, treeDepth-1) ) - 1;
     	
     	// go from leaf to root, put path in a stack
     	int currNodeOrder = numNonLeafNodes + kthLeaf;
@@ -102,5 +107,20 @@ public class CountCompleteTreeNodes
     	{
     		return true;
     	}
+    }
+    
+    @Test
+    public void test()
+    {
+    	TreeNode node1 = new TreeNode( 1 );
+    	TreeNode node2 = new TreeNode( 2 );
+    	TreeNode node3 = new TreeNode( 3 );
+    	TreeNode node4 = new TreeNode( 4 );
+    	node1.left = node2;
+    	node1.right = node3;
+    	node2.left = node4;
+    	assertEquals( 4, countNodes(node1) );
+    	assertEquals( 11, countNodes( TreeFactory.createCompleteTree() ) );
+    	assertEquals( 15, countNodes( TreeFactory.createFullTree() ) );
     }
 }
