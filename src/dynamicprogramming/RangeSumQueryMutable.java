@@ -9,7 +9,6 @@ public class RangeSumQueryMutable
 
 	public RangeSumQueryMutable( int[] nums )
 	{
-		// TODO Auto-generated constructor stub
 	}
 
     void update(int i, int val) 
