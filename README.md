@@ -40,7 +40,24 @@
 	* judge whether a value is even or odd
 		- Use num % 2 != 0 rather than num % 2 == 1 because of negative number mod ( e.g. -5 % 2 == -1 )
 		- To guarantee mod result is always positive, if knowing num range RANGE, could consider ( num + RANGE ) % RANGE 
-		
+* bit manipulation
+```java
+// convert int decimal to binary format
+int decimalNum = RANDOM_VALUE;
+int[] binaryRepr = new int[32]; // for simplicity, binary format as an array
+for ( int i = 0; i < 32; i++ )
+{
+	binaryRepr[i] = ( decimalNum >> i ) & 1;
+}
+
+// convert int binary to decimal format
+int[] binaryRepr = new int[32];
+int decimalNum = 0;
+for ( int i = 0; i < 32; i++ )
+{
+	decimalNum |= ( binaryRepr[i] << i );
+}
+```
 #### array <a id="array"></a>
 * Print arrays in Java
 ```java
