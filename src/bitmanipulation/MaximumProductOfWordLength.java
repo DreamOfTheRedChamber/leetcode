@@ -23,7 +23,7 @@ Return 0
 No such pair of words.
  * */
 
-//todo
+// TO_TEST
 public class MaximumProductOfWordLength 
 {
     public int maxProduct( String[] words )

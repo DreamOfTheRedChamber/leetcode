@@ -8,7 +8,7 @@ You may assume each number in the sequence is unique.
 Follow up:
 Could you do it using only constant space complexity?
  * */
-
+//TO_TEST
 // TODO: handle duplicates inside BST
 public class VerifyPreorderSequenceInBinarySearchTree 
 {

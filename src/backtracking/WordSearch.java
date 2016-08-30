@@ -17,7 +17,7 @@ word = "ABCCED", -> returns true,
 word = "SEE", -> returns true,
 word = "ABCB", -> returns false.
  * */
-
+//TO_START
 public class WordSearch 
 {
 	public boolean exist( char[][] board, String word )

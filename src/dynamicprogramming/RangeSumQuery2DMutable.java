@@ -21,7 +21,7 @@ The matrix is only modifiable by the update function.
 You may assume the number of calls to update and sumRegion function is distributed evenly.
 You may assume that row1 ≤ row2 and col1 ≤ col2.
  */
-
+// TO_TEST
 public class RangeSumQuery2DMutable
 {
 	private int[][] rowPrefixSum;

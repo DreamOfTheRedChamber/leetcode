@@ -14,7 +14,7 @@ Note:
 You may assume that the array does not change.
 There are many calls to sumRange function.
  */
-
+// TO_TEST
 public class RangeSumQueryImmutable
 {
 	private int[] prefixSum;

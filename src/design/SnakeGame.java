@@ -1,5 +1,6 @@
 package design;
 
+// TO_START: To start
 public class SnakeGame
 {
 

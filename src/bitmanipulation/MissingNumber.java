@@ -10,7 +10,6 @@ Note:
 Your algorithm should run in linear runtime complexity. Could you implement it using only constant extra space complexity?
  * */
 
-//todo
 public class MissingNumber 
 {
     public int missingNumber(int[] nums) 

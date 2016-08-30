@@ -58,7 +58,7 @@ Return a NestedInteger object containing a nested list with 2 elements:
  *     public List<NestedInteger> getList();
  * }
  */
-
+//TO_TEST
 // TODO: readme summarize customized integer parser from string
 // TODO: iterative/recursive method
 public class MiniParser 

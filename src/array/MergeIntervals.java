@@ -10,7 +10,7 @@ return [1,6],[8,10],[15,18].
 Show Company Tags
 Hide Tags
  */
-
+//TO_START
 public class MergeIntervals
 {
 
