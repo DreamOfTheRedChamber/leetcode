@@ -1,7 +1,11 @@
 package hashtable;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.HashSet;
 import java.util.Set;
+
+import org.junit.Test;
 
 /**
 Given a string, find the length of the longest substring without repeating characters.
@@ -32,16 +36,17 @@ public class LongestSubstringWithoutRepeatingCharacters
     	{
     		// increase windEnd as much as possible
     		while ( windEnd < s.length()
-    				&& !currWindChars.contains( windEnd ) )
+    				&& !currWindChars.contains( s.charAt( windEnd ) ) )
     		{
-    			windEnd++;
     			currWindChars.add( s.charAt( windEnd ) );
+    			windEnd++;
     			maxLength = Math.max( maxLength, windEnd - windStart );
     		}    		
+    	
     		// increase windStart as less as possible
     		if ( windEnd < s.length() )
     		{
-    			while ( currWindChars.contains( windEnd ) )
+    			while ( currWindChars.contains( s.charAt( windEnd ) ) )
     			{
     				currWindChars.remove( s.charAt( windStart ) );
     				windStart++;
@@ -51,4 +56,9 @@ public class LongestSubstringWithoutRepeatingCharacters
     	return maxLength;
     }
 
+    @Test
+    public void test()
+    {
+    	assertEquals( 3, lengthOfLongestSubstring( "abcabcbb" ));
+    }
 }
