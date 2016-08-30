@@ -5,6 +5,7 @@
 	* [array](#array)
 	* [string](#string)
 	* [linkedlist](#linkedlist)
+	* [sort](#sort)
 	* [binary-search](#binary-search)
 	* [stack](#stack)
 	* [queue](#queue)
@@ -69,6 +70,18 @@ String part2 = parts[1]; // 034556
 ```
 
 #### linkedList <a id="linkedlist"></a>
+
+#### sort <a id="sort"></a>
+* Judge whether intervals overlap
+```java
+private boolean isOverlap( Interval o1, Interval o2 )
+{
+	return !( o1.start >= o2.end 
+			|| o2.start >= o1.end );
+}
+```
+* Arrays.sort( array, comparator ) and Collections.sort( collection, comparator ) method
+
 #### binary search <a id="binary-search"></a>
 * universal templates - iterative/recursive version 
 ```java

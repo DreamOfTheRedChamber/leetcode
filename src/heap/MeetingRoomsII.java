@@ -1,7 +1,12 @@
 package heap;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.PriorityQueue;
+
+import org.junit.Test;
 
 import utility.Interval;
 
@@ -15,20 +20,17 @@ return 2.
 
 public class MeetingRoomsII 
 {
-	// TODO: intervals - sort, overlap
     public int minMeetingRooms( Interval[] intervals )
     {
-    	// sort intervals array
-    	// TODO: Arrays.sort( array, comparator ), Collections.sort( collection, comparator )
-    	Arrays.sort( intervals, ( o1, o2 ) -> ( o1.start == o2.start ? o1.start - o2.start : o1.end - o2.end ) );
+		Arrays.sort( intervals, ( o1, o2 ) -> o1.start - o2.start );
     	
-    	// max size of prio queue is result
+    	// max size of PriorityQueue is result
     	int maxSize = 0;
-    	PriorityQueue<Interval> minQueue = new PriorityQueue<>();
+    	PriorityQueue<Interval> minQueue = new PriorityQueue<>( ( o1, o2 ) -> o1.end - o2.end );
     	for ( Interval interval : intervals )
     	{
     		while ( !minQueue.isEmpty() 
-    				&& isOverlapping( interval, minQueue.peek() ) )
+    				&& !isOverlapping( interval, minQueue.peek() ) )
     		{
     			minQueue.remove();
     		}
@@ -41,6 +43,15 @@ public class MeetingRoomsII
     
     private boolean isOverlapping( Interval interval1, Interval interval2 )
     {
-    	return ( interval1.start < interval2.end ) || ( interval2.start < interval1.end );
+    	return ! ( ( interval1.start >= interval2.end ) 
+    			|| ( interval2.start >= interval1.end ) );
+    }
+    
+    @Test
+    public void test()
+    {
+    	assertEquals( 1, minMeetingRooms( new Interval[]{ new Interval( 7, 10 ), new Interval( 2, 4 ) } ) );
+    	assertEquals( 3, minMeetingRooms( new Interval[]{ new Interval( 6, 17 ), new Interval( 8, 9 ), new Interval( 11, 12 ), new Interval( 6, 9 ) } ) );
+    	assertEquals( 2, minMeetingRooms( new Interval[]{ new Interval( 1, 17 ), new Interval( 7, 10 ), new Interval( 12, 14 ) } ) );
     }
 }
