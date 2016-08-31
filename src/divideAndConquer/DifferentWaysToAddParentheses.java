@@ -25,9 +25,8 @@ Output: [-34, -14, -10, -10, 10]
 //TO_START
 public class DifferentWaysToAddParentheses
 {
-
-	public DifferentWaysToAddParentheses( )
-	{
-	}
-
+    public List<Integer> diffWaysToCompute(String input) 
+    {
+        
+    }
 }

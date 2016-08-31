@@ -6,9 +6,8 @@ Sort a linked list using insertion sort.
 //TO_START
 public class InsertionSortList
 {
-
-	public InsertionSortList( )
-	{
-	}
-
+    public ListNode insertionSortList(ListNode head) 
+    {
+        
+    }
 }

@@ -6,9 +6,8 @@ Given an array of integers, find out whether there are two distinct indices i an
 //TO_START
 public class ContainsDuplicateIII
 {
-
-	public ContainsDuplicateIII( )
-	{
-	}
-
+    public boolean containsNearbyAlmostDuplicate(int[] nums, int k, int t) 
+    {
+        
+    }
 }

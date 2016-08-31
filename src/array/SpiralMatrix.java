@@ -16,9 +16,8 @@ You should return [1,2,3,6,9,8,7,4,5].
 //TO_START
 public class SpiralMatrix
 {
-
-	public SpiralMatrix( )
-	{
-	}
-
+    public List<Integer> spiralOrder(int[][] matrix) 
+    {
+        
+    }
 }

@@ -9,9 +9,8 @@ Given [0,1,0,2,1,0,1,3,2,1,2,1], return 6.
 //TO_START
 public class TrappingRainWater
 {
-
-	public TrappingRainWater( )
-	{
-	}
-
+    public int trap(int[] height)
+    {
+        
+    }
 }

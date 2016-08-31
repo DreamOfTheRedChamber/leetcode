@@ -16,9 +16,7 @@ This is because the new interval [4,9] overlaps with [3,5],[6,7],[8,10].
 // TO_START:
 public class InsertIntervals
 {
-
-	public InsertIntervals( )
-	{
-	}
-
+    public List<Interval> insert(List<Interval> intervals, Interval newInterval) 
+    {
+    }
 }

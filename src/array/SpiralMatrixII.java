@@ -16,9 +16,8 @@ You should return the following matrix:
 //TO_START
 public class SpiralMatrixII
 {
-
-	public SpiralMatrixII( )
-	{
-	}
-
+    public int[][] generateMatrix(int n) 
+    {
+        
+    }
 }

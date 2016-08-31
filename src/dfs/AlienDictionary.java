@@ -23,9 +23,8 @@ There may be multiple valid order of letters, return any one of them is fine.
 //TO_START
 public class AlienDictionary
 {
-
-	public AlienDictionary( )
-	{
-	}
-
+    public String alienOrder(String[] words) 
+    {
+        
+    }
 }

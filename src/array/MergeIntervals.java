@@ -13,9 +13,8 @@ Hide Tags
 //TO_START
 public class MergeIntervals
 {
-
-	public MergeIntervals( )
-	{
-	}
-
+    public List<Interval> merge(List<Interval> intervals) 
+    {
+        
+    }
 }

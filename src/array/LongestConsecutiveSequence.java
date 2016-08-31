@@ -12,9 +12,9 @@ Your algorithm should run in O(n) complexity.
 // TO_START
 public class LongestConsecutiveSequence
 {
-
-	public LongestConsecutiveSequence( )
-	{
-	}
+    public int longestConsecutive(int[] nums) 
+    {
+        
+    }
 
 }

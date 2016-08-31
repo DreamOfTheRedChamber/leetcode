@@ -20,9 +20,8 @@ Can you figure out ways to solve it with O(n) time complexity?
 //TO_START
 public class LargestBSTSubtree
 {
-
-	public LargestBSTSubtree( )
-	{
-	}
-
+    public int largestBSTSubtree(TreeNode root) 
+    {
+        
+    }
 }

@@ -13,9 +13,8 @@ Could you solve it with constant space complexity? (Note: The output array does 
 //TO_START
 public class ProductOfArrayExceptSelf
 {
-
-	public ProductOfArrayExceptSelf( )
-	{
-	}
-
+    public int[] productExceptSelf(int[] nums) 
+    {
+        
+    }
 }

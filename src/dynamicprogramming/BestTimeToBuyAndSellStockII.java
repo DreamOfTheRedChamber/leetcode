@@ -8,5 +8,8 @@ Design an algorithm to find the maximum profit. You may complete as many transac
 //TO_START
 public class BestTimeToBuyAndSellStockII
 {
-
+    public int maxProfit(int[] prices) 
+    {
+        
+    }
 }

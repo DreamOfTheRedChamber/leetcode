@@ -13,9 +13,8 @@ Examples:
 //TO_START
 public class ExpressionAddOperators
 {
-
-	public ExpressionAddOperators( )
-	{
-	}
-
+    public List<String> addOperators(String num, int target) 
+    {
+        
+    }
 }

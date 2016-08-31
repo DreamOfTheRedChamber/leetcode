@@ -8,9 +8,8 @@ Note: If the given node has no in-order successor in the tree, return null.
 //TO_START
 public class InorderSuccessor
 {
-
-	public InorderSuccessor( )
-	{
-	}
-
+    public TreeNode inorderSuccessor(TreeNode root, TreeNode p) 
+    {
+        
+    }
 }

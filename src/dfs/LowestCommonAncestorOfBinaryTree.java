@@ -3,7 +3,7 @@ package dfs;
 /**
 Given a binary tree, find the lowest common ancestor (LCA) of two given nodes in the tree.
 
-According to the definition of LCA on Wikipedia: “The lowest common ancestor is defined between two nodes v and w as the lowest node in T that has both v and w as descendants (where we allow a node to be a descendant of itself).”
+According to the definition of LCA on Wikipedia: ï¿½The lowest common ancestor is defined between two nodes v and w as the lowest node in T that has both v and w as descendants (where we allow a node to be a descendant of itself).ï¿½
 
         _______3______
        /              \
@@ -17,9 +17,8 @@ For example, the lowest common ancestor (LCA) of nodes 5 and 1 is 3. Another exa
 //TO_START
 public class LowestCommonAncestorOfBinaryTree
 {
-
-	public LowestCommonAncestorOfBinaryTree( )
-	{
-	}
-
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) 
+    {
+        
+    }
 }

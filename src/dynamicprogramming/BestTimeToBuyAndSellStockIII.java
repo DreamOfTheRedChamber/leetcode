@@ -8,5 +8,8 @@ Design an algorithm to find the maximum profit. You may complete at most two tra
 //TO_START
 public class BestTimeToBuyAndSellStockIII
 {
-
+    public int maxProfit(int[] prices) 
+    {
+        
+    }
 }

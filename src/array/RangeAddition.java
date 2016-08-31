@@ -38,9 +38,8 @@ After applying operation [0, 2, -2]:
 //TO_START
 public class RangeAddition
 {
-
-	public RangeAddition( )
-	{
-	}
-
+    public int[] getModifiedArray(int length, int[][] updates) 
+    {
+        
+    }
 }

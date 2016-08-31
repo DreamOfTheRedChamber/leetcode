@@ -12,9 +12,8 @@ You may assume all elements in the array are non-negative integers and fit in th
 // TO_START
 public class MaximumGap
 {
-
-	public MaximumGap( )
-	{
-	}
-
+    public int maximumGap(int[] nums) 
+    {
+        
+    }
 }

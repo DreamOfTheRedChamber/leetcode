@@ -11,9 +11,8 @@ You are not suppose to use the library's sort function for this problem.
 //TO_START
 public class SortColors
 {
-
-	public SortColors( )
-	{
-	}
-
+    public void sortColors(int[] nums) 
+    {
+        
+    }
 }

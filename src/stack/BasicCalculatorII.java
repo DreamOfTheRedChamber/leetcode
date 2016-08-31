@@ -16,9 +16,8 @@ Note: Do not use the eval built-in library function.
 //TO_START
 public class BasicCalculatorII
 {
-
-	public BasicCalculatorII( )
-	{
-	}
-
+    public int calculate(String s) 
+    {
+        
+    }
 }
