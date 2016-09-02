@@ -13,7 +13,7 @@ You should return the following matrix:
  [ 7, 6, 5 ]
 ]
  */
-//TO_START
+//TO_HURRY
 public class SpiralMatrixII
 {
     public int[][] generateMatrix(int n) 

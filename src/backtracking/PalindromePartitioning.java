@@ -13,7 +13,7 @@ Return
   ["a","a","b"]
 ]
  * */
-//TO_START
+//TO_HURRY
 public class PalindromePartitioning 
 {
     public List<List<String>> partition(String s) 

@@ -16,7 +16,7 @@ nums: [1,2,4,8]
 
 Result: [1,2,4,8]
 */
-//TO_START
+//TO_HURRY
 public class LargestDivisibleSubset
 {
 

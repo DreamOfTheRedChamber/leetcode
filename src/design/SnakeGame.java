@@ -1,6 +1,6 @@
 package design;
 
-// TO_START: To start
+// TO_HURRY
 public class SnakeGame
 {
 

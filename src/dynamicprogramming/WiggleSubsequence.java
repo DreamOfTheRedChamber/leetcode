@@ -21,7 +21,7 @@ Output: 2
 Follow up:
 Can you do it in O(n) time?
  */
-//TO_START
+//TO_HURRY
 public class WiggleSubsequence
 {
 

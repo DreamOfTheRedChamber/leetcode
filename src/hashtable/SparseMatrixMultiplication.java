@@ -25,7 +25,7 @@ AB = | -1 0 3 | x | 0 0 0 | = | -7 0 3 |
  */
 
 
-//todo
+// TO_HURRY
 public class SparseMatrixMultiplication
 {
     public int[][] multiply(int[][] A, int[][] B) 

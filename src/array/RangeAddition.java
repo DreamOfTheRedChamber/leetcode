@@ -35,7 +35,7 @@ After applying operation [2, 4, 3]:
 After applying operation [0, 2, -2]:
 [-2, 0, 3, 5, 3 ] 
  */
-//TO_START
+//TO_HURRY
 public class RangeAddition
 {
     public int[] getModifiedArray(int length, int[][] updates) 

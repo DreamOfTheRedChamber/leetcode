@@ -3,7 +3,7 @@ package math;
 /**
  * 
  */
-
+// TO_HURRY
 public class SuperPow
 {
 

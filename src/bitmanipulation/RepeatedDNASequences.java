@@ -1,5 +1,5 @@
 package bitmanipulation;
-//TO_START
+//TO_HURRY
 public class RepeatedDNASequences 
 {
     public List<String> findRepeatedDnaSequences(String s) {

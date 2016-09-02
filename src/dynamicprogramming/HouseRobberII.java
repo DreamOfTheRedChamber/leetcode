@@ -5,7 +5,7 @@ After robbing those houses on that street, the thief has found himself a new pla
 This time, all houses at this place are arranged in a circle. That means the first house is the neighbor of the last one. 
 Meanwhile, the security system for these houses remain the same as for those in the previous street.
  */
-//TO_START
+//TO_HURRY
 public class HouseRobberII
 {
     public int rob(int[] nums) 

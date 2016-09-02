@@ -13,7 +13,7 @@ Follow up:
 Could you do better than O(n2)?
  */
 
-//todo
+// TO_HURRY
 public class LineReflection
 {
 

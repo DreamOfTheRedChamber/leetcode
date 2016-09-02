@@ -11,7 +11,7 @@ Note:
 The solution is guaranteed to be unique.
  */
 
-// TO_START
+// TO_HURRY
 public class GasStation {
     public int canCompleteCircuit(int[] gas, int[] cost) {
         

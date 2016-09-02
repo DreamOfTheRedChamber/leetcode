@@ -1,5 +1,5 @@
 package string;
-//TO_START
+//TO_HURRY
 public class LongestPalindromicSubstring 
 {
     public String longestPalindrome(String s) 

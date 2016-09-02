@@ -35,7 +35,7 @@ output:
   [4, 8]
 ]
  * */
-
+// TO_HURRY
 public class FactorCombinations 
 {
     public List<List<Integer>> getFactors(int n) 

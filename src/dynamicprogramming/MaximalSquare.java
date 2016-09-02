@@ -12,6 +12,7 @@ For example, given the following matrix:
 Return 4.
  */
 
+// TO_HURRY
 public class MaximalSquare
 {
 

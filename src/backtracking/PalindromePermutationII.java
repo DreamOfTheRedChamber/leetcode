@@ -9,7 +9,7 @@ Given s = "aabb", return ["abba", "baab"].
 
 Given s = "abc", return [].
  * */
-//TO_START
+//TO_HURRY
 public class PalindromePermutationII 
 {
     public List<String> generatePalindromes(String s) 

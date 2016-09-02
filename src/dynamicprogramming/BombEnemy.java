@@ -15,6 +15,7 @@ E 0 W E
 return 3. (Placing a bomb at (1,1) kills 3 enemies) 
  */
 
+// TO_HURRY
 public class BombEnemy
 {
 
