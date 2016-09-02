@@ -22,15 +22,12 @@ A solution set is:
   [1, 1, 6]
 ]
  * */
-// TO_TEST
 public class CombinationSumII 
 {
-	// TODO: combination sum ( positive or negative )
     public List<List<Integer>> combinationSum2( int[] candidates, int target )
     {
     	List<List<Integer>> allCombs = new LinkedList<>();
     	List<Integer> oneComb = new LinkedList<>();
-    	// TODO: arrays sort, defensive programming
     	Arrays.sort( candidates );
     	generateCombs( allCombs, oneComb, candidates, 0, target );
     	return allCombs;   	
@@ -38,14 +35,22 @@ public class CombinationSumII
     
     private void generateCombs( List<List<Integer>> allCombs, List<Integer> oneComb, int[] candidates, int startPos, int targetSum )
     {
+    	// base criteria
+    	if ( targetSum < 0 )
+    	{
+    		return;
+    	}
+    	
     	if ( targetSum == 0 )
     	{
     		allCombs.add( new LinkedList<>( oneComb ) );
     		return;
     	}
     	
+    	// either take or not take candidates[i]
     	for ( int i = startPos; i < candidates.length; i++ )
     	{
+    		// avoid recursing from the same base
     		if ( i > startPos
     				&& candidates[i] == candidates[i-1] )
     		{

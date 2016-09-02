@@ -21,7 +21,6 @@ If nums = [1,2,2], a solution is:
   []
 ]
  * */
-// TO_TEST
 public class SubsetsII 
 {
     public List<List<Integer>> subsetsWithDup(int[] nums ) 
@@ -36,7 +35,7 @@ public class SubsetsII
     private void generateSubsets( List<List<Integer>> allSubsets, List<Integer> oneSubset, int[] nums, int startPos )
     {
     	// recursion base
-    	if ( startPos >= nums.length )
+    	if ( startPos > nums.length )
     	{
     		return;
     	}
@@ -46,7 +45,7 @@ public class SubsetsII
     	// recursion body
     	for ( int i = startPos; i < nums.length; i++ )
     	{
-    		if ( i > 0 
+    		if ( i > startPos 
     				&& nums[i] == nums[i-1] )
     		{
     			continue;

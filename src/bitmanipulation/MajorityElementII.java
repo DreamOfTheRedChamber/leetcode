@@ -3,7 +3,6 @@ package bitmanipulation;
 import java.util.ArrayList;
 import java.util.List;
 
-// TO_TEST
 public class MajorityElementII 
 {
     public List<Integer> majorityElement( int[] nums )

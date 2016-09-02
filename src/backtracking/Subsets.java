@@ -3,6 +3,8 @@ package backtracking;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.junit.Test;
+
 /*
 Given a set of distinct integers, nums, return all possible subsets.
 
@@ -22,7 +24,6 @@ If nums = [1,2,3], a solution is:
   []
 ] 
  * */
-// TO_TEST
 public class Subsets 
 {
     public List<List<Integer>> subsets( int[] nums ) 
@@ -36,7 +37,7 @@ public class Subsets
     private void generateSubsets( List<List<Integer>> allSubsets, List<Integer> oneSubset, int[] nums, int startPos )
     {
     	// recursion base
-    	if ( startPos >= nums.length )
+    	if ( startPos > nums.length )
     	{
     		return;
     	}
@@ -50,5 +51,11 @@ public class Subsets
     		generateSubsets( allSubsets, oneSubset, nums, i + 1 );
     		oneSubset.remove( oneSubset.size( ) - 1 );
     	}
+    }
+
+    @Test
+    public void test()
+    {
+    	System.out.println( subsets( new int[]{ 1, 2, 3 } ) );
     }
 }

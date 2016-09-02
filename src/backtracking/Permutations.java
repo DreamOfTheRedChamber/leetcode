@@ -3,6 +3,8 @@ package backtracking;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.junit.Test;
+
 /*
 Given a collection of distinct numbers, return all possible permutations.
 
@@ -17,7 +19,6 @@ For example,
   [3,2,1]
 ]
  * */
-// TO_TEST
 public class Permutations 
 {
     public List<List<Integer>> permute( int[] nums ) 
@@ -41,8 +42,8 @@ public class Permutations
     	for ( int i = startPos; i < nums.length; i++ )
     	{
     		swap( nums, i, startPos );
-    		onePerm.add( nums[i] );
-    		generatePerms( allPerms, onePerm, nums, i + 1 );
+    		onePerm.add( nums[startPos] );
+    		generatePerms( allPerms, onePerm, nums, startPos + 1 );
     		onePerm.remove( onePerm.size( ) - 1 );
     		swap( nums, i, startPos );
     	}
@@ -55,4 +56,9 @@ public class Permutations
     	nums[pos2] = pos1NumBuffer;
     }
     
+    @Test
+    public void test()
+    {
+    	System.out.println( permute( new int[]{ 1, 2, 3 } ) );
+    }
 }

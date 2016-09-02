@@ -23,7 +23,6 @@ Output:
 
 [[1,2,6], [1,3,5], [2,3,4]]
  * */
-//TO_TEST
 public class CombinationSumIII 
 {
     public List<List<Integer>> combinationSum3( int k, int n ) 
@@ -54,7 +53,7 @@ public class CombinationSumIII
     	for ( int i = startPos; i <= endPos; i++ )
     	{
     		oneComb.add( i );
-    		generateCombs( allCombs, oneComb, targetNum + 1, targetSum - i, i + 1, endPos );
+    		generateCombs( allCombs, oneComb, targetNum, targetSum - i, i + 1, endPos );
     		oneComb.remove( oneComb.size( ) - 1 );
     	}
     }

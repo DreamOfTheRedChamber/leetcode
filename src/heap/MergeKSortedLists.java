@@ -6,7 +6,6 @@ import utility.ListNode;
 
 public class MergeKSortedLists 
 {
-	// TO_TEST
     public ListNode mergeKLists(ListNode[] lists) 
     {
     	if ( lists.length == 0 )

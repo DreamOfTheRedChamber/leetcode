@@ -20,24 +20,30 @@ If n = 4 and k = 2, a solution is:
   [1,4],
 ]
  * */
-// TO_TEST
 public class Combinations 
 {
     public List<List<Integer>> combine( int n, int k )
     {
     	List<List<Integer>> allCombs = new LinkedList<>();
     	List<Integer> oneComb = new LinkedList<>();
-    	generateCombs( allCombs, oneComb, 0, n, k );
+    	generateCombs( allCombs, oneComb, 1, n, k );
     	return allCombs;
     }
     
     private void generateCombs( List<List<Integer>> allCombs, List<Integer> oneComb, int start, int end, int k )
     {
+    	// recursion base
+    	if ( k < 0 )
+    	{
+    		return;
+    	}    	
     	if ( k == 0 )
     	{
     		allCombs.add( new LinkedList<>( oneComb ) );
+    		return;
     	}
     	
+    	// recursion body
     	for ( int i = start; i <= end; i++ )
     	{
     		oneComb.add( i );
@@ -49,6 +55,6 @@ public class Combinations
     @Test
     public void test()
     {
-    	System.out.print( combine(3 ,2) );
+    	System.out.print( combine( 3 ,2 ) );
     }
 }

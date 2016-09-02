@@ -4,7 +4,6 @@ package bitmanipulation;
  * 
  */
 
-// TO_TEST 
 public class MajorityElement
 {
     public int majorityElement( int[] nums )
