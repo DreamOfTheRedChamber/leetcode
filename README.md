@@ -425,7 +425,7 @@ public TreeNode changePos( Position position, String input )
 	- gridsize == 1, no solution inside grid
 * When a variable's name is really really long such as matrix[qHead.xCoor][qHead.yCoor+1] and it needs to be used in multiple places, it is really easy to create typos
 * When a recursive function contains a long list of arguments, need to double check to make sure the arguments are correct
-
+* Ternary operator ?: priority is only higher than assignment. If it is used in combination with other operators, parentheses should be added.
 ### smells for refactoring and optimization <a id="bad-smells"></a>
 * code length > 100
 * too many if statement checking for boundary cases
