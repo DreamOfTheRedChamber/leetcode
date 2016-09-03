@@ -1,5 +1,9 @@
 package binarySearch;
 
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
+
 /*
 Given an array of citations (each citation is a non-negative integer) of a researcher, write a function to compute the researcher's h-index.
 
@@ -11,12 +15,11 @@ Note: If there are several possible values for h, the maximum one is taken as th
 Follow up for H-Index: What if the citations array is sorted in ascending order? Could you optimize your algorithm?
 
  * */
-//TO_TEST
 public class HIndexII 
 {
     public int hIndex( int[] citations )
     {
-    	if ( citations.length == 0 )
+     	if ( citations.length == 0 )
     	{
     		return 0;
     	}
@@ -27,22 +30,45 @@ public class HIndexII
     	while ( start + 1 < end )
     	{
     		int mid = ( end - start ) / 2 + start;
-    		if ( citations[mid] < citations.length - mid )
-    		{
-    			start = mid;
-    		}
-    		else
+    		if ( citations[mid] > citations.length - mid )
     		{
     			end = mid;
     		}
+    		else
+    		{
+    			start = mid;
+    		}
     	}
-    	if ( citations[end] >= citations.length - end )
+
+    	if ( citations[end] <= citations.length - end )
     	{
-    		return citations[end];
+    		return Math.min( citations[end], citations.length - end );
+    	}
+    	else if ( citations[start] <= citations.length - start )
+    	{
+    		return Math.min( citations[start], citations.length - start );
     	}
     	else
     	{
-    		return citations[start];
+    		return Math.min( citations.length, citations.length - start );
     	}
+    }
+    
+    @Test
+    public void test()
+    {   
+    /*	
+    	assertEquals( 1, hIndex( new int[]{ 100 } ) );
+    	    	
+    	assertEquals( 2, hIndex( new int[]{ 11, 15 } ) );
+    	assertEquals( 1, hIndex( new int[]{ 1, 2 } ) );
+    	assertEquals( 2, hIndex( new int[]{ 2, 4 } ) );
+    	
+   		assertEquals( 1, hIndex( new int[]{ 0, 0, 1 } ) );    	
+	*/
+     	assertEquals( 3, hIndex( new int[]{ 3, 3, 3, 3, 3 } ) );
+
+//   		assertEquals( 2, hIndex( new int[]{ 0, 0, 4, 4 } ) );
+
     }
 }
