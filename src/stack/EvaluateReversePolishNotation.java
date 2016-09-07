@@ -1,6 +1,10 @@
 package stack;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.Stack;
+
+import org.junit.Test;
 
 /*
 Evaluate the value of an arithmetic expression in Reverse Polish Notation.
@@ -11,9 +15,15 @@ Some examples:
   ["2", "1", "+", "3", "*"] -> ((2 + 1) * 3) -> 9
   ["4", "13", "5", "/", "+"] -> (4 + (13 / 5)) -> 6
  * */
-//TO_TEST
 public class EvaluateReversePolishNotation 
 {
+	@Test
+	public void test()
+	{
+		assertEquals( 9, evalRPN( new String[]{"2", "1", "+", "3", "*" } ) );
+		assertEquals( 6, evalRPN( new String[]{"4", "13", "5", "/", "+"} ) );
+	}
+	
     public int evalRPN( String[] tokens ) 
     {
     	Stack<Integer> operandStack = new Stack<>();
