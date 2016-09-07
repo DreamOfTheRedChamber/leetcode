@@ -179,6 +179,7 @@ public int binarySearchRecursive( int[] array, int target, int start, int end )
 * how to handle duplicates in binary search
 
 #### stack <a id="stack"></a>
+* When popping elements from stack, always check if the stack is empty. Otherwise, there might be a EmptyStackException()
 * Binary tree inorder traversal
 ```java
     public List<Integer> inorderTraversal( TreeNode root )

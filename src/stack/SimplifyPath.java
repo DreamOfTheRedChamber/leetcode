@@ -14,7 +14,7 @@ path = "/home/", => "/home"
 path = "/a/./b/../../c/", => "/c"
  * */
 
-// TODO: README. summarize use of exceptions: EmptyStackException
+// TO_TEST
 public class SimplifyPath 
 {
     public String simplifyPath( String path )
