@@ -1,12 +1,15 @@
 package dynamicprogramming;
 
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
+
 /**
 Find the contiguous subarray within an array (containing at least one number) which has the largest product.
 
 For example, given the array [2,3,-2,4],
 the contiguous subarray [2,3] has the largest product = 6.
  */
-//TO_TEST
 public class MaxProduct
 {
     public int maxProduct( int[] nums )
@@ -17,20 +20,28 @@ public class MaxProduct
     	}
     	
     	int globalMaxProduct = nums[0];
-    	int maxEndingAtCurrPos = nums[0]; // ending at index i
-    	int minEndingAtCurrPos = nums[0];
+    	int maxEndingAtPrevPos = nums[0]; // ending at index i
+    	int minEndingAtPrevPos = nums[0];
     	for ( int i = 1; i < nums.length; i++ )
     	{
     		// max product ending at i
-    		maxEndingAtCurrPos = Math.max( Math.max( nums[i] * maxEndingAtCurrPos, // nums[i] > 0
-    										nums[i] * minEndingAtCurrPos), 		   // nums[i] < 0
-    										nums[i] );			   				   // nums[i-1] == 0
-    		minEndingAtCurrPos = Math.min( Math.min( nums[i] * maxEndingAtCurrPos, 
-    										nums[i] * minEndingAtCurrPos), 
+    		int updatedMaxEndingAtPrevPos = maxEndingAtPrevPos = Math.max( Math.max( nums[i] * maxEndingAtPrevPos, // nums[i] > 0
+    										nums[i] * minEndingAtPrevPos ), 		   // nums[i] < 0
+    										nums[i] ); // nums[i-1] == 0
+    		int updatedMinEndingAtPrevPos = minEndingAtPrevPos = Math.min( Math.min( nums[i] * maxEndingAtPrevPos, 
+    										nums[i] * minEndingAtPrevPos ), 
     										nums[i] );
-    		globalMaxProduct = Math.max( globalMaxProduct, maxEndingAtCurrPos );
+    		maxEndingAtPrevPos = updatedMaxEndingAtPrevPos;
+    		minEndingAtPrevPos = updatedMinEndingAtPrevPos;
+    		globalMaxProduct = Math.max( globalMaxProduct, maxEndingAtPrevPos );
     	}
     	
     	return globalMaxProduct;
+    }
+    
+    @Test
+    public void test()
+    {
+    	assertEquals( 12, maxProduct( new int[]{ -4, -3, -2 } ) );
     }
 }
