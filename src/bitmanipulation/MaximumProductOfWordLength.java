@@ -1,8 +1,12 @@
 package bitmanipulation;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
+
+import org.junit.Test;
 
 /*
 Given a string array words, find the maximum value of length(word[i]) * length(word[j]) where the two words do not share common letters. You may assume that each word will contain only lower case letters. If no such two words exist, return 0.
@@ -26,6 +30,14 @@ No such pair of words.
 // TO_TEST
 public class MaximumProductOfWordLength 
 {
+	@Test
+	public void test()
+	{
+		assertEquals( 0, maxProduct( new String[]{ "a", "aa", "aaa", "aaaa" } ) );
+		assertEquals( 16, maxProduct( new String[]{ "abcw", "baz", "foo", "bar", "xtfn", "abcedf" } ) );
+		assertEquals( 4, maxProduct( new String[]{ "a", "ab", "abc", "d", "cd", "bcd", "abcd" } ) );		
+	}	
+	
     public int maxProduct( String[] words )
     {
     	Map<String, Integer> strCharEncoding = new HashMap<>();
@@ -35,13 +47,11 @@ public class MaximumProductOfWordLength
     	}
     	
     	int maxLength = 0;
-    	// TODO: two for each loop
     	for ( Entry<String, Integer> entry1 : strCharEncoding.entrySet( ) )
     	{
     		for ( Entry<String, Integer> entry2 : strCharEncoding.entrySet( ) )
     		{
-    			if ( !( entry1.getKey( ).equals( entry2.getKey( ) )) 
-    					&& ( ( entry1.getValue( ) & entry2.getValue( ) ) != 0 ) )
+    			if ( ( entry1.getValue( ) & entry2.getValue( ) ) == 0  )
     			{
     				maxLength = Math.max( maxLength, entry1.getKey( ).length( ) * entry2.getKey( ).length( ) );
     			}
@@ -53,7 +63,6 @@ public class MaximumProductOfWordLength
     private int calcEncoding( String word )
     {
     	int encodedNum = 0;
-    	// TODO: loop through chars inside an array
     	for ( char ch : word.toCharArray( ) )
     	{
     		int pos = ( int )( ch - 'a' );
