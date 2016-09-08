@@ -60,8 +60,6 @@ Return a NestedInteger object containing a nested list with 2 elements:
  *     public List<NestedInteger> getList();
  * }
  */
-//TO_TEST
-// TODO: iterative/recursive method
 public class MiniParser 
 {
 	@Test
@@ -91,11 +89,23 @@ public class MiniParser
     	}
     	
     	NestedInteger currLevelNestedInteger = new NestedInteger();
-    	int currPos = startPos[0] + 1; // skip '['
-    	while ( s.charAt( currPos ) != ']' )
+    	if ( s.charAt(startPos[0]) >= 1 
+    			&& s.charAt( startPos[0] ) <= 9 )
+    	{
+    		currLevelNestedInteger.setInteger( parseInteger( s, startPos ) );
+    		return currLevelNestedInteger;
+    	}
+    	
+    	int currPos = startPos[0] + 1;
+    	boolean isInteger = true;
+    	
+    	while ( currPos < s.length()
+    			&& s.charAt( currPos ) != ']' )
     	{
     		if ( s.charAt( currPos ) == '[' )
     		{
+    			isInteger = false;
+    			currPos++;
     			startPos[0] = currPos;
     			NestedInteger nextLevelNestedInteger = deserializeRecurse( s, startPos );
     			currLevelNestedInteger.add( nextLevelNestedInteger );
@@ -106,18 +116,34 @@ public class MiniParser
     		}
     		else
     		{
-    			int value = 0;
-    			while ( s.charAt( currPos ) <= '9'
-    					&& s.charAt( currPos ) >= '0' )
+    			int value = parseInteger( s, startPos );
+    			if ( isInteger )
     			{
-    				value = value * 10 +  s.charAt( currPos ) - '0' ; 
-    				currPos++;
+    				currLevelNestedInteger.setInteger( value );
     			}
-    			currLevelNestedInteger.add( value );
+    			else
+    			{
+    				currLevelNestedInteger.add( new NestedInteger( value ) );
+    			}
     		}
+        	startPos[0] = currPos;
     	}
-    	startPos[0] = currPos;
     	
     	return currLevelNestedInteger;
+    }
+    
+    private int parseInteger( String s, int[] startPos )
+    {
+    	int currPos = startPos[0];
+		int value = 0;
+		while ( currPos < s.length()
+				&& s.charAt( currPos ) <= '9'
+				&& s.charAt( currPos ) >= '0' )
+		{
+			value = value * 10 +  s.charAt( currPos ) - '0' ;
+			currPos++;
+		}
+		startPos[0] = currPos;
+		return value;
     }
 }
