@@ -60,17 +60,21 @@ Return a NestedInteger object containing a nested list with 2 elements:
  *     public List<NestedInteger> getList();
  * }
  */
+// TO_TEST
 public class MiniParser 
 {
+	private int deserialPos;
+	
 	@Test
 	public void test()
 	{
 		NestedInteger resultOne = deserialize( new String( "324" ) );
-		NestedInteger resultTwo = deserialize( new String( "[123,[456,[789]]]" ) );
-		NestedInteger resultThree = deserialize( new String( "[123,[456,578,[789, 090]]]" ) );
+		NestedInteger resultTwo = deserialize( new String( "[324]" ) );
+		NestedInteger resultThree = deserialize( new String( "[123,[456,[789]]]" ) );
+		NestedInteger resultFour = deserialize( new String( "[123,[456,578,[789,090]]]" ) );
 	}
 	
-	public NestedInteger deserialize(String s) 
+	public NestedInteger deserialize(String s)
     {
     	if ( s == null )
     	{
@@ -78,72 +82,80 @@ public class MiniParser
     	}
     	// other assertions
     	
-    	return deserializeRecurse( s, new int[1] );
+    	deserialPos = 0;
+    	return deserializeRecurse( s );
     }
     
-    private NestedInteger deserializeRecurse( String s, int[] startPos )
+    private NestedInteger deserializeRecurse( String s )
     {
-    	if ( startPos[0] >= s.length() )
+    	// recursion base
+    	if ( deserialPos >= s.length() )
     	{
     		return null;
+    	}    	    	
+    	if ( s.charAt( deserialPos ) >= '0'
+    			&& s.charAt( deserialPos ) <= '9' )
+    	{
+    		return new NestedInteger( parseInteger( s ) );
     	}
     	
+    	// recursion body
     	NestedInteger currLevelNestedInteger = new NestedInteger();
-    	if ( s.charAt(startPos[0]) >= 1 
-    			&& s.charAt( startPos[0] ) <= 9 )
+    	while ( deserialPos < s.length()
+    			&& s.charAt( deserialPos ) != ']' )
     	{
-    		currLevelNestedInteger.setInteger( parseInteger( s, startPos ) );
-    		return currLevelNestedInteger;
-    	}
-    	
-    	int currPos = startPos[0] + 1;
-    	boolean isInteger = true;
-    	
-    	while ( currPos < s.length()
-    			&& s.charAt( currPos ) != ']' )
-    	{
-    		if ( s.charAt( currPos ) == '[' )
+    		if ( s.charAt( deserialPos ) == ',' )
     		{
-    			isInteger = false;
-    			currPos++;
-    			startPos[0] = currPos;
-    			NestedInteger nextLevelNestedInteger = deserializeRecurse( s, startPos );
-    			currLevelNestedInteger.add( nextLevelNestedInteger );
+    			deserialPos++;
     		}
-    		else if ( s.charAt( currPos ) == ',' )
-    		{
-    			currPos++;
+    		else if ( s.charAt( deserialPos ) == '[' )
+    		{    	
+    			NestedInteger nextLevelNestedInteger = new NestedInteger();
+        		deserialPos++;
+    			while ( deserialPos < s.length() 
+    					&& s.charAt( deserialPos ) != ']' )
+    			{
+            		nextLevelNestedInteger.add( deserializeRecurse( s ) );
+            		if ( s.charAt( deserialPos ) == ',' )
+            		{
+            			deserialPos++;
+            		}
+            		else if ( s.charAt( deserialPos ) == ']' )
+            		{
+            			deserialPos++;
+            			break;
+            		}
+            		else
+            		{
+            			throw new IllegalStateException("");
+            		}
+    			}
+    			currLevelNestedInteger.add( nextLevelNestedInteger );
     		}
     		else
     		{
-    			int value = parseInteger( s, startPos );
-    			if ( isInteger )
-    			{
-    				currLevelNestedInteger.setInteger( value );
-    			}
-    			else
-    			{
-    				currLevelNestedInteger.add( new NestedInteger( value ) );
-    			}
+    			currLevelNestedInteger.add( new NestedInteger(  parseInteger( s ) ) );    			
     		}
-        	startPos[0] = currPos;
     	}
     	
+    	if ( deserialPos < s.length( )
+    			&& s.charAt( deserialPos ) == ']' )
+    	{
+    		deserialPos++;
+    	}
     	return currLevelNestedInteger;
     }
     
-    private int parseInteger( String s, int[] startPos )
+    private int parseInteger( String s )
     {
-    	int currPos = startPos[0];
 		int value = 0;
-		while ( currPos < s.length()
-				&& s.charAt( currPos ) <= '9'
-				&& s.charAt( currPos ) >= '0' )
+		while ( deserialPos < s.length()
+				&& s.charAt( deserialPos ) <= '9'
+				&& s.charAt( deserialPos ) >= '0' )
 		{
-			value = value * 10 +  s.charAt( currPos ) - '0' ;
-			currPos++;
+			value = value * 10 +  s.charAt( deserialPos ) - '0' ;
+			deserialPos++;
 		}
-		startPos[0] = currPos;
 		return value;
     }
 }
