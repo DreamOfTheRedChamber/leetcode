@@ -25,6 +25,7 @@ public class CountingBits
 	public void test()
 	{
 		assertArrayEquals( new int[]{ 0, 1, 1, 2, 1, 2 }, countBits( 5 )  ); 
+		assertArrayEquals( new int[]{ 0 }, countBits( 0 ) );
 	}
 	
     public int[] countBits( int num )
@@ -32,6 +33,10 @@ public class CountingBits
     	if ( num < 0 )
     	{
     		throw new IllegalArgumentException("");
+    	}
+    	if ( num == 0 )
+    	{
+    		return new int[]{ 0 };
     	}
         	
     	int[] numOfOnes = new int[num + 1];
