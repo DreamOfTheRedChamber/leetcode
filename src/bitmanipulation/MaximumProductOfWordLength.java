@@ -27,7 +27,6 @@ Return 0
 No such pair of words.
  * */
 
-// TO_TEST
 public class MaximumProductOfWordLength 
 {
 	@Test

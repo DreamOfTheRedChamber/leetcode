@@ -1,7 +1,11 @@
 package hashtable;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.HashMap;
 import java.util.Map;
+
+import org.junit.Test;
 
 /**
 Given an array nums and a target value k, find the maximum length of a subarray that sums to k. If there isn't one, return 0 instead.
@@ -17,9 +21,15 @@ return 2. (because the subarray [-1, 2] sums to 1 and is the longest)
 Follow Up:
 Can you do it in O(n) time?
  */
-// TO_TEST
 public class MaximumSizeSubarraySumEqualsK
 {
+	@Test
+	public void test()
+	{
+		assertEquals( 3, maxSubArrayLen( new int[]{ 1, -1, 5, -2, 3}, 3 ) );
+		assertEquals( 2, maxSubArrayLen( new int[]{ -2, -1, 2, 1}, 1 ) );
+	}
+	
     public int maxSubArrayLen( int[] nums, int k )
     {
     	Map<Integer, Integer> prefixSumToIndex = new HashMap<>();
