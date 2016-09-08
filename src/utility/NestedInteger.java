@@ -13,6 +13,7 @@ public class NestedInteger
 	public NestedInteger()
 	{
 		list = new ArrayList<>();
+		isInteger = false;
 	}
 	
 	// Constructor initializes a single integer.
