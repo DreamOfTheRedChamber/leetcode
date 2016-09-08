@@ -1,5 +1,7 @@
 package stack;
 
+import org.junit.Test;
+
 import utility.NestedInteger;
 
 /*
@@ -59,11 +61,18 @@ Return a NestedInteger object containing a nested list with 2 elements:
  * }
  */
 //TO_TEST
-// TODO: readme summarize customized integer parser from string
 // TODO: iterative/recursive method
 public class MiniParser 
 {
-    public NestedInteger deserialize(String s) 
+	@Test
+	public void test()
+	{
+		NestedInteger resultOne = deserialize( new String( "324" ) );
+		NestedInteger resultTwo = deserialize( new String( "[123,[456,[789]]]" ) );
+		NestedInteger resultThree = deserialize( new String( "[123,[456,578,[789, 090]]]" ) );
+	}
+	
+	public NestedInteger deserialize(String s) 
     {
     	if ( s == null )
     	{
@@ -101,7 +110,6 @@ public class MiniParser
     			while ( s.charAt( currPos ) <= '9'
     					&& s.charAt( currPos ) >= '0' )
     			{
-    				// TODO: char to int, unnecessary cast
     				value = value * 10 +  s.charAt( currPos ) - '0' ; 
     				currPos++;
     			}

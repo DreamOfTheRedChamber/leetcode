@@ -19,6 +19,11 @@
 * [leetcode sins](#sins)
 
 ### code snippets to remember <a id="snippets"></a>
+* convert char to int, does not need explicit conversion
+```java
+value = value * 10 +  s.charAt( currPos ) - '0' ; 
+```
+
 #### Java basic apis <a id="basic-apis"></a>
 
 * set.add(elem) return false if set already contains the elem
@@ -412,6 +417,9 @@ public TreeNode changePos( Position position, String input )
 	* histogram-related problem, character set
 * binary search
 	* whether duplicates exist inside array
+* String parser related problems
+    * whether the string contains space
+    * how are tokens separated, using comma, slash or something else
 
 ### error-prone cases <a id="error-prone"></a>
 * detect cycle in undirected graph
