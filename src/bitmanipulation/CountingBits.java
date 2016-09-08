@@ -1,5 +1,9 @@
 package bitmanipulation;
 
+import static org.junit.Assert.assertArrayEquals;
+
+import org.junit.Test;
+
 /*
 Given a non negative integer number num. 
 For every numbers i in the range 0 ≤ i ≤ num calculate the number of 1's in their binary representation and return them as an array.
@@ -17,6 +21,12 @@ Can you do it like a boss? Do it without using any builtin function like __built
 // TO_TEST
 public class CountingBits 
 {
+	@Test
+	public void test()
+	{
+		assertArrayEquals( new int[]{ 0, 1, 1, 2, 1, 2 }, countBits( 5 )  ); 
+	}
+	
     public int[] countBits( int num )
     {
     	if ( num < 0 )
@@ -28,17 +38,17 @@ public class CountingBits
     	numOfOnes[0] = 0;
     	numOfOnes[1] = 1;
     	
-    	// TODO: will it generate all nums?
     	for ( int i = 1; i <= num; i++ )
     	{    	
-    		//TODO: overflow
     		int parentOne = ( i << 1 );
-    		if ( parentOne < num )
+    		if ( parentOne > 0 &&
+    				parentOne <= num )
     		{
     			numOfOnes[parentOne] = numOfOnes[i];
     		}
     		int parentTwo = ( i << 1) + 1;
-    		if ( parentTwo < num )
+    		if ( parentTwo > 0 &&
+    				parentTwo <= num )
     		{
     			numOfOnes[parentTwo] = numOfOnes[i] + 1;
     		}
