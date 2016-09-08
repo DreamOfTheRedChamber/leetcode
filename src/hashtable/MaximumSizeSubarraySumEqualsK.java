@@ -26,21 +26,30 @@ public class MaximumSizeSubarraySumEqualsK
 	@Test
 	public void test()
 	{
-		assertEquals( 3, maxSubArrayLen( new int[]{ 1, -1, 5, -2, 3}, 3 ) );
-		assertEquals( 2, maxSubArrayLen( new int[]{ -2, -1, 2, 1}, 1 ) );
+		assertEquals( 4, maxSubArrayLen( new int[]{ 1, -1, 5, -2, 3 }, 3 ) );
+		assertEquals( 2, maxSubArrayLen( new int[]{ -2, -1, 2, 1 }, 1 ) );
+		assertEquals( 2, maxSubArrayLen( new int[]{ -1, 1 }, 0 ) );
+		assertEquals( 4, maxSubArrayLen( new int[]{ 0, 1, -1, 2 }, 2) );
 	}
 	
     public int maxSubArrayLen( int[] nums, int k )
     {
+    	if ( nums.length == 0 )
+    	{
+    		return 0;
+    	}
     	Map<Integer, Integer> prefixSumToIndex = new HashMap<>();
     	int prefixSum = 0;
     	int maxLength = 0;
+    	
+    	prefixSumToIndex.put( 0, -1 ); // for edge case starting from zero position
     	for ( int i = 0; i < nums.length; i++ )
     	{
     		prefixSum += nums[i];
-    		if ( prefixSumToIndex.containsKey( k - prefixSum ) )
+    		if ( prefixSumToIndex.containsKey( prefixSum - k ) )
     		{
-    			maxLength = Math.max( maxLength, i - prefixSumToIndex.get( k - prefixSum ) );
+    			maxLength = Math.max( maxLength, 
+    									i - prefixSumToIndex.get( prefixSum - k ) );
     		}
     		if ( !prefixSumToIndex.containsKey( prefixSum ) )
     		{
