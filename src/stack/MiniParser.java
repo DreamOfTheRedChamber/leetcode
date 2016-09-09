@@ -1,5 +1,7 @@
 package stack;
 
+import java.util.Stack;
+
 import org.junit.Test;
 
 import utility.NestedInteger;
@@ -63,7 +65,6 @@ Return a NestedInteger object containing a nested list with 2 elements:
 // TO_TEST
 public class MiniParser 
 {
-	private int deserialPos;
 	
 	@Test
 	public void test()
@@ -72,99 +73,24 @@ public class MiniParser
 		NestedInteger resultFour = deserialize( new String( "[123,[456,578]]" ) );
 		NestedInteger resultOne = deserialize( new String( "324" ) );
 //		NestedInteger resultTwo = deserialize( new String( "[324]" ) );
-		NestedInteger resultFive = deserialize( new String( "-3" ) );
+//		NestedInteger resultFive = deserialize( new String( "-3" ) );
 	}
-	
-	public NestedInteger deserialize(String s)
+	// refer to the code in http://www.jiuzhang.com/solutions/mini-parse/
+	public NestedInteger deserialize( String s )
     {
-    	if ( s == null )
-    	{
-    		throw new IllegalArgumentException("");
-    	}
-    	// other assertions
-    	
-    	deserialPos = 0;
-    	return deserializeRecurse( s );
-    }
-    
-    private NestedInteger deserializeRecurse( String s )
-    {
-    	// recursion base
-    	if ( deserialPos >= s.length() )
-    	{
-    		return null;
-    	}
-    	boolean isNeg = false;
-    	if ( s.charAt( deserialPos ) == '-' )
-    	{
-    		isNeg = true;
-    		deserialPos++;
-    	}
-    	if ( s.charAt( deserialPos ) >= '0'
-    			&& s.charAt( deserialPos ) <= '9' )
-    	{
-    		return new NestedInteger( isNeg ? -1 * parseInteger( s ) : parseInteger( s ) );
-    	}
-    	
-    	// recursion body
-    	NestedInteger currLevelNestedInteger = new NestedInteger();
-    	while ( deserialPos < s.length()
-    			&& s.charAt( deserialPos ) != ']' )
-    	{
-    		if ( s.charAt( deserialPos ) == ',' )
-    		{
-    			deserialPos++;
-    		}
-    		else if ( s.charAt( deserialPos ) == '[' )
-    		{    	
-        		deserialPos++;
-    			while ( deserialPos < s.length() 
-    					&& s.charAt( deserialPos ) != ']' )
-    			{
-            		currLevelNestedInteger.add( deserializeRecurse( s ) );
-            		if ( deserialPos >= s.length() )
-            		{
-            			break;
-            		}
-            		else if ( s.charAt( deserialPos ) == ',' )
-            		{
-            			deserialPos++;
-            		}
-            		else if ( s.charAt( deserialPos ) == ']' )
-            		{
-            			deserialPos++;
-            			break;
-            		}
-            		else
-            		{
-            			throw new IllegalStateException("");
-            		}
-    			}
-    		}
-    		else
-    		{
-    			currLevelNestedInteger.add( new NestedInteger(  parseInteger( s ) ) );    			
-    		}
-    	}
-    	
-    	if ( deserialPos < s.length( )
-    			&& s.charAt( deserialPos ) == ']' )
-    	{
-    		deserialPos++;
-    	}
-    	return currLevelNestedInteger;
-    }
-    
-    private int parseInteger( String s )
-    {
-		int value = 0;
-		while ( deserialPos < s.length()
-				&& s.charAt( deserialPos ) <= '9'
-				&& s.charAt( deserialPos ) >= '0' )
+		if ( s == null )
 		{
-			value = value * 10 +  s.charAt( deserialPos ) - '0' ;
-			deserialPos++;
+			throw new IllegalArgumentException("");
 		}
-		return value;
-    }
+		
+		Stack<NestedInteger> bufferStack = new Stack<>();
+		int currPos = 0;
+		while ( currPos < s.length() )
+		{
+			if ( currPos == '[' )
+			{
+				
+			}
+		}
+    }    
 }
