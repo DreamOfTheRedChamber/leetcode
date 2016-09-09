@@ -68,10 +68,11 @@ public class MiniParser
 	@Test
 	public void test()
 	{
+//		NestedInteger resultThree = deserialize( new String( "[123,[456]]" ) );
+		NestedInteger resultFour = deserialize( new String( "[123,[456,578]]" ) );
 		NestedInteger resultOne = deserialize( new String( "324" ) );
-		NestedInteger resultTwo = deserialize( new String( "[324]" ) );
-		NestedInteger resultThree = deserialize( new String( "[123,[456,[789]]]" ) );
-		NestedInteger resultFour = deserialize( new String( "[123,[456,578,[789,090]]]" ) );
+//		NestedInteger resultTwo = deserialize( new String( "[324]" ) );
+		NestedInteger resultFive = deserialize( new String( "-3" ) );
 	}
 	
 	public NestedInteger deserialize(String s)
@@ -92,11 +93,17 @@ public class MiniParser
     	if ( deserialPos >= s.length() )
     	{
     		return null;
-    	}    	    	
+    	}
+    	boolean isNeg = false;
+    	if ( s.charAt( deserialPos ) == '-' )
+    	{
+    		isNeg = true;
+    		deserialPos++;
+    	}
     	if ( s.charAt( deserialPos ) >= '0'
     			&& s.charAt( deserialPos ) <= '9' )
     	{
-    		return new NestedInteger( parseInteger( s ) );
+    		return new NestedInteger( isNeg ? -1 * parseInteger( s ) : parseInteger( s ) );
     	}
     	
     	// recursion body
@@ -110,13 +117,16 @@ public class MiniParser
     		}
     		else if ( s.charAt( deserialPos ) == '[' )
     		{    	
-    			NestedInteger nextLevelNestedInteger = new NestedInteger();
         		deserialPos++;
     			while ( deserialPos < s.length() 
     					&& s.charAt( deserialPos ) != ']' )
     			{
-            		nextLevelNestedInteger.add( deserializeRecurse( s ) );
-            		if ( s.charAt( deserialPos ) == ',' )
+            		currLevelNestedInteger.add( deserializeRecurse( s ) );
+            		if ( deserialPos >= s.length() )
+            		{
+            			break;
+            		}
+            		else if ( s.charAt( deserialPos ) == ',' )
             		{
             			deserialPos++;
             		}
@@ -130,7 +140,6 @@ public class MiniParser
             			throw new IllegalStateException("");
             		}
     			}
-    			currLevelNestedInteger.add( nextLevelNestedInteger );
     		}
     		else
     		{
