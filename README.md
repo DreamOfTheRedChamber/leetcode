@@ -435,6 +435,8 @@ public TreeNode changePos( Position position, String input )
 * When a recursive function contains a long list of arguments, need to double check to make sure the arguments are correct
 * Ternary operator ?: priority is only higher than assignment. If it is used in combination with other operators, parentheses should be added.
 * Use 1D array based dynamic programming, remember to check the size when array.length == 0 or array.length == 1
+* Parsing integer from string, what if integer could be negative
+
 ### smells for refactoring and optimization <a id="bad-smells"></a>
 * code length > 100
 * too many if statement checking for boundary cases
