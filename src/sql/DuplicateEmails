@@ -15,3 +15,20 @@ For example, your query should return the following for the above table:
 | a@b.com |
 +---------+
 Note: All emails are in lowercase.
+
+Answer1:
+SELECT Email from Person GROUP BY Email Having count(Email) > 1
+
+Answer2:
+SELECT DISTINCT
+	Person.Email
+FROM
+	Person
+		LEFT JOIN
+	( SELECT
+		MIN(Id) as Id, Email
+	  FROM 
+	  	Person
+	  GROUP BY Email ) PersonWithMinId ON Person.Id = PersonWithMinId.Id
+WHERE 
+	PersonWithMinId.Id is NULL;
