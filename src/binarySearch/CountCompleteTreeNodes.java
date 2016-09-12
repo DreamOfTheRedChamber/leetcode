@@ -39,17 +39,14 @@ public class CountCompleteTreeNodes
     	{
     		rightMostDepth++;
     	}
-    	
-    	
+    	    	
     	if ( leftMostDepth == rightMostDepth )
     	{
-    		return (int) Math.pow( 2, rightMostDepth ) - 1;
+    		return ( 2 << ( rightMostDepth - 1) ) - 1;
     	}
     	else // tree not a complete tree
-    	{
-    		int numLeftSubtree = countNodes( root.left );
-    		int numRightSubtree = countNodes( root.right );
-    		return numLeftSubtree + 1 + numRightSubtree;
+    	{    		
+    		return countNodes( root.left ) + 1 + countNodes( root.right );
     	}
     }
     

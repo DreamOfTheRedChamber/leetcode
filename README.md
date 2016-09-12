@@ -15,6 +15,7 @@
 	* [dynamic-programming](#dynamic-programming)
 * [questions to ask](#questions)
 * [error-prone cases](#error-prone)
+* [communication patterns](#communication-pattern)
 * [smells for refactoring and optimization](#bad-smells)
 * [leetcode sins](#sins)
 
@@ -27,7 +28,8 @@ value = value * 10 +  s.charAt( currPos ) - '0' ;
 #### Java basic apis <a id="basic-apis"></a>
 
 * set.add(elem) return false if set already contains the elem
-
+* recursive algorithm time complexity
+  * T(n) = 2T(n/2) + O(n) = nlog(n)
 #### math <a id="math"></a>
 * divide two integers ( useful names: dividend/numerator, divisor/denominator, quotient, residue )
 	* handle boundary cases ( 0, Integer.MIN_VALUE )
@@ -45,7 +47,9 @@ value = value * 10 +  s.charAt( currPos ) - '0' ;
 	* judge whether a value is even or odd
 		- Use num % 2 != 0 rather than num % 2 == 1 because of negative number mod ( e.g. -5 % 2 == -1 )
 		- To guarantee mod result is always positive, if knowing num range RANGE, could consider ( num + RANGE ) % RANGE 
-* bit manipulation
+* power of integer 2
+    * double Math.pow( 2, b ) needs to be downcast for integer power, a more elegant way is to use bit manipulation 2 << b
+
 ```java
 // convert int decimal to binary format
 int decimalNum = RANDOM_VALUE;
@@ -437,6 +441,38 @@ public TreeNode changePos( Position position, String input )
 * Use 1D array based dynamic programming, remember to check the size when array.length == 0 or array.length == 1
 * Parsing integer from string, what if integer could be negative
 
+### communication patterns <a id="communication-pattern"></a>
+* Before writing the code
+  * first step: declare interface in a strategic way (talk about different ways of defining it and trade-offs)
+  * second step: ask clarifying questions (refer to the "questions to ask" section)
+  * third step: come up with a brute force solution, calc time/space complexity
+    * brain storm problem types (min/max, shortest distance, output solutions, search, topo sort), algorithms (recursion, backtracking, sorting, breath/depth-first search, two pointers) / data types (stack, heap, undirected/directed graph, trie) which might help in this problem
+    * if stuck in this step, write a small and general example, think about how I will do it manually
+    * if still having problems, ask interviewer for help tips
+  * fourth step: optimize (strike a balance between time and space complexity)
+    * optimize from the perspective of space complexity
+      * lots of repetitive computation: recursion -> dynamic programming --(optional)--> 2D memorization array to 1D --(optional)--> bit manipulation
+      * top K: priorityQueue --> bucket sorting/partition algorithm
+      *
+    * optimize from the perspective of time complexity
+      * require O(logn) complexity: complete search -> binary search
+      * require O(n) complexity -> two pointers/use hashmap
+      * require O(nlogn) complexity: divide and conquer/priorityQueue
+  * fifth step:
+      * if stuck in optimization, think about data structures/algorithms that might be help
+      * if still having problems, ask interviewer for help tips
+      * if figuring out a solution, ask interviewer for confirmation "Am I on the right track?"
+* writing the code
+  * first step: write some test cases
+  * second step: check input validity (throw exception or return directly)
+  * third step: use // comments to outline the next block of code (could finish later, but have a placeholder)
+* after writing the code
+  * first step: review the entire code, check whether there are obvious problems (dead-loop, counters...)
+  * second step: use edge test cases to check whether they are handled properly
+  * third step: use normal test cases to walk through main branches of the code
+  * fourth step: talk about sections which could be improved, but was done in a certain way in an interview setting
+  * fifth step: tell interviewer I have finished the problem
+          
 ### smells for refactoring and optimization <a id="bad-smells"></a>
 * code length > 100
 * too many if statement checking for boundary cases
