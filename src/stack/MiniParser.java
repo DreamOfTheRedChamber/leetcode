@@ -62,7 +62,6 @@ Return a NestedInteger object containing a nested list with 2 elements:
  *     public List<NestedInteger> getList();
  * }
  */
-// TO_TEST
 public class MiniParser 
 {
 	
