@@ -95,6 +95,7 @@ String part1 = parts[0]; // 004
 String part2 = parts[1]; // 034556
 ```
 
+* Parsing integer from a string. When possible, use Java's built-in function Integer Integer.ValueOf(String) or int Integer.ParseInt(String) instead of doing it manually
 #### linkedList <a id="linkedlist"></a>
 
 #### sort <a id="sort"></a>
@@ -433,45 +434,47 @@ public TreeNode changePos( Position position, String input )
 	- List<Integer> input
 	- list.remove(index) will always take precedence because it does not require type casting
 * passed in a reference variable (e.g. TreeNode, LinkNode, GraphNode...), check null pointer case
-* grid-based problem
-	- gridsize == 1, no solution inside grid
+* boundary case summary
+  * 2D array problem
+	- check whether array2D.length == 0 and array2D[0].length == 0
+  * Use 1D array based dynamic programming
+	- check the size when array.length == 0 or array.length == 1
+  * reference as input, such as collection (List, Map, ...) or string s
+    - check s == null || s.length() == 0
 * When a variable's name is really really long such as matrix[qHead.xCoor][qHead.yCoor+1] and it needs to be used in multiple places, it is really easy to create typos
 * When a recursive function contains a long list of arguments, need to double check to make sure the arguments are correct
 * Ternary operator ?: priority is only higher than assignment. If it is used in combination with other operators, parentheses should be added.
-* Use 1D array based dynamic programming, remember to check the size when array.length == 0 or array.length == 1
 * Parsing integer from string, what if integer could be negative
 
 ### communication patterns <a id="communication-pattern"></a>
 * Before writing the code
-  * first step: declare interface in a strategic way (talk about different ways of defining it and trade-offs)
-  * second step: ask clarifying questions (refer to the "questions to ask" section)
-  * third step: come up with a brute force solution, calc time/space complexity
+  1. declare interface in a strategic way (talk about different ways of defining it and trade-offs)
+  2. ask clarifying questions (refer to the "questions to ask" section)
+  3. come up with a brute force solution, calc time/space complexity
     * brain storm problem types (min/max, shortest distance, output solutions, search, topo sort), algorithms (recursion, backtracking, sorting, breath/depth-first search, two pointers) / data types (stack, heap, undirected/directed graph, trie) which might help in this problem
     * if stuck in this step, write a small and general example, think about how I will do it manually
     * if still having problems, ask interviewer for help tips
-  * fourth step: optimize (strike a balance between time and space complexity)
+  4. (optional) optimize - strike a balance between time and space complexity
     * optimize from the perspective of space complexity
       * lots of repetitive computation: recursion -> dynamic programming --(optional)--> 2D memorization array to 1D --(optional)--> bit manipulation
       * top K: priorityQueue --> bucket sorting/partition algorithm
-      *
     * optimize from the perspective of time complexity
       * require O(logn) complexity: complete search -> binary search
       * require O(n) complexity -> two pointers/use hashmap
       * require O(nlogn) complexity: divide and conquer/priorityQueue
-  * fifth step:
-      * if stuck in optimization, think about data structures/algorithms that might be help
-      * if still having problems, ask interviewer for help tips
-      * if figuring out a solution, ask interviewer for confirmation "Am I on the right track?"
+  5. Confirm with interviewer "Whether I am on the right track?". If no, go back to 4.
+  6. Write some test cases
+  7. Walk through test cases ( think about the boundary logics which is needed to be handled inside code ) 
 * writing the code
-  * first step: write some test cases
-  * second step: check input validity (throw exception or return directly)
-  * third step: use // comments to outline the next block of code (could finish later, but have a placeholder)
+  1. check input validity (throw exception or return directly)
+  2. use // comments to outline the next block of code
+    * Talk out the comments aloud
+    * Writing part could be finished after writing the code. Leave a placeholder // temporarily 
 * after writing the code
-  * first step: review the entire code, check whether there are obvious problems (dead-loop, counters...)
-  * second step: use edge test cases to check whether they are handled properly
-  * third step: use normal test cases to walk through main branches of the code
-  * fourth step: talk about sections which could be improved, but was done in a certain way in an interview setting
-  * fifth step: tell interviewer I have finished the problem
+  1. review the entire code, check whether there are small non-logical problems (dead-loop, counters, typos, ...)
+  2. use test cases to walk through logical branches of the code
+  3. talk about sections which could be improved, but was done in a certain way in an interview setting
+  4. tell interviewer I have finished the problem
           
 ### smells for refactoring and optimization <a id="bad-smells"></a>
 * code length > 100
