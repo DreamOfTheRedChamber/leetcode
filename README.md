@@ -425,6 +425,8 @@ public TreeNode changePos( Position position, String input )
 * String parser related problems
     * whether the string contains space
     * how are tokens separated, using comma, slash or something else
+* Binary search tree
+    * whether there are duplicated values. If yes, how are they stored (left <= middle < right)
 
 ### error-prone cases <a id="error-prone"></a>
 * detect cycle in undirected graph

@@ -1,5 +1,10 @@
 package stack;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
+import org.junit.Test;
+
 /*
 One way to serialize a binary tree is to use pre-order traversal. 
 When we encounter a non-null node, we record the node's value. If it is a null node, we record using a sentinel value such as #.
@@ -33,10 +38,17 @@ Example 3:
 Return false
  * */
 //TO_TEST
-// TODO: verify preorder serialization of binary search tree
 public class VerifyPreorderSerializationOfBinaryTree 
 {
-    public boolean isValidSerialization( String preorder )
+	@Test
+	public void test()
+	{
+		assertTrue( isValidSerialization( "9,3,4,#,#,1,#,#,2,#,6,#,#" ) );
+		assertFalse( isValidSerialization("1, #") );
+		assertFalse( isValidSerialization("9, #, #, 1") );
+	}
+	
+	public boolean isValidSerialization( String preorder )
     {
     	if ( preorder == null )
     	{
