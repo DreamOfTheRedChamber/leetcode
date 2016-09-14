@@ -5,6 +5,8 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Set;
 
+import org.junit.Test;
+
 /*
 Design a Snake game that is played on a device with screen size = width x height. Play the game online if you are not familiar with the game.
 The snake is initially positioned at the top left corner (0,0) with length = 1 unit.
@@ -50,6 +52,9 @@ snake.move("U"); -> Returns -1 (Game over because snake collides with border)
 */
 
 // TO_TEST
+// assumption:
+// 1. food grid is always enough
+// 2. direction always valid
 public class SnakeGame
 {
 	// snake
@@ -140,15 +145,16 @@ public class SnakeGame
 			return -1;
 		}
 		
-		// if next pos is food
 		int nextFoodX = foodGrid[nextFood][0];
 		int nextFoodY = foodGrid[nextFood][1];
 		snakeBody.add( getCoorHash( nextSnakeHeadX, nextSnakeHeadY ) );
 		snakeBodyMarker.add( getCoorHash( nextSnakeHeadX, nextSnakeHeadY ) );
 
+		// if next pos is food
 		if ( nextSnakeHeadX == nextFoodX && nextSnakeHeadY == nextFoodY )
 		{
 			score++;
+			nextFood++;
 		}
 		// not food
 		else
@@ -161,6 +167,15 @@ public class SnakeGame
 		snakeHeadY = nextSnakeHeadY;
 		
 		return score;
+	}
+	
+	@Test
+	public void test()
+	{
+		/*
+["SnakeGame","move","move"]
+[[2,2,[[0,1]]],["R"],["D"]]
+		 * */
 	}
 }
 

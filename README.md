@@ -473,10 +473,12 @@ public TreeNode changePos( Position position, String input )
     * Talk out the comments aloud
     * Writing part could be finished after writing the code. Leave a placeholder // temporarily 
 * after writing the code
-  1. review the entire code, check whether there are small non-logical problems (dead-loop, counters, typos, ...)
-  2. use test cases to walk through logical branches of the code
-  3. talk about sections which could be improved, but was done in a certain way in an interview setting
-  4. tell interviewer I have finished the problem
+  1. check the code by myself
+     1. review the entire code, check whether there are small non-logical problems (dead-loop, counters, typos, ...)
+     2. review the problem description, check whether there are unhandled problem assumptions 
+     3. use test cases to walk through logical branches of the code
+  2. talk about sections which could be improved, but was done in a certain way in an interview setting
+  3. tell interviewer I have finished the problem
           
 ### smells for refactoring and optimization <a id="bad-smells"></a>
 * code length > 100
