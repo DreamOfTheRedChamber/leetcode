@@ -18,6 +18,42 @@ getNewsFeed(userId): Retrieve the 10 most recent tweet ids in the user's news fe
 follow(followerId, followeeId): Follower follows a followee.
 unfollow(followerId, followeeId): Follower unfollows a followee.
 */
+
+/*
+Really great interview question !!!
+
+1. class design: Tweet class
+2. handle details: 
+   a. user is its own follower.
+3. system design: two basic ways to implement twitter. Pull-based model/Push-based model. 
+   a. For a specific user, whether to use pull-based/push-based model also depends on its social graph size. 
+      Pull-based model will have O(1) time complexity for write, but O(n) time complexity for read.
+      Push-based model will have O(n) time complexity for write, but O(1) time complexity for write.
+      If the user has a lot of followers, using push-based model, each time he posts a tweet, will have O(n) time complexity. 
+      If the user has a lot of followees, using pull-based model, each time he get news feed, will have O(n) time complexity. 
+      From statistics perspective, a normal user usually have more followees than followers. We prefer push-based model.
+   b. That means the read QPS is much higher than write QPS. 
+      From the standpoint of read/write frequency, functions including postTweet/follow/unfollow are all write operations. function postTweet is a read operation. 
+      So it is better to put complex operation ( read social graph ) inside postTweet function. 
+   c. In practice, both push-based/pull-based model works (Facebook/Instagram) via corresponding optimization
+4. Data structure design:
+   a. social graph: userId to follower/followee? how to avoid refollow?
+      Map<UserId, Set<UserId>> userIdToFollowers ( for push-based model ) or userIdToFollowees ( for pull-based model )
+   b. newsfeed
+      Map<UserId, List<TweetId>> userToTweets
+5. Language features
+   a. syntactic sugar. PutIfAbsent()
+6. If adopting pull-based model
+   a. the problem reduces to a get latest tweets from k-sorted list operation.
+   b. an naive approach is to take 10 latest tweets from each followee and then sort them according to timestamp. But with space complexity.
+   c. an improved approach is to use priorityQueue to take the latest tweets from k-sorted list. But need some implementation trick to make it work.
+7. If adopting push-based model
+   a. for postTweet() function, just two nested for loop
+      for follow() function, need to insert 10 latest tweets of followee to follower's timeline
+      for unfollow() function, need to delete all tweets of follower's from follower's timeline
+      Three functions, three set of logics. this will be kind of overkilling for an interview setting. 
+ * */
+
 // TO_HURRY
 public class Twitter 
 {
@@ -78,7 +114,6 @@ public class Twitter
     /** Follower follows a followee. If the operation is invalid, it should be a no-op. */
     public void follow(int followerId, int followeeId) 
     {
-    	setUpUser( followerId );
     	setUpUser( followeeId );
     	userToFollowee.get( followerId ).add( followeeId );
     }

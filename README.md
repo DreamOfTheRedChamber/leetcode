@@ -28,8 +28,13 @@ value = value * 10 +  s.charAt( currPos ) - '0' ;
 #### Java basic apis <a id="basic-apis"></a>
 
 * set.add(elem) return false if set already contains the elem
+* list.sublist(startIndex, endIndex) returns a sublist of List
 * recursive algorithm time complexity
   * T(n) = 2T(n/2) + O(n) = nlog(n)
+* ListIterator benefits:
+  * iterating bidirectional
+  * add/remove elements while iterating
+  
 #### math <a id="math"></a>
 * divide two integers ( useful names: dividend/numerator, divisor/denominator, quotient, residue )
 	* handle boundary cases ( 0, Integer.MIN_VALUE )
@@ -484,6 +489,10 @@ public TreeNode changePos( Position position, String input )
 * code length > 100
 * too many if statement checking for boundary cases
 * code do not generalize well. Only work for current problem. e.g. merge 2 sorted list -> merge k sorted List
+
+#### Java sins <a id="java-sins"></a>
+* linkedhashset could not be iterated reversely
+* hard to return tuple values
 
 ### Leetcode sins <a id="sins"></a>
 * When problem occurs, too few stack trace
