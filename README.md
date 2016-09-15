@@ -489,6 +489,7 @@ public TreeNode changePos( Position position, String input )
 * When problem occurs, too few stack trace
 * No online debuggers
 * No history track along time axis. Really bad synchronous workflow
+* Assumptions about validity of input
 * Unable to mark different stages in solving a problem ( e.g. thought-out, implemented, optimized, on-line judged, summarized )
 * Cannot add enough comments along the code
 * Never-ending, ever-increasing number of problems
