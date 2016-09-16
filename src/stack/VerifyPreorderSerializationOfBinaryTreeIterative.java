@@ -37,56 +37,20 @@ Example 3:
 "9,#,#,1"
 Return false
  * */
-//TO_TEST
-public class VerifyPreorderSerializationOfBinaryTree 
+// TO_HURRY
+public class VerifyPreorderSerializationOfBinaryTreeIterative 
 {
 	@Test
 	public void test()
 	{
+		assertTrue( isValidSerialization( "9,3,#,#,#" ) );
+
 		assertTrue( isValidSerialization( "9,3,4,#,#,1,#,#,2,#,6,#,#" ) );
 		assertFalse( isValidSerialization("1, #") );
-		assertFalse( isValidSerialization("9, #, #, 1") );
+		assertFalse( isValidSerialization("9, #, #, 1") );		
 	}
 	
 	public boolean isValidSerialization( String preorder )
     {
-    	if ( preorder == null )
-    	{
-    		throw new NullPointerException("");
-    	}    			
-    	if ( preorder.length() == 0 )
-    	{
-    		return true;
-    	}
-    	
-    	int[] currPos = new int[1];
-    	String[] nodeValues = preorder.split( "," );
-    	if ( !isValidSerializationRecurse( nodeValues, currPos ) )
-    	{ 
-    		return false;
-    	}
-    	return currPos[0] == preorder.length( );
-    }
-    
-    /**
-     * 
-     * @param nodeValues  parsed tree node values
-     * @param currPos  position inside nodeValues
-     * @return	whether nodeValues is enough to build a binary tree
-     */
-    private boolean isValidSerializationRecurse( String[] nodeValues, int[] currPos )
-    {
-    	if ( currPos[0] >= nodeValues.length )
-    	{
-    		return false;
-    	}    	
-    	if ( nodeValues[currPos[0]].equals( "#" ) )
-    	{
-    		return true;
-    	}
-    	
-    	currPos[0] += 1;
-    	return isValidSerializationRecurse( nodeValues, currPos )
-    			&& isValidSerializationRecurse( nodeValues, currPos );
     }
 }

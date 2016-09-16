@@ -64,7 +64,7 @@
   1. check the code by myself
      1. review the entire code, check whether there are unused variables, dead while loops, formatting issues, substring boundaries (start index, inclusive; end index, exclusive) , ...
      2. review the problem description, check whether there are unhandled problem assumptions 
-     3. use test cases to walk through logical branches of the code
+     3. use small test cases to test different logical branches of the code
   2. talk about sections which could be refactored/improved, but was done in a certain way in an interview setting
   3. tell interviewer I have finished the problem
 
