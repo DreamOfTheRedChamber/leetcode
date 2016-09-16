@@ -1,12 +1,10 @@
 package design;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.PriorityQueue;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -56,7 +54,6 @@ Really great interview question !!!
       Three functions, three set of logics. this will be kind of overkilling for an interview setting. 
  * */
 
-// TO_HURRY
 public class Twitter 
 {
 	
@@ -85,12 +82,13 @@ public class Twitter
     /** Retrieve the 10 most recent tweet ids in the user's news feed. Each item in the news feed must be posted by users who the user followed or by the user herself. Tweets must be ordered from most recent to least recent. */
     public List<Integer> getNewsFeed( int userId )
     {
+    	setUpUser( userId );
     	// aggregate 10 latest news feed for all followees
     	List<Tweet> aggregatedTweets = new ArrayList<>();
     	for ( Integer followeeId : userToFollowee.get( userId ) )
     	{    		
     		List<Tweet> followeeTweets = userToTweets.get( followeeId );
-    		aggregatedTweets.addAll( followeeTweets.subList( Math.max( 0, followeeTweets.size() - 1 - FEED_SIZE ), 
+    		aggregatedTweets.addAll( followeeTweets.subList( Math.max( 0, followeeTweets.size() - FEED_SIZE ), 
     																	followeeTweets.size() ) );    		
     	}
     		
@@ -98,8 +96,11 @@ public class Twitter
 		aggregatedTweets.sort( (o1, o2) -> 
 								o1.timestamp - o2.timestamp);
 		
-		return aggregatedTweets.subList( Math.max( 0, aggregatedTweets.size() - 1 - FEED_SIZE ), aggregatedTweets.size() )
+		return aggregatedTweets.subList( Math.max( 0, aggregatedTweets.size() - FEED_SIZE ), 
+													aggregatedTweets.size() )
 				               .stream()
+				               .sorted( (o1, o2) -> 
+								o2.timestamp - o1.timestamp) 
 				               .map( i -> i.tweetID )
 				               .collect( Collectors.toList() );
     }
@@ -107,6 +108,7 @@ public class Twitter
     /** Follower follows a followee. If the operation is invalid, it should be a no-op. */
     public void follow(int followerId, int followeeId) 
     {
+    	setUpUser( followerId );
     	setUpUser( followeeId );
     	userToFollowee.get( followerId ).add( followeeId );
     }
@@ -114,6 +116,9 @@ public class Twitter
     /** Follower unfollows a followee. If the operation is invalid, it should be a no-op. */
     public void unfollow(int followerId, int followeeId) 
     {
+    	setUpUser( followerId );
+    	setUpUser( followeeId );
+
     	if ( followerId != followeeId )
     	{
     		userToFollowee.get( followerId ).remove( followeeId );
@@ -139,7 +144,7 @@ public class Twitter
     }    
 
     @Test
-    public void test()
+    public void testFourAtomicOperations()
     {
     	Twitter obj = new Twitter();
     	obj.postTweet(1, 5);
@@ -151,6 +156,45 @@ public class Twitter
     	System.out.println( obj.getNewsFeed(1) );
     }
 
+    @Test
+    public void testNewsFeedOrder()
+    {
+    	Twitter obj = new Twitter();
+    	obj.postTweet( 1, 1 );
+    	System.out.println( obj.getNewsFeed( 1 ) );
+    	obj.follow( 1, 2 );
+    	obj.postTweet( 2, 2 );
+    	System.out.println( obj.getNewsFeed( 2 ) );
+    }
+    
+    @Test
+    public void testGetNewsFeedWithoutSetup()
+    {
+    	Twitter obj = new Twitter();
+    	System.out.println( obj.getNewsFeed( 1 ) );
+    }
+    
+    @Test
+    public void testNumberOfReturnedTweets()
+    {
+    	Twitter obj = new Twitter();
+    	
+    	obj.postTweet( 1, 5 );
+    	obj.postTweet( 1, 3 );
+    	obj.postTweet( 1, 101 );
+    	obj.postTweet( 1, 13 );
+    	obj.postTweet( 1, 10 );
+    	
+    	obj.postTweet( 1, 2 );
+    	obj.postTweet( 1, 94 );
+    	obj.postTweet( 1, 505 );
+    	obj.postTweet( 1, 333 );
+    	obj.postTweet( 1, 22 );
+
+    	obj.postTweet( 1, 11 );
+    	
+    	System.out.println( obj.getNewsFeed(1) );
+    }
 }
 
 /**

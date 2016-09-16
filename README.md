@@ -13,9 +13,9 @@
 	* [recursive functions](#recursive)
 	* [graph](#graph)
 	* [dynamic-programming](#dynamic-programming)
-* [questions to ask](#questions)
 * [error-prone cases](#error-prone)
 * [communication patterns](#communication-pattern)
+* [input specification](#input-specification)
 * [smells for refactoring and optimization](#bad-smells)
 * [leetcode sins](#sins)
 
@@ -414,25 +414,6 @@ public TreeNode changePos( Position position, String input )
 #### dynamic-programming <a id="dynamic-programming"></a>
 
 
-
-
-### questions to ask <a id="questions"></a>
-* array
-	* Is array sorted
-	* Given two arrays, which one's size is bigger
-	* Whether could modify entries inside array
-* linkedList
-	* Convert tree to linkedlist, doubly or singly linkedlist
-* hashmap
-	* histogram-related problem, character set
-* binary search
-	* whether duplicates exist inside array
-* String parser related problems
-    * whether the string contains space
-    * how are tokens separated, using comma, slash or something else
-* Binary search tree
-    * whether there are duplicated values. If yes, how are they stored (left <= middle < right)
-
 ### error-prone cases <a id="error-prone"></a>
 * detect cycle in undirected graph
     - pass in super node inside dfs recursive call
@@ -456,12 +437,13 @@ public TreeNode changePos( Position position, String input )
 ### communication patterns <a id="communication-pattern"></a>
 * Before writing the code
   1. declare interface in a strategic way (talk about different ways of defining it and trade-offs)
-  2. ask clarifying questions (refer to the "questions to ask" section)
-  3. come up with a brute force solution, calc time/space complexity
+  2. clear assumptions about the problem, one type of assumption is about input validity; the other type is about input specifications (refer to "input-specifications" section)
+  3. abstract the question
+  4. come up with a brute force solution, calc time/space complexity
     * brain storm problem types (min/max, shortest distance, output solutions, search, topo sort), algorithms (recursion, backtracking, sorting, breath/depth-first search, two pointers) / data types (stack, heap, undirected/directed graph, trie) which might help in this problem
     * if stuck in this step, write a small and general example, think about how I will do it manually
     * if still having problems, ask interviewer for help tips
-  4. (optional) optimize - strike a balance between time and space complexity
+  5. (optional) optimize - strike a balance between time and space complexity
     * optimize from the perspective of space complexity
       * lots of repetitive computation: recursion -> dynamic programming --(optional)--> 2D memorization array to 1D --(optional)--> bit manipulation
       * top K: priorityQueue --> bucket sorting/partition algorithm
@@ -469,9 +451,9 @@ public TreeNode changePos( Position position, String input )
       * require O(logn) complexity: complete search -> binary search
       * require O(n) complexity -> two pointers/use hashmap
       * require O(nlogn) complexity: divide and conquer/priorityQueue
-  5. Confirm with interviewer "Whether I am on the right track?". If no, go back to 4.
-  6. Write some test cases
-  7. Walk through test cases ( think about the boundary logics which is needed to be handled inside code ) 
+  6. Confirm with interviewer "Whether I am on the right track?". If no, go back to 4.
+  7. Write some test cases
+  8. Walk through test cases ( think about the boundary logics which is needed to be handled inside code ) 
 * writing the code
   1. check input validity (throw exception or return directly)
   2. use // comments to outline the next block of code
@@ -484,7 +466,26 @@ public TreeNode changePos( Position position, String input )
      3. use test cases to walk through logical branches of the code
   2. talk about sections which could be refactored/improved, but was done in a certain way in an interview setting
   3. tell interviewer I have finished the problem
-          
+
+
+### input-specification <a id="input-specification"></a>
+* array
+	* Is array sorted
+	* Given two arrays, which one's size is bigger
+	* Whether could modify entries inside array
+* linkedList
+	* doubly or singly linkedlist
+* search related problems
+    * return boolean or specific result
+	* whether duplicates exist inside array
+* hashmap
+	* histogram-related problem, character set	
+* String parser related problems
+    * whether the string contains space
+    * how are tokens separated, using comma, slash or something else
+* Binary search tree
+    * whether there are duplicated values. If yes, how are they stored (left <= middle < right)
+
 ### smells for refactoring and optimization <a id="bad-smells"></a>
 * code length > 100
 * too many if statement checking for boundary cases
