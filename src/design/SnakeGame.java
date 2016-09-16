@@ -1,11 +1,11 @@
 package design;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Set;
-
-import org.junit.Test;
 
 /*
 Design a Snake game that is played on a device with screen size = width x height. Play the game online if you are not familiar with the game.
@@ -51,7 +51,6 @@ snake.move("L"); -> Returns 2 (Snake eats the second food)
 snake.move("U"); -> Returns -1 (Game over because snake collides with border)
 */
 
-// TO_TEST
 // assumption:
 // 1. food grid is always enough
 // 2. direction always valid
@@ -74,6 +73,7 @@ public class SnakeGame
 	private Set<Integer> snakeBodyMarker;
 	
 	private int score;
+
 	/**
 	 * Initialize your data structure here.
 	 * 
@@ -95,6 +95,7 @@ public class SnakeGame
 		
 		snakeHeadX = 0;
 		snakeHeadY = 0;
+		
 		snakeBody = new LinkedList<>();
 		snakeBody.add( getCoorHash( snakeHeadX, snakeHeadY ) );
 		snakeBodyMarker = new HashSet<>();
@@ -138,47 +139,142 @@ public class SnakeGame
 			nextSnakeHeadY++;
 		}
 		
+		
+		// edge cases
+		// if cross boundary
 		if( ( nextSnakeHeadX < 0 || nextSnakeHeadX >= boardHeight )
-				|| ( nextSnakeHeadY < 0 || nextSnakeHeadY >= boardWidth ) 
-				|| snakeBodyMarker.contains( getCoorHash( nextSnakeHeadX, nextSnakeHeadY ) ) )
+				|| ( nextSnakeHeadY < 0 || nextSnakeHeadY >= boardWidth ) )
 		{
 			return -1;
 		}
-		
-		int nextFoodX = foodGrid[nextFood][0];
-		int nextFoodY = foodGrid[nextFood][1];
-		snakeBody.add( getCoorHash( nextSnakeHeadX, nextSnakeHeadY ) );
-		snakeBodyMarker.add( getCoorHash( nextSnakeHeadX, nextSnakeHeadY ) );
 
-		// if next pos is food
-		if ( nextSnakeHeadX == nextFoodX && nextSnakeHeadY == nextFoodY )
+		// if eat itself
+		// always won't eat its tail
+		Integer tailHash = snakeBody.peek( );
+		Integer nextSnakeHeadHash = getCoorHash( nextSnakeHeadX, nextSnakeHeadY );
+		if ( snakeBodyMarker.contains( nextSnakeHeadHash )
+			&& nextSnakeHeadHash != tailHash ) 
+		{
+			return -1;
+		}
+
+		
+		// move toward next position
+		// has food
+		if ( nextFood < foodGrid.length 
+				&& foodGrid[nextFood][0] == nextSnakeHeadX 
+				&& foodGrid[nextFood][1] == nextSnakeHeadY )
 		{
 			score++;
-			nextFood++;
+			nextFood++;			
 		}
-		// not food
 		else
 		{
-			Integer tailHash = snakeBody.remove( );
+			snakeBody.remove();
 			snakeBodyMarker.remove( tailHash );
 		}
 		
+		// Add head
+		snakeBody.add( nextSnakeHeadHash );
+		snakeBodyMarker.add( nextSnakeHeadHash );		
 		snakeHeadX = nextSnakeHeadX;
 		snakeHeadY = nextSnakeHeadY;
 		
 		return score;
 	}
-	
-	@Test
-	public void test()
+
+	public static void main(String[] args)
 	{
 		/*
-["SnakeGame","move","move"]
-[[2,2,[[0,1]]],["R"],["D"]]
+["SnakeGame","move","move","move","move","move","move","move","move","move","move","move","move","move","move","move"]
+[[3,3,[[2,0],[0,0],[0,2],[0,1],[2,2],[0,1]]],["D"],["D"],["R"],["U"],["U"],["L"],["D"],["R"],["R"],["U"],["L"],["L"],["D"],["R"],["U"]]
 		 * */
+		int[][] food = new int[][]{ {2,0}, {0,0}, {0,2}, {0,1}, {2,2}, {0,1} };
+		SnakeGame snakeGame = new SnakeGame( 3, 3, food );
+
+		// first food
+		assertEquals( 0, snakeGame.move( "D" ) );
+		assertEquals( 1, snakeGame.move( "D" ) );
+		
+		// second food
+		assertEquals( 1, snakeGame.move( "R" ) );
+		assertEquals( 1, snakeGame.move( "U" ) );
+		assertEquals( 1, snakeGame.move( "U" ) );
+		assertEquals( 2, snakeGame.move( "L" ) );
+		
+		// third food
+		assertEquals( 2, snakeGame.move( "D" ) );
+		assertEquals( 2, snakeGame.move( "R" ) );
+		assertEquals( 2, snakeGame.move( "R" ) );
+		assertEquals( 3, snakeGame.move( "U" ) );		
+
+		// fourth food
+		assertEquals( 4, snakeGame.move( "L" ) );
+		assertEquals( 4, snakeGame.move( "L" ) );
+		assertEquals( 4, snakeGame.move( "D" ) );
+		assertEquals( 4, snakeGame.move( "R" ) );
+		
+		// eat itself
+		assertEquals( -1, snakeGame.move( "U" ) );
+				
+		// edge case: when to remove snake tail
+		/*
+["SnakeGame","move","move","move","move","move","move","move","move","move","move","move","move"]
+[[3,3,[[2,0],[0,0],[0,2],[2,2]]],["D"],["D"],["R"],["U"],["U"],  ["L"],["D"],["R"],["R"],["U"],  ["L"],["D"]]
+		 */
+		food = new int[][]{ {2,0}, {0,0}, {0,2}, {2,2} };
+		snakeGame = new SnakeGame( 3, 3, food );
+		
+		// first food
+		assertEquals( 0, snakeGame.move( "D" ) );
+		assertEquals( 1, snakeGame.move( "D" ) );
+		
+		// second food
+		assertEquals( 1, snakeGame.move( "R" ) );
+		assertEquals( 1, snakeGame.move( "U" ) );
+		assertEquals( 1, snakeGame.move( "U" ) );
+		assertEquals( 2, snakeGame.move( "L" ) );
+		
+		// third food
+		assertEquals( 2, snakeGame.move( "D" ) );
+		assertEquals( 2, snakeGame.move( "R" ) );
+		assertEquals( 2, snakeGame.move( "R" ) );
+		assertEquals( 3, snakeGame.move( "U" ) );
+		
+		assertEquals( 3, snakeGame.move( "L" ) );
+		assertEquals( 3, snakeGame.move( "D" ) );
+	
+		// remove tail before adding head
+	/*
+["SnakeGame","move","move","move","move","move","move","move","move","move","move","move","move","move","move","move","move","move","move","move"]
+[[3,3,[[0,1],[0,2],[1,2],[2,2],[2,1],[2,0],[1,0]]],["R"],["R"],["D"],["D"],["L"],["L"],["U"],["U"],["R"],["R"],["D"],["D"],["L"],["L"],["U"],["R"],["U"],["L"],["D"]]
+	 */
+		food = new int[][]{ {0, 1}, {0, 2}, {1, 2}, {2, 2}, {2, 1}, {2, 0}, {1, 0} };
+		snakeGame = new SnakeGame( 3, 3, food );
+
+		assertEquals( 1, snakeGame.move( "R" ) );
+		assertEquals( 2, snakeGame.move( "R" ) );
+		assertEquals( 3, snakeGame.move( "D" ) );
+		assertEquals( 4, snakeGame.move( "D" ) );
+		assertEquals( 5, snakeGame.move( "L" ) );
+		assertEquals( 6, snakeGame.move( "L" ) );
+		assertEquals( 7, snakeGame.move( "U" ) );
+		
+		assertEquals( 7, snakeGame.move( "U" ) );		
+		assertEquals( 7, snakeGame.move( "R" ) );		
+		assertEquals( 7, snakeGame.move( "R" ) );		
+		assertEquals( 7, snakeGame.move( "D" ) );
+		assertEquals( 7, snakeGame.move( "D" ) );		
+		assertEquals( 7, snakeGame.move( "L" ) );
+		assertEquals( 7, snakeGame.move( "L" ) );
+		assertEquals( 7, snakeGame.move( "U" ) );
+		assertEquals( 7, snakeGame.move( "R" ) );
+		assertEquals( 7, snakeGame.move( "U" ) );
+		assertEquals( 7, snakeGame.move( "L" ) );
+		
+		assertEquals( -1, snakeGame.move( "D" ) );
 	}
 }
-
 /**
  * Your SnakeGame object will be instantiated and called as such: SnakeGame obj
  * = new SnakeGame(width, height, food); int param_1 = obj.move(direction);

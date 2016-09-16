@@ -17,7 +17,8 @@
 * [communication patterns](#communication-pattern)
 * [input specification](#input-specification)
 * [smells for refactoring and optimization](#bad-smells)
-* [leetcode sins](#sins)
+* [Java sins](#java-sins)
+* [leetcode sins](#leetcode-sins)
 
 ### code snippets to remember <a id="snippets"></a>
 * convert char to int, does not need explicit conversion
@@ -80,6 +81,7 @@ int[][] array2D = { { 1, 2 }, {2, 5}, {3, 7} };
 System.out.println( Arrays.toString( array1D ) );
 System.out.println( Arrays.deepToString( array2D ));
 ```
+* Generate coordinate hash for a position (x,y) by x * width + y;
 
 #### string <a id="string"></a>
 * StringTokenizer ( like an iterator, has built-in hasNext() and next() func)
@@ -495,7 +497,7 @@ public TreeNode changePos( Position position, String input )
 * linkedhashset could not be iterated reversely
 * hard to return tuple values
 
-### Leetcode sins <a id="sins"></a>
+### Leetcode sins <a id="leetcode-sins"></a>
 * When problem occurs, too few stack trace
 * No online debuggers
 * No history track along time axis. Really bad synchronous workflow
