@@ -1,12 +1,14 @@
 package design;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.junit.Test;
 
@@ -76,39 +78,30 @@ public class Twitter
     {
     	setUpUser( userId );
     	List<Tweet> tweetList = userToTweets.get( userId );
-    	tweetList.add( new Tweet( tweetId, timestamp, tweetList.size() ) );
+    	tweetList.add( new Tweet( tweetId, timestamp ) );
     	timestamp++;
     }
     
     /** Retrieve the 10 most recent tweet ids in the user's news feed. Each item in the news feed must be posted by users who the user followed or by the user herself. Tweets must be ordered from most recent to least recent. */
     public List<Integer> getNewsFeed( int userId )
     {
-    	Set<Integer> followeeList = userToFollowee.get( userId );
-    	List<List<Tweet>> followeeTweets = new ArrayList<>();
-    	for ( Integer followee : followeeList )
-    	{
-    		followeeTweets.add( userToTweets.get( followee ) );
+    	// aggregate 10 latest news feed for all followees
+    	List<Tweet> aggregatedTweets = new ArrayList<>();
+    	for ( Integer followeeId : userToFollowee.get( userId ) )
+    	{    		
+    		List<Tweet> followeeTweets = userToTweets.get( followeeId );
+    		aggregatedTweets.addAll( followeeTweets.subList( Math.max( 0, followeeTweets.size() - 1 - FEED_SIZE ), 
+    																	followeeTweets.size() ) );    		
     	}
-    	PriorityQueue<Tweet> minQueue = new PriorityQueue<>( (o1, o2) -> ( o2.timestamp - o1.timestamp ) );
-    	for ( List<Tweet> tweetList : followeeTweets )
-    	{
-    		if ( tweetList.size() > 0 )
-    		{
-    			minQueue.add( tweetList.get( tweetList.size() - 1 ) );
-    		}
-    	}
-    	int counter = 0;
-    	List<Integer> newsFeed = new ArrayList<>();
-    	while ( !minQueue.isEmpty() 
-    			&& counter < FEED_SIZE )
-    	{
-    		Tweet latestTweet = minQueue.poll();
-    		newsFeed.add( latestTweet.tweetID );
-    		if ( latestTweet.index > 0 )
-    		{
-    			minQueue.offer( userTo)
-    		}
-    	}
+    		
+    	// sort and take the latest 10 tweets
+		aggregatedTweets.sort( (o1, o2) -> 
+								o1.timestamp - o2.timestamp);
+		
+		return aggregatedTweets.subList( Math.max( 0, aggregatedTweets.size() - 1 - FEED_SIZE ), aggregatedTweets.size() )
+				               .stream()
+				               .map( i -> i.tweetID )
+				               .collect( Collectors.toList() );
     }
     
     /** Follower follows a followee. If the operation is invalid, it should be a no-op. */
@@ -121,13 +114,16 @@ public class Twitter
     /** Follower unfollows a followee. If the operation is invalid, it should be a no-op. */
     public void unfollow(int followerId, int followeeId) 
     {
-    	userToFollowee.get( followerId ).remove( followeeId );
+    	if ( followerId != followeeId )
+    	{
+    		userToFollowee.get( followerId ).remove( followeeId );
+    	}
     }
-
+    
     private void setUpUser( int userId )
     {
     	userToFollowee.putIfAbsent( userId, new HashSet<>() );
-    	userToFollowee.get( userId ).add( userId ); // add user itself to followeelist
+    	userToFollowee.get( userId ).add( userId ); // add user itself to followee set
     	userToTweets.putIfAbsent( userId, new ArrayList<>() );	
     }
     
@@ -135,12 +131,10 @@ public class Twitter
     {
     	public final int tweetID;
     	public final int timestamp;
-    	public final int index;
-    	public Tweet( int tweetID, int timestamp, int index )
+    	public Tweet( int tweetID, int timestamp )
     	{
     		this.tweetID = tweetID;
     		this.timestamp = timestamp;
-    		this.index = index;
     	}
     }    
 
@@ -156,6 +150,7 @@ public class Twitter
     	obj.unfollow(1, 2);
     	System.out.println( obj.getNewsFeed(1) );
     }
+
 }
 
 /**

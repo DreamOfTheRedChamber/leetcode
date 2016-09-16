@@ -479,10 +479,10 @@ public TreeNode changePos( Position position, String input )
     * Writing part could be finished after writing the code. Leave a placeholder // temporarily 
 * after writing the code
   1. check the code by myself
-     1. review the entire code, check whether there are small non-logical problems (dead-loop, counters, typos, ...)
+     1. review the entire code, check whether there are unused variables, dead while loops, formatting issues, substring boundaries (start index, inclusive; end index, exclusive) , ...
      2. review the problem description, check whether there are unhandled problem assumptions 
      3. use test cases to walk through logical branches of the code
-  2. talk about sections which could be improved, but was done in a certain way in an interview setting
+  2. talk about sections which could be refactored/improved, but was done in a certain way in an interview setting
   3. tell interviewer I have finished the problem
           
 ### smells for refactoring and optimization <a id="bad-smells"></a>
@@ -490,7 +490,7 @@ public TreeNode changePos( Position position, String input )
 * too many if statement checking for boundary cases
 * code do not generalize well. Only work for current problem. e.g. merge 2 sorted list -> merge k sorted List
 
-#### Java sins <a id="java-sins"></a>
+### Java sins <a id="java-sins"></a>
 * linkedhashset could not be iterated reversely
 * hard to return tuple values
 
