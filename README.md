@@ -1,5 +1,8 @@
 # loop through leetcode one more time, ; )
-* [code snippets to remember](#snippets)
+* [strategy](#strategy)
+* [communication patterns](#communication-pattern)
+* [input specification](#input-specification)
+* [summarized code snippets](#snippets)
 	* [Java basic apis](#basic-apis)
 	* [math](#math)
 	* [array](#array)
@@ -14,11 +17,76 @@
 	* [graph](#graph)
 	* [dynamic-programming](#dynamic-programming)
 * [error-prone cases](#error-prone)
-* [communication patterns](#communication-pattern)
-* [input specification](#input-specification)
 * [smells for refactoring and optimization](#bad-smells)
 * [Java sins](#java-sins)
 * [leetcode sins](#leetcode-sins)
+
+### Strategy <a id="strategy"></a>
+* for easy problems ( could complete 100% )
+  * fast, because might have follow-up questions
+  * focus more on communication / coding style / corner cases / exception handling
+* for medium problems
+  * try to be bug-free
+  * exhibit good coding habits
+    * write test cases before starting
+    * use comment placeholder to outline code before writing
+    * check code before finishing
+* for tricky/hard problems
+  * summarize an easy-to-remember pattern for each popular hard problem (e.g. regular expression matching, iterative post-order traversal)
+  * talk aloud so when stuck, interviewer could help
+  
+### communication patterns <a id="communication-pattern"></a>
+* Before writing the code
+  1. declare interface in a strategic way (talk about different ways of defining it and trade-offs)
+  2. clear assumptions about the problem, one type of assumption is about input validity; the other type is about input specifications (refer to "input-specifications" section)
+  3. abstract the question
+  4. come up with a brute force solution, calc time/space complexity
+    * brain storm problem types (min/max, shortest distance, output solutions, search, topo sort), algorithms (recursion, backtracking, sorting, breath/depth-first search, two pointers) / data types (stack, heap, undirected/directed graph, trie) which might help in this problem
+    * if stuck in this step, write a small and general example, think about how I will do it manually
+    * if still having problems, ask interviewer for help tips
+  5. (optional) optimize - strike a balance between time and space complexity
+    * optimize from the perspective of space complexity
+      * lots of repetitive computation: recursion -> dynamic programming --(optional)--> 2D memorization array to 1D --(optional)--> bit manipulation
+      * top K: priorityQueue --> bucket sorting/partition algorithm
+    * optimize from the perspective of time complexity
+      * require O(logn) complexity: complete search -> binary search
+      * require O(n) complexity -> two pointers/use hashmap
+      * require O(nlogn) complexity: divide and conquer/priorityQueue
+  6. Confirm with interviewer "Whether I am on the right track?". If no, go back to 4.
+  7. Write some test cases
+  8. Walk through test cases ( think about the boundary logics which is needed to be handled inside code ) 
+* writing the code
+  1. check input validity (throw exception or return directly)
+  2. use // comments to outline the next block of code
+    * Talk out the comments aloud
+    * Writing part could be finished after writing the code. Leave a placeholder // temporarily 
+* after writing the code
+  1. check the code by myself
+     1. review the entire code, check whether there are unused variables, dead while loops, formatting issues, substring boundaries (start index, inclusive; end index, exclusive) , ...
+     2. review the problem description, check whether there are unhandled problem assumptions 
+     3. use test cases to walk through logical branches of the code
+  2. talk about sections which could be refactored/improved, but was done in a certain way in an interview setting
+  3. tell interviewer I have finished the problem
+
+
+### input-specification <a id="input-specification"></a>
+* array
+	* Is array sorted
+	* Given two arrays, which one's size is bigger
+	* Whether could modify entries inside array
+* linkedList
+	* doubly or singly linkedlist
+* search related problems
+    * return boolean or specific result
+	* whether duplicates exist inside array
+* hashmap
+	* histogram-related problem, character set	
+* String parser related problems
+    * whether the string contains space
+    * how are tokens separated, using comma, slash or something else
+* Binary search tree
+    * whether there are duplicated values. If yes, how are they stored (left <= middle < right)
+
 
 ### code snippets to remember <a id="snippets"></a>
 * convert char to int, does not need explicit conversion
@@ -436,57 +504,6 @@ public TreeNode changePos( Position position, String input )
 * Ternary operator ?: priority is only higher than assignment. If it is used in combination with other operators, parentheses should be added.
 * Parsing integer from string, what if integer could be negative
 
-### communication patterns <a id="communication-pattern"></a>
-* Before writing the code
-  1. declare interface in a strategic way (talk about different ways of defining it and trade-offs)
-  2. clear assumptions about the problem, one type of assumption is about input validity; the other type is about input specifications (refer to "input-specifications" section)
-  3. abstract the question
-  4. come up with a brute force solution, calc time/space complexity
-    * brain storm problem types (min/max, shortest distance, output solutions, search, topo sort), algorithms (recursion, backtracking, sorting, breath/depth-first search, two pointers) / data types (stack, heap, undirected/directed graph, trie) which might help in this problem
-    * if stuck in this step, write a small and general example, think about how I will do it manually
-    * if still having problems, ask interviewer for help tips
-  5. (optional) optimize - strike a balance between time and space complexity
-    * optimize from the perspective of space complexity
-      * lots of repetitive computation: recursion -> dynamic programming --(optional)--> 2D memorization array to 1D --(optional)--> bit manipulation
-      * top K: priorityQueue --> bucket sorting/partition algorithm
-    * optimize from the perspective of time complexity
-      * require O(logn) complexity: complete search -> binary search
-      * require O(n) complexity -> two pointers/use hashmap
-      * require O(nlogn) complexity: divide and conquer/priorityQueue
-  6. Confirm with interviewer "Whether I am on the right track?". If no, go back to 4.
-  7. Write some test cases
-  8. Walk through test cases ( think about the boundary logics which is needed to be handled inside code ) 
-* writing the code
-  1. check input validity (throw exception or return directly)
-  2. use // comments to outline the next block of code
-    * Talk out the comments aloud
-    * Writing part could be finished after writing the code. Leave a placeholder // temporarily 
-* after writing the code
-  1. check the code by myself
-     1. review the entire code, check whether there are unused variables, dead while loops, formatting issues, substring boundaries (start index, inclusive; end index, exclusive) , ...
-     2. review the problem description, check whether there are unhandled problem assumptions 
-     3. use test cases to walk through logical branches of the code
-  2. talk about sections which could be refactored/improved, but was done in a certain way in an interview setting
-  3. tell interviewer I have finished the problem
-
-
-### input-specification <a id="input-specification"></a>
-* array
-	* Is array sorted
-	* Given two arrays, which one's size is bigger
-	* Whether could modify entries inside array
-* linkedList
-	* doubly or singly linkedlist
-* search related problems
-    * return boolean or specific result
-	* whether duplicates exist inside array
-* hashmap
-	* histogram-related problem, character set	
-* String parser related problems
-    * whether the string contains space
-    * how are tokens separated, using comma, slash or something else
-* Binary search tree
-    * whether there are duplicated values. If yes, how are they stored (left <= middle < right)
 
 ### smells for refactoring and optimization <a id="bad-smells"></a>
 * code length > 100
