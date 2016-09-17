@@ -3,6 +3,9 @@ package stack;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.util.Stack;
+import java.util.StringTokenizer;
+
 import org.junit.Test;
 
 /*
@@ -37,7 +40,6 @@ Example 3:
 "9,#,#,1"
 Return false
  * */
-// TO_HURRY
 public class VerifyPreorderSerializationOfBinaryTreeIterative 
 {
 	@Test
@@ -46,11 +48,32 @@ public class VerifyPreorderSerializationOfBinaryTreeIterative
 		assertTrue( isValidSerialization( "9,3,#,#,#" ) );
 
 		assertTrue( isValidSerialization( "9,3,4,#,#,1,#,#,2,#,6,#,#" ) );
-		assertFalse( isValidSerialization("1, #") );
-		assertFalse( isValidSerialization("9, #, #, 1") );		
+		assertFalse( isValidSerialization( "1,#" ) );
+		assertFalse( isValidSerialization( "9,#,#,1" ) );		
+		
 	}
 	
 	public boolean isValidSerialization( String preorder )
     {
+		if ( preorder == null ) 
+		{
+			throw new IllegalArgumentException("");
+		}
+		
+		String[] nodes = preorder.split( "," );
+		Stack<String> preorderStack = new Stack<>(); 
+		for ( int i = 0; i < nodes.length; i++ )
+		{
+			while ( preorderStack.size() > 1
+					&& nodes[i].equals( "#" ) 
+					&& preorderStack.peek().equals( "#" ) )
+			{
+				preorderStack.pop();
+				preorderStack.pop();
+			}
+			preorderStack.push( nodes[i] );
+		}
+		return preorderStack.size() == 1 
+				&& preorderStack.peek().equals( "#" );
     }
 }
