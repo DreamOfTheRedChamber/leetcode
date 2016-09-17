@@ -3,8 +3,8 @@ package stack;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import java.util.Stack;
-import java.util.StringTokenizer;
+import java.util.LinkedList;
+import java.util.List;
 
 import org.junit.Test;
 
@@ -51,6 +51,7 @@ public class VerifyPreorderSerializationOfBinaryTreeIterative
 		assertFalse( isValidSerialization( "1,#" ) );
 		assertFalse( isValidSerialization( "9,#,#,1" ) );		
 		
+		assertFalse( isValidSerialization( "1,#,#,#,#" ) );
 	}
 	
 	public boolean isValidSerialization( String preorder )
@@ -61,19 +62,24 @@ public class VerifyPreorderSerializationOfBinaryTreeIterative
 		}
 		
 		String[] nodes = preorder.split( "," );
-		Stack<String> preorderStack = new Stack<>(); 
+		List<String> preorderStack = new LinkedList<>(); 
 		for ( int i = 0; i < nodes.length; i++ )
 		{
-			while ( preorderStack.size() > 1
-					&& nodes[i].equals( "#" ) 
-					&& preorderStack.peek().equals( "#" ) )
+			preorderStack.add( nodes[i] );
+	
+			while ( preorderStack.size() >= 3
+					&& preorderStack.get( preorderStack.size() - 1 ).equals( "#" ) 
+					&& preorderStack.get( preorderStack.size() - 2 ).equals( "#" ) 
+					&& !preorderStack.get( preorderStack.size() - 3 ).equals( "#" ) ) 
 			{
-				preorderStack.pop();
-				preorderStack.pop();
+				preorderStack.remove( preorderStack.size() - 1);
+				preorderStack.remove( preorderStack.size() - 1);
+				preorderStack.remove( preorderStack.size() - 1);
+
+				preorderStack.add( "#" );
 			}
-			preorderStack.push( nodes[i] );
 		}
 		return preorderStack.size() == 1 
-				&& preorderStack.peek().equals( "#" );
+				&& preorderStack.get( 0 ).equals( "#" );
     }
 }
