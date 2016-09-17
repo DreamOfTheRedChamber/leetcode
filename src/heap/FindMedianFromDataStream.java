@@ -1,67 +1,104 @@
 package heap;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.PriorityQueue;
-// TO_TEST
+
+import org.junit.Test;
+
 public class FindMedianFromDataStream 
 {
 	// larger half
-	private PriorityQueue<Integer> minQueue = new PriorityQueue<>( ( o1, o2 ) -> ( o1 - o2 ) );
+	private PriorityQueue<Integer> largerHalf = new PriorityQueue<>( ( o1, o2 ) -> ( o1 - o2 ) );
 	// smaller half
-	private PriorityQueue<Integer> maxQueue = new PriorityQueue<>( ( o1, o2 ) -> ( o2 - o1 ) );
+	private PriorityQueue<Integer> smallerHalf = new PriorityQueue<>( ( o1, o2 ) -> ( o2 - o1 ) );
 	
     // Adds a number into the data structure.
     public void addNum( int num )
     {
-    	if ( minQueue.size() == 0 )
+    	if ( largerHalf.size() == 0 )
     	{
-    		// TODO: bug here simplify logic
-    		minQueue.add( num );
+    		largerHalf.add( num );
     	}
-    	else if ( maxQueue.size( ) == 0 )
+    	else if ( smallerHalf.size() == 0 )
     	{
-    		maxQueue.add( num );
-    	}
-    	else if ( minQueue.size() == maxQueue.size() + 1 )
-    	{
-    		if ( minQueue.peek( ) > num )
+    		if ( num >= largerHalf.peek() )
     		{
-    			maxQueue.add( minQueue.remove( ) );
-    			minQueue.add( num );
+    			smallerHalf.add( largerHalf.remove() );
+    			largerHalf.add( num );
     		}
     		else
     		{
-    			maxQueue.add( num );
+    			smallerHalf.add( num );
     		}
     	}
-    	else if ( minQueue.size() == maxQueue.size() )
+    	else if ( smallerHalf.size() == largerHalf.size() )
     	{
-    		if ( maxQueue.peek() < num )
+    		if ( num >= smallerHalf.peek() )
     		{
-    			minQueue.add( maxQueue.remove( ) );
-    			maxQueue.add( num );
+    			largerHalf.add( num );
     		}
     		else
     		{
-    			minQueue.add( num );
+    			largerHalf.add( smallerHalf.remove() );
+    			smallerHalf.add( num );
+    		}
+    	}
+    	else if ( smallerHalf.size() + 1 == largerHalf.size() )
+    	{
+    		if ( num >= largerHalf.peek() )
+    		{
+    			smallerHalf.add( largerHalf.remove() );
+    			largerHalf.add( num );
+    		}
+    		else
+    		{
+    			smallerHalf.add( num );
     		}
     	}
     	else
     	{
-    		throw new IllegalStateException();
+    		throw new IllegalArgumentException("");
     	}
-    	
     }
 
     // Returns the median of current data stream
     public double findMedian() 
     {
-        if ( minQueue.size() == maxQueue.size() )
-        {
-        	return ( ( double ) minQueue.peek( ) + maxQueue.peek( ) ) / 2;
-        }
-        else
-        {
-        	return ( double ) minQueue.peek( );
-        }
+    	if ( largerHalf.size() == 0 )
+    	{
+    		return 0;
+    	}
+    	
+    	if ( smallerHalf.size() == largerHalf.size() )
+    	{
+    		return ( ( double ) smallerHalf.peek() + largerHalf.peek() ) / 2;
+    	}
+    	else
+    	{
+    		return ( double ) largerHalf.peek();
+    	}
+    }
+    
+    private static final double DELTA = 1e-15;
+
+    @Test
+    public void test()
+    {
+    	FindMedianFromDataStream obj = new FindMedianFromDataStream();
+    	obj.addNum( 3 );
+    	assertEquals( 3, obj.findMedian(), DELTA );
+    	obj.addNum( 8 );
+    	assertEquals( 5.5, obj.findMedian(), DELTA );
+    	obj.addNum( 4 );
+    	assertEquals( 4, obj.findMedian(), DELTA );
+    	obj.addNum( 5 );
+    	assertEquals( 4.5, obj.findMedian(), DELTA );
+    	obj.addNum( 7 );
+    	assertEquals( 5, obj.findMedian(), DELTA );
+    	obj.addNum( 6 );
+    	assertEquals( 5.5, obj.findMedian(), DELTA );
+    	obj.addNum( 2 );
+    	assertEquals( 5, obj.findMedian(), DELTA );
     }
 }
