@@ -1,6 +1,8 @@
 package tree;
 
 // TO_IMME
-public class CompleteTree {
+// http://www.jiuzhang.com/solutions/complete-binary-tree/     
+// complete tree/full tree
 
+public class CompleteTree {
 }
