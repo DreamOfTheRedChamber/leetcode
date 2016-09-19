@@ -40,6 +40,7 @@ public class BasicCalculator
     	{
     		throw new IllegalArgumentException("");
     	}
+    	// assertions on validity
     	
     	Stack<Integer> operandStack = new Stack<>();
     	Stack<Character> operatorStack = new Stack<>();
@@ -50,78 +51,78 @@ public class BasicCalculator
     		{
     			currPos++;
     		}
-    		else if ( s.charAt( currPos ) == '(' )
-    		{
-    			operatorStack.push( s.charAt( currPos ) );
-    			currPos++;
-    		}
-    		else if ( s.charAt( currPos ) == ')' )
-    		{
-    			if ( operatorStack.peek() != '(' )
-    			{
-    				int operand2 = operandStack.pop( );
-    				int operand1 = operandStack.pop( );
-    				char operator = operatorStack.pop( );
-    				operandStack.push( compute( operand1, operand2, operator ) );    				
-    			}
-    			operatorStack.pop( );
-    			currPos++;
-    		}
+    		// pop from stack and calculate when dealing with +, -, )
     		else if ( s.charAt( currPos ) == '+' 
-    				|| s.charAt( currPos ) == '-' )
+    				|| s.charAt( currPos ) == '-' 
+    				|| s.charAt(currPos) == ')' )    			
     		{
     			if ( !operatorStack.isEmpty( )
     					&& operatorStack.peek( ) != '(' )
     			{
-    				int operand2 = operandStack.pop( );
-    				int operand1 = operandStack.pop( );
-    				char operator = operatorStack.pop( );
-    				operandStack.push( compute( operand1, operand2, operator ) );
+    	    		calculate( operandStack, operatorStack );
     			}
-    			operatorStack.push( s.charAt( currPos ) );
+    			if ( s.charAt( currPos ) == ')' )
+    			{
+        			operatorStack.pop( );
+    				
+    			}
+    			else
+    			{
+    				operatorStack.push( s.charAt( currPos ) );
+    			}
     			currPos++;
     		}
+    		// push into stack when dealing with (, num
     		else
     		{
-    			int value = 0;
-    			while ( currPos < s.length( ) 
-    					&& s.charAt( currPos ) >= '0'
-    					&& s.charAt( currPos ) <= '9' )
+    			if ( s.charAt( currPos ) == '(' )
     			{
-    				value = value * 10 + s.charAt( currPos ) - '0';
-    				currPos++;
+        			operatorStack.push( s.charAt( currPos ) );
+        			currPos++;
     			}
-    			operandStack.push( value );
+    			else
+    			{
+	    			int value = 0;
+	    			while ( currPos < s.length( ) 
+	    					&& s.charAt( currPos ) >= '0'
+	    					&& s.charAt( currPos ) <= '9' )
+	    			{
+	    				value = value * 10 + s.charAt( currPos ) - '0';
+	    				currPos++;
+	    			}
+	    			operandStack.push( value );
+    			}
     		}
     	}
     	
     	while ( !operatorStack.isEmpty( ) )
     	{
-    		int operand2 = operandStack.pop( );
-    		int operand1 = operandStack.pop( );
-    		char operator = operatorStack.pop( );
-    		operandStack.push( compute( operand1, operand2, operator) );
+    		calculate( operandStack, operatorStack );
     	}
     	return operandStack.pop();    	
     }
     
-    private int compute( int operand1, int operand2, char operator )
+    private void calculate( Stack<Integer> operandStack, Stack<Character> operatorStack )
     {
+		int operand2 = operandStack.pop( );
+		int operand1 = operandStack.pop( );
+		char operator = operatorStack.pop( );
+
     	if ( operator == '+' )
     	{
-    		return operand1 + operand2;
+    		operandStack.push( operand1 + operand2 );
     	}
     	else if ( operator == '-' )
     	{
-    		return operand1 - operand2;
+    		operandStack.push( operand1 - operand2 );
     	}
     	else if ( operator == '*' )
     	{
-    		return operand1 * operand2;
+    		operandStack.push( operand1 * operand2 );
     	}
     	else
     	{
-    		return operand1 / operand2;
+    		operandStack.push( operand1 / operand2 );
     	}
     }
 }
