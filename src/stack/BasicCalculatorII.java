@@ -24,9 +24,12 @@ public class BasicCalculatorII
 	@Test
 	public void test()
 	{
-		assertEquals(7, calculate("3 + 2*2") );
-		assertEquals(1, calculate("3/2") );
-		assertEquals(5, calculate("3+5/2") );
+		assertEquals( 7, calculate("3 + 2*2") );
+		assertEquals( 1, calculate("3/2") );
+		assertEquals( 5, calculate("3+5/2") );
+		assertEquals( 5, calculate("100/10/2") );
+		assertEquals( 2, calculate("10000000/1/2/3/4/5/6/7/8/9/10") );
+		assertEquals( -24, calculate("1*2-3/4+5*6-7*8+9/10"));
 	}
 	
     public int calculate( String s )
@@ -61,6 +64,11 @@ public class BasicCalculatorII
     		else if ( s.charAt( currPos ) == '*'
     				|| s.charAt( currPos ) == '/' )
     		{
+    			while ( !operatorStack.isEmpty() 
+    					&& ( operatorStack.peek() == '*' || operatorStack.peek() == '/') )
+    			{
+    	    		calculate( operandStack, operatorStack );    				
+    			}
     			operatorStack.push( s.charAt( currPos ) );
     			currPos++;
     		}
@@ -106,6 +114,10 @@ public class BasicCalculatorII
     	}
     	else
     	{
+    		if ( operand2 == 0 )
+    		{
+    			
+    		}
     		operandStack.push( operand1 / operand2 );
     	}
     }
