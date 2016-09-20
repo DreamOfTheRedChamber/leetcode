@@ -54,7 +54,7 @@ public class BasicCalculatorII
     		else if ( s.charAt( currPos ) == '+' 
     				|| s.charAt( currPos ) == '-' )    			
     		{
-    			if ( !operatorStack.isEmpty( ) )
+    			while ( !operatorStack.isEmpty( ) )
     			{
     	    		calculate( operandStack, operatorStack );
     			}    			
@@ -114,10 +114,6 @@ public class BasicCalculatorII
     	}
     	else
     	{
-    		if ( operand2 == 0 )
-    		{
-    			
-    		}
     		operandStack.push( operand1 / operand2 );
     	}
     }
