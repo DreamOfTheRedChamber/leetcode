@@ -11,7 +11,7 @@
 	* [sort](#sort)
 	* [binary-search](#binary-search)
 	* [stack](#stack)
-	* [queue](#queue)
+	* [queue/priorityqueue](#queue)
 	* [hashtable](#hashtable)
 	* [recursive functions](#recursive)
 	* [graph](#graph)
@@ -91,7 +91,8 @@
     * return boolean or specific result
 	* whether duplicates exist inside array
 * hashmap
-	* histogram-related problem, character set	
+	* histogram-related problem, character set
+	* whether hashmap key should be case-sensitive	
 * String parser related problems
     * whether the string contains space
     * how are tokens separated, using comma, slash or something else
@@ -367,7 +368,7 @@ public int binarySearchRecursive( int[] array, int target, int start, int end )
     }
 ```
 
-#### queue <a id="queue"></a>
+#### queue/priorityqueue <a id="queue"></a>
 * Lambda expression inside PriorityQueue elements comparison
 ```java
 PriorityQueue<NumAndFreq> mostFreqPrioQueue = new PriorityQueue<>( ( o1, o2 ) -> ( o2.freq - o1.freq ) ); // decreasing order
@@ -390,7 +391,18 @@ while ( !bfsQueue.isEmpty() )
 }
 ``` 
 
+* treemap supports all operations by priorityqueue itself. In addition, it supports lookup by key.
+
 #### hashtable <a id="hashtable"></a>
+* frequency count with hashmap
+```java
+map.put( key, 1 + map.getOrDefault( key, 0 ) );
+```
+* put if not exist
+```java
+map.putIfAbsent( key, new ArrayList<>() );
+```
+
 #### recursive functions <a id="recursive"></a>
 
 * Result wrapper class or customized classes
@@ -495,7 +507,6 @@ public TreeNode changePos( Position position, String input )
 * applicable when optimize for a list of words as dictionary, avoid recomputation for the same string prefix ( e.g. word search II, airbnb k distance question )
 * iterative implementation much more concise than recursive implementation.
 ```java
-
 class TrieNode 
 {
     private final static int CHARSET_SIZE = 26;
