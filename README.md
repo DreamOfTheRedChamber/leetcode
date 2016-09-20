@@ -15,6 +15,7 @@
 	* [hashtable](#hashtable)
 	* [recursive functions](#recursive)
 	* [graph](#graph)
+	* [Trie](#trie)
 	* [dynamic-programming](#dynamic-programming)
 * [error-prone cases](#error-prone)
 * [smells for refactoring and optimization](#bad-smells)
@@ -22,6 +23,16 @@
 * [leetcode sins](#leetcode-sins)
 
 ### Strategy <a id="strategy"></a>
+* Principles
+  * Think as if you are making product
+    * identify problems
+    * make tradeoffs
+    * attention to details
+    * be passionate
+  * Think as if you are talking to your teammates
+    * be a logical person, optimize from brute force to best
+    * speak out your thoughts for discussion when stuck
+    * be humble, always quick to take ideas from others
 * for easy problems ( could complete 100% )
   * fast, because might have follow-up questions
   * focus more on communication / coding style / corner cases / exception handling
@@ -480,6 +491,105 @@ public TreeNode changePos( Position position, String input )
     }
 ```
 
+#### Trie <a id="trie"></a>
+* applicable when optimize for a list of words as dictionary, avoid recomputation for the same string prefix ( e.g. word search II, airbnb k distance question )
+* iterative implementation much more concise than recursive implementation.
+```java
+
+class TrieNode 
+{
+    private final static int CHARSET_SIZE = 26;
+    public TrieNode[] children;
+    public boolean isLeaf;
+    public char val;
+    
+    // Initialize your data structure here.
+    public TrieNode() 
+    {
+        children = new TrieNode[CHARSET_SIZE];
+    }
+    
+    public TrieNode( char val )
+    {
+        this();
+        this.val = val;
+    }
+}
+
+public class TrieIterative
+{
+    private TrieNode root;
+
+    public TrieIterative() 
+    {
+        root = new TrieNode();
+    }
+
+    // Inserts a word into the trie.
+    public void insert(String word) 
+    {
+        TrieNode currNode = root;
+        for ( int i = 0; i < word.length(); i++ )
+        {
+            int nextNodePos = (int)( word.charAt( i ) - 'a' );
+            if ( currNode.children[nextNodePos] == null )
+            {
+                TrieNode node = new TrieNode( word.charAt( i ) );
+                currNode.children[nextNodePos] = node;
+            }
+            currNode = currNode.children[nextNodePos];
+
+            if ( i == word.length() - 1 )
+            {
+                currNode.isLeaf = true;
+            }
+        }
+    }
+    
+    // Returns if the word is in the trie.
+    public boolean search( String word )
+    {
+        TrieNode currNode = root;
+        for ( int i = 0; i < word.length(); i++ )
+        {
+            int nextNodePos = (int)( word.charAt( i ) - 'a' );
+
+            if ( currNode.children[nextNodePos] == null )
+            {
+                return false;
+            }
+            // prefix exists, but not word
+            if ( i == word.length() - 1 
+                && !currNode.children[nextNodePos].isLeaf )
+            {
+                return false;
+            }                
+
+            currNode = currNode.children[nextNodePos];
+        }
+        return true;
+    }
+
+    // Returns if there is any word in the trie
+    // that starts with the given prefix.
+    public boolean startsWith(String prefix) 
+    {
+        TrieNode currNode = root;
+        for ( int i = 0; i < prefix.length(); i++ )
+        {
+            int nextNodePos = (int)( prefix.charAt( i ) - 'a' );
+
+            if ( currNode.children[nextNodePos] == null )
+            {
+                return false;
+            }
+
+            currNode = currNode.children[nextNodePos];
+        }
+        return true;        
+    }    
+}
+```
 
 #### dynamic-programming <a id="dynamic-programming"></a>
 * when allocate dynamic programming table size, allocate additional one row/col for generalization
