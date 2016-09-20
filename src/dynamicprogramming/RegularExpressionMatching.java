@@ -78,20 +78,39 @@ public class RegularExpressionMatching
     			}
     			else if ( p.charAt( j - 1 ) == '*' && p.charAt( j - 2 ) != '.' )
     			{
-    				if ( isSubstringMatch[i][j-2] 
-    						|| isSubstringMatch[i][j-1])
+    				// 0 match for *
+    				if ( isSubstringMatch[i][j-2] )
     				{
     					isSubstringMatch[i][j] = true;
     					continue;
     				}
     				
-    				for ( int k = i; k >= 1; k-- )
+    				// 1 match for *
+    				if ( isSubstringMatch[i][j-1] )
     				{
-    					if ( s.charAt( k - 1 ) == p.charAt( j - 2 ) 
-    							&& isSubstringMatch[k-1][j-1] )
+    					isSubstringMatch[i][j] = true;
+    					continue;
+    				}
+// equivalent with the following, but more concise
+//    				if ( i < 2 && isSubstringMatch[i-1][j-2] )
+//    				{
+//    					isSubstringMatch[i][j] = true;
+//    				}
+//    				if ( i >= 2 && isSubstringMatch[i-1][j-2] && s.charAt( i - 1 ) == p.charAt( j - 2 ) )
+//        			{
+//    					isSubstringMatch[i][j] = true;
+//    					continue;
+//    				}
+    					
+    				// multi match for *
+    				for ( int k = 1; i - 1 - k >= 0; k++ )
+    				{
+    					if ( isSubstringMatch[i-1-k][j-2] 
+    							&& s.charAt( i - 1 - k ) == s.charAt( i - k )
+    							&& s.charAt( i - 1 - k ) == p.charAt( j - 2 ) )
     					{
     						isSubstringMatch[i][j] = true;
-    						break;
+    						continue;
     					}
     				}
     			}
