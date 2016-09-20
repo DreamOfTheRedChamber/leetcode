@@ -125,7 +125,7 @@ value = value * 10 +  s.charAt( currPos ) - '0' ;
 * ListIterator benefits:
   * iterating bidirectional
   * add/remove elements while iterating
-  
+* Iterators
 #### math <a id="math"></a>
 * divide two integers ( useful names: dividend/numerator, divisor/denominator, quotient, residue )
 	* handle boundary cases ( 0, Integer.MIN_VALUE )
@@ -412,7 +412,7 @@ map.put( key, 1 + map.getOrDefault( key, 0 ) );
 ```java
 map.putIfAbsent( key, new ArrayList<>() );
 ```
-
+* Use double as hashmap keys
 #### recursive functions <a id="recursive"></a>
 
 * Result wrapper class or customized classes
