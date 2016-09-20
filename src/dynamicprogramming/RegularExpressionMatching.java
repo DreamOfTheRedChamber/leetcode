@@ -83,7 +83,7 @@ public class RegularExpressionMatching
     				
     				if ( p.charAt( j - 2 ) == '.' )
     				{
-    					for ( int k = i; k >= 0; k-- )
+    					for ( int k = i; k >= 1; k-- )
     					{
     						if ( isSubstringMatch[k][j-1] )
     						{
@@ -93,12 +93,12 @@ public class RegularExpressionMatching
     				}
     				else
     				{
-    					for ( int k = i; k >= 0; k-- )
+    					for ( int k = i; k >= 1; k-- )
     					{
     						if ( s.charAt( k - 1 ) == p.charAt( j - 2 ) 
     								&& isSubstringMatch[k][j-1] )
     						{
-    							isSubstringMatch[k][j] = true;
+    							isSubstringMatch[i][j] = true;
     							break;
     						}
     					}

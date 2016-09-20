@@ -1,5 +1,6 @@
 # loop through leetcode one more time, ; )
 * [strategy](#strategy)
+* [practice patterns](#practice-pattern)
 * [communication patterns](#communication-pattern)
 * [input specification](#input-specification)
 * [summarized code snippets](#snippets)
@@ -45,6 +46,12 @@
 * for tricky/hard problems
   * summarize an easy-to-remember pattern for each popular hard problem (e.g. regular expression matching, iterative post-order traversal)
   * talk aloud so when stuck, interviewer could help
+
+### practice patterns <a id="practice-pattern"></a>
+* Use Eclipse task tags ( TO_START, TO_HURRY, TO_TEST ) to manage algorithm question status and prioritize important tasks
+* Use git commit number per day as feedback for progress
+* Use git commit message as a place to learn from mistakes and summarize lessons
+* Never use debugger before thinking it through / walking it through by hands
   
 ### communication patterns <a id="communication-pattern"></a>
 * Before writing the code
@@ -73,7 +80,7 @@
     * Writing part could be finished after writing the code. Leave a placeholder // temporarily 
 * after writing the code
   1. check the code by myself
-     1. review the entire code, check whether there are unused variables, dead while loops, formatting issues, substring boundaries (start index, inclusive; end index, exclusive) , ...
+     1. review the entire code, check whether there are unused variables, dead while loops, formatting issues, boundaries index overflow/underflow , ...
      2. review the problem description, check whether there are unhandled problem assumptions 
      3. use small test cases to test different logical branches of the code
   2. talk about sections which could be refactored/improved, but was done in a certain way in an interview setting
