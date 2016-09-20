@@ -79,7 +79,7 @@ public class WildcardMatching
     			}
     			else if ( p.charAt( j - 1 ) == '*' )
     			{
-    				for ( int k = 0; k < i; k++ )
+    				for ( int k = 0; k <= i; k++ )
     				{
     					if ( isSubstringMatch[k][j-1] )
     					{
