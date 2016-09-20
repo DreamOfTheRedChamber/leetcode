@@ -152,7 +152,7 @@ System.out.println( Arrays.deepToString( array2D ));
 * Generate coordinate hash for a position (x,y) by x * width + y;
 
 #### string <a id="string"></a>
-* StringTokenizer ( like an iterator, has built-in hasNext() and next() func)
+* StringTokenizer ( like an iterator, has built-in hasNext() and next() func ). Could be used instead of a global position pointer inside recursive function (e.g. tree serialization and deserialization)
 ```java
 String str = "This is String , split by StringTokenizer, created by mkyong";
 StringTokenizer st = new StringTokenizer( str, "," );
@@ -482,7 +482,7 @@ public TreeNode changePos( Position position, String input )
 
 
 #### dynamic-programming <a id="dynamic-programming"></a>
-
+* when allocate dynamic programming table size, allocate additional one row/col for generalization
 
 ### error-prone cases <a id="error-prone"></a>
 * detect cycle in undirected graph

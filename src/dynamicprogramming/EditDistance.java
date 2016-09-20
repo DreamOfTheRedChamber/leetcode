@@ -1,5 +1,9 @@
 package dynamicprogramming;
 
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
+
 /**
 Given two words word1 and word2, find the minimum number of steps required to convert word1 to word2. (each operation is counted as 1 step.)
 
@@ -12,6 +16,17 @@ c) Replace a character
 
 public class EditDistance
 {
+	@Test
+	public void test()
+	{
+		assertEquals( 2, minDistance( "ab", "bc" ) );
+		assertEquals( 3, minDistance( "mart", "karma" ) );
+		assertEquals( 1, minDistance( "geek", "gesek" ) );
+		assertEquals( 3, minDistance( "sunday", "saturday" ) );
+
+		assertEquals( 27, minDistance( "pneumonoultramicroscopicsilicovolcanoconiosis", "ultramicroscopically" ));
+	}
+	
     public int minDistance( String word1, String word2 )
     {
     	if ( word1 == null 
@@ -28,32 +43,30 @@ public class EditDistance
     		return word1.length();
     	}
     	
-    	int[][] distance = new int[word1.length()][word2.length()];
-    	distance[0][0] = word1.charAt( 0 ) == word2.charAt( 0 ) ? 0 : 1;
-    	for ( int i = 1; i < word1.length(); i++ )
+    	int height = word1.length() + 1;
+    	int width = word2.length() + 1;
+    	int[][] distance = new int[height][width];
+    	// init dp table
+    	for ( int i = 1; i < height; i++ )
     	{
-    		distance[i][0] = distance[i-1][0] + 1;
+    		distance[i][0] = i;
     	}
-    	for ( int j = 1; j < word2.length(); j++ )
+    	for ( int j = 1; j < width; j++ )
     	{
-    		distance[0][j] = distance[0][j-1] + 1;
+    		distance[0][j] = j;
     	}
     	
-    	for ( int i = 1; i < word1.length(); i++ )
+    	// fill dp table
+    	for ( int i = 1; i < height; i++ )
     	{
-    		for ( int j = 1; j < word2.length(); j++ )
+    		for ( int j = 1; j < width; j++ )
     		{
-    			if ( word1.charAt( i ) == word2.charAt( j ) )
-    			{
-    				distance[i][j] = Math.min( distance[i-1][j-1], Math.min( distance[i-1][j], distance[i][j-1] ) + 1 );
-    			}
-    			else
-    			{
-    				distance[i][j] = Math.min( distance[i][j-1], distance[i-1][j] ) + 1;
-    			}
+    			distance[i][j] = Math.min( Math.min( distance[i-1][j], distance[i][j-1]) + 1, 
+    											distance[i-1][j-1] + ( word1.charAt( i - 1 ) == word2.charAt( j - 1 ) ? 0 : 1));
     		}
     	}
     	
-    	return distance[word1.length() - 1][word2.length() - 1];
+    	return distance[height-1][width-1];
     }
+
 }
