@@ -1,7 +1,13 @@
 package interview.airbnb;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * 给了以下一些输入数据，要求将以下行分页显示，每页12行，其中每行已经按score排好序，分页显示的时候如果有相同host id的行，则将后面同host id的行移到下一页。
@@ -75,8 +81,70 @@ import java.util.Map;
 
 public class RearrangePages
 {
+	private final static int NUM_PER_PAGE = 12;
+	
 	public Map<Integer, List<String>> arrangeRentalSources( String[] sources )
-	{
+	{		
+		if ( sources.length <= 1 )
+		{
+			return new HashMap<>();
+		}
 		
+		// calc num of pages
+		int totalNumRentals = sources.length - 1;
+		int numPages = totalNumRentals / NUM_PER_PAGE; 
+
+		Map<Integer, List<String>> outputPages = new HashMap<>();
+		TreeSet<Integer> availableRental = new TreeSet<>();		
+		for ( int i = 1; i < sources.length; i++ )
+		{
+			availableRental.add( i );
+		}
+		
+		for ( int i = 0; i < numPages; i++ )
+		{
+			List<String> onePage = new ArrayList<>();
+			Set<String> onePageSet = new HashSet<>();
+			
+			// take rentals with unique hostid from unusedRentals
+			Iterator<Integer> iterator = availableRental.iterator( );
+			while ( iterator.hasNext( ) 
+					&& onePage.size( ) < NUM_PER_PAGE )
+			{
+				int sourceId = iterator.next( );
+				String hostId =  sources[sourceId].split( "," )[0];
+				if ( !onePageSet.contains( hostId ) )
+				{
+					onePage.add( sources[sourceId] );
+					onePageSet.add( hostId );
+					iterator.remove( );
+				}
+			}
+			
+			// fill in with highest score rentals if cannot find more
+			iterator = availableRental.iterator( );
+			while ( iterator.hasNext( ) && onePage.size( ) < NUM_PER_PAGE )
+			{
+				int sourceId = iterator.next( );
+				onePage.add( sources[sourceId] );
+				iterator.remove( );
+			}
+			
+			// add to result
+			outputPages.put( outputPages.size( ) + 1, onePage );
+		}
+		
+		// if there are redundant results, add to the last map
+		if ( availableRental.size() != 0 )
+		{
+			List<String> onePage = new ArrayList<>();
+			for ( Integer sourceId : availableRental )
+			{
+				onePage.add( sources[sourceId] );
+			}
+			outputPages.put( outputPages.size( ) + 1, onePage );
+		}
+		
+		return outputPages;
 	}
 }
