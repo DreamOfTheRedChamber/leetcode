@@ -1,5 +1,6 @@
 package dynamicprogramming;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
@@ -36,6 +37,8 @@ public class RegularExpressionMatching
 		assertTrue( isMatch( "ccaab", "c*a*b" ) );
 		assertTrue( isMatch( "", ".*" ) );
 		assertTrue( isMatch( "ab", ".*" ) );
+		
+		assertFalse( isMatch( "aaba", "ab*a*c*a" ) );
 	}
 	
     public boolean isMatch( String s, String p )
@@ -73,34 +76,32 @@ public class RegularExpressionMatching
     			{
     				isSubstringMatch[i][j] = isSubstringMatch[i-1][j-1];
     			}
-    			else if ( p.charAt( j - 1 ) == '*' )
+    			else if ( p.charAt( j - 1 ) == '*' && p.charAt( j - 2 ) != '.' )
     			{
-    				if ( isSubstringMatch[i][j-2] )
+    				if ( isSubstringMatch[i][j-2] 
+    						|| isSubstringMatch[i][j-1])
     				{
     					isSubstringMatch[i][j] = true;
     					continue;
     				}
     				
-    				if ( p.charAt( j - 2 ) == '.' )
+    				for ( int k = i; k >= 1; k-- )
     				{
-    					for ( int k = i; k >= 1; k-- )
+    					if ( s.charAt( k - 1 ) == p.charAt( j - 2 ) 
+    							&& isSubstringMatch[k-1][j-1] )
     					{
-    						if ( isSubstringMatch[k][j-1] )
-    						{
-    							isSubstringMatch[i][j] = true;
-    						}
+    						isSubstringMatch[i][j] = true;
+    						break;
     					}
     				}
-    				else
+    			}
+    			else if ( p.charAt( j - 1 ) == '*' && p.charAt( j - 2 ) == '.' )
+    			{
+    				for ( int k = i; k >= 1; k-- )
     				{
-    					for ( int k = i; k >= 1; k-- )
+    					if ( isSubstringMatch[k][j-1] )
     					{
-    						if ( s.charAt( k - 1 ) == p.charAt( j - 2 ) 
-    								&& isSubstringMatch[k][j-1] )
-    						{
-    							isSubstringMatch[i][j] = true;
-    							break;
-    						}
+    						isSubstringMatch[i][j] = true;
     					}
     				}
     			}
