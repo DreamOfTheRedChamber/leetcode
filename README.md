@@ -15,6 +15,9 @@
 	* [queue/priorityqueue](#queue)
 	* [hashtable](#hashtable)
 	* [recursive functions](#recursive)
+	* [enumeration](#enumeration)
+	* [depth first search](#dfs)
+	* [breath first search](#bfs)
 	* [graph](#graph)
 	* [Trie](#trie)
 	* [dynamic-programming](#dynamic-programming)
@@ -457,6 +460,14 @@ public TreeNode changePos( int[] position, String input ) // Solution1: declare 
 public TreeNode changePos( List<Integer> position, String input ) // Solution2: Use an array/collection/customized type to wrap the primitive number
 public TreeNode changePos( Position position, String input )
 ```	
+
+#### enumeration <a id="enumeration"></a>
+* remove duplicates inside result
+
+#### depth first search <a id="dfs"></a>
+
+#### breath first search < id="bfs"></a>
+* Grid-based problem concise snippets
 
 #### graph <a id="graph"></a>
 * Detect cycles inside directed graphs with dfs + visited set + discovered set.
