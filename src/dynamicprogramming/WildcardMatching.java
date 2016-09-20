@@ -43,6 +43,8 @@ public class WildcardMatching
 		
 		// test ? * 
 		assertTrue( isMatch( "ab", "?*" ) );
+		
+		assertTrue( isMatch( "ho", "**ho" ) );
 	}
 	
     public boolean isMatch( String s, String p )
@@ -65,10 +67,21 @@ public class WildcardMatching
     	int width = p.length() + 1;
     	boolean[][] isSubstringMatch = new boolean[height][width];
     	isSubstringMatch[0][0] = true;
-    	if ( p.charAt( 0 ) == '*' )
+    	
+    	// init dp table
+    	for ( int j = 1; j < width; j++ )
     	{
-    		isSubstringMatch[0][1] = true;
+    		if ( p.charAt( j - 1 ) == '*' )
+    		{
+    			isSubstringMatch[0][j] = true;
+    		}
+    		else
+    		{
+    			break;
+    		}    		
     	}
+    	
+    	// fill in dp table
     	for ( int i = 1; i < height; i++ )
     	{
     		for ( int j = 1; j < width; j++ )
