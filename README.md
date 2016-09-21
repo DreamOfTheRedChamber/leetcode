@@ -2,7 +2,8 @@
 * [strategy](#strategy)
 * [practice patterns](#practice-pattern)
 * [communication patterns](#communication-pattern)
-* [input specification](#input-specification)
+* [questions to confirm about input](#input-specification)
+* [java collections internals](#java-collections)
 * [summarized code snippets](#snippets)
 	* [Java basic apis](#basic-apis)
 	* [math](#math)
@@ -27,8 +28,8 @@
 * [leetcode sins](#leetcode-sins)
 
 ### Strategy <a id="strategy"></a>
-* Principles
-  * Think as if you are making product
+* Think from perspectives of designing products and teamwork
+  * Think as if you are desigining product
     * identify problems
     * make tradeoffs
     * attention to details
@@ -37,24 +38,53 @@
     * be a logical person, optimize from brute force to best
     * speak out your thoughts for discussion when stuck
     * be humble, always quick to take ideas from others
-* for easy problems ( could complete 100% )
-  * fast, because might have follow-up questions
-  * focus more on communication / coding style / corner cases / exception handling
-* for medium problems
-  * try to be bug-free
-  * exhibit good coding habits
-    * write test cases before starting
-    * use comment placeholder to outline code before writing
-    * check code before finishing
-* for tricky/hard problems
-  * summarize an easy-to-remember pattern for each popular hard problem (e.g. regular expression matching, iterative post-order traversal)
-  * talk aloud so when stuck, interviewer could help
+* How to load previously solved problems more quickly into my memory
+  * Use a concrete example to wake up associated memory
+  * Identify problem types and key points for that type of problems. e.g.
+    * For stack type of problems, think about when to push/pop out of stack
+    * For breath first search type of problems, think about starting point
+    * For two-pointer type of problems, think about pointer start position(start/end position), increment/decrement pointer conditions
+    * For binary search type of problems, think about whether to go left/right once mid is determined
+    * For recursion type of problems, think about recursion base(arguments passed in), truning techniques, recursion order(child/parent first), recursion body, need backtracking
+* Progressive enhancement on algorithms and data structures
+  * algorithms
+    * brute force first
+    * trade space for time: e.g. hashmap in two-sum
+    * pre-process data: e.g. sorting
+    * divide into subproblems: e.g. recursion, discuss by different conditions
+    * save time by avoid solving repeated problems: e.g. recursion -> dynamic programming
+  * data structures
+    * support lookup/delete by key: priorityqueue -> treemap
+    * support enqueue/dequeue from both ends: queue -> deque
+    * support insertion order on hashset/hashmap: hashset/hashmap -> linkedhashset/linkedhashmap
+    * support larger character set for histogram problem: array -> map
+  * algorithm time complexity for techniques: 
+    * O(lgn): binary search
+    * O(n): two pointers, use hashmap, partition
+    * O(nlogn): priorityqueue, divide and conquer
+    * O(n^2): dynamic programming
+    * O(2^n): backtracking
+    * O(n!): 
+* Different strategies for different level of problems
+	* for easy problems ( could complete 100% )
+	  * fast, because might have follow-up questions
+	  * focus more on communication / coding style / corner cases / exception handling
+	* for medium problems
+	  * try to be bug-free
+	  * exhibit good coding habits
+	    * write test cases before starting
+	    * use comment placeholder to outline code before writing
+	    * check code before finishing
+	* for tricky/hard problems
+	  * summarize an easy-to-remember pattern for each popular hard problem (e.g. regular expression matching, iterative post-order traversal)
+	  * talk aloud so when stuck, interviewer could help
 
 ### practice patterns <a id="practice-pattern"></a>
-* Use Eclipse task tags ( TO_START, TO_HURRY, TO_TEST ) to manage algorithm question status and prioritize important tasks
-* Use git commit number per day as feedback for progress
-* Use git commit message as a place to learn from mistakes and summarize lessons
-* Never use debugger before thinking it through / walking it through by hands
+* Task planning: Use Eclipse task tags ( TO_START, TO_HURRY, TO_TEST ) to manage algorithm question status and prioritize important tasks
+* Feedbacks: Use git commit number per day as feedback for progress
+* Summarizing lessons: Use git commit message as a place to learn from mistakes and summarize lessons
+* Coding habit - check code after finishing: Use JUnit to write and run test cases locally before going to online judge
+* Coding habit - think about big picture before going to details: Never use debugger before thinking it through / walking it through by hands
   
 ### communication patterns <a id="communication-pattern"></a>
 * Before writing the code
@@ -90,11 +120,12 @@
   3. tell interviewer I have finished the problem
 
 
-### input-specification <a id="input-specification"></a>
+### Questions to confirm about input <a id="input-specification"></a>
 * array
-	* Is array sorted
-	* Given two arrays, which one's size is bigger
-	* Whether could modify entries inside array
+	* is array sorted
+	* whether array entries contains positive/negative entries
+	* given two arrays, which one's size is bigger
+	* whether could modify entries inside array
 * linkedList
 	* doubly or singly linkedlist
 * search related problems
@@ -109,7 +140,14 @@
 * Binary search tree
     * whether there are duplicated values. If yes, how are they stored (left <= middle < right)
 
-
+#### java collections internals <a id="java-collections"></a>
+* deque/stack: linkedlist
+* hashmap: chaining ( array + list )
+  * compute array index based on **public int hashCode()** method
+  * decide list index based on **public boolean equals()** method
+* linkedhashmap: hashtable with a linkedlist
+* treemap: red-black tree
+* priorityqueue: 
 ### code snippets to remember <a id="snippets"></a>
 * convert char to int, does not need explicit conversion
 ```java
@@ -287,95 +325,58 @@ public int binarySearchRecursive( int[] array, int target, int start, int end )
 
 #### stack <a id="stack"></a>
 * When popping elements from stack, always check if the stack is empty. Otherwise, there might be a EmptyStackException()
-* Binary tree inorder traversal
+* Elegant way to implement binary tree preorder/inorder/postorder traversal iteratively
 ```java
-    public List<Integer> inorderTraversal( TreeNode root )
-    {
-    	List<Integer> inorderSeqs = new ArrayList<>();
-    	Stack<TreeNode> inorderStack = new Stack<>();
-    	pushAllNodesOnLeftPath( root, inorderStack );
-    	while ( !inorderStack.isEmpty( ) )
-    	{
-    		TreeNode top = inorderStack.pop( );
-    		inorderSeqs.add( top.val );
-    		if ( top.right != null )
-    		{
-    			pushAllNodesOnLeftPath( top.right, inorderStack );
-    		}
-    	}
-    	return inorderSeqs;
-    }
-	
-    private void pushAllNodesOnLeftPath( TreeNode root, Stack<TreeNode> inorderStack )
-    {
-    	TreeNode currNode = root;
-    	while ( currNode != null )
-    	{
-    		inorderStack.push( currNode );
-    		currNode = currNode.left;
-    	}
-    }
-```
-* Binary tree preorder traversal
-	* There are two classical ways to implement iterative preorder traversal. The first one follows basically the same code structure as iterative inorder traversal. The second one is more concise and has a more recursive like structure.
-```java
-    public List<Integer> preorderTraversal(TreeNode root) {
-     	List<Integer> result = new ArrayList<>();
-    	if ( root == null )
-    	{
-    		return result;
-    	}
-    	
-    	Stack<TreeNode> preorderStack = new Stack<>();
-    	pushAllLeftChildren( root, preorderStack, result );    	
-    	
-    	while ( !preorderStack.isEmpty() )
-    	{
-    		TreeNode top = preorderStack.pop();
-    		if ( top.right != null )
-    		{
-    			pushAllLeftChildren( top.right, preorderStack, result );
-    		}
-    	}   
-    	return result;       
-    }
-    
-    private void pushAllLeftChildren( TreeNode root, Stack<TreeNode> preorderStack, List<Integer> result )
+class Pair
+{
+	TreeNode node;
+	int type; // 0 for first time, 1 for second time
+	public Pair( TreeNode node, int type )
 	{
-		TreeNode currNode = root;
-		while ( currNode != null )
+		this.node = node;
+		this.type = type;
+	}
+}
+
+/** 
+ * @param order  0 preorder; 1 inorder; 2 postorder
+*/
+public void traverse( TreeNode root, int order ) 
+{
+	Stack<Pair> stack = new Stack<>();
+	stack.push( new Pair( root, 0 ) );
+	while ( !stack.isEmpty() )
+	{
+		Pair stackTop = stack.pop();
+		if ( stackTop.node == null )
 		{
-			result.add( currNode.val );
-			preorderStack.push( currNode );
-			currNode = currNode.left;
+			continue;
+		}
+		if ( stackTop.type == 1 )
+		{
+			System.out.println(stackTop.node.value);
+			continue;
+		}
+		switch ( order )
+		{
+			case 0:
+				stack.push( new Pair( stackTop.node.rigth, 0 ) );
+				stack.push( new Pair( stackTop.node.left, 0 ) );
+				stack.push( new Pair( stackTop.node, 1 ) );
+				break;
+			case 1:
+				stack.push( new Pair( stackTop.node.rigth, 0 ) );
+				stack.push( new Pair( stackTop.node.left, 0 ) );
+				stack.push( new Pair( stackTop.node, 1 ) );
+				break;
+			case 2:
+				stack.push( new Pair( stackTop.node.rigth, 0 ) );
+				stack.push( new Pair( stackTop.node.left, 0 ) );
+				stack.push( new Pair( stackTop.node, 1 ) );
+				break;				
 		}
 	}
-	
-	public List<Integer> preorderTraversal(TreeNode root) 
-	{
-     	List<Integer> result = new ArrayList<>();
-    		if ( root == null )
-    		{
-    			return result;
-    		}
-    	
-	    	Stack<TreeNode> preorderBuf = new Stack<>();
-    		preorderBuf.push( root );
-    		while ( !preorderBuf.isEmpty() )
-    		{
-    			TreeNode stackTop = preorderBuf.pop();
-    			result.add( stackTop.val );
-    			if ( stackTop.right != null )
-    			{
-    				preorderBuf.push( stackTop.right );
-    			}
-    			if ( stackTop.left != null )
-    			{
-    				preorderBuf.push( stackTop.left );
-    			}
-    		}
-    		return result;       
-    }
+}
 ```
 
 #### queue/priorityqueue <a id="queue"></a>
