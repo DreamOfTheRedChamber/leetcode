@@ -1,5 +1,6 @@
 package hashtable;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.util.HashSet;
@@ -22,12 +23,13 @@ public class HappyNumber
     	}
     	
     	Set<Integer> appearedNums = new HashSet<>();
-    	appearedNums.add( n );
     	return isHappy( n, appearedNums );
     }
     
     private boolean isHappy( int n, Set<Integer> appearedNums )
     {
+    	appearedNums.add( n );
+
     	int squareSum = 0;
     	while ( n != 0 )
     	{
@@ -45,7 +47,6 @@ public class HappyNumber
     	}
     	else
     	{
-    		appearedNums.add( n );
     		return isHappy( squareSum, appearedNums );
     	}
     }
@@ -53,7 +54,8 @@ public class HappyNumber
     @Test
     public void test()
     {
-//    	assertTrue( isHappy( 1 ) );
-//    	assertTrue( isHappy( 19 ) );
+    	assertTrue( isHappy( 1 ) );
+    	assertTrue( isHappy( 19 ) );
+    	assertFalse( isHappy( 2 ) );
     }
 }

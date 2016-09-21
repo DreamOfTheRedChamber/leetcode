@@ -80,11 +80,13 @@
 	  * talk aloud so when stuck, interviewer could help
 
 ### Practice patterns <a id="practice-pattern"></a>
-* Task planning: Use Eclipse task tags ( TO_START, TO_HURRY, TO_TEST ) to manage algorithm question status and prioritize important tasks
-* Feedbacks: Use git commit number per day as feedback for progress
-* Summarizing lessons: Use git commit message as a place to learn from mistakes and summarize lessons
-* Coding habit - check code after finishing: Use JUnit to write and run test cases locally before going to online judge
-* Coding habit - think about big picture before going to details: Never use debugger before thinking it through / walking it through by hands
+* **Tools - Task planning**: Use Eclipse task tags ( TO_START, TO_HURRY, TO_TEST ) to manage algorithm question status and prioritize important tasks
+* **Feedbacks**: Use git commit number per day as feedback for progress
+* **Summarizing lessons**: Use git commit message as a place to learn from mistakes and summarize lessons
+* **Coding habit** - check code after finishing: Use JUnit to write and run test cases locally before going to online judge
+* **Coding habit** - think about big picture before going to details: Never use debugger before thinking it through / walking it through by hands
+* **Coding habit** - not just satisfied with running code but always pick the most elegant/efficient ways
+* **Coding habit** - not just satisfied with fixing the bug but always think and generalize why the bug occurs
   
 ### Communication patterns <a id="communication-pattern"></a>
 * Before writing the code
