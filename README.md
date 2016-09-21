@@ -140,7 +140,7 @@
 * Binary search tree
     * whether there are duplicated values. If yes, how are they stored (left <= middle < right)
 
-#### java collections internals <a id="java-collections"></a>
+### java collections internals <a id="java-collections"></a>
 * deque/stack: linkedlist
 * hashmap: chaining ( array + list )
   * compute array index based on **public int hashCode()** method
@@ -164,6 +164,7 @@ value = value * 10 +  s.charAt( currPos ) - '0' ;
   * iterating bidirectional
   * add/remove elements while iterating
 * Iterators
+
 #### math <a id="math"></a>
 * divide two integers ( useful names: dividend/numerator, divisor/denominator, quotient, residue )
 	* handle boundary cases ( 0, Integer.MIN_VALUE )
@@ -653,6 +654,7 @@ public class TrieIterative
 ### Java sins <a id="java-sins"></a>
 * linkedhashset could not be iterated reversely
 * hard to return tuple values
+* only pass by values
 
 ### Leetcode sins <a id="leetcode-sins"></a>
 * When problem occurs, too few stack trace
