@@ -79,14 +79,14 @@
 	  * summarize an easy-to-remember pattern for each popular hard problem (e.g. regular expression matching, iterative post-order traversal)
 	  * talk aloud so when stuck, interviewer could help
 
-### practice patterns <a id="practice-pattern"></a>
+### Practice patterns <a id="practice-pattern"></a>
 * Task planning: Use Eclipse task tags ( TO_START, TO_HURRY, TO_TEST ) to manage algorithm question status and prioritize important tasks
 * Feedbacks: Use git commit number per day as feedback for progress
 * Summarizing lessons: Use git commit message as a place to learn from mistakes and summarize lessons
 * Coding habit - check code after finishing: Use JUnit to write and run test cases locally before going to online judge
 * Coding habit - think about big picture before going to details: Never use debugger before thinking it through / walking it through by hands
   
-### communication patterns <a id="communication-pattern"></a>
+### Communication patterns <a id="communication-pattern"></a>
 * Before writing the code
   1. declare interface in a strategic way (talk about different ways of defining it and trade-offs)
   2. clear assumptions about the problem, one type of assumption is about input validity; the other type is about input specifications (refer to "input-specifications" section)
@@ -140,7 +140,7 @@
 * Binary search tree
     * whether there are duplicated values. If yes, how are they stored (left <= middle < right)
 
-### java collections internals <a id="java-collections"></a>
+### Java collections internals <a id="java-collections"></a>
 * deque/stack: linkedlist
 * hashmap: chaining ( array + list )
   * compute array index based on **public int hashCode()** method
@@ -149,7 +149,7 @@
 * treemap: red-black tree
 * priorityqueue: 
 
-### code snippets to remember <a id="snippets"></a>
+### Code snippets to remember <a id="snippets"></a>
 * convert char to int, does not need explicit conversion
 ```java
 value = value * 10 +  s.charAt( currPos ) - '0' ; 
@@ -166,7 +166,7 @@ value = value * 10 +  s.charAt( currPos ) - '0' ;
   * add/remove elements while iterating
 * Iterators
 
-#### math <a id="math"></a>
+#### Math <a id="math"></a>
 * divide two integers ( useful names: dividend/numerator, divisor/denominator, quotient, residue )
 	* handle boundary cases ( 0, Integer.MIN_VALUE )
 		- return int quotient
@@ -183,9 +183,11 @@ value = value * 10 +  s.charAt( currPos ) - '0' ;
 	* judge whether a value is even or odd
 		- Use num % 2 != 0 rather than num % 2 == 1 because of negative number mod ( e.g. -5 % 2 == -1 )
 		- To guarantee mod result is always positive, if knowing num range RANGE, could consider ( num + RANGE ) % RANGE 
-* power of integer 2
-    * double Math.pow( 2, b ) needs to be downcast for integer power, a more elegant way is to use bit manipulation 2 << b
-
+* power of integer: Java does not provide a built-in function for Integer values
+    * solution 1: It has a built-in function double Math.pow( double, double ). But the computation cost for double is much higher than int and the result needs to be downcasted.
+    * solution 2: Use multiply instead when exponent is low. 
+	* solution 3: When 2 is radix, use bit shifting
+	* solution 4: Implement in-house pow for integers based on divide and conquer
 ```java
 // convert int decimal to binary format
 int decimalNum = RANDOM_VALUE;
@@ -203,7 +205,7 @@ for ( int i = 0; i < 32; i++ )
 	decimalNum |= ( binaryRepr[i] << i );
 }
 ```
-#### array <a id="array"></a>
+#### Array <a id="array"></a>
 * Print arrays in Java
 ```java
 int[] array1D = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
@@ -213,7 +215,7 @@ System.out.println( Arrays.deepToString( array2D ));
 ```
 * Generate coordinate hash for a position (x,y) by x * width + y;
 
-#### string <a id="string"></a>
+#### String <a id="string"></a>
 * StringTokenizer ( like an iterator, has built-in hasNext() and next() func ). Could be used instead of a global position pointer inside recursive function (e.g. tree serialization and deserialization)
 ```java
 String str = "This is String , split by StringTokenizer, created by mkyong";
@@ -233,9 +235,9 @@ String part2 = parts[1]; // 034556
 ```
 
 * Parsing integer from a string. When possible, use Java's built-in function Integer Integer.ValueOf(String) or int Integer.ParseInt(String) instead of doing it manually
-#### linkedList <a id="linkedlist"></a>
+#### LinkedList <a id="linkedlist"></a>
 
-#### sort <a id="sort"></a>
+#### Sort <a id="sort"></a>
 * Judge whether intervals overlap
 ```java
 private boolean isOverlap( Interval o1, Interval o2 )
@@ -246,7 +248,7 @@ private boolean isOverlap( Interval o1, Interval o2 )
 ```
 * Arrays.sort( array, comparator ) and Collections.sort( collection, comparator ) method
 
-#### binary search <a id="binary-search"></a>
+#### Binary search <a id="binary-search"></a>
 * universal templates - iterative/recursive version 
 ```java
 public int binarySearchIterative( int[] array, int target)
@@ -325,7 +327,7 @@ public int binarySearchRecursive( int[] array, int target, int start, int end )
 		- e.g. search insertion position
 * how to handle duplicates in binary search
 
-#### stack <a id="stack"></a>
+#### Stack <a id="stack"></a>
 * When popping elements from stack, always check if the stack is empty. Otherwise, there might be a EmptyStackException()
 * Elegant way to implement binary tree preorder/inorder/postorder traversal iteratively
 ```java
@@ -381,7 +383,7 @@ public void traverse( TreeNode root, int order )
 }
 ```
 
-#### queue/priorityqueue <a id="queue"></a>
+#### Queue/priorityqueue <a id="queue"></a>
 * Lambda expression inside PriorityQueue elements comparison
 ```java
 PriorityQueue<NumAndFreq> mostFreqPrioQueue = new PriorityQueue<>( ( o1, o2 ) -> ( o2.freq - o1.freq ) ); // decreasing order
@@ -406,7 +408,7 @@ while ( !bfsQueue.isEmpty() )
 
 * treemap supports all operations by priorityqueue itself. In addition, it supports lookup by key.
 
-#### hashtable <a id="hashtable"></a>
+#### Hashtable <a id="hashtable"></a>
 * frequency count with hashmap
 ```java
 map.put( key, 1 + map.getOrDefault( key, 0 ) );
@@ -416,7 +418,7 @@ map.put( key, 1 + map.getOrDefault( key, 0 ) );
 map.putIfAbsent( key, new ArrayList<>() );
 ```
 * Use double as hashmap keys
-#### recursive functions <a id="recursive"></a>
+#### Recursive functions <a id="recursive"></a>
 
 * Result wrapper class or customized classes
 	* Used a lot in PriorityQueue, Recurse(Tree) related problems
@@ -464,15 +466,15 @@ public TreeNode changePos( List<Integer> position, String input ) // Solution2: 
 public TreeNode changePos( Position position, String input )
 ```	
 
-#### enumeration <a id="enumeration"></a>
+#### Enumeration <a id="enumeration"></a>
 * remove duplicates inside result
 
-#### depth first search <a id="dfs"></a>
+#### Depth first search <a id="dfs"></a>
 
-#### breath first search < id="bfs"></a>
+#### Breath first search < id="bfs"></a>
 * Grid-based problem concise snippets
 
-#### graph <a id="graph"></a>
+#### Graph <a id="graph"></a>
 * Detect cycles inside directed graphs with dfs + visited set + discovered set.
 	* If during dfs in directed graph, a node discovered but not visited is encountered, then the directed graph has a cycle
 ```java
@@ -623,10 +625,10 @@ public class TrieIterative
 }
 ```
 
-#### dynamic-programming <a id="dynamic-programming"></a>
+#### Dynamic-programming <a id="dynamic-programming"></a>
 * when allocate dynamic programming table size, allocate additional one row/col for generalization
 
-### error-prone cases <a id="error-prone"></a>
+### Error-prone cases <a id="error-prone"></a>
 * detect cycle in undirected graph
     - pass in super node inside dfs recursive call
 * increase/decrease position counter inside foreach loop
@@ -647,7 +649,7 @@ public class TrieIterative
 * Parsing integer from string, what if integer could be negative
 
 
-### smells for refactoring and optimization <a id="bad-smells"></a>
+### Smells for refactoring and optimization <a id="bad-smells"></a>
 * code length > 100
 * too many if statement checking for boundary cases
 * code do not generalize well. Only work for current problem. e.g. merge 2 sorted list -> merge k sorted List
