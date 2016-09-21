@@ -148,6 +148,7 @@
 * linkedhashmap: hashtable with a linkedlist
 * treemap: red-black tree
 * priorityqueue: 
+
 ### code snippets to remember <a id="snippets"></a>
 * convert char to int, does not need explicit conversion
 ```java
