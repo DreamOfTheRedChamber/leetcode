@@ -87,6 +87,7 @@
 * **Coding habit** - think about big picture before going to details: Never use debugger before thinking it through / walking it through by hands
 * **Coding habit** - not just satisfied with running code but always pick the most elegant/efficient ways
 * **Coding habit** - not just satisfied with fixing the bug but always think and generalize why the bug occurs
+* **Review habit** - when writing the code once again, which section is the most possible to look different. These easy to change sections are usually error-prone in an time-limited interview setting
   
 ### Communication patterns <a id="communication-pattern"></a>
 * Before writing the code
@@ -468,13 +469,24 @@ public TreeNode changePos( List<Integer> position, String input ) // Solution2: 
 public TreeNode changePos( Position position, String input )
 ```	
 
-#### Enumeration <a id="enumeration"></a>
+#### Backtrack <a id="enumeration"></a>
+* usually occurs at the beginning and ending of a recursive function
+```java
+public void recursivefunction()
+{
+	backtracking forward
+	// ... other stuff
+	backtracking backwards
+}
+```
 * remove duplicates inside result
-
+* mark visited locations inside a 2D grid
+  * use set<Integer> and position hash (x * width + height)
+  * if could modify the grid, place special chars such as '#'
+  
 #### Depth first search <a id="dfs"></a>
 
 #### Breath first search < id="bfs"></a>
-* Grid-based problem concise snippets
 
 #### Graph <a id="graph"></a>
 * Detect cycles inside directed graphs with dfs + visited set + discovered set.
