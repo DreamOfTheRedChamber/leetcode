@@ -52,8 +52,9 @@
    * [Java sins](#sins-java)
    * [Whiteboard coding sins](#sins-whiteboard-coding) 
    * [Leetcode sins](#sins-leetcode)
+
 ### Strategy <a id="strategy"></a>
-* **Think perspectives**: how to understand interviewer's expectations <a id="think-perspectives"></a>
+#### Think perspectives: how to understand interviewer's expectations <a id="think-perspectives"></a>
   * Think as if you are desigining product
     * identify problems
     * make tradeoffs
@@ -63,7 +64,8 @@
     * be a logical person, optimize from brute force to best
     * speak out your thoughts for discussion when stuck
     * be humble, always quick to take ideas from others
-* **Faster responses**: how to load previously solved problems more quickly into my memory <a id="faster-responses"></a>
+
+#### Faster responses: how to load previously solved problems more quickly into my memory <a id="faster-responses"></a>
   * Use a concrete example to wake up associated memory
   * Identify problem types and key points for that type of problems. e.g.
     * For stack type of problems, think about when to push/pop out of stack
@@ -71,7 +73,8 @@
     * For two-pointer type of problems, think about pointer start position(start/end position), increment/decrement pointer conditions
     * For binary search type of problems, think about whether to go left/right once mid is determined
     * For recursion type of problems, think about recursion base(arguments passed in), truning techniques, recursion order(child/parent first), recursion body, need backtracking
-* **Practical techniques**: different strategy for different problems <a id="practical-techniques"></a>
+
+#### Practical techniques: different strategy for different problems <a id="practical-techniques"></a>
 	* for easy problems
 	  * fast, because might have follow-up questions
 	  * focus more on communication / coding style / corner cases / exception handling
@@ -86,11 +89,12 @@
 	  * talk aloud so when stuck, interviewer could help
 
 ### Practice patterns <a id="practice-patterns"></a>
-* Tools<a id="practice-tools"></a>
+#### Tools<a id="practice-tools"></a>
   * Task planning: Use Eclipse task tags ( TO_START, TO_HURRY, TO_TEST ) to manage algorithm question status and prioritize important tasks
   * Feedbacks: Use git commit number per day as feedback for progress
   * Summarizing lessons: Use git commit message as a place to learn from mistakes and summarize lessons
-* Habits<a id="practice-habits"></a>
+
+#### Habits<a id="practice-habits"></a>
   * Check code after finishing: Use JUnit to write and run test cases locally before going to online judge
   * Review your own code for variance: when writing the code once again, which section is the most possible to look different. These easy to change sections are usually error-prone in an time-limited interview setting
   * Think about big picture before going to details: Never use debugger before thinking it through
@@ -98,7 +102,7 @@
   * Think behind the scenes: not just satisfied with fixing the bug but always think and generalize why the bug occurs
   
 ### Interview patterns <a id="interview-patterns"></a>
-* Before coding <a id="interview-before-coding"></a>
+#### Before coding <a id="interview-before-coding"></a>
   1. declare interface in a strategic way (talk about different ways of defining it and trade-offs)
   2. clear assumptions about the problem, one type of assumption is about input validity; the other type is about input specifications (refer to "input-specifications" section)
   3. abstract the question
@@ -117,12 +121,14 @@
   6. Confirm with interviewer "Whether I am on the right track?". If no, go back to 4.
   7. Write some test cases
   8. Walk through test cases ( think about the boundary logics which is needed to be handled inside code ) 
-* While coding <a id="interview-while-coding"></a>
+
+#### While coding <a id="interview-while-coding"></a>
   1. check input validity (throw exception or return directly)
   2. use // comments to outline the next block of code
     * Talk out the comments aloud
     * Writing part could be finished after writing the code. Leave a placeholder // temporarily 
-* After coding <a id="interview-after-coding"></a>
+
+#### After coding <a id="interview-after-coding"></a>
   1. check the code by myself
      1. review the entire code, check whether there are unused variables, dead while loops, formatting issues, boundaries index overflow/underflow , ...
      2. review the problem description, check whether there are unhandled problem assumptions 
@@ -131,61 +137,60 @@
   3. tell interviewer I have finished the problem
 
 ### Questions to confirm about input <a id="questions-to-confirm-about-input"></a>
-* Field types<a id="question-field-type"></a>
+#### Field types<a id="question-field-type"></a>
     * integer or double
     * positive or negative
-* Array<a id="question-array"></a>
+
+#### Array<a id="question-array"></a>
 	* sorted or unsorted
 	* given two arrays, which one's size is bigger
 	* whether could modify entries inside array
-* LinkedList<a id="question-linkedlist"></a>
+
+#### LinkedList<a id="question-linkedlist"></a>
 	* doubly or singly linkedlist
-* Binary search<a id="question-binary-search"></a>
+
+#### Binary search<a id="question-binary-search"></a>
     * return boolean or specific result
 	* whether duplicates exist inside array
-* String<a id="question-string"></a>
+
+#### String<a id="question-string"></a>
     * whether the string contains space
     * how are tokens separated, using comma, slash or something else
-* Tree<a id="question-tree"></a>
+
+#### Tree<a id="question-tree"></a>
     * whether binary search tree
-* Graph<a id="question-graph"></a>
+
+#### Graph<a id="question-graph"></a>
     * directed or undirected
 
 ### Learned lessons: Java basics <a id="learned-lessons-java-basics"></a>
-* Type size<a id="basics-type-size"></a>
-* Rare mentioned collection methods<a id="basics-rare-mentioned-collection-methods"></a>
+#### Type size<a id="basics-type-size"></a>
+#### Rare mentioned collection methods<a id="basics-rare-mentioned-collection-methods"></a>
   * set.add(elem) return false if set already contains the elem
   * list.sublist(startIndex, endIndex) returns a sublist of List
-* Math<a id="basics-math"></a>
-* Type conversions<a id="basics-type-conversions"></a>
-* Iterator<a id="basics-iterator"></a>
-  * ListIterator benefits:
-    * iterating bidirectional
-    * add/remove elements while iterating
-* Collections internals<a id="basics-collection-internals"></a>
 
-#### Math <a id="math"></a>
-* divide two integers ( useful names: dividend/numerator, divisor/denominator, quotient, residue )
-    * handle boundary cases ( 0, Integer.MIN_VALUE )
-        - return int quotient
-        - return double quotient
-    * record quotient symbol ( neg/pos )
-    * convert dividend and divisor to positive
-    * calculate integer part 
-    * calculate fraction part 
-        - quotient = ( residue * 10 ) / divisor
-        - residue = ( residue * 10 ) % divisor
-        - use hashmap to record residue and occuring positions to handle recurring
-    * concatenate symbol, integer part, dot, fraction part (possibly with parentheses)
-* mod
-    * judge whether a value is even or odd
-        - Use num % 2 != 0 rather than num % 2 == 1 because of negative number mod ( e.g. -5 % 2 == -1 )
-        - To guarantee mod result is always positive, if knowing num range RANGE, could consider ( num + RANGE ) % RANGE 
-* power of integer: Java does not provide a built-in function for Integer values
-    * solution 1: It has a built-in function double Math.pow( double, double ). But the computation cost for double is much higher than int and the result needs to be downcasted.
-    * solution 2: Use multiply instead when exponent is low. 
-    * solution 3: When 2 is radix, use bit shifting
-    * solution 4: Implement in-house pow for integers based on divide and conquer
+#### Math<a id="basics-math"></a>
+    - divide two integers ( useful names: dividend/numerator, divisor/denominator, quotient, residue )
+        - handle boundary cases ( 0, Integer.MIN_VALUE )
+            + return int quotient
+            + return double quotient
+        - record quotient symbol ( neg/pos )
+        - convert dividend and divisor to positive
+        - calculate integer part 
+        - calculate fraction part 
+            + quotient = ( residue * 10 ) / divisor
+            + residue = ( residue * 10 ) % divisor
+            + use hashmap to record residue and occuring positions to handle recurring
+        - concatenate symbol, integer part, dot, fraction part (possibly with parentheses)
+    - mod
+        - judge whether a value is even or odd
+            + Use num % 2 != 0 rather than num % 2 == 1 because of negative number mod ( e.g. -5 % 2 == -1 )
+            + To guarantee mod result is always positive, if knowing num range RANGE, could consider ( num + RANGE ) % RANGE 
+    - power of integer: Java does not provide a built-in function for Integer values
+        - solution 1: It has a built-in function double Math.pow( double, double ). But the computation cost for double is much higher than int and the result needs to be downcasted.
+        - solution 2: Use multiply instead when exponent is low. 
+        - solution 3: When 2 is radix, use bit shifting
+        - solution 4: Implement in-house pow for integers based on divide and conquer
 ```java
 // convert int decimal to binary format
 int decimalNum = RANDOM_VALUE;
@@ -204,8 +209,18 @@ for ( int i = 0; i < 32; i++ )
 }
 ```
 
-### Learned lessons: data structures <a id="learned-lessons-datat-structures"></a>
-#### Java collections internals <a id="java-collections"></a>
+#### Type conversions<a id="basics-type-conversions"></a>
+* convert char to int, does not need explicit conversion
+```java
+value = value * 10 +  s.charAt( currPos ) - '0' ; 
+```
+
+#### Iterator<a id="basics-iterator"></a>
+* ListIterator benefits:
+  * iterating bidirectional
+  * add/remove elements while iterating
+
+#### Collections internals<a id="basics-collection-internals"></a>
 * deque/stack: linkedlist
 * hashmap: chaining ( array + list )
   * compute array index based on **public int hashCode()** method
@@ -213,6 +228,8 @@ for ( int i = 0; i < 32; i++ )
 * linkedhashmap: hashtable with a linkedlist
 * treemap: red-black tree
 * priorityqueue: 
+
+### Learned lessons: data structures <a id="learned-lessons-datat-structures"></a>
 
 #### Progressive enhancement on data structures <a id="prog-ds"></a>
 * support lookup/delete by key: priorityqueue -> treemap
@@ -222,7 +239,7 @@ for ( int i = 0; i < 32; i++ )
 * support append/insert/delete more efficiently: string -> stringbuilder
 * support array resize: array -> arrayList
 
-#### Array <a id="array"></a>
+#### Array <a id="ds-array"></a>
 * Print arrays in Java
 ```java
 int[] array1D = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
@@ -232,7 +249,7 @@ System.out.println( Arrays.deepToString( array2D ));
 ```
 * Generate coordinate hash for a position (x,y) by x * width + y;
 
-#### String <a id="string"></a>
+#### String <a id="ds-string"></a>
 * StringTokenizer ( like an iterator, has built-in hasNext() and next() func ). Could be used instead of a global position pointer inside recursive function (e.g. tree serialization and deserialization)
 ```java
 String str = "This is String , split by StringTokenizer, created by mkyong";
@@ -253,9 +270,9 @@ String part2 = parts[1]; // 034556
 
 * Parsing integer from a string. When possible, use Java's built-in function Integer Integer.ValueOf(String) or int Integer.ParseInt(String) instead of doing it manually
 
-#### LinkedList <a id="linkedlist"></a>
+#### LinkedList <a id="ds-linkedlist"></a>
 
-#### Stack <a id="stack"></a>
+#### Stack <a id="ds-stack"></a>
 * When popping elements from stack, always check if the stack is empty. Otherwise, there might be a EmptyStackException()
 * Elegant way to implement binary tree preorder/inorder/postorder traversal iteratively
 ```java
@@ -311,7 +328,7 @@ public void traverse( TreeNode root, int order )
 }
 ```
 
-#### Queue/priorityqueue <a id="queue"></a>
+#### Queue/PriorityQueue <a id="ds-queue"></a>
 * Lambda expression inside PriorityQueue elements comparison
 ```java
 PriorityQueue<NumAndFreq> mostFreqPrioQueue = new PriorityQueue<>( ( o1, o2 ) -> ( o2.freq - o1.freq ) ); // decreasing order
@@ -334,7 +351,7 @@ while ( !bfsQueue.isEmpty() )
 }
 ``` 
 
-#### Hashtable <a id="hashtable"></a>
+#### Hashtable <a id="ds-hashtable"></a>
 * frequency count with hashmap
 ```java
 map.put( key, 1 + map.getOrDefault( key, 0 ) );
@@ -345,7 +362,7 @@ map.putIfAbsent( key, new ArrayList<>() );
 ```
 * Use double as hashmap keys
 
-#### Graph <a id="graph"></a>
+#### Graph <a id="ds-graph"></a>
 * Detect cycles inside directed graphs with dfs + visited set + discovered set.
     * If during dfs in directed graph, a node discovered but not visited is encountered, then the directed graph has a cycle
 ```java
@@ -398,7 +415,7 @@ map.putIfAbsent( key, new ArrayList<>() );
 ```
 
 
-#### Trie <a id="trie"></a>
+#### Trie <a id="ds-trie"></a>
 * applicable when optimize for a list of words as dictionary, avoid recomputation for the same string prefix ( e.g. word search II, airbnb k distance question )
 * iterative implementation much more concise than recursive implementation.
 ```java
@@ -499,7 +516,7 @@ public class TrieIterative
 
 
 ### Learned lessons: algorithms <a id="learned-lessons-algorithms"></a>
-#### Progressive enhancement on algorithms and data structures <a id="prog-algo"></a>
+#### Progressive enhancement on algorithms and data structures <a id="algorithms-progressive-enhancement-on-algorithms"></a>
 * algorithms
   * brute force first
   * trade space for time: e.g. hashmap in two-sum
@@ -514,7 +531,7 @@ public class TrieIterative
   * O(2^n): backtracking
   * O(n!): 
 
-#### Sort <a id="sort"></a>
+#### Sort <a id="algorithms-sort"></a>
 * Judge whether intervals overlap
 ```java
 private boolean isOverlap( Interval o1, Interval o2 )
@@ -525,7 +542,7 @@ private boolean isOverlap( Interval o1, Interval o2 )
 ```
 * Arrays.sort( array, comparator ) and Collections.sort( collection, comparator ) method
 
-#### Binary search <a id="binary-search"></a>
+#### Binary search <a id="algorithms-binary-search"></a>
 * Universal templates - iterative/recursive version 
 ```java
 public int binarySearchIterative( int[] array, int target)
@@ -605,7 +622,7 @@ public int binarySearchRecursive( int[] array, int target, int start, int end )
 * how to handle duplicates in binary search
 
 
-#### Recursive functions <a id="recursive"></a>
+#### Recursive functions <a id="algorithms-recursion"></a>
 
 * Result wrapper class or customized classes
     * Used a lot in PriorityQueue, Recurse(Tree) related problems
@@ -654,7 +671,7 @@ public TreeNode changePos( Position position, String input )
 ``` 
 
 
-#### Backtrack <a id="enumeration"></a>
+#### Backtrack <a id="algorithms-backtrack"></a>
 * usually occurs at the beginning and ending of a recursive function
 ```java
 public void recursivefunction()
@@ -669,21 +686,12 @@ public void recursivefunction()
   * use set<Integer> and position hash (x * width + height)
   * if could modify the grid, place special chars such as '#'
   
-#### Depth first search <a id="dfs"></a>
+#### Depth first search <a id="algorithms-dfs"></a>
 
-#### Breath first search < id="bfs"></a>
+#### Breath first search < id="algorithms-bfs"></a>
 
-#### Dynamic-programming <a id="dynamic-programming"></a>
+#### Dynamic-programming <a id="algorithms-dynamic-programming"></a>
 * when allocate dynamic programming table size, allocate additional one row/col for generalization
-
-
-
-### Code snippets to remember <a id="snippets"></a>
-* convert char to int, does not need explicit conversion
-```java
-value = value * 10 +  s.charAt( currPos ) - '0' ; 
-```
-
 
 ### Error-prone cases <a id="error-prone"></a>
 * detect cycle in undirected graph
