@@ -26,6 +26,8 @@ isMatch("aa", ".*") → true
 isMatch("ab", ".*") → true
 isMatch("aab", "c*a*b") → true
  */
+
+// TO_IMME
 public class RegularExpressionMatching
 {
 	@Test
@@ -39,6 +41,7 @@ public class RegularExpressionMatching
 		assertTrue( isMatch( "ab", ".*" ) );
 		
 		assertFalse( isMatch( "aaba", "ab*a*c*a" ) );
+		assertTrue( isMatch( "aasdfasdfasdfasdfas", "aasdf.*asdf.*asdf.*asdf.*s" ) );
 	}
 	
     public boolean isMatch( String s, String p )
