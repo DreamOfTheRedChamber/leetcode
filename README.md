@@ -1,8 +1,8 @@
 # loop through leetcode one more time, ; )
-* [Strategy](#strategy)
+* [Core strategies](#strategy)
     * [Thinking perspectives](#think-perspectives)
     * [Faster responses](#faster-responses)
-    * [Practical techniques](#practical-techniques)
+    * [When met with easy/hard/tricky problems](#met-with-easy-hard-tricky-problems)
 * [Practice patterns](#practice-patterns)
     * [Tools](#practice-tools)
     * [Habits](#practice-habits)
@@ -10,6 +10,7 @@
     * [Before coding](#interview-before-coding)
     * [While coding](#interview-while-coding)
     * [After coding](#interview-after-coding)
+    * [Template sentences for communication](#template-sentences-for-communication)
 * [Questions to confirm about input](#question-to-confirm-about-input)
     * [Field types](#question-field-type)
     * [Array](#question-array)
@@ -20,10 +21,12 @@
     * [Graph](#question-graph)
 * [Learned lessons: Java basics](#learned-lessons-java-basics)
     * [Type size](#basics-type-size) 
-    * [Rare mentioned collection methods](#basics-rare-mentioned-collection-methods)
+    * [Error-prone APIs](#basics-error-prone-apis)
+    * [Rarely mentioned APIs](#basics-rarely-mentioned-apis)
     * [Math](#basics-math)
     * [Type conversions](#basics-type-conversions)
     * [Iterator](#basics-iterator)
+    * [Error handling](#error-handling)
     * [Collections internals](#basics-collections-internals)
 * [Learned lessons: data structures](#learned-lessons-data-structures)
     * [Progressive enhancement on data structures](#progressive-enhancement-on-ds)
@@ -46,14 +49,13 @@
 	* [Breath first search](#algorithms-bfs)
 	* [Dynamic programming](#algorithms-dynamic-programming)
 * [Multithreading in Java](#multithreading) 
-* [Error-prone cases](#error-prone)
 * [Bad smells for refactoring and optimization](#bad-smells)
 * [Sins](#sins)
    * [Java sins](#sins-java)
    * [Whiteboard coding sins](#sins-whiteboard-coding) 
    * [Leetcode sins](#sins-leetcode)
 
-### Strategy <a id="strategy"></a>
+### Core Strategies <a id="core-strategies"></a>
 #### Think perspectives: how to understand interviewer's expectations <a id="think-perspectives"></a>
   * Think as if you are desigining product
     * identify problems
@@ -64,6 +66,7 @@
     * be a logical person, optimize from brute force to best
     * speak out your thoughts for discussion when stuck
     * be humble, always quick to take ideas from others
+    * demonstrate strong engineering skills/habits
 
 #### Faster responses: how to load previously solved problems more quickly into my memory <a id="faster-responses"></a>
   * Use a concrete example to wake up associated memory
@@ -74,19 +77,15 @@
     * For binary search type of problems, think about whether to go left/right once mid is determined
     * For recursion type of problems, think about recursion base(arguments passed in), truning techniques, recursion order(child/parent first), recursion body, need backtracking
 
-#### Practical techniques: different strategy for different problems <a id="practical-techniques"></a>
-	* for easy problems
-	  * fast, because might have follow-up questions
-	  * focus more on communication / coding style / corner cases / exception handling
-	* for medium problems
-	  * try to be bug-free
-	  * exhibit good coding habits
-	    * write test cases before starting
-	    * use comment placeholder to outline code before writing
-	    * check code before finishing
-	* for tricky/hard problems
-	  * summarize an easy-to-remember pattern for each popular hard problem (e.g. regular expression matching, iterative post-order traversal)
-	  * talk aloud so when stuck, interviewer could help
+#### When met with easy/hard/tricky problems (although most time medium problems): <a id="met-with-easy-hard-tricky-problems"></a>
+* always smile no matter how easy/hard/tricky the problem is, ;)
+* for problems of easy/medium difficulty level
+	* the hard part usually lies in interviewers' follow-up questions	
+* for problems of hard difficulty level
+	* summarize an easy-to-remember pattern for each popular hard problem (e.g. regular expression matching, iterative post-order traversal)
+	* talk aloud so when stuck, interviewer could help
+* for problems which has lots of tricky test cases
+    * clarify assumptions about the problem, what are possible inputs/what are not.
 
 ### Practice patterns <a id="practice-patterns"></a>
 #### Tools<a id="practice-tools"></a>
@@ -136,44 +135,55 @@
   2. talk about sections which could be refactored/improved, but was done in a certain way in an interview setting
   3. tell interviewer I have finished the problem
 
+#### Template sentences for communication<a id="template-sentences-for-communication"></a>
+
 ### Questions to confirm about input <a id="questions-to-confirm-about-input"></a>
 #### Field types<a id="question-field-type"></a>
-    * integer or double
-    * positive or negative
+* integer or double
+* positive or negative
 
 #### Array<a id="question-array"></a>
-	* sorted or unsorted
-	* given two arrays, which one's size is bigger
-	* whether could modify entries inside array
+* sorted or unsorted
+* given two arrays, which one's size is bigger
+* whether could modify entries inside array
 
 #### LinkedList<a id="question-linkedlist"></a>
-	* doubly or singly linkedlist
+* doubly or singly linkedlist
 
 #### Binary search<a id="question-binary-search"></a>
-    * return boolean or specific result
-	* whether duplicates exist inside array
+* return boolean or specific result
+* whether duplicates exist inside array
 
 #### String<a id="question-string"></a>
-    * whether the string contains space
-    * how are tokens separated, using comma, slash or something else
+* whether the string contains space
+* how are tokens separated, using comma, slash or something else
 
 #### Tree<a id="question-tree"></a>
-    * whether binary search tree
+* whether binary search tree
 
 #### Graph<a id="question-graph"></a>
-    * directed or undirected
+* directed or undirected
 
 ### Learned lessons: Java basics <a id="learned-lessons-java-basics"></a>
 #### Type size<a id="basics-type-size"></a>
-#### Rare mentioned collection methods<a id="basics-rare-mentioned-collection-methods"></a>
-  * set.add(elem) return false if set already contains the elem
-  * list.sublist(startIndex, endIndex) returns a sublist of List
+* Reference types: 32-bit system (32 bit), 64-bit system (64 bit)
+* Primitive types: boolean (8 bit), byte (8 bit), char (16 bit), short (16 bit), int (32 bit), long (64 bit), float (32 bit), double (64 bit)
+
+#### Error-prone APIs<a id="basics-error-prone-apis"></a>
+* Java list remove interface. Two list.remove() interface ( list.remove(int index), list.remove( Object object ) )
+    - List<Integer> input
+    - list.remove(index) will always take precedence because it does not require type casting
+* Ternary operator ?: priority is only higher than assignment. If it is used in combination with other operators, parentheses should be added.
+
+#### Rarely mentioned APIs<a id="basics-rarely-mentioned-apis"></a>
+* set.add(elem) return false if set already contains the elem
+* list.sublist(startIndex, endIndex) returns a sublist of List
 
 #### Math<a id="basics-math"></a>
-    - divide two integers ( useful names: dividend/numerator, divisor/denominator, quotient, residue )
-        - handle boundary cases ( 0, Integer.MIN_VALUE )
-            + return int quotient
-            + return double quotient
+* divide two integers ( useful names: dividend/numerator, divisor/denominator, quotient, residue )
+  * handle boundary cases ( 0, Integer.MIN_VALUE )
+    + return int quotient
+    + return double quotient
         - record quotient symbol ( neg/pos )
         - convert dividend and divisor to positive
         - calculate integer part 
@@ -182,11 +192,11 @@
             + residue = ( residue * 10 ) % divisor
             + use hashmap to record residue and occuring positions to handle recurring
         - concatenate symbol, integer part, dot, fraction part (possibly with parentheses)
-    - mod
+* mod
         - judge whether a value is even or odd
             + Use num % 2 != 0 rather than num % 2 == 1 because of negative number mod ( e.g. -5 % 2 == -1 )
             + To guarantee mod result is always positive, if knowing num range RANGE, could consider ( num + RANGE ) % RANGE 
-    - power of integer: Java does not provide a built-in function for Integer values
+* power of integer: Java does not provide a built-in function for Integer values
         - solution 1: It has a built-in function double Math.pow( double, double ). But the computation cost for double is much higher than int and the result needs to be downcasted.
         - solution 2: Use multiply instead when exponent is low. 
         - solution 3: When 2 is radix, use bit shifting
@@ -210,15 +220,73 @@ for ( int i = 0; i < 32; i++ )
 ```
 
 #### Type conversions<a id="basics-type-conversions"></a>
-* convert char to int, does not need explicit conversion
+* Convert char to int, does not need explicit conversion
 ```java
 value = value * 10 +  s.charAt( currPos ) - '0' ; 
 ```
 
+* Convert string to int
+```java
+String str = "-2";
+int intValue = Integer.parseInt( str );
+```
+
+* Convert reference type of list to array, 
+```java
+List<Integer> list = ...; // {1,2,3}
+Integer[] array = new Integer[list.size()];
+list.toArray( array );
+```
+
+* Convert reference type of array to list, the returned arrayList is based on the array of fixed size. When new item is added, exception will be thrown out.
+```java
+Element[] array = { new Element(1), new Element(2), new Element(3) };
+
+// wrong way
+List<Element> list = Arrays.asList( array );
+list.add(1); // UnsupportedOperationException
+
+// correct way
+List<Element> list = new ArrayList<>( Arrays.asList( array ) );
+```
+
+
+* Convert between collection types - stream apis Collectors
+```java
+// hashmap keys to list
+Map<String, List<String>> map = new HashMap<>();
+List<String> list = map.keySet().stream().collect(Collectors.toList() );
+```
+
 #### Iterator<a id="basics-iterator"></a>
-* ListIterator benefits:
+* ListIterator vs iterator: additional interface for 
   * iterating bidirectional
-  * add/remove elements while iterating
+  * remove elements while iterating
+* iterator vs for-each loop: remove elements while iterating/avoid ConcurrentModificationException
+```java
+List<Integer> list = ...; // 1, 2, 3, 4
+Iterator<Integer> iterator = list.iterator();
+while ( iterator.hasNext() )
+{
+    if ( iterator.next() == 3 )
+    {
+        iterator.remove()
+    }
+}
+// list 1, 2, 4
+```
+
+#### Error handling<a id="error-handling"></a>
+* Types
+  * logs (handle errors later, first restart)
+  * assertions (internal use only, function arguments)
+  * dialogue (let user decides what to do next)
+  * exception (point out what (exception type), where (exact location), why (message))
+* Exceptions usually seen in coding interviews
+  * IllegalArgumentException ( check input of function arguments )
+  * IllegalStateException ( illegal state of variables )
+  * ArithmeticException ( 1 / 0 )
+  * IndexOutOfBoundaryException ( example problem: search in unknown size sorted array )
 
 #### Collections internals<a id="basics-collection-internals"></a>
 * deque/stack: linkedlist
@@ -227,17 +295,19 @@ value = value * 10 +  s.charAt( currPos ) - '0' ;
   * decide list index based on **public boolean equals()** method
 * linkedhashmap: hashtable with a linkedlist
 * treemap: red-black tree
-* priorityqueue: 
+* priorityqueue: array
 
 ### Learned lessons: data structures <a id="learned-lessons-datat-structures"></a>
 
 #### Progressive enhancement on data structures <a id="prog-ds"></a>
+* support array resize: array -> arrayList
 * support lookup/delete by key: priorityqueue -> treemap
 * support enqueue/dequeue from both ends: queue -> deque
 * support insertion order on hashset/hashmap: hashset/hashmap -> linkedhashset/linkedhashmap
 * support larger character set for histogram problem: array -> map
 * support append/insert/delete more efficiently: string -> stringbuilder
-* support array resize: array -> arrayList
+* space efficiency in dynamic programming: 2D memorization array -> rolling 1D memorization array
+* space efficiency in boolean array: Boolean[] -> boolean[] -> BitSet
 
 #### Array <a id="ds-array"></a>
 * Print arrays in Java
@@ -670,7 +740,6 @@ public TreeNode changePos( List<Integer> position, String input ) // Solution2: 
 public TreeNode changePos( Position position, String input )
 ``` 
 
-
 #### Backtrack <a id="algorithms-backtrack"></a>
 * usually occurs at the beginning and ending of a recursive function
 ```java
@@ -683,47 +752,33 @@ public void recursivefunction()
 ```
 * remove duplicates inside result
 * mark visited locations inside a 2D grid
-  * use set<Integer> and position hash (x * width + height)
-  * if could modify the grid, place special chars such as '#'
+  * use set<Integer> to store position hash (x * width + height)
+  * if could modify the grid, place special char such as '#' for already discovered nodes
   
 #### Depth first search <a id="algorithms-dfs"></a>
 
-#### Breath first search < id="algorithms-bfs"></a>
+#### Breath first search <a id="algorithms-bfs"></a>
 
 #### Dynamic-programming <a id="algorithms-dynamic-programming"></a>
 * when allocate dynamic programming table size, allocate additional one row/col for generalization
 
-### Error-prone cases <a id="error-prone"></a>
-* detect cycle in undirected graph
-    - pass in super node inside dfs recursive call
-* increase/decrease position counter inside foreach loop
-* java list remove interface. Two list.remove() interface ( list.remove(int index), list.remove( Object object ) )
-	- List<Integer> input
-	- list.remove(index) will always take precedence because it does not require type casting
-* passed in a reference variable (e.g. TreeNode, LinkNode, GraphNode...), check null pointer case
-* boundary case summary
-  * 2D array problem
-	- check whether array2D.length == 0 and array2D[0].length == 0
-  * Use 1D array based dynamic programming
-	- check the size when array.length == 0 or array.length == 1
-  * reference as input, such as collection (List, Map, ...) or string s
-    - check s == null || s.length() == 0
-* When a variable's name is really really long such as matrix[qHead.xCoor][qHead.yCoor+1] and it needs to be used in multiple places, it is really easy to create typos
-* When a recursive function contains a long list of arguments, need to double check to make sure the arguments are correct
-* Ternary operator ?: priority is only higher than assignment. If it is used in combination with other operators, parentheses should be added.
-* Parsing integer from string, what if integer could be negative
+### Bad smells for refactoring and optimization <a id="bad-smells"></a>
+#### code length > 100
+#### too many if statement checking for boundary cases
+#### code do not generalize well. Only work for current problem. e.g. merge 2 sorted list -> merge k sorted List
 
-### Smells for refactoring and optimization <a id="bad-smells"></a>
-* code length > 100
-* too many if statement checking for boundary cases
-* code do not generalize well. Only work for current problem. e.g. merge 2 sorted list -> merge k sorted List
-
-### Java sins <a id="java-sins"></a>
+### Sins <a id="sins"></a>
+#### Java sins <a id="sins-java"></a>
 * linkedhashset could not be iterated reversely
 * hard to return tuple values
 * only pass by values
 
-### Leetcode sins <a id="leetcode-sins"></a>
+#### Whiteboard coding sins <a id="sins-whiteboard-coding"></a>
+* whiteboard coding does not simulate daily workflow of software engineers, thus might generate high false positives and false negatives. 
+  * finish algorithms in 20 min in a bug-free and clean way requires lots of practice. not impartial for experienced engineers who does practice leetcode a lot such as Max Howell.
+  * the optimization process in algorithm questions is over-optimization. In practice, only improve performance when necessary.
+
+#### Leetcode sins <a id="sins-leetcode"></a>
 * When problem occurs, too few stack trace
 * No online debuggers
 * No history track along time axis. Really bad synchronous workflow
