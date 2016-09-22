@@ -762,10 +762,11 @@ public void recursivefunction()
 #### Dynamic-programming <a id="algorithms-dynamic-programming"></a>
 * when allocate dynamic programming table size, allocate additional one row/col for generalization
 
+#### Multithreading in Java <a id="multithreading"></a>
 ### Bad smells for refactoring and optimization <a id="bad-smells"></a>
-#### code length > 100
-#### too many if statement checking for boundary cases
-#### code do not generalize well. Only work for current problem. e.g. merge 2 sorted list -> merge k sorted List
+* code length > 100
+* too many if statement checking for boundary cases
+* code do not generalize well. Only work for current problem. e.g. merge 2 sorted list -> merge k sorted List
 
 ### Sins <a id="sins"></a>
 #### Java sins <a id="sins-java"></a>
