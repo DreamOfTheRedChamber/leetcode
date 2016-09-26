@@ -99,6 +99,7 @@
   * Think about big picture before going to details: Never use debugger before thinking it through
   * Perfectionism: not just satisfied with running code but always pick the most elegant/efficient ways
   * Think behind the scenes: not just satisfied with fixing the bug but always think and generalize why the bug occurs
+  * First things first: Thought process first, then coding
   
 ### Interview patterns <a id="interview-patterns"></a>
 #### Before coding <a id="interview-before-coding"></a>
@@ -178,6 +179,7 @@
 #### Rarely mentioned APIs<a id="basics-rarely-mentioned-apis"></a>
 * set.add(elem) return false if set already contains the elem
 * list.sublist(startIndex, endIndex) returns a sublist of List
+* Collections.unmodifiableList/unmodifiableSet/unmodifiableMap()
 
 #### Math<a id="basics-math"></a>
 * divide two integers ( useful names: dividend/numerator, divisor/denominator, quotient, residue )
@@ -281,8 +283,9 @@ while ( iterator.hasNext() )
   * logs (handle errors later, first restart)
   * assertions (internal use only, function arguments)
   * dialogue (let user decides what to do next)
-  * exception (point out what (exception type), where (exact location), why (message))
-* Exceptions usually seen in coding interviews
+  * exception - checked/unchecked(point out what (exception type), where (exact location), why (message))
+  * errors ( usually used by the JVM to indicate resource deficiencies )
+* Use runtime exceptions to indicate precondition violations
   * IllegalArgumentException ( check input of function arguments )
   * IllegalStateException ( illegal state of variables )
   * ArithmeticException ( 1 / 0 )
@@ -300,10 +303,11 @@ while ( iterator.hasNext() )
 ### Learned lessons: data structures <a id="learned-lessons-datat-structures"></a>
 
 #### Progressive enhancement on data structures <a id="prog-ds"></a>
+* support accuracy: float/double -> BigDecimal
 * support array resize: array -> arrayList
 * support lookup/delete by key: priorityqueue -> treemap
 * support enqueue/dequeue from both ends: queue -> deque
-* support insertion order on hashset/hashmap: hashset/hashmap -> linkedhashset/linkedhashmap
+* support insertion -> customized order on hashset/hashmap: hashset/hashmap -> linkedhashset/linkedhashmap -> treeset/treemap
 * support larger character set for histogram problem: array -> map
 * support append/insert/delete more efficiently: string -> stringbuilder
 * space efficiency in dynamic programming: 2D memorization array -> rolling 1D memorization array
@@ -773,6 +777,7 @@ public void recursivefunction()
 * linkedhashset could not be iterated reversely
 * hard to return tuple values
 * only pass by values
+* lambda expressions are still not closures
 
 #### Whiteboard coding sins <a id="sins-whiteboard-coding"></a>
 * whiteboard coding does not simulate daily workflow of software engineers, thus might generate high false positives and false negatives. 
@@ -787,3 +792,6 @@ public void recursivefunction()
 * Unable to mark different stages in solving a problem ( e.g. thought-out, implemented, optimized, on-line judged, summarized )
 * Cannot add enough comments along the code
 * Never-ending, ever-increasing number of problems
+
+#### Core Java Interview questions
+[blog: java-success.com](http://www.java-success.com/)
