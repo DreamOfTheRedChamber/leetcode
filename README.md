@@ -10,7 +10,6 @@
     * [Before coding](#interview-before-coding)
     * [While coding](#interview-while-coding)
     * [After coding](#interview-after-coding)
-    * [Template sentences for communication](#template-sentences-for-communication)
 * [Questions to confirm about input](#question-to-confirm-about-input)
     * [Field types](#question-field-type)
     * [Array](#question-array)
@@ -36,7 +35,8 @@
     * [Stack](#ds-stack)
     * [Queue/Priorityqueue](#ds-queue)
     * [Tree](#ds-tree)
-    * [Hashtable](#ds-hashtable)
+    * [HashMap](#ds-hashmap)
+    * [TreeMap](#ds-treemap)
     * [Graph](#ds-graph)
     * [Trie](#ds-trie)
 * [Learned lessons: algorithms](#learned-lessons-algorithms)
@@ -103,40 +103,52 @@
   
 ### Interview patterns <a id="interview-patterns"></a>
 #### Before coding <a id="interview-before-coding"></a>
-  1. declare interface in a strategic way (talk about different ways of defining it and trade-offs)
-  2. clear assumptions about the problem, one type of assumption is about input validity; the other type is about input specifications (refer to "input-specifications" section)
-  3. abstract the question
-  4. come up with a brute force solution, calc time/space complexity
-    * brain storm problem types (min/max, shortest distance, output solutions, search, topo sort), algorithms (recursion, backtracking, sorting, breath/depth-first search, two pointers) / data types (stack, heap, undirected/directed graph, trie) which might help in this problem
-    * if stuck in this step, write a small and general example, think about how I will do it manually
-    * if still having problems, ask interviewer for help tips
-  5. (optional) optimize - strike a balance between time and space complexity
-    * optimize from the perspective of space complexity
-      * lots of repetitive computation: recursion -> dynamic programming --(optional)--> 2D memorization array to 1D --(optional)--> bit manipulation
-      * top K: priorityQueue --> bucket sorting/partition algorithm
-    * optimize from the perspective of time complexity
-      * require O(logn) complexity: complete search -> binary search
-      * require O(n) complexity -> two pointers/use hashmap
-      * require O(nlogn) complexity: divide and conquer/priorityQueue
-  6. Confirm with interviewer "Whether I am on the right track?". If no, go back to 4.
-  7. Write some test cases
-  8. Walk through test cases ( think about the boundary logics which is needed to be handled inside code ) 
+1. Make sure I understand the problem
+  1. Declare interface in a strategic way (talk about different ways of defining it and trade-offs. e.g. do not define input as string when possible)
+  2. (Optional) Clear assumptions about the problem. There are two types of questions. One is about more detailed info about input (refer to "input-specifications" section). The other is for special output. e.g. "If input is like this, what should output be"
+2. **Synchronize with interviewer** "Let's come up with a brute force solution first."
+3. Work out a brute force solution
+  1. Work through a concrete example to abstract the problem
+  2. Guarantee to come up with a brute force solution 
+    * How I will enumerate all possible solutions / how will I do it in the most stupid way
+    * **Unstuck strategy: Clear problem abstraction**: "What kind of ds/algo might be used"
+      * Brain storm problem types (min/max, shortest distance, output solutions, search, topo sort), algorithms (recursion, backtracking, sorting, breath/depth-first search, two pointers) / data types (stack, heap, undirected/directed graph, trie)
+    * **Unstuck strategy: Simplify problem**: "This problem seems kind of complicated. Let's try to solve a simpler problem first"
+    * **Unstuck strategy: Give it a try**: "Let's try doing it with XX DS/Algorithm. Not sure if it will work or not."
+  3. Calc time/space complexity: "The brute force solution is to test all possibilities, which is O(X)."
+4. **Synchronize with interviewer** "Now we have a brute force solution. Let's think ways to improve this"
+5. Optimize
+    * **Unstuck strategy: Think about upper bound**: what are the best time/space complexity I could achieve
+      * "Since I have to look through all items, so I cann't do better than O(n)."
+    * **Unstuck strategy: Identify bad smell for efficiency**: whether repetitive computation, redundant space usage appears
+    * **Unstuck strategy: Trade space for time complexity**: Identify the bottleneck of brute force solution
+    * **Unstuck strategy: Discuss with interviewer for help:**: Stand back for a while and talk about the challegning you are facing. The interviewer might come in for help when necessary
+    * **Unstuck strategy: Give it a try**: "Let's try doing it with XX DS/Algorithm. Not sure if it will work or not."
+    * **Unstuck strategy: Be keen to what interviewer is saying**: Every word the interviewer is saying has its meanings
+6. **Synchronize with interviewer** "Should we write code for this"
 
 #### While coding <a id="interview-while-coding"></a>
-  1. check input validity (throw exception or return directly)
-  2. use // comments to outline the next block of code
-    * Talk out the comments aloud
-    * Writing part could be finished after writing the code. Leave a placeholder // temporarily 
+  1. Write edge/normal test cases first
+  2. **Synchronize with interviewer**: tell my plan first. What are the first step, second step and third step to implement
+  3. Check input validity (throw exception or return directly)
+  4. Use // or empty line as separator different steps.
+  5. Avoid get caught up in trivialities
+    * When forget some language-specific trivial: "I do not remember exactly how the interface looks like, but I'd guess it has an API like this."
+    * When need a subroutine: "I am going to use a subroutine with the following interface. I will implement later".
 
-#### After coding <a id="interview-after-coding"></a>
-  1. check the code by myself
-     1. review the entire code, check whether there are unused variables, dead while loops, formatting issues, boundaries index overflow/underflow , ...
-     2. review the problem description, check whether there are unhandled problem assumptions 
-     3. use small test cases to test different logical branches of the code
-  2. talk about sections which could be refactored/improved, but was done in a certain way in an interview setting
-  3. tell interviewer I have finished the problem
-
-#### Template sentences for communication<a id="template-sentences-for-communication"></a>
+#### Clean up <a id="interview-after-coding"></a>
+  1. **Synchronize with interviewer**: "Then I would usually check against some edge cases, should we do that next?" 
+  2. Check the code by myself
+     * Check steps:
+       1. review the entire code, check whether there are unused variables, dead while loops, formatting issues, boundaries index overflow/underflow , ...
+       2. review the problem description, check whether there are unhandled problem assumptions 
+       3. use small test cases to test different logical branches of the code
+     * When there is a bug: do not rush to change. Identify the root cause first.
+       * "Give me a moment, I feel there is a bug here. Let's have a double check."
+       * "The root cause of the bug is XXX."
+  3. Explain shortcuts I have taken: Talk about sections which could be refactored/improved, but was done in a certain way in an interview setting
+     * "If I were writing this for a production use, I would avoid using this global variable."
+  4. **Synchronize with interviewer**: "I think I am done with the problem". Look and smell.
 
 ### Questions to confirm about input <a id="questions-to-confirm-about-input"></a>
 #### Field types<a id="question-field-type"></a>
@@ -403,6 +415,23 @@ public void traverse( TreeNode root, int order )
 ```
 
 #### Queue/PriorityQueue <a id="ds-queue"></a>
+* [peek vs element, poll vs remove] when queue is empty, the former returns null and the latter throws exception. Most times in an interview setting, use the former one is appropriate. The first reason is that it is not an exceptional case that the queue is empty. The second reason is that throwsing exceptions incurs a performance penalty.
+```java
+// implements inside abstractQueue<E>
+public E remove()
+{
+  E x = poll();
+  if ( x != null )
+  {
+    return x;
+  }
+  else
+  {
+    throw new NoSuchElementException();
+  }
+}
+```
+
 * Lambda expression inside PriorityQueue elements comparison
 ```java
 PriorityQueue<NumAndFreq> mostFreqPrioQueue = new PriorityQueue<>( ( o1, o2 ) -> ( o2.freq - o1.freq ) ); // decreasing order
@@ -425,7 +454,10 @@ while ( !bfsQueue.isEmpty() )
 }
 ``` 
 
-#### Hashtable <a id="ds-hashtable"></a>
+#### Tree <a id="ds-tree"></a>
+
+
+#### HashMap <a id="ds-hashmap"></a>
 * frequency count with hashmap
 ```java
 map.put( key, 1 + map.getOrDefault( key, 0 ) );
@@ -434,7 +466,12 @@ map.put( key, 1 + map.getOrDefault( key, 0 ) );
 ```java
 map.putIfAbsent( key, new ArrayList<>() );
 ```
-* Use double as hashmap keys
+* Use double as hashmap keys is a bad practice. Especially if needing to perform calculations on double keys, the hash of double could mess up.
+
+#### TreeMap <a id="ds-treemap"></a>
+* Get Key/Entry APIs: firstKey/firstEntry, lastKey/lastEntry, lowerKey/lowerEntry, higherKey/higherEntry, CeilingKey/CeilingEntry, floorKey/floorEntry
+* Remove Key/Entry APIs: pollFirstEntry/pollLastEntry, remove
+* Get Subset APIs: tailMap/headMap/subMap
 
 #### Graph <a id="ds-graph"></a>
 * Detect cycles inside directed graphs with dfs + visited set + discovered set.
@@ -490,8 +527,8 @@ map.putIfAbsent( key, new ArrayList<>() );
 
 
 #### Trie <a id="ds-trie"></a>
-* applicable when optimize for a list of words as dictionary, avoid recomputation for the same string prefix ( e.g. word search II, airbnb k distance question )
-* iterative implementation much more concise than recursive implementation.
+* Use cases: applicable when optimize for a list of words as dictionary, avoid recomputation for the same string prefix ( e.g. word search II, airbnb k distance question )
+* Definitions: iterative implementation much more concise than recursive implementation.
 ```java
 class TrieNode 
 {
@@ -783,6 +820,7 @@ public void recursivefunction()
 * whiteboard coding does not simulate daily workflow of software engineers, thus might generate high false positives and false negatives. 
   * finish algorithms in 20 min in a bug-free and clean way requires lots of practice. not impartial for experienced engineers who does practice leetcode a lot such as Max Howell.
   * the optimization process in algorithm questions is over-optimization. In practice, only improve performance when necessary.
+  * stand and write code on whiteboard is really exhausting if lasting for 4-5 hours.
 
 #### Leetcode sins <a id="sins-leetcode"></a>
 * When problem occurs, too few stack trace
