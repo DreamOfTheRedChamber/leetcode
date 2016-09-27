@@ -43,6 +43,7 @@
 * [Learned lessons: algorithms](#learned-lessons-algorithms)
    * [Progressive enhancement on algorithms](#algorithms-progressive-enhancement-on-algorithms)
 	 * [Sort](#algorithms-sort)
+   * [Two pointer](#algorithms-two-pointer) 
 	 * [Binary search](#algorithms-binary-search)
 	 * [Recursion](#algorithms-recursive)
 	 * [Backtrack](#algorithms-backtrack)
@@ -140,8 +141,8 @@
   1. Synchronize with interviewer: "***Then I would usually check against some edge cases, should we do that next?***" 
   2. Check the code by myself
      * Check steps:
-       1. review the entire code, check whether there are unused variables, dead while loops, formatting issues, boundaries index overflow/underflow , ...
-       2. review the problem description, check whether there are unhandled problem assumptions 
+       1. review the entire code, check whether there are unused variables, loop counters while does not change as expected, unnecessary edge case checkings, boundaries index overflow/underflow 
+       2. review the problem description, check whether there are unhandled problem assumptions
        3. use small test cases to test different logical branches of the code
      * When there is a bug: do not rush to change. Identify the root cause first.
        * "***Give me a moment, I feel there is a bug here. Let's have a double check.***"
@@ -646,6 +647,9 @@ public class TrieIterative
   * O(n^2): dynamic programming
   * O(2^n): backtracking
   * O(n!): 
+
+#### Two pointers <a id="algorithms-twopointer"></a>
+* isSubsequence: Two pointers on two different arrays
 
 #### Sort <a id="algorithms-sort"></a>
 * Judge whether intervals overlap
