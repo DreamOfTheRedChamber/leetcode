@@ -107,50 +107,48 @@
 1. Make sure I understand the problem
   1. Declare interface in a strategic way (talk about different ways of defining it and trade-offs. e.g. do not define input as string when possible)
   2. (Optional) Clear assumptions about the problem. There are two types of questions. One is about more detailed info about input (refer to "input-specifications" section). The other is for special output. e.g. "If input is like this, what should output be"
-2. **Synchronize with interviewer** "Let's come up with a brute force solution first."
+2. Synchronize with interviewer "***Let's come up with a brute force solution first.***"
 3. Work out a brute force solution
   1. Work through a concrete example to abstract the problem
   2. Guarantee to come up with a brute force solution 
     * How I will enumerate all possible solutions / how will I do it in the most stupid way
-    * **Unstuck strategy: Clear problem abstraction**: "What kind of ds/algo might be used"
+    * Unstuck strategy: Clear problem abstraction: What kind of ds/algo might be used"
       * Brain storm problem types (min/max, shortest distance, output solutions, search, topo sort), algorithms (recursion, backtracking, sorting, breath/depth-first search, two pointers) / data types (stack, heap, undirected/directed graph, trie)
-    * **Unstuck strategy: Simplify problem**: "This problem seems kind of complicated. Let's try to solve a simpler problem first"
-    * **Unstuck strategy: Give it a try**: "Let's try doing it with XX DS/Algorithm. Not sure if it will work or not."
-  3. Calc time/space complexity: "The brute force solution is to test all possibilities, which is O(X)."
-4. Synchronize with interviewer "Now we have a brute force solution. Let's think ways to improve this"
+    * Unstuck strategy: Simplify problem: "***This problem seems kind of complicated. Let's try to solve a simpler problem first***"
+    * Unstuck strategy: Give it a try: "***Let's try doing it with XX DS/Algorithm. Not sure if it will work or not.***"
+  3. Calc time/space complexity: "***The time complexity of the algorithm is O(XXX) and space complexity is O(XXX)***"
+4. Synchronize with interviewer "***Now we have a brute force solution. Let's think ways to improve this***"
 5. Optimize
-    * **Unstuck strategy: Think about upper bound**: what are the best time/space complexity I could achieve
-    
-> * "Since I have to look through all items, so I cann't do better than O(n)." 
-    * **Unstuck strategy: Identify bad smell for efficiency**: whether repetitive computation, redundant space usage appears
-    * **Unstuck strategy: Trade space for time complexity**: Identify the bottleneck of brute force solution
-    * **Unstuck strategy: Discuss with interviewer for help:**: Stand back for a while and talk about the challegning you are facing. The interviewer might come in for help when necessary
-    * **Unstuck strategy: Give it a try**: "Let's try doing it with XX DS/Algorithm. Not sure if it will work or not."
-    * **Unstuck strategy: Be keen to what interviewer is saying**: Every word the interviewer is saying has its meanings
-6. **Synchronize with interviewer** "Should we write code for this"
+  * Unstuck strategy: Think about upper bound: what are the best time/space complexity I could achieve. "***Since I have to look through all items, so I cann't do better than O(n).***"
+  * Unstuck strategy: Identify bad smell for efficiency: whether repetitive computation, redundant space usage appears. "***We have done a lot of repetitive computation in the recursion tree.***"
+  * Unstuck strategy: Trade space for time complexity: Identify the bottleneck of brute force solution. "***The bottleneck of the algorithm lies in this section of code***"
+  * Unstuck strategy: Give it a try: "***Let's try doing it with XX DS/Algorithm. Not sure if it will work or not.***"
+  * Unstuck strategy: Discuss with interviewer for help: Stand back for a while and talk about the challegning you are facing. The interviewer might come in for help when necessary
+  * Unstuck strategy: Be keen to what interviewer is saying: Every word the interviewer is saying has its meanings
+6. Synchronize with interviewer "***Should we write code for this***"
 
 #### While coding <a id="interview-while-coding"></a>
   1. Write edge/normal test cases first
-  2. **Synchronize with interviewer**: tell my plan first. What are the first step, second step and third step to implement
+  2. Synchronize with interviewer: tell my plan first. What are the first step, second step and third step to implement
   3. Check input validity (throw exception or return directly)
   4. Use // or empty line as separator different steps.
   5. Avoid get caught up in trivialities
-    * When forget some language-specific trivial: "I do not remember exactly how the interface looks like, but I'd guess it has an API like this."
-    * When need a subroutine: "I am going to use a subroutine with the following interface. I will implement later".
+    * When forget some language-specific trivial: "***I do not remember exactly how the interface looks like, but I'd guess it has an API like this.***"
+    * When need a subroutine: "***I am going to use a subroutine with the following interface. I will implement later***".
 
 #### Clean up <a id="interview-after-coding"></a>
-  1. **Synchronize with interviewer**: "Then I would usually check against some edge cases, should we do that next?" 
+  1. Synchronize with interviewer: "***Then I would usually check against some edge cases, should we do that next?***" 
   2. Check the code by myself
      * Check steps:
        1. review the entire code, check whether there are unused variables, dead while loops, formatting issues, boundaries index overflow/underflow , ...
        2. review the problem description, check whether there are unhandled problem assumptions 
        3. use small test cases to test different logical branches of the code
      * When there is a bug: do not rush to change. Identify the root cause first.
-       * "Give me a moment, I feel there is a bug here. Let's have a double check."
-       * "The root cause of the bug is XXX."
+       * "***Give me a moment, I feel there is a bug here. Let's have a double check.***"
+       * "***The root cause of the problem is XXX.***"
   3. Explain shortcuts I have taken: Talk about sections which could be refactored/improved, but was done in a certain way in an interview setting
-     * "If I were writing this for a production use, I would avoid using this global variable."
-  4. **Synchronize with interviewer**: "I think I am done with the problem". Look and smell.
+     * "***If I were writing this for a production use, I would avoid using this global variable.***"
+  4. Synchronize with interviewer: "***I think I am done with the problem***".
 
 ### Questions to confirm about input <a id="questions-to-confirm-about-input"></a>
 #### Field types<a id="question-field-type"></a>
