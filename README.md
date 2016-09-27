@@ -70,6 +70,7 @@
     * speak out your thoughts for discussion when stuck
     * be humble, always quick to take ideas from others
     * demonstrate strong engineering skills/habits
+  * Think as if this is the last time that you are doing this in such a detailed way in your life. Next time when I hunt for jobs, either the HR will find me or I will have far less time to prepare
 
 #### Faster responses: how to load previously solved problems more quickly into my memory <a id="faster-responses"></a>
   * Use a concrete example to wake up associated memory
@@ -341,6 +342,7 @@ System.out.println( Arrays.toString( array1D ) );
 System.out.println( Arrays.deepToString( array2D ));
 ```
 * Generate coordinate hash for a position (x,y) by x * width + y;
+* When input is a 2D array and array width and height will be used repeated afterwards. Could consider define it inside a int width and int height variable
 
 #### String <a id="ds-string"></a>
 * StringTokenizer ( like an iterator, has built-in hasNext() and next() func ). Could be used instead of a global position pointer inside recursive function (e.g. tree serialization and deserialization)
