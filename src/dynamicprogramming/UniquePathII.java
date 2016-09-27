@@ -1,5 +1,9 @@
 package dynamicprogramming;
 
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
+
 /**
 Follow up for "Unique Paths":
 
@@ -57,9 +61,9 @@ public class UniquePathII
     	}
     	
     	// fill dp table
-    	for ( int i = 0; i < height; i++ )
+    	for ( int i = 1; i < height; i++ )
     	{
-    		for ( int j = 0; j < width; j++ )
+    		for ( int j = 1; j < width; j++ )
     		{
     			if ( obstacleGrid[i][j] == 1 )
     			{
@@ -73,5 +77,14 @@ public class UniquePathII
     	}
     	
     	return numUniquePaths[height-1][width-1];
+    }
+    
+    @Test
+    public void test()
+    {
+    	int[][] singleElemGrid = new int[0][0];
+    	singleElemGrid[0][0] = 0;
+    	assertEquals( 1, uniquePathsWithObstacles( singleElemGrid ) );
+    	
     }
 }

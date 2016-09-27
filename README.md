@@ -50,6 +50,7 @@
 	 * [Depth first search](#algorithms-dfs)
 	 * [Breath first search](#algorithms-bfs)
 	 * [Dynamic programming](#algorithms-dynamic-programming)
+* [Edge case tests](#edge-case-tests)  
 * [Multithreading in Java](#multithreading) 
 * [Bad smells for refactoring and optimization](#bad-smells)
 * [Sins](#sins)
@@ -154,7 +155,7 @@
 ### Questions to confirm about input <a id="questions-to-confirm-about-input"></a>
 #### Field types<a id="question-field-type"></a>
 * integer or double
-* positive or negative
+* positive or negative, non-positive or non-negative
 
 #### Array<a id="question-array"></a>
 * sorted or unsorted
@@ -179,7 +180,7 @@
 * directed or undirected
 
 ### Questions to confirm about output <a id="questions-to-confirm-about-output"></a>
-#### List<List<?>>
+#### List &lt List &lt?>>
 * any order requirements on internal list
 * should duplicates be removed
 
@@ -818,7 +819,12 @@ public void recursivefunction()
     * Palindrome: [i, j] depends on [i+1, j-1]
     * Edit distance: [i, j] dependes on [i-1, j], [i, j-1], [i-1, j-1]
 
-#### Multithreading in Java <a id="multithreading"></a>
+### [Edge case tests]<a id="edge-case-tests"></a>
+* Single element 2D grid
+* Integer.MIN_VALUE, Integer.MAX_VALUE
+
+### Multithreading in Java <a id="multithreading"></a>
+
 ### Bad smells for refactoring and optimization <a id="bad-smells"></a>
 * code length > 100
 * too many if statement checking for boundary cases
@@ -845,6 +851,7 @@ public void recursivefunction()
 * Unable to mark different stages in solving a problem ( e.g. thought-out, implemented, optimized, on-line judged, summarized )
 * Cannot add enough comments along the code
 * Never-ending, ever-increasing number of problems
+* Time exceed limit exception sometimes dependes on Leetcode.org machine status
 
 #### Core Java Interview questions
 [blog: java-success.com](http://www.java-success.com/)
