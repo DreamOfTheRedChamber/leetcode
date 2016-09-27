@@ -807,28 +807,12 @@ public void recursivefunction()
 
 #### Dynamic-programming <a id="algorithms-dynamic-programming"></a>
 * when allocate dynamic programming table size, allocate additional one row/col for generalization
-* Palindrome type: [i,j] depends on [i+1, j-1]
-```java
-      // init dp table
-      boolean[][] isPalindrome = new boolean[s.length()][s.length()];
-      for ( int i = 0; i < s.length(); i++ )
-      {
-        isPalindrome[i][i] = true;
-      }
-      for ( int i = 0; i < s.length() - 1; i++ )
-      {
-        isPalindrome[i][i+1] = s.charAt( i ) == s.charAt( i + 1 );
-      }
-      // fill dp table
-      for ( int i = s.length() - 2; i >= 0; i-- )
-      {
-        for ( int j = i + 2; j < s.length(); j++ )
-        {
-          isPalindrome[i][j] = s.charAt(i) == s.charAt(j)
-                    && isPalindrome[i+1][j-1];
-        }
-      }
-```
+* Types
+  * 1D dynamic programming
+    * House robber: [i, j] depends on [i-2], [i-3]
+  * 2D dynamic programming
+    * Palindrome: [i, j] depends on [i+1, j-1]
+    * Edit distance: [i, j] dependes on [i-1, j], [i, j-1], [i-1, j-1]
 
 #### Multithreading in Java <a id="multithreading"></a>
 ### Bad smells for refactoring and optimization <a id="bad-smells"></a>

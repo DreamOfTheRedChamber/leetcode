@@ -31,6 +31,6 @@ public class HouseRobber
         {
         	maxAmountLocal[i+1] = Math.max( maxAmountLocal[i - 1], maxAmountLocal[i - 2] ) + nums[i];
         }
-        return Math.max( maxAmountLocal[maxAmountLocal.length - 1], maxAmountLocal.length - 2 );
+        return Math.max( maxAmountLocal[maxAmountLocal.length - 1], maxAmountLocal[maxAmountLocal.length - 2] );
     }
 }
