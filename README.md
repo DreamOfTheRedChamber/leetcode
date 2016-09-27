@@ -10,7 +10,7 @@
     * [Before coding](#interview-before-coding)
     * [While coding](#interview-while-coding)
     * [After coding](#interview-after-coding)
-* [Questions to confirm about input](#question-to-confirm-about-input)
+* [Questions to confirm about input](#questions-to-confirm-about-input)
     * [Field types](#question-field-type)
     * [Array](#question-array)
     * [Linkedlist](#question-linkedlist)
@@ -18,6 +18,7 @@
     * [String](#question-string)
     * [Tree](#question-tree)
     * [Graph](#question-graph)
+* [Questions to confirm about output](#questions-to-confirm-about-output)
 * [Learned lessons: Java basics](#learned-lessons-java-basics)
     * [Type size](#basics-type-size) 
     * [Error-prone APIs](#basics-error-prone-apis)
@@ -40,14 +41,14 @@
     * [Graph](#ds-graph)
     * [Trie](#ds-trie)
 * [Learned lessons: algorithms](#learned-lessons-algorithms)
-    * [Progressive enhancement on algorithms](#algorithms-progressive-enhancement-on-algorithms)
-	* [Sort](#algorithms-sort)
-	* [Binary search](#algorithms-binary-search)
-	* [Recursion](#algorithms-recursive)
-	* [Backtrack](#algorithms-backtrack)
-	* [Depth first search](#algorithms-dfs)
-	* [Breath first search](#algorithms-bfs)
-	* [Dynamic programming](#algorithms-dynamic-programming)
+   * [Progressive enhancement on algorithms](#algorithms-progressive-enhancement-on-algorithms)
+	 * [Sort](#algorithms-sort)
+	 * [Binary search](#algorithms-binary-search)
+	 * [Recursion](#algorithms-recursive)
+	 * [Backtrack](#algorithms-backtrack)
+	 * [Depth first search](#algorithms-dfs)
+	 * [Breath first search](#algorithms-bfs)
+	 * [Dynamic programming](#algorithms-dynamic-programming)
 * [Multithreading in Java](#multithreading) 
 * [Bad smells for refactoring and optimization](#bad-smells)
 * [Sins](#sins)
@@ -176,6 +177,11 @@
 
 #### Graph<a id="question-graph"></a>
 * directed or undirected
+
+### Questions to confirm about output <a id="questions-to-confirm-about-output"></a>
+#### List<List<?>>
+* any order requirements on internal list
+* should duplicates be removed
 
 ### Learned lessons: Java basics <a id="learned-lessons-java-basics"></a>
 #### Type size<a id="basics-type-size"></a>
@@ -802,6 +808,28 @@ public void recursivefunction()
 
 #### Dynamic-programming <a id="algorithms-dynamic-programming"></a>
 * when allocate dynamic programming table size, allocate additional one row/col for generalization
+* Palindrome type: [i,j] depends on [i+1, j-1]
+```java
+      // init dp table
+      boolean[][] isPalindrome = new boolean[s.length()][s.length()];
+      for ( int i = 0; i < s.length(); i++ )
+      {
+        isPalindrome[i][i] = true;
+      }
+      for ( int i = 0; i < s.length() - 1; i++ )
+      {
+        isPalindrome[i][i+1] = s.charAt( i ) == s.charAt( i + 1 );
+      }
+      // fill dp table
+      for ( int i = s.length() - 2; i >= 0; i-- )
+      {
+        for ( int j = i + 2; j < s.length(); j++ )
+        {
+          isPalindrome[i][j] = s.charAt(i) == s.charAt(j)
+                    && isPalindrome[i+1][j-1];
+        }
+      }
+```
 
 #### Multithreading in Java <a id="multithreading"></a>
 ### Bad smells for refactoring and optimization <a id="bad-smells"></a>
