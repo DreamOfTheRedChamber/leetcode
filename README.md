@@ -9,7 +9,7 @@
 * [Interview patterns](#interview-patterns)
     * [Before coding](#interview-before-coding)
     * [While coding](#interview-while-coding)
-    * [After coding](#interview-after-coding)
+    * [Clean up](#interview-after-coding)
 * [Questions to confirm about input](#questions-to-confirm-about-input)
     * [Field types](#question-field-type)
     * [Array](#question-array)
@@ -117,10 +117,11 @@
     * **Unstuck strategy: Simplify problem**: "This problem seems kind of complicated. Let's try to solve a simpler problem first"
     * **Unstuck strategy: Give it a try**: "Let's try doing it with XX DS/Algorithm. Not sure if it will work or not."
   3. Calc time/space complexity: "The brute force solution is to test all possibilities, which is O(X)."
-4. **Synchronize with interviewer** "Now we have a brute force solution. Let's think ways to improve this"
+4. Synchronize with interviewer "Now we have a brute force solution. Let's think ways to improve this"
 5. Optimize
     * **Unstuck strategy: Think about upper bound**: what are the best time/space complexity I could achieve
-      * "Since I have to look through all items, so I cann't do better than O(n)."
+    
+> * "Since I have to look through all items, so I cann't do better than O(n)." 
     * **Unstuck strategy: Identify bad smell for efficiency**: whether repetitive computation, redundant space usage appears
     * **Unstuck strategy: Trade space for time complexity**: Identify the bottleneck of brute force solution
     * **Unstuck strategy: Discuss with interviewer for help:**: Stand back for a while and talk about the challegning you are facing. The interviewer might come in for help when necessary
