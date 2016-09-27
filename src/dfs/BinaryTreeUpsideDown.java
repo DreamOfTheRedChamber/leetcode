@@ -1,5 +1,7 @@
 package dfs;
 
+import utility.TreeNode;
+
 /**
 Given a binary tree where all the right nodes are either leaf nodes with a sibling (a left node that shares the same parent node) or empty, flip it upside down and turn it into a tree where the original right nodes turned into left leaf nodes. Return the new root.
 
@@ -17,11 +19,40 @@ return the root of the binary tree [4,5,2,#,#,3,1].
     / \
    3   1  
  */
-//TO_IMME
 public class BinaryTreeUpsideDown
 {
-    public TreeNode upsideDownBinaryTree(TreeNode root) 
+    public TreeNode upsideDownBinaryTree( TreeNode root )
     {
-        
+    	if ( root == null )
+    	{
+    		throw new IllegalArgumentException();
+    	}
+    	
+    	TreeNode newRoot = root;
+    	while( newRoot.left != null )
+    	{
+    		newRoot = newRoot.left;
+    	}
+    	
+    	upsideDownBinaryTree( root, null );
+    	return newRoot;
+    }
+    
+    private void upsideDownBinaryTree( TreeNode root, TreeNode parent )
+    {
+    	if ( root.left != null )
+    	{
+    		 upsideDownBinaryTree( root.left, root );
+    	}
+    	
+		root.right = parent;
+    	if ( parent != null )
+    	{
+        	root.left = parent.right;   		
+    	}
+    	else
+    	{
+    		root.left = null;
+    	}
     }
 }
