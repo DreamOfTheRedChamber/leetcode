@@ -182,7 +182,7 @@
 * directed or undirected
 
 ### Questions to confirm about output <a id="questions-to-confirm-about-output"></a>
-#### List &lt List &lt?>>
+#### List of List
 * any order requirements on internal list
 * should duplicates be removed
 
@@ -196,6 +196,11 @@
     - List<Integer> input
     - list.remove(index) will always take precedence because it does not require type casting
 * Ternary operator ?: priority is only higher than assignment. If it is used in combination with other operators, parentheses should be added.
+* Generate a random number
+```java
+Random rand = new Random();
+int n = rand.nextInt( 50 ) + 1; // 1 ~ 50, specified number is exclusive
+```
 
 #### Rarely mentioned APIs<a id="basics-rarely-mentioned-apis"></a>
 * set.add(elem) return false if set already contains the elem
@@ -768,7 +773,7 @@ public class Solution
 }
 ```
 
-* If the problem is a recursive problem. But public API does not satisfy the arguments needed by recursive algorithm, consider declare one by yourself. In the example below, declare a private recursive method cloneGraphRecurse(node, Map) for public API cloneGraph(node)
+* If the problem is a recursive problem. But public API does not satisfy the arguments needed by recursive algorithm, consider declare one by yourself. In the example below, declare a private recursive method cloneGraphRecurse(node, Map) for public API cloneGraph(node). Note: the return value is not a function signature.
 ```java
     public UndirectedGraphNode cloneGraph(UndirectedGraphNode node) 
     {
