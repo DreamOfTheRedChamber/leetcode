@@ -484,6 +484,7 @@ map.putIfAbsent( key, new ArrayList<>() );
 * Get Subset APIs: tailMap/headMap/subMap
 
 #### Graph <a id="ds-graph"></a>
+* When building graph, it is best practices to separate the phase of building vertexes and edges. When they are merged together, it is easy to forget about the isolated vertexes.
 * Detect cycles inside directed graphs with dfs + visited set + discovered set.
     * If during dfs in directed graph, a node discovered but not visited is encountered, then the directed graph has a cycle
 ```java
@@ -852,7 +853,7 @@ public void recursivefunction()
 * When problem occurs, too few stack trace
 * No online debuggers
 * No history track along time axis. Really bad synchronous workflow
-* Assumptions about validity of input
+* Assumptions about validity of input. They usually do not appear in interview settings
 * Unable to mark different stages in solving a problem ( e.g. thought-out, implemented, optimized, on-line judged, summarized )
 * Cannot add enough comments along the code
 * Never-ending, ever-increasing number of problems

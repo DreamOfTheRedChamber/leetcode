@@ -1,5 +1,7 @@
 package bfs;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -8,6 +10,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
+import java.util.stream.Collectors;
+
+import org.junit.Test;
 
 /**
 Given two words (beginWord and endWord), and a dictionary's word list, find the length of shortest transformation sequence from beginWord to endWord, such that:
@@ -30,6 +35,21 @@ All words contain only lowercase alphabetic characters.
  */
 public class WordLadder
 {
+	@Test
+	public void test()
+	{
+		Set<String> words = new HashSet<>();
+		words.add( "hot" );
+		words.add( "dog" );
+		words.add( "dot" );
+		assertEquals( 3, ladderLength( "hot", "dog", words ) );
+		
+		Set<String> words2 = new HashSet<>();
+		words2.add( "hot" );
+		words2.add( "dog" );
+		assertEquals(  -1, ladderLength( "hot", "dog", words2 ) );
+	}
+	
     public int ladderLength( String beginWord, String endWord, Set<String> wordList )
     {
     	if ( beginWord == null 
@@ -50,7 +70,8 @@ public class WordLadder
     	int distance = 1;
     	while ( !bfsQueue.isEmpty() )
     	{
-    		for ( int i = 0; i < bfsQueue.size( ); i++ )
+    		int levelSize = bfsQueue.size();
+    		for ( int i = 0; i < levelSize; i++ )
     		{
     			String head = bfsQueue.poll( );
     			if ( head.equals( endWord ) )
@@ -75,17 +96,22 @@ public class WordLadder
     private Map<String, Set<String>> buildGraph( String beginWord, String endWord, Set<String> wordList )
     {
     	Map<String, Set<String>> graph = new HashMap<>();
-    	List<String> allNodes = new ArrayList<>( wordList );
-    	allNodes.add( beginWord );
-    	allNodes.add( endWord );
+    	Set<String> allUniqueNodes = new HashSet<>( wordList );
+    	allUniqueNodes.add( beginWord );
+    	allUniqueNodes.add( endWord );
+    	List<String> allNodes = allUniqueNodes.stream().collect( Collectors.toList() );
+    	
+    	for ( String node : allNodes )
+    	{
+    		graph.put( node, new HashSet<>() );
+    	}
+    	
     	for ( int i = 0; i < allNodes.size() - 1; i++ )
     	{
     		for ( int j = i + 1; j < allNodes.size(); j++ )
     		{
     			if ( isAdjacent( allNodes.get( i ), allNodes.get( j ) ) )
     			{
-    				graph.putIfAbsent( allNodes.get( i ), new HashSet<>() );
-    				graph.putIfAbsent( allNodes.get( j ), new HashSet<>() );
     				graph.get( allNodes.get( i ) ).add( allNodes.get( j ) );
     				graph.get( allNodes.get( j ) ).add( allNodes.get( i ) );
     			}
@@ -105,7 +131,7 @@ public class WordLadder
     	boolean isFirstDiffFound = false;
     	for ( int i = 0; i < word1.length( ); i++ )
     	{
-    		if ( !word1.equals( word2 ) )
+    		if ( word1.charAt( i ) != word2.charAt( i ) )
     		{
     			if ( !isFirstDiffFound )
     			{
