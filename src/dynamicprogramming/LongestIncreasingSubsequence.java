@@ -11,13 +11,26 @@ Your algorithm should run in O(n2) complexity.
 
 Follow up: Could you improve it to O(n log n) time complexity?
  */
-//TO_HURRY
 public class LongestIncreasingSubsequence
 {
-
-    public int calculateMinimumHP(int[][] dungeon) 
+    public int lengthOfLIS( int[] nums )
     {
-        
+    	if ( nums.length == 0 )
+    	{
+    		return 0;
+    	}
+    	
+    	int[] longestSubseq = new int[nums.length];
+    	longestSubseq[0] = 1;
+    	for ( int i = 1; i < nums.length; i++ )
+    	{
+    		longestSubseq[i] = 1;
+    		for ( int j = 0; j < i; j++ )
+    		{
+    			longestSubseq[i] = Math.max( longestSubseq[i], 1 + longestSubseq[j] );
+    		}
+    	}
+    	
+    	return longestSubseq[longestSubseq.length-1];
     }
-
 }
