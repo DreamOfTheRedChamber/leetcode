@@ -138,6 +138,7 @@
   5. Avoid get caught up in trivialities
     * When forget some language-specific trivial: "***I do not remember exactly how the interface looks like, but I'd guess it has an API like this.***"
     * When need a subroutine: "***I am going to use a subroutine with the following interface. I will implement later***".
+    * When need double check: Not sure whether my loop should have "<" or "<=". Write a checkmark to remind yourself to check it at the end. Just get the general algorithm down first. 
 
 #### Clean up <a id="interview-after-coding"></a>
   1. Synchronize with interviewer: "***Then I would usually check against some edge cases, should we do that next?***" 
@@ -821,7 +822,8 @@ public void recursivefunction()
     * Palindrome: [i, j] depends on [i+1, j-1]
     * Edit distance: [i, j] dependes on [i-1, j], [i, j-1], [i-1, j-1]
     * Longest increasing subsequence: Global optimial from local optimal
-    * Coin change: [i] depends on an external set S. More specifically, every [i-s], where s belongs to S.  
+    * Coin change: [i] depends on an external set S. More specifically, every [i-s], where s belongs to S.
+
 ### [Edge case tests]<a id="edge-case-tests"></a>
 * Single element 2D grid
 * Integer.MIN_VALUE, Integer.MAX_VALUE

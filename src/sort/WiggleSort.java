@@ -19,7 +19,7 @@ public class WiggleSort
     	{
     		if ( i % 2 == 0 )
     		{
-    			if ( nums[i] < nums[i-1] )
+    			if ( nums[i] > nums[i-1] )
     			{
     				swap( nums, i, i-1 );
     			}
