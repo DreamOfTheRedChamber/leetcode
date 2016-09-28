@@ -1,11 +1,23 @@
-// TO_START
+package design;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+
 public class RandomizedSet
 {
+	private List<Integer> elements;
+	private Map<Integer,Integer> elemToPos;	
+	private Random rand;
 	
 	/** Initialize your data structure here. */
 	public RandomizedSet( )
 	{
-		
+		elements = new ArrayList<>();
+		elemToPos = new HashMap<>();
+		rand = new Random();
 	}
 
 	/**
@@ -14,7 +26,16 @@ public class RandomizedSet
 	 */
 	public boolean insert( int val )
 	{
-		
+		if ( !elemToPos.containsKey( val ) )
+		{
+			elements.add( val );
+			elemToPos.put( val, elements.size() - 1 );
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 
 	/**
@@ -23,13 +44,30 @@ public class RandomizedSet
 	 */
 	public boolean remove( int val )
 	{
-
+		if ( elemToPos.containsKey( val ) )
+		{
+			int position = elemToPos.get( val );
+			swap( elements, position, elements.size() - 1 );
+			elements.remove( elements.size() - 1 );
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 
 	/** Get a random element from the set. */
 	public int getRandom( )
 	{
-		
+		return elements.get( rand.nextInt( elements.size() ) );
+	}
+	
+	private void swap( List<Integer> elements, int pos1, int pos2 )
+	{
+		int buffer = elements.get( pos1 );
+		elements.set( pos1, elements.get( pos2 ) );
+		elements.set( pos2, buffer );
 	}
 }
 
