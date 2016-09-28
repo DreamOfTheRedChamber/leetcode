@@ -1,5 +1,9 @@
 package dynamicprogramming;
 
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
+
 /**
 Given an unsorted array of integers, find the length of longest increasing subsequence.
 
@@ -11,6 +15,8 @@ Your algorithm should run in O(n2) complexity.
 
 Follow up: Could you improve it to O(n log n) time complexity?
  */
+
+// TODO: improve complexity to nlogn
 public class LongestIncreasingSubsequence
 {
     public int lengthOfLIS( int[] nums )
@@ -27,10 +33,24 @@ public class LongestIncreasingSubsequence
     		longestSubseq[i] = 1;
     		for ( int j = 0; j < i; j++ )
     		{
-    			longestSubseq[i] = Math.max( longestSubseq[i], 1 + longestSubseq[j] );
+    			if ( nums[i] > nums[j] )
+    			{
+    				longestSubseq[i] = Math.max( longestSubseq[i], 1 + longestSubseq[j] );
+    			}
     		}
     	}
     	
-    	return longestSubseq[longestSubseq.length-1];
+    	int longestLength = 0;
+    	for ( int i = 0; i < longestSubseq.length; i++ )
+    	{
+    		longestLength = Math.max( longestLength, longestSubseq[i] );
+    	}
+    	return longestLength;
+    }
+    
+    @Test
+    public void test()
+    {
+    	assertEquals( 6, lengthOfLIS( new int[]{ 1, 3, 6, 7, 9, 4, 10, 5, 6 } ) );
     }
 }
