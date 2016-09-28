@@ -820,7 +820,8 @@ public void recursivefunction()
   * 2D dynamic programming
     * Palindrome: [i, j] depends on [i+1, j-1]
     * Edit distance: [i, j] dependes on [i-1, j], [i, j-1], [i-1, j-1]
-
+    * Longest increasing subsequence: Global optimial from local optimal
+    * Coin change: [i] depends on an external set S. More specifically, every [i-s], where s belongs to S.  
 ### [Edge case tests]<a id="edge-case-tests"></a>
 * Single element 2D grid
 * Integer.MIN_VALUE, Integer.MAX_VALUE

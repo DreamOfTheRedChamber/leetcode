@@ -21,6 +21,8 @@ return -1.
 Note:
 You may assume that you have an infinite number of each kind of coin.
  */
+
+// TODO: refactor
 public class CoinChange
 {
     public int coinChange( int[] coins, int amount )
@@ -45,15 +47,21 @@ public class CoinChange
     		return 1;
     	}
     	
-    	int[] minNum = new int[amount+1];
+    	int[] minNum = new int[amount + 1];
     	for ( int i = 1; i <= amount; i++ )
     	{    		
+    		if ( coinSet.contains( i ) )
+    		{
+    			minNum[i] = 1;
+    			continue;
+    		}
     		minNum[i] = Integer.MAX_VALUE;
     		for ( Integer coin : coins )
     		{
-    			if ( i - coin > 0 )
+    			if ( i - coin > 0 
+    					&& minNum[i - coin] > 0 )
     			{
-    				minNum[i] = Math.min( minNum[i], minNum[i-coin] + 1 );
+    				minNum[i] = Math.min( minNum[i], minNum[i - coin] + 1 );
     			}
     		}
     		if ( minNum[i] == Integer.MAX_VALUE )
