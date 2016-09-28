@@ -25,7 +25,7 @@ public class BinaryTreeUpsideDown
     {
     	if ( root == null )
     	{
-    		throw new IllegalArgumentException();
+    		return null;
     	}
     	
     	TreeNode newRoot = root;
