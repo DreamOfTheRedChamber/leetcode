@@ -1,6 +1,11 @@
 package linkedList;
 
+import org.junit.Ignore;
+import org.junit.Test;
+
+import utility.ListFactory;
 import utility.ListNode;
+import utility.Print;
 
 /**
 Given a linked list, reverse the nodes of a linked list k at a time and return its modified list.
@@ -22,6 +27,11 @@ public class ReverseNodesInKGroup
 {
     public ListNode reverseKGroup( ListNode head, int k )
     {
+    	if ( head == null )
+    	{
+    		return null;
+    	}
+    	
     	ListNode dummyHead = new ListNode( 0 );
     	dummyHead.next = head;
     	ListNode tailNode = dummyHead;
@@ -29,7 +39,7 @@ public class ReverseNodesInKGroup
     	ListNode currNode = head;
     	while ( currNode != null )
     	{
-    		// find the next (k+1)th node
+    		// find the next k th node
     		int nodeCounter = 1;
     		ListNode kthNode = currNode;
     		while ( nodeCounter < k
@@ -37,29 +47,82 @@ public class ReverseNodesInKGroup
     		{
     			nodeCounter++;
     			kthNode = kthNode.next;
-    		}
-    			
-    		if ( kthNode != null )
-    		{
-    			ListNode reversedListTail = currNode.next;
-    			ListNode nextNode = kthNode.next;
-    			    			
-    			for ( int numReversed = 0; numReversed < k; numReversed++, currNode = currNode.next )
-    			{
-    				tailNode.next = currNode;
-    				tailNode = currNode;
-    				currNode = currNode.next;
-    			}    			        		    			
-        		
-    			// move to the (k+1) th nodes for the next round
-    			currNode = nextNode;
-    		}
-    		else
+    		}    			
+    		if ( kthNode == null )
     		{
     			break;
-    		}    		
+    		}
+    		
+    		// reverse the next k nodes
+    		ListNode beforeThisRoundStart = tailNode;
+    		ListNode nextRoundStart = kthNode.next;		
+    		ListNode reversedListTail = currNode;
+    		ListNode reversedListHead = reverseKNodes( currNode, k );
+    		
+    		// concatenate list
+    		beforeThisRoundStart.next = reversedListHead;
+    		reversedListTail.next = nextRoundStart;
+    		
+    		// move to next round
+    		tailNode = reversedListTail;
+    		currNode = nextRoundStart;
     	}
-    	tailNode.next = null;
+    	
     	return dummyHead.next;
+    }
+    
+    private ListNode reverseKNodes( ListNode head, int k )
+    {
+    	ListNode dummyHead = new ListNode( 0 );
+    	ListNode currNode = head;
+    	int count = 0;
+    	while ( currNode != null 
+    			&& count < k )
+    	{
+    		// prepare for next round loop
+    		ListNode dummyHeadNextBuffer = dummyHead.next;
+    		ListNode currNodeNextBuffer = currNode.next;
+    		
+    		// ... do job in  this round loop
+    		dummyHead.next = currNode;
+    		currNode.next = dummyHeadNextBuffer;
+    		
+    		// move to next round loop
+    		currNode = currNodeNextBuffer;
+    		count++;
+    	}
+    	return dummyHead.next;
+    }
+    
+    @Test
+    public void test()
+    {
+    	ListNode head = ListFactory.createSingleNodeList();
+    	ListNode result = reverseKGroup( head, 1 );
+    	Print.printListNode( result );
+    }
+    
+    @Test
+    public void test2()
+    {
+    	ListNode head = ListFactory.createSingleNodeList();
+    	head = reverseKGroup( head, 2 );
+    	Print.printListNode( head );
+    }
+    
+    @Test
+    public void test3()
+    {
+    	ListNode head = ListFactory.createOddNodeList();
+    	ListNode result = reverseKGroup( head, 2 );
+    	Print.printListNode( result );
+    }
+
+    @Test
+    public void test4()
+    {
+    	ListNode evenList = ListFactory.createEvenNodeList();
+    	ListNode result = reverseKGroup( evenList, 2 );
+    	Print.printListNode( result );
     }
 }

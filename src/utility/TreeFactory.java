@@ -91,7 +91,7 @@ public class TreeFactory
 		return node0;
 	}
 	
-	public static TreeNode createSplayTree()
+	public static TreeNode createFlattenedTree()
 	{
 		TreeNode node0 = new TreeNode( 0 );
 		TreeNode node1 = new TreeNode( 1 );

@@ -373,6 +373,31 @@ String part2 = parts[1]; // 034556
 * Parsing integer from a string. When possible, use Java's built-in function Integer Integer.ValueOf(String) or int Integer.ParseInt(String) instead of doing it manually
 
 #### LinkedList <a id="ds-linkedlist"></a>
+* When linked list is used in combination with counters inside a while loop, it is really error-prone because the programmer needs to increment two places inside each loop. For while loop, it is a better practice to use blank space to separate the three sections including preparing for next round loop, do job in this round loop and move to next round loop.
+```java
+    private ListNode reverseKNodes( ListNode head, int k )
+    {
+      ListNode dummyHead = new ListNode( 0 );
+      ListNode currNode = head;
+      int count = 0;
+      while ( currNode != null 
+          && count < k )
+      {
+        // prepare for next round loop
+        ListNode dummyHeadNextBuffer = dummyHead.next;
+        ListNode currNodeNextBuffer = currNode.next;
+        
+        // ... do job in  this round loop
+        dummyHead.next = currNode;
+        currNode.next = dummyHeadNextBuffer;
+        
+        // move to next round loop
+        currNode = currNodeNextBuffer;
+        count++;
+      }
+      return dummyHead.next;
+    }
+```
 
 #### Stack <a id="ds-stack"></a>
 * When popping elements from stack, always check if the stack is empty. Otherwise, there might be a EmptyStackException()
@@ -849,6 +874,7 @@ public void recursivefunction()
 * code length > 100
 * too many if statement checking for boundary cases
 * code do not generalize well. Only work for current problem. e.g. merge 2 sorted list -> merge k sorted List
+* too deep nesting due to if/else blocks
 
 ### Sins <a id="sins"></a>
 #### Java sins <a id="sins-java"></a>
