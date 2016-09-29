@@ -104,6 +104,7 @@
   * Perfectionism: not just satisfied with running code but always pick the most elegant/efficient ways
   * Think behind the scenes: not just satisfied with fixing the bug but always think and generalize why the bug occurs
   * First things first: Thought process first, then coding
+  * Never be lazy: As long as you have not got 100% confidence that I will get the problem right, you should practice coding the problem by hand if time is enough
   
 ### Interview patterns <a id="interview-patterns"></a>
 #### Before coding <a id="interview-before-coding"></a>
@@ -470,7 +471,9 @@ while ( !bfsQueue.isEmpty() )
 ``` 
 
 #### Tree <a id="ds-tree"></a>
+* Complete tree
 
+* Binary search tree
 
 #### HashMap <a id="ds-hashmap"></a>
 * frequency count with hashmap
@@ -753,7 +756,11 @@ public int binarySearchRecursive( int[] array, int target, int start, int end )
 
 
 #### Recursive functions <a id="algorithms-recursion"></a>
-
+* Things to consider when designing recursive functions
+    * what arguments to pass to child recursion
+    * what result to return from child recursion
+    * parent recursion first, child recursion next or the reverse
+    * how many times to call child recursion from parent recursion
 * Result wrapper class or customized classes
     * Used a lot in PriorityQueue, Recurse(Tree) related problems
     * the resultwrapper class should be a private inner class, rather than relying on the default package level visibility rule
@@ -833,6 +840,7 @@ public void recursivefunction()
 ### [Edge case tests]<a id="edge-case-tests"></a>
 * Single element 2D grid
 * Integer.MIN_VALUE, Integer.MAX_VALUE
+* Tree: single node tree, flattened tree, normal tree, complete tree
 
 ### Multithreading in Java <a id="multithreading"></a>
 
@@ -850,7 +858,7 @@ public void recursivefunction()
 
 #### Whiteboard coding sins <a id="sins-whiteboard-coding"></a>
 * whiteboard coding does not simulate daily workflow of software engineers, thus might generate high false positives and false negatives. 
-  * finish algorithms in 20 min in a bug-free and clean way requires lots of practice. not impartial for experienced engineers who does practice leetcode a lot such as Max Howell.
+  * finish algorithms in 20 min in a bug-free and clean way requires lots of practice. It does not only require interviewee to understand algorithms and data structures, but also really proficient in these, sometimes even remember pretty tricky test cases. 
   * the optimization process in algorithm questions is over-optimization. In practice, only improve performance when necessary.
   * stand and write code on whiteboard is really exhausting if lasting for 4-5 hours.
 
