@@ -1,5 +1,6 @@
 package hashtable;
 
+import org.junit.Test;
 
 // Definition for singly-linked list with a random pointer.
  class RandomListNode 
@@ -37,7 +38,7 @@ public class CopyListWithRandomPointer
     	{
     		RandomListNode nextNode = currNode.next.next;
     		
-    		currNode.next.random = currNode.random.next;
+    		currNode.next.random = currNode.random == null ? null : currNode.random.next;
     		
     		currNode = nextNode;
     	}
@@ -49,7 +50,7 @@ public class CopyListWithRandomPointer
     	while ( currNode != null )
     	{
     		RandomListNode nextNode = currCopiedNode.next;
-    		RandomListNode nextCopiedNode = nextNode.next;
+    		RandomListNode nextCopiedNode = nextNode == null ? null : nextNode.next;
     		
     		currNode.next = nextNode;
     		currCopiedNode.next = nextCopiedNode;
@@ -59,5 +60,12 @@ public class CopyListWithRandomPointer
     	}
     	
     	return copiedHead;
+    }
+    
+    @Test
+    public void test()
+    {
+    	RandomListNode node = new RandomListNode( 1 );
+    	RandomListNode copiedNode = copyRandomList( node );    	
     }
 }

@@ -840,6 +840,7 @@ public void recursivefunction()
 ### [Edge case tests]<a id="edge-case-tests"></a>
 * Single element 2D grid
 * Integer.MIN_VALUE, Integer.MAX_VALUE
+* LinkedList: single node, even node, odd node, pointer pointing to null
 * Tree: single node tree, flattened tree, normal tree, complete tree
 
 ### Multithreading in Java <a id="multithreading"></a>
