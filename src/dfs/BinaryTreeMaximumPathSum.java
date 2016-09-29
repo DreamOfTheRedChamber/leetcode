@@ -1,5 +1,9 @@
 package dfs;
 
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
+
 import utility.TreeNode;
 
 /**
@@ -23,7 +27,8 @@ class ResultWrapper
 	public final int maxSubtree;
 	public ResultWrapper( int maxSubtreeFromRoot, int maxSubtree )
 	{
-		
+		this.maxSubtreeFromRoot = maxSubtreeFromRoot;
+		this.maxSubtree = maxSubtree;
 	}
 }
 
@@ -43,7 +48,7 @@ public class BinaryTreeMaximumPathSum
     {
     	if ( root == null )
     	{
-    		return new ResultWrapper( 0, 0 );
+    		return new ResultWrapper( 0, Integer.MIN_VALUE );
     	}
     	if ( root.left == null 
     			&& root.right == null )
@@ -55,9 +60,29 @@ public class BinaryTreeMaximumPathSum
     	ResultWrapper rightChildResult = maxPathSumRecurse( root.right );
     	int maxSubtreeFromRoot = Math.max( root.val,
     										Math.max( leftChildResult.maxSubtreeFromRoot + root.val, rightChildResult.maxSubtreeFromRoot + root.val ) );
-    	int maxSubtree = Math.max( maxSubtreeFromRoot, 
+    	int maxSubtree = Math.max( root.val + Math.max( 0, leftChildResult.maxSubtreeFromRoot ) + Math.max( 0, rightChildResult.maxSubtreeFromRoot ), 
     										Math.max( leftChildResult.maxSubtree, rightChildResult.maxSubtree ) );
 
     	return new ResultWrapper( maxSubtreeFromRoot, maxSubtree );
+    }
+    
+    @Test
+    public void test()
+    {
+    	TreeNode node1 = new TreeNode( 1 );
+    	TreeNode node2 = new TreeNode( 2 );
+    	TreeNode node3 = new TreeNode( 3 );
+    	node1.left = node2;
+    	node1.right = node3;
+    	assertEquals( 6, maxPathSum( node1 ) );    	    	
+    }
+    
+    @Test
+    public void edgeTest()
+    {
+    	TreeNode node4 = new TreeNode( -2 );
+    	TreeNode node5 = new TreeNode( -1 );
+    	node4.left = node5;
+    	assertEquals( -1, maxPathSum( node4 ) );
     }
 }
