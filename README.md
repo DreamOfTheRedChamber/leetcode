@@ -41,15 +41,15 @@
     * [Graph](#ds-graph)
     * [Trie](#ds-trie)
 * [Learned lessons: algorithms](#learned-lessons-algorithms)
-   * [Progressive enhancement on algorithms](#algorithms-progressive-enhancement-on-algorithms)
-	 * [Sort](#algorithms-sort)
-   * [Two pointer](#algorithms-two-pointer) 
-	 * [Binary search](#algorithms-binary-search)
-	 * [Recursion](#algorithms-recursive)
-	 * [Backtrack](#algorithms-backtrack)
-	 * [Depth first search](#algorithms-dfs)
-	 * [Breath first search](#algorithms-bfs)
-	 * [Dynamic programming](#algorithms-dynamic-programming)
+    * [Progressive enhancement on algorithms](#algorithms-progressive-enhancement-on-algorithms)
+	  * [Sort](#algorithms-sort)
+    * [Two pointer](#algorithms-two-pointer) 
+	  * [Binary search](#algorithms-binary-search)
+	  * [Recursion](#algorithms-recursive)
+	  * [Backtrack](#algorithms-backtrack)
+	  * [Depth first search](#algorithms-dfs)
+	  * [Breath first search](#algorithms-bfs)
+	  * [Dynamic programming](#algorithms-dynamic-programming)
 * [Edge case tests](#edge-case-tests)  
 * [Multithreading in Java](#multithreading) 
 * [Bad smells for refactoring and optimization](#bad-smells)
@@ -397,6 +397,23 @@ String part2 = parts[1]; // 034556
       }
       return dummyHead.next;
     }
+```
+* Reverse list recursively, the key point here is record the reversed list tail before recursion
+```java
+  public ListNode reverseListRecusively( ListNode head )
+  {
+    if ( head == null
+        || head.next == null )
+    {
+      return head;
+    }
+    
+    ListNode reversedListTail = head.next;
+    ListNode reversedListHead = reverseList( head.next );
+    reversedListTail.next = head;
+    head.next = null;
+    return reversedListHead;
+  }
 ```
 
 #### Stack <a id="ds-stack"></a>
