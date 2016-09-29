@@ -42,8 +42,8 @@
     * [Trie](#ds-trie)
 * [Learned lessons: algorithms](#learned-lessons-algorithms)
     * [Progressive enhancement on algorithms](#progressive-enhancement-on-algorithms)
+    * [Two pointers](#algorithms-two-pointer)
     * [Sort](#algorithms-sort)
-    * [Two pointer](#algorithms-two-pointer)
     * [Binary search](#algorithms-binary-search) 
     * [Recursion](#algorithms-recursive)
     * [Backtrack](#algorithms-backtrack)
@@ -110,7 +110,10 @@
 #### Before coding <a id="interview-before-coding"></a>
 1. Make sure I understand the problem
   1. Declare interface in a strategic way (talk about different ways of defining it and trade-offs. e.g. do not define input as string when possible)
-  2. (Optional) Clear assumptions about the problem. There are two types of questions. One is about more detailed info about input (refer to "input-specifications" section). The other is for special output. e.g. "If input is like this, what should output be"
+  2. (Optional) Clear assumptions about the problem. There are two types of questions. 
+     1. more detailed info about input (refer to "input-specifications" section). 
+     2. "***Whether a valid solution always exist***" 
+     3. "***If input is like this, what should output be***"
 2. Synchronize with interviewer "***Let's come up with a brute force solution first.***"
 3. Work out a brute force solution
   1. Work through a concrete example to abstract the problem
@@ -695,15 +698,10 @@ public class TrieIterative
   * pre-process data: e.g. sorting
   * divide into subproblems: e.g. recursion, discuss by different conditions
   * save time by avoid solving repeated problems: e.g. recursion -> dynamic programming
-* time complexity for common problem types: 
-  * O(lgn): binary search
-  * O(n): two pointers, use hashmap, partition, bucket sort
-  * O(nlogn): priorityqueue, divide and conquer
-  * O(n^2): dynamic programming
-  * O(2^n): backtracking
-  * O(n!): 
 
-#### Two pointers <a id="algorithms-twopointer"></a>
+#### Two pointers <a id="algorithms-two-pointer"></a>
+* slow/fast pointers that start from same location:
+* begin/end pointers that move toward each other
 * isSubsequence: Two pointers on two different arrays
 
 #### Sort <a id="algorithms-sort"></a>
@@ -716,6 +714,29 @@ private boolean isOverlap( Interval o1, Interval o2 )
 }
 ```
 * Arrays.sort( array, comparator ) and Collections.sort( collection, comparator ) method
+* Partition algorithm used in quick sort O(n)
+```java
+// int[] input, int left, int right
+    int pivotValue = input[(left+right)/2];
+    while(i >= j)
+    {
+          while(input[i] < pivotValue)
+          {
+              i++;
+          }
+          while(input[j] > pivotValue)
+          {
+              j--;
+          }
+         
+          if(i <= j)
+          {
+                swap(data, i, j);
+                i++;
+                j--;
+          }         
+     }
+```
 
 #### Binary search <a id="algorithms-binary-search"></a>
 * Universal templates - iterative/recursive version 
@@ -798,6 +819,16 @@ public int binarySearchRecursive( int[] array, int target, int start, int end )
 
 
 #### Recursive functions <a id="algorithms-recursion"></a>
+* Time complexity:
+
+| Recurrence | Algorithm           | Big-O Solution  |
+| --------------------- |:-------------:| -----:|
+| T(n) = T(n/2) + O(1)  | Binary search | O(lgn) |
+| T(n) = T(n-1) + O(1)  | Sequential search      |   O(n) |
+| T(n) = 2T(n/2) + O(1) | Tree traversal      |  O(n) |
+| T(n) = 2T(n/2) + O(n) | Merge sort      |    O(nlogn) |
+| T(n) = T(n-1) + O(n)  | Selection sort      |  O(n^2) |
+
 * Things to consider when designing recursive functions
     * what arguments to pass to child recursion
     * what result to return from child recursion
@@ -865,8 +896,14 @@ public void recursivefunction()
   * if could modify the grid, place special char such as '#' for already discovered nodes
   
 #### Depth first search <a id="algorithms-dfs"></a>
+* When the problem asks for all results
+* How to remove duplicates ( avoid duplicate recursion beforehand or use hashset afterwards )
+* Record depth first search path
 
 #### Breath first search <a id="algorithms-bfs"></a>
+* When the problem asks for the minimum 
+* Grid-based
+* Graph-based
 
 #### Dynamic-programming <a id="algorithms-dynamic-programming"></a>
 * when allocate dynamic programming table size, allocate additional one row/col for generalization
@@ -878,6 +915,7 @@ public void recursivefunction()
     * Edit distance: [i, j] dependes on [i-1, j], [i, j-1], [i-1, j-1]
     * Longest increasing subsequence/max product subarray: Global optimial from local optimal
     * Coin change: [i] depends on an external set S. More specifically, every [i-s], where s belongs to S.
+* Rebuild the results from memorization array
 
 ### [Edge case tests]<a id="edge-case-tests"></a>
 * Single element 2D grid
