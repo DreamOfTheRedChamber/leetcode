@@ -17,8 +17,8 @@ public class MaximumProductSubarray
     	}
     	
     	// compute local peek values
-    	int[] localMaxProduct = new int[nums.length-1];
-    	int[] localMinProduct = new int[nums.length-1];
+    	int[] localMaxProduct = new int[nums.length];
+    	int[] localMinProduct = new int[nums.length];
     	localMaxProduct[0] = nums[0];
     	localMinProduct[0] = nums[0];
     	for ( int i = 1; i < nums.length; i++ )
