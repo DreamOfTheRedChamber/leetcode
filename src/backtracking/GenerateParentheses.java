@@ -16,7 +16,7 @@ For example, given n = 3, a solution set is:
 //TO_HURRY
 public class GenerateParentheses 
 {
-    public List<String> generateParenthesis(int n) 
+    public List<String> generateParenthesis( int n )
     {
         
     }

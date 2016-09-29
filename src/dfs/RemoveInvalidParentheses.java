@@ -13,7 +13,7 @@ Examples:
 //TO_IMME
 public class RemoveInvalidParentheses
 {
-    public List<String> removeInvalidParentheses(String s) 
+    public List<String> removeInvalidParentheses( String s )
     {
         
     }

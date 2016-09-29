@@ -32,9 +32,15 @@ Do not rely on any library method such as eval or serialize methods. You should 
 //TO_HURRY
 public class EncodeAndDecodeStrings
 {
+    // Encodes a list of strings to a single string.
+    public String encode( List<String> strs )
+    {
+        
+    }
 
-	public EncodeAndDecodeStrings( )
-	{
-	}
-
+    // Decodes a single string to a list of strings.
+    public List<String> decode( String s )
+    {
+        
+    }
 }
