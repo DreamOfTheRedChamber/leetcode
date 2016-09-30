@@ -4,13 +4,15 @@ package multithreading;
  * 
  */
 
-public class HelloWorld
-{
+public class ThreadBasicsJoin2
+{	
 	public static void main( String[] args ) throws InterruptedException
 	{
-		Thread thread = new Thread( new PrintHello() );
-		thread.start( );
-		thread.join( );
+		Thread childThread = new Thread( new PrintHello() );
+		childThread.start( );
+		
+		// Join: used for thread synchronization. main thread will wait for child thread to finish
+		childThread.join( );
 		System.out.print( "Success!" );
 	}
 	

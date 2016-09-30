@@ -6,7 +6,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * 
  */
 
-public class AtomicTest
+public class CounterAtomicNoRaceCondition
 {
 	private static AtomicInteger race = new AtomicInteger();
 	private static final int THREADS_COUNT = 20;

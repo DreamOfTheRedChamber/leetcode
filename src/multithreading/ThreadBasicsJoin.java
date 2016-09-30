@@ -4,7 +4,7 @@ package multithreading;
  * 
  */
 
-public class HelloWorld2
+public class ThreadBasicsJoin
 {
 	public static void main( String[] args ) throws InterruptedException
 	{

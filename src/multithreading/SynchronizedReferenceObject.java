@@ -4,7 +4,7 @@ package multithreading;
  * 
  */
 
-public class SynchronizedExample5
+public class SynchronizedReferenceObject
 {
 	private static final long SLEEP_INTERVAL_MS = 5000;
 	private static final Object lock = new Object();
@@ -41,8 +41,8 @@ public class SynchronizedExample5
 	
 	public static void main( String[] args ) throws InterruptedException
 	{
-		final SynchronizedExample5 s = new SynchronizedExample5();
-		final SynchronizedExample5 s2 = new SynchronizedExample5();
+		final SynchronizedReferenceObject s = new SynchronizedReferenceObject();
+		final SynchronizedReferenceObject s2 = new SynchronizedReferenceObject();
 		
 		Thread T1 = new Thread( ( Runnable ) () -> { 
 								s.foo( ); 

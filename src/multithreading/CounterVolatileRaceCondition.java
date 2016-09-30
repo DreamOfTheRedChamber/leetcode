@@ -4,8 +4,9 @@ package multithreading;
  * 
  */
 
-public class VolatileTest
+public class CounterVolatileRaceCondition
 {
+	// TODO: Even using volatile variable, there is still race condition
 	public static volatile int race = 0;
 	private static final int THREADS_COUNT = 20;
 	

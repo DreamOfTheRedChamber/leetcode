@@ -4,7 +4,7 @@ package multithreading;
  * 
  */
 
-public class SynchronizedExample3
+public class SynchronizedBlock
 {
 	public void foo() throws InterruptedException
 	{
@@ -20,13 +20,13 @@ public class SynchronizedExample3
 	{
 		synchronized ( this )
 		{
-			System.out.print( "Inside bar" );
+			System.out.println( "Inside bar" );
 		}
 	}
 	
 	public static void main( String[] args ) throws InterruptedException
 	{
-		final SynchronizedExample3 s = new SynchronizedExample3();
+		final SynchronizedBlock s = new SynchronizedBlock();
 		
 		Thread T1 = new Thread( new Runnable() {
 			@Override

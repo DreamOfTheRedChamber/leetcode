@@ -4,13 +4,13 @@ package multithreading;
  * 
  */
 
-public class SynchronizedExample4
+public class SynchronizedClassMethod
 {
 	private static final long SLEEP_INTERVAL_MS = 5000;
 	
 	public void foo()
 	{
-		synchronized ( SynchronizedExample4.class )
+		synchronized ( SynchronizedClassMethod.class )
 		{
 			System.out.println( "Inside foo" );
 			try
@@ -25,7 +25,7 @@ public class SynchronizedExample4
 	
 	public void bar()
 	{
-		synchronized ( SynchronizedExample4.class )
+		synchronized ( SynchronizedClassMethod.class )
 		{
 			System.out.append( "Inside bar" );
 		}
@@ -38,8 +38,8 @@ public class SynchronizedExample4
 	
 	public static void main( String[] args ) throws InterruptedException
 	{
-		final SynchronizedExample4 s = new SynchronizedExample4();
-		final SynchronizedExample4 s2 = new SynchronizedExample4();
+		final SynchronizedClassMethod s = new SynchronizedClassMethod();
+		final SynchronizedClassMethod s2 = new SynchronizedClassMethod();
 		
 		Thread T1 = new Thread( ( Runnable) () 
 									-> { s.foo( ); } );

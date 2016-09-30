@@ -4,22 +4,25 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
- * 
+ * This file demonstrate the use of ReentrantLock. The lock is only available to other 
  */
 
-public class LockExample
+public class ReentrantLockExample
 {
 	private static final long SLEEP_INTERVAL_MS = 5000;
 	private final Lock lock = new ReentrantLock();
 	
 	public void foo()
 	{
+		// Java's best practices to structure lock()/unlock() method at
+		// http://www.javapractices.com/topic/TopicAction.do;jsessionid=E3DD19CD14CA19D1D9B9E0C019A7F018?Id=253
+		lock.lock( );
 		try
-		{
-			lock.lock( );
+		{			
 			System.out.println( "Inside foo" );
 			try
 			{
+				// reentrantLock will be owned by foo() before unlocks it.
 				Thread.sleep( SLEEP_INTERVAL_MS );
 			}
 			catch ( InterruptedException e )
@@ -33,11 +36,12 @@ public class LockExample
 		}
 	}
 	
-	public void bar()
+	public void bar()	
 	{
+		// bar() will print out after foo() releases the reentrantlock()
+		lock.lock( );
 		try
 		{
-			lock.lock( );
 			System.out.println( "Inside bar" );
 		}
 		finally
@@ -53,7 +57,7 @@ public class LockExample
 	
 	public static void main( String[] args ) throws InterruptedException
 	{
-		final LockExample s = new LockExample();
+		final ReentrantLockExample s = new ReentrantLockExample();
 		
 		Thread T1 = new Thread( ( Runnable ) () -> {
 			s.foo( );

@@ -1,7 +1,7 @@
 package multithreading;
 
 /**
- * 
+ * This class could not be run. not sure about the reason yet 
  */
 
 public class ConditionVariableExample
@@ -22,6 +22,7 @@ public class ConditionVariableExample
 			{
 				Thread.currentThread( ).interrupt( );
 			}
+			
 			synchronized ( thread )
 			{
 				running = false;

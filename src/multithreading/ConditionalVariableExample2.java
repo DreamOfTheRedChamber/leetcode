@@ -32,6 +32,8 @@ public class ConditionalVariableExample2
 			{
 				lock.lock( );
 				running = false;
+				
+				// wake up all waiting threads
 				condition.signalAll( );
 			}
 			finally

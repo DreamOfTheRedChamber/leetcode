@@ -1,10 +1,10 @@
 package multithreading;
 
 /**
- * 
+ *  
  */
 
-public class SynchronizedExample
+public class SynchronizedMethods
 {
 	private static final long SLEEP_INTERVAL_MS = 5000;
 	
@@ -21,6 +21,7 @@ public class SynchronizedExample
 		}
 	}
 	
+	// have not fully understand, why bar() needs to wait for foo() to finish
 	public synchronized void bar() 
 	{
 		System.out.println( "Inside bar" );
@@ -33,7 +34,7 @@ public class SynchronizedExample
 	
 	public static void main( String[] args ) throws InterruptedException
 	{
-		final SynchronizedExample s = new SynchronizedExample();
+		final SynchronizedMethods s = new SynchronizedMethods();
 		
 		Thread T1 = new Thread( new Runnable() {
 			@Override
