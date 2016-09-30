@@ -476,7 +476,7 @@ public void traverse( TreeNode root, int order )
 ```
 
 #### Queue/PriorityQueue <a id="ds-queue"></a>
-* [peek vs element, poll vs remove] when queue is empty, the former returns null and the latter throws exception. Most times in an interview setting, use the former one is appropriate. The first reason is that it is not an exceptional case that the queue is empty. The second reason is that throwsing exceptions incurs a performance penalty.
+* peek vs element, poll vs remove: when queue is empty, the former returns null and the latter throws exception. Most times in an interview setting, use the former one is appropriate. The first reason is that it is not an exceptional case that the queue is empty. The second reason is that throwsing exceptions incurs a performance penalty.
 ```java
 // implements inside abstractQueue<E>
 public E remove()
@@ -917,11 +917,12 @@ public void recursivefunction()
     * Coin change: [i] depends on an external set S. More specifically, every [i-s], where s belongs to S.
 * Rebuild the results from memorization array
 
-### [Edge case tests]<a id="edge-case-tests"></a>
+### Edge case tests <a id="edge-case-tests"></a>
 * Single element 2D grid
 * Integer.MIN_VALUE, Integer.MAX_VALUE
 * LinkedList: single node, even node, odd node, pointer pointing to null
 * Tree: single node tree, flattened tree, normal tree, complete tree
+* While loop: flow control counters
 
 ### Multithreading in Java <a id="multithreading"></a>
 
@@ -954,5 +955,6 @@ public void recursivefunction()
 * Never-ending, ever-increasing number of problems
 * Time exceed limit exception sometimes dependes on Leetcode.org machine status
 
-#### Core Java Interview questions
-[blog: java-success.com](http://www.java-success.com/)
+#### References
+* Core Java Interview questions: [blog: java-success.com](http://www.java-success.com/)
+* Coding and system design [blog: massive tech interview](http://massivetechinterview.blogspot.com/)

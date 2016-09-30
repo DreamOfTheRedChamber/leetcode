@@ -3,6 +3,8 @@ package string;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Test;
+
 /**
 Given an array of words and a length L, format the text such that each line has exactly L characters and is fully (left and right) justified.
 
@@ -27,15 +29,21 @@ Note: Each word is guaranteed not to exceed L in length.
 
 public class TextJustification
 {
+	@Test
+	public void test()
+	{
+		System.out.println( fullJustify( new String[]{ "This", "is", "an", "example", "of", "text", "justification" }, 16 ) );
+		System.out.println( fullJustify( new String[]{ "What", "must", "be", "shall", "be" }, 12 ) );
+	}
+	
     public List<String> fullJustify( String[] words, int maxWidth )
     {
        List<String> justifiedLines = new ArrayList<>();
-       int wordPos = 0;
-       while ( wordPos < words.length )
+       int endPos = 0;
+       while ( endPos < words.length )
        {
     	   // calculate num of words in this line
-    	   int startPos = wordPos;
-    	   int endPos = wordPos;
+    	   int startPos = endPos;
     	   int usedCharNum = 0;
     	   while ( endPos < words.length 
     			   && usedCharNum + words[endPos].length() <= maxWidth )
@@ -53,17 +61,23 @@ public class TextJustification
     	   }
     	   int numWords = endPos - startPos;
 
-    	   // handle edge case: single word a line
-    	   if ( numWords == 1 )
+    	   // handle edge case: single word a line or last line
+    	   if ( numWords == 1 
+    			   || endPos == words.length )
     	   {
     		   StringBuilder currLine = new StringBuilder();
     		   currLine.append( words[startPos] );
-    		   int spaces = maxWidth - words[startPos].length();
-    		   for ( int i = 0; i < spaces; i++ )
+    		   for ( int i = startPos + 1; i < endPos; i++ )
     		   {
-    			   currLine.append(' ');
+    			   currLine.append( ' ' );
+    			   currLine.append( words[i] );
     		   }
-    		   wordPos = endPos;
+    		   int numSpaces = maxWidth - currLine.length();
+    		   for ( int i = 0; i < numSpaces; i++ )
+    		   {
+    			   currLine.append( ' ' );
+    		   }
+    		   justifiedLines.add( currLine.toString() );
     		   continue;
     	   }
     	   
