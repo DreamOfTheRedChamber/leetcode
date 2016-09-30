@@ -705,6 +705,15 @@ public class TrieIterative
 * isSubsequence: Two pointers on two different arrays
 
 #### Sort <a id="algorithms-sort"></a>
+* Sort classification ( only for O(nlogn) and O(n) algorithms )
+
+| Algorithm | memory    | Use case  | 
+| --------------------- |:---------:| -----:|  
+| Mergesort  | O(1)     | external sorting / stable |
+| Quicksort  | O(n)     |  usually the quickest O(nlogn) / unstable sort |
+| Heapsort   | O(1)     |  unstable sort |
+| Bucketsort | O(1)     |  when knowing range and faster (non-comparison) |
+
 * Judge whether intervals overlap
 ```java
 private boolean isOverlap( Interval o1, Interval o2 )
@@ -738,6 +747,7 @@ private boolean isOverlap( Interval o1, Interval o2 )
      }
 ```
 
+ 
 #### Binary search <a id="algorithms-binary-search"></a>
 * Universal templates - iterative/recursive version 
 ```java
