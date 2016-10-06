@@ -911,9 +911,25 @@ public void recursivefunction()
 
 #### Breath first search <a id="algorithms-bfs"></a>
 * When the problem asks for the minimum 
-* Grid-based: 
+* Grid-based ( e.g. int[][] grid ):
+  * How to store coordinates: 
+     * A customized class Coor
+     * If allowing to modify grid, could temporarily place special chars/values to indicate that this position has been visited before. Depending on whether input int grid[][] is a defensive copy, we could decide whether to recover the grid[][] by replacing previously set special chars/values.
+  * How to track visited coordinates:
+     * The idea approach is to provides a overrided hashCode() and equals() function for Coor class. But this is kind of overkilling for a 45-min interview setting.
+     * Prefer a compromised approach by using ( x * grid_width + y ) use as Coor hash and put them in a separate Set<Integer> collection. This might introduce overflow bugs, but should be enough in an interview setting.
 ```java
-// 
+class Coor
+{
+  public final int x;
+  public final int y;
+  public Coor( int x, int y )
+  {
+    this.x = x;
+    this.y = y;
+  } 
+}
+
 public void bfsMainFunction( T[][] grid )
 {
   //... other logics
