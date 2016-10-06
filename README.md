@@ -51,7 +51,6 @@
     * [Breath first search](#algorithms-bfs)
     * [Dynamic programming](#algorithms-dynamic-programming)
 * [Edge case tests](#edge-case-tests)  
-* [Multithreading in Java](#multithreading) 
 * [Bad smells for refactoring and optimization](#bad-smells)
 * [Sins](#sins)
    * [Java sins](#sins-java)
