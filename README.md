@@ -69,7 +69,7 @@
     * speak out your thoughts for discussion when stuck
     * be humble, always quick to take ideas from others
     * demonstrate strong engineering skills/habits
-  * Think as if this is the last time that you are doing this in such a detailed way in your life. Next time when I hunt for jobs, either the HR will find me or I will have far less time to prepare
+  * Think as if this is the last time that you are doing this in such a detailed way in your life. Next time when I hunt for jobs, either HRs will find me or I will have far less time to prepare
 
 #### Faster responses: how to load previously solved problems more quickly into my memory <a id="faster-responses"></a>
   * Use a concrete example to wake up associated memory
@@ -92,7 +92,7 @@
 
 ### Practice patterns <a id="practice-patterns"></a>
 #### Tools<a id="practice-tools"></a>
-  * Task planning: Use Eclipse task tags ( TO_START, TO_HURRY, TO_TEST ) to manage algorithm question status and prioritize important tasks
+  * Task planning: Use tags ( TO_START, TO_HURRY, TO_TEST ) to manage algorithm question status and prioritize important tasks
   * Feedbacks: Use git commit number per day as feedback for progress
   * Summarizing lessons: Use git commit message as a place to learn from mistakes and summarize lessons
 
@@ -932,8 +932,6 @@ public void recursivefunction()
 * LinkedList: single node, even node, odd node, pointer pointing to null
 * Tree: single node tree, flattened tree, normal tree, complete tree
 * While loop: flow control counters
-
-### Multithreading in Java <a id="multithreading"></a>
 
 ### Bad smells for refactoring and optimization <a id="bad-smells"></a>
 * code length > 100
