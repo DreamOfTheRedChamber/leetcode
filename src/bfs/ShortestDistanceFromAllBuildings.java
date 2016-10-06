@@ -8,7 +8,24 @@ import java.util.Queue;
 import org.junit.Test;
 
 /**
- * 
+You want to build a house on an empty land which reaches all buildings in the shortest amount of distance. You are given a 2D grid of values 0, 1 or 2, where:
+
+Each 0 marks an empty land which you can pass by freely.
+Each 1 marks a building which you cannot pass through.
+Each 2 marks an obstacle which you cannot pass through.
+The distance is calculated using Manhattan Distance, where distance(p1, p2) = |p2.x – p1.x| + |p2.y – p1.y|.
+
+For example, given three buildings at (0,0), (0,4), (2,2), and an obstacle at (0,2):
+
+1 – 0 – 2 – 0 – 1
+|    |     |     |    |
+0 – 0 – 0 – 0 – 0
+|     |     |     |    |
+0 – 0 – 1 – 0 – 0
+The point (1,2) is an ideal empty land to build a house, as the total travel distance of 3+3+1=7 is minimal. So return 7.
+
+Note:
+There will be at least one building. If it is not possible to build such house according to the above rules, return -1.
  */
 
 public class ShortestDistanceFromAllBuildings

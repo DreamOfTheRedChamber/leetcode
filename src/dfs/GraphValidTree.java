@@ -1,4 +1,4 @@
-package bfs;
+package dfs;
 
 import static org.junit.Assert.assertTrue;
 
