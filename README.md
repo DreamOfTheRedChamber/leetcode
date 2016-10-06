@@ -911,7 +911,61 @@ public void recursivefunction()
 
 #### Breath first search <a id="algorithms-bfs"></a>
 * When the problem asks for the minimum 
-* Grid-based
+* Grid-based: 
+```java
+// 
+public void bfsMainFunction( T[][] grid )
+{
+  //... other logics
+
+  int height = grid.length;
+  int width = grid[0].length;
+
+  Queue<Coor> bfsQueue = new LinkedList<>();
+  Set<Integer> isVisited = new HashSet<>();
+
+  // suppose the unique starting point is (0,0) here
+  bfsQueue.offer( new Coor( 0, 0 ) );
+  isVisited.add( getCoorHash( 0, 0, width ) );
+
+  // until queue is empty
+  int depth = 1;
+  while ( !bfsQueue.isEmpty() )
+  {
+    // loop through curr level
+    int levelSize = bfsQueue.size();
+    for ( int i = 0; i < levelSize; i++ )
+    {
+      Coor qHead = bfsQueue.poll();
+
+      // try four directions
+      for ( int[] direction : directions )
+      {
+        int neighborX = qHead.x + direction[0];
+        int neighborY = qHead.y + direction[1];
+        int neighborHash = getCoorHash( neighborX, neighborY, width );
+        if ( neighborX < height 
+          && neighborY < width
+          && !isVisited.contains( neighborHash ) )
+        {
+          // might include bfs termination logics here
+
+          isVisited.add( neighborHash );
+          bfsQueue.offer( new Coor( neighborXCoor, neighborYCoor ) );
+        }
+      } // end of four directions
+    } // end of level order
+
+    depth++;
+  } 
+}
+
+private int getCoorHash( int x, int y, int width )
+{
+  return x * width + y;
+}
+
+```
 * Graph-based
 
 #### Dynamic-programming <a id="algorithms-dynamic-programming"></a>

@@ -1,5 +1,8 @@
 package bfs;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 /**
 You are given a m x n 2D grid initialized with these three possible values.
 
@@ -19,13 +22,66 @@ After running your function, the 2D grid should be:
   1  -1   2  -1
   0  -1   3   4
  */
-// TO_HURRY
+
 public class WallsAndGates
 {
 
-    public void wallsAndGates(int[][] rooms) 
+	private class Coor
+	{
+		public final int xCoor;
+		public final int yCoor;
+		public Coor( int xCoor, int yCoor )
+		{
+			this.xCoor = xCoor;
+			this.yCoor = yCoor;
+		}
+	}
+	
+    public void wallsAndGates( int[][] rooms )
     {
-        
-    }
+    	if ( rooms == null
+    			|| rooms.length == 0 
+    			|| rooms[0].length == 0 )
+    	{
+    		throw new IllegalArgumentException();
+    	}
+    	
+    	int height = rooms.length;
+    	int width = rooms[0].length;
 
+    	// enqueue all gates
+    	Queue<Coor> bfsQueue = new LinkedList<>();
+    	for ( int i = 0; i < height; i++ )
+    	{
+    		for ( int j = 0; j < width; j++ )
+    		{
+    			if ( rooms[i][j] == 0 )
+    			{
+    				bfsQueue.offer( new Coor( i, j ) );
+    			}
+    		}
+    	}
+
+    	int[][] directions = new int[][]{ {0, 1}, {1, 0}, {0, -1}, {-1, 0}};
+    	// bfs traverse
+    	while ( !bfsQueue.isEmpty() )
+    	{
+    		Coor qHead = bfsQueue.poll();
+    		for ( int[] direction : directions )
+    		{
+    			int neighborXCoor = qHead.xCoor + direction[0];
+    			int neighborYCoor = qHead.yCoor + direction[1];
+    			if ( neighborXCoor < height 
+    					&& neighborYCoor < width
+    					&& rooms[neighborXCoor][neighborYCoor] == Integer.MAX_VALUE )
+    			{
+    				rooms[neighborXCoor][neighborYCoor] = rooms[qHead.xCoor][qHead.yCoor] + 1;
+    				bfsQueue.offer( new Coor( neighborXCoor, neighborYCoor ) );
+    			}
+    		}
+    	}
+    	
+    	
+    }
+    
 }
