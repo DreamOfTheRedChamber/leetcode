@@ -209,6 +209,7 @@ int n = rand.nextInt( 50 ) + 1; // 1 ~ 50, specified number is exclusive
 * set.add(elem) return false if set already contains the elem
 * list.sublist(startIndex, endIndex) returns a sublist of List
 * Collections.unmodifiableList/unmodifiableSet/unmodifiableMap()
+* Collections.reverse(List<?>) reverses a linkedlist
 
 #### Math<a id="basics-math"></a>
 * divide two integers ( useful names: dividend/numerator, divisor/denominator, quotient, residue )
@@ -1031,6 +1032,7 @@ private int getCoorHash( int x, int y, int width )
 * Cannot add enough comments along the code
 * Never-ending, ever-increasing number of problems
 * Time exceed limit exception sometimes dependes on Leetcode.org machine status
+* Could not search problems by specifying multiple tags
 
 #### References
 * Core Java Interview questions: [blog: java-success.com](http://www.java-success.com/)
