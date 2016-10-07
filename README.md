@@ -47,8 +47,8 @@
     * [Binary search](#algorithms-binary-search) 
     * [Recursion](#algorithms-recursive)
     * [Backtrack](#algorithms-backtrack)
-    * [Depth first search](#algorithms-dfs)
     * [Breath first search](#algorithms-bfs)
+    * [Depth first search](#algorithms-dfs)
     * [Dynamic programming](#algorithms-dynamic-programming)
 * [Edge case tests](#edge-case-tests)  
 * [Bad smells for refactoring and optimization](#bad-smells)
@@ -537,8 +537,30 @@ map.putIfAbsent( key, new ArrayList<>() );
 * Get Subset APIs: tailMap/headMap/subMap
 
 #### Graph <a id="ds-graph"></a>
-* When building graph, it is best practices to separate the phase of building vertexes and edges. When they are merged together, it is easy to forget about the isolated vertexes.
-* Detect cycles inside directed graphs with dfs + visited set + discovered set.
+* **Building graph**, it is will be less error-prone to separate the phase of building vertexes and edges. When they are merged together, it is easy to forget about the isolated vertexes. In a common setting, usually asked to build a graph given the number of vertex int n and an array of edges. 
+```java
+public Map<Integer, Set<Integer>> buildGraph( int n, int[][] edges )
+{
+  Map<Integer, Set<Integer>> graph = new HashMap<>();
+  
+  // build vertex
+  for ( int i = 0; i < n; i++ )
+  {
+    graph.put( i, new HashSet<>() );
+  }
+
+  // build edges
+  for ( int[] edge : edges  )
+  {
+    // undirected graph needs to add the edge twice
+    graph.get( edge[0] ).add( edge[1] );
+    graph.get( edge[1] ).add( edge[0] );
+  }
+}
+```
+* **Count number of connected components in an undirected graph** with dfs + discovered set. Implementation details ignored here because code snippets will be a simpler version of Detect cycles inside directed graph
+* **Detect cycles inside undirected graph** with dfs + discovered set. Implementation details ignored here because code snippets will be a simpler version of Detect cycles inside directed graph
+* **Detect cycles inside directed graph** with dfs + visited set + discovered set.
     * If during dfs in directed graph, a node discovered but not visited is encountered, then the directed graph has a cycle
 ```java
     public boolean hasCycle( Graph graph )
@@ -829,6 +851,8 @@ public int binarySearchRecursive( int[] array, int target, int start, int end )
 
 
 #### Recursive functions <a id="algorithms-recursion"></a>
+* How to remove duplicates (avoid duplicate recursion beforehand or use hashset afterwards)
+
 * Time complexity:
 
 | Recurrence | Algorithm           | Big-O Solution  |
@@ -904,11 +928,6 @@ public void recursivefunction()
 * mark visited locations inside a 2D grid
   * use set<Integer> to store position hash (x * width + height)
   * if could modify the grid, place special char such as '#' for already discovered nodes
-  
-#### Depth first search <a id="algorithms-dfs"></a>
-* When the problem asks for all results
-* How to remove duplicates ( avoid duplicate recursion beforehand or use hashset afterwards )
-* Record depth first search path
 
 #### Breath first search <a id="algorithms-bfs"></a>
 * When the problem asks for the minimum 
@@ -939,7 +958,7 @@ public void bfsMainFunction( T[][] grid )
   int width = grid[0].length;
 
   Queue<Coor> bfsQueue = new LinkedList<>();
-  Set<Integer> isVisited = new HashSet<>();
+  Set<Integer> isDiscovered = new HashSet<>();
 
   // suppose the unique starting point is (0,0) here
   bfsQueue.offer( new Coor( 0, 0 ) );
@@ -963,11 +982,11 @@ public void bfsMainFunction( T[][] grid )
         int neighborHash = getCoorHash( neighborX, neighborY, width );
         if ( neighborX < height 
           && neighborY < width
-          && !isVisited.contains( neighborHash ) )
+          && !isDiscovered.contains( neighborHash ) )
         {
           // might include bfs termination logics here
 
-          isVisited.add( neighborHash );
+          isDiscovered.add( neighborHash );
           bfsQueue.offer( new Coor( neighborXCoor, neighborYCoor ) );
         }
       } // end of four directions
@@ -981,8 +1000,46 @@ private int getCoorHash( int x, int y, int width )
 {
   return x * width + y;
 }
+```
+  
+#### Depth first search <a id="algorithms-dfs"></a>
+* When the problem requires a complete search and asks for traversal paths (record path in bfs is much more complicated)
+* Record depth first search path
+* Grid-based ( e.g. int[][] grid )
+```java
+public void mainFunc( T[][] grid )
+{
+  //... other logics
+  // suppose the unique starting point is (0,0) here
+  Set<Integer> isDiscovered = new HashSet<>();
+  dfs( grid, 0, 0, isDiscovered );
+}
+
+private void dfs( T[][] grid, int x, int y, Set<Integer> isDiscovered )
+{
+  int height = grid.length;
+  int width = grid[0].length;
+
+  // put boundary/visited check together
+  if ( x < 0 
+    || x >= height 
+    || y < 0 
+    || y >= width 
+    || isDiscovered.contains( x, y ) )
+  {
+    return;
+  }
+
+  isDiscovered.add( getCoorHash( x, y, grid_width ) );
+  dfs( grid, x + 1, y, isDiscovered );
+  dfs( grid, x - 1, y, isDiscovered );
+  dfs( grid, x, y + 1, isDiscovered );
+  dfs( grid, x, y - 1, isDiscovered );
+}
 
 ```
+
+
 * Graph-based
 
 #### Dynamic-programming <a id="algorithms-dynamic-programming"></a>

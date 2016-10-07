@@ -1,4 +1,4 @@
-package depthFirstSearch;
+package graph;
 
 import java.util.HashMap;
 import java.util.HashSet;
