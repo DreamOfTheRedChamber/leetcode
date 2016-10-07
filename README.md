@@ -422,7 +422,33 @@ String part2 = parts[1]; // 034556
 
 #### Stack <a id="ds-stack"></a>
 * When popping elements from stack, always check if the stack is empty. Otherwise, there might be a EmptyStackException()
-* Elegant way to implement binary tree preorder/inorder/postorder traversal iteratively
+
+#### Queue/PriorityQueue <a id="ds-queue"></a>
+* peek vs element, poll vs remove: when queue is empty, the former returns null and the latter throws exception. Most times in an interview setting, use the former one is appropriate. The first reason is that it is not an exceptional case that the queue is empty. The second reason is that throwsing exceptions incurs a performance penalty.
+```java
+// implements inside abstractQueue<E>
+public E remove()
+{
+  E x = poll();
+  if ( x != null )
+  {
+    return x;
+  }
+  else
+  {
+    throw new NoSuchElementException();
+  }
+}
+```
+
+* Lambda expression inside PriorityQueue elements comparison
+```java
+PriorityQueue<NumAndFreq> mostFreqPrioQueue = new PriorityQueue<>( ( o1, o2 ) -> ( o2.freq - o1.freq ) ); // decreasing order
+PriorityQueue<NumAndFreq> mostFreqPrioQueue = new PriorityQueue<>( ( o1, o2 ) -> ( o1.freq - o2.freq ) ); // increasing order
+```
+
+#### Tree <a id="ds-tree"></a>
+* Tree iterative traversal with O(logn) space: preorder/inorder/postorder traversal
 ```java
 class Pair
 {
@@ -476,33 +502,9 @@ public void traverse( TreeNode root, int order )
 }
 ```
 
-#### Queue/PriorityQueue <a id="ds-queue"></a>
-* peek vs element, poll vs remove: when queue is empty, the former returns null and the latter throws exception. Most times in an interview setting, use the former one is appropriate. The first reason is that it is not an exceptional case that the queue is empty. The second reason is that throwsing exceptions incurs a performance penalty.
-```java
-// implements inside abstractQueue<E>
-public E remove()
-{
-  E x = poll();
-  if ( x != null )
-  {
-    return x;
-  }
-  else
-  {
-    throw new NoSuchElementException();
-  }
-}
-```
-
-* Lambda expression inside PriorityQueue elements comparison
-```java
-PriorityQueue<NumAndFreq> mostFreqPrioQueue = new PriorityQueue<>( ( o1, o2 ) -> ( o2.freq - o1.freq ) ); // decreasing order
-PriorityQueue<NumAndFreq> mostFreqPrioQueue = new PriorityQueue<>( ( o1, o2 ) -> ( o1.freq - o2.freq ) ); // increasing order
-```
-
-#### Tree <a id="ds-tree"></a>
-* Complete tree
-
+* Tree iterative traversal with O(1) space: 
+* TreeNode successor
+* TreeNode predecessor
 * Binary search tree
 
 #### HashMap <a id="ds-hashmap"></a>
@@ -983,9 +985,8 @@ private void dfs( T[][] grid, int x, int y, Set<Integer> isDiscovered )
       * If do not need to detect cycle, could simply use a Stack<> order to record the visited node, namely using Set<?> discovered, Stack<?> visited 
       * If need to detect cycle, namely using Set<?> discovered, LinkedHashSet<?> visited
 ```java
-    public void mainTopo()
+    public int[] getTopoOrder(Map<Integer, Set<Integer>> graph)
     {
-        // Map<Integer, Set<Integer>> graph
         Set<Integer> discovered = new HashSet<>();
         Set<Integer> visited = new LinkedHashSet<>();
         for ( Integer node : graph.keySet() )
