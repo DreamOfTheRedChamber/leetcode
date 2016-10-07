@@ -49,6 +49,7 @@
     * [Backtrack](#algorithms-backtrack)
     * [Breath first search](#algorithms-bfs)
     * [Depth first search](#algorithms-dfs)
+    * [Topological sort](#algorithms-topo)
     * [Dynamic programming](#algorithms-dynamic-programming)
 * [Edge case tests](#edge-case-tests)  
 * [Bad smells for refactoring and optimization](#bad-smells)
@@ -498,22 +499,6 @@ public E remove()
 PriorityQueue<NumAndFreq> mostFreqPrioQueue = new PriorityQueue<>( ( o1, o2 ) -> ( o2.freq - o1.freq ) ); // decreasing order
 PriorityQueue<NumAndFreq> mostFreqPrioQueue = new PriorityQueue<>( ( o1, o2 ) -> ( o1.freq - o2.freq ) ); // increasing order
 ```
-* use breath-first search queue for shortest path 
-```java
-int bfsLevel = 0;
-Queue<Integer> bfsQueue = new LinkedList<>();
-bfsQueue.add( i * width + j );
-while ( !bfsQueue.isEmpty() )
-{
-    int levelSize = bfsQueue.size(); // the number of nodes in one level can be obtained from the size of queue
-    for ( int t = 0; t < levelSize; t++ )
-    {
-        int head = bfsQueue.remove();
-        // ... other stuff
-    }
-    bfsLevel++;
-}
-``` 
 
 #### Tree <a id="ds-tree"></a>
 * Complete tree
@@ -558,59 +543,9 @@ public Map<Integer, Set<Integer>> buildGraph( int n, int[][] edges )
   }
 }
 ```
-* **Count number of connected components in an undirected graph** with dfs + discovered set. Implementation details ignored here because code snippets will be a simpler version of Detect cycles inside directed graph
-* **Detect cycles inside undirected graph** with dfs + discovered set. Implementation details ignored here because code snippets will be a simpler version of Detect cycles inside directed graph
+* **Count number of connected components in an undirected graph** with dfs + discovered set. 
+* **Detect cycles inside undirected graph** with dfs + discovered set. 
 * **Detect cycles inside directed graph** with dfs + visited set + discovered set.
-    * If during dfs in directed graph, a node discovered but not visited is encountered, then the directed graph has a cycle
-```java
-    public boolean hasCycle( Graph graph )
-    {
-        // topoSort with dfs for detecting cycles
-        Set<Integer> discovered = new HashSet<>();
-        Set<Integer> visited = new HashSet<>();
-        for ( Integer vertex : graph.keySet() )
-        {
-            if ( !visited.contains( vertex ) )
-            {
-                if ( topoSort( graph, vertex, discovered, visited ) )
-                {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-    /**
-     * @return whether a cycle is detected
-     */
-    private boolean topoSort ( Map<Integer, Set<Integer>> graph, Integer startNode, Set<Integer> discovered, Set<Integer> visited )
-    {
-        discovered.add( startNode );
-        for ( Integer neighbor : graph.get( startNode ) )
-        {
-            if ( !discovered.contains( neighbor ) )
-            {
-                if ( topoSort( graph, neighbor, discovered, visited ) )
-                {
-                    return true;
-                }
-            }
-            else if ( discovered.contains( neighbor ) 
-                    && !visited.contains( neighbor ) )
-            {
-                return true;
-            }
-            else
-            {
-                // already visited, do nothing
-                ;
-            }
-        }
-        visited.add( startNode );
-        return false;
-    }
-```
-
 
 #### Trie <a id="ds-trie"></a>
 * Use cases: applicable when optimize for a list of words as dictionary, avoid recomputation for the same string prefix ( e.g. word search II, airbnb k distance question )
@@ -958,11 +893,11 @@ public void bfsMainFunction( T[][] grid )
   int width = grid[0].length;
 
   Queue<Coor> bfsQueue = new LinkedList<>();
-  Set<Integer> isDiscovered = new HashSet<>();
+  Set<Integer> discovered = new HashSet<>();
 
   // suppose the unique starting point is (0,0) here
   bfsQueue.offer( new Coor( 0, 0 ) );
-  isVisited.add( getCoorHash( 0, 0, width ) );
+  discovered.add( getCoorHash( 0, 0, width ) );
 
   // until queue is empty
   int depth = 1;
@@ -982,11 +917,11 @@ public void bfsMainFunction( T[][] grid )
         int neighborHash = getCoorHash( neighborX, neighborY, width );
         if ( neighborX < height 
           && neighborY < width
-          && !isDiscovered.contains( neighborHash ) )
+          && !discovered.contains( neighborHash ) )
         {
           // might include bfs termination logics here
 
-          isDiscovered.add( neighborHash );
+          discovered.add( neighborHash );
           bfsQueue.offer( new Coor( neighborXCoor, neighborYCoor ) );
         }
       } // end of four directions
@@ -1004,15 +939,14 @@ private int getCoorHash( int x, int y, int width )
   
 #### Depth first search <a id="algorithms-dfs"></a>
 * When the problem requires a complete search and asks for traversal paths (record path in bfs is much more complicated)
-* Record depth first search path
 * Grid-based ( e.g. int[][] grid )
 ```java
 public void mainFunc( T[][] grid )
 {
   //... other logics
   // suppose the unique starting point is (0,0) here
-  Set<Integer> isDiscovered = new HashSet<>();
-  dfs( grid, 0, 0, isDiscovered );
+  Set<Integer> discovered = new HashSet<>();
+  dfs( grid, 0, 0, discovered );
 }
 
 private void dfs( T[][] grid, int x, int y, Set<Integer> isDiscovered )
@@ -1025,22 +959,86 @@ private void dfs( T[][] grid, int x, int y, Set<Integer> isDiscovered )
     || x >= height 
     || y < 0 
     || y >= width 
-    || isDiscovered.contains( x, y ) )
+    || discovered.contains( x, y ) )
   {
     return;
   }
 
-  isDiscovered.add( getCoorHash( x, y, grid_width ) );
-  dfs( grid, x + 1, y, isDiscovered );
-  dfs( grid, x - 1, y, isDiscovered );
-  dfs( grid, x, y + 1, isDiscovered );
-  dfs( grid, x, y - 1, isDiscovered );
+  discovered.add( getCoorHash( x, y, grid_width ) );
+  dfs( grid, x + 1, y, discovered );
+  dfs( grid, x - 1, y, discovered );
+  dfs( grid, x, y + 1, discovered );
+  dfs( grid, x, y - 1, discovered );
 }
 
 ```
 
+#### Topological sort <a id="algorithms-topo"></a>
+* There are basically two categories of methods for topological sort. The first one is greedy algorithm with O(n^2) time complexity. The second is based on depth first search with O(n) time complexity. Here only discusses DFS based approach. 
+* When using DFS based approach, there are two cases which should be taken care of. The first one is what if there exists no topological order at all. The second is how to return topological order.
+   * what if there exists no topological order - a cycle is detected. 
+      * How to detect cycle: use UNDISCOVERED, DISCOVERED, VISITED to represent three possible states of graph nodes. Use a Set<?> isDiscovered and Set<?> isVisited to record all history info. If met up with a node which has been discovered but not visited, then a cycle is detected. 
+      * How to handle cycle: return a boolean value (preferred) or throw an exception (not really suitable because they are expected cases)
+   * what if need to return topological order
+      * If do not need to detect cycle, could simply use a Stack<> order to record the visited node, namely using Set<?> discovered, Stack<?> visited 
+      * If need to detect cycle, namely using Set<?> discovered, LinkedHashSet<?> visited
+```java
+    public void mainTopo()
+    {
+        // Map<Integer, Set<Integer>> graph
+        Set<Integer> discovered = new HashSet<>();
+        Set<Integer> visited = new LinkedHashSet<>();
+        for ( Integer node : graph.keySet() )
+        {
+          if ( !discoverd.contains( node ) )
+          {
+            if ( !topoSort( graph, node, discovered, visited ) )
+            {
+              // a cycle is detected....error handling
+            }
+          }
+        }
 
-* Graph-based
+        int[] topoOrder = new int[visited.size()];
+        int pos = topoOrder.length - 1;
+        for ( Integer node : visited )
+        {
+          topoOrder[pos] = node;
+          pos--;
+        }
+        return topoOrder;
+    }
+
+    /**
+     * @return whether a cycle is detected
+     */ 
+    private boolean topoSort ( Map<Integer, Set<Integer>> graph, Integer startNode, Set<Integer> discovered, Set<Integer> visited )
+    {
+        discovered.add( startNode );
+        for ( Integer neighbor : graph.get( startNode ) )
+        {
+            if ( !discovered.contains( neighbor ) )
+            {
+                if ( topoSort( graph, neighbor, discovered, visited ) )
+                {
+                    return true;
+                }
+            }
+            else if ( discovered.contains( neighbor ) 
+                    && !visited.contains( neighbor ) )
+            {
+                return true;
+            }
+            else
+            {
+                // already visited, do nothing
+                ;
+            }
+        }
+        visited.add( startNode );
+        return false;
+    }
+```
 
 #### Dynamic-programming <a id="algorithms-dynamic-programming"></a>
 * when allocate dynamic programming table size, allocate additional one row/col for generalization
