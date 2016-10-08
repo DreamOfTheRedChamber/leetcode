@@ -122,8 +122,8 @@
 #### Before coding <a id="interview-before-coding"></a>
 1. Make sure I understand the problem
   1. Declare interface in a strategic way (talk about different ways of defining it and trade-offs. e.g. do not define input as string when possible)
-  2. (Optional) Clear assumptions about the problem. There are two types of questions. 
-     1. more detailed info about input (refer to "input-specifications" section). 
+  2. (Optional) Clarify ambiguous problem statement, need to gather all requirements before implementing one. 
+     1. Refer to "questions to confirm about input" 
      2. "***Whether a valid solution always exist***" 
      3. "***If input is like this, what should output be***"
 2. Synchronize with interviewer "***Let's come up with a brute force solution first.***"
@@ -583,7 +583,13 @@ public Map<Integer, Set<Integer>> buildGraph( int n, int[][] edges )
 * **Detect cycles inside directed graph** with dfs + visited set + discovered set.
 
 #### Trie <a id="ds-trie"></a>
-* Use cases: applicable when optimize for a list of words as dictionary, avoid recomputation for the same string prefix ( e.g. word search II, airbnb k distance question )
+* Use cases: 
+   * find prefix of string
+   * traverse character by character
+   * compared with hashmap: 
+      * space complexity: when storing a list of words (Especially when these words share prefix), using trie save space. 
+      * time complexity: to compute hashcode for a string, O(n) time complexity; find/insert a string in a trie, the same
+   * but no built-in implementation in Java core
 * Definitions: iterative implementation much more concise than recursive implementation.
 ```java
 class TrieNode 

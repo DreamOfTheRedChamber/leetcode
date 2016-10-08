@@ -1,5 +1,9 @@
 package recursionTree;
 
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
+
 import utility.TreeNode;
 
 /**
@@ -49,11 +53,56 @@ Example 2:
  1   3   1
 Maximum amount of money the thief can rob = 4 + 5 = 9. 
  */
-//TO_START
 public class HouseRobberIII
 {
     public int rob( TreeNode root )
     {
+    	if ( root == null )
+    	{
+    		return 0;
+    	}
+    	
+    	// sum includes root
+    	int sumIncludeRoot = 0;
+    	sumIncludeRoot += root.val;
+    	if ( root.left != null )
+    	{
+    		sumIncludeRoot += rob( root.left.left );
+    		sumIncludeRoot += rob( root.left.right );
+    	}
+    	if ( root.right != null )
+    	{
+    		sumIncludeRoot += rob( root.right.left );
+    		sumIncludeRoot += rob( root.right.right );
+    	}
+    	
+    	// sum does not include root
+    	int sumExcludeRoot = rob( root.left ) + rob( root.right );
+    	
+    	return Math.max( sumIncludeRoot, sumExcludeRoot );
+    }
     
+    public static void main( String[] args )
+    {
+    	System.out.println("hello world");
+    }
+    
+    @Test
+    public void test()    
+    {
+//    	TreeNode node1 = new TreeNode( 3 );
+//    	TreeNode node2 = new TreeNode( 4 );
+//    	TreeNode node3 = new TreeNode( 5 );
+//    	TreeNode node4 = new TreeNode( 1 );
+//    	TreeNode node5 = new TreeNode( 3 );
+//    	TreeNode node6 = new TreeNode( 3 );
+//    	node1.left = node2;
+//    	node1.right = node3;
+//    	node2.left = node4;
+//    	node2.right = node5;
+//    	node3.right = node6;
+//    	
+//    	assertEquals( 9, rob( node1 ) );
+    	System.out.println("Hello JUnit");
     }
 }
