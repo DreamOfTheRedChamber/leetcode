@@ -19,6 +19,7 @@
     * [Tree](#question-tree)
     * [Graph](#question-graph)
 * [Questions to confirm about output](#questions-to-confirm-about-output)
+* [Typical follow up questions](#questions-follow-up)
 * [Learned lessons: Java basics](#learned-lessons-java-basics)
     * [Type size](#basics-type-size) 
     * [Error-prone APIs](#basics-error-prone-apis)
@@ -43,14 +44,25 @@
 * [Learned lessons: algorithms](#learned-lessons-algorithms)
     * [Progressive enhancement on algorithms](#progressive-enhancement-on-algorithms)
     * [Two pointers](#algorithms-two-pointer)
+       * [Begin and end type](#algorithms-boundary-to-center)
+       * [Slow and fast type](#algorithms-slow-and-fast)
+       * [Window type](#algorithms-window)
+       * [Two arrays type](#algorithms-two-arrays)
     * [Sort](#algorithms-sort)
     * [Binary search](#algorithms-binary-search) 
     * [Recursion](#algorithms-recursive)
     * [Backtrack](#algorithms-backtrack)
-    * [Breath first search](#algorithms-bfs)
-    * [Depth first search](#algorithms-dfs)
-    * [Topological sort](#algorithms-topo)
+    * [Graph](#algorithms-bfs)
+       * [Grid-based graph patterns](#algorithms-grid)
+       * [Breath first search](#algorithms-bfs)
+       * [Depth first search](#algorithms-dfs)
+       * [Topological sort](#algorithms-topo)
+       * [Union find](#algorithms-union-find)
     * [Dynamic programming](#algorithms-dynamic-programming)
+       * [One dimension](#dynamic-programming-1d)
+       * [Two dimensions](#dynamic-programming-2d)
+       * [Memorization](#dynamic-programming-memo)
+       * [Game](#dynamic-programming-game)
 * [Edge case tests](#edge-case-tests)  
 * [Bad smells for refactoring and optimization](#bad-smells)
 * [Sins](#sins)
@@ -189,6 +201,11 @@
 #### List of List
 * any order requirements on internal list
 * should duplicates be removed
+
+### Typical follow-up questions <a id="questions-follow-up"></a>
+* no duplicates -> duplicates exist
+* judge whether result exist -> return all results
+* one dimension -> two dimension
 
 ### Learned lessons: Java basics <a id="learned-lessons-java-basics"></a>
 #### Type size<a id="basics-type-size"></a>
@@ -524,6 +541,22 @@ map.putIfAbsent( key, new ArrayList<>() );
 * Get Subset APIs: tailMap/headMap/subMap
 
 #### Graph <a id="ds-graph"></a>
+* Graph definition, there are multiple ways to define graphs in Java. To represent a sparse graph, one typical classical way is to define class GraphNode and then graph can be defined as List<GraphNode>. The other way is to define graph as Map<Integer, Set<Integer>> graph.
+```java
+// first way, more official
+// but if there are redundant edges in input, might need to implement hashcode() and equal() methods to avoid add redundant nodes into neighbors. Kind of overkilling in an interview setting
+class GraphNode 
+{
+  int val;
+  int status; // used for track visiting status in DFS
+  List<GraphNode> neighbor;
+  // ...
+}
+List<GraphNode> graph =...;
+
+// second way, graph itself is more concise. But need additional data structures like Set<Integer> visited and Set<Integer> discovered to track dfs traverse status
+Map<Integer, Set<Integer>> graph 
+```
 * **Building graph**, it is will be less error-prone to separate the phase of building vertexes and edges. When they are merged together, it is easy to forget about the isolated vertexes. In a common setting, usually asked to build a graph given the number of vertex int n and an array of edges. 
 ```java
 public Map<Integer, Set<Integer>> buildGraph( int n, int[][] edges )
@@ -659,9 +692,10 @@ public class TrieIterative
   * save time by avoid solving repeated problems: e.g. recursion -> dynamic programming
 
 #### Two pointers <a id="algorithms-two-pointer"></a>
-* slow/fast pointers that start from same location:
-* begin/end pointers that move toward each other
-* isSubsequence: Two pointers on two different arrays
+##### Begin and end type <a id="algorithms-boundary-to-center"></a>
+##### Slow and fast type <a id="algorithms-slow-and-fast"></a>
+##### Window type <a id="algorithms-window"></a>
+##### Two arrays type <a id="algorithms-two-arrays"></a>
 
 #### Sort <a id="algorithms-sort"></a>
 * Sort classification ( only for O(nlogn) and O(n) algorithms )
@@ -865,16 +899,17 @@ public void recursivefunction()
 * mark visited locations inside a 2D grid
   * use set<Integer> to store position hash (x * width + height)
   * if could modify the grid, place special char such as '#' for already discovered nodes
-
-#### Breath first search <a id="algorithms-bfs"></a>
-* When the problem asks for the minimum 
-* Grid-based ( e.g. int[][] grid ):
-  * How to store coordinates: 
-     * A customized class Coor
-     * If allowing to modify grid, could temporarily place special chars/values to indicate that this position has been visited before. Depending on whether input int grid[][] is a defensive copy, we could decide whether to recover the grid[][] by replacing previously set special chars/values.
-  * How to track visited coordinates:
-     * The idea approach is to provides a overrided hashCode() and equals() function for Coor class. But this is kind of overkilling for a 45-min interview setting.
-     * Prefer a compromised approach by using ( x * grid_width + y ) use as Coor hash and put them in a separate Set<Integer> collection. This might introduce overflow bugs, but should be enough in an interview setting.
+#### Graph
+##### Grid-based graph patterns
+* How to store coordinates: 
+   * A customized class Coor
+   * If allowing to modify grid, could temporarily place special chars/values to indicate that this position has been visited before. Depending on whether input int grid[][] is a defensive copy, we could decide whether to recover the grid[][] by replacing previously set special chars/values.
+* How to track visited coordinates:
+   * There are four possible approaches here: 
+      * Preferred approach: The first is to use a two-dimensional boolean[][] array. true as visited and false as not visited.
+      * The second is to use ( x * grid_width + y ) as Coor hash and put them in a Set<Integer> visited. Integer might overflow but should be enough in an interview setting.
+      * Not recommend: The third is replacing entries in grid with some special characters such as '#' to mark as visited. 
+      * Not recommend: The fourth is define a customized class Coor to overrided hashCode() and equals() function for Coor class. But this is kind of overkilling for a 45-min interview setting.
 ```java
 class Coor
 {
@@ -886,7 +921,11 @@ class Coor
     this.y = y;
   } 
 }
+```
 
+##### Breath first search <a id="algorithms-bfs"></a>
+* When the problem asks for the minimum 
+```java
 public void bfsMainFunction( T[][] grid )
 {
   //... other logics
@@ -895,11 +934,11 @@ public void bfsMainFunction( T[][] grid )
   int width = grid[0].length;
 
   Queue<Coor> bfsQueue = new LinkedList<>();
-  Set<Integer> discovered = new HashSet<>();
+  boolean[][] discovered = new boolean[height][width];
 
   // suppose the unique starting point is (0,0) here
   bfsQueue.offer( new Coor( 0, 0 ) );
-  discovered.add( getCoorHash( 0, 0, width ) );
+  discoverd[0][0] = true;
 
   // until queue is empty
   int depth = 1;
@@ -919,11 +958,10 @@ public void bfsMainFunction( T[][] grid )
         int neighborHash = getCoorHash( neighborX, neighborY, width );
         if ( neighborX < height 
           && neighborY < width
-          && !discovered.contains( neighborHash ) )
+          && !discoverd[neighborX][neighborY] )
         {
           // might include bfs termination logics here
-
-          discovered.add( neighborHash );
+          discoverd[neighborX][neighborY] = true;
           bfsQueue.offer( new Coor( neighborXCoor, neighborYCoor ) );
         }
       } // end of four directions
@@ -932,14 +970,9 @@ public void bfsMainFunction( T[][] grid )
     depth++;
   } 
 }
-
-private int getCoorHash( int x, int y, int width )
-{
-  return x * width + y;
-}
 ```
   
-#### Depth first search <a id="algorithms-dfs"></a>
+##### Depth first search <a id="algorithms-dfs"></a>
 * When the problem requires a complete search and asks for traversal paths (record path in bfs is much more complicated)
 * Grid-based ( e.g. int[][] grid )
 ```java
@@ -947,11 +980,11 @@ public void mainFunc( T[][] grid )
 {
   //... other logics
   // suppose the unique starting point is (0,0) here
-  Set<Integer> discovered = new HashSet<>();
+  boolean[][] discovered = new boolean[][];
   dfs( grid, 0, 0, discovered );
 }
 
-private void dfs( T[][] grid, int x, int y, Set<Integer> isDiscovered )
+private void dfs( T[][] grid, int x, int y, boolean[][] discovered )
 {
   int height = grid.length;
   int width = grid[0].length;
@@ -961,12 +994,12 @@ private void dfs( T[][] grid, int x, int y, Set<Integer> isDiscovered )
     || x >= height 
     || y < 0 
     || y >= width 
-    || discovered.contains( x, y ) )
+    || discoverd[x][y] )
   {
     return;
   }
 
-  discovered.add( getCoorHash( x, y, grid_width ) );
+  discovered[x][y] = true;
   dfs( grid, x + 1, y, discovered );
   dfs( grid, x - 1, y, discovered );
   dfs( grid, x, y + 1, discovered );
@@ -975,8 +1008,8 @@ private void dfs( T[][] grid, int x, int y, Set<Integer> isDiscovered )
 
 ```
 
-#### Topological sort <a id="algorithms-topo"></a>
-* There are basically two categories of methods for topological sort. The first one is greedy algorithm with O(n^2) time complexity. The second is based on depth first search with O(n) time complexity. Here only discusses DFS based approach. 
+##### Topological sort <a id="algorithms-topo"></a>
+* There are basically two categories of methods for topological sort. The first one is greedy algorithm with O(|V|^2 + |E|) time complexity. The second is based on depth first search with O(|V| + |E|) time complexity. Here only discusses DFS based approach. 
 * When using DFS based approach, there are two cases which should be taken care of. The first one is what if there exists no topological order at all. The second is how to return topological order.
    * what if there exists no topological order - a cycle is detected. 
       * How to detect cycle: use UNDISCOVERED, DISCOVERED, VISITED to represent three possible states of graph nodes. Use a Set<?> isDiscovered and Set<?> isVisited to record all history info. If met up with a node which has been discovered but not visited, then a cycle is detected. 
@@ -1000,6 +1033,7 @@ private void dfs( T[][] grid, int x, int y, Set<Integer> isDiscovered )
           }
         }
 
+        return visited.stream().reverse().collect( Collectors.toL);
         int[] topoOrder = new int[visited.size()];
         int pos = topoOrder.length - 1;
         for ( Integer node : visited )
@@ -1007,6 +1041,7 @@ private void dfs( T[][] grid, int x, int y, Set<Integer> isDiscovered )
           topoOrder[pos] = node;
           pos--;
         }
+
         return topoOrder;
     }
 
@@ -1041,17 +1076,18 @@ private void dfs( T[][] grid, int x, int y, Set<Integer> isDiscovered )
     }
 ```
 
+##### Union find <a id="algorithms-union-find"></a>
+* Suitable in a dynamically changing graph. Example problems: Number of Island II, find weakly connected components in directed graph, find connected components in undirected graph
+
 #### Dynamic-programming <a id="algorithms-dynamic-programming"></a>
-* when allocate dynamic programming table size, allocate additional one row/col for generalization
-* Types
-  * 1D dynamic programming
-    * House robber: [i, j] depends on [i-2], [i-3]
-  * 2D dynamic programming
-    * Palindrome: [i, j] depends on [i+1, j-1]
-    * Edit distance: [i, j] dependes on [i-1, j], [i, j-1], [i-1, j-1]
-    * Longest increasing subsequence/max product subarray: Global optimial from local optimal
-    * Coin change: [i] depends on an external set S. More specifically, every [i-s], where s belongs to S.
+
 * Rebuild the results from memorization array
+* One dimension <a id="dynamic-programming-1d"></a>
+* Two dimension <a id="dynamic-programming-2d"></a>
+* Memorization <a id="dynamic-programming-memo"></a>
+* Game <a id="dynamic-programming-game"></a>
+* when allocate dynamic programming table size, allocate additional one row/col for generalization
+
 
 ### Edge case tests <a id="edge-case-tests"></a>
 * Single element 2D grid
