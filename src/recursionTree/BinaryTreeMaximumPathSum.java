@@ -27,12 +27,12 @@ public class BinaryTreeMaximumPathSum
 {	
 	class ResultWrapper
 	{
-		public final int maxSubtreeFromRoot;
-		public final int maxSubtree;
-		public ResultWrapper( int maxSubtreeFromRoot, int maxSubtree )
+		public final int includeRootMax;
+		public final int globalMax;
+		public ResultWrapper( int includeRootMax, int globalMax )
 		{
-			this.maxSubtreeFromRoot = maxSubtreeFromRoot;
-			this.maxSubtree = maxSubtree;
+			this.includeRootMax = includeRootMax;
+			this.globalMax = globalMax;
 		}
 	}
 	
@@ -43,7 +43,7 @@ public class BinaryTreeMaximumPathSum
     		return 0;
     	}
     	ResultWrapper result = maxPathSumRecurse( root );
-    	return Math.max( result.maxSubtree, result.maxSubtreeFromRoot );
+    	return Math.max( result.globalMax, result.includeRootMax );
     }
     
     private ResultWrapper maxPathSumRecurse( TreeNode root )
@@ -60,12 +60,12 @@ public class BinaryTreeMaximumPathSum
     	
     	ResultWrapper leftChildResult = maxPathSumRecurse( root.left );
     	ResultWrapper rightChildResult = maxPathSumRecurse( root.right );
-    	int maxSubtreeFromRoot = Math.max( root.val,
-    										Math.max( leftChildResult.maxSubtreeFromRoot + root.val, rightChildResult.maxSubtreeFromRoot + root.val ) );
-    	int maxSubtree = Math.max( root.val + Math.max( 0, leftChildResult.maxSubtreeFromRoot ) + Math.max( 0, rightChildResult.maxSubtreeFromRoot ), 
-    										Math.max( leftChildResult.maxSubtree, rightChildResult.maxSubtree ) );
+    	int includeRootMax = Math.max( root.val,
+    										Math.max( leftChildResult.includeRootMax + root.val, rightChildResult.includeRootMax + root.val ) );
+    	int globalMax = Math.max( root.val + Math.max( 0, leftChildResult.includeRootMax ) + Math.max( 0, rightChildResult.includeRootMax ), 
+    										Math.max( leftChildResult.globalMax, rightChildResult.globalMax ) );
 
-    	return new ResultWrapper( maxSubtreeFromRoot, maxSubtree );
+    	return new ResultWrapper( includeRootMax, globalMax );
     }
     
     @Test
