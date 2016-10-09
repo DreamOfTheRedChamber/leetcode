@@ -841,11 +841,6 @@ public int binarySearchRecursive( int[] array, int target, int start, int end )
 | T(n) = 2T(n/2) + O(n) | Merge sort      |    O(nlogn) |
 | T(n) = T(n-1) + O(n)  | Selection sort      |  O(n^2) |
 
-* Things to consider when designing recursive functions
-    * What does this recursive function takes as input
-    * What does this recursive function returns
-    * How does parent function reduce to child functions
-
 * How to return multiple results from recursive functions
   - not use return value: use global variable. 
     + The first is to use private instance variables to store results
@@ -898,6 +893,34 @@ private class ResultWrapper
     {
         \\...
     }
+```
+
+* Tree-based recursion
+    - One of the key problems resulting from TreeNode definition is that TreeNode has no info about its parent node. But to resolve a tree-based problem, it is usually required to combine child and parent information.
+    - Two basic strategies to return this problem
+      + Pass parent node as an input argument to child recursive function, then resolve problem inside child function. This approach usually needs some global variables, as discussed before.
+      + Solve children recursive functions first, then resolve problem inside parent function. This approach usually needs some complex return value types, as discussed before. 
+```java
+// pass parent node as an input argument to child
+public void  firstApproach( TreeNode currNode, TreeNode parentNode, int[] longestPath )
+{
+  // compare currNode with parentNode and update longestPath
+  //...
+}
+
+// return value from child
+public ResultWrapper secondApproach( TreeNode currNode )
+{
+  //...
+  
+  ResultWrapper leftResult = secondApproach( currNode.left);
+  ResultWrapper rightResult = secondApproach( currNode.right);
+  
+  // combine leftResult, rightResult and currNode
+  //...
+
+  // return new ResultWrapper(...);
+}
 ```
 
 #### Backtrack <a id="algorithms-backtrack"></a>
