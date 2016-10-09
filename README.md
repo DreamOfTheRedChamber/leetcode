@@ -96,10 +96,10 @@
 #### When met with easy/hard/tricky problems (although most time medium problems): <a id="met-with-easy-hard-tricky-problems"></a>
 * always smile no matter how easy/hard/tricky the problem is, ;)
 * for problems of easy/medium difficulty level
-	* the hard part usually lies in interviewers' follow-up questions	
+  * the hard part usually lies in interviewers' follow-up questions 
 * for problems of hard difficulty level
-	* summarize an easy-to-remember pattern for each popular hard problem (e.g. regular expression matching, iterative post-order traversal)
-	* talk aloud so when stuck, interviewer could help
+  * summarize an easy-to-remember pattern for each popular hard problem (e.g. regular expression matching, iterative post-order traversal)
+  * talk aloud so when stuck, interviewer could help
 * for problems which has lots of tricky test cases
     * clarify assumptions about the problem, what are possible inputs/what are not.
 
@@ -206,6 +206,7 @@
 * no duplicates -> duplicates exist
 * judge whether result exist -> return all results
 * one dimension -> two dimension
+* how to avoid global variables
 
 ### Learned lessons: Java basics <a id="learned-lessons-java-basics"></a>
 #### Type size<a id="basics-type-size"></a>
@@ -841,28 +842,46 @@ public int binarySearchRecursive( int[] array, int target, int start, int end )
 | T(n) = T(n-1) + O(n)  | Selection sort      |  O(n^2) |
 
 * Things to consider when designing recursive functions
-    * what arguments to pass to child recursion
-    * what result to return from child recursion
-    * parent recursion first, child recursion next or the reverse
-    * how many times to call child recursion from parent recursion
-* Result wrapper class or customized classes
-    * Used a lot in PriorityQueue, Recurse(Tree) related problems
-    * the resultwrapper class should be a private inner class, rather than relying on the default package level visibility rule
+    * What does this recursive function takes as input
+    * What does this recursive function returns
+    * How does parent function reduce to child functions
+
+* How to return multiple results from recursive functions
+  - not use return value: use global variable. 
+    + The first is to use private instance variables to store results
+    + The second is to use a mutable argument of type ( int[], List<> ). Modify the value of this argument while travering.
+  - use return value
+    + If multiple results are of same type, define return type as an array T[]
+    + Define a result wrapper class
 ```java
-public class Solution
+// 1. not use use global variables
+// 1.1. global variables as class instance
+public class XXX
 {
-    private class NumAndFreq
-    {
-        public final int num;
-        public final int freq;
-        public NumAndFreq( int num, int freq )
-        {
-            this.num = num;
-            this.freq = freq;
-        }
-    }
+  private int max;
+  // change this global int
+}
+// 1.2. global variables as mutable function arguments
+public void maxNodeValue( TreeNode root, int[] max ) 
+public void maxNodeValue( TreeNode root, List<Integer> max )
+
+// 2. use return value
+// 2.1. use array T[] as return type
+public int[] maxNodeValue( TreeNode root )
+// 2.2. define a result wrapper class as class inner class
+private class ResultWrapper
+{
+  public final int numFoundNodes;
+  public final TreeNode lcaNode;
+  public ResultWrapper( int numFoundNodes, TreeNode lcaNode )
+  {
+    this.numFoundNodes = numFoundNodes;
+    this.lcaNode = lcaNode;
+  }
 }
 ```
+
+* How to avoid recomputation inside recursive function
 
 * If the problem is a recursive problem. But public API does not satisfy the arguments needed by recursive algorithm, consider declare one by yourself. In the example below, declare a private recursive method cloneGraphRecurse(node, Map) for public API cloneGraph(node). Note: the return value is not a function signature.
 ```java
@@ -880,16 +899,6 @@ public class Solution
         \\...
     }
 ```
-
-* Modify java function primitive parameters ( Java so heavy, missing pointers inside C++, -_- )
-    * Example problem: deserialize tree from String input. Return value is occupied by something else ( in this case TreeNode), but still want to change int argument position
-```java
-public TreeNode changePos( int position, String input ) // problem
-
-public TreeNode changePos( int[] position, String input ) // Solution1: declare a global instance variable as position
-public TreeNode changePos( List<Integer> position, String input ) // Solution2: Use an array/collection/customized type to wrap the primitive number
-public TreeNode changePos( Position position, String input )
-``` 
 
 #### Backtrack <a id="algorithms-backtrack"></a>
 * usually occurs at the beginning and ending of a recursive function
