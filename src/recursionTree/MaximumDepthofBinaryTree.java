@@ -13,11 +13,11 @@ public class MaximumDepthofBinaryTree
     public int maxDepth( TreeNode root )
     {
     	int[] max = new int[1];
-    	maxDepth( root, 1, max );
+    	maxDepthUpdateAtChild( root, 1, max );
     	return max[0];
     }
     
-    private void maxDepth( TreeNode root, int depth, int[] max )
+    private void maxDepthUpdateAtChild( TreeNode root, int depth, int[] max )
     {
     	if ( root == null )
     	{
@@ -26,7 +26,23 @@ public class MaximumDepthofBinaryTree
     	
     	max[0] = Math.max( max[0], depth );
     	
-    	maxDepth( root.left, depth + 1, max );
-    	maxDepth( root.right, depth + 1, max );
+    	maxDepthUpdateAtChild( root.left, depth + 1, max );
+    	maxDepthUpdateAtChild( root.right, depth + 1, max );
+    }
+    
+    public int maxDepth2( TreeNode root )
+    {
+    	return maxDepthUpdateAtParent( root, 1 );
+    }
+    
+    private int maxDepthUpdateAtParent( TreeNode root, int depth )
+    {
+    	if ( root == null )
+    	{
+    		return depth - 1;
+    	}
+    	
+    	return Math.max( maxDepthUpdateAtParent( root.left, depth + 1 ),
+    					 maxDepthUpdateAtParent( root.right, depth + 1 ) );
     }
 }
