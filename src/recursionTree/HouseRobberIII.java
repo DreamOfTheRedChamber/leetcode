@@ -2,6 +2,9 @@ package recursionTree;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.junit.Test;
 
 import utility.TreeNode;
@@ -55,31 +58,44 @@ Maximum amount of money the thief can rob = 4 + 5 = 9.
  */
 public class HouseRobberIII
 {
-    public int rob( TreeNode root )
+	public int rob( TreeNode root )
+	{
+		return rob( root, new HashMap<>() );
+	}	
+	
+    private int rob( TreeNode root, Map<TreeNode, Integer> computedHouses )
     {
     	if ( root == null )
     	{
     		return 0;
+    	}    	
+    	if ( computedHouses.containsKey( root ) )
+    	{
+    		return computedHouses.get( root );
     	}
     	
     	// sum includes root
     	int sumIncludeRoot = 0;
     	sumIncludeRoot += root.val;
+    	
     	if ( root.left != null )
-    	{
-    		sumIncludeRoot += rob( root.left.left );
-    		sumIncludeRoot += rob( root.left.right );
+    	{    		
+    		sumIncludeRoot += rob( root.left.left, computedHouses );
+    		sumIncludeRoot += rob( root.left.right, computedHouses );
     	}
     	if ( root.right != null )
     	{
-    		sumIncludeRoot += rob( root.right.left );
-    		sumIncludeRoot += rob( root.right.right );
+    		sumIncludeRoot += rob( root.right.left, computedHouses );
+    		sumIncludeRoot += rob( root.right.right, computedHouses );
     	}
     	
     	// sum does not include root
-    	int sumExcludeRoot = rob( root.left ) + rob( root.right );
-    	
-    	return Math.max( sumIncludeRoot, sumExcludeRoot );
+    	int sumExcludeRoot = rob( root.left, computedHouses ) + rob( root.right, computedHouses );
+    	int result = Math.max( sumIncludeRoot, sumExcludeRoot );
+
+    	// memorizing search
+    	computedHouses.put( root, result );    	
+    	return result;
     }
 
     @Test

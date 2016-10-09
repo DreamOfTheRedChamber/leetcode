@@ -881,9 +881,9 @@ private class ResultWrapper
 }
 ```
 
-* How to avoid recomputation inside recursive function
-
-* If the problem is a recursive problem. But public API does not satisfy the arguments needed by recursive algorithm, consider declare one by yourself. In the example below, declare a private recursive method cloneGraphRecurse(node, Map) for public API cloneGraph(node). Note: the return value is not a function signature.
+* How to avoid recomputation inside recursive function - memorize already computed searched results
+  - use hashmap (example problems include House Robber III, Clone Graph)
+  - use dynamic programming (see dynamic programming section for details) 
 ```java
     public UndirectedGraphNode cloneGraph(UndirectedGraphNode node) 
     {
