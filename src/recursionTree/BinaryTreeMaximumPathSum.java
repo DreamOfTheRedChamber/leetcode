@@ -21,19 +21,21 @@ Given the below binary tree,
 Return 6.
  */
 
-class ResultWrapper
-{
-	public final int maxSubtreeFromRoot;
-	public final int maxSubtree;
-	public ResultWrapper( int maxSubtreeFromRoot, int maxSubtree )
-	{
-		this.maxSubtreeFromRoot = maxSubtreeFromRoot;
-		this.maxSubtree = maxSubtree;
-	}
-}
+
 
 public class BinaryTreeMaximumPathSum
-{
+{	
+	class ResultWrapper
+	{
+		public final int maxSubtreeFromRoot;
+		public final int maxSubtree;
+		public ResultWrapper( int maxSubtreeFromRoot, int maxSubtree )
+		{
+			this.maxSubtreeFromRoot = maxSubtreeFromRoot;
+			this.maxSubtree = maxSubtree;
+		}
+	}
+	
     public int maxPathSum( TreeNode root ) 
     {
     	if ( root == null )
