@@ -1,5 +1,8 @@
 package depthFirstSearch;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 import org.junit.Test;
 
 /**
@@ -43,7 +46,7 @@ public class NumberOfIslands
     	{
     		for ( int j = 0; j < width; j++ )
     		{
-    			if ( grid[i][j] == '1' )
+    			if ( grid[i][j] == '1' && !isVisited[i][j] )
     			{
     				numIsland++;
     				visitIsland( grid, isVisited, i, j );
@@ -54,21 +57,43 @@ public class NumberOfIslands
     	return numIsland;
     }
     
+    private class Pair
+    {
+    	public final int x;
+    	public final int y;
+    	public Pair( int x, int y )
+    	{
+    		this.x = x;
+    		this.y = y;
+    	}
+    }
+    
     private void visitIsland( char[][] grid, boolean[][] isVisited, int xStart, int yStart )
     {
-    	if ( xStart < 0 
-    			|| xStart >= grid.length
-    			|| yStart < 0
-    			|| yStart >= grid[0].length
-    			|| isVisited[xStart][yStart] )
-    	{
-    		return;
-    	}
-
+    	Queue<Pair> bfsQueue = new LinkedList<>();
+    	bfsQueue.offer( new Pair( xStart, yStart ) );
     	isVisited[xStart][yStart] = true;
-    	for ( int[] direction : directions )
+    	
+    	int height = grid.length;
+    	int width = grid[0].length;
+    	while ( !bfsQueue.isEmpty() )
     	{
-    		visitIsland( grid, isVisited, xStart + direction[0], yStart + direction[1] );
+    		Pair qHead = bfsQueue.poll();
+    		for ( int[] direction : directions )
+    		{
+    			int neighborX = qHead.x + direction[0];
+    			int neighborY = qHead.y + direction[1];
+    			if ( neighborX >= 0 
+    					&& neighborX < height 
+    					&& neighborY >= 0 
+    					&& neighborY < width 
+    					&& !isVisited[neighborX][neighborY] 
+    					&& grid[neighborX][neighborY] == '1'		)
+    			{
+    				isVisited[neighborX][neighborY] = true;
+    				bfsQueue.offer( new Pair( neighborX, neighborY ) );
+    			}
+    		}
     	}
     }
 }
