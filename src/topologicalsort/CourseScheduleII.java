@@ -46,13 +46,11 @@ public class CourseScheduleII
     	Set<Integer> visited = new LinkedHashSet<>(); // visited in dfs
     	for ( Integer vertex : graph.keySet() )
     	{
-    		if ( !discovered.contains( vertex ) )
-    		{
-	    		if ( !topoSort( graph, vertex, discovered, visited ) )
+    		if ( !discovered.contains( vertex ) 
+    				&& hasCycle( graph, vertex, discovered, visited ) )
 	    		{
 	    			return new int[]{};
 	    		}
-    		}
     	}
     	
     	// build result
@@ -66,31 +64,21 @@ public class CourseScheduleII
     	return result;
     }
 
-    /*
-     * @return whether a cycle is detected
-     * */
-    private boolean topoSort( Map<Integer, Set<Integer>> graph, Integer startNode, Set<Integer> discovered, Set<Integer> visited )
+    private boolean hasCycle( Map<Integer, Set<Integer>> graph, Integer startNode, Set<Integer> discovered, Set<Integer> visited )
     {
     	discovered.add( startNode );
     	
     	for ( Integer neighborNode : graph.get( startNode ) )
     	{
-    		if ( !discovered.contains( neighborNode ) )
+    		if ( !discovered.contains( neighborNode ) 
+    				&& hasCycle( graph, neighborNode, discovered, visited ) )
     		{
-    			if ( !topoSort( graph, neighborNode, discovered, visited ) )
-    			{
-    				return false;
-    			}
+    				return true;
     		}
     		else if ( discovered.contains( neighborNode )
     				&& !visited.contains( neighborNode ) )
     		{
-    			return false;
-    		}
-    		else
-    		{
-    			// already visited, do nothing
-    			;
+    			return true;
     		}
     	}
     	

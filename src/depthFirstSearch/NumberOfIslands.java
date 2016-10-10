@@ -1,7 +1,10 @@
 package depthFirstSearch;
 
+import org.junit.Test;
+
 /**
-Given a 2d grid map of '1's (land) and '0's (water), count the number of islands. An island is surrounded by water and is formed by connecting adjacent lands horizontally or vertically. You may assume all four edges of the grid are all surrounded by water.
+Given a 2d grid map of '1's (land) and '0's (water), count the number of islands. An island is surrounded by water and is formed by connecting adjacent lands horizontally or vertically. 
+You may assume all four edges of the grid are all surrounded by water.
 
 Example 1:
 
@@ -21,9 +24,8 @@ Example 2:
  */
 
 public class NumberOfIslands
-{
-	private final static int MARKED_LAND = 2;
-	private final static int LAND = 1;
+{	
+	private int[][] directions = new int[][]{ {0, 1}, {0, -1}, {1, 0}, {-1, 0} };
 	
     public int numIslands(char[][] grid) 
     {
@@ -33,53 +35,40 @@ public class NumberOfIslands
     		return 0;
     	}
     	
-    	int heighth = grid.length;
+    	int height = grid.length;
     	int width = grid[0].length;
-    	int islandCount = 0;
-    	for ( int i = 0; i < heighth; i++ )
+    	int numIsland = 0;
+    	boolean[][] isVisited = new boolean[height][width];
+    	for ( int i = 0; i < height; i++ )
     	{
     		for ( int j = 0; j < width; j++ )
     		{
-    			if ( grid[i][j] == LAND )
+    			if ( grid[i][j] == '1' )
     			{
-    				islandCount++;
-    				markEntireIsland( grid, i, j );
+    				numIsland++;
+    				visitIsland( grid, isVisited, i, j );
     			}
     		}
     	}
     	
-    	for ( int i = 0; i < heighth; i++ )
-    	{
-    		for ( int j = 0; j < width; j++ )
-    		{
-    			if ( grid[i][j] == MARKED_LAND )
-    			{
-    				grid[i][j] = LAND;
-    			}
-    		}
-    	}
-    	
-    	return islandCount;
+    	return numIsland;
     }
     
-    private void markEntireIsland( char[][] grid, int xStart, int yStart )
+    private void visitIsland( char[][] grid, boolean[][] isVisited, int xStart, int yStart )
     {
-    	int heighth = grid.length;
-    	int width = grid[0].length;
     	if ( xStart < 0 
-    			|| xStart >= heighth
+    			|| xStart >= grid.length
     			|| yStart < 0
-    			|| yStart >= width
-    			|| grid[xStart][yStart] != LAND )
+    			|| yStart >= grid[0].length
+    			|| isVisited[xStart][yStart] )
     	{
     		return;
     	}
-    	
-    	grid[xStart][yStart] = MARKED_LAND;
-    	markEntireIsland( grid, xStart + 1, yStart );
-    	markEntireIsland( grid, xStart - 1, yStart );
-    	markEntireIsland( grid, xStart, yStart + 1 );
-    	markEntireIsland( grid, xStart, yStart - 1 );
-    }
 
+    	isVisited[xStart][yStart] = true;
+    	for ( int[] direction : directions )
+    	{
+    		visitIsland( grid, isVisited, xStart + direction[0], yStart + direction[1] );
+    	}
+    }
 }

@@ -37,7 +37,7 @@ public class WallsAndGates
 		}
 	}
 	
-    public void wallsAndGates( int[][] rooms )
+	public void wallsAndGates( int[][] rooms )
     {
     	if ( rooms == null
     			|| rooms.length == 0 
@@ -63,7 +63,7 @@ public class WallsAndGates
     	}
 
     	int[][] directions = new int[][]{ {0, 1}, {1, 0}, {0, -1}, {-1, 0}};
-    	// bfs traverse
+    	
     	while ( !bfsQueue.isEmpty() )
     	{
     		Coor qHead = bfsQueue.poll();
@@ -79,9 +79,7 @@ public class WallsAndGates
     				bfsQueue.offer( new Coor( neighborXCoor, neighborYCoor ) );
     			}
     		}
-    	}
-    	
-    	
+    	}    	
     }
     
 }

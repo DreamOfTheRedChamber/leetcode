@@ -26,12 +26,7 @@ For k = 3, you should return: 3->2->1->4->5
 public class ReverseNodesInKGroup
 {
     public ListNode reverseKGroup( ListNode head, int k )
-    {
-    	if ( head == null )
-    	{
-    		return null;
-    	}
-    	
+    {    	
     	ListNode dummyHead = new ListNode( 0 );
     	dummyHead.next = head;
     	ListNode tailNode = dummyHead;
