@@ -39,4 +39,25 @@ public class MinDepthofBinaryTree
     	minDepth( root.left, depth + 1, min );
     	minDepth( root.right, depth + 1, min );
     }
+    
+    public int minDepth2( TreeNode root )
+    {
+    	return minDepthUpdateAtParent( root, 1 );
+    }
+    
+    private int minDepthUpdateAtParent( TreeNode root, int depth )
+    {
+    	if ( root == null )
+    	{
+    		return depth - 1;
+    	}
+    	if ( root.left == null 
+    			&& root.right == null )
+    	{
+    		return depth;
+    	}
+    	
+    	return Math.min( minDepthUpdateAtParent( root.left, depth + 1 ),
+    					 minDepthUpdateAtParent( root.right, depth + 1 ) );
+    }
 }

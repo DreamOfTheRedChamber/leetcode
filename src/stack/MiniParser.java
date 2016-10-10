@@ -69,11 +69,11 @@ public class MiniParser
 	public void test()
 	{
 		NestedInteger resultOne = deserialize( new String( "324" ) );
-		NestedInteger resultFive = deserialize( new String( "-3" ) );
-		NestedInteger resultTwo = deserialize( new String( "[324]" ) );
-		NestedInteger resultThree = deserialize( new String( "[123,[456]]" ) );
-		NestedInteger resultFour = deserialize( new String( "[123,[456,578]]" ) );
-		NestedInteger resultSix = deserialize( new String( "[[],456]" ) );
+//		NestedInteger resultFive = deserialize( new String( "-3" ) );
+//		NestedInteger resultTwo = deserialize( new String( "[324]" ) );
+//		NestedInteger resultThree = deserialize( new String( "[123,[456]]" ) );
+//		NestedInteger resultFour = deserialize( new String( "[123,[456,578]]" ) );
+//		NestedInteger resultSix = deserialize( new String( "[[],456]" ) );
 	}
 	// refer to the code in http://www.jiuzhang.com/solutions/mini-parse/
 	public NestedInteger deserialize( String s )
@@ -111,20 +111,14 @@ public class MiniParser
 			else // integers
 			{
 				// parse integer
-				boolean isNeg = s.charAt( pos ) == '-' ? true : false;
-				if ( isNeg )
-				{
-					pos++;
-				}
 				int startPos = pos;
 				while ( pos < s.length() 
-						&& s.charAt( pos ) >= '0' 
-						&& s.charAt( pos ) <= '9' )
+						&& (s.charAt( pos ) == '-' || ( s.charAt( pos ) >= '0' && s.charAt( pos ) <= '9' ) ) )
 				{
 					pos++;
 				}
 				int parsedInt = Integer.valueOf( s.substring( startPos, pos ) );
-				NestedInteger newValue = new NestedInteger( isNeg ? -1 * parsedInt : parsedInt );
+				NestedInteger newValue = new NestedInteger( parsedInt );
 
 				// add to stack
 				if ( recursionStack.size() >= 1 )
