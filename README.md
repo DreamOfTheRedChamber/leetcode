@@ -35,7 +35,8 @@
     * [String](#ds-string)
     * [Linkedlist](#ds-linkedlist) 
     * [Stack](#ds-stack)
-    * [Queue/Priorityqueue](#ds-queue)
+    * [Queue](#ds-queue)
+    * [PriorityQueue](#ds-priorityqueue)
     * [Tree](#ds-tree)
     * [HashMap](#ds-hashmap)
     * [TreeMap](#ds-treemap)
@@ -52,7 +53,7 @@
     * [Binary search](#algorithms-binary-search) 
     * [Recursion](#algorithms-recursive)
     * [Backtrack](#algorithms-backtrack)
-    * [Graph](#algorithms-bfs)
+    * [Graph](#algorithms-graph)
        * [Grid-based graph patterns](#algorithms-grid)
        * [Breath first search](#algorithms-bfs)
        * [Depth first search](#algorithms-dfs)
@@ -224,11 +225,68 @@ Random rand = new Random();
 int n = rand.nextInt( 50 ) + 1; // 1 ~ 50, specified number is exclusive
 ```
 
-#### Rarely mentioned APIs<a id="basics-rarely-mentioned-apis"></a>
-* set.add(elem) return false if set already contains the elem
-* list.sublist(startIndex, endIndex) returns a sublist of List
-* Collections.unmodifiableList/unmodifiableSet/unmodifiableMap()
-* Collections.reverse(List<?>) reverses a linkedlist
+#### Data structure important APIs<a id="basics-rarely-mentioned-apis"></a>
+* String
+  - StringTokenizer ( like an iterator, has built-in hasNext() and next() func ). Could be used instead of a global position pointer inside recursive function (e.g. tree serialization and deserialization)
+```java
+String str = "This is String , split by StringTokenizer, created by mkyong";
+StringTokenizer st = new StringTokenizer( str, "," );
+while (st.hasMoreElements()) 
+{
+    System.out.println(st.nextElement());
+}
+```
+  - String[] split( String regex )
+```java
+String string = "004-034556";
+String[] parts = string.split("-");
+String part1 = parts[0]; // 004
+String part2 = parts[1]; // 034556
+```
+  - Parsing integer from a string. When possible, use Java's built-in function Integer Integer.ValueOf(String) or int Integer.ParseInt(String) instead of doing it manually
+* Array
+  - Print arrays in Java
+```java
+int[] array1D = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+int[][] array2D = { { 1, 2 }, {2, 5}, {3, 7} };
+System.out.println( Arrays.toString( array1D ) );
+System.out.println( Arrays.deepToString( array2D ));
+```
+* LinkedList
+  - list.sublist(startIndex, endIndex) returns a sublist of List
+  - LinkedList.addFirst(element: Object)/addLast(element: Object)/getFirst()/getLast()/removeFirst()/removeLast()
+* Queue
+  - peek() vs element(), poll() vs remove(), add() vs offer(): when queue is empty, the former returns null and the latter throws exception. Most times in an interview setting, use the former one is appropriate. The first reason is that it is not an exceptional case that the queue is empty. The second reason is that throwsing exceptions incurs a performance penalty.
+```java
+// implements inside abstractQueue<E>
+public E remove()
+{
+  E x = poll();
+  if ( x != null )
+  {
+    return x;
+  }
+  else
+  {
+    throw new NoSuchElementException();
+  }
+}
+```
+* Set
+  - set.add(elem) return false if set already contains the elem. 
+* Map
+  - frequency count with hashmap
+```java
+map.put( key, 1 + map.getOrDefault( key, 0 ) );
+```
+* put if not exist
+```java
+map.putIfAbsent( key, new ArrayList<>() );
+```
+* Collections
+  - Collections.unmodifiableList/unmodifiableSet/unmodifiableMap()
+  - Collections.reverse(List<?>) reverses a linkedlist
+
 
 #### Math<a id="basics-math"></a>
 * divide two integers ( useful names: dividend/numerator, divisor/denominator, quotient, residue )
@@ -363,36 +421,8 @@ while ( iterator.hasNext() )
 * space efficiency in boolean array: Boolean[] -> boolean[] -> BitSet
 
 #### Array <a id="ds-array"></a>
-* Print arrays in Java
-```java
-int[] array1D = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
-int[][] array2D = { { 1, 2 }, {2, 5}, {3, 7} };
-System.out.println( Arrays.toString( array1D ) );
-System.out.println( Arrays.deepToString( array2D ));
-```
-* Generate coordinate hash for a position (x,y) by x * width + y;
-* When input is a 2D array and array width and height will be used repeated afterwards. Could consider define it inside a int width and int height variable
 
 #### String <a id="ds-string"></a>
-* StringTokenizer ( like an iterator, has built-in hasNext() and next() func ). Could be used instead of a global position pointer inside recursive function (e.g. tree serialization and deserialization)
-```java
-String str = "This is String , split by StringTokenizer, created by mkyong";
-StringTokenizer st = new StringTokenizer( str, "," );
-while (st.hasMoreElements()) 
-{
-    System.out.println(st.nextElement());
-}
-```
-
-* String[] split( String regex )
-```java
-String string = "004-034556";
-String[] parts = string.split("-");
-String part1 = parts[0]; // 004
-String part2 = parts[1]; // 034556
-```
-
-* Parsing integer from a string. When possible, use Java's built-in function Integer Integer.ValueOf(String) or int Integer.ParseInt(String) instead of doing it manually
 
 #### LinkedList <a id="ds-linkedlist"></a>
 * When linked list is used in combination with counters inside a while loop, it is really error-prone because the programmer needs to increment two places inside each loop. For while loop, it is a better practice to use blank space to separate the three sections including preparing for next round loop, do job in this round loop and move to next round loop.
@@ -441,23 +471,12 @@ String part2 = parts[1]; // 034556
 #### Stack <a id="ds-stack"></a>
 * When popping elements from stack, always check if the stack is empty. Otherwise, there might be a EmptyStackException()
 
-#### Queue/PriorityQueue <a id="ds-queue"></a>
-* peek vs element, poll vs remove: when queue is empty, the former returns null and the latter throws exception. Most times in an interview setting, use the former one is appropriate. The first reason is that it is not an exceptional case that the queue is empty. The second reason is that throwsing exceptions incurs a performance penalty.
-```java
-// implements inside abstractQueue<E>
-public E remove()
-{
-  E x = poll();
-  if ( x != null )
-  {
-    return x;
-  }
-  else
-  {
-    throw new NoSuchElementException();
-  }
-}
-```
+#### Queue <a id="ds-queue"></a>
+
+#### PriorityQueue <a id="ds-priorityqueue"></a>
+* Built-in implementation remove() method for priorityqueue has O(n) time complexity.
+  -  O(n) time is spent on looping through entire queue to find the element to be removed. O(logn) is used to remove the element
+  -  But O(n) could be easily improved to O(logn) by adding an additional Map<T, Node> existingNodes. When Node has duplicate values, a counter could be added as Node class instance variable.
 
 * Lambda expression inside PriorityQueue elements comparison
 ```java
@@ -526,14 +545,6 @@ public void traverse( TreeNode root, int order )
 * Binary search tree
 
 #### HashMap <a id="ds-hashmap"></a>
-* frequency count with hashmap
-```java
-map.put( key, 1 + map.getOrDefault( key, 0 ) );
-```
-* put if not exist
-```java
-map.putIfAbsent( key, new ArrayList<>() );
-```
 * Use double as hashmap keys is a bad practice. Especially if needing to perform calculations on double keys, the hash of double could mess up.
 
 #### TreeMap <a id="ds-treemap"></a>
@@ -897,7 +908,7 @@ private class ResultWrapper
 
 * Tree-based recursion
     - One of the key problems resulting from TreeNode definition is that TreeNode has no info about its parent node. But to resolve a tree-based problem, it is usually required to combine child and parent information.
-    - Two basic strategies to return this problem
+    - Two basic strategies to solve this problem
       + Pass parent node as an input argument to child recursive function, then resolve problem inside child function. This approach usually needs some global variables, as discussed before.
       + Solve children recursive functions first, then resolve problem inside parent function. This approach usually needs some complex return value types, as discussed before. 
 ```java
@@ -937,8 +948,9 @@ public void recursivefunction()
 * mark visited locations inside a 2D grid
   * use set<Integer> to store position hash (x * width + height)
   * if could modify the grid, place special char such as '#' for already discovered nodes
-#### Graph
-##### Grid-based graph patterns
+
+#### Graph <a id="algorithms-graph"></a>
+##### Grid-based graph patterns <a id="algorithms-grid"></a>
 * How to store coordinates: 
    * A customized class Coor
    * If allowing to modify grid, could temporarily place special chars/values to indicate that this position has been visited before. Depending on whether input int grid[][] is a defensive copy, we could decide whether to recover the grid[][] by replacing previously set special chars/values.
