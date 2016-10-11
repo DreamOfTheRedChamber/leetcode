@@ -659,7 +659,7 @@ public void treeHighSpaceTraverse( TreeNode root, int order )
 * Get Subset APIs: tailMap/headMap/subMap
 
 #### Graph <a id="ds-graph"></a>
-* Graph definition, there are multiple ways to define graphs in Java. To represent a sparse graph, one typical classical way is to define class GraphNode and then graph can be defined as List<GraphNode>. The other way is to define graph as Map<Integer, Set<Integer>> graph.
+* Graph definition, there are multiple ways to define graphs in Java. To represent a sparse graph, one typical classical way is to define class GraphNode and then graph can be defined as List &lt GraphNode &gt. The other way is to define graph as Map&ltInteger, Set &lt Integer&gt&gt graph. 'Map<Integer>'
 ```java
 // first way, more official
 // but if there are redundant edges in input, might need to implement hashcode() and equal() methods to avoid add redundant nodes into neighbors. Kind of overkilling in an interview setting
