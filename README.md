@@ -502,7 +502,7 @@ class Pair
 /** 
  * @param order  0 preorder; 1 inorder; 2 postorder
 */
-public void traverse( TreeNode root, int order ) 
+public void treeHighSpaceTraverse( TreeNode root, int order ) 
 {
     Stack<Pair> stack = new Stack<>();
     stack.push( new Pair( root, 0 ) );
@@ -582,8 +582,71 @@ public void traverse( TreeNode root, int order )
   } 
 ```
 
-
 #### Binary search tree<a id="ds-binary-search-tree"></a>
+* Get inorder traversal predecessor/successor
+```java
+    TreeNode getPredecessor( TreeNode root, TreeNode target )
+    {
+      if ( target.left != null )
+      {
+        TreeNode currNode = target.left;
+        while ( currNode.right != null )
+        {
+          currNode = currNode.right;
+        }
+        return currNode;
+      }
+      else
+      {
+        TreeNode predecessor = null;
+        TreeNode currNode = root;
+        while ( currNode != target )
+        {
+          if ( currNode.val >= target.val )
+          {
+            currNode = currNode.left;
+          }
+          else
+          {
+            predecessor = currNode;
+            currNode = currNode.right;
+          }
+        }
+        return predecessor;
+      }
+    }
+    
+    TreeNode getSuccessor( TreeNode root, TreeNode target )
+    {
+      if ( target.right != null )
+      {
+        TreeNode currNode = target.right;
+        while ( currNode.left != null )
+        {
+          currNode = currNode.left;
+        }
+        return currNode;
+      }
+      else
+      {
+        TreeNode successor = null;
+        TreeNode currNode = root;
+        while ( currNode != target )
+        {
+          if ( currNode.val >= target.val )
+          {
+            successor = currNode;
+            currNode = currNode.left;
+          }
+          else
+          {
+            currNode = currNode.right;
+          }
+        }
+        return successor;
+      }
+    }
+```
 
 #### HashMap <a id="ds-hashmap"></a>
 * Use Double as hashmap keys is a bad practice. Especially if needing to perform calculations on double keys, the hash of double could mess up.

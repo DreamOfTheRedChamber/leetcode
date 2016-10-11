@@ -1,6 +1,6 @@
 package stack;
 
-import java.util.Stack;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
@@ -22,44 +22,43 @@ public class InorderSuccessor
     		throw new IllegalArgumentException();
     	}
     	
-    	// has right child
-    	if ( p.right != null )
+    	TreeNode target = p;
+    	if ( target.right != null )
     	{
-    		TreeNode successor = p.right;
-    		while ( successor.left != null )
-    		{
-    			successor = successor.left;
-    		}
-    		return successor;
-    	}
-    	
-    	// find node along the path where lower node is left child of upper node
-    	Stack<TreeNode> path = new Stack<>();
-    	TreeNode currNode = root;
-    	while ( currNode != p )
-    	{
-    		path.push( currNode );
-    		if ( currNode.val < p.val )
-    		{
-    			currNode = currNode.right;
-    		}
-    		else
+    		TreeNode currNode = target.right;
+    		while ( currNode.left != null )
     		{
     			currNode = currNode.left;
     		}
+    		return currNode;
     	}
-
-    	TreeNode child = p;
-    	while ( !path.isEmpty() )
+    	else
     	{
-    		TreeNode top = path.pop();
-    		if ( top.left == child )
+    		TreeNode successor = null;
+    		TreeNode currNode = root;
+    		while ( currNode != target )
     		{
-    			return top;
+    			if ( currNode.val >= target.val )
+    			{
+    				successor = currNode;
+    				currNode = currNode.left;
+    			}
+    			else
+    			{
+    				currNode = currNode.right;
+    			}
     		}
-    		child = top;
+    		return successor;
     	}
-    	
-    	return null;
     }    
+    
+    @Test
+    public void test()
+    {
+    	TreeNode node1 = new TreeNode( 2 );
+    	TreeNode node2 = new TreeNode( 1 );
+    	node1.left = node2;
+    	
+    	assertEquals( 2, inorderSuccessor( node1, node2 ).val );
+    }
 }
