@@ -38,6 +38,7 @@
     * [Queue](#ds-queue)
     * [PriorityQueue](#ds-priorityqueue)
     * [Tree](#ds-tree)
+    * [Binary search tree](#ds-binary-search-tree)
     * [HashMap](#ds-hashmap)
     * [TreeMap](#ds-treemap)
     * [Graph](#ds-graph)
@@ -254,7 +255,7 @@ System.out.println( Arrays.deepToString( array2D ));
 ```
 * LinkedList
   - list.sublist(startIndex, endIndex) returns a sublist of List
-  - LinkedList.addFirst(element: Object)/addLast(element: Object)/getFirst()/getLast()/removeFirst()/removeLast()
+  - LinkedList.addFirst(element: Object)/addLast(element: Object)/getFirst()/getLast()/removeFirst()/removeLast(). This could be used in backtracking.
 * Queue
   - peek() vs element(), poll() vs remove(), add() vs offer(): when queue is empty, the former returns null and the latter throws exception. Most times in an interview setting, use the former one is appropriate. The first reason is that it is not an exceptional case that the queue is empty. The second reason is that throwsing exceptions incurs a performance penalty.
 ```java
@@ -286,7 +287,6 @@ map.putIfAbsent( key, new ArrayList<>() );
 * Collections
   - Collections.unmodifiableList/unmodifiableSet/unmodifiableMap()
   - Collections.reverse(List<?>) reverses a linkedlist
-
 
 #### Math<a id="basics-math"></a>
 * divide two integers ( useful names: dividend/numerator, divisor/denominator, quotient, residue )
@@ -403,6 +403,7 @@ while ( iterator.hasNext() )
 * hashmap: chaining ( array + list )
   * compute array index based on **public int hashCode()** method
   * decide list index based on **public boolean equals()** method
+* hashset: implemented based on hashmap with dummy values
 * linkedhashmap: hashtable with a linkedlist
 * treemap: red-black tree
 * priorityqueue: array
@@ -538,14 +539,56 @@ public void traverse( TreeNode root, int order )
     }
 }
 ```
+* Tree iterative traversal with O(1) space: Binary threaded tree
+```java
+  public void constantSpaceTraverse( TreeNode root )
+  {
+    TreeNode currNode = root;
+    while ( currNode != null )
+    {
+      if ( currNode.left == null )
+      {
+        System.out.println( currNode.val );
+        currNode = currNode.right;
+      }
+      else
+      {
+        TreeNode rightMostChild = findRightMostChild( currNode );
+        // second time traverse the node
+        if ( rightMostChild.right == currNode )
+        {
+          System.out.println( currNode.val );
+          rightMostChild.right = null;
+          currNode = currNode.right;
+        }
+        // first time traverse the node
+        else
+        {
+          rightMostChild.right = currNode;
+          currNode = currNode.left;
+        }
+      }
+    }
+  }
+  
+  private TreeNode findRightMostChild( TreeNode root )
+  {
+    TreeNode currNode = root.left;
+    while ( currNode.right != null && currNode.right != root )
+    {
+      currNode = currNode.right;
+    }
+    return currNode;
+  } 
+```
 
-* Tree iterative traversal with O(1) space: 
-* TreeNode successor
-* TreeNode predecessor
-* Binary search tree
+
+#### Binary search tree<a id="ds-binary-search-tree"></a>
 
 #### HashMap <a id="ds-hashmap"></a>
-* Use double as hashmap keys is a bad practice. Especially if needing to perform calculations on double keys, the hash of double could mess up.
+* Use Double as hashmap keys is a bad practice. Especially if needing to perform calculations on double keys, the hash of double could mess up.
+* Use Object as hashmap keys. When the hashCode() and equals(Object o) methods are not overriden by your class, the default implementation are used. The default behavior is to treat all objects as different, unless they are the same object. IdentityHashMap always does this by using reference-equality in place of object-equality
+* HashMap.keySet().retainAll( Set ) computes intersection of two sets
 
 #### TreeMap <a id="ds-treemap"></a>
 * Get Key/Entry APIs: firstKey/firstEntry, lastKey/lastEntry, lowerKey/lowerEntry, higherKey/higherEntry, CeilingKey/CeilingEntry, floorKey/floorEntry
@@ -757,7 +800,6 @@ private boolean isOverlap( Interval o1, Interval o2 )
           }         
      }
 ```
-
  
 #### Binary search <a id="algorithms-binary-search"></a>
 * Universal templates - iterative/recursive version 
