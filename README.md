@@ -583,6 +583,7 @@ public void treeHighSpaceTraverse( TreeNode root, int order )
 ```
 
 #### Binary search tree<a id="ds-binary-search-tree"></a>
+* The definition of BST is left <= middle < right. Pay attention to the equals sign.
 * Get inorder traversal predecessor/successor
 ```java
     TreeNode getPredecessor( TreeNode root, TreeNode target )
@@ -652,6 +653,21 @@ public void treeHighSpaceTraverse( TreeNode root, int order )
 * Use Double as hashmap keys is a bad practice. Especially if needing to perform calculations on double keys, the hash of double could mess up.
 * Use Object as hashmap keys. When the hashCode() and equals(Object o) methods are not overriden by your class, the default implementation are used. The default behavior is to treat all objects as different, unless they are the same object. IdentityHashMap always does this by using reference-equality in place of object-equality
 * HashMap.keySet().retainAll( Set ) computes intersection of two sets
+* A popular use case for hashmap in interview is frequency counting, namely histogram. Based on this, it is usually required to output the histogram in desending order. A straightforward approach is to use TreeMap for frequency calculating. But this will result in O(mlogn + nlogn) complexity, where m is the number of input and n is the number of distinct input. A more efficient approach is to use HashMap + PriorityQueue
+```java
+      // initialize
+      Map<Character, Integer> histogram = new HashMap<>();
+      histogram.put( 'c', 10 );
+      histogram.put( 'a', 12 );
+      histogram.put( 'b', 6 );
+      // output according to priorityqueue
+      PriorityQueue<Map.Entry<Character, Integer>> maxQueue = new PriorityQueue<>( ( o1, o2 ) ->  o2.getValue() - o1.getValue() );
+      maxQueue.addAll( histogram.entrySet() );
+      while ( !maxQueue.isEmpty() )
+      {
+        System.out.println( maxQueue.poll() );
+      }
+```
 
 #### TreeMap <a id="ds-treemap"></a>
 * Get Key/Entry APIs: firstKey/firstEntry, lastKey/lastEntry, lowerKey/lowerEntry, higherKey/higherEntry, CeilingKey/CeilingEntry, floorKey/floorEntry
@@ -659,7 +675,7 @@ public void treeHighSpaceTraverse( TreeNode root, int order )
 * Get Subset APIs: tailMap/headMap/subMap
 
 #### Graph <a id="ds-graph"></a>
-* Graph definition, there are multiple ways to define graphs in Java. To represent a sparse graph, one typical classical way is to define class GraphNode and then graph can be defined as List &lt GraphNode &gt. The other way is to define graph as Map&lt;Integer, Set&lt;Integer&gt;&gt; graph. Map&lt;Integer&gt;
+* Graph definition, there are multiple ways to define graphs in Java. To represent a sparse graph, one typical classical way is to define class GraphNode and then graph can be defined as List &lt; GraphNode &gt;. The other way is to define graph as Map&lt;Integer, Set&lt;Integer&gt;&gt; graph. Map&lt;Integer&gt;
 ```java
 // first way, more official
 // but if there are redundant edges in input, might need to implement hashcode() and equal() methods to avoid add redundant nodes into neighbors. Kind of overkilling in an interview setting
