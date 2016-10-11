@@ -1,4 +1,4 @@
-package sort;
+package twoPointer;
 
 import java.util.Arrays;
 

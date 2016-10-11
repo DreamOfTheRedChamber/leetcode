@@ -1,4 +1,4 @@
-package binarySearch;
+package twoPointer;
 
 import static org.junit.Assert.assertEquals;
 

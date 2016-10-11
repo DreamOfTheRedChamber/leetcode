@@ -1,4 +1,4 @@
-package hashtable;
+package twoPointer;
 
 import static org.junit.Assert.assertEquals;
 
