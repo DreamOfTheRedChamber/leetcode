@@ -1,4 +1,4 @@
-package hashtable;
+package kth;
 
 import static org.junit.Assert.assertEquals;
 

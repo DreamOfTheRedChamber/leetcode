@@ -1,4 +1,4 @@
-package hashtable;
+package kth;
 
 import java.util.HashMap;
 import java.util.LinkedList;

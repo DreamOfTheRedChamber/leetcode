@@ -1,4 +1,4 @@
-package hashtable;
+package kth;
 
 /**
 Given a non-empty string str and an integer k, rearrange the string such that the same characters are at least distance k from each other.

@@ -1,4 +1,4 @@
-package binarySearch;
+package kth;
 
 import static org.junit.Assert.assertEquals;
 
