@@ -1,4 +1,4 @@
-package binarySearch;
+package rectangleAndSquare;
 
 public class SmallestRectangleEnclosingBlackPixels 
 {
