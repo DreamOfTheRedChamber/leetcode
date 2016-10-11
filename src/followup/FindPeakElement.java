@@ -1,4 +1,4 @@
-package binarySearch;
+package followup;
 
 import static org.junit.Assert.assertEquals;
 
