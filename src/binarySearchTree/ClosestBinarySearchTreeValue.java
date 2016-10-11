@@ -26,34 +26,27 @@ public class ClosestBinarySearchTreeValue
     	
     	if ( root.val < target && root.right != null )
     	{
-    		int childClosest = closestValue( root.right, target );
-    		double rootDistance = Math.abs( root.val - target );
-    		double childDistance = Math.abs( childClosest - target );
-    		if ( rootDistance < childDistance )
-    		{
-    			return root.val;
-    		}
-    		else
-    		{
-    			return childClosest;
-    		}
+    		return findClosest( root.val, closestValue( root.right, target ), target );    		
     	}
     	if ( root.val > target && root.left != null )
     	{
-    		int childClosest = closestValue( root.left, target );
-    		double rootDistance = Math.abs( root.val - target );
-    		double childDistance = Math.abs( childClosest - target );
-    		if ( rootDistance < childDistance )
-    		{
-    			return root.val;
-    		}
-    		else
-    		{
-    			return childClosest;
-    		}
-    		
+    		return findClosest( root.val, closestValue( root.left, target ), target );
     	}
     	
     	return root.val;
+    }
+    
+    private int findClosest( int value1, int value2, double target )
+    {
+		double value1Distance = Math.abs( value1 - target );
+		double value2Distance = Math.abs( value2 - target );
+		if ( value1Distance < value2Distance )
+		{
+			return value1;
+		}
+		else
+		{
+			return value2;
+		}    	
     }
 }
