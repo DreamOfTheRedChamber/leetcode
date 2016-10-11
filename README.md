@@ -217,7 +217,7 @@
 
 #### Error-prone APIs<a id="basics-error-prone-apis"></a>
 * Java list remove interface. Two list.remove() interface ( list.remove(int index), list.remove( Object object ) )
-    - List<Integer> input
+    - List&lt;Integer&gt; input
     - list.remove(index) will always take precedence because it does not require type casting
 * Ternary operator ?: priority is only higher than assignment. If it is used in combination with other operators, parentheses should be added.
 * Generate a random number
@@ -286,7 +286,7 @@ map.putIfAbsent( key, new ArrayList<>() );
 ```
 * Collections
   - Collections.unmodifiableList/unmodifiableSet/unmodifiableMap()
-  - Collections.reverse(List<?>) reverses a linkedlist
+  - Collections.reverse(List&lt;?&gt;) reverses a linkedlist
 
 #### Math<a id="basics-math"></a>
 * divide two integers ( useful names: dividend/numerator, divisor/denominator, quotient, residue )
@@ -477,7 +477,7 @@ while ( iterator.hasNext() )
 #### PriorityQueue <a id="ds-priorityqueue"></a>
 * Built-in implementation remove() method for priorityqueue has O(n) time complexity.
   -  O(n) time is spent on looping through entire queue to find the element to be removed. O(logn) is used to remove the element
-  -  But O(n) could be easily improved to O(logn) by adding an additional Map<T, Node> existingNodes. When Node has duplicate values, a counter could be added as Node class instance variable.
+  -  But O(n) could be easily improved to O(logn) by adding an additional Map&lt;T, Node&gt& existingNodes. When Node has duplicate values, a counter could be added as Node class instance variable.
 
 * Lambda expression inside PriorityQueue elements comparison
 ```java
@@ -659,7 +659,7 @@ public void treeHighSpaceTraverse( TreeNode root, int order )
 * Get Subset APIs: tailMap/headMap/subMap
 
 #### Graph <a id="ds-graph"></a>
-* Graph definition, there are multiple ways to define graphs in Java. To represent a sparse graph, one typical classical way is to define class GraphNode and then graph can be defined as List &lt GraphNode &gt. The other way is to define graph as Map&ltInteger, Set &lt Integer&gt&gt graph. 'Map<Integer>'
+* Graph definition, there are multiple ways to define graphs in Java. To represent a sparse graph, one typical classical way is to define class GraphNode and then graph can be defined as List &lt GraphNode &gt. The other way is to define graph as Map&lt;Integer, Set&lt;Integer&gt;&gt; graph. Map&lt;Integer&gt;
 ```java
 // first way, more official
 // but if there are redundant edges in input, might need to implement hashcode() and equal() methods to avoid add redundant nodes into neighbors. Kind of overkilling in an interview setting
@@ -960,7 +960,7 @@ public int binarySearchRecursive( int[] array, int target, int start, int end )
 * How to return multiple results from recursive functions
   - not use return value: use global variable. 
     + The first is to use private instance variables to store results
-    + The second is to use a mutable argument of type ( int[], List<> ). Modify the value of this argument while travering.
+    + The second is to use a mutable argument of type ( int[], List&lt;&gt; ). Modify the value of this argument while travering.
   - use return value
     + If multiple results are of same type, define return type as an array T[]
     + Define a result wrapper class
@@ -1051,7 +1051,7 @@ public void recursivefunction()
 ```
 * remove duplicates inside result
 * mark visited locations inside a 2D grid
-  * use set<Integer> to store position hash (x * width + height)
+  * use set&lt;Integer&gt; to store position hash (x * width + height)
   * if could modify the grid, place special char such as '#' for already discovered nodes
 
 #### Graph <a id="algorithms-graph"></a>
@@ -1062,7 +1062,7 @@ public void recursivefunction()
 * How to track visited coordinates:
    * There are four possible approaches here: 
       * Preferred approach: The first is to use a two-dimensional boolean[][] array. true as visited and false as not visited.
-      * The second is to use ( x * grid_width + y ) as Coor hash and put them in a Set<Integer> visited. Integer might overflow but should be enough in an interview setting.
+      * The second is to use ( x * grid_width + y ) as Coor hash and put them in a Set&lt;Integer&gt; visited. Integer might overflow but should be enough in an interview setting.
       * Not recommend: The third is replacing entries in grid with some special characters such as '#' to mark as visited. 
       * Not recommend: The fourth is define a customized class Coor to overrided hashCode() and equals() function for Coor class. But this is kind of overkilling for a 45-min interview setting.
 ```java
@@ -1167,11 +1167,11 @@ private void dfs( T[][] grid, int x, int y, boolean[][] discovered )
 * There are basically two categories of methods for topological sort. The first one is greedy algorithm with O(|V|^2 + |E|) time complexity. The second is based on depth first search with O(|V| + |E|) time complexity. Here only discusses DFS based approach. 
 * When using DFS based approach, there are two cases which should be taken care of. The first one is what if there exists no topological order at all. The second is how to return topological order.
    * what if there exists no topological order - a cycle is detected. 
-      * How to detect cycle: use UNDISCOVERED, DISCOVERED, VISITED to represent three possible states of graph nodes. Use a Set<?> isDiscovered and Set<?> isVisited to record all history info. If met up with a node which has been discovered but not visited, then a cycle is detected. 
+      * How to detect cycle: use UNDISCOVERED, DISCOVERED, VISITED to represent three possible states of graph nodes. Use a Set&lt;?&gt; isDiscovered and Set&lt;?&gt; isVisited to record all history info. If met up with a node which has been discovered but not visited, then a cycle is detected. 
       * How to handle cycle: return a boolean value (preferred) or throw an exception (not really suitable because they are expected cases)
    * what if need to return topological order
-      * If do not need to detect cycle, could simply use a Stack<> order to record the visited node, namely using Set<?> discovered, Stack<?> visited 
-      * If need to detect cycle, namely using Set<?> discovered, LinkedHashSet<?> visited
+      * If do not need to detect cycle, could simply use a Stack&lt;&gt; order to record the visited node, namely using Set&lt;?&gt; discovered, Stack&lt;?&gt; visited 
+      * If need to detect cycle, namely using Set&lt;?&gt; discovered, LinkedHashSet&lt;?&gt; visited
 ```java
     public int[] getTopoOrder(Map<Integer, Set<Integer>> graph)
     {
