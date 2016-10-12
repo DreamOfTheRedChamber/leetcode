@@ -1,4 +1,4 @@
-package subarraySum;
+package sum;
 
 import static org.junit.Assert.assertEquals;
 

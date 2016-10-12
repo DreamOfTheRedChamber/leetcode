@@ -1,4 +1,4 @@
-package subarraySum;
+package sum;
 
 /**
 /*
