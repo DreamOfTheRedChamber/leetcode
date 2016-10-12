@@ -1,5 +1,9 @@
 package followup;
 
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
+
 /**
 Given a 2D grid, each cell is either a wall 'W', an enemy 'E' or empty '0' (the number zero), return the maximum enemies you can kill using one bomb.
 The bomb kills all the enemies in the same row and column from the planted point until it hits the wall since the wall is too strong to be destroyed.
@@ -17,6 +21,13 @@ return 3. (Placing a bomb at (1,1) kills 3 enemies)
 
 public class BombEnemy
 {	
+	@Test
+	public void test()
+	{
+		assertEquals( 3, maxKilledEnemies( new char[][]{ {'0', 'E', '0', '0'}, {'E', '0', 'W', 'E'}, {'0', 'E', '0', '0'} }) );
+		assertEquals( 10, maxKilledEnemies( new char[][]{ {'0', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'W' } } ) );
+	}
+	
     public int maxKilledEnemies( char[][] grid )
     {
     	if ( grid == null || grid.length == 0 || grid[0].length == 0 )
@@ -31,7 +42,7 @@ public class BombEnemy
     	{
     		for ( int j = 0; j < width; j++ )
     		{
-    			if ( grid[i][j] == 'E' )
+    			if ( grid[i][j] == '0' )
     			{
     				aggreReacheableEnemies( numKilled, grid, i, j );
     			}
@@ -57,11 +68,12 @@ public class BombEnemy
     	int[][] directions = new int[][]{ {0, 1}, {0, -1}, {1, 0}, {-1, 0} };
     	int height = grid.length;
     	int width = grid[0].length;
+		int numKilledEnemies = 0;
+
     	for ( int[] direction : directions )
     	{
     		int nextX = startX + direction[0];
     		int nextY = startY + direction[1];
-    		int numEnemy = 1;
     		while ( nextX < height 
     				&& nextX >= 0 
     				&& nextY < width
@@ -73,15 +85,13 @@ public class BombEnemy
     			}
     			else if ( grid[nextX][nextY] == 'E' )
     			{
-    				numEnemy++;
+    				numKilledEnemies++;
     			}
-    			else
-    			{
-    				numKilled[nextX][nextY] += numEnemy;
-    			}
+    			
     			nextX += direction[0];
     			nextY += direction[1];
     		}
     	}
+    	numKilled[startX][startY] = numKilledEnemies;
     }
 }
