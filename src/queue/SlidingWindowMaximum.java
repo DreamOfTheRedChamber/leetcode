@@ -1,4 +1,4 @@
-package heap;
+package queue;
 //TO_START
 public class SlidingWindowMaximum 
 {

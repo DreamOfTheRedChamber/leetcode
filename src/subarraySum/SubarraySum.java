@@ -1,4 +1,4 @@
-package followup;
+package subarraySum;
 
 /**
 /*

@@ -1,4 +1,4 @@
-package kth;
+package subarraySum;
 
 import static org.junit.Assert.assertEquals;
 

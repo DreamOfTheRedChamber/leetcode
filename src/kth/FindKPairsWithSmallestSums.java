@@ -1,4 +1,4 @@
-package heap;
+package kth;
 
 import java.util.ArrayList;
 import java.util.Arrays;
