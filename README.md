@@ -424,6 +424,7 @@ while ( iterator.hasNext() )
 #### Array <a id="ds-array"></a>
 
 #### String <a id="ds-string"></a>
+* Only alphabetic characters, ascii characters, or any characters
 
 #### LinkedList <a id="ds-linkedlist"></a>
 * When linked list is used in combination with counters inside a while loop, it is really error-prone because the programmer needs to increment two places inside each loop. For while loop, it is a better practice to use blank space to separate the three sections including preparing for next round loop, do job in this round loop and move to next round loop.
@@ -484,6 +485,8 @@ while ( iterator.hasNext() )
 PriorityQueue<NumAndFreq> mostFreqPrioQueue = new PriorityQueue<>( ( o1, o2 ) -> ( o2.freq - o1.freq ) ); // decreasing order
 PriorityQueue<NumAndFreq> mostFreqPrioQueue = new PriorityQueue<>( ( o1, o2 ) -> ( o1.freq - o2.freq ) ); // increasing order
 ```
+
+* Top K problems
 
 #### Tree <a id="ds-tree"></a>
 * Tree iterative traversal with O(logn) space: preorder/inorder/postorder traversal
@@ -833,8 +836,74 @@ public class TrieIterative
 
 #### Two pointers <a id="algorithms-two-pointer"></a>
 ##### Begin and end type <a id="algorithms-boundary-to-center"></a>
+* Two sum type - avoid scanning redundant states
+```java
+if ( A[i] and A[j] satisfy some condition )
+{
+  j--; // do not need to consider pairs composed of [i+1, j-1] and j
+  // do something
+}
+else if ( A[i] and A[j] do not satisfy some condition )
+{
+  i++; // do not need to consider pairs composed of [i+1, j-1] and i
+  // do something
+}
+else
+{
+  // do something
+  i++ or j--
+}
+```
+* Partition (quick select) type - calculate kth largest element O(n) = n + 1/2 n + 1/4 n + 1/8 n + ..... < 2n. E.g. Sort colors, wiggle sort II, Valid palindrome, partition array by odd and even
+```java
+// int[] input, int left, int right
+    int pivot = input[(left+right)/2];
+    while(i <= j)
+    {
+          while(input[i] < pivot)
+          {
+              i++;
+          }
+          while(input[j] > pivot)
+          {
+              j--;
+          }
+         
+          if(i <= j)
+          {
+                swap(data, i, j);
+                i++;
+                j--;
+          }         
+     }
+```
+
 ##### Slow and fast type <a id="algorithms-slow-and-fast"></a>
+* Find the middle of linked list
+* Find linked list cycle
+
 ##### Window type <a id="algorithms-window"></a>
+* Improve naive two level for loop to for-outer loop + while inner loop 
+* E.g. minimum window substring, minimum size subarray sum, Longest substring with at most K distinct characters, Longest substring without repeating characters
+```java
+for ( i = 0; i < n; i++ )
+{
+  while ( j < n )
+  {
+    if ( satisfy some condition )
+    {
+      j++;
+      // update j status
+    }
+    else
+    {
+      break;
+    }    
+  }
+  // update i status
+}
+```
+
 ##### Two arrays type <a id="algorithms-two-arrays"></a>
 
 #### Sort <a id="algorithms-sort"></a>
@@ -856,29 +925,6 @@ private boolean isOverlap( Interval o1, Interval o2 )
 }
 ```
 * Arrays.sort( array, comparator ) and Collections.sort( collection, comparator ) method
-* Partition algorithm used in quick sort O(n)
-```java
-// int[] input, int left, int right
-    int pivotValue = input[(left+right)/2];
-    while(i >= j)
-    {
-          while(input[i] < pivotValue)
-          {
-              i++;
-          }
-          while(input[j] > pivotValue)
-          {
-              j--;
-          }
-         
-          if(i <= j)
-          {
-                swap(data, i, j);
-                i++;
-                j--;
-          }         
-     }
-```
  
 #### Binary search <a id="algorithms-binary-search"></a>
 * Universal templates - iterative/recursive version 
