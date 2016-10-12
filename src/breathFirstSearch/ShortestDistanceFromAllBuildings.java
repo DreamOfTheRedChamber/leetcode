@@ -42,7 +42,6 @@ public class ShortestDistanceFromAllBuildings
     	int width = grid[0].length;
     	int[][] distSum = new int[heighth][width];
     	int[][] numReached = new int[heighth][width];     	// num buildings reached from current land
-    	int[][] directions = new int[][]{ { -1, 0 }, { 1, 0 }, { 0, 1 }, { 0, -1 } };
     	int houseNum = 0;
     	
     	for ( int i = 0; i < heighth; i++ )
@@ -53,41 +52,7 @@ public class ShortestDistanceFromAllBuildings
     			if ( grid[i][j] == 1 )
     			{
     				houseNum++;
-    				int bfsLevel = 0;
-    				boolean[][] visited = new boolean[heighth][width];
-    				Queue<Integer> bfsQueue = new LinkedList<>();
-    				bfsQueue.add( i * width + j );
-    				visited[i][j] = true;
-    				while ( !bfsQueue.isEmpty() )
-    				{
-    					int levelSize = bfsQueue.size();
-    					for ( int t = 0; t < levelSize; t++ )
-    					{
-    						int head = bfsQueue.remove();
-    						int xCoor = head / width;
-    						int yCoor = head % width;
-    						
-    						// bfs four directions for traversing
-    						for ( int[] direction : directions )
-    						{
-    							int xCoorNeighbor = xCoor + direction[0];
-    							int yCoorNeighbor = yCoor + direction[1];
-    							if ( xCoorNeighbor >= 0
-    									&& xCoorNeighbor < heighth
-    									&& yCoorNeighbor >= 0
-    									&& yCoorNeighbor < width
-    									&& !visited[xCoorNeighbor][yCoorNeighbor]
-    									&& grid[xCoorNeighbor][yCoorNeighbor] == 0 )
-    							{
-    								bfsQueue.add( xCoorNeighbor * width + yCoorNeighbor );
-    								visited[xCoorNeighbor][yCoorNeighbor] = true;
-    								distSum[xCoorNeighbor][yCoorNeighbor] += bfsLevel + 1;
-    								numReached[xCoorNeighbor][yCoorNeighbor]++;
-    							}
-    						}
-    					}
-    					bfsLevel++;
-    				}
+    				bfs( distSum, numReached, grid, i, j );
     			}
     		}    		
     	}
@@ -105,6 +70,48 @@ public class ShortestDistanceFromAllBuildings
     		}
     	}
     	return minDist == Integer.MAX_VALUE ? -1 : minDist;
+    }
+    
+    private void bfs( int[][] distSum, int[][] numReached, int[][] grid, int xStart, int yStart )
+    {
+    	int height = distSum.length;
+    	int width = distSum[0].length;
+    	int[][] directions = new int[][]{ { -1, 0 }, { 1, 0 }, { 0, 1 }, { 0, -1 } };
+		int bfsLevel = 0;
+		boolean[][] visited = new boolean[height][width];
+		Queue<Integer> bfsQueue = new LinkedList<>();
+		bfsQueue.add( xStart * width + yStart );
+		visited[xStart][yStart] = true;
+		while ( !bfsQueue.isEmpty() )
+		{
+			int levelSize = bfsQueue.size();
+			for ( int t = 0; t < levelSize; t++ )
+			{
+				int head = bfsQueue.remove();
+				int xCoor = head / width;
+				int yCoor = head % width;
+				
+				// bfs four directions for traversing
+				for ( int[] direction : directions )
+				{
+					int xNext = xCoor + direction[0];
+					int yNext = yCoor + direction[1];
+					if ( xNext >= 0
+							&& xNext < height
+							&& yNext >= 0
+							&& yNext < width
+							&& !visited[xNext][yNext]
+							&& grid[xNext][yNext] == 0 )
+					{
+						bfsQueue.add( xNext * width + yNext );
+						visited[xNext][yNext] = true;
+						distSum[xNext][yNext] += bfsLevel + 1;
+						numReached[xNext][yNext]++;
+					}
+				}
+			}
+			bfsLevel++;
+		}
     }
     
     @Test
