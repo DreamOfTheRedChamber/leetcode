@@ -38,7 +38,7 @@ public class ThreeSumClosest
         	if ( currDis < closestDis )
         	{
         		closestDis = currDis;
-        		closestSum = currSum;
+        		closestSum = currSum + nums[i];
         	}
         }
         return closestSum;
