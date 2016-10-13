@@ -49,22 +49,23 @@ public class FindKPairsWithSmallestSums
         }
         
         // enqueue all pairs
-        PriorityQueue<Pair> pairSumQueue = new PriorityQueue<>( ( o1, o2 ) -> o1.sum - o2.sum );
+        PriorityQueue<Pair> minQueue = new PriorityQueue<>( ( o1, o2 ) -> o1.sum - o2.sum );
         for ( int i = 0; i < nums1.length; i++ )
         {
-        	for ( int j = 0; j < nums2.length; j++ )
-        	{
-                pairSumQueue.offer( new Pair( i, j, nums1[i] + nums2[j] ) );        		
-        	}
+        	minQueue.offer( new Pair( i, 0, nums1[i] + nums2[0] ) );
         }
         
         // take the smallest k pairs
         int numPairs = 0;
         while ( numPairs < k
-        		&& !pairSumQueue.isEmpty() )
+        		&& !minQueue.isEmpty() )
         {
-        	Pair qHead = pairSumQueue.remove();        	
-        	result.add( new int[]{ nums1[qHead.num1Index], nums2[qHead.num2Index ] } );
+        	Pair qHead = minQueue.remove();        	
+        	result.add( new int[]{ nums1[qHead.index1], nums2[qHead.index2 ] } );
+        	if ( qHead.index2 < nums2.length - 1 )
+        	{
+        		minQueue.offer( new Pair( qHead.index1, qHead.index2 + 1, nums1[qHead.index1] + nums2[qHead.index2 + 1] ) );
+        	}
         	numPairs++;
         }
         return result;
@@ -83,13 +84,13 @@ public class FindKPairsWithSmallestSums
 
 class Pair
 {
-	public final int num1Index;
-	public final int num2Index;
+	public final int index1;
+	public final int index2;
 	public final int sum;
-	public Pair( int num1Index, int num2Index, int sum )
+	public Pair( int index1, int index2, int sum )
 	{
-		this.num1Index = num1Index;
-		this.num2Index = num2Index;
+		this.index1 = index1;
+		this.index2 = index2;
 		this.sum = sum;
 	}
 }
