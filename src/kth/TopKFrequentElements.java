@@ -1,10 +1,13 @@
 package kth;
 
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
+import java.util.Queue;
+import java.util.stream.Collectors;
+
+import org.junit.Test;
 
 /**
  * 
@@ -20,41 +23,31 @@ Your algorithm's time complexity must be better than O(n log n), where n is the 
 
 public class TopKFrequentElements
 {
-    public List<Integer> topKFrequent(int[] nums, int k) 
+    public List<Integer> topKFrequent( int[] nums, int k )
     {
     	// build a histogram
-    	Map<Integer, Integer> numHistogram = new HashMap<>();
+    	Map<Integer, Integer> histogram = new HashMap<>();
     	for ( int num : nums )
     	{
-    		numHistogram.put( num, numHistogram.getOrDefault( num, 0 ) + 1 );
+    		histogram.put( num, histogram.getOrDefault( num, 0 ) + 1 );
     	}
     	
     	// build a priorityqueue
-    	PriorityQueue<NumAndFreq> mostFreqPrioQueue = new PriorityQueue<>( ( o1, o2 ) -> ( o2.freq - o1.freq ) );
-    	for ( Map.Entry<Integer, Integer> entry : numHistogram.entrySet( ) )
-    	{
-    		mostFreqPrioQueue.add( new NumAndFreq( entry.getKey( ), entry.getValue( ) ) );
-    	}
+    	Queue<Map.Entry<Integer, Integer>> maxQueue = new PriorityQueue<>( ( o1, o2 ) -> ( o2.getValue() - o1.getValue() ) );
+    	maxQueue.addAll( histogram.entrySet() );
     	
     	// take top k frequent
-    	List<Integer> topKFreqNums = new LinkedList<>();
-    	while ( ( mostFreqPrioQueue.size() > 0 )
-    			&& ( topKFreqNums.size() < k ) )
-    	{
-    		topKFreqNums.add( mostFreqPrioQueue.remove( ).num );
-    	}
-    	return topKFreqNums;
+    	return maxQueue.stream()
+    				   .sorted( ( o1, o2 ) -> ( o2.getValue() - o1.getValue() ) )
+    				   .limit( k )
+    				   .map( o -> o.getKey() )
+    				   .collect( Collectors.toList() );    	
     }    
     
-}
-
-class NumAndFreq
-{
-	public final int num;
-	public final int freq;
-	public NumAndFreq( int num, int freq )
-	{
-		this.num = num;
-		this.freq = freq;
-	}
+    @Test
+    public void test()
+    {
+    	System.out.println( topKFrequent( new int[]{4, 1, -1, 2, -1, 2, 3}, 2 ) );
+    }
+    
 }

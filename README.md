@@ -664,12 +664,13 @@ public void treeHighSpaceTraverse( TreeNode root, int order )
       histogram.put( 'a', 12 );
       histogram.put( 'b', 6 );
       // output according to priorityqueue
-      PriorityQueue<Map.Entry<Character, Integer>> maxQueue = new PriorityQueue<>( ( o1, o2 ) ->  o2.getValue() - o1.getValue() );
+      Queue<Map.Entry<Character, Integer>> maxQueue = new PriorityQueue<>( ( o1, o2 ) ->  o2.getValue() - o1.getValue() );
       maxQueue.addAll( histogram.entrySet() );
-      while ( !maxQueue.isEmpty() )
-      {
-        System.out.println( maxQueue.poll() );
-      }
+      return maxQueue.stream()
+                     .sorted( ( o1, o2 ) -> ( o2.getValue() - o1.getValue() ) )
+                     .limit( k )
+                     .map( o -> o.getKey() )
+                     .collect( Collectors.toList() );
 ```
 
 #### TreeMap <a id="ds-treemap"></a>
