@@ -194,7 +194,7 @@
 * how are tokens separated, using comma, slash or something else
 
 #### Tree<a id="question-tree"></a>
-* whether binary search tree
+* whether complete tree, binary tree, binary search tree
 
 #### Graph<a id="question-graph"></a>
 * directed or undirected
@@ -584,6 +584,83 @@ public void treeHighSpaceTraverse( TreeNode root, int order )
     return currNode;
   } 
 ```
+* NAray-tree serialization and deserialization
+  - There are two popular ways to serialize a N-Aray tree: preorder and level-order. Preorder leads to a natural recursive implementation. Level-order leads to a natural iterative implementation. 
+```java
+/*
+public class NArayNode
+{
+  public int value;
+  public List<NArayNode> children;
+  public NArayNode( int value )
+  {
+    this.value = value;
+    children = new LinkedList<>();
+  }
+  public void addChild( NArayNode node )
+  {
+    children.add( node );
+  }
+}
+*/
+
+// level order serialization and deserialization
+  public String serialize( NArayNode root )
+  {
+    if ( root == null )
+    {
+      return "";
+    }
+    
+    StringBuilder result = new StringBuilder();
+    Queue<NArayNode> bfsQueue = new LinkedList<>();
+    result.append( root.value );
+    result.append( ',' );
+    bfsQueue.offer( root );
+    while ( !bfsQueue.isEmpty( ) )
+    {
+      NArayNode qHead = bfsQueue.poll( );
+      for ( NArayNode childNode : qHead.children )
+      {     
+        result.append( childNode.value );
+        result.append( ',' );
+        bfsQueue.offer( childNode );
+      }
+      result.append( ')' );
+      result.append( ',' );
+    }
+    return result.toString( );
+  }
+  
+  public NArayNode deserialize( String input )
+  {
+    if ( input == null )
+    {
+      return null;
+    }
+    
+    String[] tokens = input.split( "," );   
+    Queue<NArayNode> bfsQueue = new LinkedList<>();
+    NArayNode root = new NArayNode( Integer.parseInt( tokens[0] ) );
+    bfsQueue.offer( root );
+    
+    int index = 1;
+    while ( !bfsQueue.isEmpty( ) )      
+    {
+      NArayNode qHead = bfsQueue.poll( );
+      while ( index < tokens.length && !tokens[index].equals( ")" ) )
+      {
+        NArayNode newNode = new NArayNode( Integer.parseInt( tokens[index] ) );
+        qHead.addChild( newNode );
+        bfsQueue.offer( newNode );
+        index++;
+      }
+      index++;
+    }
+    
+    return root;
+  }
+```
 
 #### Binary search tree<a id="ds-binary-search-tree"></a>
 * The definition of BST is left <= middle < right. Pay attention to the equals sign.
@@ -914,7 +991,7 @@ for ( i = 0; i < n; i++ )
 | Mergesort  | O(1)     | external sorting / stable |
 | Quicksort  | O(n)     |  usually the quickest O(nlogn) / unstable sort |
 | Heapsort   | O(1)     |  unstable sort |
-| Bucketsort | O(1)     |  when knowing range and faster (non-comparison) |
+| Bucketsort | O(1)     |  when knowing range and evenly distributed O(n+k) |
 
 * Judge whether intervals overlap
 ```java
