@@ -31,10 +31,10 @@ public class ThreeSum
 	
     public List<List<Integer>> threeSum( int[] nums )
     {
-    	List<List<Integer>> allThreeSums = new ArrayList<>();
+    	List<List<Integer>> threeSums = new ArrayList<>();
     	if ( nums == null || nums.length == 0 )
     	{
-    		return allThreeSums;
+    		return threeSums;
     	}
     	Arrays.sort( nums );
     	for ( int i = 0; i < nums.length - 2; i++ )
@@ -44,51 +44,37 @@ public class ThreeSum
     			continue;
     		}
     		
-    		List<List<Integer>> allTwoSums = twoSum( nums, i + 1, -nums[i] );
-    		if ( allTwoSums.size() != 0 )
+    		int start = i + 1;
+    		int end = nums.length - 1;
+    		while ( start < end )
     		{
-    			for ( List<Integer> oneTwoSum : allTwoSums )
+    			if ( start > i + 1 && nums[start] == nums[start-1] )
     			{
-	    			List<Integer> oneThreeSum = new LinkedList<>( oneTwoSum );
-	    			oneThreeSum.add( 0, nums[i] );
-	    			allThreeSums.add( oneThreeSum );
+    				start++;
+    				continue;
+    			}
+    			
+    			int sum = nums[start] + nums[end];
+    			if ( sum < -nums[i] )
+    			{
+    				start++;
+    			}
+    			else if ( sum > -nums[i] )
+    			{
+    				end--;
+    			}
+    			else
+    			{
+    				List<Integer> threeSum = new LinkedList<>();
+    				threeSum.add( nums[i] );
+    				threeSum.add( nums[start] );
+    				threeSum.add( nums[end] );
+    				threeSums.add( threeSum );
+    				start++;
+    				end--;
     			}
     		}
     	}
-    	return allThreeSums;
-    }
-    
-    private List<List<Integer>> twoSum( int[] nums, int start, int target )
-    {
-    	List<List<Integer>> allTwoSums = new ArrayList<>();
-    	int right = nums.length - 1;
-    	int left = start;
-    	while ( left < right )
-    	{
-    		if ( left > start && nums[left] == nums[left-1] )
-    		{
-    			left++;
-    			continue;
-    		}
-    		
-    		if ( nums[left] + nums[right] == target )
-    		{
-    			List<Integer> oneTwoSum = new LinkedList<>();
-    			oneTwoSum.add( nums[left] );
-    			oneTwoSum.add( nums[right] );
-    			allTwoSums.add( oneTwoSum );
-    			left++;
-    			right--;
-    		}
-    		else if ( nums[left] + nums[right] < target )
-    		{
-    			left++;
-    		}
-    		else
-    		{
-    			right--;
-    		}
-    	}
-    	return allTwoSums;
+    	return threeSums;
     }
 }

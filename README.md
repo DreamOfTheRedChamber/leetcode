@@ -1111,10 +1111,15 @@ public void recursivefunction()
     backtracking backwards
 }
 ```
-* remove duplicates inside result
-* mark visited locations inside a 2D grid
-  * use set&lt;Integer&gt; to store position hash (x * width + height)
-  * if could modify the grid, place special char such as '#' for already discovered nodes
+* avoid generating duplicate results by ensuring that the never two recursion tree branches overlap 
+```java
+if ( i > 0 && candidates[i] == candidates[i-1] )
+{
+  i++;
+  continue;
+}
+// invoking functions based on index i
+```
 
 #### Graph <a id="algorithms-graph"></a>
 ##### Grid-based graph patterns <a id="algorithms-grid"></a>
