@@ -1,4 +1,4 @@
-package binarySearch;
+package twoPointer;
 
 /*
 Given an array of integers that is already sorted in ascending order, find two numbers such that they add up to a specific target number.
@@ -15,7 +15,6 @@ Show Tags
 Show Similar Problems
  * */
 
-//todo
 public class TwoSumII 
 {
     public int[] twoSum(int[] numbers, int target) 

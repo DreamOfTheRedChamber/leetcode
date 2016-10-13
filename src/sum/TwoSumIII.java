@@ -3,7 +3,7 @@ package sum;
 import java.util.HashMap;
 import java.util.Map;
 
-public class TwoSum 
+public class TwoSumIII 
 {
 	private Map<Integer, Integer> numToFreqMap = new HashMap<>();
 	
