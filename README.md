@@ -478,12 +478,12 @@ while ( iterator.hasNext() )
 #### PriorityQueue <a id="ds-priorityqueue"></a>
 * Built-in implementation remove() method for priorityqueue has O(n) time complexity.
   -  O(n) time is spent on looping through entire queue to find the element to be removed. O(logn) is used to remove the element
-  -  But O(n) could be easily improved to O(logn) by adding an additional Map&lt;T, Node&gt& existingNodes. When Node has duplicate values, a counter could be added as Node class instance variable.
+  -  But O(n) could be easily improved to O(logn) by adding an additional Map&lt;T, Node&gt; existingNodes. When Node has duplicate values, a counter could be added as Node class instance variable.
 
 * Lambda expression inside PriorityQueue elements comparison
 ```java
-PriorityQueue<NumAndFreq> mostFreqPrioQueue = new PriorityQueue<>( ( o1, o2 ) -> ( o2.freq - o1.freq ) ); // decreasing order
-PriorityQueue<NumAndFreq> mostFreqPrioQueue = new PriorityQueue<>( ( o1, o2 ) -> ( o1.freq - o2.freq ) ); // increasing order
+PriorityQueue<NumAndFreq> maxQueue = new PriorityQueue<>( ( o1, o2 ) -> ( o2.freq - o1.freq ) ); // decreasing order
+PriorityQueue<NumAndFreq> minQueue = new PriorityQueue<>( ( o1, o2 ) -> ( o1.freq - o2.freq ) ); // increasing order
 ```
 
 * Top K problems
@@ -890,17 +890,16 @@ for ( i = 0; i < n; i++ )
 {
   while ( j < n )
   {
+    // update j status
     if ( satisfy some condition )
     {
       j++;
-      // update j status
     }
     else
     {
       break;
     }    
   }
-  // update i status
 }
 ```
 
