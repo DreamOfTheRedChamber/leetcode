@@ -44,20 +44,9 @@ public class TextJustification
        {
     	   // calculate num of words in this line
     	   int startPos = endPos;
-    	   int usedCharNum = 0;
-    	   while ( endPos < words.length 
-    			   && usedCharNum + words[endPos].length() <= maxWidth )
+    	   for ( int usedCharNum = 0; endPos < words.length && usedCharNum + words[endPos].length() <= maxWidth; usedCharNum++, endPos++ ) // usedCharNum++ is used for white spaces
     	   {
-    		   // if word is equal to remaining space
     		   usedCharNum += words[endPos].length();
-    		   endPos++;
-    		   if ( usedCharNum == maxWidth )
-    		   {
-    			   break;
-    		   }
-    		   
-    		   // if word is smaller than remaining space
-    		   usedCharNum += 1;  
     	   }
     	   int numWords = endPos - startPos;
 
@@ -78,43 +67,43 @@ public class TextJustification
     			   currLine.append( ' ' );
     		   }
     		   justifiedLines.add( currLine.toString() );
-    		   continue;
     	   }
-    	   
-    	   // calculate how to disperse space
-    	   int numSpaces = maxWidth;
-    	   for ( int currPos = startPos; currPos < endPos; currPos++ )
+    	   else
     	   {
-    		   numSpaces -= words[currPos].length();
-    	   }    	   
-    	   int averageSpaces = numSpaces / ( numWords - 1 );
-    	   int additionSpaces = numSpaces % ( numWords - 1 );
-    	       	   
-    	   StringBuilder currLine = new StringBuilder();
-    	   for ( int currPos = startPos; currPos < endPos; currPos++ )
-    	   {
-    		   // append word
-    		   currLine.append( words[currPos] );
-    		   
-    		   if ( currPos != endPos - 1 )
-    		   {
-	    		   // append space
-	    		   for ( int i = 0; i < averageSpaces; i++ )
-	    		   {
-	    			   currLine.append(' ');
-	    		   }
+	    	   // calculate how to disperse space
+	    	   int numSpaces = maxWidth;
+	    	   for ( int currPos = startPos; currPos < endPos; currPos++ )
+	    	   {
+	    		   numSpaces -= words[currPos].length();
+	    	   }    	   
+	    	   int averageSpaces = numSpaces / ( numWords - 1 );
+	    	   int additionSpaces = numSpaces % ( numWords - 1 );
+	    	       	   
+	    	   StringBuilder currLine = new StringBuilder();
+	    	   for ( int currPos = startPos; currPos < endPos; currPos++ )
+	    	   {
+	    		   // append word
+	    		   currLine.append( words[currPos] );
 	    		   
-	    		   // append additional space
-	    		   if ( additionSpaces > 0 )
+	    		   if ( currPos != endPos - 1 )
 	    		   {
-	    			   currLine.append(' ');
-	    			   additionSpaces--;
-	    		   }
-    		   }    		   
+		    		   // append space
+		    		   for ( int i = 0; i < averageSpaces; i++ )
+		    		   {
+		    			   currLine.append(' ');
+		    		   }
+		    		   
+		    		   // append additional space
+		    		   if ( additionSpaces > 0 )
+		    		   {
+		    			   currLine.append(' ');
+		    			   additionSpaces--;
+		    		   }
+	    		   }    		   
+	    	   }
+	    	   // build this line
+	    	   justifiedLines.add( currLine.toString() );
     	   }
-    	   
-    	   // build this line
-    	   justifiedLines.add( currLine.toString() );
        }
        
        return justifiedLines;

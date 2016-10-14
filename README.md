@@ -1396,15 +1396,15 @@ private void dfs( T[][] grid, int x, int y, boolean[][] discovered )
 * While loop: flow control counters
 
 ### Bad smells for refactoring and optimization <a id="bad-smells"></a>
-* code length > 100
+* code/function length > 100
 * too many if statement checking for boundary cases
 * code do not generalize well. Only work for current problem. e.g. merge 2 sorted list -> merge k sorted List
-* too deep nesting due to if/else blocks
+* nested while loops (really error prone)
 
 ### Sins <a id="sins"></a>
 #### Java sins <a id="sins-java"></a>
 * linkedhashset could not be iterated reversely
-* hard to return tuple values
+* heavy to return tuple values
 * only pass by values
 * lambda expressions are still not closures
 

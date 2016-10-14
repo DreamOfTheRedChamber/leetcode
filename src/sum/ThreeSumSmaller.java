@@ -1,5 +1,7 @@
 package sum;
 
+import java.util.Arrays;
+
 /**
 Given an array of n integers nums and a target, 
 find the number of index triplets i, j, k with 0 <= i < j < k < n that satisfy the condition nums[i] + nums[j] + nums[k] < target.
@@ -20,9 +22,10 @@ public class ThreeSumSmaller
     {
     	if ( nums.length < 3 )
     	{
-    		throw new IllegalArgumentException();
+    		return 0;
     	}
     	
+    	Arrays.sort( nums );
     	int totalNum = 0;
     	for ( int i = 0; i < nums.length - 2; i++ )
     	{    		
@@ -34,22 +37,23 @@ public class ThreeSumSmaller
     private int twoSumSmaller( int[] nums, int target, int start )
     {
     	int totalNum = 0;
-    	for ( int i = start; i < nums.length - 1; i++ )
+    	
+    	int left = start;
+    	int right = nums.length - 1;
+    	while ( left < right )
     	{
-        	int left = i;
-        	int right = nums.length - 1;
-
-        	// could be replaced with binary search
-        	while ( left < right && nums[left] + nums[right] >= target )
+    		int sum = nums[left] + nums[right];
+    		if ( sum < target )
+    		{
+    			totalNum += right - left;
+    			left++;
+    		}
+    		else
     		{
     			right--;
     		}
-        	
-    		if ( nums[left] + nums[right] < target )
-    		{
-    			totalNum += right - left;
-    		}
     	}
+    	
     	return totalNum;
     }
 }
