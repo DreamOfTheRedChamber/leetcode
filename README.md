@@ -1415,14 +1415,14 @@ private void dfs( T[][] grid, int x, int y, boolean[][] discovered )
       * function: f[x,y] from f[x-1, y] or f[x, y-1]
       * initialization: usually f[0,0]
       * answer: usually f[m,n]
-    + Examples: Minimum Path Sum, Unique Path, Climbing stairs, Jump game I/II
+    + Examples: Minimum Path Sum, Unique Path I·, Climbing stairs, Jump game I/II
   - 1D sequence <a id="dynamic-programming-1d"></a>
     + Patterns:
       * state: f[i] represents first i position, digits, characters
       * function: f[i] from f[j], j < i
       * initialize: f[0]
       * answer: f[n]
-    + Examples: Longest increasing subsequence, word break
+    + Examples: Longest increasing subsequence, word break I
   - Two dimension <a id="dynamic-programming-2d"></a>
   - Memorization <a id="dynamic-programming-memo"></a>
   - Game <a id="dynamic-programming-game"></a>

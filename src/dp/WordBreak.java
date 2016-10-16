@@ -1,4 +1,4 @@
-package depthFirstSearch;
+package dp;
 
 import static org.junit.Assert.assertTrue;
 
@@ -21,25 +21,36 @@ public class WordBreak
 {
     public boolean wordBreak( String s, Set<String> wordDict )
     {
-    	boolean[] canBreak = new boolean[s.length( )];
-    	for ( int i = 0; i < s.length( ); i++ )
-    	{
-    		if ( wordDict.contains( s.substring( 0, i+1 ) ) )
+    	boolean[] canBreak = new boolean[s.length( )+1];
+    	canBreak[0] = true;
+    	int maxLength = getMaxLength( wordDict );
+    	for ( int i = 1; i <= s.length() ; i++ )
+    	{    		    		
+    		for ( int lastWordLength = 1; lastWordLength <= i && lastWordLength <= maxLength; lastWordLength++ )
     		{
-    			canBreak[i] = true;
-    			continue;
-    		}
-    		
-    		for ( int j = 0; j < i; j++ )
-    		{
-    			if (  canBreak[j] 
-    					&& wordDict.contains( s.substring( j+1, i+1 ) ) ) 
+    			if ( !canBreak[i-lastWordLength] )
+    			{
+    				continue;
+    			}
+    			String lastWord = s.substring( i - lastWordLength, i );
+    			if ( wordDict.contains( lastWord ) )
     			{
     				canBreak[i] = true;
+    				break;
     			}
     		}
     	}    	
-    	return canBreak[s.length( )-1];
+    	return canBreak[s.length( )];
+    }
+    
+    private int getMaxLength( Set<String> dict )
+    {
+    	int maxLength = 0;
+    	for ( String word : dict )
+    	{
+    		maxLength = Math.max( maxLength, word.length() );
+    	}
+    	return maxLength;
     }
     
     @Test
