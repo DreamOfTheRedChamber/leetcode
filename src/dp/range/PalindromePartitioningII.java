@@ -1,5 +1,9 @@
 package dp.range;
 
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
+
 /**
 Given a string s, partition s such that every substring of the partition is a palindrome.
 
@@ -10,7 +14,15 @@ Return 1 since the palindrome partitioning ["aa","b"] could be produced using 1 
  */
 public class PalindromePartitioningII
 {
-	public int minCut( String s )
+	@Test
+	public void test()
+	{
+		assertEquals( 1, minCut( "abcb" ) );
+		assertEquals( 3, minCut( "abcd" ) );
+		assertEquals( 0, minCut( "aaaaa" ) );
+	}
+	
+	public int minCut( String s )	
 	{
 		boolean[][] isPalindrome = new boolean[s.length() + 1][s.length() + 1];
 		// init isPalindrome
@@ -25,7 +37,7 @@ public class PalindromePartitioningII
 				isPalindrome[i][i+1] = true;
 			}
 		}
-		for ( int i = s.length(); i >= 1; i++ )
+		for ( int i = s.length(); i >= 1; i-- )
 		{
 			for ( int j = i + 2; j <= s.length(); j++ )
 			{
@@ -34,7 +46,7 @@ public class PalindromePartitioningII
 		}
 		
 		int[][] minCutNum = new int[s.length() + 1][s.length() + 1];
-		for ( int i = s.length(); i >= 1; i++ )
+		for ( int i = s.length(); i >= 1; i-- )
 		{
 			for ( int j = i + 1; j <= s.length(); j++ )
 			{
@@ -45,12 +57,12 @@ public class PalindromePartitioningII
 				}
 				
 				minCutNum[i][j] = j - i;
-				for ( int k = i + 1; k < j; k++ )
+				for ( int k = i; k < j; k++ )
 				{
 					minCutNum[i][j] = Math.min( minCutNum[i][j], minCutNum[i][k] + minCutNum[k+1][j] + 1 );
 				}				
 			}
 		}
-		return minCutNum[s.length()][s.length()];
+		return minCutNum[1][s.length()];
 	}
 }
