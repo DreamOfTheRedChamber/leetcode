@@ -425,6 +425,10 @@ while ( iterator.hasNext() )
 * space efficiency in boolean array: Boolean[] -> boolean[] -> BitSet
 
 #### Array <a id="ds-array"></a>
+* Common techniques used in circular arrays
+  - double the array to 2n by concatenating original array to the end and then apply a sliding window of size n on it (whether is a sorted rotated array)
+  - invert the sign of the array (circular array maximum sum)
+  - break the circle (house robber II)
 
 #### String <a id="ds-string"></a>
 * Only alphabetic characters, ascii characters, or any characters
@@ -1078,11 +1082,14 @@ public int binarySearchRecursive( int[] array, int target, int start, int end )
 }
 ```
 
-* convert a range of binary search problem into variants of essence form
-    - find first element smaller than target
-        - e.g. find minimum element in rotated sorted array ( target: array[array.length-1])
-    - find last element smaller than target
-        - e.g. search insertion position
+* binary search variants:
+  - find first element smaller than target
+      - e.g. find minimum element in rotated sorted array ( target: array[array.length-1])
+  - find last element smaller than target
+      - e.g. search insertion position
+  - convert a range of binary search problem into variants of essence form
+
+* binary search in 2D matrix
 * how to handle duplicates in binary search
 
 
@@ -1409,20 +1416,20 @@ private void dfs( T[][] grid, int x, int y, boolean[][] discovered )
   - Initialization: starting point
   - Answer: ending point
 * Type:
-  - Grid-based
+  - Coordinate based
     + Patterns:
       * state: f[x,y] represents goes to x,y position from starting point
       * function: f[x,y] from f[x-1, y] or f[x, y-1]
-      * initialization: usually f[0,0]
+      * initialization: f[0,0~width], f[0~height, 0]
       * answer: usually f[m,n]
     + Examples: Minimum Path Sum, Unique Path I·, Climbing stairs, Jump game I/II
   - 1D sequence <a id="dynamic-programming-1d"></a>
     + Patterns:
       * state: f[i] represents first i position, digits, characters
       * function: f[i] from f[j], j < i
-      * initialize: f[0]
+      * initialize: f[0] = 0, f[1]
       * answer: f[n]
-    + Examples: Longest increasing subsequence, word break I
+    + Examples: Longest increasing subsequence, Word break I, House robber
   - 2D sequences <a id="dynamic-programming-2d"></a>
     + Patterns: 
       * state: f[i,j] represents the results of first i numbers/characters in sequence one matching the first j numbers/characters in sequence two
@@ -1438,7 +1445,50 @@ private void dfs( T[][] grid, int x, int y, boolean[][] discovered )
       * answer: f[i,j] the range i to j to query
     + Examples: Palindrome partition II
   - Game <a id="dynamic-programming-game"></a>
-* For non grid-based dynamic programming problems, for N number/character, array of size N+1 is allocated. The position at 0 index is used for specially used for initialization.
+* Skills
+  - For non grid-based dynamic programming problems, for N number/character, array of size N+1 is allocated. The position at 0 index is used for specially used for initialization.
+  - Rolling array: for 1D dp, if A[i] is only related with A[i-k]; for 2D dp, if A[i][j] is only related with A[i-1][k] (1 <=k <= j), A[i][m]
+```java
+// this code snippets demonstrate procedures to use rolling array
+// first step: write a solution not based on rolling array
+public int houseRobber( int[] A )
+{
+  int n = A.length;
+  if ( n == 0 )
+  {
+    return 0;
+  }
+  long[] res = new long[n+1];
+
+  res[0] = 0;
+  res[1] = A[0];
+  for ( int i = 2; i <= n; i++ )
+  {
+    res[i] = Math.max( res[i-1], res[i-2] + A[i-1]);
+  }
+  return res[n];
+}
+// second step: use mod % to transform solution to rolling array
+// res[i] is  only related with res[i-1] and res[i-2], mod 2
+public int houseRobber_RollingArray( int[] A )
+{
+  int n = A.length;
+  if ( n == 0 )
+  {
+    return 0;
+  }
+  long[] res = new long[2];
+
+  res[0] = 0;
+  res[1] = A[0];
+  for ( int i = 2; i <= n; i++ )
+  {
+    // key change here: %k, k is related with number of elements being relied on
+    res[i%2] = Math.max( res[(i-1)%2], res[(i-2)%2] + A[i-1]);
+  }
+  return res[n];  
+}
+```
 
 ### Edge case tests <a id="edge-case-tests"></a>
 * Single element 2D grid
