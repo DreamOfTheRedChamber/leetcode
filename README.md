@@ -63,10 +63,10 @@
     * Greedy(#algorithms-greedy)
     * [Dynamic programming](#algorithms-dynamic-programming)
       - Types
-        + [Grid-based](#dynamic-programming-grid)
+        + [Coordinate based](#dynamic-programming-grid)
         + [1D sequence](#dynamic-programming-sequence)
         + [2D sequences](#dynamic-programming-2d-sequence)
-        + [Memorization](#dynamic-programming-memo)
+        + [Range based](#dynamic-programming-range)
         + [Game](#dynamic-programming-game)
 * [Edge case tests](#edge-case-tests)  
 * [Bad smells for refactoring and optimization](#bad-smells)
@@ -1447,9 +1447,17 @@ private void dfs( T[][] grid, int x, int y, boolean[][] discovered )
   - Game <a id="dynamic-programming-game"></a>
 * Skills
   - For non grid-based dynamic programming problems, for N number/character, array of size N+1 is allocated. The position at 0 index is used for specially used for initialization.
-  - Rolling array: for 1D dp, if A[i] is only related with A[i-k]; for 2D dp, if A[i][j] is only related with A[i-1][k] (1 <=k <= j), A[i][m]
+  - Rolling array
+    + for 1D dp, e.g.
+      * If induction rule is f[i] = max(f[i-1], f[i-2]) + A[i], namely f[i] only depends on f[i-1] and f[i-2]
+      * To use rolling array, induction rule can be rewritten as f[i%2] = max(f[i-1]%2, f[i-2]%2)
+    + for 2D dp, e.g.
+      * if f[i][j] only depends on f[i][.], namely i th row only depends on i-1 th row
+      * To use rolling array, induction rule can be rewritten as f[i%2][j] = f[(i-1)%2] row
+    + procedures to use rolling array: write non-rolling version first, then write rolling version 
 ```java
 // this code snippets demonstrate procedures to use rolling array
+// 1D case
 // first step: write a solution not based on rolling array
 public int houseRobber( int[] A )
 {
