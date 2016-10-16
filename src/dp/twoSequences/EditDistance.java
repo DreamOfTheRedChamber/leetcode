@@ -1,4 +1,4 @@
-package dp.rollingarray;
+package dp.twoSequences;
 
 import static org.junit.Assert.assertEquals;
 

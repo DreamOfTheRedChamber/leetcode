@@ -1,4 +1,4 @@
-package dp.oneDimSequence;
+package dp.oneSequence;
 
 import static org.junit.Assert.assertEquals;
 

@@ -1,4 +1,4 @@
-package dp;
+package dp.oneSequence;
 
 import static org.junit.Assert.assertTrue;
 
