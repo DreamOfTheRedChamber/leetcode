@@ -1423,8 +1423,20 @@ private void dfs( T[][] grid, int x, int y, boolean[][] discovered )
       * initialize: f[0]
       * answer: f[n]
     + Examples: Longest increasing subsequence, word break I
-  - Two dimension <a id="dynamic-programming-2d"></a>
-  - Memorization <a id="dynamic-programming-memo"></a>
+  - 2D sequences <a id="dynamic-programming-2d"></a>
+    + Patterns: 
+      * state: f[i,j] represents the results of first i numbers/characters in sequence one matching the first j numbers/characters in sequence two
+      * function: how to decide f[i,j] from previous (varies a lot here)
+      * initialize: f[0,i] and f[i,0]
+      * answer: f[n,m] ( n = s1.length(), m = s2.length() )
+    + Examples: Edit distance, Regular expression matching, Longest common subsequences
+  - Range based <a id="dynamic-programming-range"></a>
+    + Patterns:
+      * state: f[i,j] represents whether the substring from i to j is a palindrome
+      * function: f[i,j] = f[i+1,j-1] && (s[i] == s[j])
+      * initialize: f[i][i] = true, f[i][i+1] = s[i] == s[i+1]
+      * answer: f[i,j] the range i to j to query
+    + Examples: Palindrome partition II
   - Game <a id="dynamic-programming-game"></a>
 * For non grid-based dynamic programming problems, for N number/character, array of size N+1 is allocated. The position at 0 index is used for specially used for initialization.
 
@@ -1464,6 +1476,7 @@ private void dfs( T[][] grid, int x, int y, boolean[][] discovered )
 * Never-ending, ever-increasing number of problems
 * Time exceed limit exception sometimes dependes on Leetcode.org machine status
 * Could not search problems by specifying multiple tags
+* Function names do not follow best practices, which makes variables naming kind of difficult.
 
 #### References
 * Core Java Interview questions [blog: java-success.com](http://www.java-success.com/)

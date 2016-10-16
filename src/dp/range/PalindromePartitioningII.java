@@ -25,7 +25,7 @@ public class PalindromePartitioningII
 	public int minCut( String s )	
 	{
 		boolean[][] isPalindrome = new boolean[s.length() + 1][s.length() + 1];
-		// init isPalindrome
+		// init
 		for ( int i = 1; i <= s.length(); i++ )
 		{
 			isPalindrome[i][i] = true;
@@ -37,6 +37,7 @@ public class PalindromePartitioningII
 				isPalindrome[i][i+1] = true;
 			}
 		}
+		// fill in table
 		for ( int i = s.length(); i >= 1; i-- )
 		{
 			for ( int j = i + 2; j <= s.length(); j++ )
@@ -45,24 +46,31 @@ public class PalindromePartitioningII
 			}
 		}
 		
-		int[][] minCutNum = new int[s.length() + 1][s.length() + 1];
-		for ( int i = s.length(); i >= 1; i-- )
+		// init
+		int[] minCutNum = new int[s.length() + 1];
+		for ( int i = 0; i <= s.length(); i++ )
 		{
-			for ( int j = i + 1; j <= s.length(); j++ )
+			minCutNum[i] = i - 1;
+		}
+		// fill in table
+		for ( int i = 1; i <= s.length(); i++ )
+		{
+			if ( isPalindrome[1][i] )
 			{
-				if ( isPalindrome[i][j] )
+				minCutNum[i] = 0;
+			}
+			else
+			{
+				for ( int lastWordLength = 1; lastWordLength < i; lastWordLength++ )
 				{
-					minCutNum[i][j] = 0;
-					continue;
+					if ( isPalindrome[i-lastWordLength+1][i] )
+					{
+						minCutNum[i] = Math.min( minCutNum[i], minCutNum[i-lastWordLength] + 1 );
+					}
 				}
-				
-				minCutNum[i][j] = j - i;
-				for ( int k = i; k < j; k++ )
-				{
-					minCutNum[i][j] = Math.min( minCutNum[i][j], minCutNum[i][k] + minCutNum[k+1][j] + 1 );
-				}				
 			}
 		}
-		return minCutNum[1][s.length()];
+		
+		return minCutNum[s.length()];
 	}
 }
