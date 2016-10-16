@@ -1,4 +1,4 @@
-package dp.greedy;
+package dp.girdBased;
 
 import static org.junit.Assert.assertEquals;
 

@@ -60,11 +60,14 @@
        * [Depth first search](#algorithms-dfs)
        * [Topological sort](#algorithms-topo)
        * [Union find](#algorithms-union-find)
+    * Greedy(#algorithms-greedy)
     * [Dynamic programming](#algorithms-dynamic-programming)
-       * [One dimension](#dynamic-programming-1d)
-       * [Two dimensions](#dynamic-programming-2d)
-       * [Memorization](#dynamic-programming-memo)
-       * [Game](#dynamic-programming-game)
+      - Types
+        + [Grid-based](#dynamic-programming-grid)
+        + [1D sequence](#dynamic-programming-sequence)
+        + [2D sequences](#dynamic-programming-2d-sequence)
+        + [Memorization](#dynamic-programming-memo)
+        + [Game](#dynamic-programming-game)
 * [Edge case tests](#edge-case-tests)  
 * [Bad smells for refactoring and optimization](#bad-smells)
 * [Sins](#sins)
@@ -1084,8 +1087,6 @@ public int binarySearchRecursive( int[] array, int target, int start, int end )
 
 
 #### Recursive functions <a id="algorithms-recursion"></a>
-* How to remove duplicates (avoid duplicate recursion beforehand or use hashset afterwards)
-
 * Time complexity:
 
 | Recurrence | Algorithm           | Big-O Solution  |
@@ -1096,6 +1097,13 @@ public int binarySearchRecursive( int[] array, int target, int start, int end )
 | T(n) = 2T(n/2) + O(n) | Merge sort      |    O(nlogn) |
 | T(n) = T(n-1) + O(n)  | Selection sort      |  O(n^2) |
 
+* Problems to consider:
+  - What does the recursive function do?
+    + Take what parameters
+    + Do what
+    + return what value and how
+  - How does big problems recurse to smaller ones
+  - Initialization
 * How to return multiple results from recursive functions
   - not use return value: use global variable. 
     + The first is to use private instance variables to store results
@@ -1378,15 +1386,47 @@ private void dfs( T[][] grid, int x, int y, boolean[][] discovered )
 ##### Union find <a id="algorithms-union-find"></a>
 * Suitable in a dynamically changing graph. Example problems: Number of Island II, find weakly connected components in directed graph, find connected components in undirected graph
 
+#### Greedy <a id="algorithms-greedy"></a>
+* Usually greedy algorithms are not covered in an interview setting:
+  - Greedy algorithms do not generalize as a useful way to decompose and solve problems. 
+  - Naive greedy algorithms are usually "short sighted" algorithms, which will not lead to global maximal. Working greedy algorithms are usually hard to think of. 
+
 #### Dynamic-programming <a id="algorithms-dynamic-programming"></a>
-
-* Rebuild the results from memorization array
-* One dimension <a id="dynamic-programming-1d"></a>
-* Two dimension <a id="dynamic-programming-2d"></a>
-* Memorization <a id="dynamic-programming-memo"></a>
-* Game <a id="dynamic-programming-game"></a>
-* when allocate dynamic programming table size, allocate additional one row/col for generalization
-
+* Use cases:
+  - When to use - optimize time complexity from O(n!,2^n) to O(n^2, n^3)
+    + Calculate max or min
+    + Calculate the number of solutions
+    + Calculate whether it is true or not
+  - When not to use - optimize time complexity from O(n^3, n^2) further
+    + Calculate concrete solutions themselves rather than just the number of solutions
+    + Input is a collection rather than a sequence (e.g. Longest consecutive sequence)
+* Implementation methods:
+  - Multi-loop: bottom-up approach
+  - Memorized search: top-down approach
+* Problems to consider:
+  - State: how to define dp[i] or dp[i][j]
+  - Induction rule: how to calculate big problems into smaller ones
+  - Initialization: starting point
+  - Answer: ending point
+* Type:
+  - Grid-based
+    + Patterns:
+      * state: f[x,y] represents goes to x,y position from starting point
+      * function: f[x,y] from f[x-1, y] or f[x, y-1]
+      * initialization: usually f[0,0]
+      * answer: usually f[m,n]
+    + Examples: Minimum Path Sum, Unique Path, Climbing stairs, Jump game I/II
+  - 1D sequence <a id="dynamic-programming-1d"></a>
+    + Patterns:
+      * state: f[i] represents first i position, digits, characters
+      * function: f[i] from f[j], j < i
+      * initialize: f[0]
+      * answer: f[n]
+    + Examples: Longest increasing subsequence, word break
+  - Two dimension <a id="dynamic-programming-2d"></a>
+  - Memorization <a id="dynamic-programming-memo"></a>
+  - Game <a id="dynamic-programming-game"></a>
+* For non grid-based dynamic programming problems, for N number/character, array of size N+1 is allocated. The position at 0 index is used for specially used for initialization.
 
 ### Edge case tests <a id="edge-case-tests"></a>
 * Single element 2D grid
@@ -1426,5 +1466,6 @@ private void dfs( T[][] grid, int x, int y, boolean[][] discovered )
 * Could not search problems by specifying multiple tags
 
 #### References
-* Core Java Interview questions: [blog: java-success.com](http://www.java-success.com/)
+* Core Java Interview questions [blog: java-success.com](http://www.java-success.com/)
 * Coding and system design [blog: massive tech interview](http://massivetechinterview.blogspot.com/)
+* Algorithms tutorial [Algorithm tutorial](http://algorithms.tutorialhorizon.com/)

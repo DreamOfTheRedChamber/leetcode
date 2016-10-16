@@ -1,4 +1,4 @@
-package dp.greedy;
+package dp.girdBased;
 
 import static org.junit.Assert.assertEquals;
 
@@ -20,7 +20,16 @@ The minimum number of jumps to reach the last index is 2. (Jump 1 step from inde
  */
 public class JumpGameII 
 {
-    public int jump( int[] nums )
+	
+    @Test
+    public void test()
+    {
+    	assertEquals( 2, jumpDP( new int[]{2, 3, 1, 1, 4} ) );
+    	assertEquals( 0, jumpDP( new int[]{1} ) );
+    	assertEquals( 2, jumpDP( new int[]{7, 0, 9, 6, 9, 6, 1, 7, 9, 0, 1, 2, 9, 0, 3}) );
+    }
+
+    public int jumpDP( int[] nums )
     {
     	if ( nums.length == 0 )
     	{
@@ -41,9 +50,4 @@ public class JumpGameII
         return minSteps[nums.length-1];
     }
     
-    @Test
-    public void test()
-    {
-    	assertEquals( 2, jump( new int[]{2, 3, 1, 1, 4} ) );
-    }
 }

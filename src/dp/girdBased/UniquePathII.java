@@ -1,4 +1,4 @@
-package dp.rollingarray;
+package dp.girdBased;
 
 import static org.junit.Assert.assertEquals;
 
