@@ -28,7 +28,7 @@ isMatch("aab", "c*a*b") → true
  */
 
 // TO_IMME
-public class RegularExpressionMatching
+public class RegularExpressionMatchingRecurse
 {
 	@Test
 	public void test()
@@ -126,5 +126,34 @@ public class RegularExpressionMatching
     	}
     	
     	return isSubstringMatch[height-1][width-1];
+    }
+    
+    public boolean isMatchRecurse( String s, String p )
+    {
+    	if ( s == null || p == null )
+    	{
+    		return false;
+    	}
+    	return helperRecurse( s, p, 0, 0 );
+    }
+    
+    private boolean helperRecurse( String s, String p, int i, int j )
+    {
+    	// base case
+    	if ( j == p.length() )
+    	{
+    		return i == s.length();
+    	}
+    	
+    	// case 1: p[i+1] == '*'
+    	if ( j < p.length() - 1 && p.charAt( j + 1 ) == '*' )
+    	{
+    		return i < s.length() && ( s.charAt( i ) == p.charAt( j ) || p.charAt( j ) == '.' ) && helperRecurse( s, p, i + 1, j ) 
+    				|| helperRecurse( s, p, i, j + 2 );
+    	}
+    	// case 2: p[i+1] != '*'
+    	{
+    		return i < s.length() && ( s.charAt( i ) == p.charAt( j ) || p.charAt( j ) == '.' && helperRecurse( s, p, i + 1, j + 1 ) );
+    	}
     }
 }
