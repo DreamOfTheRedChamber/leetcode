@@ -47,17 +47,17 @@ public class PalindromePartitioningII
 		}
 		
 		// init
-		int[] minCutNum = new int[s.length() + 1];
+		int[] minNumPalindrome = new int[s.length() + 1]; // 
 		for ( int i = 0; i <= s.length(); i++ )
 		{
-			minCutNum[i] = i - 1;
+			minNumPalindrome[i] = i - 1;
 		}
 		// fill in table
 		for ( int i = 1; i <= s.length(); i++ )
 		{
 			if ( isPalindrome[1][i] )
 			{
-				minCutNum[i] = 0;
+				minNumPalindrome[i] = 0;
 			}
 			else
 			{
@@ -65,12 +65,12 @@ public class PalindromePartitioningII
 				{
 					if ( isPalindrome[i-lastWordLength+1][i] )
 					{
-						minCutNum[i] = Math.min( minCutNum[i], minCutNum[i-lastWordLength] + 1 );
+						minNumPalindrome[i] = Math.min( minNumPalindrome[i], minNumPalindrome[i-lastWordLength] + 1 );
 					}
 				}
 			}
 		}
 		
-		return minCutNum[s.length()];
+		return minNumPalindrome[s.length()];
 	}
 }

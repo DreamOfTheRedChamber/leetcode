@@ -94,16 +94,6 @@ public class RegularExpressionMatching
     					isSubstringMatch[i][j] = true;
     					continue;
     				}
-// equivalent with the following, but more concise
-//    				if ( i < 2 && isSubstringMatch[i-1][j-2] )
-//    				{
-//    					isSubstringMatch[i][j] = true;
-//    				}
-//    				if ( i >= 2 && isSubstringMatch[i-1][j-2] && s.charAt( i - 1 ) == p.charAt( j - 2 ) )
-//        			{
-//    					isSubstringMatch[i][j] = true;
-//    					continue;
-//    				}
     					
     				// multi match for *
     				for ( int k = 1; i - 1 - k >= 0; k++ )

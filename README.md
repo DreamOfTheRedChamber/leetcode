@@ -430,6 +430,32 @@ while ( iterator.hasNext() )
   - invert the sign of the array (circular array maximum sum)
   - break the circle (house robber II)
 
+* 1D/2D Prefix sum
+```java
+// 1D prefix sum
+int[] array1D = new int[n];
+int[] prefixSum1D = new int[array1D.length+1];
+for ( int i = 1; i <= array1D.length; i++ )
+{
+  prefixSum1D[i] = array1D[i] + prefixSum1D[i-1];
+}
+// to calculate range sum from i to j
+int rangeSum = prefixSum1D[j] - prefixSum1D[i-1];
+
+// 2D prefix sum
+int[][] array2D = new int[m][n];
+int[][] prefixSum2D = new int[m+1][n+1];
+for ( int i = 1; i <= array2D.length; i++ )
+{
+  for ( int j = 1; j <= array2D[0].length; j++ )
+  {
+    prefixSum2D[i][j] = array2D[i-1][j-1] + prefixSum2D[i-1][j];
+  }
+}
+// to calculate range sum from (x_s, y_s) to (x_e, y_e)
+int areaSum = prefixSum2D[x_e][y_e] - prefixSum2D[x_s-1][y_e] - prefixSum2D[x_e][y_s-1] + prefixSum2D[x_s-1][y_s-1]
+```
+
 #### String <a id="ds-string"></a>
 * Only alphabetic characters, ascii characters, or any characters
 
@@ -1416,42 +1442,56 @@ private void dfs( T[][] grid, int x, int y, boolean[][] discovered )
   - Multi-loop: bottom-up approach
   - Memorized search: top-down approach
   - Use cases:
-    + In most cases, both of them can be applied. 
-    + But some times memorized search is better.
-      * When the induction rule is not sequential, thus hard to define
-      * When the initialization state is hard to find
-      * Example problem to demonstrate: Longest increasing subsequences in 2D
+    + In most cases, both of them can be applied. Could start with bottom-up approach because it is usually more concise. 
+    + But some times memorized search is more appropriate
+      * When it is easier to start thinking from the last step rather than the first step. Example: Burst ballons, Stone-game (Lintcode)
+      * When the induction rule is not sequential, thus hard to define.  Example: Longest increasing subsequences in 2D (Lintcode)
+      * When the initialization state is hard to find. Example: Longest increasing subsequences in 2D (Lintcode)
 
 * Type:
   - Coordinate based
     + Patterns:
       * state: f[x,y] represents goes to x,y position from starting point
-      * function: f[x,y] from f[x-1, y] or f[x, y-1]
+      * induction rule: f[x,y] from f[x-1, y] or f[x, y-1]
       * initialization: f[0,0~width], f[0~height, 0]
       * answer: usually f[m,n]
     + Examples: Minimum Path Sum, Unique Path I·, Climbing stairs, Jump game I/II
   - 1D sequence <a id="dynamic-programming-1d"></a>
     + Patterns:
       * state: f[i] represents first i position, digits, characters
-      * function: f[i] from f[j], j < i
+      * induction rule: f[i] from f[j], j < i
       * initialize: f[0] = 0, f[1]
       * answer: f[n]
     + Examples: Longest increasing subsequence, Word break I, House robber
   - 2D sequences <a id="dynamic-programming-2d"></a>
     + Patterns: 
       * state: f[i,j] represents the results of first i numbers/characters in sequence one matching the first j numbers/characters in sequence two
-      * function: how to decide f[i,j] from previous (varies a lot here)
+      * induction rule: how to decide f[i,j] from previous (varies a lot here)
       * initialize: f[0,i] and f[i,0]
       * answer: f[n,m] ( n = s1.length(), m = s2.length() )
     + Examples: Edit distance, Regular expression matching, Longest common subsequences
   - Range based <a id="dynamic-programming-range"></a>
     + Patterns:
       * state: f[i,j] represents whether the substring from i to j is a palindrome
-      * function: f[i,j] = f[i+1,j-1] && (s[i] == s[j])
+      * induction rule: f[i,j] = f[i+1,j-1] && (s[i] == s[j])
       * initialize: f[i][i] = true, f[i][i+1] = s[i] == s[i+1]
-      * answer: f[i,j] the range i to j to query
-    + Examples: Palindrome partition II
+      * answer: f[0,n]
+    + Examples: Palindrome partition II, Coins in a line III (Lintcode), Stone game, Burst ballons, Scramble string 
   - Game <a id="dynamic-programming-game"></a>
+    + Patterns:
+      * state: f[i] represents win/lose max/min profit for the first person
+      * induction rule: avoid defining second person's state because second person always tries his best to defeat first person/make first person profit least.
+      * initialize: varies with problem
+      * answer: f[n]
+    + Examples: Coin in a line (Lintcode), Coin in a line II (Lintcode), Flip game II
+  - Backpack <a id="dynamic-programming-backpack"></a>
+    + Patterns:
+      * state: f[i][S]: whether the first i items could form S/Max value/number of ways
+      * induction rule: varies with problems
+      * initialize: varies with problems
+      * answer: varies with problems
+    + Examples: Backpack I-VI (Lintcode), K Sum (Lintcode), Minimum adjustment cost (Lintcode)
+
 * Skills
   - For non grid-based dynamic programming problems, for N number/character, array of size N+1 is allocated. The position at 0 index is used for specially used for initialization.
   - Rolling array
