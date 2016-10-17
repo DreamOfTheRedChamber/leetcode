@@ -53,6 +53,11 @@
     * [Sort](#algorithms-sort)
     * [Binary search](#algorithms-binary-search) 
     * [Recursion](#algorithms-recursive)
+      - [Time complexity](#algorithms-recursive-tc)
+      - [Problems to consider](#algorithms-recursion-problems-to-consider)
+      - [How to return multiple results](#algorithms-recursion-return-multiple-results)
+      - [How to avoid repeated recursion](#algorithms-recursion-repeated)
+      - [Tree-based recursion](#algorithms-recursion-tree-based)
     * [Backtrack](#algorithms-backtrack)
     * [Graph](#algorithms-graph)
        * [Grid-based graph patterns](#algorithms-grid)
@@ -60,14 +65,19 @@
        * [Depth first search](#algorithms-dfs)
        * [Topological sort](#algorithms-topo)
        * [Union find](#algorithms-union-find)
-    * Greedy(#algorithms-greedy)
+    * [Greedy](#algorithms-greedy)
     * [Dynamic programming](#algorithms-dynamic-programming)
-      - Types
-        + [Coordinate based](#dynamic-programming-grid)
-        + [1D sequence](#dynamic-programming-sequence)
-        + [2D sequences](#dynamic-programming-2d-sequence)
-        + [Range based](#dynamic-programming-range)
-        + [Game](#dynamic-programming-game)
+      - [Use cases](#algorithms-dp-use-cases)
+      - [Problems to consider](#algorithms-dp-problems-to-consider)
+      - [Implementation methods](#algorithms-dp-implementation-methods)
+      - [Memorization array tricks](#algorithms-dp-memorization-array-tricks)
+      - [Types](#algorithms-dp-types)
+        + [Coordinate based](#algorithms-dp-types-coordinate)
+        + [1D sequence](#algorithms-dp-1d-sequence)
+        + [2D sequences](#algorithms-dp-2d-sequences)
+        + [Range based](#algorithms-dp-range-based)
+        + [Game](#algorithms-dp-game)
+        + [Backpack](#algorithms-dp-backpack)
 * [Edge case tests](#edge-case-tests)  
 * [Bad smells for refactoring and optimization](#bad-smells)
 * [Sins](#sins)
@@ -1120,7 +1130,7 @@ public int binarySearchRecursive( int[] array, int target, int start, int end )
 
 
 #### Recursive functions <a id="algorithms-recursion"></a>
-* Time complexity:
+* Time complexity: <a id="algorithms-recursive-tc"></a>
 
 | Recurrence | Algorithm           | Big-O Solution  |
 | --------------------- |:-------------:| -----:|
@@ -1130,14 +1140,14 @@ public int binarySearchRecursive( int[] array, int target, int start, int end )
 | T(n) = 2T(n/2) + O(n) | Merge sort      |    O(nlogn) |
 | T(n) = T(n-1) + O(n)  | Selection sort      |  O(n^2) |
 
-* Problems to consider:
+* Problems to consider: <a id="algorithms-recursion-problems-to-consider"></a>
   - What does the recursive function do?
     + Take what parameters
     + Do what
     + return what value and how
   - How does big problems recurse to smaller ones
   - Initialization
-* How to return multiple results from recursive functions
+* How to return multiple results from recursive functions<a id="algorithms-recursion-return-multiple-results"></a>
   - not use return value: use global variable. 
     + The first is to use private instance variables to store results
     + The second is to use a mutable argument of type ( int[], List&lt;&gt; ). Modify the value of this argument while travering.
@@ -1172,7 +1182,7 @@ private class ResultWrapper
 }
 ```
 
-* How to avoid recomputation inside recursive function - memorize already computed searched results
+* How to avoid repeated recursion - memorize already computed searched results <a id="algorithms-recursion-repeated"></a>
   - use hashmap (example problems include House Robber III, Clone Graph)
   - use dynamic programming (see dynamic programming section for details) 
 ```java
@@ -1191,7 +1201,7 @@ private class ResultWrapper
     }
 ```
 
-* Tree-based recursion
+* Tree-based recursion <a id="algorithms-recursion-tree-based"></a>
     - One of the key problems resulting from TreeNode definition is that TreeNode has no info about its parent node. But to resolve a tree-based problem, it is usually required to combine child and parent information.
     - Two basic strategies to solve this problem
       + Pass parent node as an input argument to child recursive function, then resolve problem inside child function. This approach usually needs some global variables, as discussed before.
@@ -1425,7 +1435,7 @@ private void dfs( T[][] grid, int x, int y, boolean[][] discovered )
   - Naive greedy algorithms are usually "short sighted" algorithms, which will not lead to global maximal. Working greedy algorithms are usually hard to think of. 
 
 #### Dynamic-programming <a id="algorithms-dynamic-programming"></a>
-* Use cases:
+* Use cases: <a id="algorithms-dp-use-cases"></a>
   - When to use - optimize time complexity from O(n!,2^n) to O(n^2, n^3)
     + Calculate max or min
     + Calculate the number of solutions
@@ -1433,12 +1443,12 @@ private void dfs( T[][] grid, int x, int y, boolean[][] discovered )
   - When not to use - optimize time complexity from O(n^3, n^2) further
     + Calculate concrete solutions themselves rather than just the number of solutions
     + Input is a collection rather than a sequence (e.g. Longest consecutive sequence)
-* Problems to consider:
+* Problems to consider: <a id="algorithms-dp-problems-to-consider"></a>
   - State: how to define dp[i] or dp[i][j]
   - Induction rule: how to calculate big problems into smaller ones
   - Initialization: starting point
   - Answer: ending point
-* Implementation methods:
+* Implementation methods: <a id="algorithms-dp-implementation-methods"></a>
   - Multi-loop: bottom-up approach
   - Memorized search: top-down approach
   - Use cases:
@@ -1447,52 +1457,7 @@ private void dfs( T[][] grid, int x, int y, boolean[][] discovered )
       * When it is easier to start thinking from the last step rather than the first step. Example: Burst ballons, Stone-game (Lintcode)
       * When the induction rule is not sequential, thus hard to define.  Example: Longest increasing subsequences in 2D (Lintcode)
       * When the initialization state is hard to find. Example: Longest increasing subsequences in 2D (Lintcode)
-
-* Type:
-  - Coordinate based
-    + Patterns:
-      * state: f[x,y] represents goes to x,y position from starting point
-      * induction rule: f[x,y] from f[x-1, y] or f[x, y-1]
-      * initialization: f[0,0~width], f[0~height, 0]
-      * answer: usually f[m,n]
-    + Examples: Minimum Path Sum, Unique Path I·, Climbing stairs, Jump game I/II
-  - 1D sequence <a id="dynamic-programming-1d"></a>
-    + Patterns:
-      * state: f[i] represents first i position, digits, characters
-      * induction rule: f[i] from f[j], j < i
-      * initialize: f[0] = 0, f[1]
-      * answer: f[n]
-    + Examples: Longest increasing subsequence, Word break I, House robber
-  - 2D sequences <a id="dynamic-programming-2d"></a>
-    + Patterns: 
-      * state: f[i,j] represents the results of first i numbers/characters in sequence one matching the first j numbers/characters in sequence two
-      * induction rule: how to decide f[i,j] from previous (varies a lot here)
-      * initialize: f[0,i] and f[i,0]
-      * answer: f[n,m] ( n = s1.length(), m = s2.length() )
-    + Examples: Edit distance, Regular expression matching, Longest common subsequences
-  - Range based <a id="dynamic-programming-range"></a>
-    + Patterns:
-      * state: f[i,j] represents whether the substring from i to j is a palindrome
-      * induction rule: f[i,j] = f[i+1,j-1] && (s[i] == s[j])
-      * initialize: f[i][i] = true, f[i][i+1] = s[i] == s[i+1]
-      * answer: f[0,n]
-    + Examples: Palindrome partition II, Coins in a line III (Lintcode), Stone game, Burst ballons, Scramble string 
-  - Game <a id="dynamic-programming-game"></a>
-    + Patterns:
-      * state: f[i] represents win/lose max/min profit for the first person
-      * induction rule: avoid defining second person's state because second person always tries his best to defeat first person/make first person profit least.
-      * initialize: varies with problem
-      * answer: f[n]
-    + Examples: Coin in a line (Lintcode), Coin in a line II (Lintcode), Flip game II
-  - Backpack <a id="dynamic-programming-backpack"></a>
-    + Patterns:
-      * state: f[i][S]: whether the first i items could form S/Max value/number of ways
-      * induction rule: varies with problems
-      * initialize: varies with problems
-      * answer: varies with problems
-    + Examples: Backpack I-VI (Lintcode), K Sum (Lintcode), Minimum adjustment cost (Lintcode)
-
-* Skills
+* Memorization array tricks <a id="algorithms-dp-memorization-array-tricks"></a>
   - For non grid-based dynamic programming problems, for N number/character, array of size N+1 is allocated. The position at 0 index is used for specially used for initialization.
   - Rolling array
     + for 1D dp, e.g.
@@ -1544,6 +1509,50 @@ public int houseRobber_RollingArray( int[] A )
   return res[n];  
 }
 ```
+
+* Type: <a id="algorithms-dp-types"></a>
+  - Coordinate based <a id="algorithms-dp-types-coordinate"></a>
+    + Patterns:
+      * state: f[x,y] represents goes to x,y position from starting point
+      * induction rule: f[x,y] from f[x-1, y] or f[x, y-1]
+      * initialization: f[0,0~width], f[0~height, 0]
+      * answer: usually f[m,n]
+    + Examples: Minimum Path Sum, Unique Path I·, Climbing stairs, Jump game I/II
+  - 1D sequence <a id="algorithms-dp-1d-sequence"></a>
+    + Patterns:
+      * state: f[i] represents first i position, digits, characters
+      * induction rule: f[i] from f[j], j < i
+      * initialize: f[0] = 0, f[1]
+      * answer: f[n]
+    + Examples: Longest increasing subsequence, Word break I, House robber
+  - 2D sequences <a id="algorithms-dp-2d-sequences"></a>
+    + Patterns: 
+      * state: f[i,j] represents the results of first i numbers/characters in sequence one matching the first j numbers/characters in sequence two
+      * induction rule: how to decide f[i,j] from previous (varies a lot here)
+      * initialize: f[0,i] and f[i,0]
+      * answer: f[n,m] ( n = s1.length(), m = s2.length() )
+    + Examples: Edit distance, Regular expression matching, Longest common subsequences, Maximal rectangle/Square
+  - Range based <a id="algorithms-dp-range-based"></a>
+    + Patterns:
+      * state: f[i,j] represents whether the substring from i to j is a palindrome
+      * induction rule: f[i,j] = f[i+1,j-1] && (s[i] == s[j])
+      * initialize: f[i][i] = true, f[i][i+1] = s[i] == s[i+1]
+      * answer: f[0,n]
+    + Examples: Palindrome partition II, Coins in a line III (Lintcode), Stone game, Burst ballons, Scramble string 
+  - Game <a id="algorithms-dp-game"></a>
+    + Patterns:
+      * state: f[i] represents win/lose max/min profit for the first person
+      * induction rule: avoid defining second person's state because second person always tries his best to defeat first person/make first person profit least.
+      * initialize: varies with problem
+      * answer: f[n]
+    + Examples: Coin in a line (Lintcode), Coin in a line II (Lintcode), Flip game II
+  - Backpack <a id="algorithms-dp-backpack"></a>
+    + Patterns:
+      * state: f[i][S]: whether the first i items could form S/Max value/number of ways
+      * induction rule: varies with problems
+      * initialize: varies with problems
+      * answer: varies with problems
+    + Examples: Backpack I-VI (Lintcode), K Sum (Lintcode), Minimum adjustment cost (Lintcode)
 
 ### Edge case tests <a id="edge-case-tests"></a>
 * Single element 2D grid
