@@ -1407,14 +1407,21 @@ private void dfs( T[][] grid, int x, int y, boolean[][] discovered )
   - When not to use - optimize time complexity from O(n^3, n^2) further
     + Calculate concrete solutions themselves rather than just the number of solutions
     + Input is a collection rather than a sequence (e.g. Longest consecutive sequence)
-* Implementation methods:
-  - Multi-loop: bottom-up approach
-  - Memorized search: top-down approach
 * Problems to consider:
   - State: how to define dp[i] or dp[i][j]
   - Induction rule: how to calculate big problems into smaller ones
   - Initialization: starting point
   - Answer: ending point
+* Implementation methods:
+  - Multi-loop: bottom-up approach
+  - Memorized search: top-down approach
+  - Use cases:
+    + In most cases, both of them can be applied. 
+    + But some times memorized search is better.
+      * When the induction rule is not sequential, thus hard to define
+      * When the initialization state is hard to find
+      * Example problem to demonstrate: Longest increasing subsequences in 2D
+
 * Type:
   - Coordinate based
     + Patterns:
