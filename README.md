@@ -3,6 +3,7 @@
     * [Thinking perspectives](#think-perspectives)
     * [Faster responses](#faster-responses)
     * [When met with easy/hard/tricky problems](#met-with-easy-hard-tricky-problems)
+    * [Understanding what interviewers really wants](#undertand-interviewers)
 * [Practice patterns](#practice-patterns)
     * [Tools](#practice-tools)
     * [Habits](#practice-habits)
@@ -117,6 +118,23 @@
   * talk aloud so when stuck, interviewer could help
 * for problems which has lots of tricky test cases
     * clarify assumptions about the problem, what are possible inputs/what are not.
+
+#### Understanding what interviewers really wants <a id="#undertand-interviewers"></a>
+* Evaluation criteria
+  - Is s/he a good coder?
+  - Can s/he explain technical solutions well?
+  - Does s/he understand basic concepts well?
+  - Does s/he has a good grasp of past project experiences?
+  - How is his/her attitude?
+* What are interviewers really asking
+
+| what they ask | How most people respond :(    | what they really want  | 
+| --------------------- |:---------:| -----:|  
+| Tell me what you did for this project  | <ul><li>Describe the process in chronological order</li><li>Recites what's on their resume</li></ul>  | <ul><li>What are you able to do after completing this project4</li><li>How did you overcome obstacles</li><li>Details that are not on your resume</li></ul> |
+| Tell me what you did for this job  | <ul><li>Describe major projects</li><li>Describe daily tasks</li></ul>  |  <ul><li>Were you able to learn quickly</li><li>Did you add enough value at your previous job to prove that you can add value for me</li></ul> |
+| Compare data structure A and B  | <ul><li>Explain what A and B are respectively</li><li>List 1 difference between them</li></ul>     |  <ul><li>Does your explanation show that you have actually used them in a real project</li><li>Explain real situations where you would use A vs B.</li></ul> |
+| Write code to solve problem | <ul><li>Jumps into writing code</li><li>Awkward silence</li></ul>     | <ul><li>Would I want to work with them everyday</li><li>Have they actually written production grade code</li><li>What do they do when stuck</li></ul> |
+| Maybe you could try this ... | <ul><li>Take advice without serious thinking</li></ul>  | <ul><li>Do they think independently</li><li>How fast can they absord new information</li><li>Do they take advice/directions well</li><li>Do they learn quickly and run with it</li></ul> |
 
 ### Practice patterns <a id="practice-patterns"></a>
 #### Tools<a id="practice-tools"></a>
@@ -1605,7 +1623,7 @@ public int houseRobber_RollingArray( int[] A )
       * induction rule: f[x,y] from f[x-1, y] or f[x, y-1]
       * initialization: f[0,0~width], f[0~height, 0]
       * answer: usually f[m,n]
-    + Examples: Minimum Path Sum, Unique Path IÂ·, Climbing stairs, Jump game I/II
+    + Examples: Minimum Path Sum, Unique Path I·, Climbing stairs, Jump game I/II
   - 1D sequence <a id="algorithms-dp-1d-sequence"></a>
     + Patterns:
       * state: f[i] represents first i position, digits, characters

@@ -7,8 +7,9 @@ import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
-public class FindSecondHighest {
-    public static void main(String[] args) 
+public class FindSecondHighest 
+{
+    public static void main( String[] args )
     {
         System.out.println("Hello world");
         System.out.println( findSecond("aabbbcdee") );
@@ -30,19 +31,14 @@ public class FindSecondHighest {
         Queue<Map.Entry<Character, Integer>> maxQueue = new PriorityQueue<>( ( o1, o2 ) -> o2.getValue() - o1.getValue() );
         maxQueue.addAll( histogram.entrySet() );
         
-        for ( Map.Entry<Character, Integer> entry : maxQueue )
-        {
-        	System.out.println( entry.getKey() );
-        	System.out.println( entry.getValue() );
-        }
-        
         if ( maxQueue.size() < 2 ) 
         {
             return new ArrayList<>();
         }
         
-        char firstElem = maxQueue.poll().getKey();
-        int firstElemFreq = maxQueue.poll().getValue();
+        Map.Entry<Character, Integer> pair = maxQueue.poll( );
+        char firstElem = pair.getKey();
+        int firstElemFreq = pair.getValue();
         while ( maxQueue.size() > 0 && maxQueue.peek().getValue() == firstElemFreq )
         {
             maxQueue.poll();
@@ -53,8 +49,9 @@ public class FindSecondHighest {
         }
         
         List<Character> result = new ArrayList<>();
-        char secondElem = maxQueue.poll().getKey();
-        int secondElemFreq = maxQueue.poll().getValue();
+        pair = maxQueue.poll( );
+        char secondElem = pair.getKey();
+        int secondElemFreq = pair.getValue();
         result.add( secondElem );
         while ( maxQueue.size() > 0 && maxQueue.peek().getValue() == secondElemFreq )
         {
