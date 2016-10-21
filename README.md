@@ -1,7 +1,6 @@
 # loop through leetcode one more time, ; )
 * [Core strategies](#strategy)
     * [Thinking perspectives](#think-perspectives)
-    * [Faster responses](#faster-responses)
     * [When met with easy/hard/tricky problems](#met-with-easy-hard-tricky-problems)
     * [Understanding what interviewers really wants](#undertand-interviewers)
 * [Practice patterns](#practice-patterns)
@@ -11,15 +10,17 @@
     * [Before coding](#interview-before-coding)
     * [While coding](#interview-while-coding)
     * [Clean up](#interview-after-coding)
-* [Questions to confirm about input](#questions-to-confirm-about-input)
-    * [Field types](#question-field-type)
-    * [Array](#question-array)
-    * [Linkedlist](#question-linkedlist)
-    * [Binary search](#question-binary-search)
-    * [String](#question-string)
-    * [Tree](#question-tree)
-    * [Graph](#question-graph)
-* [Questions to confirm about output](#questions-to-confirm-about-output)
+* [Questions to clarify ambiguous problems](#questions-to-clarify-ambiguous-problems)
+    * [Input - Field types](#question-field-type)
+    * [Input - Array](#question-array)
+    * [Input - Linkedlist](#question-linkedlist)
+    * [Input - Binary search](#question-binary-search)
+    * [Input - String](#question-string)
+    * [Input - Tree](#question-tree)
+    * [Input - Graph](#question-graph)
+    * [Output - Solutions](#question-solutions)
+    * [Corner cases](#question-corner-cases)
+
 * [Typical follow up questions](#questions-follow-up)
 * [Learned lessons: Java basics](#learned-lessons-java-basics)
     * [Type size](#basics-type-size) 
@@ -100,24 +101,18 @@
     * demonstrate strong engineering skills/habits
   * Think as if this is the last time that you are doing this in such a detailed way in your life. Next time when I hunt for jobs, either HRs will find me or I will have far less time to prepare
 
-#### Faster responses: how to load previously solved problems more quickly into my memory <a id="faster-responses"></a>
-  * Use a concrete example to wake up associated memory
-  * Identify problem types and key points for that type of problems. e.g.
-    * For stack type of problems, think about when to push/pop out of stack
-    * For breath first search type of problems, think about starting point
-    * For two-pointer type of problems, think about pointer start position(start/end position), increment/decrement pointer conditions
-    * For binary search type of problems, think about whether to go left/right once mid is determined
-    * For recursion type of problems, think about recursion base(arguments passed in), truning techniques, recursion order(child/parent first), recursion body, need backtracking
-
 #### When met with easy/hard/tricky problems (although most time medium problems): <a id="met-with-easy-hard-tricky-problems"></a>
-* always smile no matter how easy/hard/tricky the problem is, ;)
-* for problems of easy/medium difficulty level
-  * the hard part usually lies in interviewers' follow-up questions 
-* for problems of hard difficulty level
-  * summarize an easy-to-remember pattern for each popular hard problem (e.g. regular expression matching, iterative post-order traversal)
-  * talk aloud so when stuck, interviewer could help
-* for problems which has lots of tricky test cases
-    * clarify assumptions about the problem, what are possible inputs/what are not.
+* Always smile no matter how easy/hard/tricky the problem is, ;)
+* For easy problems,
+  * Although interviewer says "I will only give you an easy question". Every interviewing question has its purpose. It might be the corner case, coding style or communication. 
+  * There might be some follow-up questions. The easy problem is just for warming up.
+* For problems I have seen before, 
+  * Notice that the assumption might have been changed. 
+  * Still need to walk through the entire thought process instead of jumping to the right answer directly.
+* For hard problems,
+  * It is not really practical to finish a tricky problems in a 45 minutes setting from scratch perfectly. 
+    * Talk with interviewers about my thoughts before implementing.
+    * Outline the code skeleton before implement every detail.
 
 #### Understanding what interviewers really wants <a id="#undertand-interviewers"></a>
 * Evaluation criteria
@@ -203,43 +198,52 @@
      * "***If I were writing this for a production use, I would avoid using this global variable.***"
   4. Synchronize with interviewer: "***I think I am done with the problem***".
 
-### Questions to confirm about input <a id="questions-to-confirm-about-input"></a>
-#### Field types<a id="question-field-type"></a>
-* integer or double
-* positive or negative, non-positive or non-negative
+### Questions to clarify ambiguous problems <a id="questions-to-clarify-ambiguous-problems"></a>
+#### Input - Field types<a id="question-field-type"></a>
+* Integer or double
+* Positive or negative, non-positive or non-negative
 
-#### Array<a id="question-array"></a>
-* sorted or unsorted
-* given two arrays, which one's size is bigger
-* whether could modify entries inside array
+#### Input - Array<a id="question-array"></a>
+* Sorted or unsorted
+* Given two arrays, which one's size is bigger
+* Whether could modify entries inside array
 
-#### LinkedList<a id="question-linkedlist"></a>
-* doubly or singly linkedlist
+#### Input - LinkedList<a id="question-linkedlist"></a>
+* Doubly or singly linkedlist
 
-#### Binary search<a id="question-binary-search"></a>
-* return boolean or specific result
-* whether duplicates exist inside array
+#### Input - Binary search<a id="question-binary-search"></a>
+* Return boolean or specific result
+* Whether duplicates exist inside array
 
-#### String<a id="question-string"></a>
-* whether the string contains space
-* how are tokens separated, using comma, slash or something else
+#### Input - String<a id="question-string"></a>
+* Whether the string contains space
+* How are tokens separated, using comma, slash or something else
 
-#### Tree<a id="question-tree"></a>
-* whether complete tree, binary tree, binary search tree
+#### Input - Tree<a id="question-tree"></a>
+* Whether complete tree, binary tree, binary search tree
 
-#### Graph<a id="question-graph"></a>
-* directed or undirected
+#### Input - Graph<a id="question-graph"></a>
+* Directed or undirected, weighted or not, connected or not
 
-### Questions to confirm about output <a id="questions-to-confirm-about-output"></a>
-#### List of List
-* any order requirements on internal list
-* should duplicates be removed
+#### Output - Solutions <a id="question-solutions"></a>
+* Different levels of solutions
+  * boolean: Whether solutions exist or not
+  * int: the number of solutions
+  * List&lt;?&rt;: solutions themselves
+  * List&lt;?&rt;: solutions without duplicates
+  * List&lt;?&rt;: solutions with specific order
+
+#### Corner cases <a id="question-corner-cases"></a>
+* How should I handle corner cases
+  - What to return
+  - throw exception or not
 
 ### Typical follow-up questions <a id="questions-follow-up"></a>
-* no duplicates -> duplicates exist
-* judge whether result exist -> return all results
-* one dimension -> two dimension
-* how to avoid global variables
+* No duplicates -> duplicates exist
+* Whether result exist -> return all results
+* One dimension -> two dimension
+* How to avoid global variables
+* How to improve performance
 
 ### Learned lessons: Java basics <a id="learned-lessons-java-basics"></a>
 #### Type size<a id="basics-type-size"></a>
@@ -446,7 +450,7 @@ while ( iterator.hasNext() )
 * support array resize: array -> arrayList
 * support lookup/delete by key: priorityqueue -> treemap
 * support enqueue/dequeue from both ends: queue -> deque
-* support insertion -> customized order on hashset/hashmap: hashset/hashmap -> linkedhashset/linkedhashmap -> treeset/treemap
+* support insertion -> customized order on hashset/hashmap: hashset/hashmap -> linkedhashset/linkedhashmap -> binary search tree (treeset/treemap)
 * support larger character set for histogram problem: array -> map
 * support append/insert/delete more efficiently: string -> stringbuilder
 * space efficiency in dynamic programming: 2D memorization array -> rolling 1D memorization array
@@ -805,11 +809,6 @@ class SegmentTreeNode
   }
 ```
 
-* binary indexed tree
-```java
-
-```
-
 #### Binary search tree<a id="ds-binary-search-tree"></a>
 * The definition of BST is left <= middle < right. Pay attention to the equals sign.
 * Get inorder traversal predecessor/successor
@@ -904,7 +903,20 @@ class SegmentTreeNode
 * Get Subset APIs: tailMap/headMap/subMap
 
 #### Graph <a id="ds-graph"></a>
-* Graph definition, there are multiple ways to define graphs in Java. To represent a sparse graph, one typical classical way is to define class GraphNode and then graph can be defined as List &lt; GraphNode &gt;. The other way is to define graph as Map&lt;Integer, Set&lt;Integer&gt;&gt; graph. Map&lt;Integer&gt;
+* Time complexity comparison between different graph representation
+
+| Representation\Complexity | Delete a vertex | Delete an edge | Edge exists? | iterating all neighbors of a vertex |
+| --------------------- |:-------------:|:-------------:| -----:|-----:|
+| Edge List  | O(E) | O(E) | O(E) | O(E) |
+| Adjacent matrix  | O(V^2) | O(1) |  O(1) | O(V) |
+| Adjacent List | O(E) | O(list length) | O(list length) | O(list length) |
+
+* Use cases for different representations
+  * Edge list is usually not used because looping through neighbor of a vertex is too expensive. This makes it really appropriate for many graph algorithms (bfs, dfs).
+  * Adjacent matrix is usually used for dense graph, where vertexes are seldomly added or removed.
+  * Adjacent list is usually used for sparse graph to save space.
+
+* Adjacent list representation is the most commonly used graph representation in an interview setting. There are two common ways to realize this. One typical classical way is to define class GraphNode and then graph can be defined as List &lt; GraphNode &gt;. The other way is to define graph as Map&lt;Integer, Set&lt;Integer&gt;&gt; graph. Map&lt;Integer&gt;
 ```java
 // first way, more official
 // but if there are redundant edges in input, might need to implement hashcode() and equal() methods to avoid add redundant nodes into neighbors. Kind of overkilling in an interview setting
@@ -947,12 +959,12 @@ public Map<Integer, Set<Integer>> buildGraph( int n, int[][] edges )
 
 #### Trie <a id="ds-trie"></a>
 * Use cases: 
-   * find prefix of string
-   * traverse character by character
-   * compared with hashmap: 
-      * space complexity: when storing a list of words (Especially when these words share prefix), using trie save space. 
-      * time complexity: to compute hashcode for a string, O(n) time complexity; find/insert a string in a trie, the same
-   * but no built-in implementation in Java core
+   * Find prefix of string
+   * Traverse character by character
+   * Compared with hashmap: 
+      * Space complexity: when storing a list of words (Especially when these words share prefix), using trie save space. 
+      * Time complexity: to compute hashcode for a string, O(n) time complexity; find/insert a string in a trie, the same
+   * But no built-in implementation in Java core
 * Definitions: iterative implementation much more concise than recursive implementation.
 ```java
 class TrieNode 
@@ -1053,12 +1065,12 @@ public class TrieIterative
 
 ### Learned lessons: algorithms <a id="learned-lessons-algorithms"></a>
 #### Progressive enhancement on algorithms and data structures <a id="algorithms-progressive-enhancement-on-algorithms"></a>
-* algorithms
-  * brute force first
-  * trade space for time: e.g. hashmap in two-sum
-  * pre-process data: e.g. sorting
-  * divide into subproblems: e.g. recursion, discuss by different conditions
-  * save time by avoid solving repeated problems: e.g. recursion -> dynamic programming
+* Algorithms
+  * Brute force first
+  * Trade space for time: e.g. hashmap in two-sum
+  * Pre-process data: e.g. sorting
+  * Divide into subproblems: e.g. recursion, discuss by different conditions
+  * Save time by avoid solving repeated problems: e.g. recursion -> dynamic programming
 
 #### Two pointers <a id="algorithms-two-pointer"></a>
 ##### Begin and end type <a id="algorithms-boundary-to-center"></a>
@@ -1223,16 +1235,15 @@ public int binarySearchRecursive( int[] array, int target, int start, int end )
 }
 ```
 
-* binary search variants:
-  - find first element smaller than target
+* Binary search variants:
+  - Find first element smaller than target
       - e.g. find minimum element in rotated sorted array ( target: array[array.length-1])
-  - find last element smaller than target
+  - Find last element smaller than target
       - e.g. search insertion position
-  - convert a range of binary search problem into variants of essence form
+  - Convert a range of binary search problem into variants of essence form
 
-* binary search in 2D matrix
-* how to handle duplicates in binary search
-
+* Binary search in 2D matrix
+* How to handle duplicates in binary search
 
 #### Recursive functions <a id="algorithms-recursion"></a>
 * Time complexity: <a id="algorithms-recursive-tc"></a>
@@ -1253,10 +1264,10 @@ public int binarySearchRecursive( int[] array, int target, int start, int end )
   - How does big problems recurse to smaller ones
   - Initialization
 * How to return multiple results from recursive functions<a id="algorithms-recursion-return-multiple-results"></a>
-  - not use return value: use global variable. 
+  - Use global variable. 
     + The first is to use private instance variables to store results
     + The second is to use a mutable argument of type ( int[], List&lt;&gt; ). Modify the value of this argument while travering.
-  - use return value
+  - Use return value
     + If multiple results are of same type, define return type as an array T[]
     + Define a result wrapper class
 ```java
@@ -1288,8 +1299,8 @@ private class ResultWrapper
 ```
 
 * How to avoid repeated recursion - memorize already computed searched results <a id="algorithms-recursion-repeated"></a>
-  - use hashmap (example problems include House Robber III, Clone Graph)
-  - use dynamic programming (see dynamic programming section for details) 
+  - Use hashmap (example problems include House Robber III, Clone Graph)
+  - Use dynamic programming (see dynamic programming section for details) 
 ```java
     public UndirectedGraphNode cloneGraph(UndirectedGraphNode node) 
     {
@@ -1335,7 +1346,7 @@ public ResultWrapper secondApproach( TreeNode currNode )
 ```
 
 #### Backtrack <a id="algorithms-backtrack"></a>
-* usually occurs at the beginning and ending of a recursive function
+* Usually occurs at the beginning and ending of a recursive function
 ```java
 public void recursivefunction()
 {
@@ -1344,7 +1355,7 @@ public void recursivefunction()
     backtracking backwards
 }
 ```
-* avoid generating duplicate results by ensuring that the never two recursion tree branches overlap 
+* Avoid generating duplicate results by ensuring that the never two recursion tree branches overlap 
 ```java
 if ( i > 0 && candidates[i] == candidates[i-1] )
 {
@@ -1467,10 +1478,10 @@ private void dfs( T[][] grid, int x, int y, boolean[][] discovered )
 ##### Topological sort <a id="algorithms-topo"></a>
 * There are basically two categories of methods for topological sort. The first one is greedy algorithm with O(|V|^2 + |E|) time complexity. The second is based on depth first search with O(|V| + |E|) time complexity. Here only discusses DFS based approach. 
 * When using DFS based approach, there are two cases which should be taken care of. The first one is what if there exists no topological order at all. The second is how to return topological order.
-   * what if there exists no topological order - a cycle is detected. 
+   * What if there exists no topological order - a cycle is detected. 
       * How to detect cycle: use UNDISCOVERED, DISCOVERED, VISITED to represent three possible states of graph nodes. Use a Set&lt;?&gt; isDiscovered and Set&lt;?&gt; isVisited to record all history info. If met up with a node which has been discovered but not visited, then a cycle is detected. 
       * How to handle cycle: return a boolean value (preferred) or throw an exception (not really suitable because they are expected cases)
-   * what if need to return topological order
+   * What if need to return topological order
       * If do not need to detect cycle, could simply use a Stack&lt;&gt; order to record the visited node, namely using Set&lt;?&gt; discovered, Stack&lt;?&gt; visited 
       * If need to detect cycle, namely using Set&lt;?&gt; discovered, LinkedHashSet&lt;?&gt; visited
 ```java
@@ -1668,23 +1679,23 @@ public int houseRobber_RollingArray( int[] A )
 * While loop: flow control counters
 
 ### Bad smells for refactoring and optimization <a id="bad-smells"></a>
-* code/function length > 100
-* too many if statement checking for boundary cases
-* code do not generalize well. Only work for current problem. e.g. merge 2 sorted list -> merge k sorted List
-* nested while loops (really error prone)
+* Code/function length > 100
+* Too many if statement checking for boundary cases
+* Code do not generalize well. Only work for current problem. e.g. merge 2 sorted list -> merge k sorted List
+* Nested while loops (really error prone)
 
 ### Sins <a id="sins"></a>
 #### Java sins <a id="sins-java"></a>
-* linkedhashset could not be iterated reversely
-* heavy to return tuple values
-* only pass by values
-* lambda expressions are still not closures
+* Linkedhashset could not be iterated reversely
+* Heavy to return tuple values
+* Only pass by values
+* Lambda expressions are still not closures
 
 #### Whiteboard coding sins <a id="sins-whiteboard-coding"></a>
-* whiteboard coding does not simulate daily workflow of software engineers, thus might generate high false positives and false negatives. 
-  * finish algorithms in 20 min in a bug-free and clean way requires lots of practice. It does not only require interviewee to understand algorithms and data structures, but also really proficient in these, sometimes even remember pretty tricky test cases. 
-  * the optimization process in algorithm questions is over-optimization. In practice, only improve performance when necessary.
-  * stand and write code on whiteboard is really exhausting if lasting for 4-5 hours.
+* Whiteboard coding does not simulate daily workflow of software engineers, thus might generate high false positives and false negatives. 
+  * Finish algorithms in 20 min in a bug-free and clean way requires lots of practice. It does not only require interviewee to understand algorithms and data structures, but also really proficient in these, sometimes even remember pretty tricky test cases. 
+  * The optimization process in algorithm questions is over-optimization. In practice, only improve performance when necessary.
+  * Stand and write code on whiteboard is really exhausting if lasting for 4-5 hours.
 
 #### Leetcode sins <a id="sins-leetcode"></a>
 * When problem occurs, too few stack trace
