@@ -229,9 +229,9 @@
 * Different levels of solutions
   * boolean: Whether solutions exist or not
   * int: the number of solutions
-  * List&lt;?&rt;: solutions themselves
-  * List&lt;?&rt;: solutions without duplicates
-  * List&lt;?&rt;: solutions with specific order
+  * List&lt;?> : solutions themselves
+  * List&lt;?>: solutions without duplicates
+  * List&lt;?>: solutions with specific order
 
 #### Corner cases <a id="question-corner-cases"></a>
 * How should I handle corner cases
@@ -810,6 +810,7 @@ class SegmentTreeNode
 ```
 
 #### Binary search tree<a id="ds-binary-search-tree"></a>
+* Used to store a collection of items in sorted form
 * The definition of BST is left <= middle < right. Pay attention to the equals sign.
 * Get inorder traversal predecessor/successor
 ```java
@@ -905,7 +906,7 @@ class SegmentTreeNode
 #### Graph <a id="ds-graph"></a>
 * Time complexity comparison between different graph representation
 
-| Representation\Complexity | Delete a vertex | Delete an edge | Edge exists? | iterating all neighbors of a vertex |
+| Representation\Complexity | Delete a vertex | Delete an edge | Edge exists? | iterating vertex neighbors |
 | --------------------- |:-------------:|:-------------:| -----:|-----:|
 | Edge List  | O(E) | O(E) | O(E) | O(E) |
 | Adjacent matrix  | O(V^2) | O(1) |  O(1) | O(V) |
@@ -1692,22 +1693,25 @@ public int houseRobber_RollingArray( int[] A )
 * Lambda expressions are still not closures
 
 #### Whiteboard coding sins <a id="sins-whiteboard-coding"></a>
-* Whiteboard coding does not simulate daily workflow of software engineers, thus might generate high false positives and false negatives. 
-  * Finish algorithms in 20 min in a bug-free and clean way requires lots of practice. It does not only require interviewee to understand algorithms and data structures, but also really proficient in these, sometimes even remember pretty tricky test cases. 
-  * The optimization process in algorithm questions is over-optimization. In practice, only improve performance when necessary.
-  * Stand and write code on whiteboard is really exhausting if lasting for 4-5 hours.
+* The most important capability for a software engineer is abstraction and skipping complexity. They are not asked effectively during whiteboard coding.
+* Whiteboard coding does not reflect daily workflow of software engineers, thus might generate high false positives and false negatives. 
+* Finish algorithms in 20 min in a bug-free and clean way requires lots of practice. It does not only require interviewee to understand algorithms and data structures, but also really proficient in these, sometimes even remember pretty tricky test cases. 
+* The optimization process in algorithm questions is over-optimization. In practice, only improve performance when necessary.
+* Stand and write code on whiteboard is really exhausting if lasting for 4-5 hours.
 
 #### Leetcode sins <a id="sins-leetcode"></a>
-* When problem occurs, too few stack trace
-* No online debuggers
-* No history track along time axis. Really bad synchronous workflow
-* Assumptions about validity of input. They usually do not appear in interview settings
-* Unable to mark different stages in solving a problem ( e.g. thought-out, implemented, optimized, on-line judged, summarized )
-* Cannot add enough comments along the code
-* Never-ending, ever-increasing number of problems
-* Time exceed limit exception sometimes dependes on Leetcode.org machine status
-* Could not search problems by specifying multiple tags
-* Function names do not follow best practices, which makes variables naming kind of difficult.
+* Testing
+  * Assumptions about validity of input. They usually do not appear in interview settings
+  * Time exceed limit exception sometimes dependes on Leetcode.org machine status
+* Debug
+  * When problem occurs, too few stack trace
+  * No online debuggers
+* Usability
+  * No history track along time axis. Really bad synchronous workflow
+  * Unable to mark different stages in solving a problem ( e.g. thought-out, implemented, optimized, on-line judged, summarized )
+  * Cannot add enough comments along the code
+  * Could not search problems by specifying multiple tags
+  * Function names do not follow best practices, which makes variables naming kind of difficult.
 
 #### References
 * Core Java Interview questions [blog: java-success.com](http://www.java-success.com/)
