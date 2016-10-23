@@ -42,7 +42,7 @@
     * [Graph](#ds-graph)
     * [Trie](#ds-trie)
 * [Learned lessons: algorithms](#learned-lessons-algorithms)
-    * [Progressive enhancement on algorithms](#progressive-enhancement-on-algorithms)
+    * [Bit manipulation](#algorithms-bit-manipulation)
     * [Two pointers](#algorithms-two-pointer)
        * [Begin and end type](#algorithms-boundary-to-center)
        * [Slow and fast type](#algorithms-slow-and-fast)
@@ -76,12 +76,7 @@
         + [Range based](#algorithms-dp-range-based)
         + [Game](#algorithms-dp-game)
         + [Backpack](#algorithms-dp-backpack)
-* [Edge case tests](#edge-case-tests)  
-* [Bad smells for refactoring and optimization](#bad-smells)
-* [Sins](#sins)
-   * [Java sins](#sins-java)
-   * [Whiteboard coding sins](#sins-whiteboard-coding) 
-   * [Leetcode sins](#sins-leetcode)
+* [References](#references)
   
 ### Typical whiteboard coding workflow <a id="whiteboard-workflow"></a>
 
@@ -166,6 +161,11 @@
 5. Synchronize with interviewer "***Do you have any concerns for the proposed algorithm? Should we write code for this***."
 
 #### Write test cases <a id="whiteboard-workflow-test-cases"></a>
+* In general, the following types of test cases should be considered 
+   * The normal case: e.g. array length of even or odd in sorting algorithms
+   * The extremes: e.g. empty array, one element array, extremely large one array
+   * Nulls and "illegal" input: e.g. input is negative when positive is expected 
+   * Strange input: an array already sorted
 * Typical test cases for different input types
    * Integer
       * Integer.MAX_VALUE, Integer.MIN_VALUE
@@ -177,12 +177,12 @@
       * Two characters
       * Contains duplicated characters
       * Contains space, tab or other separators
-   * List &lt;?> list <a id="question-list"></a>
+   * Array/List &lt;?> list
       * NULL
-      * Empty list
-      * List entry is NULL
-      * List of size one
-      * List of size two
+      * One element List/Array
+      * List/Array entry is NULL
+      * List/Array of even length
+      * List/Array of odd length
    * Topological sort
      * Cycle exist or not
 
@@ -393,23 +393,11 @@ map.putIfAbsent( key, new ArrayList<>() );
   - Collections.reverse(List&lt;?&gt;) reverses a linkedlist
 
 #### Math<a id="basics-math"></a>
-* divide two integers ( useful names: dividend/numerator, divisor/denominator, quotient, residue )
-  * handle boundary cases ( 0, Integer.MIN_VALUE )
-    + return int quotient
-    + return double quotient
-        - record quotient symbol ( neg/pos )
-        - convert dividend and divisor to positive
-        - calculate integer part 
-        - calculate fraction part 
-            + quotient = ( residue * 10 ) / divisor
-            + residue = ( residue * 10 ) % divisor
-            + use hashmap to record residue and occuring positions to handle recurring
-        - concatenate symbol, integer part, dot, fraction part (possibly with parentheses)
-* mod
+* Mod
         - judge whether a value is even or odd
             + Use num % 2 != 0 rather than num % 2 == 1 because of negative number mod ( e.g. -5 % 2 == -1 )
             + To guarantee mod result is always positive, if knowing num range RANGE, could consider ( num + RANGE ) % RANGE 
-* power of integer: Java does not provide a built-in function for Integer values
+* Power of integer: Java does not provide a built-in function for Integer values
         - solution 1: It has a built-in function double Math.pow( double, double ). But the computation cost for double is much higher than int and the result needs to be downcasted.
         - solution 2: Use multiply instead when exponent is low. 
         - solution 3: When 2 is radix, use bit shifting
@@ -431,6 +419,66 @@ for ( int i = 0; i < 32; i++ )
     decimalNum |= ( binaryRepr[i] << i );
 }
 ```
+* Prime 
+  * Check for primality
+    * Naive solution: Iterate from 2 through i
+    * Slightly better: Iterate from 2 through sqrt(i)
+  * Generate a list of primes: the sieve of eratosthenes
+    * Start with a list of all the numbers up through some value max.
+    * First cross off all numbers divisible by 2.
+    * Then look for the next prime and cross off all numbers divisible by it. 
+    * By continuing doing this, we wind up with a list of prime numbers from 2 through max.
+```java
+boolean[] sieveOfEratosthenes( int max )
+{
+    boolean[] flags = new boolean[max + 1];
+    int count = 0;
+    
+    init(flags);
+    int prime = 2;
+    
+    while ( prime <= Math.square(max))
+    {
+        // cross off remaining multiples of prime
+        crossOff( flags, prime );
+        
+        // find next value which is prime
+        prime = getNextPrime( flags, prime );
+    }
+    return flags;
+}
+
+void crossOff( boolean[] flags, int prime )
+{
+    for (int i = prime * prime; i < flags.length; i += prime )
+    {
+        flags[i] = false;
+    }
+}
+
+int getNextPrime( boolean[] flags, int prime )
+{
+    int next = prime + 1;
+    while ( next < flags.length && !flags[next] )
+    {
+        next++;
+    }
+    return next;
+}
+```
+* Divide two integers ( useful names: dividend/numerator, divisor/denominator, quotient, residue )
+  * handle boundary cases ( 0, Integer.MIN_VALUE )
+    + return int quotient
+    + return double quotient
+        - record quotient symbol ( neg/pos )
+        - convert dividend and divisor to positive
+        - calculate integer part 
+        - calculate fraction part 
+            + quotient = ( residue * 10 ) / divisor
+            + residue = ( residue * 10 ) % divisor
+            + use hashmap to record residue and occuring positions to handle recurring
+        - concatenate symbol, integer part, dot, fraction part (possibly with parentheses)
+
 
 #### Type conversions<a id="basics-type-conversions"></a>
 * Convert char to int, does not need explicit conversion
@@ -1134,13 +1182,51 @@ public class TrieIterative
 
 
 ### Learned lessons: algorithms <a id="learned-lessons-algorithms"></a>
-#### Progressive enhancement on algorithms and data structures <a id="algorithms-progressive-enhancement-on-algorithms"></a>
-* Algorithms
-  * Brute force first
-  * Trade space for time: e.g. hashmap in two-sum
-  * Pre-process data: e.g. sorting
-  * Divide into subproblems: e.g. recursion, discuss by different conditions
-  * Save time by avoid solving repeated problems: e.g. recursion -> dynamic programming
+
+#### Bit manipulation <a id="algorithms-bit-manipulation"></a>
+* Arithmetic vs logic right shift
+  * Arithmetic right shift >>, shift bits to the right but fill in the new bits with the value of the sign bit
+  * Logic right shift >>>, shift bits to the right but fill in the new bits with 0.
+* Common bit tasks: get bit, set bit, clear bit and update bit
+```java
+boolean getBit( int num, int i )
+{
+    return ((num & (1 << i)) != 0 );
+}
+
+int setBit( int num, int i )
+{
+    return num | (1 << i);
+}
+
+int clearBit( int num, int i )
+{
+    int mask = ~(1 << i);
+    return num & mask;
+}
+
+// clear all bits from the most significant bit through i (inclusive)
+int clearBitsMSBthroughI( int num, int i )
+{
+    int mask = (1 << i) - 1;
+    return num & mask;
+}
+
+// clear all bits from i (inclusive) through 0
+int clearBitsIthrough0( int num, int i )
+{
+    int mask = ~(-1 >>> (31 - i));
+    return num & mask;
+}
+
+// set the ith bit to a value v
+int updateBit(int num, int i, boolean bitIs1)
+{
+    int value = bitIs1 ? 1 : 0;
+    int mask = ~(1 << i);
+    return (num & mask) | (value << i);
+}
+```
 
 #### Two pointers <a id="algorithms-two-pointer"></a>
 ##### Begin and end type <a id="algorithms-boundary-to-center"></a>
@@ -1325,6 +1411,11 @@ public int binarySearchRecursive( int[] array, int target, int start, int end )
 | T(n) = 2T(n/2) + O(1) | Tree traversal      |  O(n) |
 | T(n) = 2T(n/2) + O(n) | Merge sort      |    O(nlogn) |
 | T(n) = T(n-1) + O(n)  | Selection sort      |  O(n^2) |
+
+* Recursive vs iterative solutions
+  - Recursive algorithms can be very space inefficient. Each recursive call adds a new layer to the stack. If the algorithm recurses to a depth of n, it uses at least O(n) space.
+  - All recursive algorithms can be implemented iteratively, although sometimes the code is more complex. 
+  - Before diving into writing recursive code, ask myself how hard it would be to implement iteratively and discuss tradeoffs with your interviewer.
 
 * Problems to consider: <a id="algorithms-recursion-problems-to-consider"></a>
   - What does the recursive function do?
@@ -1741,7 +1832,7 @@ public int houseRobber_RollingArray( int[] A )
       * answer: varies with problems
     + Examples: Backpack I-VI (Lintcode), K Sum (Lintcode), Minimum adjustment cost (Lintcode)
 
-#### References
+#### References <a id="references"></a>
 * Core Java Interview questions [blog: java-success.com](http://www.java-success.com/)
 * Coding and system design [blog: massive tech interview](http://massivetechinterview.blogspot.com/)
 * Algorithms tutorial [Algorithm tutorial](http://algorithms.tutorialhorizon.com/)
