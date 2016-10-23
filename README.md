@@ -10,11 +10,14 @@
     * [Solve follow up questions](#whiteboard-workflow-follow-up)
 * [Interview mindset](#strategy)
     * [Understanding what interviewers really wants](#undertand-interviewers)
-    * [Thinking perspectives](#think-perspectives)
     * [When met with easy/hard/tricky problems](#met-with-easy-hard-tricky-problems)
+    * [Whiteboard coding pros and cons](#whiteboard-coding-pros-cons)
 * [Practice mindset](#practice-patterns)
+    * [Attitudes](#practice-attitudes)
     * [Tools](#practice-tools)
     * [Habits](#practice-habits)
+    * [Leetcode pros and cons](#leetcode-pros-cons)
+    * [Java pros and cons](#java-pros-cons)
 * [Learned lessons: Java basics](#learned-lessons-java-basics)
     * [Type size](#basics-type-size) 
     * [Error-prone APIs](#basics-error-prone-apis)
@@ -148,7 +151,7 @@
       * Give it a try: "***Let's try a graph-based solution***"
 3. Calc time/space complexity: "***The time complexity of the algorithm is O(XXX) and space complexity is O(XXX)***"
 
-#### Optimize the brute force solution <a id=""></a>
+#### Optimize the brute force solution <a id="whiteboard-workflow-optimize"></a>
 1. Synchronize with interviewer "***The time/space complexity of the brute force solution is too high and will be impractical.***"
 2. Consider the typical optimizing patterns below:
    1. Where the bottleneck is: "***The bottleneck of the algorithm lies in this section of code***"
@@ -206,18 +209,23 @@
        * "***Give me a moment, I feel there is a bug here. Let's have a double check.***"
        * "***The root cause of the problem is XXX.***"
   3. Explain shortcuts I have taken: Talk about sections which could be refactored/improved, but was done in a certain way in an interview setting
-     * "***If I were writing this for a production use, I would avoid using this global variable.***"
+     * Bad smells for refactoring and optimization <a id="bad-smells"></a>
+       * Code/function length > 100
+       * Too many if statement checking for boundary cases
+       * Code do not generalize well. Only work for current problem. e.g. merge 2 sorted list -> merge k sorted List
+       * Nested while loops ( really error prone )
+       * Global variables
   4. Synchronize with interviewer: "***I think I am done with the problem***".
 
 #### Solve follow up questions <a id="whiteboard-workflow-follow-up"></a>
-* Typical follow-up questions <a id="questions-follow-up"></a>
+* Typical follow-up questions
     * No duplicates -> duplicates exist
     * Whether result exist -> return all results
     * One dimension -> two dimension
     * How to avoid global variables
     * How to improve performance
 
-### Core Strategies <a id="core-strategies"></a>
+### Interview mindset <a id="core-strategies"></a>
 #### Understanding what interviewers really wants <a id="#undertand-interviewers"></a>
 * Evaluation criteria
   - Is s/he a good coder?
@@ -235,19 +243,6 @@
 | Write code to solve problem | <ul><li>Jumps into writing code</li><li>Awkward silence</li></ul>     | <ul><li>Would I want to work with them everyday</li><li>Have they actually written production grade code</li><li>What do they do when stuck</li></ul> |
 | Maybe you could try this ... | <ul><li>Take advice without serious thinking</li></ul>  | <ul><li>Do they think independently</li><li>How fast can they absord new information</li><li>Do they take advice/directions well</li><li>Do they learn quickly and run with it</li></ul> |
 
-#### Think perspectives: how to understand interviewer's expectations <a id="think-perspectives"></a>
-  * Think as if you are desigining product
-    * identify problems
-    * make tradeoffs
-    * attention to details
-    * be passionate
-  * Think as if you are talking to your teammates
-    * be a logical person, optimize from brute force to best
-    * speak out your thoughts for discussion when stuck
-    * be humble, always quick to take ideas from others
-    * demonstrate strong engineering skills/habits
-  * Think as if this is the last time that you are doing this in such a detailed way in your life. Next time when I hunt for jobs, either HRs will find me or I will have far less time to prepare
-
 #### When met with easy/hard/tricky problems (although most time medium problems): <a id="met-with-easy-hard-tricky-problems"></a>
 * Always smile no matter how easy/hard/tricky the problem is, ;)
 * For easy problems,
@@ -261,14 +256,22 @@
     * Talk with interviewers about my thoughts before implementing.
     * Outline the code skeleton before implement every detail.
 
+#### Whiteboard coding pros and cons <a id="whiteboard-coding-pros-cons"></a>
+* Pros
+  * Every software engineer knows algorithms and data structures. It provides a common domain for interviewers and interviewees to discuss.
+  * Smart people will always be smart wherever they go. There are just too many candidates there and there needs a way to differentiate it. At least, whiteboard coding could reflect candidates' understanding of algorithms/data structures and communication skills.
+  * Whiteboard coding advocates a good workflow for developing code.
+* Cons
+  * The most important capability for a software engineer is abstraction and skipping complexity. Algorithms questions are usually available in many online forums. Even if candidates could finish the problem in interview, it does not necessarily demonstrate the core perspective here. It might generate high false positives and false negatives. 
+  * Finish algorithms in 20 min in a bug-free and clean way requires lots of practice. It does not only require interviewee to understand algorithms and data structures, but also really proficient in these, sometimes even remember pretty tricky test cases. 
+  * The optimization process in algorithm questions is kind of over-optimization. In practice, only improve performance when necessary.
+  * Stand and write code on whiteboard is really exhausting if lasting for 4-5 hours.
 
-
-#### Going faster <a id="go-faster"></a>
-  * Stick to the right interview workflow: questions, examples, algorithms, optimize, implement and check. This will avoid time-consuming reworking or big changes in code.
-  * For easy questions, do not spend too much time because the big thing should be the follow-up hard questions.
-  * Do not speak too much to illustrate what your code does. Software engineers do code reviews on a daily basis. They only need big ideas instead of details.
-
-### Practice patterns <a id="practice-patterns"></a>
+### Practice mindset <a id="practice-patterns"></a>
+#### Attitudes <a id="practice-attitudes"></a>
+  * This might be the last time in my life that I spent so much time and efforts in algorithm questions. Next time when I hunt for jobs, either HRs will invite me or I will have far less time to prepare.
+  * The way an engineer approach a algorithm problem can reflect their efficiency at work. Davinci starts from drawing eggs.
+  
 #### Tools<a id="practice-tools"></a>
   * Task planning: Use tags ( TO_START, TO_HURRY, TO_TEST ) to manage algorithm question status and prioritize important tasks
   * Feedbacks: Use git commit number per day as feedback for progress
@@ -282,6 +285,34 @@
   * Think behind the scenes: not just satisfied with fixing the bug but always think and generalize why the bug occurs
   * First things first: Thought process first, then coding
   * Never be lazy: As long as you have not got 100% confidence that I will get the problem right, you should practice coding the problem by hand if time is enough
+
+#### Leetcode pros and cons <a id="leetcode-pros-cons"></a>
+* Pros
+  * Latest interview questions
+  * Large pool of different question types
+* Cons
+  * Testing
+    * Input is always valid. 
+    * Time exceed limit is too constraint. Sometimes we want to start from inefficient algorithms, verify its correctness and then optimize performance.
+  * Debug
+    * When problem occurs, too few stack trace
+    * No online debuggers
+  * Usability
+    * No history track along time axis. Really bad synchronous workflow
+    * Unable to mark different stages in solving a problem ( e.g. thought-out, implemented, optimized, on-line judged, summarized )
+    * Cannot add enough comments along the code
+    * Could not search problems by specifying multiple tags
+    * Function names do not follow best practices, which makes variables naming kind of difficult.
+
+#### Java pros and cons <a id="java-pros-cons"></a>
+* Pros
+  * Readability
+* Cons
+  * A bit verbose: heavy to return tuple values
+  * Only pass by values
+  * Lambda expressions are still not closures
+  * Linkedhashset could not be iterated reversely
+
 
 ### Learned lessons: Java basics <a id="learned-lessons-java-basics"></a>
 #### Type size<a id="basics-type-size"></a>
@@ -1709,47 +1740,6 @@ public int houseRobber_RollingArray( int[] A )
       * initialize: varies with problems
       * answer: varies with problems
     + Examples: Backpack I-VI (Lintcode), K Sum (Lintcode), Minimum adjustment cost (Lintcode)
-
-### Edge case tests <a id="edge-case-tests"></a>
-* Single element 2D grid
-* Integer.MIN_VALUE, Integer.MAX_VALUE
-* LinkedList: single node, even node, odd node, pointer pointing to null
-* Tree: single node tree, flattened tree, normal tree, complete tree
-* While loop: flow control counters
-
-### Bad smells for refactoring and optimization <a id="bad-smells"></a>
-* Code/function length > 100
-* Too many if statement checking for boundary cases
-* Code do not generalize well. Only work for current problem. e.g. merge 2 sorted list -> merge k sorted List
-* Nested while loops (really error prone)
-
-### Sins <a id="sins"></a>
-#### Java sins <a id="sins-java"></a>
-* Linkedhashset could not be iterated reversely
-* Heavy to return tuple values
-* Only pass by values
-* Lambda expressions are still not closures
-
-#### Whiteboard coding sins <a id="sins-whiteboard-coding"></a>
-* The most important capability for a software engineer is abstraction and skipping complexity. They are not asked effectively during whiteboard coding.
-* Whiteboard coding does not reflect daily workflow of software engineers, thus might generate high false positives and false negatives. 
-* Finish algorithms in 20 min in a bug-free and clean way requires lots of practice. It does not only require interviewee to understand algorithms and data structures, but also really proficient in these, sometimes even remember pretty tricky test cases. 
-* The optimization process in algorithm questions is over-optimization. In practice, only improve performance when necessary.
-* Stand and write code on whiteboard is really exhausting if lasting for 4-5 hours.
-
-#### Leetcode sins <a id="sins-leetcode"></a>
-* Testing
-  * Assumptions about validity of input. They usually do not appear in interview settings
-  * Time exceed limit exception sometimes dependes on Leetcode.org machine status
-* Debug
-  * When problem occurs, too few stack trace
-  * No online debuggers
-* Usability
-  * No history track along time axis. Really bad synchronous workflow
-  * Unable to mark different stages in solving a problem ( e.g. thought-out, implemented, optimized, on-line judged, summarized )
-  * Cannot add enough comments along the code
-  * Could not search problems by specifying multiple tags
-  * Function names do not follow best practices, which makes variables naming kind of difficult.
 
 #### References
 * Core Java Interview questions [blog: java-success.com](http://www.java-success.com/)
