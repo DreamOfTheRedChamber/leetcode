@@ -1,27 +1,20 @@
 # loop through leetcode one more time, ; )
-* [Core strategies](#strategy)
+* [Typical whiteboard coding workflow](#whiteboard-workflow)
+    * [Clarify questions](#whiteboard-workflow-clarify)
+    * [Give a small but general enough example for discussing algo/DS](#whiteboard-workflow-context)
+    * [Come up with a brute force algorithm with an example](#whiteboard-workflow-bruteforce)
+    * [Come up with an optimized solution](#whiteboard-workflow-optimize)
+    * [Write test cases](#whiteboard-workflow-test-cases)
+    * [Write code](#whiteboard-workflow-write-code)
+    * [Walk through a test case](#whtieboard-workflow-walk-test-cases)
+    * [Solve follow up questions](#whiteboard-workflow-follow-up)
+* [Interview mindset](#strategy)
+    * [Understanding what interviewers really wants](#undertand-interviewers)
     * [Thinking perspectives](#think-perspectives)
     * [When met with easy/hard/tricky problems](#met-with-easy-hard-tricky-problems)
-    * [Understanding what interviewers really wants](#undertand-interviewers)
-* [Practice patterns](#practice-patterns)
+* [Practice mindset](#practice-patterns)
     * [Tools](#practice-tools)
     * [Habits](#practice-habits)
-* [Interview patterns](#interview-patterns)
-    * [Before coding](#interview-before-coding)
-    * [While coding](#interview-while-coding)
-    * [Clean up](#interview-after-coding)
-* [Questions to clarify ambiguous problems](#questions-to-clarify-ambiguous-problems)
-    * [Input - Field types](#question-field-type)
-    * [Input - Array](#question-array)
-    * [Input - Linkedlist](#question-linkedlist)
-    * [Input - Binary search](#question-binary-search)
-    * [Input - String](#question-string)
-    * [Input - Tree](#question-tree)
-    * [Input - Graph](#question-graph)
-    * [Output - Solutions](#question-solutions)
-    * [Corner cases](#question-corner-cases)
-
-* [Typical follow up questions](#questions-follow-up)
 * [Learned lessons: Java basics](#learned-lessons-java-basics)
     * [Type size](#basics-type-size) 
     * [Error-prone APIs](#basics-error-prone-apis)
@@ -86,8 +79,162 @@
    * [Java sins](#sins-java)
    * [Whiteboard coding sins](#sins-whiteboard-coding) 
    * [Leetcode sins](#sins-leetcode)
+  
+### Typical whiteboard coding workflow <a id="whiteboard-workflow"></a>
+
+#### Clarify question <a id="whiteboard-workflow-clarify"></a>
+1. Define public APIs to be implemented:
+   * Things to define - Input type
+   * Things to define - Number of input arguments
+   * Things to define - Output type
+     * Different levels of solutions
+       * boolean: Whether solutions exist or not
+       * int: the number of solutions
+       * List&lt;?> : solutions themselves
+       * List&lt;?>: solutions without duplicates
+       * List&lt;?>: solutions with specific order
+     
+2. Clarify ambiguous problem statements / Gather all requirements
+   * Solution existence: "***What if no solution exists? How should I handle that?***"
+   * Solution uniqueness: "***Whether there are multiple solutions?***"
+   * Input emptiness: "***How should I handle null pointers and input of size zero?***"
+   * Input validity: "***Could I assume input is always invalid?***" 
+   * Input types:
+      * Typical scenarios
+        * In most cases, one single public API
+        * Multiple public APIs inside a class
+        * Two associated APIs, like serialize and deserialize
+      * Input - Field types<a id="question-field-type"></a>
+         * Integer or double
+         * Positive or negative, non-positive or non-negative
+      * Input - Array<a id="question-array"></a>
+         * Sorted or unsorted
+         * Given two arrays, which one's size is bigger
+         * Whether could modify entries inside array
+      * Input - String<a id="question-string"></a>
+         * Whether the string contains space
+         * How are tokens separated, using comma, slash or something else
+         * What characters are contained in the string, only english letters, or ascii characters   
+      * Input - LinkedList<a id="question-linkedlist"></a>
+         * Doubly or singly linkedlist
+      * Input - Tree<a id="question-tree"></a>
+         * Binary tree
+         * Binary search tree
+         * Complete tree
+      * Input - Graph<a id="question-graph"></a>
+         * Directed or undirected
+         * Weighted or not
+         * Connected or not
+   * Problem types:
+      * Sort
+        * Stable or not
+        * External or internal
+        * Input almost sorted or not
+        * Input range
+      * Search
+        * Whether duplicate entries exist
+   * Edge cases: "***If input is like this, then what should I output?***"
+
+#### Give a small but general enough example for discussing algo/DS <a id="whiteboard-workflow-context"></a>
+* Usually a size of 4~5 is enough.
+
+#### Come up with a brute force algorithm <a id="whiteboard-workflow-bruteforce"></a>
+1. Synchronize with interviewer "***Let's come up with a brute force solution first.***"
+2. Unstuck strategy:
+   1. The most straightforward way to list all possible solutions
+   2. Whether I could decompose the problem into subproblems and solve them individually
+      * Divide and conquer "***The problem could be decomposed into X subproblems.***"
+   3. Brainstorm DS/Algo which might be used / Give it a try
+      * Give it a try: "***Let's try a graph-based solution***"
+3. Calc time/space complexity: "***The time complexity of the algorithm is O(XXX) and space complexity is O(XXX)***"
+
+#### Optimize the brute force solution <a id=""></a>
+1. Synchronize with interviewer "***The time/space complexity of the brute force solution is too high and will be impractical.***"
+2. Consider the typical optimizing patterns below:
+   1. Where the bottleneck is: "***The bottleneck of the algorithm lies in this section of code***"
+   2. What the time complexity upper bound is: "***Theoretically, the best time complexity I could achieve is O(n) because I need to look through all items.***"
+   3. Whether space complexity is acceptable or not: "***Algorithms with linear space complexity is usually acceptable.***"
+   4. Repetitive computation: "***We solve a lot of repetitive problems. If we could cache the solutions, it will be much more efficient.***"
+   5. Additional rounds of iterating input: "***We iterate through input twice. If we could reduce it to once, it will boost performance twice.***"
+3. Synchronize with interviewer "***The reason we could do better is XXX***."
+4. Ask for help when being stuck
+   1. Show interviewer all the approaches you tried and difficulties. ""
+   2. Be keen to what interviewer is saying: Every word the interviewer is saying has its meanings. ""
+5. Synchronize with interviewer "***Do you have any concerns for the proposed algorithm? Should we write code for this***."
+
+#### Write test cases <a id="whiteboard-workflow-test-cases"></a>
+* Typical test cases for different input types
+   * Integer
+      * Integer.MAX_VALUE, Integer.MIN_VALUE
+      * 0
+      * Positive/negative numbers
+   * String
+      * NULL
+      * Single character
+      * Two characters
+      * Contains duplicated characters
+      * Contains space, tab or other separators
+   * List &lt;?> list <a id="question-list"></a>
+      * NULL
+      * Empty list
+      * List entry is NULL
+      * List of size one
+      * List of size two
+   * Topological sort
+     * Cycle exist or not
+
+#### Write code <a id="whiteboard-workflow-write-code"></a>
+  1. Synchronize with interviewer "***There are XXX steps in this algorithm. The first is XXX. The second....***"
+  2. Check input validity (already discussed thoroughly before)
+  3. Use // or empty line to separate different steps and a place to synchronize with interviewer.
+  4. Just get the general algorithm down first and avoid getting caught up in trivialities
+     * When forget some language-specific trivial
+       * "***I do not remember exactly how the interface looks like, but I'd guess it has an API like this.***"
+     * When need implement a large code block, or nested for/while loop, or repeated needed util methods, consider using a subroutine
+       * "***I am going to use a subroutine with the following interface. I will implement later***".
+     * When need double check trivials (like +1 or plus two, loop termination conditions ): 
+       * "***Not sure whether my loop should have "<" or "<=". Write a checkmark to remind yourself to figure out the details at the end.***""
+
+#### Walk through test cases <a id="whtieboard-workflow-walk-test-cases)"></a>
+  1. Synchronize with interviewer: "***Then I would usually check my code against tests***" 
+  2. Check the code by myself
+     * Check steps:
+       1. Review the entire code, check whether there are unused variables, loop counters while does not change as expected, unnecessary edge case checkings, boundaries index overflow/underflow 
+       2. Review the problem description, check whether there are unhandled problem assumptions
+       3. Use small test cases to test different logical branches of the code
+     * When there is a bug: do not rush to change. Identify the root cause first.
+       * "***Give me a moment, I feel there is a bug here. Let's have a double check.***"
+       * "***The root cause of the problem is XXX.***"
+  3. Explain shortcuts I have taken: Talk about sections which could be refactored/improved, but was done in a certain way in an interview setting
+     * "***If I were writing this for a production use, I would avoid using this global variable.***"
+  4. Synchronize with interviewer: "***I think I am done with the problem***".
+
+#### Solve follow up questions <a id="whiteboard-workflow-follow-up"></a>
+* Typical follow-up questions <a id="questions-follow-up"></a>
+    * No duplicates -> duplicates exist
+    * Whether result exist -> return all results
+    * One dimension -> two dimension
+    * How to avoid global variables
+    * How to improve performance
 
 ### Core Strategies <a id="core-strategies"></a>
+#### Understanding what interviewers really wants <a id="#undertand-interviewers"></a>
+* Evaluation criteria
+  - Is s/he a good coder?
+  - Can s/he explain technical solutions well?
+  - Does s/he understand basic concepts well?
+  - Does s/he has a good grasp of past project experiences?
+  - How is his/her attitude?
+* What are interviewers really asking
+
+| What they ask | Wrong response    | What they really want  |
+| --------------------- |:---------:| -----:|  
+| Tell me what you did for this project  | <ul><li>Describe the process in chronological order</li><li>Recites what's on their resume</li></ul>  | <ul><li>What are you able to do after completing this project4</li><li>How did you overcome obstacles</li><li>Details that are not on your resume</li></ul> |
+| Tell me what you did for this job  | <ul><li>Describe major projects</li><li>Describe daily tasks</li></ul>  |  <ul><li>Were you able to learn quickly</li><li>Did you add enough value at your previous job to prove that you can add value for me</li></ul> |
+| Compare data structure A and B  | <ul><li>Explain what A and B are respectively</li><li>List 1 difference between them</li></ul>     |  <ul><li>Does your explanation show that you have actually used them in a real project</li><li>Explain real situations where you would use A vs B.</li></ul> |
+| Write code to solve problem | <ul><li>Jumps into writing code</li><li>Awkward silence</li></ul>     | <ul><li>Would I want to work with them everyday</li><li>Have they actually written production grade code</li><li>What do they do when stuck</li></ul> |
+| Maybe you could try this ... | <ul><li>Take advice without serious thinking</li></ul>  | <ul><li>Do they think independently</li><li>How fast can they absord new information</li><li>Do they take advice/directions well</li><li>Do they learn quickly and run with it</li></ul> |
+
 #### Think perspectives: how to understand interviewer's expectations <a id="think-perspectives"></a>
   * Think as if you are desigining product
     * identify problems
@@ -114,22 +261,12 @@
     * Talk with interviewers about my thoughts before implementing.
     * Outline the code skeleton before implement every detail.
 
-#### Understanding what interviewers really wants <a id="#undertand-interviewers"></a>
-* Evaluation criteria
-  - Is s/he a good coder?
-  - Can s/he explain technical solutions well?
-  - Does s/he understand basic concepts well?
-  - Does s/he has a good grasp of past project experiences?
-  - How is his/her attitude?
-* What are interviewers really asking
 
-| what they ask | How most people respond :(    | what they really want  | 
-| --------------------- |:---------:| -----:|  
-| Tell me what you did for this project  | <ul><li>Describe the process in chronological order</li><li>Recites what's on their resume</li></ul>  | <ul><li>What are you able to do after completing this project4</li><li>How did you overcome obstacles</li><li>Details that are not on your resume</li></ul> |
-| Tell me what you did for this job  | <ul><li>Describe major projects</li><li>Describe daily tasks</li></ul>  |  <ul><li>Were you able to learn quickly</li><li>Did you add enough value at your previous job to prove that you can add value for me</li></ul> |
-| Compare data structure A and B  | <ul><li>Explain what A and B are respectively</li><li>List 1 difference between them</li></ul>     |  <ul><li>Does your explanation show that you have actually used them in a real project</li><li>Explain real situations where you would use A vs B.</li></ul> |
-| Write code to solve problem | <ul><li>Jumps into writing code</li><li>Awkward silence</li></ul>     | <ul><li>Would I want to work with them everyday</li><li>Have they actually written production grade code</li><li>What do they do when stuck</li></ul> |
-| Maybe you could try this ... | <ul><li>Take advice without serious thinking</li></ul>  | <ul><li>Do they think independently</li><li>How fast can they absord new information</li><li>Do they take advice/directions well</li><li>Do they learn quickly and run with it</li></ul> |
+
+#### Going faster <a id="go-faster"></a>
+  * Stick to the right interview workflow: questions, examples, algorithms, optimize, implement and check. This will avoid time-consuming reworking or big changes in code.
+  * For easy questions, do not spend too much time because the big thing should be the follow-up hard questions.
+  * Do not speak too much to illustrate what your code does. Software engineers do code reviews on a daily basis. They only need big ideas instead of details.
 
 ### Practice patterns <a id="practice-patterns"></a>
 #### Tools<a id="practice-tools"></a>
@@ -145,105 +282,6 @@
   * Think behind the scenes: not just satisfied with fixing the bug but always think and generalize why the bug occurs
   * First things first: Thought process first, then coding
   * Never be lazy: As long as you have not got 100% confidence that I will get the problem right, you should practice coding the problem by hand if time is enough
-  
-### Interview patterns <a id="interview-patterns"></a>
-#### Before coding <a id="interview-before-coding"></a>
-1. Make sure I understand the problem
-  1. Declare interface in a strategic way (talk about different ways of defining it and trade-offs. e.g. do not define input as string when possible)
-  2. (Optional) Clarify ambiguous problem statement, need to gather all requirements before implementing one. 
-     1. Refer to "questions to confirm about input" 
-     2. "***Whether a valid solution always exist***" 
-     3. "***If input is like this, what should output be***"
-2. Synchronize with interviewer "***Let's come up with a brute force solution first.***"
-3. Work out a brute force solution
-  1. Work through a concrete example to abstract the problem
-  2. Guarantee to come up with a brute force solution 
-    * How I will enumerate all possible solutions / how will I do it in the most stupid way
-    * Unstuck strategy: Clear problem abstraction: What kind of ds/algo might be used"
-      * Brain storm problem types (min/max, shortest distance, output solutions, search, topo sort), algorithms (recursion, backtracking, sorting, breath/depth-first search, two pointers) / data types (stack, heap, undirected/directed graph, trie)
-    * Unstuck strategy: Simplify problem: "***This problem seems kind of complicated. Let's try to solve a simpler problem first***"
-    * Unstuck strategy: Give it a try: "***Let's try doing it with XX DS/Algorithm. Not sure if it will work or not.***"
-  3. Calc time/space complexity: "***The time complexity of the algorithm is O(XXX) and space complexity is O(XXX)***"
-4. Synchronize with interviewer "***Now we have a brute force solution. Let's think ways to improve this***"
-5. Optimize
-  * Unstuck strategy: Think about upper bound: what are the best time/space complexity I could achieve. "***Since I have to look through all items, so I cann't do better than O(n).***"
-  * Unstuck strategy: Identify bad smell for efficiency: whether repetitive computation, redundant space usage appears. "***We have done a lot of repetitive computation in the recursion tree.***"
-  * Unstuck strategy: Trade space for time complexity: Identify the bottleneck of brute force solution. "***The bottleneck of the algorithm lies in this section of code***"
-  * Unstuck strategy: Give it a try: "***Let's try doing it with XX DS/Algorithm. Not sure if it will work or not.***"
-  * Unstuck strategy: Discuss with interviewer for help: Stand back for a while and talk about the challegning you are facing. The interviewer might come in for help when necessary
-  * Unstuck strategy: Be keen to what interviewer is saying: Every word the interviewer is saying has its meanings
-6. Synchronize with interviewer "***Should we write code for this***"
-
-#### While coding <a id="interview-while-coding"></a>
-  1. Write edge/normal test cases first
-  2. Synchronize with interviewer: tell my plan first. What are the first step, second step and third step to implement
-  3. Check input validity (throw exception or return directly)
-  4. Use // or empty line as separator different steps.
-  5. Avoid get caught up in trivialities
-    * When forget some language-specific trivial: "***I do not remember exactly how the interface looks like, but I'd guess it has an API like this.***"
-    * When need a subroutine: "***I am going to use a subroutine with the following interface. I will implement later***".
-    * When need double check: Not sure whether my loop should have "<" or "<=". Write a checkmark to remind yourself to check it at the end. Just get the general algorithm down first. 
-
-#### Clean up <a id="interview-after-coding"></a>
-  1. Synchronize with interviewer: "***Then I would usually check against some edge cases, should we do that next?***" 
-  2. Check the code by myself
-     * Check steps:
-       1. review the entire code, check whether there are unused variables, loop counters while does not change as expected, unnecessary edge case checkings, boundaries index overflow/underflow 
-       2. review the problem description, check whether there are unhandled problem assumptions
-       3. use small test cases to test different logical branches of the code
-     * When there is a bug: do not rush to change. Identify the root cause first.
-       * "***Give me a moment, I feel there is a bug here. Let's have a double check.***"
-       * "***The root cause of the problem is XXX.***"
-  3. Explain shortcuts I have taken: Talk about sections which could be refactored/improved, but was done in a certain way in an interview setting
-     * "***If I were writing this for a production use, I would avoid using this global variable.***"
-  4. Synchronize with interviewer: "***I think I am done with the problem***".
-
-### Questions to clarify ambiguous problems <a id="questions-to-clarify-ambiguous-problems"></a>
-#### Input - Field types<a id="question-field-type"></a>
-* Integer or double
-* Positive or negative, non-positive or non-negative
-
-#### Input - Array<a id="question-array"></a>
-* Sorted or unsorted
-* Given two arrays, which one's size is bigger
-* Whether could modify entries inside array
-
-#### Input - LinkedList<a id="question-linkedlist"></a>
-* Doubly or singly linkedlist
-
-#### Input - Binary search<a id="question-binary-search"></a>
-* Return boolean or specific result
-* Whether duplicates exist inside array
-
-#### Input - String<a id="question-string"></a>
-* Whether the string contains space
-* How are tokens separated, using comma, slash or something else
-
-#### Input - Tree<a id="question-tree"></a>
-* Whether complete tree, binary tree, binary search tree
-
-#### Input - Graph<a id="question-graph"></a>
-* Directed or undirected, weighted or not, connected or not
-
-#### Output - Solutions <a id="question-solutions"></a>
-* Different levels of solutions
-  * boolean: Whether solutions exist or not
-  * int: the number of solutions
-  * List&lt;?> : solutions themselves
-  * List&lt;?>: solutions without duplicates
-  * List&lt;?>: solutions with specific order
-
-#### Corner cases <a id="question-corner-cases"></a>
-* How should I handle corner cases
-  - What to return
-  - throw exception or not
-
-### Typical follow-up questions <a id="questions-follow-up"></a>
-* No duplicates -> duplicates exist
-* Whether result exist -> return all results
-* One dimension -> two dimension
-* How to avoid global variables
-* How to improve performance
 
 ### Learned lessons: Java basics <a id="learned-lessons-java-basics"></a>
 #### Type size<a id="basics-type-size"></a>
@@ -1635,7 +1673,7 @@ public int houseRobber_RollingArray( int[] A )
       * induction rule: f[x,y] from f[x-1, y] or f[x, y-1]
       * initialization: f[0,0~width], f[0~height, 0]
       * answer: usually f[m,n]
-    + Examples: Minimum Path Sum, Unique Path I·, Climbing stairs, Jump game I/II
+    + Examples: Minimum Path Sum, Unique Path Iï¿½, Climbing stairs, Jump game I/II
   - 1D sequence <a id="algorithms-dp-1d-sequence"></a>
     + Patterns:
       * state: f[i] represents first i position, digits, characters
