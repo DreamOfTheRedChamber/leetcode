@@ -21,19 +21,15 @@ public class WordBreak
 {
     public boolean wordBreak( String s, Set<String> wordDict )
     {
-    	boolean[] canBreak = new boolean[s.length( )+1];
+    	boolean[] canBreak = new boolean[s.length( )+1]; // whether first i characters can be broken
     	canBreak[0] = true;
     	int maxLength = getMaxLength( wordDict );
     	for ( int i = 1; i <= s.length() ; i++ )
     	{    		    		
     		for ( int lastWordLength = 1; lastWordLength <= i && lastWordLength <= maxLength; lastWordLength++ )
     		{
-    			if ( !canBreak[i-lastWordLength] )
-    			{
-    				continue;
-    			}
-    			String lastWord = s.substring( i - lastWordLength, i );
-    			if ( wordDict.contains( lastWord ) )
+    			if ( canBreak[i-lastWordLength] 
+    				&& wordDict.contains( s.substring( i - lastWordLength, i ) ) )
     			{
     				canBreak[i] = true;
     				break;
