@@ -252,7 +252,8 @@
   * Notice that the assumption might have been changed. 
   * Still need to walk through the entire thought process instead of jumping to the right answer directly.
 * For hard problems,
-  * It is not really practical to finish a tricky problems in a 45 minutes setting from scratch perfectly. 
+  * It is of no shame to admit that it is really hard to finish a tricky problems in a 45 minutes setting from scratch and in a bug-free way.
+    * Some hard problems are already pretty popular. This means that the interviewer is trying to see you are really proficient in Leetcode.
     * Talk with interviewers about my thoughts before implementing.
     * Outline the code skeleton before implement every detail.
 
@@ -349,6 +350,7 @@ String part1 = parts[0]; // 004
 String part2 = parts[1]; // 034556
 ```
   - Parsing integer from a string. When possible, use Java's built-in function Integer Integer.ValueOf(String) or int Integer.ParseInt(String) instead of doing it manually
+  - string.indexOf(char). Returns the index within this string of the first occurrence of the specified character or -1.
 * Array
   - Print arrays in Java
 ```java
@@ -1313,8 +1315,8 @@ for ( i = 0; i < n; i++ )
 ```java
 private boolean isOverlap( Interval o1, Interval o2 )
 {
-    return !( o1.start >= o2.end 
-            || o2.start >= o1.end );
+    return !( o1.start > o2.end 
+            || o2.start > o1.end );
 }
 ```
 * Arrays.sort( array, comparator ) and Collections.sort( collection, comparator ) method
