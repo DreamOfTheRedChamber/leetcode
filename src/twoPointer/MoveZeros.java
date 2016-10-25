@@ -1,5 +1,9 @@
 package twoPointer;
 
+import java.util.Arrays;
+
+import org.junit.Test;
+
 /*
 Given an array nums, write a function to move all 0's to the end of it while maintaining the relative order of the non-zero elements.
 
@@ -20,28 +24,40 @@ public class MoveZeros
     	}
     	
     	int left = 0;
-    	int right = nums.length - 1;
-    	while ( left < right )
+    	while ( left < nums.length )
     	{
-    		while ( left < right && nums[left] != 0 )
+    		if ( nums[left] == 0 )
     		{
-    			left++;
+    			int nextNonZero = left + 1;
+    			while ( nextNonZero < nums.length && nums[nextNonZero] == 0 )
+    			{
+    				nextNonZero++;
+    			}
+    			if ( nextNonZero < nums.length )
+    			{
+    				swap( nums, left, nextNonZero );
+    			}
+    			else
+    			{
+    				break;
+    			}
     		}
-    		while ( left < right && nums[right] == 0 )
-    		{
-    			right--;
-    		}
-    		if ( left < right )
-    		{
-    			swap( nums, left, right );
-    		}
+    		left++;
     	}
     }
     
-    private void swap( int[] nums, int left, int right )
+    private void swap( int[] nums, int pos1, int pos2 )
     {
-    	int temp = nums[left];
-    	nums[left] = nums[right];
-    	nums[right] = temp;
+    	int temp = nums[pos1];
+    	nums[pos1] = nums[pos2];
+    	nums[pos2] = temp;
+    }
+    
+    @Test
+    public void test()
+    {
+    	int[] array = new int[]{ 0, 1, 0, 3, 12 };
+    	moveZeroes( array );
+    	System.out.println( Arrays.toString( array ));
     }
 }
