@@ -54,6 +54,11 @@ public class InsertIntervals
 		
     public List<Interval> insert( List<Interval> intervals, Interval newInterval )
     {
+    	if ( newInterval == null )
+    	{
+    		throw new IllegalArgumentException("");
+    	}
+    	
     	List<Interval> result = new ArrayList<>();
     	if ( intervals == null || intervals.size() == 0 )
     	{
@@ -61,45 +66,43 @@ public class InsertIntervals
     		return result;
     	}
     	
-    	boolean hasInserted = false;
-    	Interval toBeInserted = newInterval;
+    	Interval curr = newInterval;
     	for ( Interval interval : intervals )
     	{
-    		if ( !hasInserted )
+    		if ( isOverlap( interval, curr ) )
     		{
-    			if ( isOverlap( interval, toBeInserted ) )
-    			{
-    				toBeInserted = new Interval( Math.min( interval.start, toBeInserted.start ), 
-    											Math.max( interval.end, toBeInserted.end ) );
-    			}
-    			else if ( interval.start < toBeInserted.start )
-    			{
-    				result.add( interval );
-    			}
-    			else
-    			{
-    				result.add( toBeInserted );
-    				result.add( interval );
-    				hasInserted = true;
-    			}
+    			curr = new Interval( Math.min( curr.start, interval.start ), Math.max( curr.end, interval.end ) );
+    		}
+    		else if ( isEarlier( interval, curr ) )
+    		{
+    			result.add( interval );
     		}
     		else
     		{
-    			result.add( interval );
-    		}    		
+    			result.add( curr );
+    			curr = interval;
+    		}
     	}
     	
-    	if ( !hasInserted )
-    	{
-    		result.add( toBeInserted );
-    	}
-    	
+    	result.add( curr );
     	return result;
+    }
+    
+    private boolean isEarlier( Interval o1, Interval o2 )
+    {
+    	if ( o1.start != o2.start )
+    	{
+    		return o1.start < o2.start;
+    	}
+    	else
+    	{
+    		return o1.end < o2.start;
+    	}
     }
     
     private boolean isOverlap( Interval o1, Interval o2 )
     {
-    	if ( ( o1.start > o2.end ) || ( o2.start > o1.end ) )
+    	if ( o1.start > o2.end || o2.start > o1.end )
     	{
     		return false;
     	}
