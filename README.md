@@ -183,8 +183,6 @@
       * List/Array entry is NULL
       * List/Array of even length
       * List/Array of odd length
-   * Topological sort
-     * Cycle exist or not
 
 #### Write code <a id="whiteboard-workflow-write-code"></a>
   1. Synchronize with interviewer "***There are XXX steps in this algorithm. The first is XXX. The second....***"
@@ -656,6 +654,10 @@ int areaSum = prefixSum2D[x_e][y_e] - prefixSum2D[x_s-1][y_e] - prefixSum2D[x_e]
 
 #### Stack <a id="ds-stack"></a>
 * When popping elements from stack, always check if the stack is empty. Otherwise, there might be a EmptyStackException()
+* Commonly used tricks (Example problems: min stack, trapping rain water, largest rectangle in histogram, longest valid parentheses)
+  * Using stack to maintains a continuous increasing/decreasing sequence
+  * Push the index of array entries into stack
+  * Push a -1 into stack in the beginning to avoid handling corner cases
 
 #### Queue <a id="ds-queue"></a>
 
