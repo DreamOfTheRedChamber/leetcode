@@ -28,8 +28,7 @@ public class LongestValidParentheses
     	leftIndexes.push( -1 );
     	for ( int i = 0; i < s.length(); i++ )
     	{
-    		char ch = s.charAt( i );
-    		if ( ch == '(' )
+    		if ( s.charAt( i ) == '(' )
     		{
     			leftIndexes.push( i );
     		}
@@ -55,5 +54,7 @@ public class LongestValidParentheses
     {
     	assertEquals( 2, longestValidParentheses( "()" ) );
     	assertEquals( 4, longestValidParentheses( ")()())" ) );
+    	assertEquals( 2, longestValidParentheses( "()))()" ) );
+    	assertEquals( 0, longestValidParentheses( "((((((" ) );
     }
 }
