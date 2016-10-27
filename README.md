@@ -1302,6 +1302,40 @@ for ( i = 0; i < n; i++ )
 ```
 
 ##### Two arrays type <a id="algorithms-two-arrays"></a>
+* Interval related (merge interval, insert interval)
+```java
+public List<Interval> insert( List<Interval> intervals, Interval newInterval )
+{
+      
+  List<Interval> result = new ArrayList<>();
+  if ( intervals == null || intervals.size() == 0 )
+  {
+    result.add( newInterval );
+    return result;
+  }
+      
+  Interval curr = newInterval;
+  for ( Interval interval : intervals )
+  {
+    if ( isOverlap( interval, curr ) )
+    {
+      curr = new Interval( Math.min( curr.start, interval.start ), Math.max( curr.end, interval.end ) );
+    }
+    else if ( isEarlier( interval, curr ) )
+    {
+      result.add( interval );
+    }
+    else
+    {
+      result.add( curr );
+      curr = interval;
+    }
+  }
+      
+  result.add( curr );
+  return result;
+}
+```
 
 #### Sort <a id="algorithms-sort"></a>
 * Sort classification ( only for O(nlogn) and O(n) algorithms )
