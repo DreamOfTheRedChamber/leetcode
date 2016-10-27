@@ -1,4 +1,4 @@
-package hashtable;
+package facebook;
 
 /**
 Given two sparse matrices A and B, return the result of AB.

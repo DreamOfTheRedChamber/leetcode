@@ -1,4 +1,4 @@
-package hashtable;
+package facebook;
 
 import java.util.HashMap;
 import java.util.LinkedList;

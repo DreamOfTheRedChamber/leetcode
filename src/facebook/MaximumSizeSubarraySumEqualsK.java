@@ -1,4 +1,4 @@
-package sum;
+package facebook;
 
 import static org.junit.Assert.assertEquals;
 
