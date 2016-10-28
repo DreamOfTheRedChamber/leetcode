@@ -1,5 +1,13 @@
 package hashtable;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+import java.util.Set;
+
 /**
 Design a data structure that supports all following operations in average O(1) time.
 
@@ -34,9 +42,50 @@ collection.getRandom();
 
 public class InsertDeleteGetRandomII
 {
-
-	public InsertDeleteGetRandomII( )
-	{
-	}
-
+	private List<Integer> list;
+	private Map<Integer, Set<Integer>> valToIndexes;	
+	private Random random;
+	
+    /** Initialize your data structure here. */
+    public RandomizedCollection() 
+    {
+        list = new ArrayList<>();
+        valToIndexes = new HashMap<>();
+        random = new Random();
+    }
+    
+    /** Inserts a value to the collection. Returns true if the collection did not already contain the specified element. */
+    public boolean insert( int val )
+    {
+    	valToIndexes.putIfAbsent( val, new HashSet<>() );
+    	valToIndexes.get( val ).add( list.size() );
+    	list.add( val );
+    	return valToIndexes.get( val ).size() == 1;
+    }
+    
+    /** Removes a value from the collection. Returns true if the collection contained the specified element. */
+    public boolean remove( int val )
+    {
+        if ( !valToIndexes.containsKey( val )
+        		|| valToIndexes.get( val ).size() == 0 )
+        {
+        	return false;
+        }
+        int removedIndex = valToIndexes.get( val ).iterator().next();
+        if ( removedIndex != list.size() - 1 )
+        {
+        	int lastValue = list.get( list.size() - 1) ;
+        	list.set( removedIndex, lastValue );
+        	valToIndexes.get( lastValue ).add( removedIndex );
+        }
+        valToIndexes.get( val ).remove( removedIndex );
+        list.remove( list.size() - 1 );
+        return true;
+    }
+    
+    /** Get a random element from the collection. */
+    public int getRandom()
+    {
+    	return list.get( random.nextInt( list.size() ) );
+    }
 }
