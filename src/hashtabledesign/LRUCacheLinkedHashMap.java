@@ -1,4 +1,4 @@
-package hashtable;
+package hashtabledesign;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
