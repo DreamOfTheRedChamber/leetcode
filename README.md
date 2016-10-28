@@ -276,14 +276,9 @@
   * Feedbacks: Use git commit number per day as feedback for progress
   * Summarizing lessons: Use git commit message as a place to learn from mistakes and summarize lessons
 
-#### Habits<a id="practice-habits"></a>
-  * Check code after finishing: Use JUnit to write and run test cases locally before going to online judge
-  * Review your own code for variance: when writing the code once again, which section is the most possible to look different. These easy to change sections are usually error-prone in an time-limited interview setting
-  * Think about big picture before going to details: Never use debugger before thinking it through
-  * Perfectionism: not just satisfied with running code but always pick the most elegant/efficient ways
-  * Think behind the scenes: not just satisfied with fixing the bug but always think and generalize why the bug occurs
-  * First things first: Thought process first, then coding
-  * Never be lazy: As long as you have not got 100% confidence that I will get the problem right, you should practice coding the problem by hand if time is enough
+#### Strategies<a id="practice-habits"></a>
+  * For hard problems, handle it as early as possible because my mind really needs time to digest it. Practice it repeatedly until it becomes part of my body and I could finish it within 20 minutes even while I am sleeping.
+  * For each category of problems, summarize common tricks/techniques used.
 
 #### Leetcode pros and cons <a id="leetcode-pros-cons"></a>
 * Pros
@@ -606,7 +601,7 @@ int areaSum = prefixSum2D[x_e][y_e] - prefixSum2D[x_s-1][y_e] - prefixSum2D[x_e]
 ```
 
 #### String <a id="ds-string"></a>
-* Only alphabetic characters, ascii characters, or any characters
+* Only alphabetic characters, ascii characters, or unicode characters
 
 #### LinkedList <a id="ds-linkedlist"></a>
 * When linked list is used in combination with counters inside a while loop, it is really error-prone because the programmer needs to increment two places inside each loop. For while loop, it is a better practice to use blank space to separate the three sections including preparing for next round loop, do job in this round loop and move to next round loop.
@@ -673,6 +668,25 @@ PriorityQueue<NumAndFreq> minQueue = new PriorityQueue<>( ( o1, o2 ) -> ( o1.fre
 ```
 
 * Top K problems
+  + Calculate the top K most frequent characters in a string 
+    - Use TreeMap to maintain topK sorted order. Suppose m is the number of input and n is the number of distinct input, then build treemap requires O(mlogn),  + nlogn) complexity.
+    - A more efficient approach is to use HashMap + PriorityQueue. 
+```java      
+      // initialize
+      Map<Character, Integer> histogram = new HashMap<>();
+      histogram.put( 'c', 10 );
+      histogram.put( 'a', 12 );
+      histogram.put( 'b', 6 );
+      // output according to priorityqueue
+      Queue<Map.Entry<Character, Integer>> maxQueue = new PriorityQueue<>( ( o1, o2 ) ->  o2.getValue() - o1.getValue() );
+      maxQueue.addAll( histogram.entrySet() );
+      return maxQueue.stream()
+                     .sorted( ( o1, o2 ) -> ( o2.getValue() - o1.getValue() ) )
+                     .limit( k )
+                     .map( o -> o.getKey() )
+                     .collect( Collectors.toList() );
+```
+
 
 #### Tree <a id="ds-tree"></a>
 * Tree iterative traversal with O(logn) space: preorder/inorder/postorder traversal
@@ -1002,22 +1016,9 @@ class SegmentTreeNode
 * Use Double as hashmap keys is a bad practice. Especially if needing to perform calculations on double keys, the hash of double could mess up.
 * Use Object as hashmap keys. When the hashCode() and equals(Object o) methods are not overriden by your class, the default implementation are used. The default behavior is to treat all objects as different, unless they are the same object. IdentityHashMap always does this by using reference-equality in place of object-equality
 * HashMap.keySet().retainAll( Set ) computes intersection of two sets
-* A popular use case for hashmap in interview is frequency counting, namely histogram. Based on this, it is usually required to output the histogram in desending order. A straightforward approach is to use TreeMap for frequency calculating. But this will result in O(mlogn + nlogn) complexity, where m is the number of input and n is the number of distinct input. A more efficient approach is to use HashMap + PriorityQueue
-```java
-      // initialize
-      Map<Character, Integer> histogram = new HashMap<>();
-      histogram.put( 'c', 10 );
-      histogram.put( 'a', 12 );
-      histogram.put( 'b', 6 );
-      // output according to priorityqueue
-      Queue<Map.Entry<Character, Integer>> maxQueue = new PriorityQueue<>( ( o1, o2 ) ->  o2.getValue() - o1.getValue() );
-      maxQueue.addAll( histogram.entrySet() );
-      return maxQueue.stream()
-                     .sorted( ( o1, o2 ) -> ( o2.getValue() - o1.getValue() ) )
-                     .limit( k )
-                     .map( o -> o.getKey() )
-                     .collect( Collectors.toList() );
-```
+* A popular use case for hashmap in interview is frequency counting, namely histogram. 
+  + If the character set only contains lower-case characters, could consider using a bitmap instead, which is much faster.
+  + If the character set is unicode, could consider using hashmap.
 
 #### TreeMap <a id="ds-treemap"></a>
 * Get Key/Entry APIs: firstKey/firstEntry, lastKey/lastEntry, lowerKey/lowerEntry, higherKey/higherEntry, CeilingKey/CeilingEntry, floorKey/floorEntry
