@@ -16,15 +16,18 @@ as "[1,2,3,null,null,4,5]", just the same as how LeetCode OJ serializes a binary
 Note: Do not use class member/global/static variables to store states. Your serialize and deserialize algorithms should be stateless.
  * */
 
-public class SerializeAndDeserializeBinaryTree {
+public class SerializeAndDeserializeBinaryTree 
+{
 
     // Encodes a tree to a single string.
-    public String serialize(TreeNode root) {
+    public String serialize( TreeNode root )
+    {
         
     }
 
     // Decodes your encoded data to tree.
-    public TreeNode deserialize(String data) {
+    public TreeNode deserialize( String data )
+    {
         
     }
 

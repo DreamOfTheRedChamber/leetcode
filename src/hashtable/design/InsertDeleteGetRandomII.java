@@ -1,4 +1,4 @@
-package hashtable;
+package hashtable.design;
 
 import static org.junit.Assert.assertTrue;
 

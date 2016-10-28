@@ -1,4 +1,4 @@
-package hashtable;
+package hashtable.intersection;
 
 import java.util.ArrayList;
 import java.util.HashMap;

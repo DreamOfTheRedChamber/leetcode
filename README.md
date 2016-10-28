@@ -1,4 +1,4 @@
-# loop through leetcode one more time, ; )
+# Learn as much as I can from Leetcode
 * [Typical whiteboard coding workflow](#whiteboard-workflow)
     * [Clarify questions](#whiteboard-workflow-clarify)
     * [Give a small but general enough example for discussing algo/DS](#whiteboard-workflow-context)

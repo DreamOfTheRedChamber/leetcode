@@ -1,4 +1,4 @@
-package hashtable;
+package hashtable.anagram;
 
 import java.util.ArrayList;
 import java.util.HashMap;
