@@ -1,9 +1,9 @@
 package hashtable;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.HashMap;
 import java.util.Random;
 
 public class RandomizedSet
@@ -26,15 +26,15 @@ public class RandomizedSet
 	 */
 	public boolean insert( int val )
 	{
-		if ( !elemToPos.containsKey( val ) )
+		if ( elemToPos.containsKey( val ) )
+		{
+			return false;
+		}
+		else
 		{
 			elements.add( val );
 			elemToPos.put( val, elements.size() - 1 );
 			return true;
-		}
-		else
-		{
-			return false;
 		}
 	}
 
@@ -46,10 +46,9 @@ public class RandomizedSet
 	{
 		if ( elemToPos.containsKey( val ) )
 		{
-			int position = elemToPos.get( val );
-			swap( elements, elemToPos, position, elements.size() - 1 );
-			elements.remove( elements.size() - 1 );
+			int removedIndex = elemToPos.get( val );
 			elemToPos.remove( val );
+			moveLastToRemovedIndex( removedIndex );
 			return true;
 		}
 		else
@@ -58,20 +57,17 @@ public class RandomizedSet
 		}
 	}
 
+	private void moveLastToRemovedIndex( int removedIndex )
+	{
+		elements.set( removedIndex, elements.get( elements.size() - 1 ) );
+		elements.remove( elements.size() - 1 );
+	}
+	
 	/** Get a random element from the set. */
 	public int getRandom( )
 	{
-		return elements.get( rand.nextInt( elements.size() ) );
-	}
-	
-	private void swap( List<Integer> elements, Map<Integer, Integer> elemToPos, int pos1, int pos2 )
-	{
-		elemToPos.put( elements.get( pos1 ), pos2 );
-		elemToPos.put( elements.get( pos2 ), pos1 );
-		
-		int buffer = elements.get( pos1 );		
-		elements.set( pos1, elements.get( pos2 ) );
-		elements.set( pos2, buffer );
+		int randomPos = rand.nextInt( elements.size() );
+		return elements.get( randomPos );
 	}
 }
 
