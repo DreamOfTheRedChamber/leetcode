@@ -13,7 +13,7 @@ Derive your algorithm's runtime complexity.
 // TO_HURRY
 public class FlipGameII 
 {
-    public boolean canWin(String s) 
+    public boolean canWin( String s )
     {
         
     }
