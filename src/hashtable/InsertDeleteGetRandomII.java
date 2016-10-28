@@ -1,5 +1,7 @@
 package hashtable;
 
+import static org.junit.Assert.assertTrue;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -7,6 +9,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
+
+import org.junit.Test;
 
 /**
 Design a data structure that supports all following operations in average O(1) time.
@@ -47,7 +51,7 @@ public class InsertDeleteGetRandomII
 	private Random random;
 	
     /** Initialize your data structure here. */
-    public RandomizedCollection() 
+    public InsertDeleteGetRandomII() 
     {
         list = new ArrayList<>();
         valToIndexes = new HashMap<>();
@@ -72,13 +76,15 @@ public class InsertDeleteGetRandomII
         	return false;
         }
         int removedIndex = valToIndexes.get( val ).iterator().next();
+        valToIndexes.get( val ).remove( removedIndex );
+
         if ( removedIndex != list.size() - 1 )
         {
-        	int lastValue = list.get( list.size() - 1) ;
+        	int lastValue = list.get( list.size() - 1 );
         	list.set( removedIndex, lastValue );
         	valToIndexes.get( lastValue ).add( removedIndex );
+        	valToIndexes.get( lastValue ).remove( list.size() - 1 );
         }
-        valToIndexes.get( val ).remove( removedIndex );
         list.remove( list.size() - 1 );
         return true;
     }
@@ -87,5 +93,28 @@ public class InsertDeleteGetRandomII
     public int getRandom()
     {
     	return list.get( random.nextInt( list.size() ) );
+    }
+
+    /*
+["RandomizedCollection","insert","insert","insert","insert","insert",
+						"remove","remove","remove","remove"]
+[[],[4],[3],[4],[2],[4],
+[4],[3],[4],[4]]
+     * */
+
+    @Test
+    public void test()
+    {
+    	InsertDeleteGetRandomII result = new InsertDeleteGetRandomII();
+    	assertTrue( result.insert( 4 ) );
+    	assertTrue( result.insert( 3 ) );
+    	assertTrue( !result.insert( 4 ) );
+    	assertTrue( result.insert( 2 ) );
+    	assertTrue( !result.insert( 4 ) );
+    	
+    	assertTrue( result.remove( 4 ) );
+    	assertTrue( result.remove( 3 ) );
+    	assertTrue( result.remove( 4 ) );
+    	assertTrue( result.remove( 4 ) );    	    	
     }
 }
