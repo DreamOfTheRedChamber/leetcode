@@ -70,23 +70,27 @@ public class InsertDeleteGetRandomII
     /** Removes a value from the collection. Returns true if the collection contained the specified element. */
     public boolean remove( int val )
     {
-        if ( !valToIndexes.containsKey( val )
-        		|| valToIndexes.get( val ).size() == 0 )
-        {
-        	return false;
-        }
-        int removedIndex = valToIndexes.get( val ).iterator().next();
-        valToIndexes.get( val ).remove( removedIndex );
-
-        if ( removedIndex != list.size() - 1 )
-        {
-        	int lastValue = list.get( list.size() - 1 );
-        	list.set( removedIndex, lastValue );
-        	valToIndexes.get( lastValue ).add( removedIndex );
-        	valToIndexes.get( lastValue ).remove( list.size() - 1 );
-        }
-        list.remove( list.size() - 1 );
-        return true;
+    	if ( !valToIndexes.containsKey( val ) || valToIndexes.get( val ).size() == 0 )
+    	{
+    		return false;
+    	}
+    	// change in map, then in list
+    	if ( valToIndexes.get( val ).contains( list.size() - 1 ) )
+    	{
+    		valToIndexes.get( val ).remove( list.size() - 1 );
+    		list.remove( list.size() - 1 );
+    	}
+    	else
+    	{   
+        	int indexToRemove = valToIndexes.get( val ).iterator().next();
+        	valToIndexes.get( val ).remove( indexToRemove );
+    		int lastValue = list.get( list.size() - 1 );
+    		valToIndexes.get( lastValue ).remove( list.size() - 1 );
+    		valToIndexes.get( lastValue ).add( indexToRemove );
+    		list.set( indexToRemove, lastValue );
+    		list.remove( list.size() - 1 );
+    	}
+    	return true;
     }
     
     /** Get a random element from the collection. */
