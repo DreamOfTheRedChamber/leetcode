@@ -78,6 +78,7 @@ public class InsertDeleteGetRandomII
     	if ( valToIndexes.get( val ).contains( list.size() - 1 ) )
     	{
     		valToIndexes.get( val ).remove( list.size() - 1 );
+    		
     		list.remove( list.size() - 1 );
     	}
     	else
@@ -87,6 +88,7 @@ public class InsertDeleteGetRandomII
     		int lastValue = list.get( list.size() - 1 );
     		valToIndexes.get( lastValue ).remove( list.size() - 1 );
     		valToIndexes.get( lastValue ).add( indexToRemove );
+
     		list.set( indexToRemove, lastValue );
     		list.remove( list.size() - 1 );
     	}

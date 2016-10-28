@@ -1,4 +1,4 @@
-# Learn as much as I can from Leetcode
+# Fight towards 1000 Leetcode commits to protect my dream!!!
 * [Typical whiteboard coding workflow](#whiteboard-workflow)
     * [Clarify questions](#whiteboard-workflow-clarify)
     * [Give a small but general enough example for discussing algo/DS](#whiteboard-workflow-context)

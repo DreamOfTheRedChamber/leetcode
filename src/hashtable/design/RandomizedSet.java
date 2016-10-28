@@ -11,15 +11,15 @@ import org.junit.Test;
 
 public class RandomizedSet
 {
-	private List<Integer> elements;
-	private Map<Integer,Integer> elemToPos;	
+	private List<Integer> list;
+	private Map<Integer,Integer> valToIndex;	
 	private Random rand;
 	
 	/** Initialize your data structure here. */
 	public RandomizedSet( )
 	{
-		elements = new ArrayList<>();
-		elemToPos = new HashMap<>();
+		list = new ArrayList<>();
+		valToIndex = new HashMap<>();
 		rand = new Random();
 	}
 
@@ -29,12 +29,12 @@ public class RandomizedSet
 	 */
 	public boolean insert( int val )
 	{
-		if ( elemToPos.containsKey( val ) )
+		if ( valToIndex.containsKey( val ) )
 		{
 			return false;
 		}
-		elements.add( val );
-		elemToPos.put( val, elements.size() - 1 );
+		list.add( val );
+		valToIndex.put( val, list.size() - 1 );
 		return true;
 	}
 
@@ -44,27 +44,30 @@ public class RandomizedSet
 	 */
 	public boolean remove( int val )
 	{
-		if ( !elemToPos.containsKey( val ) )
+		if ( !valToIndex.containsKey( val ) )
 		{
 			return false;
 		}
-		int removedIndex = elemToPos.get( val );
-		if ( removedIndex != elements.size() - 1 )
+		if ( valToIndex.get( val ) == list.size() - 1 )
 		{
-			int lastValue = elements.get( elements.size() - 1 );
-			elements.set( removedIndex, lastValue );
-			elemToPos.put( lastValue, removedIndex );
+			valToIndex.remove( val );
+			list.remove( list.size() - 1 );
 		}
-
-		elemToPos.remove( val );
-		elements.remove( elements.size() - 1 );
+		else
+		{
+			int indexToRemove = valToIndex.get( val );
+			int lastValue = list.get( list.size() - 1 );
+			valToIndex.put( lastValue, indexToRemove );
+			valToIndex.remove( val, indexToRemove );
+			list.set( indexToRemove, lastValue );
+		}
 		return true;
 	}
 	
 	/** Get a random element from the set. */
 	public int getRandom( )
 	{
-		return elements.get( rand.nextInt( elements.size() ) );
+		return list.get( rand.nextInt( list.size() ) );
 	}
 	
 	/*
