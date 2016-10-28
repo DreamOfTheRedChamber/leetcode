@@ -39,46 +39,24 @@ public class SparseMatrixMultiplication
     	{
     		throw new IllegalArgumentException("");
     	}
-
-    	Map<Integer, Map<Integer, Integer>> mapA = new HashMap<>();
-    	for ( int i = 0; i < A.length; i++ )
-    	{
-    		mapA.put( i, new HashMap<>() );
-    		for ( int j = 0; j < A[0].length; j++ )
-    		{
-    			mapA.get( i ).put( j, A[i][j] );
-    		}
-    	}
-    	
-    	Map<Integer, Map<Integer, Integer>> mapB = new HashMap<>();
-    	for ( int j = 0; j < B[0].length; j++ )
-    	{
-    		mapB.put( j, new HashMap<>() );
-    		for ( int i = 0; i < B.length; i++ )
-    		{
-    			mapB.get( j ).put( i, B[i][j] );
-    		}
-    	}
     	
     	int[][] result = new int[A.length][B[0].length];
-    	for ( int i = 0; i < result.length; i++ )
+    	for ( int i = 0; i < A.length; i++ )
     	{
-    		Map<Integer, Integer> rowI = mapA.get( i );
-    		for ( int j = 0; j < result[0].length; j++ )
-    		{    			
-    			Map<Integer, Integer> colJ = mapB.get( j );
-    			int entrySum = 0;
-    			for ( Integer col : rowI.keySet() ) // A[i][col]
+    		for ( int k = 0; k < A[0].length; k++ )
+    		{
+    			if ( A[i][k] != 0 )
     			{
-    				if ( colJ.containsKey( col ) )
-    				{
-    					entrySum += rowI.get( col ) * colJ.get( col ); // B[col][j]
-    				}
-    			}    			
-    			result[i][j] = entrySum;
+		    		for ( int j = 0; j < B[0].length; j++ )
+		    		{
+		    			if ( B[k][j] != 0 )
+		    			{
+		    				result[i][j] += A[i][k] * B[k][j];
+		    			}
+		    		}
+    			}
     		}
     	}
-    	
     	return result;
     }
     
