@@ -2,8 +2,9 @@ package facebook.medium;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Comparator;
+import java.util.List;
 import java.util.PriorityQueue;
 
 import org.junit.Test;
@@ -19,9 +20,14 @@ return 2.
  * */
 
 public class MeetingRoomsII 
-{
+{	
+	
     public int minMeetingRooms( Interval[] intervals )
     {
+    	if ( intervals == null || intervals.length == 0 )
+    	{
+    		return 0;
+    	}
 		Arrays.sort( intervals, ( o1, o2 ) -> o1.start - o2.start );
     	
     	// max size of PriorityQueue is result
@@ -43,8 +49,50 @@ public class MeetingRoomsII
     
     private boolean isOverlapping( Interval interval1, Interval interval2 )
     {
-    	return ! ( ( interval1.start >= interval2.end ) 
-    			|| ( interval2.start >= interval1.end ) );
+    	if ( interval1.start >= interval2.end || interval2.start >= interval1.end )
+    	{
+    		return false;
+    	}
+    	else
+    	{
+    		return true;
+    	}
+    }
+    
+    public int sweepLineMinMeetingRooms( Interval[] intervals )
+    {
+    	if ( intervals == null || intervals.length == 0 )
+    	{
+    		return 0;
+    	}
+    	
+    	List<Pair> list = new ArrayList<>( intervals.length * 2 );
+    	for ( Interval interval : intervals )
+    	{
+    		list.add( new Pair( interval.start, 1 ) );
+    		list.add( new Pair( interval.end, -1 ) );
+    	}
+    	
+    	list.sort( ( o1, o2 ) -> o1.point != o2.point ? o1.point - o2.point : o1.flag - o2.flag );
+    	int numRooms = 0;
+    	int maxRoom = 0;
+    	for ( Pair p : list )
+    	{
+    		numRooms += p.flag;
+    		maxRoom = Math.max( maxRoom, numRooms );
+    	}
+    	return maxRoom;
+    }
+        
+    class Pair
+    {
+    	public final int point;
+    	public final int flag;
+    	public Pair( int point, int flag )
+    	{
+    		this.point = point;
+    		this.flag = flag;
+    	}
     }
     
     @Test

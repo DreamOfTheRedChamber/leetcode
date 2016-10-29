@@ -1348,16 +1348,45 @@ public List<Interval> insert( List<Interval> intervals, Interval newInterval )
 | Heapsort   | O(1)     |  unstable sort |
 | Bucketsort | O(1)     |  when knowing range and evenly distributed O(n+k) |
 
-* Judge whether intervals overlap
+* Sort interfaces: Arrays.sort( array, comparator ) Collections.sort( collection, comparator ) method, list.sort( comparator )
+
+* Interval
+  + Judge whether intervals overlap
 ```java
-private boolean isOverlap( Interval o1, Interval o2 )
+boolean isOverlapping( Interval o1, Interval o2 )
 {
-    return !( o1.start > o2.end 
-            || o2.start > o1.end );
+  if ( o1.start >= o2.end || o2.start >= o1.end )
+  {
+    return false;
+  }
+  else
+  {
+    return true;
+  }
 }
 ```
-* Arrays.sort( array, comparator ) and Collections.sort( collection, comparator ) method
- 
+  + Sort intervals
+```java
+List<Interval> list = //...
+// sort according to starting point
+list.sort( (o1,o2) -> o1.start - o2.start );
+// or sort according to ending point
+list.sort( (o1,o2) -> o1.end - o2.end );
+// sort according to both starting and ending point
+list.sort( (o1,o2) -> o1.start != o2.start ? o1.start - o2.start : o1.end - o2.end );
+```
+  + Split intervals into Pair(int start, boolean isStart), Pair(int end, boolean isEnd)
+```java
+List<Interval> intervalList = //...
+List<Pair> pairList = //...
+for ( Interval interval : intervalList )
+{
+  pairList.add( new Pair(interval.start, true) );
+  pairList.add( new Pair(interval.end, false) );
+}
+pairList.sort( (o1, o2) -> (o1.start-o2.start) );
+```
+
 #### Binary search <a id="algorithms-binary-search"></a>
 * Universal templates - iterative/recursive version 
 ```java
