@@ -2,7 +2,7 @@
 * [Typical whiteboard coding workflow](#whiteboard-workflow)
     * [Clarify questions](#whiteboard-workflow-clarify)
     * [Give a small but general enough example for discussing algo/DS](#whiteboard-workflow-context)
-    * [Come up with a brute force algorithm with an example](#whiteboard-workflow-bruteforce)
+    * [Come up with a brute force algorithm](#whiteboard-workflow-bruteforce)
     * [Come up with an optimized solution](#whiteboard-workflow-optimize)
     * [Write test cases](#whiteboard-workflow-test-cases)
     * [Write code](#whiteboard-workflow-write-code)
@@ -17,7 +17,7 @@
     * [Tools](#practice-tools)
     * [Habits](#practice-habits)
     * [Leetcode pros and cons](#leetcode-pros-cons)
-    * [Java pros and cons](#java-pros-cons)
+    * [Interview Java pros and cons](#java-pros-cons)
 * [Learned lessons: Java basics](#learned-lessons-java-basics)
     * [Type size](#basics-type-size) 
     * [Error-prone APIs](#basics-error-prone-apis)
@@ -43,31 +43,52 @@
     * [Trie](#ds-trie)
 * [Learned lessons: algorithms](#learned-lessons-algorithms)
     * [Bit manipulation](#algorithms-bit-manipulation)
-    * [Non-DP Memorization](#algorithms-non-dp-memorization)
-       * [array](#algorithms-non-dp-memo-array)
-       * [stack](#algorithms-non-dp-memo-stack)
-       * [hashmap](#algorithms-non-dp-memo-hashmap)
+      - [Arithmetic vs logic right shift](#algorithms-bit-manipulation-arithmetic-vs-logic)
+      - [Common tasks](#algorithms-bit-manipulation-common-tasks)
+    * [Non-DP memorization](#algorithms-non-dp-memorization)
+      - [Array](#algorithms-non-dp-memo-array)
+      - [Stack](#algorithms-non-dp-memo-stack)
+      - [Hashmap](#algorithms-non-dp-memo-hashmap)
     * [Two pointers](#algorithms-two-pointer)
-       * [Begin and end type](#algorithms-boundary-to-center)
-       * [Slow and fast type](#algorithms-slow-and-fast)
-       * [Window type](#algorithms-window)
-       * [Two arrays type](#algorithms-two-arrays)
+      - [Use case](#algorithms-two-pointer-use-case)
+      - [Types](#algorithms-two-pointer-types)
+        + [Begin and end type](#algorithms-boundary-to-center)
+        + [Slow and fast type](#algorithms-slow-and-fast)
+        + [Window type](#algorithms-window)
+        + [Two arrays type](#algorithms-two-arrays)
     * [Sort](#algorithms-sort)
-    * [Binary search](#algorithms-binary-search) 
+      - [Common sorting algorithms](#algorithms-sort-common-algorithms)
+      - [Java sort interfaces](#algorithms-sort-java-interfaces)
+      - [Types](#algorithms-sort-types)
+        + [Interval-related](#algorithms-sort-interval-based)
+        + [TopK](#algorithms-sort-topK)
+    * [Binary search](#algorithms-binary-search)
+      - [Best practices](#algorithms-binary-search-best-practices)
+      - [How to handle duplicates](#algorithms-binary-search-handle-duplicates)
+      - [Types](#algorithms-binary-search-types)
+        + [First/Last smaller/bigger](#algorithms-binary-search-first-last-smaller-bigger)
+        + [Rotated array](#algorithms-binary-search-rotated-array)
+        + [2D array](#algorithms-binary-search-2d-variants)
     * [Recursion](#algorithms-recursive)
-      - [Time complexity](#algorithms-recursive-tc)
-      - [Problems to consider](#algorithms-recursion-problems-to-consider)
-      - [How to return multiple results](#algorithms-recursion-return-multiple-results)
-      - [Tree-based recursion](#algorithms-recursion-tree-based)
-      - [String-based recursion](#algorithms-recursion-string-based)
-      - [Array-based recursion](#algorithms-recursion-array-based)
+      - [Recursive vs iterative solutions](#algorithms-recursive-iterative)
+      - [Recursion time complexity cheat sheet](#algorithms-recursive-tc)
+      - [Steps in using recursion](#algorithms-recursion-problems-to-consider)
+      - [Return multiple results](#algorithms-recursion-return-multiple-results)
+      - [Avoid duplicated recursion](#algorithms-recursion-avoid-duplicated-recursion)
+      - [Types](#algorithms-recursion-types)
+        + [Tree-based recursion](#algorithms-recursion-tree-based)
+        + [String-based recursion](#algorithms-recursion-string-based)
+        + [Array-based recursion](#algorithms-recursion-array-based)
     * [Backtrack](#algorithms-backtrack)
+      - [Use pattern](#algorithms-backtrack-use-pattern)
+      - [Types](#algorithms-recursion-types)
+        + [Combination sum](#algorithms-backtrack-combination-sum)
     * [Graph](#algorithms-graph)
-       * [Grid-based graph patterns](#algorithms-grid)
-       * [Breath first search](#algorithms-bfs)
-       * [Depth first search](#algorithms-dfs)
-       * [Topological sort](#algorithms-topo)
-       * [Union find](#algorithms-union-find)
+      - [Grid-based graph best practices](#algorithms-grid)
+      - [Breath first search](#algorithms-bfs)
+      - [Depth first search](#algorithms-dfs)
+      - [Topological sort](#algorithms-topo)
+      - [Union find](#algorithms-union-find)
     * [Greedy](#algorithms-greedy)
     * [Dynamic programming](#algorithms-dynamic-programming)
       - [Use cases](#algorithms-dp-use-cases)
@@ -1199,10 +1220,12 @@ public class TrieIterative
 ### Learned lessons: algorithms <a id="learned-lessons-algorithms"></a>
 
 #### Bit manipulation <a id="algorithms-bit-manipulation"></a>
-* Arithmetic vs logic right shift
+##### Arithmetic vs logic right shift <a id="algorithms-bit-manipulation-arithmetic-vs-logic"></a>
   * Arithmetic right shift >>, shift bits to the right but fill in the new bits with the value of the sign bit
   * Logic right shift >>>, shift bits to the right but fill in the new bits with 0.
-* Common bit tasks: get bit, set bit, clear bit and update bit
+
+##### Common tasks <a id="algorithms-bit-manipulation-common-tasks"></a>
+* get bit, set bit, clear bit and update bit
 ```java
 boolean getBit( int num, int i )
 {
@@ -1244,7 +1267,7 @@ int updateBit(int num, int i, boolean bitIs1)
 ```
 
 #### Non-DP Memorization <a id="algorithms-non-dp-memorization"></a>
-##### Array-based non-dp memorization <a id="algorithms-non-dp-memo-array"></a>
+##### Array <a id="algorithms-non-dp-memo-array"></a>
 * 1D/2D Prefix sum
 ```java
 // 1D prefix sum
@@ -1270,6 +1293,7 @@ for ( int i = 1; i <= array2D.length; i++ )
 // to calculate range sum from (x_s, y_s) to (x_e, y_e)
 int areaSum = prefixSum2D[x_e][y_e] - prefixSum2D[x_s-1][y_e] - prefixSum2D[x_e][y_s-1] + prefixSum2D[x_s-1][y_s-1]
 ```
+
 ##### Stack <a id="algorithms-non-dp-memo-stack"></a>
 * Longest valid parentheses
 
@@ -1431,7 +1455,7 @@ pairList.sort( (o1, o2) -> (o1.start-o2.start) );
 ```
 
 #### Binary search <a id="algorithms-binary-search"></a>
-* Universal templates - iterative/recursive version 
+##### Best practices - iterative/recursive version 
 ```java
 public int binarySearchIterative( int[] array, int target)
 {
@@ -1501,19 +1525,27 @@ public int binarySearchRecursive( int[] array, int target, int start, int end )
     }
 }
 ```
+##### How to handle duplicates <a id="algorithms-binary-search-handle-duplicates"></a>
 
-* Binary search variants:
+##### First/Last smaller/bigger than target <a id="algorithms-binary-search-first-last-smaller-bigger"></a>
+
+##### Rotated array <a id="algorithms-binary-search-rotated-array"></a>
   - Find first element smaller than target
       - e.g. find minimum element in rotated sorted array ( target: array[array.length-1])
   - Find last element smaller than target
       - e.g. search insertion position
   - Convert a range of binary search problem into variants of essence form
 
-* Binary search in 2D matrix
-* How to handle duplicates in binary search
+##### Two dimensional array <a id="algorithms-binary-search-2d-array"></a>
+
 
 #### Recursive functions <a id="algorithms-recursion"></a>
-* Time complexity: <a id="algorithms-recursive-tc"></a>
+##### Recursive vs iterative solutions <a id="algorithms-recursive-iterative"></a>
+  - Recursive algorithms can be very space inefficient. Each recursive call adds a new layer to the stack. If the algorithm recurses to a depth of n, it uses at least O(n) space.
+  - All recursive algorithms can be implemented iteratively, although sometimes the code is more complex. 
+  - Before diving into writing recursive code, ask myself how hard it would be to implement iteratively and discuss tradeoffs with your interviewer.
+
+##### Recursion time complexity cheat sheet <a id="algorithms-recursive-tc"></a>
 
 | Recurrence | Algorithm           | Big-O Solution  |
 | --------------------- |:-------------:| -----:|
@@ -1523,19 +1555,17 @@ public int binarySearchRecursive( int[] array, int target, int start, int end )
 | T(n) = 2T(n/2) + O(n) | Merge sort      |    O(nlogn) |
 | T(n) = T(n-1) + O(n)  | Selection sort      |  O(n^2) |
 
-* Recursive vs iterative solutions
-  - Recursive algorithms can be very space inefficient. Each recursive call adds a new layer to the stack. If the algorithm recurses to a depth of n, it uses at least O(n) space.
-  - All recursive algorithms can be implemented iteratively, although sometimes the code is more complex. 
-  - Before diving into writing recursive code, ask myself how hard it would be to implement iteratively and discuss tradeoffs with your interviewer.
 
-* Problems to consider: <a id="algorithms-recursion-problems-to-consider"></a>
+##### Steps in using recursion <a id="algorithms-recursion-problems-to-consider"></a>
   - What does the recursive function do?
     + Take what parameters
     + Do what
     + return what value and how
   - How does big problems recurse to smaller ones
   - Initialization
-* How to return multiple results from recursive functions<a id="algorithms-recursion-return-multiple-results"></a>
+  - Prunning
+
+##### How to return multiple results from recursive functions<a id="algorithms-recursion-return-multiple-results"></a>
   - Use global variable. 
     + The first is to use private instance variables to store results
     + The second is to use a mutable argument of type ( int[], List&lt;&gt; ). Modify the value of this argument while travering.
@@ -1570,7 +1600,19 @@ private class ResultWrapper
 }
 ```
 
-* Tree-based recursion <a id="algorithms-recursion-tree-based"></a>
+##### Avoid duplicated recursion <a id="algorithms-recursion-avoid-duplicates"></a>
+* ensuring that the never two recursion tree branches overlap 
+```java
+if ( i > 0 && candidates[i] == candidates[i-1] )
+{
+  i++;
+  continue;
+}
+// invoking functions based on index i
+```
+* dp
+
+##### Tree-based recursion <a id="algorithms-recursion-tree-based"></a>
     - One of the key problems resulting from TreeNode definition is that TreeNode has no info about its parent node. But to resolve a tree-based problem, it is usually required to combine child and parent information.
     - Two basic strategies to solve this problem
       + Pass parent node as an input argument to child recursive function, then resolve problem inside child function. This approach usually needs some global variables, as discussed before.
@@ -1597,12 +1639,13 @@ public ResultWrapper secondApproach( TreeNode currNode )
   // return new ResultWrapper(...);
 }
 ```
-* String-based recursion < a id="algorithms-recursion-string-based"></a>
-* Array-based recursion < a id="algorithms-recursion-array-based"></a>
+##### String-based recursion < a id="algorithms-recursion-string-based"></a>
+##### Array-based recursion < a id="algorithms-recursion-array-based"></a>
 
 #### Backtrack <a id="algorithms-backtrack"></a>
-* Usually occurs at the beginning and ending of a recursive function
+##### Use pattern <a id="algorithms-backtrack-use-pattern"></a>
 ```java
+// usually occurs at the beginning and ending of a recursive function
 public void recursivefunction()
 {
     backtracking forward
@@ -1610,16 +1653,9 @@ public void recursivefunction()
     backtracking backwards
 }
 ```
-* Avoid generating duplicate results by ensuring that the never two recursion tree branches overlap 
-```java
-if ( i > 0 && candidates[i] == candidates[i-1] )
-{
-  i++;
-  continue;
-}
-// invoking functions based on index i
-```
-* Pruning
+
+##### Combination sum <a id="algorithms-backtrack-combination-sum"></a>
+* 
 
 #### Graph <a id="algorithms-graph"></a>
 ##### Grid-based graph patterns <a id="algorithms-grid"></a>
