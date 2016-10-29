@@ -52,10 +52,7 @@ public class MaximumSizeSubarraySumEqualsK
     		{
     			maxLength = Math.max( maxLength, i - prefixSumToIndex.get( prefixSum - k ) );    			
     		}
-    		else
-    		{
-    			prefixSumToIndex.putIfAbsent( prefixSum, i );
-    		}
+    		prefixSumToIndex.putIfAbsent( prefixSum, i );
     	}
     	return maxLength;
     }
