@@ -1,9 +1,13 @@
 package facebook.hard;
 
-import java.util.Arrays;
+import static org.junit.Assert.assertEquals;
+
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import org.junit.Test;
 
 /**
 Given an unsorted array of integers, find the length of the longest consecutive elements sequence.
@@ -29,7 +33,7 @@ public class LongestConsecutiveSequence
     		existingNums.add( num );
     	}
     	
-    	int longestConsecSeq = 1;
+    	int longestConsecSeq = 0;
     	for ( int num : nums )
     	{
     		if ( existingNums.contains( num ) )
@@ -37,22 +41,27 @@ public class LongestConsecutiveSequence
     			existingNums.remove( num );
 	    		int currConsecSeq = 1;    	
 	    		
-	    		int nextBigger = num + 1;
-	    		while ( existingNums.contains( nextBigger ) )
+	    		for ( int nextBigger = num + 1; existingNums.contains( nextBigger ); nextBigger += 1 )
 	    		{
 	    			currConsecSeq++;
 	    			existingNums.remove( nextBigger );
-	    		}
-	    		
-	    		int nextSmaller = num - 1;
-	    		while ( existingNums.contains( nextSmaller ) )
+	    			nextBigger += 1;
+	    		}	    			    		
+	    		for ( int nextSmaller = num - 1; existingNums.contains( nextSmaller ); nextSmaller -= 1 )
 	    		{
 	    			currConsecSeq++;
-	    			existingNums.remove( nextSmaller );
+	    			existingNums.remove( nextSmaller );	    			
 	    		}
+	    		
 	    		longestConsecSeq = Math.max( longestConsecSeq, currConsecSeq );
     		}
     	}
     	return longestConsecSeq;
      }
+    
+    @Test
+    public void test()
+    {
+    	assertEquals( 3, longestConsecutive( new int[]{ 1, 0, -1} ) );
+    }
 }
