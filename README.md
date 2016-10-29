@@ -1,4 +1,4 @@
-# This might be the last time I cracked Leetcode so crazy in my life!!!
+# This might be the last time I cracked Leetcode so crazily in my life!!!
 * [Typical whiteboard coding workflow](#whiteboard-workflow)
     * [Clarify questions](#whiteboard-workflow-clarify)
     * [Give a small but general enough example for discussing algo/DS](#whiteboard-workflow-context)
@@ -29,8 +29,8 @@
     * [Type conversions](#basics-type-conversions)
       - [Between char and int](#basics-type-conversions-char-and-int)
       - [Between string and integer](#basics-type-conversions-string-and-integer)
-      - [Between array and list](#basics-type-conversions-array-and-list)
-      - [Between Java collection types](#basics-type-conversions-collections)
+      - [Between array and collections](#basics-type-conversions-array-and-collections)
+      - [Between collections](#basics-type-conversions-collections)
     * [Math](#basics-math)
       - [Mod](#basics-math-mod)
       - [Power](#basics-math-power)
@@ -538,45 +538,6 @@ int getNextPrime( boolean[] flags, int prime )
         - concatenate symbol, integer part, dot, fraction part (possibly with parentheses)
 
 
-#### Type conversions<a id="basics-type-conversions"></a>
-* Convert char to int, does not need explicit conversion
-```java
-value = value * 10 +  s.charAt( currPos ) - '0' ; 
-```
-
-* Convert string to int
-```java
-String str = "-2";
-int intValue = Integer.parseInt( str );
-```
-
-* Convert reference type of list to array, 
-```java
-List<Integer> list = ...; // {1,2,3}
-Integer[] array = new Integer[list.size()];
-list.toArray( array );
-```
-
-* Convert reference type of array to list, the returned arrayList is based on the array of fixed size. When new item is added, exception will be thrown out.
-```java
-Element[] array = { new Element(1), new Element(2), new Element(3) };
-
-// wrong way
-List<Element> list = Arrays.asList( array );
-list.add(1); // UnsupportedOperationException
-
-// correct way
-List<Element> list = new ArrayList<>( Arrays.asList( array ) );
-```
-
-
-* Convert between collection types - stream apis Collectors
-```java
-// hashmap keys to list
-Map<String, List<String>> map = new HashMap<>();
-List<String> list = map.keySet().stream().collect(Collectors.toList() );
-```
-
 #### Iterator<a id="basics-iterator"></a>
 * ListIterator vs iterator: additional interface for 
   * iterating bidirectional
@@ -630,6 +591,63 @@ while ( iterator.hasNext() )
 * support append/insert/delete more efficiently: string -> stringbuilder
 * space efficiency in dynamic programming: 2D memorization array -> rolling 1D memorization array
 * space efficiency in boolean array: Boolean[] -> boolean[] -> BitSet
+
+#### Type conversions<a id="basics-type-conversions"></a>
+* Convert char to int, does not need explicit conversion
+```java
+value = value * 10 +  s.charAt( currPos ) - '0' ; 
+```
+
+* Convert string to int
+```java
+String str = "-2";
+int intValue = Integer.parseInt( str );
+```
+
+##### Between array and collections <a id="basics-type-conversions-array-and-collections"></a>
+* Array to collections 
+  + To convert array of reference types into collections, there is an API Arrays.asList(). Then List collection could be easily casted to set/map collections. 
+```java
+Element[] array = { new Element(1), new Element(2), new Element(3) };
+
+// wrong way
+List<Element> list = Arrays.asList( array );
+list.add(1); // UnsupportedOperationException
+
+// correct way
+List<Element> list = new ArrayList<>( Arrays.asList( array ) );
+```
+  + To convert array of primtive types into collections, need to do it manually.
+```java
+List<Integer> list = ...//
+for ( int num : nums )
+{
+  list.add( num );
+}
+```
+
+* Collections to array
+  + There are built-in interfaces for this such as Object[] collections.toArray() or collections.toArray(T[] array)
+  + Honestly, both of them are really ugly and would better to do it manually.
+
+##### Between collections <a id="basics-type-conversions-array-and-collections"></a>
+* Map and list
+* Set and list
+* Map and set
+```java
+// hashmap keys to list and set
+Map<String, List<String>> map = new HashMap<>();
+List<String> list = map.keySet().stream().collect(Collectors.toList() );
+Set<String> set = map.keySet();
+
+// set to list
+Set<String> set = //...
+List<String> list = set.stream().collect( Collectors.toList() );
+
+// list to set
+List<String> list = //...
+Set<String> set = list.stream().collect( Collectors.toSet() );
+```
 
 #### Array <a id="ds-array"></a>
 ##### Circular array <a id="ds-array-circular"></a>
