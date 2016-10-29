@@ -43,6 +43,10 @@
     * [Trie](#ds-trie)
 * [Learned lessons: algorithms](#learned-lessons-algorithms)
     * [Bit manipulation](#algorithms-bit-manipulation)
+    * [Non-DP Memorization](#algorithms-non-dp-memorization)
+       * [array](#algorithms-non-dp-memo-array)
+       * [stack](#algorithms-non-dp-memo-stack)
+       * [hashmap](#algorithms-non-dp-memo-hashmap)
     * [Two pointers](#algorithms-two-pointer)
        * [Begin and end type](#algorithms-boundary-to-center)
        * [Slow and fast type](#algorithms-slow-and-fast)
@@ -54,8 +58,9 @@
       - [Time complexity](#algorithms-recursive-tc)
       - [Problems to consider](#algorithms-recursion-problems-to-consider)
       - [How to return multiple results](#algorithms-recursion-return-multiple-results)
-      - [How to avoid repeated recursion](#algorithms-recursion-repeated)
       - [Tree-based recursion](#algorithms-recursion-tree-based)
+      - [String-based recursion](#algorithms-recursion-string-based)
+      - [Array-based recursion](#algorithms-recursion-array-based)
     * [Backtrack](#algorithms-backtrack)
     * [Graph](#algorithms-graph)
        * [Grid-based graph patterns](#algorithms-grid)
@@ -574,32 +579,6 @@ while ( iterator.hasNext() )
   - invert the sign of the array (circular array maximum sum)
   - break the circle (house robber II)
 
-* 1D/2D Prefix sum
-```java
-// 1D prefix sum
-int[] array1D = new int[n];
-int[] prefixSum1D = new int[array1D.length+1];
-for ( int i = 1; i <= array1D.length; i++ )
-{
-  prefixSum1D[i] = array1D[i] + prefixSum1D[i-1];
-}
-// to calculate range sum from i to j
-int rangeSum = prefixSum1D[j] - prefixSum1D[i-1];
-
-// 2D prefix sum
-int[][] array2D = new int[m][n];
-int[][] prefixSum2D = new int[m+1][n+1];
-for ( int i = 1; i <= array2D.length; i++ )
-{
-  for ( int j = 1; j <= array2D[0].length; j++ )
-  {
-    prefixSum2D[i][j] = array2D[i-1][j-1] + prefixSum2D[i-1][j];
-  }
-}
-// to calculate range sum from (x_s, y_s) to (x_e, y_e)
-int areaSum = prefixSum2D[x_e][y_e] - prefixSum2D[x_s-1][y_e] - prefixSum2D[x_e][y_s-1] + prefixSum2D[x_s-1][y_s-1]
-```
-
 #### String <a id="ds-string"></a>
 * Only alphabetic characters, ascii characters, or unicode characters
 
@@ -652,8 +631,7 @@ int areaSum = prefixSum2D[x_e][y_e] - prefixSum2D[x_s-1][y_e] - prefixSum2D[x_e]
 * Commonly used tricks (Example problems: min stack, trapping rain water, largest rectangle in histogram, longest valid parentheses)
   * Using stack to maintains a continuous increasing/decreasing sequence
   * Push the index of array entries into stack
-  * Push a -1 into stack in the beginning to avoid handling corner cases
-
+  
 #### Queue <a id="ds-queue"></a>
 
 #### PriorityQueue <a id="ds-priorityqueue"></a>
@@ -1015,7 +993,6 @@ class SegmentTreeNode
 #### HashMap <a id="ds-hashmap"></a>
 * Use Double as hashmap keys is a bad practice. Especially if needing to perform calculations on double keys, the hash of double could mess up.
 * Use Object as hashmap keys. When the hashCode() and equals(Object o) methods are not overriden by your class, the default implementation are used. The default behavior is to treat all objects as different, unless they are the same object. IdentityHashMap always does this by using reference-equality in place of object-equality
-<<<<<<< HEAD
 * Compute the intersection of two hashmap/hashset
 ```java
 Map<Integer, String> mapA = ...; 
@@ -1052,7 +1029,6 @@ setA.retainsAll( setB );
 * A popular use case for hashmap in interview is frequency counting, namely histogram. 
   + If the character set only contains lower-case characters, could consider using a bitmap instead, which is much faster.
   + If the character set is unicode, could consider using hashmap.
->>>>>>> refs/remotes/origin/master
 
 #### TreeMap <a id="ds-treemap"></a>
 * Get Key/Entry APIs: firstKey/firstEntry, lastKey/lastEntry, lowerKey/lowerEntry, higherKey/higherEntry, CeilingKey/CeilingEntry, floorKey/floorEntry
@@ -1266,6 +1242,39 @@ int updateBit(int num, int i, boolean bitIs1)
     return (num & mask) | (value << i);
 }
 ```
+
+#### Non-DP Memorization <a id="algorithms-non-dp-memorization"></a>
+##### Array-based non-dp memorization <a id="algorithms-non-dp-memo-array"></a>
+* 1D/2D Prefix sum
+```java
+// 1D prefix sum
+int[] array1D = new int[n];
+int[] prefixSum1D = new int[array1D.length+1];
+for ( int i = 1; i <= array1D.length; i++ )
+{
+  prefixSum1D[i] = array1D[i] + prefixSum1D[i-1];
+}
+// to calculate range sum from i to j
+int rangeSum = prefixSum1D[j] - prefixSum1D[i-1];
+
+// 2D prefix sum
+int[][] array2D = new int[m][n];
+int[][] prefixSum2D = new int[m+1][n+1];
+for ( int i = 1; i <= array2D.length; i++ )
+{
+  for ( int j = 1; j <= array2D[0].length; j++ )
+  {
+    prefixSum2D[i][j] = array2D[i-1][j-1] + prefixSum2D[i-1][j];
+  }
+}
+// to calculate range sum from (x_s, y_s) to (x_e, y_e)
+int areaSum = prefixSum2D[x_e][y_e] - prefixSum2D[x_s-1][y_e] - prefixSum2D[x_e][y_s-1] + prefixSum2D[x_s-1][y_s-1]
+```
+##### Stack <a id="algorithms-non-dp-memo-stack"></a>
+* Longest valid parentheses
+
+##### HashMap <a id="algorithms-non-dp-memo-hashmap"></a>
+* Maximum size subarray sums to K, clone graph, two sum
 
 #### Two pointers <a id="algorithms-two-pointer"></a>
 ##### Begin and end type <a id="algorithms-boundary-to-center"></a>
@@ -1561,25 +1570,6 @@ private class ResultWrapper
 }
 ```
 
-* How to avoid repeated recursion - memorize already computed searched results <a id="algorithms-recursion-repeated"></a>
-  - Use hashmap (example problems include House Robber III, Clone Graph)
-  - Use dynamic programming (see dynamic programming section for details) 
-```java
-    public UndirectedGraphNode cloneGraph(UndirectedGraphNode node) 
-    {
-        \\ validate input arguments before passing into 
-        if ( node == null )
-        {
-            return null;
-        }
-        return cloneGraphRecurse( node, new HashMap<Integer, UndirectedGraphNode>() );
-    }
-    private UndirectedGraphNode cloneGraphRecurse( UndirectedGraphNode node, Map<Integer, UndirectedGraphNode> labelToNodeMap )
-    {
-        \\...
-    }
-```
-
 * Tree-based recursion <a id="algorithms-recursion-tree-based"></a>
     - One of the key problems resulting from TreeNode definition is that TreeNode has no info about its parent node. But to resolve a tree-based problem, it is usually required to combine child and parent information.
     - Two basic strategies to solve this problem
@@ -1607,6 +1597,8 @@ public ResultWrapper secondApproach( TreeNode currNode )
   // return new ResultWrapper(...);
 }
 ```
+* String-based recursion < a id="algorithms-recursion-string-based"></a>
+* Array-based recursion < a id="algorithms-recursion-array-based"></a>
 
 #### Backtrack <a id="algorithms-backtrack"></a>
 * Usually occurs at the beginning and ending of a recursive function
