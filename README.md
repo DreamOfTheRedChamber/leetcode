@@ -1,4 +1,4 @@
-# Fight towards 1000 Leetcode commits to protect my dream!!!
+# This might be the last time I cracked Leetcode so crazy in my life!!!
 * [Typical whiteboard coding workflow](#whiteboard-workflow)
     * [Clarify questions](#whiteboard-workflow-clarify)
     * [Give a small but general enough example for discussing algo/DS](#whiteboard-workflow-context)
@@ -22,26 +22,62 @@
     * [Type size](#basics-type-size) 
     * [Error-prone APIs](#basics-error-prone-apis)
     * [Rarely mentioned APIs](#basics-rarely-mentioned-apis)
-    * [Math](#basics-math)
-    * [Type conversions](#basics-type-conversions)
-    * [Iterator](#basics-iterator)
     * [Error handling](#error-handling)
     * [Collections internals](#basics-collections-internals)
 * [Learned lessons: data structures](#learned-lessons-data-structures)
     * [Progressive enhancement on data structures](#progressive-enhancement-on-ds)
+    * [Type conversions](#basics-type-conversions)
+      - [Between char and int](#basics-type-conversions-char-and-int)
+      - [Between string and integer](#basics-type-conversions-string-and-integer)
+      - [Between array and list](#basics-type-conversions-array-and-list)
+      - [Between Java collection types](#basics-type-conversions-collections)
+    * [Math](#basics-math)
+      - [Mod](#basics-math-mod)
+      - [Power](#basics-math-power)
+      - [Sqrt](#basics-math-sqrt)
+      - [Divide](#basics-math-divide)
+        + [Two integer](#basics-math-divide-two-integers)
+        + [Fraction and decimal](#basics-math-fraction-and-decimal)
+      - [Multiply](#basics-math-multiply)
+      - [Prime](#basics-math-prime)
     * [Array](#ds-array)
+      - [Circular array](#ds-circular-array)
     * [String](#ds-string)
+      - [Encode and decode](#ds-string-encode-decode)
+      - [Serialize and deserialize](#ds-string-serialize-deserialize)
+      - [Palindrome](#ds-string-palindrome) 
+    * [Iterator](#ds-iterator)
     * [Linkedlist](#ds-linkedlist) 
+      - [Reverse linked list](#ds-linkedlist-reverse)
     * [Stack](#ds-stack)
+      - [Calculator](#ds-stack-calculator)
+      - [Parentheses](#ds-stack-parentheses)
     * [Queue](#ds-queue)
     * [PriorityQueue](#ds-priorityqueue)
+      - [Merge k sorted list](#ds-priorityqueue-merge-k-sorted-list)
     * [Tree](#ds-tree)
+      - [Traversal](#ds-tree-traversal)
+        + [Iterative pre/in/post order traversal in O(logn)/O(1)](#ds-tree-traversal-pre-in-post)
+        + [Level order/zigzag traveral](#ds-tree-traversal-level-zigzag)
+        + [Vertical order](#ds-tree-traversal-vertical-order)
+      - [View](#ds-tree-view)
+        + [Left-side view](#ds-tree-left-side-view)
+        + [Top-down view](#ds-tree-top-down-view)
+        + [Bottom-up view](#ds-tree-bottom-up-view)
+      - [Serialize/Deserialize](#ds-tree-serialize-deserialize)
+        + [Preorder-based](#ds-tree-serialize-deserialize-preorder-based)
+        + [Level-based](#ds-tree-serialize-deserialize-level-based)
+      - [Path on tree](#ds-tree-path)      
     * [Binary search tree](#ds-binary-search-tree)
     * [HashMap](#ds-hashmap)
+      - [Anagram](#ds-hashmap-anagram)
     * [TreeMap](#ds-treemap)
     * [Graph](#ds-graph)
+      - [Trade-offs between different representation](#ds-representation-and-tradeoffs)
+      - [Build graph](#ds-graph-build)
     * [Trie](#ds-trie)
 * [Learned lessons: algorithms](#learned-lessons-algorithms)
+    * [Random](#algorithms-random)
     * [Bit manipulation](#algorithms-bit-manipulation)
       - [Arithmetic vs logic right shift](#algorithms-bit-manipulation-arithmetic-vs-logic)
       - [Common tasks](#algorithms-bit-manipulation-common-tasks)
@@ -83,6 +119,7 @@
       - [Use pattern](#algorithms-backtrack-use-pattern)
       - [Types](#algorithms-recursion-types)
         + [Combination sum](#algorithms-backtrack-combination-sum)
+        + [Permutation](#algorithms-backtrack-permutation)
     * [Graph](#algorithms-graph)
       - [Grid-based graph best practices](#algorithms-grid)
       - [Breath first search](#algorithms-bfs)
@@ -595,6 +632,7 @@ while ( iterator.hasNext() )
 * space efficiency in boolean array: Boolean[] -> boolean[] -> BitSet
 
 #### Array <a id="ds-array"></a>
+##### Circular array <a id="ds-array-circular"></a>
 * Common techniques used in circular arrays
   - double the array to 2n by concatenating original array to the end and then apply a sliding window of size n on it (whether is a sorted rotated array)
   - invert the sign of the array (circular array maximum sum)
@@ -783,6 +821,7 @@ public void treeHighSpaceTraverse( TreeNode root, int order )
     return currNode;
   } 
 ```
+
 * NAray-tree serialization and deserialization
   - There are two popular ways to serialize a N-Aray tree: preorder and level-order. Preorder leads to a natural recursive implementation. Level-order leads to a natural iterative implementation. 
 ```java
@@ -1302,7 +1341,8 @@ int areaSum = prefixSum2D[x_e][y_e] - prefixSum2D[x_s-1][y_e] - prefixSum2D[x_e]
 
 #### Two pointers <a id="algorithms-two-pointer"></a>
 ##### Begin and end type <a id="algorithms-boundary-to-center"></a>
-* Two sum type - avoid scanning redundant states
+* Two sum type
+  - example problems: two sum (sorted), three sum, four sum, three sum closest, three sum smaller
 ```java
 if ( A[i] and A[j] satisfy some condition )
 {
