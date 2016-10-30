@@ -47,7 +47,7 @@ public class WordLadder
 		Set<String> words2 = new HashSet<>();
 		words2.add( "hot" );
 		words2.add( "dog" );
-		assertEquals(  -1, ladderLength( "hot", "dog", words2 ) );
+		assertEquals(  -1, ladderLength( "hot", "dog", words2 ) );				
 	}
 	
     public int ladderLength( String beginWord, String endWord, Set<String> wordList )
