@@ -1,4 +1,4 @@
-package twoPointer;
+package facebook.medium;
 
 import static org.junit.Assert.assertEquals;
 
@@ -21,37 +21,41 @@ public class MinimumSizeSubarraySum
 		assertEquals( 2, minSubArrayLen( 7, new int[]{ 2, 3, 1, 2, 4, 3 } ) );
 	}
 	
-	// TODO: what if both postive and negative integers
     public int minSubArrayLen( int s, int[] nums )
     {
-    	int currWindStart = 0;
-    	int currWindEnd = 0;
-    	int currWindSum = 0;
-    	int minSize = Integer.MAX_VALUE;
-    	while ( currWindEnd < nums.length )
+    	if ( nums == null || nums.length == 0 || s <= 0 )
     	{
-    		while ( currWindEnd < nums.length
-    				&& currWindSum < s )
-    		{    			
-    			currWindSum += nums[currWindEnd];
-    			currWindEnd++;
+    		return 0;
+    	}
+    	
+    	int right = 0;
+    	int windSum = 0;
+    	int minLength = Integer.MAX_VALUE;
+    	for ( int left = 0; left < nums.length; windSum -= nums[left], left++  )
+    	{
+    		while ( right < nums.length && windSum < s )
+    		{
+    			windSum += nums[right];
+    			right++;
     		}
     		
-    		while ( currWindStart < currWindEnd
-    				&& currWindSum >= s )
+    		if ( windSum >= s )
     		{
-    			minSize = Math.min( currWindEnd-currWindStart, minSize );
-    			currWindSum -= nums[currWindStart];
-    			currWindStart++;
+    			minLength = Math.min( minLength, right - left );    			
+    		}
+    		else
+    		{
+    			break;
     		}
     	}
-    	if ( minSize == Integer.MAX_VALUE )
+    	
+    	if ( minLength == Integer.MAX_VALUE )
     	{
     		return 0;
     	}
     	else
     	{
-    		return minSize;
+        	return minLength;    		
     	}
     }
 }
