@@ -25,13 +25,27 @@ What if negative numbers are allowed in the given array?
 How does it change the problem?
 What limitation we need to add to the question to allow negative numbers?
  */
-//TO_START
 public class CombinationSum4
 {
-
-    public int combinationSum4(int[] nums, int target) 
+    public int combinationSum4( int[] nums, int target ) 
     {
-        
+    	if ( nums == null || nums.length == 0 || target <= 0 )
+    	{
+    		return 0;
+    	}
+    	
+    	int[] numCombs = new int[target+1];
+    	numCombs[0] = 1;
+    	for ( int i = 1; i <= target; i++ )
+    	{
+    		for ( int num : nums )
+    		{
+    			if ( i - num >= 0 )
+    			{
+    				numCombs[i] += numCombs[i-num];
+    			}
+    		}
+    	}
+    	return numCombs[target];
     }
-
 }
