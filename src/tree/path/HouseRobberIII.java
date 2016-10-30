@@ -1,4 +1,4 @@
-package recursion.tree;
+package tree.path;
 
 import static org.junit.Assert.assertEquals;
 

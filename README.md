@@ -397,6 +397,7 @@ String part2 = parts[1]; // 034556
 ```
   - Parsing integer from a string. When possible, use Java's built-in function Integer Integer.ValueOf(String) or int Integer.ParseInt(String) instead of doing it manually
   - string.indexOf(char). Returns the index within this string of the first occurrence of the specified character or -1.
+
 * Array
   - Print arrays in Java
 ```java
@@ -442,14 +443,14 @@ map.putIfAbsent( key, new ArrayList<>() );
 
 #### Math<a id="basics-math"></a>
 * Mod
-        - judge whether a value is even or odd
-            + Use num % 2 != 0 rather than num % 2 == 1 because of negative number mod ( e.g. -5 % 2 == -1 )
-            + To guarantee mod result is always positive, if knowing num range RANGE, could consider ( num + RANGE ) % RANGE 
+  - judge whether a value is even or odd
+    + Use num % 2 != 0 rather than num % 2 == 1 because of negative number mod ( e.g. -5 % 2 == -1 )
+    + To guarantee mod result is always positive, if knowing num range RANGE, could consider ( num + RANGE ) % RANGE 
 * Power of integer: Java does not provide a built-in function for Integer values
-        - solution 1: It has a built-in function double Math.pow( double, double ). But the computation cost for double is much higher than int and the result needs to be downcasted.
-        - solution 2: Use multiply instead when exponent is low. 
-        - solution 3: When 2 is radix, use bit shifting
-        - solution 4: Implement in-house pow for integers based on divide and conquer
+  - solution 1: It has a built-in function double Math.pow( double, double ). But the computation cost for double is much higher than int and the result needs to be downcasted.
+  - solution 2: Use multiply instead when exponent is low. 
+  - solution 3: When 2 is radix, use bit shifting
+  - solution 4: Implement in-house pow for integers based on divide and conquer
 ```java
 // convert int decimal to binary format
 int decimalNum = RANDOM_VALUE;
