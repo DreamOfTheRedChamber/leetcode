@@ -1,7 +1,11 @@
 package facebook.medium;
 
+import static org.junit.Assert.assertTrue;
+
 import java.util.HashMap;
 import java.util.Map;
+
+import org.junit.Test;
 
 /*
 Design a data structure that supports the following two operations:
@@ -25,6 +29,14 @@ You may assume that all words are consist of lowercase letters a-z.
 
 public class AddAndSearchWordDSDesign 
 {	
+	@Test
+	public void test()
+	{
+		AddAndSearchWordDSDesign object = new AddAndSearchWordDSDesign();
+		object.addWord( "a" );
+		assertTrue( object.search( "." ) );
+	}
+	
 	private TrieNode root = new TrieNode('0');
 	
     // Adds a word into the data structure.
@@ -56,31 +68,28 @@ public class AddAndSearchWordDSDesign
     
     private boolean search( String word, int index, TrieNode root )
     {
-    	if ( index < word.length() && root == null )
+    	if ( root == null )
     	{
     		return false;
     	}
-    	else if ( index == word.length() - 1 )
+    	else if ( index == word.length() )
     	{
     		return root.isLeaf;
     	}
+    	else if ( word.charAt( index ) != '.' )
+    	{
+			return search( word, index + 1, root.children.get( word.charAt( index ) ) );    		
+    	}
     	else
     	{
-    		if ( word.charAt( index ) == '.' )
+    		for ( TrieNode child : root.children.values() )
     		{
-    			for ( TrieNode child : root.children.values() )
+    			if ( search( word, index + 1, child ) )
     			{
-    				if ( search( word, index + 1, child ) )
-    				{
-    					return true;
-    				}
-    			}
-    			return false;
+    				return true;
+    			}    					
     		}
-    		else
-    		{
-        		return search( word, index + 1, root.children.get( word.charAt( index ) ) );    			
-    		}
+    		return false;
     	}
     }
         
