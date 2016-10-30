@@ -53,9 +53,10 @@ public class ThreeSum
     	int right = nums.length - 1;
     	while ( left < right )
     	{
-    		if ( left > 0 && nums[left] == nums[left-1] )
+    		if ( left > start && nums[left] == nums[left-1] )
     		{
     			left++;
+    			continue;
     		}
     		
     		if ( nums[left] + nums[right] == target )
