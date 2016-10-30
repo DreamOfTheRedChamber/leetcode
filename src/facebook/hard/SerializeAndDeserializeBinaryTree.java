@@ -1,8 +1,10 @@
 package facebook.hard;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import utility.TreeNode;
@@ -42,14 +44,14 @@ public class SerializeAndDeserializeBinaryTree
     	{
     		TreeNode head = bfsQueue.poll();
     		// left
-    		result.append( head.left == null ? '#' : head.left.val );
+    		result.append( (head.left == null ? "#" : head.left.val) );
     		result.append( "," );
     		if ( head.left != null )
     		{
     			bfsQueue.offer( head.left );
     		}
     		// right
-    		result.append( head.right == null ? '#' : head.right.val );
+    		result.append( (head.right == null ? "#" : head.right.val) );
     		result.append( "," );
     		if ( head.right != null )
     		{
@@ -71,21 +73,21 @@ public class SerializeAndDeserializeBinaryTree
     	TreeNode root = new TreeNode( Integer.parseInt( tokens[0] ) );
     	Queue<TreeNode> bfsQueue = new LinkedList<>();
     	bfsQueue.offer( root );
-    	int index = 0;
+    	int index = 1;
     	while ( !bfsQueue.isEmpty() )
     	{
     		TreeNode head = bfsQueue.poll();
-    		if ( !tokens[index + 1].equals( "#" ) )
+    		if ( !tokens[index].equals( "#" ) )
     		{
-    			head.left = new TreeNode( Integer.parseInt( tokens[index + 1] ) );
+    			head.left = new TreeNode( Integer.parseInt( tokens[index] ) );
     			bfsQueue.offer( head.left );
     		}
-    		if ( !tokens[index + 2].equals( "#" ) )
+    		if ( !tokens[index + 1].equals( "#" ) )
     		{
-    			head.right = new TreeNode( Integer.parseInt( tokens[index + 2] ) );
+    			head.right = new TreeNode( Integer.parseInt( tokens[index + 1] ) );
     			bfsQueue.offer( head.right );
     		}
-    		index += 3;
+    		index += 2;
     	}
     	return root;
     }
@@ -99,5 +101,23 @@ public class SerializeAndDeserializeBinaryTree
     	
     	TreeNode node3 = deserialize( serialize( node1 ) );
     	System.out.println( node3.val );
+    }
+    
+    @Ignore
+    @Test
+    public void test2()
+    {
+    	StringBuilder sb1 = new StringBuilder();
+    	sb1.append("#");
+    	sb1.append(",");
+    	String[] tokens = sb1.toString().split( "," );
+    	
+    	StringBuilder sb2 = new StringBuilder();
+    	sb2.append('#');
+    	sb2.append(',');
+    	String[] tokens2 = sb2.toString().split( "," );
+    	
+    	System.out.println( Arrays.toString( tokens ) );
+    	System.out.println( Arrays.toString( tokens2 ) );
     }
 }
