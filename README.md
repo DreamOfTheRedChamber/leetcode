@@ -1,4 +1,4 @@
-# This might be the last time I cracked Leetcode so crazily in my life!!!
+# Fight towards 1000 commits !!!
 * [Typical whiteboard coding workflow](#whiteboard-workflow)
     * [Clarify questions](#whiteboard-workflow-clarify)
     * [Give a small but general enough example for discussing algo/DS](#whiteboard-workflow-context)
@@ -607,6 +607,7 @@ int intValue = Integer.parseInt( str );
 ##### Between array and collections <a id="basics-type-conversions-array-and-collections"></a>
 * Array to collections 
   + To convert array of reference types into collections, there is an API Arrays.asList(). Then List collection could be easily casted to set/map collections. 
+  + To convert array of primtive types into collections, need to do it manually.
 ```java
 Element[] array = { new Element(1), new Element(2), new Element(3) };
 
@@ -616,9 +617,9 @@ list.add(1); // UnsupportedOperationException
 
 // correct way
 List<Element> list = new ArrayList<>( Arrays.asList( array ) );
-```
-  + To convert array of primtive types into collections, need to do it manually.
-```java
+
+
+// list 
 List<Integer> list = ...//
 for ( int num : nums )
 {
@@ -1351,6 +1352,20 @@ for ( int i = 1; i <= array2D.length; i++ )
 int areaSum = prefixSum2D[x_e][y_e] - prefixSum2D[x_s-1][y_e] - prefixSum2D[x_e][y_s-1] + prefixSum2D[x_s-1][y_s-1]
 ```
 
+* Array sum
+  + Two pointers
+    - Begin and end type: Two sum II and variants (3Sum, 3Sum closest, 3Sum smaller)
+    - Window type: Minimize size subarray sum
+  + Hashmap
+    - Two sum
+    - Maximize size subarray sum equals K
+  + Backtrack
+    - Combination sum I/II/II
+  + Dynamic programming
+    - One sequence: maximum subarray
+    - Backpack type: Combination sum IV
+
+
 ##### Stack <a id="algorithms-non-dp-memo-stack"></a>
 * Longest valid parentheses
 
@@ -1474,6 +1489,16 @@ public List<Interval> insert( List<Interval> intervals, Interval newInterval )
 | Bucketsort | O(1)     |  when knowing range and evenly distributed O(n+k) |
 
 * Sort interfaces: Arrays.sort( array, comparator ) Collections.sort( collection, comparator ) method, list.sort( comparator )
+  + If do not want to change the original array/list, could create a copy instead.
+```java
+// array
+int[] nums = new int[]{-1, 0, 1, 2};
+int[] numsCopy = nums.clone();
+// list
+// java best practice: Given all of the problems associated with Cloneable, it’s safe to say that other interfaces should not extend it, and that classes designed for inheritance (Item 17) 
+List<Integer> list = new ArrayList<>();
+List<Integer> listCopy = new ArrayList<>( list );
+```
 
 * Interval
   + Judge whether intervals overlap
