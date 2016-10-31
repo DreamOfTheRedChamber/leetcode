@@ -15,120 +15,130 @@
 * [Practice mindset](#practice-patterns)
     * [Attitudes](#practice-attitudes)
     * [Tools](#practice-tools)
-    * [Habits](#practice-habits)
+    * [Strategies](#practice-strategies)
     * [Leetcode pros and cons](#leetcode-pros-cons)
     * [Interview Java pros and cons](#java-pros-cons)
-* [Learned lessons: Java basics](#learned-lessons-java-basics)
-    * [Type size](#basics-type-size) 
-    * [Error-prone APIs](#basics-error-prone-apis)
-    * [Rarely mentioned APIs](#basics-rarely-mentioned-apis)
-    * [Error handling](#error-handling)
-    * [Collections internals](#basics-collections-internals)
-* [Learned lessons: data structures](#learned-lessons-data-structures)
-    * [Progressive enhancement on data structures](#progressive-enhancement-on-ds)
-    * [Type conversions](#basics-type-conversions)
-      - [Between char and int](#basics-type-conversions-char-and-int)
-      - [Between string and integer](#basics-type-conversions-string-and-integer)
-      - [Between array and collections](#basics-type-conversions-array-and-collections)
-      - [Between collections](#basics-type-conversions-collections)
-    * [Math](#basics-math)
-      - [Mod](#basics-math-mod)
-      - [Power](#basics-math-power)
-      - [Sqrt](#basics-math-sqrt)
-      - [Divide](#basics-math-divide)
-      - [Multiply](#basics-math-multiply)
-      - [Prime](#basics-math-prime)
+* [Data structures](#ds)
+    * [Data structure relationships](#ds-relationship)
+    * [Type size](#ds-type-size)
+    * [Type conversions](#ds-type-conversions)
+      - [Automated cast](#ds-type-conversions-automated-cast)
+      - [Between string and integer](#ds-type-conversions-string-and-integer)
+      - [Between array and collections](#ds-type-conversions-array-and-collections)
+      - [Between collections](#ds-type-conversions-collections)
     * [Array](#ds-array)
       - [Circular array](#ds-circular-array)
+      - [Array sum](#ds-array-array-sum)
     * [String](#ds-string)
+      - [String vs StringBuilder vs StringBuffer](#ds-string-tradeoffs)
       - [Encode and decode](#ds-string-encode-decode)
-      - [Serialize and deserialize](#ds-string-serialize-deserialize)
       - [Palindrome](#ds-string-palindrome) 
-    * [Iterator](#ds-iterator)
-    * [Linkedlist](#ds-linkedlist) 
-      - [Reverse linked list](#ds-linkedlist-reverse)
+    * [Collections](#ds-collections)
+      - [Iterator](#ds-collections-iterator)
+      - [Immutability](#ds-collections-immutability)
+    * [List](#ds-list) 
+      - [ArrayList vs LinkedList](#ds-list-tradeoffs)
+      - [LinkedListNode](#ds-list-linkedlistnode)
+      - [Common tasks](#ds-list-common-tasks)
     * [Stack](#ds-stack)
       - [Calculator](#ds-stack-calculator)
       - [Parentheses](#ds-stack-parentheses)
     * [Queue](#ds-queue)
     * [PriorityQueue](#ds-priorityqueue)
-      - [Merge k sorted list](#ds-priorityqueue-merge-k-sorted-list)
+      - [Heapify](#ds-priorityqueue-heapify)
+      - [Sift up/down](#ds-priorityqueue-sift-up-down)
+      - [Improve built-in remove](#ds-priorityqueue-improve-built-in-remove)
+      - [Lambda expression as comparator](#ds-priorityqueue-lambda-expression)
     * [Tree](#ds-tree)
+      - [Build](#ds-tree-build)
       - [Traversal](#ds-tree-traversal)
       - [View](#ds-tree-view)
       - [Serialize/Deserialize](#ds-tree-serialize-deserialize)
-      - [Path on tree](#ds-tree-path)      
-    * [Binary search tree](#ds-binary-search-tree)
+      - [Path on tree](#ds-tree-path)
+      - [Segment tree](#ds-tree-segment-tree)
+      - [Binary search tree](#ds-tree-binary-search-tree)
     * [HashMap](#ds-hashmap)
+      - [Intersection](#ds-hashmap-intersection)
+      - [Histogram](#ds-hashmap-histogram)
       - [Anagram](#ds-hashmap-anagram)
     * [TreeMap](#ds-treemap)
     * [Graph](#ds-graph)
-      - [Trade-offs between different representation](#ds-representation-and-tradeoffs)
+      - [Edge list vs Adjacent list vs Adjacent matrix](#ds-graph-tradeoffs)
       - [Build graph](#ds-graph-build)
     * [Trie](#ds-trie)
-* [Learned lessons: algorithms](#learned-lessons-algorithms)
-    * [Random](#algorithms-random)
-    * [Bit manipulation](#algorithms-bit-manipulation)
-      - [Arithmetic vs logic right shift](#algorithms-bit-manipulation-arithmetic-vs-logic)
-      - [Common tasks](#algorithms-bit-manipulation-common-tasks)
-    * [Non-DP memorization](#algorithms-non-dp-memorization)
-      - [Array](#algorithms-non-dp-memo-array)
-      - [Stack](#algorithms-non-dp-memo-stack)
-      - [Hashmap](#algorithms-non-dp-memo-hashmap)
-    * [Two pointers](#algorithms-two-pointer)
-      - [Use case](#algorithms-two-pointer-use-case)
-      - [Types](#algorithms-two-pointer-types)
-        + [Begin and end type](#algorithms-boundary-to-center)
-        + [Slow and fast type](#algorithms-slow-and-fast)
-        + [Window type](#algorithms-window)
-        + [Two arrays type](#algorithms-two-arrays)
-    * [Sort](#algorithms-sort)
-      - [Common sorting algorithms](#algorithms-sort-common-algorithms)
-      - [Java sort interfaces](#algorithms-sort-java-interfaces)
-      - [Types](#algorithms-sort-types)
-        + [Interval-related](#algorithms-sort-interval-based)
-        + [TopK](#algorithms-sort-topK)
-    * [Binary search](#algorithms-binary-search)
-      - [Best practices](#algorithms-binary-search-best-practices)
-      - [How to handle duplicates](#algorithms-binary-search-handle-duplicates)
-      - [Types](#algorithms-binary-search-types)
-        + [First/Last smaller/bigger](#algorithms-binary-search-first-last-smaller-bigger)
-        + [Rotated array](#algorithms-binary-search-rotated-array)
-        + [2D array](#algorithms-binary-search-2d-variants)
-    * [Recursion](#algorithms-recursive)
-      - [Recursive vs iterative solutions](#algorithms-recursive-iterative)
-      - [Recursion time complexity cheat sheet](#algorithms-recursive-tc)
-      - [Steps in using recursion](#algorithms-recursion-problems-to-consider)
-      - [Return multiple results](#algorithms-recursion-return-multiple-results)
-      - [Avoid duplicated recursion](#algorithms-recursion-avoid-duplicated-recursion)
-      - [Types](#algorithms-recursion-types)
-        + [Tree-based recursion](#algorithms-recursion-tree-based)
-        + [String-based recursion](#algorithms-recursion-string-based)
-        + [Array-based recursion](#algorithms-recursion-array-based)
-    * [Backtrack](#algorithms-backtrack)
-      - [Use pattern](#algorithms-backtrack-use-pattern)
-      - [Types](#algorithms-recursion-types)
-        + [Combination sum](#algorithms-backtrack-combination-sum)
-        + [Permutation](#algorithms-backtrack-permutation)
-    * [Graph](#algorithms-graph)
-      - [Grid-based graph best practices](#algorithms-grid)
-      - [Breath first search](#algorithms-bfs)
-      - [Depth first search](#algorithms-dfs)
-      - [Topological sort](#algorithms-topo)
-      - [Union find](#algorithms-union-find)
-    * [Greedy](#algorithms-greedy)
-    * [Dynamic programming](#algorithms-dynamic-programming)
-      - [Use cases](#algorithms-dp-use-cases)
-      - [Problems to consider](#algorithms-dp-problems-to-consider)
-      - [Implementation methods](#algorithms-dp-implementation-methods)
-      - [Memorization array tricks](#algorithms-dp-memorization-array-tricks)
-      - [Types](#algorithms-dp-types)
-        + [Coordinate based](#algorithms-dp-types-coordinate)
-        + [1D sequence](#algorithms-dp-1d-sequence)
-        + [2D sequences](#algorithms-dp-2d-sequences)
-        + [Range based](#algorithms-dp-range-based)
-        + [Game](#algorithms-dp-game)
-        + [Backpack](#algorithms-dp-backpack)
+      - [Use case](#ds-trie-use-case)
+      - [Build trie](#ds-trie-build)
+      - [Common tasks](#ds-trie-common-tasks)
+* [Algorithms](#algo)
+    * [Random](#algo-random)
+    * [Math](#algo-math)
+      - [Mod](#algo-math-mod)
+      - [Power](#algo-math-power)
+      - [Sqrt](#algo-math-sqrt)
+      - [Divide](#algo-math-divide)
+      - [Multiply](#algo-math-multiply)
+      - [Prime](#algo-math-prime)
+    * [Bit manipulation](#algo-bit-manipulation)
+      - [Arithmetic vs logic right shift](#algo-bit-manipulation-arithmetic-vs-logic)
+      - [Common tasks](#algo-bit-manipulation-common-tasks)
+    * [Non-DP memorization](#algo-non-dp-memorization)
+      - [Array](#algo-non-dp-memo-array)
+      - [Stack](#algo-non-dp-memo-stack)
+      - [Hashmap](#algo-non-dp-memo-hashmap)
+    * [Two pointers](#algo-two-pointer)
+      - [Use case](#algo-two-pointer-use-case)
+      - [Types](#algo-two-pointer-types)
+        + [Begin and end type](#algo-boundary-to-center)
+        + [Slow and fast type](#algo-slow-and-fast)
+        + [Window type](#algo-window)
+        + [Two arrays type](#algo-two-arrays)
+    * [Sort](#algo-sort)
+      - [Common sorting algorithms](#algo-sort-common-algo)
+      - [Built-in sort interfaces](#algo-built-in-sort-interfaces)
+      - [Types](#algo-sort-types)
+        + [Interval-related](#algo-sort-types-interval-related)
+        + [TopK](#algo-sort-types-topK)
+    * [Binary search](#algo-binary-search)
+      - [Best practices](#algo-binary-search-best-practices)
+      - [How to handle duplicates](#algo-binary-search-handle-duplicates)
+      - [Types](#algo-binary-search-types)
+        + [First/Last smaller/bigger](#algo-binary-search-first-last-smaller-bigger)
+        + [Rotated array](#algo-binary-search-rotated-array)
+        + [2D array](#algo-binary-search-2d-array)
+    * [Recursion](#algo-recursive)
+      - [Recursive vs iterative solutions](#algo-recursive-iterative)
+      - [Recursion time complexity cheat sheet](#algo-recursive-tc)
+      - [Steps in using recursion](#algo-recursion-problems-to-consider)
+      - [Return multiple results](#algo-recursion-return-multiple-results)
+      - [Avoid duplicated recursion](#algo-recursion-avoid-duplicated-recursion)
+      - [Types](#algo-recursion-types)
+        + [Tree-based recursion](#algo-recursion-tree-based)
+        + [String-based recursion](#algo-recursion-string-based)
+        + [Array-based recursion](#algo-recursion-array-based)
+    * [Backtrack](#algo-backtrack)
+      - [Best practices](#algo-backtrack-best-practices)
+      - [Types](#algo-recursion-types)
+        + [Combination](#algo-backtrack-combination)
+        + [Permutation](#algo-backtrack-permutation)
+    * [Graph](#algo-graph)
+      - [Grid-based best practices](#algo-grid)
+      - [Breath first search](#algo-bfs)
+      - [Depth first search](#algo-dfs)
+      - [Topological sort](#algo-topo)
+      - [Union find](#algo-union-find)
+    * [Greedy](#algo-greedy)
+    * [Dynamic programming](#algo-dynamic-programming)
+      - [Use cases](#algo-dp-use-cases)
+      - [Problems to consider](#algo-dp-problems-to-consider)
+      - [Implementation methods](#algo-dp-implementation-methods)
+      - [Memorization array tricks](#algo-dp-memorization-array-tricks)
+      - [Types](#algo-dp-types)
+        + [Coordinate based](#algo-dp-types-coordinate)
+        + [1D sequence](#algo-dp-1d-sequence)
+        + [2D sequences](#algo-dp-2d-sequences)
+        + [Range based](#algo-dp-range-based)
+        + [Game](#algo-dp-game)
+        + [Backpack](#algo-dp-backpack)
 * [References](#references)
   
 ### Typical whiteboard coding workflow <a id="whiteboard-workflow"></a>
@@ -165,7 +175,7 @@
       * Input - String<a id="question-string"></a>
          * Whether the string contains space
          * How are tokens separated, using comma, slash or something else
-         * What characters are contained in the string, only english letters, or ascii characters   
+         * Alphabetic characters, ascii characters, or unicode characters  
       * Input - LinkedList<a id="question-linkedlist"></a>
          * Doubly or singly linkedlist
       * Input - Tree<a id="question-tree"></a>
@@ -204,7 +214,7 @@
 2. Consider the typical optimizing patterns below:
    1. Where the bottleneck is: "***The bottleneck of the algorithm lies in this section of code***"
    2. What the time complexity upper bound is: "***Theoretically, the best time complexity I could achieve is O(n) because I need to look through all items.***"
-   3. Whether space complexity is acceptable or not: "***Algorithms with linear space complexity is usually acceptable.***"
+   3. Whether space complexity is acceptable or not: "***algo with linear space complexity is usually acceptable.***"
    4. Repetitive computation: "***We solve a lot of repetitive problems. If we could cache the solutions, it will be much more efficient.***"
    5. Additional rounds of iterating input: "***We iterate through input twice. If we could reduce it to once, it will boost performance twice.***"
 3. Synchronize with interviewer "***The reason we could do better is XXX***."
@@ -215,7 +225,7 @@
 
 #### Write test cases <a id="whiteboard-workflow-test-cases"></a>
 * In general, the following types of test cases should be considered 
-   * The normal case: e.g. array length of even or odd in sorting algorithms
+   * The normal case: e.g. array length of even or odd in sorting algo
    * The extremes: e.g. empty array, one element array, extremely large one array
    * Nulls and "illegal" input: e.g. input is negative when positive is expected 
    * Strange input: an array already sorted
@@ -279,11 +289,11 @@
 ### Interview mindset <a id="core-strategies"></a>
 #### Understanding what interviewers really wants <a id="#undertand-interviewers"></a>
 * Evaluation criteria
-  - Is s/he a good coder?
   - Can s/he explain technical solutions well?
   - Does s/he understand basic concepts well?
   - Does s/he has a good grasp of past project experiences?
   - How is his/her attitude?
+  - Is s/he a good coder? (proficiency in leetcode and whether error-prone)
 * What are interviewers really asking
 
 | What they ask | Wrong response    | What they really want  |
@@ -310,27 +320,29 @@
 
 #### Whiteboard coding pros and cons <a id="whiteboard-coding-pros-cons"></a>
 * Pros
-  * Every software engineer knows algorithms and data structures. It provides a common domain for interviewers and interviewees to discuss.
-  * Smart people will always be smart wherever they go. There are just too many candidates there and there needs a way to differentiate it. At least, whiteboard coding could reflect candidates' understanding of algorithms/data structures and communication skills.
+  * Every software engineer knows algo and data structures. It provides a common domain for interviewers and interviewees to discuss.
+  * Smart people will always be smart wherever they go. There are just too many candidates there and there needs a way to differentiate it. At least, whiteboard coding could reflect candidates' understanding of algo/data structures and communication skills.
   * Whiteboard coding advocates a good workflow for developing code.
 * Cons
-  * The most important capability for a software engineer is abstraction and skipping complexity. Algorithms questions are usually available in many online forums. Even if candidates could finish the problem in interview, it does not necessarily demonstrate the core perspective here. It might generate high false positives and false negatives. 
-  * Finish algorithms in 20 min in a bug-free and clean way requires lots of practice. It does not only require interviewee to understand algorithms and data structures, but also really proficient in these, sometimes even remember pretty tricky test cases. 
+  * The most important capability for a software engineer is abstraction and skipping complexity. algo questions are usually available in many online forums. Even if candidates could finish the problem in interview, it does not necessarily demonstrate the core perspective here. It might generate high false positives and false negatives. 
+  * Finish algo in 20 min in a bug-free and clean way requires lots of practice. It does not only require interviewee to understand algo and data structures, but also really proficient in these, sometimes even remember pretty tricky test cases. 
   * The optimization process in algorithm questions is kind of over-optimization. In practice, only improve performance when necessary.
   * Stand and write code on whiteboard is really exhausting if lasting for 4-5 hours.
 
 ### Practice mindset <a id="practice-patterns"></a>
 #### Attitudes <a id="practice-attitudes"></a>
   * This might be the last time in my life that I spent so much time and efforts in algorithm questions. Next time when I hunt for jobs, either HRs will invite me or I will have far less time to prepare.
-  * The way an engineer approach a algorithm problem can reflect their efficiency at work. Davinci starts from drawing eggs.
+  * The way an engineer approach a algorithm problem can reflect their efficiency at work. 
+  * Hiring system is broken. But currently there is no better way to do it.
   
 #### Tools<a id="practice-tools"></a>
   * Task planning: Use tags ( TO_START, TO_HURRY, TO_TEST ) to manage algorithm question status and prioritize important tasks
   * Feedbacks: Use git commit number per day as feedback for progress
   * Summarizing lessons: Use git commit message as a place to learn from mistakes and summarize lessons
 
-#### Strategies<a id="practice-habits"></a>
-  * For hard problems, handle it as early as possible because my mind really needs time to digest it. Practice it repeatedly until it becomes part of my body and I could finish it within 20 minutes even while I am sleeping.
+#### Strategies<a id="practice-strategies"></a>
+  * Focus on recently popular, medium to hard questions.
+  * Practice questions again and again until I could code it bugfree and fast even when I am sleeping.
   * For each category of problems, summarize common tricks/techniques used.
 
 #### Leetcode pros and cons <a id="leetcode-pros-cons"></a>
@@ -340,7 +352,7 @@
 * Cons
   * Testing
     * Input is always valid. 
-    * Time exceed limit is too constraint. Sometimes we want to start from inefficient algorithms, verify its correctness and then optimize performance.
+    * Time exceed limit is too constraint. Sometimes we want to start from inefficient algo, verify its correctness and then optimize performance.
   * Debug
     * When problem occurs, too few stack trace
     * No online debuggers
@@ -351,7 +363,7 @@
     * Could not search problems by specifying multiple tags
     * Function names do not follow best practices, which makes variables naming kind of difficult.
 
-#### Java pros and cons <a id="java-pros-cons"></a>
+#### Interview Java pros and cons <a id="java-pros-cons"></a>
 * Pros
   * Readability
 * Cons
@@ -361,51 +373,6 @@
   * Linkedhashset could not be iterated reversely
 
 
-### Learned lessons: Java basics <a id="learned-lessons-java-basics"></a>
-#### Type size<a id="basics-type-size"></a>
-* Reference types: 32-bit system (32 bit), 64-bit system (64 bit)
-* Primitive types: boolean (8 bit), byte (8 bit), char (16 bit), short (16 bit), int (32 bit), long (64 bit), float (32 bit), double (64 bit)
-
-#### Error-prone APIs<a id="basics-error-prone-apis"></a>
-* Java list remove interface. Two list.remove() interface ( list.remove(int index), list.remove( Object object ) )
-    - List&lt;Integer&gt; input
-    - list.remove(index) will always take precedence because it does not require type casting
-* Ternary operator ?: priority is only higher than assignment. If it is used in combination with other operators, parentheses should be added.
-* Generate a random number
-```java
-Random rand = new Random();
-int n = rand.nextInt( 50 ) + 1; // 1 ~ 50, specified number is exclusive
-```
-
-#### Data structure important APIs<a id="basics-rarely-mentioned-apis"></a>
-* String
-  - StringTokenizer ( like an iterator, has built-in hasNext() and next() func ). Could be used instead of a global position pointer inside recursive function (e.g. tree serialization and deserialization)
-```java
-String str = "This is String , split by StringTokenizer, created by mkyong";
-StringTokenizer st = new StringTokenizer( str, "," );
-while (st.hasMoreElements()) 
-{
-    System.out.println(st.nextElement());
-}
-```
-  - String[] split( String regex )
-```java
-String string = "004-034556";
-String[] parts = string.split("-");
-String part1 = parts[0]; // 004
-String part2 = parts[1]; // 034556
-```
-  - Parsing integer from a string. When possible, use Java's built-in function Integer Integer.ValueOf(String) or int Integer.ParseInt(String) instead of doing it manually
-  - string.indexOf(char). Returns the index within this string of the first occurrence of the specified character or -1.
-
-* Array
-  - Print arrays in Java
-```java
-int[] array1D = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
-int[][] array2D = { { 1, 2 }, {2, 5}, {3, 7} };
-System.out.println( Arrays.toString( array1D ) );
-System.out.println( Arrays.deepToString( array2D ));
-```
 * LinkedList
   - list.sublist(startIndex, endIndex) returns a sublist of List
   - LinkedList.addFirst(element: Object)/addLast(element: Object)/getFirst()/getLast()/removeFirst()/removeLast(). This could be used in backtracking.
@@ -441,112 +408,6 @@ map.putIfAbsent( key, new ArrayList<>() );
   - Collections.unmodifiableList/unmodifiableSet/unmodifiableMap()
   - Collections.reverse(List&lt;?&gt;) reverses a linkedlist
 
-#### Math<a id="basics-math"></a>
-* Mod
-  - judge whether a value is even or odd
-    + Use num % 2 != 0 rather than num % 2 == 1 because of negative number mod ( e.g. -5 % 2 == -1 )
-    + To guarantee mod result is always positive, if knowing num range RANGE, could consider ( num + RANGE ) % RANGE 
-* Power of integer: Java does not provide a built-in function for Integer values
-  - solution 1: It has a built-in function double Math.pow( double, double ). But the computation cost for double is much higher than int and the result needs to be downcasted.
-  - solution 2: Use multiply instead when exponent is low. 
-  - solution 3: When 2 is radix, use bit shifting
-  - solution 4: Implement in-house pow for integers based on divide and conquer
-```java
-// convert int decimal to binary format
-int decimalNum = RANDOM_VALUE;
-int[] binaryRepr = new int[32]; // for simplicity, binary format as an array
-for ( int i = 0; i < 32; i++ )
-{
-    binaryRepr[i] = ( decimalNum >> i ) & 1;
-}
-
-// convert int binary to decimal format
-int[] binaryRepr = new int[32];
-int decimalNum = 0;
-for ( int i = 0; i < 32; i++ )
-{
-    decimalNum |= ( binaryRepr[i] << i );
-}
-```
-* Prime 
-  * Check for primality
-    * Naive solution: Iterate from 2 through i
-    * Slightly better: Iterate from 2 through sqrt(i)
-  * Generate a list of primes: the sieve of eratosthenes
-    * Start with a list of all the numbers up through some value max.
-    * First cross off all numbers divisible by 2.
-    * Then look for the next prime and cross off all numbers divisible by it. 
-    * By continuing doing this, we wind up with a list of prime numbers from 2 through max.
-```java
-boolean[] sieveOfEratosthenes( int max )
-{
-    boolean[] flags = new boolean[max + 1];
-    int count = 0;
-    
-    init(flags);
-    int prime = 2;
-    
-    while ( prime <= Math.square(max))
-    {
-        // cross off remaining multiples of prime
-        crossOff( flags, prime );
-        
-        // find next value which is prime
-        prime = getNextPrime( flags, prime );
-    }
-    return flags;
-}
-
-void crossOff( boolean[] flags, int prime )
-{
-    for (int i = prime * prime; i < flags.length; i += prime )
-    {
-        flags[i] = false;
-    }
-}
-
-int getNextPrime( boolean[] flags, int prime )
-{
-    int next = prime + 1;
-    while ( next < flags.length && !flags[next] )
-    {
-        next++;
-    }
-    return next;
-}
-```
-* Divide two integers ( useful names: dividend/numerator, divisor/denominator, quotient, residue )
-  * handle boundary cases ( 0, Integer.MIN_VALUE )
-    + return int quotient
-    + return double quotient
-        - record quotient symbol ( neg/pos )
-        - convert dividend and divisor to positive
-        - calculate integer part 
-        - calculate fraction part 
-            + quotient = ( residue * 10 ) / divisor
-            + residue = ( residue * 10 ) % divisor
-            + use hashmap to record residue and occuring positions to handle recurring
-        - concatenate symbol, integer part, dot, fraction part (possibly with parentheses)
-
-
-#### Iterator<a id="basics-iterator"></a>
-* ListIterator vs iterator: additional interface for 
-  * iterating bidirectional
-  * remove elements while iterating
-* iterator vs for-each loop: remove elements while iterating/avoid ConcurrentModificationException
-```java
-List<Integer> list = ...; // 1, 2, 3, 4
-Iterator<Integer> iterator = list.iterator();
-while ( iterator.hasNext() )
-{
-    if ( iterator.next() == 3 )
-    {
-        iterator.remove()
-    }
-}
-// list 1, 2, 4
-```
-
 #### Error handling<a id="error-handling"></a>
 * Types
   * logs (handle errors later, first restart)
@@ -570,9 +431,9 @@ while ( iterator.hasNext() )
 * treemap: red-black tree
 * priorityqueue: array
 
-### Learned lessons: data structures <a id="learned-lessons-datat-structures"></a>
+### Data structures <a id="ds"></a>
 
-#### Progressive enhancement on data structures <a id="prog-ds"></a>
+#### Data structure relationships<a id="ds-relationship"></a>
 * support accuracy: float/double -> BigDecimal
 * support array resize: array -> arrayList
 * support lookup/delete by key: priorityqueue -> treemap
@@ -583,19 +444,25 @@ while ( iterator.hasNext() )
 * space efficiency in dynamic programming: 2D memorization array -> rolling 1D memorization array
 * space efficiency in boolean array: Boolean[] -> boolean[] -> BitSet
 
-#### Type conversions<a id="basics-type-conversions"></a>
+#### Type size<a id="ds-type-size"></a>
+* Reference types: 32-bit system (32 bit), 64-bit system (64 bit)
+* Primitive types: boolean (8 bit), byte (8 bit), char (16 bit), short (16 bit), int (32 bit), long (64 bit), float (32 bit), double (64 bit)
+
+#### Type conversions<a id="ds-type-conversions"></a>
+##### Automated cast<a id="ds-type-conversions-automated-cast"></a>
 * Convert char to int, does not need explicit conversion
 ```java
 value = value * 10 +  s.charAt( currPos ) - '0' ; 
 ```
 
+##### Between string and integer <a id="ds-type-conversions-string-and-integer"></a>
 * Convert string to int
 ```java
 String str = "-2";
 int intValue = Integer.parseInt( str );
 ```
 
-##### Between array and collections <a id="basics-type-conversions-array-and-collections"></a>
+##### Between array and collections <a id="ds-type-conversions-array-and-collections"></a>
 * Array to collections 
   + To convert array of reference types into collections, there is an API Arrays.asList(). Then List collection could be easily casted to set/map collections. 
   + To convert array of primtive types into collections, need to do it manually.
@@ -622,7 +489,7 @@ for ( int num : nums )
   + There are built-in interfaces for this such as Object[] collections.toArray() or collections.toArray(T[] array)
   + Honestly, both of them are really ugly and would better to do it manually.
 
-##### Between collections <a id="basics-type-conversions-array-and-collections"></a>
+##### Between collections <a id="ds-type-conversions-collections"></a>
 * Map and list
 * Set and list
 * Map and set
@@ -648,36 +515,66 @@ Set<String> set = list.stream().collect( Collectors.toSet() );
   - invert the sign of the array (circular array maximum sum)
   - break the circle (house robber II)
 
-#### String <a id="ds-string"></a>
-* Only alphabetic characters, ascii characters, or unicode characters
+##### Array sum<a id="ds-array-array-sum">
+Array sum related questions can be divided into the following categories (see algorithm section of this readme for furture details)
+* Two pointers
+  - Begin and end type: Two sum II and variants (3Sum, 3Sum closest, 3Sum smaller)
+  - Window type: Minimize size subarray sum
+* Hashmap
+  - Two sum
+  - Maximize size subarray sum equals K
+* Backtrack
+  - Combination sum I/II/II
+* Dynamic programming
+  - One sequence: maximum subarray
+  - Backpack type: Combination sum IV
 
-#### LinkedList <a id="ds-linkedlist"></a>
-* When linked list is used in combination with counters inside a while loop, it is really error-prone because the programmer needs to increment two places inside each loop. For while loop, it is a better practice to use blank space to separate the three sections including preparing for next round loop, do job in this round loop and move to next round loop.
+#### String <a id="ds-string"></a>
+##### String vs StringBuilder vs StringBuffer <a id="ds-string-tradeoffs"></a>
+
+##### Encode and decode <a id="ds-string-encode-decode"></a>
+
+##### Palindrome <a id="ds-string-palindrome"></a>
+
+#### Collections <a id="ds-collections"></a>
+##### Iterator <a id="ds-collections-iterator"></a>
+* ListIterator vs iterator: additional interface for 
+  * iterating bidirectional
+  * remove elements while iterating
+* iterator vs for-each loop: remove elements while iterating/avoid ConcurrentModificationException
 ```java
-    private ListNode reverseKNodes( ListNode head, int k )
+List<Integer> list = ...; // 1, 2, 3, 4
+Iterator<Integer> iterator = list.iterator();
+while ( iterator.hasNext() )
+{
+    if ( iterator.next() == 3 )
     {
-      ListNode dummyHead = new ListNode( 0 );
-      ListNode currNode = head;
-      int count = 0;
-      while ( currNode != null 
-          && count < k )
-      {
-        // prepare for next round loop
-        ListNode dummyHeadNextBuffer = dummyHead.next;
-        ListNode currNodeNextBuffer = currNode.next;
-        
-        // ... do job in  this round loop
-        dummyHead.next = currNode;
-        currNode.next = dummyHeadNextBuffer;
-        
-        // move to next round loop
-        currNode = currNodeNextBuffer;
-        count++;
-      }
-      return dummyHead.next;
+        iterator.remove()
     }
+}
+// list 1, 2, 4
 ```
-* Reverse list recursively, the key point here is record the reversed list tail before recursion
+##### Immutability <a id=""></a>
+* If do not want to change the original array/list, could create a copy instead.
+```java
+// array
+int[] nums = new int[]{-1, 0, 1, 2};
+int[] numsCopy = nums.clone();
+// list
+// java best practice: Given all of the problems associated with Cloneable, it’s safe to say that other interfaces should not extend it, and that classes designed for inheritance (Item 17) 
+List<Integer> list = new ArrayList<>();
+List<Integer> listCopy = new ArrayList<>( list );
+```
+
+#### List <a id="ds-list"></a>
+##### ArrayList vs LinkedList <a id="ds-list-tradeoffs"></a>
+
+##### LinkedListNode<a id="ds-list-linkedlistnode"></a>
+
+##### Common tasks<a id="ds-list-common-tasks"></a>
+* Reorder
+* Reverse list 
+  - recursively, the key point here is record the reversed list tail before recursion
 ```java
   public ListNode reverseListRecusively( ListNode head )
   {
@@ -696,28 +593,29 @@ Set<String> set = list.stream().collect( Collectors.toSet() );
 ```
 
 #### Stack <a id="ds-stack"></a>
-* When popping elements from stack, always check if the stack is empty. Otherwise, there might be a EmptyStackException()
-* Commonly used tricks (Example problems: min stack, trapping rain water, largest rectangle in histogram, longest valid parentheses)
-  * Using stack to maintains a continuous increasing/decreasing sequence
-  * Push the index of array entries into stack
+##### Calculator <a id="ds-stack-calculator"></a>
+##### Parentheses <a id="ds-stack-parent"></a>
   
 #### Queue <a id="ds-queue"></a>
 
 #### PriorityQueue <a id="ds-priorityqueue"></a>
+##### Heapify <a id="ds-priorityqueue-heapify"></a>
+##### Sift up/down <a id="ds-priorityqueue-sift-up-down"></a>
+##### Improve built-in remove O(n)
 * Built-in implementation remove() method for priorityqueue has O(n) time complexity.
   -  O(n) time is spent on looping through entire queue to find the element to be removed. O(logn) is used to remove the element
   -  But O(n) could be easily improved to O(logn) by adding an additional Map&lt;T, Node&gt; existingNodes. When Node has duplicate values, a counter could be added as Node class instance variable.
 
-* Lambda expression inside PriorityQueue elements comparison
+##### Lambda expression as comparator <a id="ds-priorityqueue-lambda-expression"></a>
 ```java
 PriorityQueue<NumAndFreq> maxQueue = new PriorityQueue<>( ( o1, o2 ) -> ( o2.freq - o1.freq ) ); // decreasing order
 PriorityQueue<NumAndFreq> minQueue = new PriorityQueue<>( ( o1, o2 ) -> ( o1.freq - o2.freq ) ); // increasing order
 ```
 
-* Top K problems
-  + Calculate the top K most frequent characters in a string 
-    - Use TreeMap to maintain topK sorted order. Suppose m is the number of input and n is the number of distinct input, then build treemap requires O(mlogn),  + nlogn) complexity.
-    - A more efficient approach is to use HashMap + PriorityQueue. 
+##### Top K problems <a id="ds-priorityqueue-top-k"></a>
+* Calculate the top K most frequent characters in a string 
+  - Use TreeMap to maintain topK sorted order. Suppose m is the number of input and n is the number of distinct input, then build treemap requires O(mlogn),  + nlogn) complexity.
+  - A more efficient approach is to use HashMap + PriorityQueue. 
 ```java      
       // initialize
       Map<Character, Integer> histogram = new HashMap<>();
@@ -736,6 +634,8 @@ PriorityQueue<NumAndFreq> minQueue = new PriorityQueue<>( ( o1, o2 ) -> ( o1.fre
 
 
 #### Tree <a id="ds-tree"></a>
+##### Build <a id="ds-tree-build"></a>
+##### Traversal <a id="ds-tree-traversal"></a>
 * Tree iterative traversal with O(logn) space: preorder/inorder/postorder traversal
 ```java
 class Pair
@@ -832,6 +732,8 @@ public void treeHighSpaceTraverse( TreeNode root, int order )
   } 
 ```
 
+##### View <a id="ds-tree-view"></a>
+##### Serialize/Deserialize <a id="ds-tree-serialize-deserialize"></a>
 * NAray-tree serialization and deserialization
   - There are two popular ways to serialize a N-Aray tree: preorder and level-order. Preorder leads to a natural recursive implementation. Level-order leads to a natural iterative implementation. 
 ```java
@@ -910,6 +812,9 @@ public class NArayNode
   }
 ```
 
+##### Path on tree <a id="ds-tree-path"></a>
+
+##### Segment tree <a id="ds-tree-segment-tree"></a>
 * Segment Tree: Range sum query and update in O(logn) time
 ```java
 class SegmentTreeNode
@@ -992,7 +897,7 @@ class SegmentTreeNode
   }
 ```
 
-#### Binary search tree<a id="ds-binary-search-tree"></a>
+##### Binary search tree<a id="ds-tree-binary-search-tree"></a>
 * Used to store a collection of items in sorted form
 * The definition of BST is left <= middle < right. Pay attention to the equals sign.
 * Get inorder traversal predecessor/successor
@@ -1061,8 +966,11 @@ class SegmentTreeNode
 ```
 
 #### HashMap <a id="ds-hashmap"></a>
+##### Best practices <a id="ds-hashmap-best-practices"></a>
 * Use Double as hashmap keys is a bad practice. Especially if needing to perform calculations on double keys, the hash of double could mess up.
 * Use Object as hashmap keys. When the hashCode() and equals(Object o) methods are not overriden by your class, the default implementation are used. The default behavior is to treat all objects as different, unless they are the same object. IdentityHashMap always does this by using reference-equality in place of object-equality
+
+##### Intersection <a id="ds-hashmap-intersection"></a>
 * Compute the intersection of two hashmap/hashset
 ```java
 Map<Integer, String> mapA = ...; 
@@ -1078,7 +986,14 @@ Set<Integer> setB = ...;
 setA.retainsAll( setB );
 
 ```
-* A popular use case for hashmap in interview is frequency counting, namely histogram. Based on this, it is usually required to output the histogram in desending order. A straightforward approach is to use TreeMap for frequency calculating. But this will result in O(mlogn + nlogn) complexity, where m is the number of input and n is the number of distinct input. A more efficient approach is to use HashMap + PriorityQueue
+
+##### Histogram <a id="ds-hashmap-histogram"></a>
+* A popular use case for hashmap in interview is frequency counting, namely histogram. 
+  + If the character set only contains lower-case characters, could consider using a bitmap instead, which is much faster.
+  + If the character set is unicode, could consider using hashmap.
+* Solutions: ( suppose m is the number of input and n is the number of distinct input )
+  + Using treeMap: this will result in O(mlogn + nlogn) complexity, 
+  + Use HashMap + PriorityQueue
 ```java
       // initialize
       Map<Character, Integer> histogram = new HashMap<>();
@@ -1094,11 +1009,9 @@ setA.retainsAll( setB );
                      .map( o -> o.getKey() )
                      .collect( Collectors.toList() );
 ```
-=======
-* HashMap.keySet().retainAll( Set ) computes intersection of two sets
-* A popular use case for hashmap in interview is frequency counting, namely histogram. 
-  + If the character set only contains lower-case characters, could consider using a bitmap instead, which is much faster.
-  + If the character set is unicode, could consider using hashmap.
+
+##### Anagram <a id="ds-hashmap-anagram"></a>
+
 
 #### TreeMap <a id="ds-treemap"></a>
 * Get Key/Entry APIs: firstKey/firstEntry, lastKey/lastEntry, lowerKey/lowerEntry, higherKey/higherEntry, CeilingKey/CeilingEntry, floorKey/floorEntry
@@ -1106,6 +1019,7 @@ setA.retainsAll( setB );
 * Get Subset APIs: tailMap/headMap/subMap
 
 #### Graph <a id="ds-graph"></a>
+##### Edge list vs Adjacent list vs Adjacent matrix<a id="ds-graph-tradeoffs"></a>
 * Time complexity comparison between different graph representation
 
 | Representation\Complexity | Delete a vertex | Delete an edge | Edge exists? | iterating vertex neighbors |
@@ -1115,7 +1029,7 @@ setA.retainsAll( setB );
 | Adjacent List | O(E) | O(list length) | O(list length) | O(list length) |
 
 * Use cases for different representations
-  * Edge list is usually not used because looping through neighbor of a vertex is too expensive. This makes it really appropriate for many graph algorithms (bfs, dfs).
+  * Edge list is usually not used because looping through neighbor of a vertex is too expensive. This makes it really appropriate for many graph algo (bfs, dfs).
   * Adjacent matrix is usually used for dense graph, where vertexes are seldomly added or removed.
   * Adjacent list is usually used for sparse graph to save space.
 
@@ -1135,6 +1049,8 @@ List<GraphNode> graph =...;
 // second way, graph itself is more concise. But need additional data structures like Set<Integer> visited and Set<Integer> discovered to track dfs traverse status
 Map<Integer, Set<Integer>> graph 
 ```
+
+##### Build graph <a id="ds-graph-build"></a>
 * **Building graph**, it is will be less error-prone to separate the phase of building vertexes and edges. When they are merged together, it is easy to forget about the isolated vertexes. In a common setting, usually asked to build a graph given the number of vertex int n and an array of edges. 
 ```java
 public Map<Integer, Set<Integer>> buildGraph( int n, int[][] edges )
@@ -1161,119 +1077,98 @@ public Map<Integer, Set<Integer>> buildGraph( int n, int[][] edges )
 * **Detect cycles inside directed graph** with dfs + visited set + discovered set.
 
 #### Trie <a id="ds-trie"></a>
-* Use cases: 
-   * Find prefix of string
-   * Traverse character by character
-   * Compared with hashmap: 
-      * Space complexity: when storing a list of words (Especially when these words share prefix), using trie save space. 
-      * Time complexity: to compute hashcode for a string, O(n) time complexity; find/insert a string in a trie, the same
-   * But no built-in implementation in Java core
-* Definitions: iterative implementation much more concise than recursive implementation.
+##### Use case <a id="ds-trie-use-case"></a>
+* Find prefix of string
+* Traverse character by character
+* Compared with hashmap: 
+   * Space complexity: when storing a list of words (Especially when these words share prefix), using trie save space. 
+   * Time complexity: to compute hashcode for a string, O(n) time complexity; find/insert a string in a trie, the same
+##### Build trie <a id="ds-trie-build"></a>
+##### Common tasks <a id="ds-trie-common-tasks"></a>
+
+
+### Algorithms <a id="algo"></a>
+#### Random <a id="algo-random"></a>
+#### Math <a id="algo-math"></a>
+##### Mod <a id="algo-math-mod"></a>
+* judge whether a value is even or odd
+  - Use num % 2 != 0 rather than num % 2 == 1 because of negative number mod ( e.g. -5 % 2 == -1 )
+  - To guarantee mod result is always positive, if knowing num range RANGE, could consider ( num + RANGE ) % RANGE 
+##### Power <a id="algo-math-power"></a>
+* Power of integer: Java does not provide a built-in function for Integer values
+  - solution 1: It has a built-in function double Math.pow( double, double ). But the computation cost for double is much higher than int and the result needs to be downcasted.
+  - solution 2: Use multiply instead when exponent is low. 
+  - solution 3: When 2 is radix, use bit shifting
+  - solution 4: Implement in-house pow for integers based on divide and conquer
+##### Sqrt <a id="algo-math-sqrt"></a>
+##### Divide <a id="algo-math-divide"></a>
+* Divide two integers ( useful names: dividend/numerator, divisor/denominator, quotient, residue )
+  * handle boundary cases ( 0, Integer.MIN_VALUE )
+    + return int quotient
+    + return double quotient
+        - record quotient symbol ( neg/pos )
+        - convert dividend and divisor to positive
+        - calculate integer part 
+        - calculate fraction part 
+            + quotient = ( residue * 10 ) / divisor
+            + residue = ( residue * 10 ) % divisor
+            + use hashmap to record residue and occuring positions to handle recurring
+        - concatenate symbol, integer part, dot, fraction part (possibly with parentheses)
+##### Multiply <a id="algo-math-multiply"></a>
+##### Prime <a id="algo-math-prime"></a>
+* Check for primality
+  * Naive solution: Iterate from 2 through i
+  * Slightly better: Iterate from 2 through sqrt(i)
+* Generate a list of primes: the sieve of eratosthenes
+  * Start with a list of all the numbers up through some value max.
+  * First cross off all numbers divisible by 2.
+  * Then look for the next prime and cross off all numbers divisible by it. 
+  * By continuing doing this, we wind up with a list of prime numbers from 2 through max.
 ```java
-class TrieNode 
+boolean[] sieveOfEratosthenes( int max )
 {
-    private final static int CHARSET_SIZE = 26;
-    public TrieNode[] children;
-    public boolean isLeaf;
-    public char val;
+    boolean[] flags = new boolean[max + 1];
+    int count = 0;
     
-    // Initialize your data structure here.
-    public TrieNode() 
+    init(flags);
+    int prime = 2;
+    
+    while ( prime <= Math.square(max))
     {
-        children = new TrieNode[CHARSET_SIZE];
+        // cross off remaining multiples of prime
+        crossOff( flags, prime );
+        
+        // find next value which is prime
+        prime = getNextPrime( flags, prime );
     }
-    
-    public TrieNode( char val )
+    return flags;
+}
+
+void crossOff( boolean[] flags, int prime )
+{
+    for (int i = prime * prime; i < flags.length; i += prime )
     {
-        this();
-        this.val = val;
+        flags[i] = false;
     }
 }
 
-public class TrieIterative
+int getNextPrime( boolean[] flags, int prime )
 {
-    private TrieNode root;
-
-    public TrieIterative() 
+    int next = prime + 1;
+    while ( next < flags.length && !flags[next] )
     {
-        root = new TrieNode();
+        next++;
     }
-
-    // Inserts a word into the trie.
-    public void insert(String word) 
-    {
-        TrieNode currNode = root;
-        for ( int i = 0; i < word.length(); i++ )
-        {
-            int nextNodePos = (int)( word.charAt( i ) - 'a' );
-            if ( currNode.children[nextNodePos] == null )
-            {
-                TrieNode node = new TrieNode( word.charAt( i ) );
-                currNode.children[nextNodePos] = node;
-            }
-            currNode = currNode.children[nextNodePos];
-
-            if ( i == word.length() - 1 )
-            {
-                currNode.isLeaf = true;
-            }
-        }
-    }
-    
-    // Returns if the word is in the trie.
-    public boolean search( String word )
-    {
-        TrieNode currNode = root;
-        for ( int i = 0; i < word.length(); i++ )
-        {
-            int nextNodePos = (int)( word.charAt( i ) - 'a' );
-
-            if ( currNode.children[nextNodePos] == null )
-            {
-                return false;
-            }
-            // prefix exists, but not word
-            if ( i == word.length() - 1 
-                && !currNode.children[nextNodePos].isLeaf )
-            {
-                return false;
-            }                
-
-            currNode = currNode.children[nextNodePos];
-        }
-        return true;
-    }
-
-    // Returns if there is any word in the trie
-    // that starts with the given prefix.
-    public boolean startsWith(String prefix) 
-    {
-        TrieNode currNode = root;
-        for ( int i = 0; i < prefix.length(); i++ )
-        {
-            int nextNodePos = (int)( prefix.charAt( i ) - 'a' );
-
-            if ( currNode.children[nextNodePos] == null )
-            {
-                return false;
-            }
-
-            currNode = currNode.children[nextNodePos];
-        }
-        return true;        
-    }    
+    return next;
 }
 ```
 
-
-### Learned lessons: algorithms <a id="learned-lessons-algorithms"></a>
-
-#### Bit manipulation <a id="algorithms-bit-manipulation"></a>
-##### Arithmetic vs logic right shift <a id="algorithms-bit-manipulation-arithmetic-vs-logic"></a>
+#### Bit manipulation <a id="algo-bit-manipulation"></a>
+##### Arithmetic vs logic right shift <a id="algo-bit-manipulation-arithmetic-vs-logic"></a>
   * Arithmetic right shift >>, shift bits to the right but fill in the new bits with the value of the sign bit
   * Logic right shift >>>, shift bits to the right but fill in the new bits with 0.
 
-##### Common tasks <a id="algorithms-bit-manipulation-common-tasks"></a>
+##### Common tasks <a id="algo-bit-manipulation-common-tasks"></a>
 * get bit, set bit, clear bit and update bit
 ```java
 boolean getBit( int num, int i )
@@ -1315,8 +1210,8 @@ int updateBit(int num, int i, boolean bitIs1)
 }
 ```
 
-#### Non-DP Memorization <a id="algorithms-non-dp-memorization"></a>
-##### Array <a id="algorithms-non-dp-memo-array"></a>
+#### Non-DP Memorization <a id="algo-non-dp-memorization"></a>
+##### Array <a id="algo-non-dp-memo-array"></a>
 * 1D/2D Prefix sum
 ```java
 // 1D prefix sum
@@ -1343,28 +1238,15 @@ for ( int i = 1; i <= array2D.length; i++ )
 int areaSum = prefixSum2D[x_e][y_e] - prefixSum2D[x_s-1][y_e] - prefixSum2D[x_e][y_s-1] + prefixSum2D[x_s-1][y_s-1]
 ```
 
-* Array sum
-  + Two pointers
-    - Begin and end type: Two sum II and variants (3Sum, 3Sum closest, 3Sum smaller)
-    - Window type: Minimize size subarray sum
-  + Hashmap
-    - Two sum
-    - Maximize size subarray sum equals K
-  + Backtrack
-    - Combination sum I/II/II
-  + Dynamic programming
-    - One sequence: maximum subarray
-    - Backpack type: Combination sum IV
+##### Stack <a id="algo-non-dp-memo-stack"></a>
+* Maintain inc/dec sequences
+  + Example problems: min stack, trapping rain water, largest rectangle in histogram, longest valid parentheses
 
-
-##### Stack <a id="algorithms-non-dp-memo-stack"></a>
-* Longest valid parentheses
-
-##### HashMap <a id="algorithms-non-dp-memo-hashmap"></a>
+##### HashMap <a id="algo-non-dp-memo-hashmap"></a>
 * Maximum size subarray sums to K, clone graph, two sum
 
-#### Two pointers <a id="algorithms-two-pointer"></a>
-##### Begin and end type <a id="algorithms-boundary-to-center"></a>
+#### Two pointers <a id="algo-two-pointer"></a>
+##### Begin and end type <a id="algo-boundary-to-center"></a>
 * Two sum type
   - example problems: two sum (sorted), three sum, four sum, three sum closest, three sum smaller
 ```java
@@ -1408,11 +1290,11 @@ else
      }
 ```
 
-##### Slow and fast type <a id="algorithms-slow-and-fast"></a>
+##### Slow and fast type <a id="algo-slow-and-fast"></a>
 * Find the middle of linked list
 * Find linked list cycle
 
-##### Window type <a id="algorithms-window"></a>
+##### Window type <a id="algo-window"></a>
 * Improve naive two level for loop to for-outer loop + while inner loop 
 * E.g. minimum window substring, minimum size subarray sum, Longest substring with at most K distinct characters, Longest substring without repeating characters
 ```java
@@ -1433,7 +1315,7 @@ for ( i = 0; i < n; i++ )
 }
 ```
 
-##### Two arrays type <a id="algorithms-two-arrays"></a>
+##### Two arrays type <a id="algo-two-arrays"></a>
 * Interval related (merge interval, insert interval)
 ```java
 public List<Interval> insert( List<Interval> intervals, Interval newInterval )
@@ -1469,8 +1351,8 @@ public List<Interval> insert( List<Interval> intervals, Interval newInterval )
 }
 ```
 
-#### Sort <a id="algorithms-sort"></a>
-* Sort classification ( only for O(nlogn) and O(n) algorithms )
+#### Sort <a id="algo-sort"></a>
+##### Common sorting algorithms <a id="algo-sort-common-algo"></a>
 
 | Algorithm | memory    | Use case  | 
 | --------------------- |:---------:| -----:|  
@@ -1479,20 +1361,12 @@ public List<Interval> insert( List<Interval> intervals, Interval newInterval )
 | Heapsort   | O(1)     |  unstable sort |
 | Bucketsort | O(1)     |  when knowing range and evenly distributed O(n+k) |
 
+##### Built-in sort interfaces <a id="algo-built-in-sort-interfaces"></a>
 * Sort interfaces: Arrays.sort( array, comparator ) Collections.sort( collection, comparator ) method, list.sort( comparator )
-  + If do not want to change the original array/list, could create a copy instead.
-```java
-// array
-int[] nums = new int[]{-1, 0, 1, 2};
-int[] numsCopy = nums.clone();
-// list
-// java best practice: Given all of the problems associated with Cloneable, it’s safe to say that other interfaces should not extend it, and that classes designed for inheritance (Item 17) 
-List<Integer> list = new ArrayList<>();
-List<Integer> listCopy = new ArrayList<>( list );
-```
 
-* Interval
-  + Judge whether intervals overlap
+##### Types <a id="algo-sort-types"></a>
+* Interval-related<a id="algo-sort-types-interval-related"></a>
+  - Judge whether intervals overlap
 ```java
 boolean isOverlapping( Interval o1, Interval o2 )
 {
@@ -1506,7 +1380,7 @@ boolean isOverlapping( Interval o1, Interval o2 )
   }
 }
 ```
-  + Sort intervals
+  - Sort intervals
 ```java
 List<Interval> list = //...
 // sort according to starting point
@@ -1516,7 +1390,7 @@ list.sort( (o1,o2) -> o1.end - o2.end );
 // sort according to both starting and ending point
 list.sort( (o1,o2) -> o1.start != o2.start ? o1.start - o2.start : o1.end - o2.end );
 ```
-  + Split intervals into Pair(int start, boolean isStart), Pair(int end, boolean isEnd)
+  - Split intervals into Pair(int start, boolean isStart), Pair(int end, boolean isEnd)
 ```java
 List<Interval> intervalList = //...
 List<Pair> pairList = //...
@@ -1527,9 +1401,10 @@ for ( Interval interval : intervalList )
 }
 pairList.sort( (o1, o2) -> (o1.start-o2.start) );
 ```
+  - Top K<a id="algo-sort-types-topK"></a>
 
-#### Binary search <a id="algorithms-binary-search"></a>
-##### Best practices - iterative/recursive version 
+#### Binary search <a id="algo-binary-search"></a>
+##### Best practices <a id="algo-binary-search-best-practices"></a>
 ```java
 public int binarySearchIterative( int[] array, int target)
 {
@@ -1599,27 +1474,22 @@ public int binarySearchRecursive( int[] array, int target, int start, int end )
     }
 }
 ```
-##### How to handle duplicates <a id="algorithms-binary-search-handle-duplicates"></a>
+##### How to handle duplicates <a id="algo-binary-search-handle-duplicates"></a>
 
-##### First/Last smaller/bigger than target <a id="algorithms-binary-search-first-last-smaller-bigger"></a>
+##### Types <a id="algo-binary-search-types"></a>
+* First/Last smaller/bigger than target <a id="algo-binary-search-first-last-smaller-bigger"></a>
 
-##### Rotated array <a id="algorithms-binary-search-rotated-array"></a>
-  - Find first element smaller than target
-      - e.g. find minimum element in rotated sorted array ( target: array[array.length-1])
-  - Find last element smaller than target
-      - e.g. search insertion position
-  - Convert a range of binary search problem into variants of essence form
+* Rotated array <a id="algo-binary-search-rotated-array"></a>
 
-##### Two dimensional array <a id="algorithms-binary-search-2d-array"></a>
+* Two dimensional array <a id="algo-binary-search-2d-array"></a>
 
-
-#### Recursive functions <a id="algorithms-recursion"></a>
-##### Recursive vs iterative solutions <a id="algorithms-recursive-iterative"></a>
-  - Recursive algorithms can be very space inefficient. Each recursive call adds a new layer to the stack. If the algorithm recurses to a depth of n, it uses at least O(n) space.
-  - All recursive algorithms can be implemented iteratively, although sometimes the code is more complex. 
+#### Recursive functions <a id="algo-recursion"></a>
+##### Recursive vs iterative solutions <a id="algo-recursive-iterative"></a>
+  - Recursive algo can be very space inefficient. Each recursive call adds a new layer to the stack. If the algorithm recurses to a depth of n, it uses at least O(n) space.
+  - All recursive algo can be implemented iteratively, although sometimes the code is more complex. 
   - Before diving into writing recursive code, ask myself how hard it would be to implement iteratively and discuss tradeoffs with your interviewer.
 
-##### Recursion time complexity cheat sheet <a id="algorithms-recursive-tc"></a>
+##### Recursion time complexity cheat sheet <a id="algo-recursive-tc"></a>
 
 | Recurrence | Algorithm           | Big-O Solution  |
 | --------------------- |:-------------:| -----:|
@@ -1630,7 +1500,7 @@ public int binarySearchRecursive( int[] array, int target, int start, int end )
 | T(n) = T(n-1) + O(n)  | Selection sort      |  O(n^2) |
 
 
-##### Steps in using recursion <a id="algorithms-recursion-problems-to-consider"></a>
+##### Steps in using recursion <a id="algo-recursion-problems-to-consider"></a>
   - What does the recursive function do?
     + Take what parameters
     + Do what
@@ -1639,7 +1509,7 @@ public int binarySearchRecursive( int[] array, int target, int start, int end )
   - Initialization
   - Prunning
 
-##### How to return multiple results from recursive functions<a id="algorithms-recursion-return-multiple-results"></a>
+##### How to return multiple results from recursive functions<a id="algo-recursion-return-multiple-results"></a>
   - Use global variable. 
     + The first is to use private instance variables to store results
     + The second is to use a mutable argument of type ( int[], List&lt;&gt; ). Modify the value of this argument while travering.
@@ -1674,7 +1544,7 @@ private class ResultWrapper
 }
 ```
 
-##### Avoid duplicated recursion <a id="algorithms-recursion-avoid-duplicates"></a>
+##### Avoid duplicated recursion <a id="algo-recursion-avoid-duplicated-recursion"></a>
 * ensuring that the never two recursion tree branches overlap 
 ```java
 if ( i > 0 && candidates[i] == candidates[i-1] )
@@ -1684,13 +1554,13 @@ if ( i > 0 && candidates[i] == candidates[i-1] )
 }
 // invoking functions based on index i
 ```
-* dp
+##### Types <a id="algo-recursion-types"></a>
 
-##### Tree-based recursion <a id="algorithms-recursion-tree-based"></a>
-    - One of the key problems resulting from TreeNode definition is that TreeNode has no info about its parent node. But to resolve a tree-based problem, it is usually required to combine child and parent information.
-    - Two basic strategies to solve this problem
-      + Pass parent node as an input argument to child recursive function, then resolve problem inside child function. This approach usually needs some global variables, as discussed before.
-      + Solve children recursive functions first, then resolve problem inside parent function. This approach usually needs some complex return value types, as discussed before. 
+* Tree-based recursion <a id="algo-recursion-tree-based"></a>
+  - One of the key problems resulting from TreeNode definition is that TreeNode has no info about its parent node. But to resolve a tree-based problem, it is usually required to combine child and parent information.
+  - Two basic strategies to solve this problem
+    + Pass parent node as an input argument to child recursive function, then resolve problem inside child function. This approach usually needs some global variables, as discussed before.
+    + Solve children recursive functions first, then resolve problem inside parent function. This approach usually needs some complex return value types, as discussed before. 
 ```java
 // pass parent node as an input argument to child
 public void  firstApproach( TreeNode currNode, TreeNode parentNode, int[] longestPath )
@@ -1713,11 +1583,11 @@ public ResultWrapper secondApproach( TreeNode currNode )
   // return new ResultWrapper(...);
 }
 ```
-##### String-based recursion < a id="algorithms-recursion-string-based"></a>
-##### Array-based recursion < a id="algorithms-recursion-array-based"></a>
+* String-based recursion < a id="algo-recursion-string-based"></a>
+* Array-based recursion < a id="algo-recursion-array-based"></a>
 
-#### Backtrack <a id="algorithms-backtrack"></a>
-##### Use pattern <a id="algorithms-backtrack-use-pattern"></a>
+#### Backtrack <a id="algo-backtrack"></a>
+##### Best practices <a id="algo-backtrack-best-practices"></a>
 ```java
 // usually occurs at the beginning and ending of a recursive function
 public void recursivefunction()
@@ -1727,12 +1597,12 @@ public void recursivefunction()
     backtracking backwards
 }
 ```
+##### Types <a id="algo-recursion-types"></a>
+* Combination <a id="algo-backtrack-combination"></a>
+* Permutation <a id="algo-backtrack-permutation"></a>
 
-##### Combination sum <a id="algorithms-backtrack-combination-sum"></a>
-* 
-
-#### Graph <a id="algorithms-graph"></a>
-##### Grid-based graph patterns <a id="algorithms-grid"></a>
+#### Graph <a id="algo-graph"></a>
+##### Grid-based graph best practices <a id="algo-grid"></a>
 * How to store coordinates: 
    * A customized class Coor
    * If allowing to modify grid, could temporarily place special chars/values to indicate that this position has been visited before. Depending on whether input int grid[][] is a defensive copy, we could decide whether to recover the grid[][] by replacing previously set special chars/values.
@@ -1755,7 +1625,7 @@ class Coor
 }
 ```
 
-##### Breath first search <a id="algorithms-bfs"></a>
+##### Breath first search <a id="algo-bfs"></a>
 * When the problem asks for the minimum 
 ```java
 public void bfsMainFunction( T[][] grid )
@@ -1804,7 +1674,7 @@ public void bfsMainFunction( T[][] grid )
 }
 ```
   
-##### Depth first search <a id="algorithms-dfs"></a>
+##### Depth first search <a id="algo-dfs"></a>
 * When the problem requires a complete search and asks for traversal paths (record path in bfs is much more complicated)
 * Grid-based ( e.g. int[][] grid )
 ```java
@@ -1840,7 +1710,7 @@ private void dfs( T[][] grid, int x, int y, boolean[][] discovered )
 
 ```
 
-##### Topological sort <a id="algorithms-topo"></a>
+##### Topological sort <a id="algo-topo"></a>
 * There are basically two categories of methods for topological sort. The first one is greedy algorithm with O(|V|^2 + |E|) time complexity. The second is based on depth first search with O(|V| + |E|) time complexity. Here only discusses DFS based approach. 
 * When using DFS based approach, there are two cases which should be taken care of. The first one is what if there exists no topological order at all. The second is how to return topological order.
    * What if there exists no topological order - a cycle is detected. 
@@ -1908,16 +1778,16 @@ private void dfs( T[][] grid, int x, int y, boolean[][] discovered )
     }
 ```
 
-##### Union find <a id="algorithms-union-find"></a>
+##### Union find <a id="algo-union-find"></a>
 * Suitable in a dynamically changing graph. Example problems: Number of Island II, find weakly connected components in directed graph, find connected components in undirected graph
 
-#### Greedy <a id="algorithms-greedy"></a>
-* Usually greedy algorithms are not covered in an interview setting:
-  - Greedy algorithms do not generalize as a useful way to decompose and solve problems. 
-  - Naive greedy algorithms are usually "short sighted" algorithms, which will not lead to global maximal. Working greedy algorithms are usually hard to think of. 
+#### Greedy <a id="algo-greedy"></a>
+* Usually greedy algo are not covered in an interview setting:
+  - Greedy algo do not generalize as a useful way to decompose and solve problems. 
+  - Naive greedy algo are usually "short sighted" algo, which will not lead to global maximal. Working greedy algo are usually hard to think of. 
 
-#### Dynamic-programming <a id="algorithms-dynamic-programming"></a>
-* Use cases: <a id="algorithms-dp-use-cases"></a>
+#### Dynamic-programming <a id="algo-dynamic-programming"></a>
+* Use cases: <a id="algo-dp-use-cases"></a>
   - When to use - optimize time complexity from O(n!,2^n) to O(n^2, n^3)
     + Calculate max or min
     + Calculate the number of solutions
@@ -1925,12 +1795,12 @@ private void dfs( T[][] grid, int x, int y, boolean[][] discovered )
   - When not to use - optimize time complexity from O(n^3, n^2) further
     + Calculate concrete solutions themselves rather than just the number of solutions
     + Input is a collection rather than a sequence (e.g. Longest consecutive sequence)
-* Problems to consider: <a id="algorithms-dp-problems-to-consider"></a>
+* Problems to consider: <a id="algo-dp-problems-to-consider"></a>
   - State: how to define dp[i] or dp[i][j]
   - Induction rule: how to calculate big problems into smaller ones
   - Initialization: starting point
   - Answer: ending point
-* Implementation methods: <a id="algorithms-dp-implementation-methods"></a>
+* Implementation methods: <a id="algo-dp-implementation-methods"></a>
   - Multi-loop: bottom-up approach
   - Memorized search: top-down approach
   - Use cases:
@@ -1939,7 +1809,7 @@ private void dfs( T[][] grid, int x, int y, boolean[][] discovered )
       * When it is easier to start thinking from the last step rather than the first step. Example: Burst ballons, Stone-game (Lintcode)
       * When the induction rule is not sequential, thus hard to define.  Example: Longest increasing subsequences in 2D (Lintcode)
       * When the initialization state is hard to find. Example: Longest increasing subsequences in 2D (Lintcode)
-* Memorization array tricks <a id="algorithms-dp-memorization-array-tricks"></a>
+* Memorization array tricks <a id="algo-dp-memorization-array-tricks"></a>
   - For non grid-based dynamic programming problems, for N number/character, array of size N+1 is allocated. The position at 0 index is used for specially used for initialization.
   - Rolling array
     + for 1D dp, e.g.
@@ -1992,43 +1862,43 @@ public int houseRobber_RollingArray( int[] A )
 }
 ```
 
-* Type: <a id="algorithms-dp-types"></a>
-  - Coordinate based <a id="algorithms-dp-types-coordinate"></a>
+* Type: <a id="algo-dp-types"></a>
+  - Coordinate based <a id="algo-dp-types-coordinate"></a>
     + Patterns:
       * state: f[x,y] represents goes to x,y position from starting point
       * induction rule: f[x,y] from f[x-1, y] or f[x, y-1]
       * initialization: f[0,0~width], f[0~height, 0]
       * answer: usually f[m,n]
     + Examples: Minimum Path Sum, Unique Path I�, Climbing stairs, Jump game I/II
-  - 1D sequence <a id="algorithms-dp-1d-sequence"></a>
+  - 1D sequence <a id="algo-dp-1d-sequence"></a>
     + Patterns:
       * state: f[i] represents first i position, digits, characters
       * induction rule: f[i] from f[j], j < i
       * initialize: f[0] = 0, f[1]
       * answer: f[n]
     + Examples: Longest increasing subsequence, Word break I, House robber
-  - 2D sequences <a id="algorithms-dp-2d-sequences"></a>
+  - 2D sequences <a id="algo-dp-2d-sequences"></a>
     + Patterns: 
       * state: f[i,j] represents the results of first i numbers/characters in sequence one matching the first j numbers/characters in sequence two
       * induction rule: how to decide f[i,j] from previous (varies a lot here)
       * initialize: f[0,i] and f[i,0]
       * answer: f[n,m] ( n = s1.length(), m = s2.length() )
     + Examples: Edit distance, Regular expression matching, Longest common subsequences, Maximal rectangle/Square
-  - Range based <a id="algorithms-dp-range-based"></a>
+  - Range based <a id="algo-dp-range-based"></a>
     + Patterns:
       * state: f[i,j] represents whether the substring from i to j is a palindrome
       * induction rule: f[i,j] = f[i+1,j-1] && (s[i] == s[j])
       * initialize: f[i][i] = true, f[i][i+1] = s[i] == s[i+1]
       * answer: f[0,n]
     + Examples: Palindrome partition II, Coins in a line III (Lintcode), Stone game, Burst ballons, Scramble string 
-  - Game <a id="algorithms-dp-game"></a>
+  - Game <a id="algo-dp-game"></a>
     + Patterns:
       * state: f[i] represents win/lose max/min profit for the first person
       * induction rule: avoid defining second person's state because second person always tries his best to defeat first person/make first person profit least.
       * initialize: varies with problem
       * answer: f[n]
     + Examples: Coin in a line (Lintcode), Coin in a line II (Lintcode), Flip game II
-  - Backpack <a id="algorithms-dp-backpack"></a>
+  - Backpack <a id="algo-dp-backpack"></a>
     + Patterns:
       * state: f[i][S]: whether the first i items could form S/Max value/number of ways
       * induction rule: varies with problems
@@ -2039,4 +1909,4 @@ public int houseRobber_RollingArray( int[] A )
 #### References <a id="references"></a>
 * Core Java Interview questions [blog: java-success.com](http://www.java-success.com/)
 * Coding and system design [blog: massive tech interview](http://massivetechinterview.blogspot.com/)
-* Algorithms tutorial [Algorithm tutorial](http://algorithms.tutorialhorizon.com/)
+* algo tutorial [Algorithm tutorial](http://algo.tutorialhorizon.com/)
