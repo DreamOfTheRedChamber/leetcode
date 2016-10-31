@@ -1,5 +1,6 @@
 package facebook.hard;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Ignore;
@@ -43,7 +44,7 @@ public class RegularExpressionMatching
     }
     
     private boolean isMatch( String s, String p, int sIndex, int pIndex )
-    {
+    {    	
     	if ( pIndex == -1 )
     	{
     		return sIndex == -1;
@@ -51,11 +52,12 @@ public class RegularExpressionMatching
     	
     	if ( p.charAt( pIndex ) == '*' )
     	{
-    		return isMatch( s, p, sIndex, pIndex - 2 )
-    				|| ( ( p.charAt( pIndex - 1 ) == s.charAt( sIndex ) || p.charAt( pIndex - 1 ) == '.') && isMatch( s, p, sIndex-1, pIndex ) ) ;
+    		return isMatch( s, p, sIndex, pIndex - 2 ) // * matching zero char, if string is valid, then pIndex >= 1. pIndex - 2 >= -1
+    				|| ( sIndex >= 0 && ( p.charAt( pIndex - 1 ) == s.charAt( sIndex ) || p.charAt( pIndex - 1 ) == '.') && isMatch( s, p, sIndex-1, pIndex ) ); // * match one char, then sIndex >= 0 to satisfy semantics here; matching multiple chars case will be handled recursively by matching one char case
     	}
     	else
     	{
+    		// match one char
     		return sIndex >= 0 
     				&& ( p.charAt( pIndex ) == s.charAt( sIndex ) || p.charAt( pIndex ) == '.' )
     				&& isMatch( s, p, sIndex - 1, pIndex - 1 );
@@ -100,5 +102,12 @@ public class RegularExpressionMatching
     	assertTrue( isMatch( "aaa", ".*" ) );
     	assertTrue( isMatch( "baa", ".*" ) );
     	assertTrue( isMatch( "aab", ".*" ) );    	    	
+    }
+    
+    @Test
+    public void errorProneTest()
+    {
+    	assertTrue( !isMatch( "a", "ab*a" ) );
+    	assertFalse( isMatch( "aab", "b.*" ) );
     }
 }
