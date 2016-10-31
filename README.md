@@ -67,7 +67,7 @@
       - [Build graph](#ds-graph-build)
     * [Trie](#ds-trie)
       - [Use case](#ds-trie-use-case)
-      - [Build trie](#ds-trie-build)
+      - [Trie definition](#ds-trie-def)
       - [Common tasks](#ds-trie-common-tasks)
 * [Algorithms](#algo)
     * [Random](#algo-random)
@@ -1081,11 +1081,82 @@ public Map<Integer, Set<Integer>> buildGraph( int n, int[][] edges )
 * Find prefix of string
 * Traverse character by character
 * Compared with hashmap: 
-   * Space complexity: when storing a list of words (Especially when these words share prefix), using trie save space. 
-   * Time complexity: to compute hashcode for a string, O(n) time complexity; find/insert a string in a trie, the same
-##### Build trie <a id="ds-trie-build"></a>
-##### Common tasks <a id="ds-trie-common-tasks"></a>
+   - Space complexity: when storing a list of words (Especially when these words share prefix), using trie save space. 
+   - Time complexity: to compute hashcode for a string, O(n) time complexity; find/insert a string in a trie, the same
+##### Trie definition <a id="ds-trie-def"></a>
+* Depending on the size of charset, children pointers could be either stored in a bitmap or hashmap. Although slightly suffering performance, hashmap implementation is more concise and generic.
+```java
+class Trie
+{
+  public TrieNode root;
+  // other functions
+}
 
+private class TrieNode
+{
+  public final int CHARSET_SIZE = 26;
+  public char val;
+  public Map<Character, TrieNode> children;     
+  public boolean isLeaf;
+  public TrieNode( char val )
+  {
+    this.val = val;
+    children = new HashMap<>( CHARSET_SIZE );
+  }     
+} 
+```
+##### Common tasks <a id="ds-trie-common-tasks"></a>
+* Add
+* Search (regular expression)
+* Start with
+```java
+// Adds a word into the data structure.
+public void addWord( String word )
+{
+  // error handling...
+  TrieNode curr = root;
+  for ( Character ch : word.toCharArray() )
+  {
+    curr.children.putIfAbsent( ch, new TrieNode( ch ) );
+    curr = curr.children.get( ch );
+  }
+  curr.isLeaf = true;
+}
+
+// Searches whether a word exists or not
+// startWith() has fewer constraints: does not need to check the boolean isLeaf flag
+public boolean search( String word )
+{
+  // error handling
+  return search( word, 0, root );
+}    
+private boolean search( String word, int index, TrieNode root )
+{
+  if ( root == null )
+  {
+    return false;
+  }
+  else if ( index == word.length() )
+  {
+    return root.isLeaf;
+  }
+  else if ( word.charAt( index ) != '.' )
+  {
+    return search( word, index + 1, root.children.get( word.charAt( index ) ) );        
+  }
+  else
+  {
+    for ( TrieNode child : root.children.values() )
+    {
+      if ( search( word, index + 1, child ) )
+      {
+        return true;
+      }             
+    }
+    return false;
+  }
+}
+```
 
 ### Algorithms <a id="algo"></a>
 #### Random <a id="algo-random"></a>
@@ -1882,7 +1953,7 @@ public int houseRobber_RollingArray( int[] A )
       * state: f[i,j] represents the results of first i numbers/characters in sequence one matching the first j numbers/characters in sequence two
       * induction rule: how to decide f[i,j] from previous (varies a lot here)
       * initialize: f[0,i] and f[i,0]
-      * answer: f[n,m] ( n = s1.length(), m = s2.length() )
+      * answer: f[n,m]( n = s1.length(), m = s2.length() )
     + Examples: Edit distance, Regular expression matching, Longest common subsequences, Maximal rectangle/Square
   - Range based <a id="algo-dp-range-based"></a>
     + Patterns:
