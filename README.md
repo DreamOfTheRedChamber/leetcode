@@ -59,9 +59,9 @@
       - [Segment tree](#ds-tree-segment-tree)
       - [Binary search tree](#ds-tree-binary-search-tree)
     * [HashMap](#ds-hashmap)
+      - [Use case](#ds-hashmap-usecase)
       - [Intersection](#ds-hashmap-intersection)
-      - [Histogram](#ds-hashmap-histogram)
-      - [Anagram](#ds-hashmap-anagram)
+      - [Histogram and hashmap list](#ds-hashmap-histogram-hashmap-list)
     * [TreeMap](#ds-treemap)
     * [Graph](#ds-graph)
       - [Edge list vs Adjacent list vs Adjacent matrix](#ds-graph-tradeoffs)
@@ -941,18 +941,18 @@ class SegmentTreeNode
 ```
 
 #### HashMap <a id="ds-hashmap"></a>
+##### Use case <a id="ds-hashmap-usecase"></a>
+* need a symbol table with search, insert and delete operations
 ##### Best practices <a id="ds-hashmap-best-practices"></a>
 * Use Double as hashmap keys is a bad practice. Especially if needing to perform calculations on double keys, the hash of double could mess up.
 * Use Object as hashmap keys. When the hashCode() and equals(Object o) methods are not overriden by your class, the default implementation are used. The default behavior is to treat all objects as different, unless they are the same object. IdentityHashMap always does this by using reference-equality in place of object-equality
-* Map
-  - frequency count with hashmap
-```java
-map.put( key, 1 + map.getOrDefault( key, 0 ) );
-```
-* put if not exist
-```java
-map.putIfAbsent( key, new ArrayList<>() );
-```
+
+##### Collision resolution <a id="ds-hashmap-collision-resolution"></a>
+| Strategies | Use case         | 
+| --------------------- |:-------------:| 
+| Chaining with linked list  | worst case O(n), most commonly used    |
+| Chaining with BST  | worst case O(n), rarely used unless input extremely nonuniform distribution     |
+| Open addressing with linear probing  | number of collisions really low, fast and efficient     |
 
 ##### Intersection <a id="ds-hashmap-intersection"></a>
 * Compute the intersection of two hashmap/hashset
@@ -971,14 +971,13 @@ setA.retainsAll( setB );
 
 ```
 
-##### Histogram <a id="ds-hashmap-histogram"></a>
-* A popular use case for hashmap in interview is frequency counting, namely calculating histogram. 
+##### Histogram and hashmap list <a id="ds-hashmap-histogram-hashmap-list"></a>
 ```java
-
+// more concise code for histogram with getOrDefault() API
+map.put( key, 1 + map.getOrDefault( key, 0 ) );
+// more concise code for hashmap list with putIfAbsent() API
+map.putIfAbsent( key, new ArrayList<>() );
 ```
-
-##### Anagram <a id="ds-hashmap-anagram"></a>
-
 
 #### TreeMap <a id="ds-treemap"></a>
 * Get Key/Entry APIs: firstKey/firstEntry, lastKey/lastEntry, lowerKey/lowerEntry, higherKey/higherEntry, CeilingKey/CeilingEntry, floorKey/floorEntry
