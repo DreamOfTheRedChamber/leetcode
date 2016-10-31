@@ -44,6 +44,7 @@
       - [Calculator](#ds-stack-calculator)
       - [Parentheses](#ds-stack-parentheses)
     * [Queue](#ds-queue)
+      - [Interfaces](#ds-queue-interfaces)
     * [PriorityQueue](#ds-priorityqueue)
       - [Heapify](#ds-priorityqueue-heapify)
       - [Sift up/down](#ds-priorityqueue-sift-up-down)
@@ -145,15 +146,14 @@
 
 #### Clarify question <a id="whiteboard-workflow-clarify"></a>
 1. Define public APIs to be implemented:
-   * Things to define - Input type
-   * Things to define - Number of input arguments
-   * Things to define - Output type
-     * Different levels of solutions
-       * boolean: Whether solutions exist or not
-       * int: the number of solutions
-       * List&lt;?> : solutions themselves
-       * List&lt;?>: solutions without duplicates
-       * List&lt;?>: solutions with specific order
+  * Things to define - Input type
+  * Things to define - Number of input arguments
+  * Things to define - Output type
+    - boolean: Whether solutions exist or not
+    - int: the number of solutions
+    - List&lt;?> : solutions themselves
+    - List&lt;?>: solutions without duplicates
+    - List&lt;?>: solutions with specific order
      
 2. Clarify ambiguous problem statements / Gather all requirements
    * Solution existence: "***What if no solution exists? How should I handle that?***"
@@ -484,6 +484,13 @@ Array sum related questions can be divided into the following categories (see al
 #### String <a id="ds-string"></a>
 ##### String vs StringBuilder vs StringBuffer <a id="ds-string-tradeoffs"></a>
 
+| Comparison | String         | StringBuilder | StringBuffer  |
+| --------------------- |:-------------:| -----:|-----:|
+| Storage area  | Constant string pool    | heap | heap |
+| Modifiable    | Immutable     |   mutable | mutable |
+| Thread safe   | Yes     |   No | Yes | 
+| Performance   | Fast    |   Fast | very slow| 
+
 ##### Encode and decode <a id="ds-string-encode-decode"></a>
 
 ##### Palindrome <a id="ds-string-palindrome"></a>
@@ -521,6 +528,14 @@ List<Integer> listCopy = new ArrayList<>( list );
 
 #### List <a id="ds-list"></a>
 ##### ArrayList vs LinkedList <a id="ds-list-tradeoffs"></a>
+* Both implements List interface, maintain the insertion-order, non-synchronized collections
+
+| Comparison | arraylist         | linkedlist  |
+| --------------------- |:-------------:| -----:|
+| Internal structure  | array    |  doubly linked list |
+| Insert performance  | O(n)     |   O(1) |
+| Search performance  | O(1)     |   O(n) |
+| Memory overhead  | array and element      | two pointers and element |
 
 ##### LinkedListNode<a id="ds-list-linkedlistnode"></a>
 
@@ -550,22 +565,13 @@ List<Integer> listCopy = new ArrayList<>( list );
 ##### Parentheses <a id="ds-stack-parent"></a>
   
 #### Queue <a id="ds-queue"></a>
-* peek() vs element(), poll() vs remove(), add() vs offer(): when queue is empty, the former returns null and the latter throws exception. Most times in an interview setting, use the former one is appropriate. The first reason is that it is not an exceptional case that the queue is empty. The second reason is that throwsing exceptions incurs a performance penalty.
-```java
-// implements inside abstractQueue<E>
-public E remove()
-{
-  E x = poll();
-  if ( x != null )
-  {
-    return x;
-  }
-  else
-  {
-    throw new NoSuchElementException();
-  }
-}
-```
+##### Interfaces <a id="ds-queue-interfaces"></a>
+| Comparison | throws exception         | return special value  |
+| --------------------- |:-------------:| -----:|
+| insert  | boolean add(E e)    |  boolean offer(E e) |
+| remove  | E remove()     |   E poll() |
+| examine  | E element()     |   E peek() |
+
 
 #### PriorityQueue <a id="ds-priorityqueue"></a>
 ##### Heapify <a id="ds-priorityqueue-heapify"></a>
