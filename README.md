@@ -246,6 +246,18 @@
       * List/Array entry is NULL
       * List/Array of even length
       * List/Array of odd length
+* Error handling
+  * Types
+    * logs (handle errors later, first restart)
+    * assertions (internal use only, function arguments)
+    * dialogue (let user decides what to do next)
+    * exception - checked/unchecked(point out what (exception type), where (exact location), why (message))
+    * errors ( usually used by the JVM to indicate resource deficiencies )
+  * Use runtime exceptions to indicate precondition violations
+    * IllegalArgumentException ( check input of function arguments )
+    * IllegalStateException ( illegal state of variables )
+    * ArithmeticException ( 1 / 0 )
+   * IndexOutOfBoundaryException ( example problem: search in unknown size sorted array )
 
 #### Write code <a id="whiteboard-workflow-write-code"></a>
   1. Synchronize with interviewer "***There are XXX steps in this algorithm. The first is XXX. The second....***"
@@ -371,65 +383,6 @@
   * Only pass by values
   * Lambda expressions are still not closures
   * Linkedhashset could not be iterated reversely
-
-
-* LinkedList
-  - list.sublist(startIndex, endIndex) returns a sublist of List
-  - LinkedList.addFirst(element: Object)/addLast(element: Object)/getFirst()/getLast()/removeFirst()/removeLast(). This could be used in backtracking.
-* Queue
-  - peek() vs element(), poll() vs remove(), add() vs offer(): when queue is empty, the former returns null and the latter throws exception. Most times in an interview setting, use the former one is appropriate. The first reason is that it is not an exceptional case that the queue is empty. The second reason is that throwsing exceptions incurs a performance penalty.
-```java
-// implements inside abstractQueue<E>
-public E remove()
-{
-  E x = poll();
-  if ( x != null )
-  {
-    return x;
-  }
-  else
-  {
-    throw new NoSuchElementException();
-  }
-}
-```
-* Set
-  - set.add(elem) return false if set already contains the elem. 
-* Map
-  - frequency count with hashmap
-```java
-map.put( key, 1 + map.getOrDefault( key, 0 ) );
-```
-* put if not exist
-```java
-map.putIfAbsent( key, new ArrayList<>() );
-```
-* Collections
-  - Collections.unmodifiableList/unmodifiableSet/unmodifiableMap()
-  - Collections.reverse(List&lt;?&gt;) reverses a linkedlist
-
-#### Error handling<a id="error-handling"></a>
-* Types
-  * logs (handle errors later, first restart)
-  * assertions (internal use only, function arguments)
-  * dialogue (let user decides what to do next)
-  * exception - checked/unchecked(point out what (exception type), where (exact location), why (message))
-  * errors ( usually used by the JVM to indicate resource deficiencies )
-* Use runtime exceptions to indicate precondition violations
-  * IllegalArgumentException ( check input of function arguments )
-  * IllegalStateException ( illegal state of variables )
-  * ArithmeticException ( 1 / 0 )
-  * IndexOutOfBoundaryException ( example problem: search in unknown size sorted array )
-
-#### Collections internals<a id="basics-collection-internals"></a>
-* deque/stack: linkedlist
-* hashmap: chaining ( array + list )
-  * compute array index based on **public int hashCode()** method
-  * decide list index based on **public boolean equals()** method
-* hashset: implemented based on hashmap with dummy values
-* linkedhashmap: hashtable with a linkedlist
-* treemap: red-black tree
-* priorityqueue: array
 
 ### Data structures <a id="ds"></a>
 
@@ -564,6 +517,7 @@ int[] numsCopy = nums.clone();
 List<Integer> list = new ArrayList<>();
 List<Integer> listCopy = new ArrayList<>( list );
 ```
+* Collections.unmodifiableList/unmodifiableSet/unmodifiableMap()
 
 #### List <a id="ds-list"></a>
 ##### ArrayList vs LinkedList <a id="ds-list-tradeoffs"></a>
@@ -596,6 +550,22 @@ List<Integer> listCopy = new ArrayList<>( list );
 ##### Parentheses <a id="ds-stack-parent"></a>
   
 #### Queue <a id="ds-queue"></a>
+* peek() vs element(), poll() vs remove(), add() vs offer(): when queue is empty, the former returns null and the latter throws exception. Most times in an interview setting, use the former one is appropriate. The first reason is that it is not an exceptional case that the queue is empty. The second reason is that throwsing exceptions incurs a performance penalty.
+```java
+// implements inside abstractQueue<E>
+public E remove()
+{
+  E x = poll();
+  if ( x != null )
+  {
+    return x;
+  }
+  else
+  {
+    throw new NoSuchElementException();
+  }
+}
+```
 
 #### PriorityQueue <a id="ds-priorityqueue"></a>
 ##### Heapify <a id="ds-priorityqueue-heapify"></a>
@@ -968,6 +938,15 @@ class SegmentTreeNode
 ##### Best practices <a id="ds-hashmap-best-practices"></a>
 * Use Double as hashmap keys is a bad practice. Especially if needing to perform calculations on double keys, the hash of double could mess up.
 * Use Object as hashmap keys. When the hashCode() and equals(Object o) methods are not overriden by your class, the default implementation are used. The default behavior is to treat all objects as different, unless they are the same object. IdentityHashMap always does this by using reference-equality in place of object-equality
+* Map
+  - frequency count with hashmap
+```java
+map.put( key, 1 + map.getOrDefault( key, 0 ) );
+```
+* put if not exist
+```java
+map.putIfAbsent( key, new ArrayList<>() );
+```
 
 ##### Intersection <a id="ds-hashmap-intersection"></a>
 * Compute the intersection of two hashmap/hashset
@@ -987,26 +966,9 @@ setA.retainsAll( setB );
 ```
 
 ##### Histogram <a id="ds-hashmap-histogram"></a>
-* A popular use case for hashmap in interview is frequency counting, namely histogram. 
-  + If the character set only contains lower-case characters, could consider using a bitmap instead, which is much faster.
-  + If the character set is unicode, could consider using hashmap.
-* Solutions: ( suppose m is the number of input and n is the number of distinct input )
-  + Using treeMap: this will result in O(mlogn + nlogn) complexity, 
-  + Use HashMap + PriorityQueue
+* A popular use case for hashmap in interview is frequency counting, namely calculating histogram. 
 ```java
-      // initialize
-      Map<Character, Integer> histogram = new HashMap<>();
-      histogram.put( 'c', 10 );
-      histogram.put( 'a', 12 );
-      histogram.put( 'b', 6 );
-      // output according to priorityqueue
-      Queue<Map.Entry<Character, Integer>> maxQueue = new PriorityQueue<>( ( o1, o2 ) ->  o2.getValue() - o1.getValue() );
-      maxQueue.addAll( histogram.entrySet() );
-      return maxQueue.stream()
-                     .sorted( ( o1, o2 ) -> ( o2.getValue() - o1.getValue() ) )
-                     .limit( k )
-                     .map( o -> o.getKey() )
-                     .collect( Collectors.toList() );
+
 ```
 
 ##### Anagram <a id="ds-hashmap-anagram"></a>
@@ -1658,6 +1620,9 @@ public ResultWrapper secondApproach( TreeNode currNode )
 
 #### Backtrack <a id="algo-backtrack"></a>
 ##### Best practices <a id="algo-backtrack-best-practices"></a>
+* LinkedList
+  - list.sublist(startIndex, endIndex) returns a sublist of List
+  - LinkedList.addFirst(element: Object)/addLast(element: Object)/getFirst()/getLast()/removeFirst()/removeLast(). This could be used in backtracking.
 ```java
 // usually occurs at the beginning and ending of a recursive function
 public void recursivefunction()
@@ -1667,6 +1632,7 @@ public void recursivefunction()
     backtracking backwards
 }
 ```
+
 ##### Types <a id="algo-recursion-types"></a>
 * Combination <a id="algo-backtrack-combination"></a>
 * Permutation <a id="algo-backtrack-permutation"></a>
