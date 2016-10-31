@@ -71,8 +71,8 @@
       - [Trie definition](#ds-trie-def)
       - [Common tasks](#ds-trie-common-tasks)
 * [Algorithms](#algo)
-    * [Random](#algo-random)
     * [Math](#algo-math)
+      - [Random](#algo-math-random)
       - [Mod](#algo-math-mod)
       - [Power](#algo-math-power)
       - [Sqrt](#algo-math-sqrt)
@@ -955,8 +955,9 @@ class SegmentTreeNode
 | Open addressing with linear probing  | number of collisions really low, fast and efficient     |
 
 ##### Intersection <a id="ds-hashmap-intersection"></a>
-* Compute the intersection of two hashmap/hashset
 ```java
+// Compute the intersection of two hashmap/hashset
+
 Map<Integer, String> mapA = ...; 
 Map<Integer, String> mapB = ...; 
 // will remove all non-matching Map.Entry pairs in mapB from mapA
@@ -1125,19 +1126,25 @@ private boolean search( String word, int index, TrieNode root )
 ```
 
 ### Algorithms <a id="algo"></a>
-#### Random <a id="algo-random"></a>
+
+
 #### Math <a id="algo-math"></a>
+##### Random <a id="algo-math-random"></a>
+
 ##### Mod <a id="algo-math-mod"></a>
 * judge whether a value is even or odd
   - Use num % 2 != 0 rather than num % 2 == 1 because of negative number mod ( e.g. -5 % 2 == -1 )
   - To guarantee mod result is always positive, if knowing num range RANGE, could consider ( num + RANGE ) % RANGE 
+
 ##### Power <a id="algo-math-power"></a>
 * Power of integer: Java does not provide a built-in function for Integer values
   - solution 1: It has a built-in function double Math.pow( double, double ). But the computation cost for double is much higher than int and the result needs to be downcasted.
   - solution 2: Use multiply instead when exponent is low. 
   - solution 3: When 2 is radix, use bit shifting
   - solution 4: Implement in-house pow for integers based on divide and conquer
+
 ##### Sqrt <a id="algo-math-sqrt"></a>
+
 ##### Divide <a id="algo-math-divide"></a>
 * Divide two integers ( useful names: dividend/numerator, divisor/denominator, quotient, residue )
   * handle boundary cases ( 0, Integer.MIN_VALUE )
@@ -1151,7 +1158,9 @@ private boolean search( String word, int index, TrieNode root )
             + residue = ( residue * 10 ) % divisor
             + use hashmap to record residue and occuring positions to handle recurring
         - concatenate symbol, integer part, dot, fraction part (possibly with parentheses)
+
 ##### Multiply <a id="algo-math-multiply"></a>
+
 ##### Prime <a id="algo-math-prime"></a>
 * Check for primality
   * Naive solution: Iterate from 2 through i
@@ -1438,7 +1447,19 @@ for ( Interval interval : intervalList )
 }
 pairList.sort( (o1, o2) -> (o1.start-o2.start) );
 ```
-  - Top K<a id="algo-sort-types-topK"></a>
+
+##### Top K<a id="algo-sort-types-topK"></a>
+##### Stream API<a id="algo-sort-types-stream-API"></a>
+* Get min/max from a list of integer
+```java
+List<Integer> list = //...
+int min = list.stream()
+              .min( Integer::compare )
+              .get();
+int max = list.stream()
+              .max( Integer::compare )
+              .get();
+```
 
 #### Binary search <a id="algo-binary-search"></a>
 ##### Best practices <a id="algo-binary-search-best-practices"></a>
@@ -1552,6 +1573,7 @@ public int binarySearchRecursive( int[] array, int target, int start, int end )
     + The second is to use a mutable argument of type ( int[], List&lt;&gt; ). Modify the value of this argument while travering.
   - Use return value
     + If multiple results are of same type, define return type as an array T[]
+    + If only two results are returned, consider using AbstractMap.SimpleEntry<K,V>
     + Define a result wrapper class
 ```java
 // 1. not use use global variables
@@ -1568,7 +1590,12 @@ public void maxNodeValue( TreeNode root, List<Integer> max )
 // 2. use return value
 // 2.1. use array T[] as return type
 public int[] maxNodeValue( TreeNode root )
-// 2.2. define a result wrapper class as class inner class
+// 2.2. AbstractMap.SimpleEntry<K,V>
+public Map.Entry function()
+{
+  new AbstractMap.SimpleEntry<>( key, val );
+}
+// 2.3. define a result wrapper class as class inner class
 private class ResultWrapper
 {
   public final int numFoundNodes;

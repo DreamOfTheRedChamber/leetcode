@@ -1,4 +1,4 @@
-package facebook.medium;
+package trie;
 
 import static org.junit.Assert.assertTrue;
 
