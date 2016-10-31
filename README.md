@@ -434,15 +434,14 @@ map.putIfAbsent( key, new ArrayList<>() );
 ### Data structures <a id="ds"></a>
 
 #### Data structure relationships<a id="ds-relationship"></a>
-* support accuracy: float/double -> BigDecimal
-* support array resize: array -> arrayList
-* support lookup/delete by key: priorityqueue -> treemap
-* support enqueue/dequeue from both ends: queue -> deque
-* support insertion -> customized order on hashset/hashmap: hashset/hashmap -> linkedhashset/linkedhashmap -> binary search tree (treeset/treemap)
-* support larger character set for histogram problem: array -> map
-* support append/insert/delete more efficiently: string -> stringbuilder
-* space efficiency in dynamic programming: 2D memorization array -> rolling 1D memorization array
-* space efficiency in boolean array: Boolean[] -> boolean[] -> BitSet
+
+| Enhancements | Original          | Improved  |
+| --------------------- |:-------------:| -----:|
+| Accuracy  | float/double      |  BigDecimal |
+| Insert/Delete at begin/end/any pos | Stack/Queue     |   Deque/LinkedList |
+| Fixed sized to resizable  | Array/String | ArrayList/StringBuilder |
+| no order to insertion/sorted order  | hashmap      |   linkedHashMap/TreeMap |
+| Partial to complete order | priorityqueue | treeset
 
 #### Type size<a id="ds-type-size"></a>
 * Reference types: 32-bit system (32 bit), 64-bit system (64 bit)
