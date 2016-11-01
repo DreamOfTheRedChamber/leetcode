@@ -1,4 +1,4 @@
-package facebook.medium;
+package stack;
 
 import static org.junit.Assert.assertEquals;
 

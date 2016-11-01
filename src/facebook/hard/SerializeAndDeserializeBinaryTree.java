@@ -44,14 +44,14 @@ public class SerializeAndDeserializeBinaryTree
     	{
     		TreeNode head = bfsQueue.poll();
     		// left
-    		result.append( (head.left == null ? "#" : head.left.val) );
+    		result.append( head.left == null ? "#" : head.left.val );
     		result.append( "," );
     		if ( head.left != null )
     		{
     			bfsQueue.offer( head.left );
     		}
     		// right
-    		result.append( (head.right == null ? "#" : head.right.val) );
+    		result.append( head.right == null ? "#" : head.right.val );
     		result.append( "," );
     		if ( head.right != null )
     		{

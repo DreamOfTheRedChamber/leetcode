@@ -713,10 +713,53 @@ public void treeHighSpaceTraverse( TreeNode root, int order )
 
 ##### View <a id="ds-tree-view"></a>
 ##### Serialize/Deserialize <a id="ds-tree-serialize-deserialize"></a>
-* NAray-tree serialization and deserialization
-  - There are two popular ways to serialize a N-Aray tree: preorder and level-order. Preorder leads to a natural recursive implementation. Level-order leads to a natural iterative implementation. 
+* Two popular ways:
+  - Preorder: preorder leads to a recursive dfs-like implementation. Since Java is passed by value, it is really hard to implement elegantly without using a global variable.
+  - Level-order: Level-order leads to a iterative bfs-like implementation. Elegant solution.
+* How to mark the ending of a tree:
+  - For binary tree, each node only has two children. The most easy way is to simply mark empty left/right child with special character like '#'. Use O(2n) space, n is the number of treenodes.
+  - For n-ary tree, each node has variable number of children. 
+    + The first way is to record the number of children it has explicitly. After serializing a node's value, record the number of children it has. If treenode value also contains special characters like '#', there will be problems adopting this approach.
+    + The second way is to record the number of children it has implicitly. After serializing a node's value, continue with serializing its children node, then finish with a special character like '#'. 
 ```java
 /*
+binary tree
+        1
+      /   \ 
+     2     3
+    / \
+   4   5
+        \
+         6
+Steps:
+serialize 1:
+ 1, 
+serialize 1's children:
+ 2, 3, 
+serialize 2's children:
+ 4, 5,
+serialize 3's children:
+ #, #, 
+......
+
+         1
+   /  /  |  \   \
+  2  3   4   5   6
+    / \
+    7  8     
+        \
+         9 
+Steps:
+serialize 1                             
+ 1,   
+serialize 1's children  
+ 2, 3, 4, 5, 6, #,     
+serialize 2's children
+ #,           
+serialize 3's children 
+ 7, 8, #,                
+......
+
 public class NArayNode
 {
   public int value;
