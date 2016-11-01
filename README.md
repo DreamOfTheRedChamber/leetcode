@@ -469,18 +469,47 @@ Set<String> set = list.stream().collect( Collectors.toSet() );
   - break the circle (house robber II)
 
 ##### Array sum<a id="ds-array-array-sum">
-Array sum related questions can be divided into the following categories (see algorithm section of this readme for furture details)
-* Two pointers
-  - Begin and end type: Two sum II and variants (3Sum, 3Sum closest, 3Sum smaller)
-  - Window type: Minimize size subarray sum
-* Hashmap
-  - Two sum
-  - Maximize size subarray sum equals K
-* Backtrack
-  - Combination sum I/II/II
-* Dynamic programming
-  - One sequence: maximum subarray
-  - Backpack type: Combination sum IV
+* Array sum related questions can be divided into the following categories (see algorithm section of this readme for furture details)
+  - Two pointers
+    + Begin and end type: Two sum II and variants (3Sum, 3Sum closest, 3Sum smaller)
+    + Window type: Minimize size subarray sum
+  - Hashmap
+    + Two sum
+    + Maximize size subarray sum equals K
+  - Backtrack
+    + Combination sum I/II/II
+  - Dynamic programming
+    + One sequence: maximum subarray
+    + Backpack type: Combination sum IV
+* KSum
+```java
+private List<List<Integer>> kSum( int kVal, int target, int startIndex, int[] nums ) 
+{
+  List<List<Integer>> result = new LinkedList<>();
+  if ( kVal == 0 ) 
+  {
+    if ( target == 0 )
+    {
+      result.add( new LinkedList<>() );
+    }
+    return result;
+  }
+        
+  for ( int i = startIndex; i < nums.length - kVal + 1; i++ ) 
+  {
+    if ( ( i > startIndex ) && ( nums[i] == nums[i - 1] ) ) 
+    {
+      continue;
+    }
+    for ( List<Integer> partialResult : kSum( kVal - 1, target - nums[i], i + 1, nums ) )
+    {
+        partialResult.add( 0, nums[i] );
+        result.add( partialResult );
+    }
+  }
+  return result;
+}
+```
 
 ##### Forward backward traversal <a id="ds-array-forward-backward-traversal"></a>
 * Trapping rain water, Best time to buy and sell stock III, product of array exclude itself
