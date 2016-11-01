@@ -39,29 +39,39 @@ public class RegularExpressionMatching
         {
         	return false;
         }
-        
-        return isMatch( s, p, s.length() - 1, p.length() - 1 );
+        int[][] isMatch = new int[s.length()+1][p.length()+1];
+        return isMatch( s, p, s.length() - 1, p.length() - 1, isMatch );
     }
     
-    private boolean isMatch( String s, String p, int sIndex, int pIndex )
+    private boolean isMatch( String s, String p, int sIndex, int pIndex, int[][] memorized )
     {    	
-    	if ( pIndex == -1 )
+    	if ( memorized[sIndex+1][pIndex+1] != 0 )
     	{
-    		return sIndex == -1;
+    		return memorized[sIndex+1][pIndex+1] == 1;
+    	}
+    	
+    	if ( pIndex == -1 )
+    	{    		
+    		memorized[sIndex+1][pIndex+1] = ( sIndex == -1 ) ? 1 : -1;
+    		return memorized[sIndex+1][pIndex+1] == 1;
     	}
     	
     	if ( p.charAt( pIndex ) == '*' )
     	{
-    		return isMatch( s, p, sIndex, pIndex - 2 ) // * matching zero char, if string is valid, then pIndex >= 1. pIndex - 2 >= -1
-    				|| ( sIndex >= 0 && ( p.charAt( pIndex - 1 ) == s.charAt( sIndex ) || p.charAt( pIndex - 1 ) == '.') && isMatch( s, p, sIndex-1, pIndex ) ); // * match one char, then sIndex >= 0 to satisfy semantics here; matching multiple chars case will be handled recursively by matching one char case
+    		boolean match = isMatch( s, p, sIndex, pIndex - 2, memorized ) // * matching zero char, if string is valid, then pIndex >= 1. pIndex - 2 >= -1
+    				|| ( sIndex >= 0 && ( p.charAt( pIndex - 1 ) == s.charAt( sIndex ) || p.charAt( pIndex - 1 ) == '.') && isMatch( s, p, sIndex-1, pIndex, memorized ) ); // * match one char, then sIndex >= 0 to satisfy semantics here; matching multiple chars case will be handled recursively by matching one char case
+    		memorized[sIndex+1][pIndex+1] = match ? 1 : -1;    		
     	}
     	else
     	{
+    		
     		// match one char
-    		return sIndex >= 0 
+    		boolean match = sIndex >= 0 
     				&& ( p.charAt( pIndex ) == s.charAt( sIndex ) || p.charAt( pIndex ) == '.' )
-    				&& isMatch( s, p, sIndex - 1, pIndex - 1 );
+    				&& isMatch( s, p, sIndex - 1, pIndex - 1, memorized );
+    		memorized[sIndex+1][pIndex+1] = match ? 1 : -1;
     	}
+    	return memorized[sIndex+1][pIndex+1] == 1;
     }
 
     @Test
