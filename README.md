@@ -527,6 +527,10 @@ private List<List<Integer>> kSum( int kVal, int target, int startIndex, int[] nu
 ##### Encode and decode <a id="ds-string-encode-decode"></a>
 
 ##### Palindrome <a id="ds-string-palindrome"></a>
+* Several ways to solve the Longest palindrome substring problem
+  - DP-based solution: O(n^2) space and time, if need to storing palindrome result, this is always better (e.g. palindrome partitioning)
+  - Start looping from middle: O(n^2) time
+  - Manacher's algorithm: O(n) time, not generic enough.
 
 #### Collections <a id="ds-collections"></a>
 ##### Iterator <a id="ds-collections-iterator"></a>
