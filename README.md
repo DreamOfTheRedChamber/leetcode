@@ -394,8 +394,8 @@
 | Accuracy  | float/double      |  BigDecimal |
 | Insert/Delete at begin/end/any pos | Stack/Queue     |   Deque/LinkedList |
 | Fixed sized to resizable  | Array/String | ArrayList/StringBuilder |
-| no order to insertion/sorted order  | hashmap      |   linkedHashMap/TreeMap |
-| Partial to complete order | priorityqueue | treeset
+| No order to insertion/sorted order  | Hashmap      |   linkedHashMap/TreeMap |
+| Partial to complete order | Priorityqueue | Treeset |
 
 #### Type size<a id="ds-type-size"></a>
 * Reference types: 32-bit system (32 bit), 64-bit system (64 bit)
@@ -490,8 +490,8 @@ Array sum related questions can be divided into the following categories (see al
 
 | Comparison | String         | StringBuilder | StringBuffer  |
 | --------------------- |:-------------:| -----:|-----:|
-| Storage area  | Constant string pool    | heap | heap |
-| Modifiable    | Immutable     |   mutable | mutable |
+| Storage area  | Constant string pool    | Heap | Heap |
+| Modifiable    | Immutable     |   Mutable | Mutable |
 | Thread safe   | Yes     |   No | Yes | 
 | Performance   | Fast    |   Fast | very slow| 
 
@@ -760,78 +760,6 @@ serialize 3's children
  7, 8, #,                
 ......
 
-public class NArayNode
-{
-  public int value;
-  public List<NArayNode> children;
-  public NArayNode( int value )
-  {
-    this.value = value;
-    children = new LinkedList<>();
-  }
-  public void addChild( NArayNode node )
-  {
-    children.add( node );
-  }
-}
-*/
-
-// level order serialization and deserialization
-  public String serialize( NArayNode root )
-  {
-    if ( root == null )
-    {
-      return "";
-    }
-    
-    StringBuilder result = new StringBuilder();
-    Queue<NArayNode> bfsQueue = new LinkedList<>();
-    result.append( root.value );
-    result.append( ',' );
-    bfsQueue.offer( root );
-    while ( !bfsQueue.isEmpty( ) )
-    {
-      NArayNode qHead = bfsQueue.poll( );
-      for ( NArayNode childNode : qHead.children )
-      {     
-        result.append( childNode.value );
-        result.append( ',' );
-        bfsQueue.offer( childNode );
-      }
-      result.append( ')' );
-      result.append( ',' );
-    }
-    return result.toString( );
-  }
-  
-  public NArayNode deserialize( String input )
-  {
-    if ( input == null )
-    {
-      return null;
-    }
-    
-    String[] tokens = input.split( "," );   
-    Queue<NArayNode> bfsQueue = new LinkedList<>();
-    NArayNode root = new NArayNode( Integer.parseInt( tokens[0] ) );
-    bfsQueue.offer( root );
-    
-    int index = 1;
-    while ( !bfsQueue.isEmpty( ) )      
-    {
-      NArayNode qHead = bfsQueue.poll( );
-      while ( index < tokens.length && !tokens[index].equals( ")" ) )
-      {
-        NArayNode newNode = new NArayNode( Integer.parseInt( tokens[index] ) );
-        qHead.addChild( newNode );
-        bfsQueue.offer( newNode );
-        index++;
-      }
-      index++;
-    }
-    
-    return root;
-  }
 ```
 
 ##### Path on tree <a id="ds-tree-path"></a>
@@ -990,6 +918,7 @@ class SegmentTreeNode
 #### HashMap <a id="ds-hashmap"></a>
 ##### Use case <a id="ds-hashmap-usecase"></a>
 * need a symbol table with search, insert and delete operations
+
 ##### Best practices <a id="ds-hashmap-best-practices"></a>
 * Use Double as hashmap keys is a bad practice. Especially if needing to perform calculations on double keys, the hash of double could mess up.
 * Use Object as hashmap keys. When the hashCode() and equals(Object o) methods are not overriden by your class, the default implementation are used. The default behavior is to treat all objects as different, unless they are the same object. IdentityHashMap always does this by using reference-equality in place of object-equality
@@ -998,8 +927,8 @@ class SegmentTreeNode
 | Strategies | Use case         | 
 | --------------------- |:-------------:| 
 | Chaining with linked list  | worst case O(n), most commonly used    |
-| Chaining with BST  | worst case O(n), rarely used unless input extremely nonuniform distribution     |
-| Open addressing with linear probing  | number of collisions really low, fast and efficient     |
+| Chaining with BST  | worst case O(logn), input extremely nonuniform distribution     |
+| Open addressing with probing  | number of collisions really low  |
 
 ##### Intersection <a id="ds-hashmap-intersection"></a>
 ```java
@@ -1097,6 +1026,7 @@ public Map<Integer, Set<Integer>> buildGraph( int n, int[][] edges )
 * Compared with hashmap: 
    - Space complexity: when storing a list of words (Especially when these words share prefix), using trie save space. 
    - Time complexity: to compute hashcode for a string, O(n) time complexity; find/insert a string in a trie, the same
+
 ##### Trie definition <a id="ds-trie-def"></a>
 * Depending on the size of charset, children pointers could be either stored in a bitmap or hashmap. Although slightly suffering performance, hashmap implementation is more concise and generic.
 ```java
