@@ -29,6 +29,7 @@
     * [Array](#ds-array)
       - [Circular array](#ds-circular-array)
       - [Array sum](#ds-array-array-sum)
+      - [Forward backward traversal](#ds-array-forward-backward-traversal)
     * [String](#ds-string)
       - [String vs StringBuilder vs StringBuffer](#ds-string-tradeoffs)
       - [Encode and decode](#ds-string-encode-decode)
@@ -480,6 +481,9 @@ Array sum related questions can be divided into the following categories (see al
 * Dynamic programming
   - One sequence: maximum subarray
   - Backpack type: Combination sum IV
+
+##### Forward backward traversal <a id="ds-array-forward-backward-traversal"></a>
+* Trapping rain water, Best time to buy and sell stock III, product of array exclude itself
 
 #### String <a id="ds-string"></a>
 ##### String vs StringBuilder vs StringBuffer <a id="ds-string-tradeoffs"></a>
