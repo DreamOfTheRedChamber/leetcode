@@ -1863,6 +1863,8 @@ public void bfsMainFunction( T[][] grid )
   } 
 }
 ```
+* When there are multiple sources/destinations, need to decide whether to start from source/destination according to time complexity analysis
+  - Shortest distances to all buildings, walls and gates
   
 ##### Depth first search <a id="algo-dfs"></a>
 * When the problem requires a complete search and asks for traversal paths (record path in bfs is much more complicated)
