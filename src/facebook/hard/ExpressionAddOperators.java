@@ -1,5 +1,8 @@
 package facebook.hard;
 
+import java.util.LinkedList;
+import java.util.List;
+
 /**
 Given a string that contains only digits 0-9 and a target value, return all possibilities to add binary operators (not unary) +, -, or * between the digits so they evaluate to the target value.
 
@@ -10,11 +13,42 @@ Examples:
 "00", 0 -> ["0+0", "0-0", "0*0"]
 "3456237490", 9191 -> []
  */
-//TO_START
 public class ExpressionAddOperators
 {
-    public List<String> addOperators(String num, int target) 
+    public List<String> addOperators( String num, int target )
     {
-        
+    	List<String> result = new LinkedList<>();
+    	addOperators( num, target, result, 0, 0, "" );
+    	return result;
+    }
+    
+    private void addOperators( String toBeParsed, int target, List<String> result, long currSum, long prevSum, String dfsPath )
+    {
+    	if ( toBeParsed.length() == 0 && currSum == target )
+    	{
+    		result.add( dfsPath );
+    		return;
+    	}
+    	
+    	for ( int i = 1; i <= toBeParsed.length(); i++ )
+    	{
+    		String numStr = toBeParsed.substring( 0, i );
+    		if ( numStr.length() > 1 && numStr.charAt( 0 ) == '0' )
+    		{
+    			return;
+    		}
+    		long num = Long.parseLong( numStr );
+    		String remainedStr = toBeParsed.substring( i );
+    		if ( ! "".equals( dfsPath ) )
+    		{
+    			addOperators( remainedStr, target, result, currSum + num, currSum, dfsPath + "+" + numStr );
+    			addOperators( remainedStr, target, result, currSum - num, currSum, dfsPath + "-" + numStr );
+    			addOperators( remainedStr, target, result, ( currSum - prevSum ) * num + prevSum, currSum, dfsPath + "*" + numStr );
+    		}
+    		else
+    		{
+    			addOperators( remainedStr, target, result, currSum + num, currSum, numStr );
+    		}
+    	}    	
     }
 }
