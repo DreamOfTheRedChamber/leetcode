@@ -61,8 +61,11 @@
       - [Binary search tree](#ds-tree-binary-search-tree)
     * [HashMap](#ds-hashmap)
       - [Use case](#ds-hashmap-usecase)
+      - [Best practices](#ds-hashmap-best-practices)
+      - [Collision resolution](#ds-hashmap-collision-resolution)
       - [Intersection](#ds-hashmap-intersection)
       - [Histogram and hashmap list](#ds-hashmap-histogram-hashmap-list)
+      - [Anagram](#ds-hashmap-anagram)
     * [TreeMap](#ds-treemap)
     * [Graph](#ds-graph)
       - [Edge list vs Adjacent list vs Adjacent matrix](#ds-graph-tradeoffs)
@@ -987,6 +990,31 @@ setA.retainsAll( setB );
 map.put( key, 1 + map.getOrDefault( key, 0 ) );
 // more concise code for hashmap list with putIfAbsent() API
 map.putIfAbsent( key, new ArrayList<>() );
+```
+
+##### Anagram <a id="ds-hashmap-anagram"></a>
+* Given an array of string, group it into anagrams (the number of strings is m, the number of chars in a string is n). The key of the problem is how to identify anagrams:
+  - Use sorted string as key, T.C. O(mnlogn), S.C. O(mn)
+  - Use histogram of string as key (like counting sort) T.C. O(mn), S.C. O(mn)
+```java
+private final static int CHARSET_SIZE = 26;
+public List<List<String>> groupAnagrams( String[] strs )
+{
+  Map<String, List<String>> groupedAnagrams = new HashMap<>();
+  for ( String str : strs )
+  {
+    char[] histogram = new char[CHARSET_SIZE];
+    for ( char ch : str.toCharArray() )
+    {
+      histogram[ch-'a']++;
+    }
+          
+    String key = new String( histogram ) ;
+    groupedAnagrams.putIfAbsent( key, new ArrayList<>() );
+    groupedAnagrams.get( key ).add( str );
+  }
+  return groupedAnagrams.values( ).stream( ).collect( Collectors.toList( ) );
+}
 ```
 
 #### TreeMap <a id="ds-treemap"></a>
