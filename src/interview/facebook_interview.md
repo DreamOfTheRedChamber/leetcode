@@ -297,4 +297,360 @@ Design the Google search bar that prompts you with suggestions as you type in it
 used leetcode and hackerrank for preparation, but some interview questions were new for me. 3SUM, Intervals intersection, palindrome, BST to linked list conversion.
 
 
+
+
+15. 3Sum
+
+139. Word Break I/II
+
+91. Decode Ways
+
+209. Minimum Size Subarray Sum
+Map store previous values ( O(N) )
+把第一题extend到2D。给一个matrix, all elements are positive，问有没有个sub rectangle加起来和等于target。return true/false。
+Lz听到题目有点懵，认真调整心态，解决之。先写了个cumulative sum。把所有从0,0 到i,j的和算在新的matrix的i,j上。方便之后算head到tail的sub rectangle的和。这一步O(n^2)
+
+
+350. Intersection of Two Arrays II
+Sort, then find duplicates
+
+
+给一个字典包括很多字符串(e.g., abcd, dhfyf)，然后给定一个字符串查看字典中是否包含这个字符串。字符串中可能包括*，*可以匹配任何字符。我用的Trie。
+Task那道题，很多面经都提到过。就是比如给你一串task，再给一个cooldown，执行每个task需要时间1，两个相同task之间必须至少相距cooldown的时间，问执行所有task总共需要多少时间。比如执行如下task：12323，假设cooldown是3。总共需要的时间应该是 1 2 3 _ _ 2 3，也就是7个单位的时间。再比如 1242353，假设cool down是4，那总共时间就是 1 2 4 _ _ _ 2 3 5 _ _ _ 3，也就是13个单位的时间
+基于1，给出最优的排列，使得字符串最短。
+
+
+自然string comparator。不知道的搜下。就是string 比较的时候考虑里面数字的大小，比如 abc9 < abc123 abc > ab9  因为char比digit重要。
+. From 1point 3acres bbs
+117. Populating Next Right Pointers in Each Node II
+salbring tree，不过没有next指针， 你要用原来的left，right指针
+
+Level BFS
+
+
+binary tree转换成doubly linked list
+And revert it back (reverted to balanced tree): 109. Convert Sorted List to Binary Search Tree
+
+
+75. Sort Colors
+
+Print a binary tree by columns top to bottom.
+
+We're given a sorted array of integers: [-3, -1, 0, 1, 2]. We want to generate a sorted array of their squares: [0, 1, 1, 4, 9]
+. Waral 鍗氬鏈夋洿澶氭枃绔�,
+list of sorted integer arrays，要求找所有的数的median. e.g. [1,3,6,7,9], [2,4, 8], [5], return 5
+
+two sum + three sum + follow up
+
+Best Time to Buy and Sell Stock, (I and II)
+buy and sell stock，每天可以买一股，也可以都卖了，或者不买不卖。
+
+Find maximum, buy from earlier days, and sell on that day.
+
+
+33. Search in Rotated Sorted Array
+
+38. Count and Say
+
+sparse vector dot multiplication
+这道题我当时并没有准备到，但是正因为如此，我认为我跟面试官的交流给我加分了不少。面试官首先问我每个vector很大，并不能在内存中存下，该怎么办，我说只需要存下非零的元素和他们的下标就行，然后询问面试官是否可以用预处理后的这两个vector非零元素的index和value作为输入，面试官同意后快速写完O(M*N)的代码，M和N分别是两个vector的长度。面试官说这两个输入如果是根据下标排序好的话应该怎么办，我说可以遍历长度较短的那一个，然后用二分搜索的方法在另一个vector中找index相同的元素，相乘加入到结果中，这样的话复杂度就是O(M*logN)。这时，面试官又问是否可以同时利用两个输入都是排序好这一个特性，我在这个地方有点卡住，但是在白板上写出一个test case，试着用可视化的方法帮助我来进行思考，同时面试官给了一些提醒，最后写出了O(M + N)的双指针方法
+然后问如果有一个向量比另一个长很多怎么办，遍历短的，对长的二分查找。
+两个vector相乘
+
+. 鍥磋鎴戜滑@1point 3 acres
+211. Add and Search Word
+
+239. Sliding Window Maximum
+
+282. Expression Add Operators
+
+158. Read N Characters Given Read4 II - Call multiple times
+
+49. Group Anagrams - use counting sort
+
+linked list 反序输出 - 1) reverse the list; 2) recursion
+
+问题一：flatten an array?
+. 1point 3acres 璁哄潧
+285. Inorder Successor in BST
+
+283. Move Zeroes
+Minimizing “writes”
+. 鐣欏鐢宠璁哄潧-涓€浜╀笁鍒嗗湴
+
+5. Longest Palindromic Substring
+62. Unique Paths I/II
+
+moving all the nonzeros to the front of a list。
+
+Prettify JSON:  输入[1,2,3, {"id": 1, "name": "wang", "tag":[1,"home",2], "price":234}]
+
+Smallest subarray with sum greater than a given value:
+
+flatten nested array
+
+215. Kth Largest Element in an Array
+
+114. Flatten Binary Tree to Linked List
+Linked list needs to be formed as a cycle
+
+
+301. Remove Invalid Parentheses (hard)
+Maintain counter and go from left to right, remove when necessary, then counter must be > 0, then remove “(“ from right hand side
+. 鍥磋鎴戜滑@1point 3 acres
+
+218. The Skyline Problem (hard)
+. visit 1point3acres.com for more.
+278. First Bad Version
+
+Min Queue, 跟Min Stack类似， 实现一个Queue， 然后O（1）复杂度获得这个Queue里最小的元素。
+
+interval [startTime, stoptime)   ----integral  time stamps
+给这样的一串区间 I1, I2......In  
+找出 一个 time stamp  出现在interval的次数最多。
+startTime <= t< stopTime 代表这个数在区间里面出现过。
+example：  [1,3),  [2, 7),   [4,  8),   [5, 9)
+5和6各出现了三次， 所以答案返回5，6。  (Hard)
+
+shortest continuous substring with all characters in input
+76. Minimum Window Substring
+
+. more info on 1point3acres.com
+合并邮件列表（后来才知道也是个面经题）
+Given 1 million email list:
+list 1: a@a.com, b@b.com
+list 2: b@b.com, c@c.com
+list 3: e@e.com
+list 4: a@a.com
+...
+Combine lists with identical emails, and output tuples:
+(list 1, list 2, list 4) (a@a.com, b@b.com, c@c.com)
+(list 3) (e@e.com)
+
+79. Word Search
+
+输出所有 root - leaf 的路径，递归做完了让迭代。
+Iterative? BFS?
+. 鐣欏鐢宠璁哄潧-涓€浜╀笁鍒嗗湴
+
+17. Letter Combinations of a Phone Number
+
+28. Implement strStr()
+
+398. Random Pick Index
+
+37. Sudoku Solver
+
+一个完全树。node有parent指针。
+每个node的值为 0或 1
+每个parent的值为两个子node的 “and” 结果
+现在把一个leaf翻牌子（0变1或者1变0）. visit 1point3acres.com for more.
+把树修正一遍
+
+200. Number of Islands
+
+BST to increasing array
+Recursive, iterative
+173. Binary Search Tree Iterator
+. From 1point 3acres bbs
+BST iterator
+Iterator for a list of BSTs (heap contain each BST’s iterator)
+
+128. Longest Consecutive Sequence
+
+22. Generate Parentheses
+
+238. Product of Array Except Self
+. 涓€浜�-涓夊垎-鍦帮紝鐙鍙戝竷
+191. Number of 1 Bits
+
+给2D平面上的N个点，求离原点最近的K个点
+
+33. Search in Rotated Sorted Array
+
+找出两个给出两个string, leetcode, codyabc和一个数字k = 3,问两个string里面存不存在连续的common substring大于等于k.比如这个例子，两个string都有cod,所以返回true。楼主用dp建了一个m*n的table秒了，然后写test case,发现有个小corner case,改了,pass
+Longest common substring
+
+
+给定一个数列，比如1234，将它match到字母上，1是A，2是B等等，那么1234可以是
+ABCD
+但是还可以是12是L，所以1234也可以写作
+LCD 或者
+AWD
+
+给出N个序列，比如2个序列A,B,没个序列包含若干的区间，比如
+A: [1,5], [10,14], [16,18]
+B: [2,6], [8,10], [11,20]
+Merge them all:  [1,6], [8, 20].
+. more info on 1point3acres.com
+balance parentheses in a string
+例子：
+"(a)()" -> "(a)()"
+"((bc)" -> "(bc)"
+")))a((" -> "a"
+"(a(b)" ->"(ab)" or "a(b)"
+Note: balance的意思就是把原来string里unpaired的括号变成paired的形式。如果有多个可能的结果， 比如上述最后一种情况，我们就只需要输出一个对的结果即可，所以这点简化了题目的难度。感受： 遍历string， 用一个stack存储每个open parenthesis的index，也就是'('的index, 每当遇到closed parenthesis就执行一次pop操作。
+注意两种unbalanced的情况：
+1. 出现多余的')':
+    对应情况就是stack为空，但遇到了一个')'。
+2. 出现多余的'(':
+    对应情况就是遍历结束，stack未空
+
+get binary tree's next node in inorder
+class Node {Node left, Node right, Node parent}
+Node getNext (Node current) {}
+
+给一个tree，每个node 有很多children，
+找到所有最深的nodes 的common  ancestor,
+比如只有一个点最深，那返回他自己。
+Similar to 236. Lowest Common Ancestor of a Binary Tree
+. 1point3acres.com/bbs
+
+78. Subsets
+90. Subsets II
+.鐣欏璁哄潧-涓€浜�-涓夊垎鍦�
+341. Flatten Nested List Iterator
+
+102. Binary Tree Level Order Traversal
+
+给三个funtions: is_low(), is_mid(), is_high(). 让给一个数组排序, low的放在最前面, mid的放在中间, high的放在最后面.
+Color sort: think about when there are K colors
+
+
+39. Combination Sum
+.1point3acres缃�
+125. Valid Palindrome
+214. Shortest Palindrome
+.鐣欏璁哄潧-涓€浜�-涓夊垎鍦�
+98. Validate Binary Search Tree
+
+Longest Arithmetic Progression)
+
+10. Regular Expression Matching
+
+211. Add and Search Word
+
+138. Copy List with Random Pointer
+. 涓€浜�-涓夊垎-鍦帮紝鐙鍙戝竷
+71. Simplify Path
+
+Maximal square:
+.鏈枃鍘熷垱鑷�1point3acres璁哄潧
+314. Binary Tree Vertical Order Traversal
+
+198. House Robber
+-google 1point3acres
+53. Maximum Subarray
+
+152. Maximum Product Subarray
+. 鐗涗汉浜戦泦,涓€浜╀笁鍒嗗湴
+32. Longest Valid Parentheses
+
+277. Find the Celebrity
+
+56. Merge Intervals
+Variant: 一串start time － end time，格式是Apr 2010 － Mar 2011这种，要求计算出这些时间的总跨度，重叠的跨度不重复计算。举例：["Apr 2010 - Dec 2010", "Aug 2010 - Dec 2010", "Jan 2011 - Mar 2011"]
+
+.鏈枃鍘熷垱鑷�1point3acres璁哄潧
+57. Insert Interval
+
+206. Reverse Linked List
+
+implement circular array
+Circular buffer
+
+
+Check big/small endian
+
+第一题：binary tree，给定一个value，return bin tree里面下一个比value大的值
+第二题：binary tree的node加一个ptr next，point到inorder traversal的下一个node，比上一个简单
+
+297. Serialize and Deserialize Binary Tree
+. 1point 3acres 璁哄潧
+Given a list of number, there is only one peak or one drop. Find the maximum drop.
+Exps:
+1 -> 2 -> 3 -> 9 -> 3 -> 0 = 9;
+10 -> 4 -> 3 -> 8 = 7 ;
+
+224. Basic Calculator
+. 鐣欏鐢宠璁哄潧-涓€浜╀笁鍒嗗湴
+43. Multiply Strings
+. from: 1point3acres.com/bbs 
+282. Expression Add Operators
+
+顺时针的print binary tree boundary, 就是从根开始，先打右边界，再打叶子，最后打左边界。
+
+310. Minimum Height Trees
+.鐣欏璁哄潧-涓€浜�-涓夊垎鍦�
+不用“／”，“％”运算符实现division，说了可以用binary search
+
+273. Integer to English Words
+
+111. Minimum Depth of Binary Tree
+
+找两个字符串中长度为N以上的共同子串
+. 1point3acres.com/bbs
+117. Populating Next Right Pointers in Each Node I / II
+.鏈枃鍘熷垱鑷�1point3acres璁哄潧
+29. Divide Two Integers
+
+一个数组内要是存在至少三个升序的数（array[x] < array[y] < array[z], x < y < z）就返回true
+. Waral 鍗氬鏈夋洿澶氭枃绔�,
+161. One Edit Distance
+
+print max depth path of a binary tree
+
+151. Reverse Words in a String
+
+261. Graph Valid Tree
+any connected graph without simple cycles is a tree.
+
+
+给一个linkedlist，里面的element都排序好了，但是是一个blackbox，有三个function可以调用。pop()随机pop出最前面或最后面的element，peek()随机偷看最前面或最后面的element，isEmpty()回传linkedlist是不是空了。问设计一个资料结构，list或是array都可以，把linkedlist里面所有的element都拿出来，并保持他们的排序。followup是如果不能用peek()该怎么做。
+My thinking: if I got element A, and next element B is smaller than A, then A is from the tail of the list; otherwise, A is from the head of the list.
+
+
+133. Clone Graph
+
+Erase duplicate in an unsorted array
+
+几何算法问题。如果给你一堆的矩形， 求重合矩形重合最多的坐标位置。我上过一个算法课，大概思路就是做一个二维的meeting room II
+-google 1point3acres
+给定N个2D坐标（可以设想为餐厅的位置），要求输入任意坐标，可以返回方圆d距离内的所有餐厅
+
+65. Valid Number
+
+253. Meeting Rooms II
+求最多interval的时间点，返回任意一个就行。
+
+
+
+
+补充内容 (2016-9-30 07:30): 鏉ユ簮涓€浜�.涓夊垎鍦拌鍧�. 
+一夜暴富了。。。谢谢大家。我昨天又做了一些修改，删去重复，合并了一些。另外一些难题的还写了写代码。可是帖子不能编辑啊？太菜了。
+PS，刚刚面了FB第一轮，iterator for merging K sorted arrays
+
  
+ 
+ 
+ Round 1 behavior + coding （美国人）
+我的第一位面试官感觉早上刚来上班就要面试，好像心情很一般，全程比较冷漠。behavior主要是自我介绍，自己未来想做的方向，how you see youself in 5 years，具体说自己做过的project。因为这位面试官在fb做广告的machine learning，对我之前的ml项目很感兴趣。但是楼主的这个project比较水，一下就被人家抓到破绽，然后又问我一些ml的概念我也是全懵逼状态，感觉让他更加不爽了。整个behavior大概25分钟。之后开始做题。LC 10. Regular Expression Matching。我把思路说了下，用文字写了各种Corner case的讨论。之后开始在白板上写。最后写出来大半，他说时间不多了不用写了。问了时间复杂度，我说O(n)。他问我确定吗。我其实也不太知道，因为我用的是lc discuss里面vote较高的一个recursive方法写的，这种带递归的时间复杂度我也不是特别清楚。最后问了他点儿问题就结束了。
+
+后面两轮纯coding
+
+Round 2：
+俄罗斯小哥，有一点点口音但是好可爱那种。面着面着突然给我用中文来一句“你会说中文吗？”。 然后说自己正在学。. 1point 3acres 璁哄潧
+上来就让我简要说了下上个实习做了什么就开始做题。
+1，LC28 Implement strStr(). 鐗涗汉浜戦泦,涓€浜╀笁鍒嗗湴
+2, 面经原题：Task那道题，很多面经都提到过。就是比如给你一串task，再给一个cooldown，执行每个task需要时间1，两个相同task之间必须至少相距cooldown的时间，问执行所有task总共需要多少时间。比如执行如下task：12323，假设cooldown是3。总共需要的时间应该是 1 2 3 _ _ 2 3，也就是7个单位的时间。再比如 1242353，假设cool down是4，那总共时间就是 1 2 4 _ _ _ 2 3 5 _ _ _ 3，也就是13个单位的时间。（我把自己写的代码附在后面了。）
+这两题基本都是秒做。我先用例子来解释自己思路，边写也边说了每个步骤在干什么，最后有用例子给他跑了一遍。没有任何问题他也比较满意。最后随便问问问题就结束了。
+. 1point3acres.com/bbs
+Round 3：
+美国小哥，邻家型。
+也是上来让我随便说说上个intern就开始做题。. 鐣欏鐢宠璁哄潧-涓€浜╀笁鍒嗗湴
+1，面经原题：We're given a sorted array of integers: [-3, -1, 0, 1, 2]. We want to generate a sorted array of their squares: [0, 1, 1, 4, 9]。要求用O(n)。也是先用例子给他解释思路，然后秒写代码，再用例子给他demo。
+2，LC43 Multiply Strings。写出来之后小哥发现一个小bug，后来他自己犯了个错误，我们讨论后他发现自己错了。之后问问题他也很开心那种。
+
+面完后带着大家一起吃饭，下午逛逛公司，q/a环节以及玩儿vr眼镜。
+
+整体下来感觉coding还可以，behavior可能比较不好。看地里好多同学被加面了behavior，估计我也得是吧。还有一点个人经验，就是写代码前和写代码后都要自己主动用例子来解释思路或是验证代码，这样不仅能让自己思路更清晰，还能发现自己的bug。这样总比被面试官指出来更好。
