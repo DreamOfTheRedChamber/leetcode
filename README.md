@@ -33,7 +33,8 @@
     * [String](#ds-string)
       - [String vs StringBuilder vs StringBuffer](#ds-string-tradeoffs)
       - [Encode and decode](#ds-string-encode-decode)
-      - [Palindrome](#ds-string-palindrome) 
+      - [Palindrome](#ds-string-palindrome)
+      - [String parsing](#ds-string-parsing)
     * [Collections](#ds-collections)
       - [Iterator](#ds-collections-iterator)
       - [Immutability](#ds-collections-immutability)
@@ -602,6 +603,89 @@ List<Integer> listCopy = new ArrayList<>( list );
 
 #### Stack <a id="ds-stack"></a>
 ##### Calculator <a id="ds-stack-calculator"></a>
+* Evaluate infix expression. The problem can have various follow-ups
+  - How to define input: String s or String[] tokens. If input is defined as String s and numbers might include negative numbers, then parsing negative numbers can be kind of cumbersome. When possible, define input as String[] tokens. Even when required to define input as String s, double check whether we need to deal with negative numbers.
+  - Whether contain space
+  - Whether need to deal with parentheses
+```java
+    public int calculate( String s )
+    {
+      // assertions on validity
+      
+      Stack<Integer> valStack = new Stack<>();
+      Stack<Character> opStack = new Stack<>();
+      for ( int i = 0; i < s.length( ); i++ )
+      {
+        char token = s.charAt( i );
+        if ( token == ' ' )
+        {
+          continue;
+        }
+        else if ( token == '(' )
+        {
+          opStack.push( token );
+        }
+        else if ( token == ')' )
+        {
+          while ( opStack.peek() != '(' )
+          {
+            valStack.push( calc( opStack.pop(), valStack.pop(), valStack.pop() ) );
+          }
+          opStack.pop();
+        }
+        else if ( Character.isDigit( token ) )
+        {
+          int start = i;
+          while ( i + 1 < s.length() && Character.isDigit( s.charAt( i + 1 ) ) )
+          { 
+            i++;
+          }
+          valStack.push( Integer.parseInt( s.substring( start, i + 1 ) ) );
+        }
+        else
+        {
+          while ( !opStack.isEmpty() && isLowerPrece( token, opStack.peek() ) )
+          {
+            valStack.push( calc( opStack.pop(), valStack.pop(), valStack.pop() ) );
+          }
+          opStack.push( token );
+        }
+      }
+      
+      while ( !opStack.isEmpty( ) )
+      {
+        valStack.push( calc( opStack.pop(), valStack.pop(), valStack.pop() ) );
+      }
+      return valStack.pop();      
+    }
+        
+    private boolean isLowerPrece( char curr, char toBeCompared )
+    {
+      return ( toBeCompared == '*' || toBeCompared == '/' ) 
+          || ( toBeCompared == '-' && ( curr == '+' || curr == '-' ) );
+    }
+    
+    private int calc( char operator, int operand1, int operand2 )
+    {
+      if ( operator == '+' )
+      {
+        return operand2 + operand1;
+      }
+      else if ( operator == '-' )
+      {
+        return operand2 - operand1;
+      }
+      else if ( operator == '*' )
+      {
+        return operand2 * operand1;
+      }
+      else
+      {
+        return operand2 / operand1;
+      }
+    }
+```
+
 ##### Parentheses <a id="ds-stack-parent"></a>
   
 #### Queue <a id="ds-queue"></a>

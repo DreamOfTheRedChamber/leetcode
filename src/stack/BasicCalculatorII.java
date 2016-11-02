@@ -41,80 +41,76 @@ public class BasicCalculatorII
     	}
     	// assertions on validity
     	
-    	Stack<Integer> operandStack = new Stack<>();
-    	Stack<Character> operatorStack = new Stack<>();
-    	int currPos = 0;
-    	while ( currPos < s.length( ) )
+    	Stack<Integer> valStack = new Stack<>();
+    	Stack<Character> opStack = new Stack<>();
+    	for ( int i = 0; i < s.length( ); i++ )
     	{
-    		if ( s.charAt( currPos ) == ' ' )
+    		char token = s.charAt( i );
+    		if ( token == ' ' )
     		{
-    			currPos++;
+    			continue;
     		}
-    		// pop from stack and calculate when dealing with +, -
-    		else if ( s.charAt( currPos ) == '+' 
-    				|| s.charAt( currPos ) == '-' )    			
+    		else if ( token == '(' )
     		{
-    			while ( !operatorStack.isEmpty( ) )
-    			{
-    	    		calculate( operandStack, operatorStack );
-    			}    			
-    			operatorStack.push( s.charAt( currPos ) );    			
-    			currPos++;
+    			opStack.push( token );
     		}
-    		else if ( s.charAt( currPos ) == '*'
-    				|| s.charAt( currPos ) == '/' )
+    		else if ( token == ')' )
     		{
-    			while ( !operatorStack.isEmpty() 
-    					&& ( operatorStack.peek() == '*' || operatorStack.peek() == '/') )
+    			while ( opStack.peek() != '(' )
     			{
-    	    		calculate( operandStack, operatorStack );    				
+    				valStack.push( calc( opStack.pop(), valStack.pop(), valStack.pop() ) );
     			}
-    			operatorStack.push( s.charAt( currPos ) );
-    			currPos++;
+    			opStack.pop();
     		}
-    		// push into stack when dealing with num
+    		else if ( Character.isDigit( token ) )
+    		{
+    			int start = i;
+    			while ( i + 1 < s.length() && Character.isDigit( s.charAt( i + 1 ) ) )
+    			{	
+    				i++;
+    			}
+    			valStack.push( Integer.parseInt( s.substring( start, i + 1 ) ) );
+    		}
     		else
     		{
-	    		int value = 0;
-	    		while ( currPos < s.length( ) 
-	    				&& s.charAt( currPos ) >= '0'
-	    				&& s.charAt( currPos ) <= '9' )
+	    		while ( !opStack.isEmpty() && isLowerPrece( token, opStack.peek() ) )
 	    		{
-	    			value = value * 10 + s.charAt( currPos ) - '0';
-	    			currPos++;
+	    			valStack.push( calc( opStack.pop(), valStack.pop(), valStack.pop() ) );
 	    		}
-	    		operandStack.push( value );
+	    		opStack.push( token );
     		}
     	}
     	
-    	while ( !operatorStack.isEmpty( ) )
+    	while ( !opStack.isEmpty( ) )
     	{
-    		calculate( operandStack, operatorStack );
+    		valStack.push( calc( opStack.pop(), valStack.pop(), valStack.pop() ) );
     	}
-    	return operandStack.pop();    	
+    	return valStack.pop();    	
+    }
+        
+    private boolean isLowerPrece( char curr, char toBeCompared )
+    {
+    	return ( toBeCompared == '*' || toBeCompared == '/' ) 
+    			|| ( toBeCompared == '-' && ( curr == '+' || curr == '-' ) );
     }
     
-    private void calculate( Stack<Integer> operandStack, Stack<Character> operatorStack )
+    private int calc( char operator, int operand1, int operand2 )
     {
-		int operand2 = operandStack.pop( );
-		int operand1 = operandStack.pop( );
-		char operator = operatorStack.pop( );
-
     	if ( operator == '+' )
     	{
-    		operandStack.push( operand1 + operand2 );
+    		return operand2 + operand1;
     	}
     	else if ( operator == '-' )
     	{
-    		operandStack.push( operand1 - operand2 );
+    		return operand2 - operand1;
     	}
     	else if ( operator == '*' )
     	{
-    		operandStack.push( operand1 * operand2 );
+    		return operand2 * operand1;
     	}
     	else
     	{
-    		operandStack.push( operand1 / operand2 );
+    		return operand2 / operand1;
     	}
     }
 }

@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.Stack;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 /*
@@ -19,9 +20,7 @@ Some examples:
 "(1+(4+5+2)-3)+(6+8)" = 23
 Note: Do not use the eval built-in library function.
  * */
-// TO_IMME
-// TODO: a calculator for + - * / ( )
-// TODO: inside interview, never define input as string value because that means a lot parsing
+
 public class BasicCalculator 
 {
 	@Test
@@ -30,7 +29,16 @@ public class BasicCalculator
 		assertEquals(2, calculate("1 + 1") );
 		assertEquals(0, calculate("0") );
 		assertEquals(23, calculate("(1+(4+5+2)-3)+(6+8)") );
-		assertEquals( 5, calculate("1+4-(3+2)+5") );
+		assertEquals( 5, calculate("1+4-(3+2)+5") );		
+	}
+	
+	@Test
+	public void test2()
+	{
+		assertEquals( 0, calculate( "0/1" ) );
+		assertEquals( 27, calculate( "100000000/1/2/3/4/5/6/7/8/9/10" ) );
+		assertEquals( -1 , calculate( "1-1-1") );
+		
 	}
 	
     public int calculate( String s )
@@ -42,87 +50,76 @@ public class BasicCalculator
     	}
     	// assertions on validity
     	
-    	Stack<Integer> operandStack = new Stack<>();
-    	Stack<Character> operatorStack = new Stack<>();
-    	int currPos = 0;
-    	while ( currPos < s.length( ) )
+    	Stack<Integer> valStack = new Stack<>();
+    	Stack<Character> opStack = new Stack<>();
+    	for ( int i = 0; i < s.length( ); i++ )
     	{
-    		if ( s.charAt( currPos ) == ' ' )
+    		char token = s.charAt( i );
+    		if ( token == ' ' )
     		{
-    			currPos++;
+    			continue;
     		}
-    		// pop from stack and calculate when dealing with +, -, )
-    		else if ( s.charAt( currPos ) == '+' 
-    				|| s.charAt( currPos ) == '-' 
-    				|| s.charAt(currPos) == ')' )    			
+    		else if ( token == '(' )
     		{
-    			if ( !operatorStack.isEmpty( )
-    					&& operatorStack.peek( ) != '(' )
-    			{
-    	    		calculate( operandStack, operatorStack );
-    			}
-    			if ( s.charAt( currPos ) == ')' )
-    			{
-        			operatorStack.pop( );
-    				
-    			}
-    			else
-    			{
-    				operatorStack.push( s.charAt( currPos ) );
-    			}
-    			currPos++;
+    			opStack.push( token );
     		}
-    		// push into stack when dealing with (, num
+    		else if ( token == ')' )
+    		{
+    			while ( opStack.peek() != '(' )
+    			{
+    				valStack.push( calc( opStack.pop(), valStack.pop(), valStack.pop() ) );
+    			}
+    			opStack.pop();
+    		}
+    		else if ( Character.isDigit( token ) )
+    		{
+    			int start = i;
+    			while ( i + 1 < s.length() && Character.isDigit( s.charAt( i + 1 ) ) )
+    			{	
+    				i++;
+    			}
+    			valStack.push( Integer.parseInt( s.substring( start, i + 1 ) ) );
+    		}
     		else
     		{
-    			if ( s.charAt( currPos ) == '(' )
-    			{
-        			operatorStack.push( s.charAt( currPos ) );
-        			currPos++;
-    			}
-    			else
-    			{
-	    			int value = 0;
-	    			while ( currPos < s.length( ) 
-	    					&& s.charAt( currPos ) >= '0'
-	    					&& s.charAt( currPos ) <= '9' )
-	    			{
-	    				value = value * 10 + s.charAt( currPos ) - '0';
-	    				currPos++;
-	    			}
-	    			operandStack.push( value );
-    			}
+	    		while ( !opStack.isEmpty() && isLowerPrece( token, opStack.peek() ) )
+	    		{
+	    			valStack.push( calc( opStack.pop(), valStack.pop(), valStack.pop() ) );
+	    		}
+	    		opStack.push( token );
     		}
     	}
     	
-    	while ( !operatorStack.isEmpty( ) )
+    	while ( !opStack.isEmpty( ) )
     	{
-    		calculate( operandStack, operatorStack );
+    		valStack.push( calc( opStack.pop(), valStack.pop(), valStack.pop() ) );
     	}
-    	return operandStack.pop();    	
+    	return valStack.pop();    	
+    }
+        
+    private boolean isLowerPrece( char curr, char toBeCompared )
+    {
+    	return ( toBeCompared == '*' || toBeCompared == '/' ) 
+    			|| ( toBeCompared == '-' && ( curr == '+' || curr == '-' ) );
     }
     
-    private void calculate( Stack<Integer> operandStack, Stack<Character> operatorStack )
+    private int calc( char operator, int operand1, int operand2 )
     {
-		int operand2 = operandStack.pop( );
-		int operand1 = operandStack.pop( );
-		char operator = operatorStack.pop( );
-
     	if ( operator == '+' )
     	{
-    		operandStack.push( operand1 + operand2 );
+    		return operand2 + operand1;
     	}
     	else if ( operator == '-' )
     	{
-    		operandStack.push( operand1 - operand2 );
+    		return operand2 - operand1;
     	}
     	else if ( operator == '*' )
     	{
-    		operandStack.push( operand1 * operand2 );
+    		return operand2 * operand1;
     	}
     	else
     	{
-    		operandStack.push( operand1 / operand2 );
+    		return operand2 / operand1;
     	}
     }
 }
