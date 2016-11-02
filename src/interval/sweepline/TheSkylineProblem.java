@@ -1,5 +1,10 @@
 package interval.sweepline;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.PriorityQueue;
+import java.util.Queue;
+
 /**
 A city's skyline is the outer contour of the silhouette formed by all the buildings in that city when viewed from a distance. Now suppose you are given the locations and height of all the buildings as shown on a cityscape photo (Figure A), write a program to output the skyline formed by these buildings collectively (Figure B).
 
@@ -19,11 +24,39 @@ The input list is already sorted in ascending order by the left x position Li.
 The output list must be sorted by the x position.
 There must be no consecutive horizontal lines of equal height in the output skyline. For instance, [...[2 3], [4 5], [7 5], [11 5], [12 7]...] is not acceptable; the three lines of height 5 should be merged into one in the final output as such: [...[2 3], [4 5], [12 7], ...]
  */
-//TO_START
 public class TheSkylineProblem
 {
-    public List<int[]> getSkyline(int[][] buildings) 
+    public List<int[]> getSkyline( int[][] buildings )
     {
-        
+    	List<int[]> result = new ArrayList<>();
+    	List<int[]> heights = new ArrayList<>();
+    	for ( int[] building : buildings )
+    	{
+    		heights.add( new int[]{ building[0], -building[2] } );
+    		heights.add( new int[]{ building[1], building[2] } );    		
+    	}
+    	heights.sort( ( o1, o2 ) -> o1[0] == o2[0] ? o1[0] - o2[0] : o1[1] - o2[1] );
+    	Queue<Integer> maxQueue = new PriorityQueue<>();
+    	maxQueue.offer( 0 );
+    	int prev = 0;
+    	for ( int[] height : heights )
+    	{
+    		if ( height[1] < 0 )
+    		{
+    			maxQueue.offer( -height[1] );
+    		}
+    		else
+    		{
+    			maxQueue.remove( height[1] );
+    		}
+    		
+    		int curr = maxQueue.peek();
+    		if ( prev != curr )
+    		{
+    			result.add( new int[]{ height[0], curr } );
+    			prev = curr;
+    		}
+    	}
+    	return result;
     }
 }
