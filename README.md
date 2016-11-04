@@ -18,12 +18,28 @@
     * [Strategies](#practice-strategies)
     * [Leetcode pros and cons](#leetcode-pros-cons)
     * [Interview Java pros and cons](#java-pros-cons)
+* [Java language](#java-language)
+    * [Characteristics of Object oriented](#characteristics)
+    * [Java vs Javascript](#java-vs-javascript)
+    * [Access modifiers](#access-modifiers)
+    * [Stack vs heap vs static area](#stack-heap-staticarea)
+    * [StackOverflow vs heapOutOfMemory](#stack-overflow-vs-heap-outof-memory)
+    * [Equals and hashcode](#equals-hashcode)
+    * [Overload vs override](#overload-vs-override)
+    * [Abstract class vs interface](#abstract-class-vs-interface)
+    * [Char and unicode](#char-and-unicode)
+    * [Abstract, static, native, synchronize method keyword](#abstract-static-native-synchronized-method-keyword)
+    * [Static nested class vs inner class](#static-nested-class-vs-inner-class)
+    * [Clone](#clone)
+    * [Assert, error and exception](#assert-error-exception)
+    * [Final vs finally vs finalize](#final-finally-finalize)
+    * [Comparable vs comparator](#comparable-vs-comparator)
 * [Data structures](#ds)
     * [Data structure relationships](#ds-relationship)
     * [Type size](#ds-type-size)
     * [Type conversions](#ds-type-conversions)
       - [Automated cast](#ds-type-conversions-automated-cast)
-      - [Between string and integer](#ds-type-conversions-string-and-integer)
+      - [Between string and primitive types](#ds-type-conversions-string-and-integer)
       - [Between array and collections](#ds-type-conversions-array-and-collections)
       - [Between collections](#ds-type-conversions-collections)
     * [Array](#ds-array)
@@ -32,6 +48,7 @@
       - [Forward backward traversal](#ds-array-forward-backward-traversal)
     * [String](#ds-string)
       - [String vs StringBuilder vs StringBuffer](#ds-string-tradeoffs)
+      - [String reverse](#ds-string-reverse)
       - [Encode and decode](#ds-string-encode-decode)
       - [Palindrome](#ds-string-palindrome)
       - [String parsing](#ds-string-parsing)
@@ -389,6 +406,23 @@
   * Lambda expressions are still not closures
   * Linkedhashset could not be iterated reversely
 
+### Java language<a id="java-language"></a>
+#### Characteristics of Object oriented<a id="characteristics"></a>
+#### Java vs Javascript<a id="java-vs-javascript"></a>
+#### Access modifiers<a id="access-modifiers"></a>
+#### Stack vs heap vs static area<a id="stack-heap-staticarea"></a>
+#### StackOverflow vs heapOutOfMemory<a id="stack-overflow-vs-heap-outof-memory"></a>
+#### Equals and hashcode<a id="equals-hashcode"></a>
+#### Overload vs override<a id="overload-vs-override"></a>
+#### Abstract class vs interface<a id="abstract-class-vs-interface"></a>
+#### Abstract, static, native, synchronize method keyword<a id="abstract-static-native-synchronized-method-keyword"></a>
+#### Static nested class vs inner class<a id="static-nested-class-vs-inner-class"></a>
+#### Char and unicode<a id="char-and-unicode"></a>
+#### Clone<a id="clone"></a>
+#### Assert, error and exception<a id="assert-error-exception"></a>
+#### Final vs finally vs finalize<a id="final-finally-finalize"></a>
+#### Comparable vs comparator<a id="comparable-vs-comparator"></a>
+
 ### Data structures <a id="ds"></a>
 
 #### Data structure relationships<a id="ds-relationship"></a>
@@ -412,7 +446,7 @@
 value = value * 10 +  s.charAt( currPos ) - '0' ; 
 ```
 
-##### Between string and integer <a id="ds-type-conversions-string-and-integer"></a>
+##### Between string and primitive types <a id="ds-type-conversions-string-and-integer"></a>
 * Convert string to int
 ```java
 String str = "-2";
@@ -527,6 +561,8 @@ private List<List<Integer>> kSum( int kVal, int target, int startIndex, int[] nu
 | Modifiable    | Immutable     |   Mutable | Mutable |
 | Thread safe   | Yes     |   No | Yes | 
 | Performance   | Fast    |   Fast | very slow| 
+
+##### String reverse <a id="ds-string-reverse"></a>
 
 ##### Encode and decode <a id="ds-string-encode-decode"></a>
 
