@@ -654,3 +654,74 @@ Round 3：
 面完后带着大家一起吃饭，下午逛逛公司，q/a环节以及玩儿vr眼镜。
 
 整体下来感觉coding还可以，behavior可能比较不好。看地里好多同学被加面了behavior，估计我也得是吧。还有一点个人经验，就是写代码前和写代码后都要自己主动用例子来解释思路或是验证代码，这样不仅能让自己思路更清晰，还能发现自己的bug。这样总比被面试官指出来更好。
+
+
+Calculate the square root of a double
+Given n intervals [si, fi], find the maximum number of overlapping intervals.
+Print all the paths from root to every leaf in a binary tree.
+Print the sum of all the numbers at every vertical level in a binary tree
+Given a set of n jobs with [start time, end time, cost] find a subset so that no 2 jobs overlap and the cost is maximum ?
+Given 1 trillion messages on FB and each message has at max 10 words, how do you build the index table and how many machines do you need on the cluster to store the index table ?
+Given an input array and another array that describes a new index for each element, mutate the input array so that each element ends up in their new index. Discuss the runtime of the algorithm and how you can be sure there won’t be any infinite loops.
+Find all the anagrams in an array of strings
+Combinations(n, k) – print all combinations of k out of n items
+Printing a binary tree L-R,
+Implementing a comparator function to sort files based on a certain naming convention.
+Implement a LRU cache
+Design FB newsfeed
+How would you query for all the Places near a given coordinate? The focus is on how to scale this to a large number of places while keeping response time to within acceptable user expectations
+Given a list of words, group anagrams.
+Find all 3 items that sum to 0 in an array.
+Write a function that calculates input strings with operators +,-,*,/ eg. “5+5*6″ should output 35
+Printing the nodes of a linked list in reverse
+Finding the longest palindrome in a given string
+Finding maximum subarray sum (similar to Kadane’s Algorithm) with the constraint that two numbers in the array that form the max sum cannot be next to each other
+How do you use Facebook app and what are the problems with it? How would you fix it?
+Design a Facebook travel app
+designing a system to do spam detection work and describing it in a huge flowchart, as might be done in an early but detailed product planning session. Be prepared to think on large scales.
+Write a palindrome-checking function
+Print a tree, level by level.
+Write all solutions for a^3+b^3 = c^3 + d^3, where a, b, c, d lie between [0, 10^5]
+Print a list in reverse
+Compute maximum profit for buying selling a stock given an array of prices for n days.
+Check if two binary trees are Isomorphic
+How would you come to an agreement if you and another senior level engineer couldn’t agree on a technical design?
+Write a function that takes 2 arguments: a binary tree and an integer n, it should return the n-th element in the inorder traversal of the binary tree.
+Add up two big integers represented in arrays.
+Design a system to support Facebook status update.
+Design the recommendation system for search keywords
+Given 2 very large numbers, each of which is so large it can only be represented as an array of integers, write a function to multiply them.
+Write a function to display a JSON string in pretty format.
+Write a function to check if polygon is simple based on given list of points
+Function to compute the number of ways to climb a flight of n steps. Taking 1, 2, or 3 steps at a time. Do it in Linear time and constant space. Example:
+n = 3.
+1 1 1
+1 2
+2 1
+3
+Ans = 4
+Interweave a linked list. Do it in Linear time and constant space.
+Input: A->B->C->D->E
+Output: A->E->B->D->C
+Given a dictionary based simple password, create all possible (special character) passwords based on a provided mapping.
+Input: face
+Map: {a -> @, 4, A}
+Output: f@ce, f4ce, fAce
+Get numeric number out of a roman string, linear time
+Given: mapping I = 1, V = 5, X = 10, L = 50, C = 100, D = 500, M = 1000
+Input/Output:
+II = 2, III = 3, IV = 4
+VI, VII, VIII
+IX = 9
+XL = 40,
+XLIX = 49
+Merge ‘k’ sorted arrays, each array may have max ‘n’ elements
+What would you change in Facebook?
+Given a sorted array, write a program to decide if two elements sum up to a third.
+Determine the 10 most frequent words given a terabyte of strings
+
+We know a string is Palindrome if it is the same reading from both sides. Now we define the following string also Palindrome: 
+
+A man, a plan, a canal, Panama! 
+
+Write a code that returns if an string is palindrome and it should return true for above input. (Without directly saying, I should conclude that I have to only consider alphanumerical characters in a string). In addition, we assume the string is very long and we can not keep a copy of this string or even a copy of preprocessed version of this string. Therefore the result should be returned with the first sweep of the string.
