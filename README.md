@@ -1252,6 +1252,35 @@ private boolean search( String word, int index, TrieNode root )
 
 #### Math <a id="algo-math"></a>
 ##### Random <a id="algo-math-random"></a>
+* Reservoir sampling: sample k from n
+```java
+public List<Integer> sample( List<Integer> list, int k )
+{
+    final List<Integer> samples = new ArrayList<Integer>( k );
+    int count = 0;
+    final Random random = new Random();
+    for ( Integer item : list ) 
+    {
+        if ( count < k ) 
+        {
+            samples.add( item );
+        } 
+        else 
+        {
+            // http://en.wikipedia.org/wiki/Reservoir_sampling
+            // In effect, for all i, the ith element of S is chosen to be included in the reservoir with probability
+            // k/i.
+            int randomPos = random.nextInt( count );
+            if ( randomPos < k ) 
+            {
+                samples.set( randomPos, item );
+            }
+        }
+        count++;
+    }
+    return samples;
+}
+```
 
 ##### Mod <a id="algo-math-mod"></a>
 * judge whether a value is even or odd
