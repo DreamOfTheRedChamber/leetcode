@@ -49,6 +49,7 @@
       - [Array sum](#ds-array-array-sum)
       - [Forward backward traversal](#ds-array-forward-backward-traversal)
     * [String](#ds-string)
+      - [Why String is immutable or final](#ds-string-immutable)  
       - [String vs StringBuilder vs StringBuffer](#ds-string-tradeoffs)
       - [String reverse](#ds-string-reverse)
       - [Encode and decode](#ds-string-encode-decode)
@@ -659,6 +660,12 @@ private List<List<Integer>> kSum( int kVal, int target, int startIndex, int[] nu
 * Trapping rain water, Best time to buy and sell stock III, product of array exclude itself
 
 #### String <a id="ds-string"></a>
+##### Why String is immutable or final <a id="ds-string-immutable"></a>
+* By design: 
+  - **String pool**: Strings are cached in String pool and shared between multiple clients. 
+  - **Security**: No one could override the behavior of String class and don't need to worry about many security threats.
+  - **Performance**: Cache its hashcode. Avoid synchronization.
+
 ##### String vs StringBuilder vs StringBuffer <a id="ds-string-tradeoffs"></a>
 
 | Comparison | String         | StringBuilder | StringBuffer  |
@@ -2281,3 +2288,4 @@ public int houseRobber_RollingArray( int[] A )
 * [Java-success.com](http://www.java-success.com/)
 * [Massive tech interview](http://massivetechinterview.blogspot.com/)
 * [Java best practices](http://www.javapractices.com/home/HomeAction.do)
+* [Java revisited](http://javarevisited.blogspot.com/)
