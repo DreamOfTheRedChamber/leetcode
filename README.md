@@ -31,6 +31,7 @@
     * [Char and unicode](#char-and-unicode)
     * [Abstract, static, native, synchronize method keyword](#abstract-static-native-synchronized-method-keyword)
     * [Static nested class vs inner class](#static-nested-class-vs-inner-class)
+    * [Immutable objects](#immutable-objects)
     * [Clone](#clone)
     * [Assert, error and exception](#assert-error-exception)
     * [Final vs finally vs finalize](#final-finally-finalize)
@@ -448,6 +449,23 @@
 #### Abstract, static, native, synchronize method keyword<a id="abstract-static-native-synchronized-method-keyword"></a>
 #### Static nested class vs inner class<a id="static-nested-class-vs-inner-class"></a>
 #### Char and unicode<a id="char-and-unicode"></a>
+#### Immutable class <a id="immutable-objects"></a>
+* Benefits:
+  - **Clone**: Don't need a copy constructor/an implementation of clone()
+  - **Defensive copy**: Don't need to be copied defensively when used as a field
+  - **Threadsafe**: Are automatically thread-safe and have no synchronization issues
+  - **Hashcode cache**: Allow hashCode to use lazy initialization and to cache its return value
+  - **Class invariants**: Have their class invariants established once upon construction and it never needs to be checked again.
+* Design guidelines:
+  - Don't allow subclass to override methods
+    + Declare the class as final
+    + Make constructor private and construct instances in factory methods
+  - Don't provide setter methods
+  - Make all fields final and private
+  - If the instance fields include references to mutable objects, don't allow those objects to be changed
+    + Do not provide methods that modify mutable objects
+    + Do not share references of mutable objects. Create defensive copy of internal mutable objects when sharing.
+
 #### Clone<a id="clone"></a>
 * Default clone() method creates the shallow copy of an object. 
   - The shallow copy of an object will have exact copy of all the fields of original object.
@@ -459,6 +477,7 @@
 #### Assert, error and exception<a id="assert-error-exception"></a>
 #### Final vs finally vs finalize<a id="final-finally-finalize"></a>
 * Final class can't be inherited, final method can't be overriden and final variable can't be changed.
+  - Final classes: String, Integer
 * Finally is used to place important code, it will be executed whether exception is handled or not.
 ```java
 lock.lock();
@@ -2246,6 +2265,6 @@ public int houseRobber_RollingArray( int[] A )
     + Examples: Backpack I-VI (Lintcode), K Sum (Lintcode), Minimum adjustment cost (Lintcode)
 
 #### References <a id="references"></a>
-* Core Java Interview questions [blog: java-success.com](http://www.java-success.com/)
-* Coding and system design [blog: massive tech interview](http://massivetechinterview.blogspot.com/)
-* algo tutorial [Algorithm tutorial](http://algo.tutorialhorizon.com/)
+* [Java-success.com](http://www.java-success.com/)
+* [Massive tech interview](http://massivetechinterview.blogspot.com/)
+* [Java best practices](http://www.javapractices.com/home/HomeAction.do)
