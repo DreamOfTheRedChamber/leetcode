@@ -1,5 +1,11 @@
 package random;
 
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+
 /*
 Given an array of integers with possible duplicates, randomly output the index of a given target number. You can assume that the given target number must exist in the array.
 
@@ -19,14 +25,22 @@ solution.pick(1);
  * */
 public class RandomPickIndex 
 {
+	private Map<Integer, List<Integer>> valToIndexes = new HashMap<>();
+	private Random rand = new Random();
+	
     public RandomPickIndex( int[] nums )
     {
-        
+        for ( int i = 0; i < nums.length; i++ )
+        {        	
+        	valToIndexes.putIfAbsent( nums[i], new LinkedList<>() );
+        	valToIndexes.get( nums[i] ).add( i );
+        }
     }
     
     public int pick( int target ) 
     {
-        
+    	List<Integer> indexList = valToIndexes.get( target );
+    	return indexList.get( rand.nextInt( indexList.size() ) );
     }
 }
 
