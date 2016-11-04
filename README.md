@@ -21,6 +21,7 @@
 * [Java language](#java-language)
     * [Characteristics of Object oriented](#characteristics)
     * [Java vs Javascript](#java-vs-javascript)
+    * [Java vs C++](#java-vs-c++)
     * [Access modifiers](#access-modifiers)
     * [Stack vs heap vs static area](#stack-heap-staticarea)
     * [StackOverflow vs heapOutOfMemory](#stack-overflow-vs-heap-outof-memory)
@@ -409,12 +410,29 @@
 ### Java language<a id="java-language"></a>
 #### Characteristics of Object oriented<a id="characteristics"></a>
 #### Java vs Javascript<a id="java-vs-javascript"></a>
+#### Java vs C++<a id="java-vs-c++"></a>
+
+| Differences | C++          | Java  |
+| --------------------- |:-------------:| -----:|
+| Design goals  | Extend C but support OOP, can write non-OOP language | OOP language, must write OOP |
+| Run env | at OS level, must compiled against particular OS | inside JVM, compiled classes portable |
+| Pointers | Could pass value by reference | Only pass by value |
+| Memory management  | Managed by developers | Garbage collector |
+
 #### Access modifiers<a id="access-modifiers"></a>
 #### Stack vs heap vs static area<a id="stack-heap-staticarea"></a>
 #### StackOverflow vs heapOutOfMemory<a id="stack-overflow-vs-heap-outof-memory"></a>
 #### Equals and hashcode<a id="equals-hashcode"></a>
 #### Overload vs override<a id="overload-vs-override"></a>
 #### Abstract class vs interface<a id="abstract-class-vs-interface"></a>
+
+| Differences | Abstract class          | Interface  |
+| --------------------- |:-------------:| -----:|
+| Use case  | share code among closely related classes |  share code skeleton among unrelated classes |
+| Content  | a mix of methods with/without implementation | Only methods/fields, no implementations |
+| Modifiers  | no limits | fields are public/static/final, methods are public automatically |
+| Inheritance  | Single  | Multiple |
+
 #### Abstract, static, native, synchronize method keyword<a id="abstract-static-native-synchronized-method-keyword"></a>
 #### Static nested class vs inner class<a id="static-nested-class-vs-inner-class"></a>
 #### Char and unicode<a id="char-and-unicode"></a>
