@@ -24,7 +24,7 @@
     * [Java vs C++](#java-vs-c++)
     * [Access modifiers](#access-modifiers)
     * [Stack vs heap vs static area](#stack-heap-staticarea)
-    * [StackOverflow vs heapOutOfMemory](#stack-overflow-vs-heap-outof-memory)
+    * [OutOfMemoryError](#outof-memory-error)
     * [Equals and hashcode](#equals-hashcode)
     * [Overload vs override](#overload-vs-override)
     * [Abstract class vs interface](#abstract-class-vs-interface)
@@ -430,7 +430,20 @@
 | private          |     Yes       |      NO      |       No         |      No        |
 
 #### Stack vs heap vs static area<a id="stack-heap-staticarea"></a>
-#### StackOverflow vs heapOutOfMemory<a id="stack-overflow-vs-heap-outof-memory"></a>
+#### OutOfMemoryError<a id="outof-memory-error"></a>
+* Types
+  - java.lang.OutOfMemoryError: Java heap space
+  - java.lang.OutOfMemoryError: PermGen space
+  - java.lang.OutOfMemoryError: Requested array size exceeds VM limit
+  - java.lang.OutOfMemoryError: request "size" bytes for "reason". Out of swap space?
+  - java.lang.OutOfMemoryError: "reason" "stack trace" (Native method)
+* Solution
+  - Step 1: Allow the JVM to use more memory
+  - Step 2: Improve/Fix the application to reduce memory usage
+    1. Generate a heap dump on OutOfMemoryError
+    2. Reproduce the problem
+    3. Investigate the issue using heap dump file
+
 #### Equals and hashcode<a id="equals-hashcode"></a>
 * The contract between equals and hashCode is
   - If two objects are equal, then they must have the same hash code.
