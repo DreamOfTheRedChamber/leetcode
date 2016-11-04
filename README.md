@@ -969,7 +969,12 @@ class SegmentTreeNode
 
 ##### Binary search tree<a id="ds-tree-binary-search-tree"></a>
 * Used to store a collection of items in sorted form
-* The definition of BST is left <= middle < right. Pay attention to the equals sign.
+* How to handle duplicates inside binary search tree
+  - Allow same keys on left side ( or right side )
+  - Augment every tree node with a count field.
+    + Benefits 1: Reduce height of tree, complexity of search/insert/delete operations
+    + Benefits 2: Search/Insert/Delete easier to do
+    + Benefits 3: Suited for rotation operation inside self balancing BSTs. 
 * Get inorder traversal predecessor/successor
 ```java
     TreeNode getPredecessor( TreeNode root, TreeNode target )
@@ -1253,6 +1258,7 @@ private boolean search( String word, int index, TrieNode root )
 #### Math <a id="algo-math"></a>
 ##### Random <a id="algo-math-random"></a>
 * Reservoir sampling: sample k from n
+  - Example problems: Shuffle an array, Random pick index, Linked list random node.
 ```java
 public List<Integer> sample( List<Integer> list, int k )
 {
@@ -2006,6 +2012,8 @@ private void dfs( T[][] grid, int x, int y, boolean[][] discovered )
 * Usually greedy algo are not covered in an interview setting:
   - Greedy algo do not generalize as a useful way to decompose and solve problems. 
   - Naive greedy algo are usually "short sighted" algo, which will not lead to global maximal. Working greedy algo are usually hard to think of. 
+* But there are exceptions
+  - Increasing triplet sequence, paint house II
 
 #### Dynamic-programming <a id="algo-dynamic-programming"></a>
 * Use cases: <a id="algo-dp-use-cases"></a>
