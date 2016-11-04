@@ -420,9 +420,21 @@
 | Memory management  | Managed by developers | Garbage collector |
 
 #### Access modifiers<a id="access-modifiers"></a>
+
+| Access modifiers | Current class | Same package | Children classes | Other packages |
+| ---------------- |:-------------:| ------------:| ----------------:| --------------:|
+| public           |     Yes       |     Yes      |      Yes         |     Yes        |
+| protected        |     Yes       |     Yes      |      Yes         |      No        |
+| default          |     Yes       |     Yes      |       No         |      No        |
+| private          |     Yes       |      NO      |       No         |      No        |
+
 #### Stack vs heap vs static area<a id="stack-heap-staticarea"></a>
 #### StackOverflow vs heapOutOfMemory<a id="stack-overflow-vs-heap-outof-memory"></a>
 #### Equals and hashcode<a id="equals-hashcode"></a>
+* The contract between equals and hashCode is
+  - If two objects are equal, then they must have the same hash code.
+  - If two objects have the same hash code, they may or may not be equal.
+
 #### Overload vs override<a id="overload-vs-override"></a>
 #### Abstract class vs interface<a id="abstract-class-vs-interface"></a>
 
@@ -437,8 +449,52 @@
 #### Static nested class vs inner class<a id="static-nested-class-vs-inner-class"></a>
 #### Char and unicode<a id="char-and-unicode"></a>
 #### Clone<a id="clone"></a>
+* Default clone() method creates the shallow copy of an object. 
+  - The shallow copy of an object will have exact copy of all the fields of original object.
+  - Shallowcopy is preferred if an object has only primitive fields. 
+* In addition to shallow copy,
+  - If original object has any references to other objects as fields, then copy of those objects are also created by calling clone() method on them.  
+
+
 #### Assert, error and exception<a id="assert-error-exception"></a>
 #### Final vs finally vs finalize<a id="final-finally-finalize"></a>
+* Final class can't be inherited, final method can't be overriden and final variable can't be changed.
+* Finally is used to place important code, it will be executed whether exception is handled or not.
+```java
+lock.lock();
+try 
+{
+  // do stuff
+}
+catch ( SomeException se )
+{
+  // handle se
+}
+finally
+{
+  lock.unlock();
+}
+```
+* Finalize is a method. It will be used to perform clean up prosessing just before object is garbage collected.
+```java
+class FinalizeExample
+{
+  public void finalize()
+  {
+    System.out.println("finalize called");
+  }
+
+  public static void main( String[] args )
+  {
+    FinalizeExample f1 = new FinalizeExample();
+    FinalizeExample f2 = new FinalizeExample();
+    f1 = null;
+    f2 = null;
+    System.gc();
+  }
+}
+```
+
 #### Comparable vs comparator<a id="comparable-vs-comparator"></a>
 
 ### Data structures <a id="ds"></a>
