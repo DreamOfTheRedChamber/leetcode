@@ -431,6 +431,10 @@
 | private          |     Yes       |      NO      |       No         |      No        |
 
 #### Stack vs heap vs static area<a id="stack-heap-staticarea"></a>
+* Stack: local variables
+* Heap: new created variables
+* Static area: literal and constant variables
+
 #### OutOfMemoryError<a id="outof-memory-error"></a>
 * Types
   - java.lang.OutOfMemoryError: Java heap space
@@ -451,6 +455,13 @@
   - If two objects have the same hash code, they may or may not be equal.
 
 #### Overload vs override<a id="overload-vs-override"></a>
+
+| Differences | Overload          | Override  |
+| --------------------- |:-------------:| -----:|
+| Definition  | Two methods with same name but different signatures      |  Redefine a class already defined in the parent class |
+| Execution time | Compile time     |  Run time |
+| Fixed sized to resizable  | Array/String | ArrayList/StringBuilder |
+
 #### Abstract class vs interface<a id="abstract-class-vs-interface"></a>
 
 | Differences | Abstract class          | Interface  |
@@ -481,12 +492,15 @@
     + Do not share references of mutable objects. Create defensive copy of internal mutable objects when sharing.
 
 #### Clone<a id="clone"></a>
-* Default clone() method creates the shallow copy of an object. 
-  - The shallow copy of an object will have exact copy of all the fields of original object.
-  - Shallowcopy is preferred if an object has only primitive fields. 
-* In addition to shallow copy,
-  - If original object has any references to other objects as fields, then copy of those objects are also created by calling clone() method on them.  
-
+* Deep and shallow copy
+  - Default clone() method creates the shallow copy of an object. 
+    + The shallow copy of an object will have exact copy of all the fields of original object.
+    + Shallowcopy is preferred if an object has only primitive fields. 
+  - In addition to shallow copy,
+    + If original object has any references to other objects as fields, then copy of those objects are also created by calling clone() method on them.  
+* How to clone an object
+  - Implements Cloneable interface and override clone() 
+  - Implements serializable interface and clone objects by serialize and deserialize
 
 #### Assert, error and exception<a id="assert-error-exception"></a>
 #### Final vs finally vs finalize<a id="final-finally-finalize"></a>
@@ -544,6 +558,7 @@ class FinalizeExample
 
 #### Type size<a id="ds-type-size"></a>
 * Reference types: 32-bit system (32 bit), 64-bit system (64 bit)
+* Enumeration type: 
 * Primitive types: boolean (8 bit), byte (8 bit), char (16 bit), short (16 bit), int (32 bit), long (64 bit), float (32 bit), double (64 bit)
 
 #### Type conversions<a id="ds-type-conversions"></a>
@@ -554,11 +569,8 @@ value = value * 10 +  s.charAt( currPos ) - '0' ;
 ```
 
 ##### Between string and primitive types <a id="ds-type-conversions-string-and-integer"></a>
-* Convert string to int
-```java
-String str = "-2";
-int intValue = Integer.parseInt( str );
-```
+* Convert string to primitive types: parseXXX(String) or valueOf(String)
+* Convert primitive types to string: String.valueOf() or add with an empty string ""
 
 ##### Between array and collections <a id="ds-type-conversions-array-and-collections"></a>
 * Array to collections 
