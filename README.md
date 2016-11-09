@@ -508,8 +508,15 @@
 
 
 #### Final vs finally vs finalize<a id="final-finally-finalize"></a>
-* Final class can't be inherited, final method can't be overriden and final variable can't be changed.
-  - Final classes: String, Integer
+* Final class can't be inherited, final method can't be overriden and final variable can't be changed. A class/Method may never be both abstract and final. Abstract means the class/Method must be extended/Overriden, while final means it cannot be. 
+
+
+|     Object   |       Meaning        |       Advantage    |     Example      |
+| ------------ |:--------------------:| ------------------:| ----------------:|
+| Final class  | Cannot be subclassed | Security/Efficiency | String | 
+| Final method | Cannot be overriden  | Preventing unexpected behavior crucial to the funtionality of the class/critical to the consistent state of the object | Object.getClass()/notify(), methods called from constructors should usually be final | 
+| Final var    | Cannot be reassigned / Making a reference var final only means the var can not be changed but you can change the referenced object | Could be cached / Safe to share in multi-threading env | All vars declared inside java interface are implicitly final |
+
 * Finally is used to place important code, it will be executed whether exception is handled or not.
 ```java
 lock.lock();
