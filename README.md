@@ -36,6 +36,7 @@
     * [Assert, error and exception](#assert-error-exception)
     * [Final vs finally vs finalize](#final-finally-finalize)
     * [Comparable vs comparator](#comparable-vs-comparator)
+    * [Garbage collector](#garbage-collector)
 * [Data structures](#ds)
     * [Data structure relationships](#ds-relationship)
     * [Type size](#ds-type-size)
@@ -194,7 +195,7 @@
          * Integer or double
          * Positive or negative, non-positive or non-negative
       * Input - Array<a id="question-array"></a>
-         * Sorted or unsorted
+         * Sorted or unsorted, sorted increasingly or decreasingly
          * Given two arrays, which one's size is bigger
          * Whether could modify entries inside array
       * Input - String<a id="question-string"></a>
@@ -217,6 +218,7 @@
         * External or internal
         * Input almost sorted or not
         * Input range
+        * Increasing/Decreasing order
       * Search
         * Whether duplicate entries exist
    * Edge cases: "***If input is like this, then what should I output?***"
@@ -503,6 +505,8 @@
   - Implements serializable interface and clone objects by serialize and deserialize
 
 #### Assert, error and exception<a id="assert-error-exception"></a>
+
+
 #### Final vs finally vs finalize<a id="final-finally-finalize"></a>
 * Final class can't be inherited, final method can't be overriden and final variable can't be changed.
   - Final classes: String, Integer
@@ -740,6 +744,18 @@ List<Integer> listCopy = new ArrayList<>( list );
 | Memory overhead  | array and element      | two pointers and element |
 
 ##### LinkedListNode<a id="ds-list-linkedlistnode"></a>
+* Maintain a list dummy head and actual tail pointer
+```java
+LinkedListNode dummy = new LinkedListNode( 0 );
+LinkedListNode tail = dummy;
+
+// append one more element to the tail
+tail.next = appendedNode;
+// move tail pointer forward
+tail = appendedNode;
+
+return dummy.next; // pointing to the actual list head
+```
 
 ##### Common tasks<a id="ds-list-common-tasks"></a>
 * Reorder
@@ -760,6 +776,101 @@ List<Integer> listCopy = new ArrayList<>( list );
     head.next = null;
     return reversedListHead;
   }
+```
+* Merge sorted list. 
+  - The number of list K
+    + if K == 2
+      - Inputs
+        * ListNode l1, ListNode l2
+        * List<T> l1, List<T> l2
+        * Iterator<T> iter1, Iterator<T> iter2
+      - Solutions
+        * Similar to merge sort process
+    + if K > 2
+      - Inputs
+        * ListNode[] / List<ListNode> input
+        * List<List<T>> input
+        * List<Iterator<T>> input
+      - Solutions: assume n is the total number of nodes
+        * Merge list two by two: O( n^2 )
+        * Divide and conquer: O( nlogn )
+        * Heap: O( nlogk )
+```java
+// k == 2 case
+private ListNode merge( ListNode list1, ListNode list2 )
+{
+  ListNode dummy = new ListNode( 0 );
+  ListNode tail = dummy;
+  while ( list1 != null && list2 != null ) 
+  {
+    if ( list1.val < list2.val ) 
+    {
+      tail.next = list1;
+      list1 = list1.next;
+    } 
+    else 
+    {
+      tail.next = list2;
+      list2 = list2.next;
+    }
+    
+    tail = tail.next;
+  }
+        
+  if ( list1 != null ) 
+  {
+    tail.next = list1;
+  } 
+  else 
+  {
+    tail.next = list2;
+  }
+        
+  return dummy.next;
+}
+
+private List<Integer> merge( List<Integer> list1, List<Integer> l2 )
+{
+  List<Integer> result = new LinkedList<>();
+  Iterator<Integer> iter1 = list1.iterator();
+  Iterator<Integer> iter2 = list2.iterator();
+
+  int head1 = iter1.hasNext() ? iter1.next() : null;
+  int head2 = iter2.hasNext() ? iter2.next() : null;
+  while ( head1 != null && head2 != null )
+  {
+    if ( head1 <= head2 )
+    {
+      result1.add( head1 );
+      head1 = iter1.hasNext() ? iter1.next() : null;
+    }
+    else
+    {
+      result.add( head2 );
+      head2 = iter2.hasNext() ? iter2.next() : null;
+    }
+  }
+
+  while ( iter1.hasNext() )
+  {
+    result.add( iter1.next() );
+  }
+
+  while ( iter2.hasNext() )
+  {
+    result.add( iter2.next() );
+  }
+
+  return result;
+}
+
+K > 2 case:
+// Heap based method is usually the most efficient one. The hard part is how to define the priority queue in case of different inputs.
+// for ListNode[] / List<ListNode> input
+Queue<ListNode> minQueue = new PriorityQueue<>( ( o1, o2 ) -> o1.val - o2.val );
+// for List<List<T>> / List<Iterator<T>> input
+Queue<ValAndIter> minQueue = new PriorityQueue<>( ( o1, o2 ) -> o1.val - o2.val );
+
 ```
 
 #### Stack <a id="ds-stack"></a>
