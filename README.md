@@ -744,7 +744,8 @@ List<Integer> listCopy = new ArrayList<>( list );
 | Memory overhead  | array and element      | two pointers and element |
 
 ##### LinkedListNode<a id="ds-list-linkedlistnode"></a>
-* Maintain a list dummy head and actual tail pointer
+* Dummy Node trick: Maintain a list dummy head and actual tail pointer
+  - Used across all linked list modification operations
 ```java
 LinkedListNode dummy = new LinkedListNode( 0 );
 LinkedListNode tail = dummy;
@@ -758,7 +759,28 @@ return dummy.next; // pointing to the actual list head
 ```
 
 ##### Common tasks<a id="ds-list-common-tasks"></a>
-* Reorder
+* Median
+```java
+  public ListNode findMedian( ListNode head )
+  {
+    ListNode fast = head;
+    ListNode slow = head;
+    while ( fast != null )
+    {
+      fast = fast.next;
+      if ( fast == null )
+      {
+        break;
+      }
+      else
+      {
+        fast = fast.next;
+        slow = slow.next;
+      }
+    }
+    return slow;
+  }
+```
 * Reverse list 
   - recursively, the key point here is record the reversed list tail before recursion
 ```java
