@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Queue;
 import java.util.Set;
 import java.util.Stack;
+import java.util.stream.Collectors;
 
 import org.junit.Test;
 
@@ -51,37 +52,40 @@ public class RemoveInvalidParentheses
 		Set<String> isVisited = new HashSet<>();		
 		Queue<String> bfsQueue = new LinkedList<>();
 		bfsQueue.add( s );
-		while ( !bfsQueue.isEmpty() )
+		while ( numInvalid > 0 )
 		{
 			int levelSize = bfsQueue.size();
 			for ( int i = 0; i < levelSize; i++ )
 			{
-				String qHead = bfsQueue.poll();
-				for ( int j = 0; j < qHead.length(); j++ )
-				{
-					if ( qHead.charAt( j ) == '(' || qHead.charAt( j ) == ')' )
-					{
-						String newString = qHead.substring( 0, j ) + qHead.substring( j + 1 ); 
-						if ( !isVisited.contains( newString ) )
-						{						
-							isVisited.add( newString );
-							int newInvalid = calcNumInvalid( newString );
-							if ( newInvalid == numInvalid - 1 )
-							{
-								if ( newInvalid > 0 )
-								{
-									bfsQueue.add( newString );
-								}
-								else
-								{
-									result.add( newString );
-								}
-							}
-						}
-					}
-				}
+				Set<String> nextLevel = removeOneParenthese( bfsQueue.poll(), numInvalid, bfsQueue, isVisited );
+				bfsQueue.addAll( nextLevel );
 			}
 			numInvalid--;
+		}
+		return bfsQueue.stream().collect( Collectors.toList() );
+	}
+	
+	private Set<String> removeOneParenthese( String target, int numInvalid, Queue<String> bfsQueue, Set<String> isVisited )
+	{
+		Set<String> result = new HashSet<>();
+		for ( int j = 0; j < target.length(); j++ )
+		{
+			// trunning for no '(' and ')' parenthese
+			if ( target.charAt( j ) != '(' && target.charAt( j ) != ')' )
+			{
+				continue;
+			}
+			
+			String newString = target.substring( 0, j ) + target.substring( j + 1 ); 
+			if ( !isVisited.contains( newString ) )
+			{						
+				isVisited.add( newString );
+				int newInvalid = calcNumInvalid( newString );
+				if ( newInvalid < numInvalid )
+				{
+					result.add( newString );
+				}
+			}
 		}
 		return result;
 	}
