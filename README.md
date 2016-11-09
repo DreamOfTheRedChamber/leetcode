@@ -981,7 +981,52 @@ Queue<ValAndIter> minQueue = new PriorityQueue<>( ( o1, o2 ) -> o1.val - o2.val 
 ```
 
 ##### Parentheses <a id="ds-stack-parent"></a>
-  
+* Check if string s contains valid parenthese
+```java
+boolean isValid( String s )
+{
+  int count = 0;
+  for ( char ch : s.toCharArray() )
+  {
+    if ( ch == '(' )
+    {
+      count++;
+    }
+    else if ( ch == ')' )
+    {
+      if ( count == 0 )
+      {
+        return false;
+      }
+      count--;
+    }
+  }
+  return count == 0;
+}
+```  
+* Calculate the number of invalid parenthese
+```java
+int calcNumInvalid( String s )
+{
+  Stack<Character> stack = new Stack<>();
+  for ( char ch : s.toCharArray() )
+  {
+    if ( ch == '(' || ch == ')' )
+    {
+      if ( !stack.isEmpty() && stack.peek() == '(' && ch == ')' )
+      {
+        stack.pop();
+      }
+      else
+      {
+        stack.push( ch );
+      }
+    }
+  }
+  return stack.size();
+}
+```
+
 #### Queue <a id="ds-queue"></a>
 ##### Interfaces <a id="ds-queue-interfaces"></a>
 | Comparison | throws exception         | return special value  |

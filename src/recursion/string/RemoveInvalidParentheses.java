@@ -41,17 +41,30 @@ public class RemoveInvalidParentheses
 			result.add("");
 			return result;
 		}
-
-		int numInvalid = calcNumInvalid( s );
+		
+		// trunning beginning and ending parenthese
+		int start = 0;
+		while ( s.charAt( start ) == ')' )
+		{
+			start++;
+		}
+		int end = s.length() - 1;
+		while ( s.charAt( end ) == '(' )
+		{
+			end--;
+		}
+		String trimmed = s.substring( start, end + 1 );
+		
+		int numInvalid = calcNumInvalid( trimmed );
 		if ( numInvalid == 0 )
 		{
-			result.add( s );
+			result.add( trimmed );
 			return result;
-		}
+		}		
 		
 		Set<String> isVisited = new HashSet<>();		
 		Queue<String> bfsQueue = new LinkedList<>();
-		bfsQueue.add( s );
+		bfsQueue.add( trimmed );
 		while ( numInvalid > 0 )
 		{
 			int levelSize = bfsQueue.size();
