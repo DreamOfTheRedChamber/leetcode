@@ -36,90 +36,67 @@ public class RemoveInvalidParentheses
 	public List<String> removeInvalidParentheses( String s ) 
 	{
 		List<String> result = new ArrayList<>();
-		if ( s == null || s.length() == 0 )
+		if ( s == null )
 		{
-			result.add("");
+			return result;
+		}
+		if ( s.length() == 0 
+				|| isValid( s ) )
+		{
+			result.add( s );
 			return result;
 		}
 		
-		// trunning beginning and ending parenthese
-		int start = 0;
-		while ( s.charAt( start ) == ')' )
+		Queue<Tuple> bfsQueue = new LinkedList<>();
+		bfsQueue.add( new Tuple( s, 0, ')') );
+		while ( !bfsQueue.isEmpty() )
 		{
-			start++;
-		}
-		int end = s.length() - 1;
-		while ( s.charAt( end ) == '(' )
-		{
-			end--;
-		}
-		String trimmed = s.substring( start, end + 1 );
-		
-		int numInvalid = calcNumInvalid( trimmed );
-		if ( numInvalid == 0 )
-		{
-			result.add( trimmed );
-			return result;
-		}		
-		
-		Set<String> isVisited = new HashSet<>();		
-		Queue<String> bfsQueue = new LinkedList<>();
-		bfsQueue.add( trimmed );
-		while ( numInvalid > 0 )
-		{
-			int levelSize = bfsQueue.size();
-			for ( int i = 0; i < levelSize; i++ )
+			Tuple qHead = bfsQueue.poll();
+			for ( int i = qHead.start; i < qHead.string.length(); ++i )
 			{
-				Set<String> nextLevel = removeOneParenthese( bfsQueue.poll(), numInvalid, bfsQueue, isVisited );
-				bfsQueue.addAll( nextLevel );
-			}
-			numInvalid--;
-		}
-		return bfsQueue.stream().collect( Collectors.toList() );
-	}
-	
-	private Set<String> removeOneParenthese( String target, int numInvalid, Queue<String> bfsQueue, Set<String> isVisited )
-	{
-		Set<String> result = new HashSet<>();
-		for ( int j = 0; j < target.length(); j++ )
-		{
-			// trunning for no '(' and ')' parenthese
-			if ( target.charAt( j ) != '(' && target.charAt( j ) != ')' )
-			{
-				continue;
-			}
-			
-			String newString = target.substring( 0, j ) + target.substring( j + 1 ); 
-			if ( !isVisited.contains( newString ) )
-			{						
-				isVisited.add( newString );
-				int newInvalid = calcNumInvalid( newString );
-				if ( newInvalid < numInvalid )
+				char ch = qHead.string.charAt( i );
+				if ( ch != '(' && ch != ')' ) continue;
+				if ( i != qHead.start && qHead.string.charAt( i - 1 ) == ch ) continue;
+				if ( qHead.removed == '(' && ch == ')' ) continue;
+				
+				String next = qHead.string.substring( 0, i ) + qHead.string.substring( i + 1 );
+				if ( isValid( next ) )	
 				{
-					result.add( newString );
+					result.add( next );
 				}
+				else if ( result.isEmpty() )
+				{
+					bfsQueue.offer( new Tuple( next, i, ch ) );
+				}
+				
 			}
 		}
 		return result;
 	}
 	
-	private int calcNumInvalid( String s )
+	private boolean isValid( String s ) 
 	{
-		Stack<Character> stack = new Stack<>();
-		for ( char ch : s.toCharArray() )
-		{
-			if ( ch == '(' || ch == ')' )
-			{
-				if ( !stack.isEmpty() && stack.peek() == '(' && ch == ')' )
-				{
-					stack.pop();
-				}
-				else
-				{
-					stack.push( ch );
-				}
-			}
-		}
-		return stack.size();
+	    int count = 0;
+	    for ( int i = 0; i < s.length(); ++i ) 
+	    {
+	        char c = s.charAt(i);
+	        if ( c == '(' ) ++count;
+	        if ( c == ')' && count-- == 0 ) return false;
+	    }
+	    return count == 0;
+	}
+
+	private class Tuple 
+	{
+	    public final String string;
+	    public final int start;
+	    public final char removed;
+
+	    public Tuple( String string, int start, char removed ) 
+	    {
+	        this.string = string;
+	        this.start = start;
+	        this.removed = removed;
+	    }
 	}
 }
