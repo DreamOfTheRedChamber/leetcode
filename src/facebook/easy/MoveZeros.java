@@ -17,32 +17,15 @@ Minimize the total number of operations.
 public class MoveZeros 
 {
     public void moveZeroes( int[] nums )
-    {
-    	if ( nums.length <= 1 )
+    {    	
+    	int nonZeroIndex = 0;
+    	for ( int i = 0; i < nums.length; i++ )
     	{
-    		return;
-    	}
-    	
-    	int left = 0;
-    	while ( left < nums.length )
-    	{
-    		if ( nums[left] == 0 )
+    		if ( nums[i] != 0 )
     		{
-    			int nextNonZero = left + 1;
-    			while ( nextNonZero < nums.length && nums[nextNonZero] == 0 )
-    			{
-    				nextNonZero++;
-    			}
-    			if ( nextNonZero < nums.length )
-    			{
-    				swap( nums, left, nextNonZero );
-    			}
-    			else
-    			{
-    				break;
-    			}
+    			swap( nums, i, nonZeroIndex );
+    			nonZeroIndex++;
     		}
-    		left++;
     	}
     }
     
