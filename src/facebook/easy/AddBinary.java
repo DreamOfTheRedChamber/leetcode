@@ -24,26 +24,15 @@ public class AddBinary
     	}
     	
     	StringBuilder result = new StringBuilder();
-    	int aIndex = a.length() - 1;
-    	int bIndex = b.length() - 1;
-    	int carry = 0;
-    	while ( aIndex >= 0 && bIndex >= 0 )
-    	{
-    		int sum = a.charAt( aIndex ) - '0' + b.charAt( bIndex ) - '0' + carry;
-    		result.append( sum % 2 );
-    		carry = sum / 2;
-    		
-    		aIndex--;
-    		bIndex--;
-    	}
     	
-    	while ( aIndex >= 0 )
+    	int carry = 0;
+    	for ( int i = a.length() - 1, j = b.length() - 1; i >= 0 || j >= 0; i--, j-- )
     	{
-    		int sum = a.charAt( aIndex ) - '0' + carry;
+    		int aVal = i >= 0 ? a.charAt( i ) - '0' : 0;
+    		int bVal = j >= 0 ? b.charAt( j ) - '0' : 0;
+    		int sum = aVal + bVal + carry;
     		result.append( sum % 2 );
     		carry = sum / 2;
-    		
-    		aIndex--;
     	}
     	
     	if ( carry == 1 )
