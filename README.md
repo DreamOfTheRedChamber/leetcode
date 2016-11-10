@@ -513,8 +513,8 @@
 |     Object   |       Meaning        |       Advantage    |     Example      |
 | ------------ |:--------------------:| ------------------:| ----------------:|
 | Final class  | Cannot be subclassed | Security/Efficiency | String | 
-  | Final method | Cannot be overriden  | <ul> <li>Preventing unexpected behavior crucial to the funtionality of the class </li> <li>Critical to the consistent state of the object</li> </ul> | <ul><li>Object.getClass()/notify() </li> <li> methods called from constructors should usually be final </li></ul> | 
-  | Final var    | Cannot be reassigned / Making a reference var final only means the var can not be changed but you can change the referenced object | <ul> <li>Could be cached </li> <li> Safe to share in multi-threading env </li> </ul> | All vars declared inside java interface are implicitly final |
+| Final method | Cannot be overriden  | <ul> <li>Preventing unexpected behavior crucial to the funtionality of the class </li> <li>Critical to the consistent state of the object</li> </ul> | <ul><li>Object.getClass()/notify() </li> <li> methods called from constructors should usually be final </li></ul> | 
+| Final var    | Cannot be reassigned / Making a reference var final only means the var can not be changed but you can change the referenced object | <ul> <li>Could be cached </li> <li> Safe to share in multi-threading env </li> </ul> | All vars declared inside java interface are implicitly final |
 
 * Finally
   - Use case: Clean up operations like closing the DB resources 
@@ -1991,21 +1991,9 @@ public int binarySearchIterative( int[] array, int target)
             end = mid;
         }
     }
-    // take result from start/end/non-exist
-    // sometimes need to compare target directly to array[end], array[start]
-    // sometimes need to see where target falls e.g. [~, array[start]), [array[start], array[end]), [array[end], ~)
-    if ( array[end] == target )
-    {
-        return end;
-    }
-    else if ( array[start] == target )
-    {
-        return start;
-    }
-    else
-    {
-        return -1;
-    }
+
+    // take result from start, end or nonexist according to different criteria
+    // ......
 }
 
 public int binarySearchRecursive( int[] array, int target, int start, int end )
