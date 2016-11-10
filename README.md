@@ -31,9 +31,9 @@
     * [Char and unicode](#char-and-unicode)
     * [Abstract, static, native, synchronize method keyword](#abstract-static-native-synchronized-method-keyword)
     * [Static nested class vs inner class](#static-nested-class-vs-inner-class)
-    * [Immutable objects](#immutable-objects)
     * [Clone](#clone)
     * [Assert, error and exception](#assert-error-exception)
+    * [Immutable objects](#immutable-objects)
     * [Final vs finally vs finalize](#final-finally-finalize)
     * [Comparable vs comparator](#comparable-vs-comparator)
     * [Garbage collector](#garbage-collector)
@@ -462,7 +462,6 @@
 | --------------------- |:-------------:| -----:|
 | Definition  | Two methods with same name but different signatures      |  Redefine a class already defined in the parent class |
 | Execution time | Compile time     |  Run time |
-| Fixed sized to resizable  | Array/String | ArrayList/StringBuilder |
 
 #### Abstract class vs interface<a id="abstract-class-vs-interface"></a>
 
@@ -476,6 +475,20 @@
 #### Abstract, static, native, synchronize method keyword<a id="abstract-static-native-synchronized-method-keyword"></a>
 #### Static nested class vs inner class<a id="static-nested-class-vs-inner-class"></a>
 #### Char and unicode<a id="char-and-unicode"></a>
+
+#### Clone<a id="clone"></a>
+* Deep and shallow copy
+  - Default clone() method creates the shallow copy of an object. 
+    + The shallow copy of an object will have exact copy of all the fields of original object.
+    + Shallowcopy is preferred if an object has only primitive fields. 
+  - In addition to shallow copy,
+    + If original object has any references to other objects as fields, then copy of those objects are also created by calling clone() method on them.  
+* How to clone an object
+  - Implements Cloneable interface and override clone() 
+  - Implements serializable interface and clone objects by serialize and deserialize
+
+#### Assert, error and exception<a id="assert-error-exception"></a>
+
 #### Immutable class <a id="immutable-objects"></a>
 * Benefits:
   - **Clone**: Don't need a copy constructor/an implementation of clone()
@@ -493,20 +506,6 @@
     + Do not provide methods that modify mutable objects
     + Do not share references of mutable objects. Create defensive copy of internal mutable objects when sharing.
 
-#### Clone<a id="clone"></a>
-* Deep and shallow copy
-  - Default clone() method creates the shallow copy of an object. 
-    + The shallow copy of an object will have exact copy of all the fields of original object.
-    + Shallowcopy is preferred if an object has only primitive fields. 
-  - In addition to shallow copy,
-    + If original object has any references to other objects as fields, then copy of those objects are also created by calling clone() method on them.  
-* How to clone an object
-  - Implements Cloneable interface and override clone() 
-  - Implements serializable interface and clone objects by serialize and deserialize
-
-#### Assert, error and exception<a id="assert-error-exception"></a>
-
-
 #### Final vs finally vs finalize<a id="final-finally-finalize"></a>
 * Final class can't be inherited, final method can't be overriden and final variable can't be changed. A class/Method may never be both abstract and final. Abstract means the class/Method must be extended/Overriden, while final means it cannot be. 
 
@@ -514,10 +513,16 @@
 |     Object   |       Meaning        |       Advantage    |     Example      |
 | ------------ |:--------------------:| ------------------:| ----------------:|
 | Final class  | Cannot be subclassed | Security/Efficiency | String | 
-| Final method | Cannot be overriden  | Preventing unexpected behavior crucial to the funtionality of the class/critical to the consistent state of the object | Object.getClass()/notify(), methods called from constructors should usually be final | 
-| Final var    | Cannot be reassigned / Making a reference var final only means the var can not be changed but you can change the referenced object | Could be cached / Safe to share in multi-threading env | All vars declared inside java interface are implicitly final |
+  | Final method | Cannot be overriden  | <ul> <li>Preventing unexpected behavior crucial to the funtionality of the class </li> <li>Critical to the consistent state of the object</li> </ul> | <ul><li>Object.getClass()/notify() </li> <li> methods called from constructors should usually be final </li></ul> | 
+  | Final var    | Cannot be reassigned / Making a reference var final only means the var can not be changed but you can change the referenced object | <ul> <li>Could be cached </li> <li> Safe to share in multi-threading env </li> </ul> | All vars declared inside java interface are implicitly final |
 
-* Finally is used to place important code, it will be executed whether exception is handled or not.
+* Finally
+  - Use case: Clean up operations like closing the DB resources 
+  - Reason: those operations will be always executed irrespective of 
+    + Whether exceptions are raised in the try block or not
+    + Whether raised exceptions are caught in catch block or not
+    + Except 
+      * You call JVM to exit by executing System.exit(0)
 ```java
 lock.lock();
 try 
@@ -533,7 +538,10 @@ finally
   lock.unlock();
 }
 ```
-* Finalize is a method. It will be used to perform clean up prosessing just before object is garbage collected.
+
+* Finalize 
+  + Def: It is a method which will be called when an object is about to be garbage collected. 
+  + Use case: Normally it should be overridden to clean-up non-Java resources ie closing a file. But it is not a good practice to use finalize() because it has all kinds of subtle issues and greatly slows garbage collection. 
 ```java
 class FinalizeExample
 {
