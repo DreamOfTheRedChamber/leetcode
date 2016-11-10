@@ -2151,9 +2151,13 @@ public ResultWrapper secondApproach( TreeNode currNode )
 
 #### Backtrack <a id="algo-backtrack"></a>
 ##### Best practices <a id="algo-backtrack-best-practices"></a>
-* LinkedList
-  - list.sublist(startIndex, endIndex) returns a sublist of List
-  - LinkedList.addFirst(element: Object)/addLast(element: Object)/getFirst()/getLast()/removeFirst()/removeLast(). This could be used in backtracking.
+* There are two popular ways to keep track of traverse path
+  * List
+    - list.sublist(startIndex, endIndex) returns a sublist of List
+    - LinkedList.addFirst(element: Object)/addLast(element: Object)/getFirst()/getLast()/removeFirst()/removeLast(). This could be used in backtracking.
+  * StringBuilder
+    - strBuilder.append( ch )
+    - strBuilder.deleteCharAt( strBuilder.length() - 1 );
 ```java
 // usually occurs at the beginning and ending of a recursive function
 public void recursivefunction()
