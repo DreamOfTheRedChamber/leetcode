@@ -32,7 +32,9 @@
     * [Abstract, static, native, synchronize method keyword](#abstract-static-native-synchronized-method-keyword)
     * [Static nested class vs inner class](#static-nested-class-vs-inner-class)
     * [Clone](#clone)
-    * [Assert, error and exception](#assert-error-exception)
+    * [Assert](#assert)
+    * [Error vs exception](#error-vs-exception)
+    * [Checked vs unchecked exception](#checked-vs-unchecked-exception)
     * [Immutable objects](#immutable-objects)
     * [Final vs finally vs finalize](#final-finally-finalize)
     * [Comparable vs comparator](#comparable-vs-comparator)
@@ -273,18 +275,6 @@
       * List/Array entry is NULL
       * List/Array of even length
       * List/Array of odd length
-* Error handling
-  * Types
-    * logs (handle errors later, first restart)
-    * assertions (internal use only, function arguments)
-    * dialogue (let user decides what to do next)
-    * exception - checked/unchecked(point out what (exception type), where (exact location), why (message))
-    * errors ( usually used by the JVM to indicate resource deficiencies )
-  * Use runtime exceptions to indicate precondition violations
-    * IllegalArgumentException ( check input of function arguments )
-    * IllegalStateException ( illegal state of variables )
-    * ArithmeticException ( 1 / 0 )
-   * IndexOutOfBoundaryException ( example problem: search in unknown size sorted array )
 
 #### Write code <a id="whiteboard-workflow-write-code"></a>
   1. Synchronize with interviewer "***There are XXX steps in this algorithm. The first is XXX. The second....***"
@@ -422,6 +412,7 @@
 | Run env | at OS level, must compiled against particular OS | inside JVM, compiled classes portable |
 | Pointers | Could pass value by reference | Only pass by value |
 | Memory management  | Managed by developers | Garbage collector |
+| Exception handling  | All unchecked | Error and RuntimeException unchecked, others checked |
 
 #### Access modifiers<a id="access-modifiers"></a>
 
@@ -487,7 +478,40 @@
   - Implements Cloneable interface and override clone() 
   - Implements serializable interface and clone objects by serialize and deserialize
 
-#### Assert, error and exception<a id="assert-error-exception"></a>
+#### Assertion <a id="assert"></a>
+* Assertion. To put it short, assertion are for internal precondition/post-condition violation checking while exception are for external condition checking.
+  - Where not to use
+    + Implement any application functionality
+      * Enable/Disable them may cause severe damage to the state of the application and its usability
+    + Check arguments of public methods
+      * Public methods should always behave the same. Enable/Disable them will change the behavior of the method dramatically.
+  - Where to use: internal logic checking
+    + Implement pre-conditions
+      * Something that must be true at the time of invoking a method
+    + Implement post-conditions
+      * Something that must be true after the 
+    + Implement class invariants
+
+#### Error vs exception <a id="error-vs-exception"></a>
+* Both java.lang.Error and java.lang.Exception classes are sub classes of java.lang.Throwable class
+* java.lang.Error class represents the errors which are mainly caused by the environment in which application is running. 
+  + For example, OutOfMemoryError occurs when JVM runs out of memory or StackOverflowError occurs when stack overflows.
+* java.lang.Exception class represents the exceptions which are mainly caused by the application itself. 
+  + For example, NullPointerException occurs when an application tries to access null object or ClassCastException occurs when an application tries to cast incompatible class types. In this article, we will discuss the differences between Error and Exception in java.
+
+#### Checked vs unchecked exception <a id="checked-vs-unchecked-exception"></a>
+* **Checked exception**
+  - **Def**: Exceptions that are checked at compile time. Must be handled explicitly either by catching or throwing the exception. 
+  - **Use condition 1**: Expected but unpreventable (The caller did everything within their power to validate the input parameters, but some condition outside their control has caused the operation to fail. For example, you try reading a file but someone deletes it between the time you check if it exists and the time the read operation begins. By declaring a checked exception, you are telling the caller to anticipate this failure.)
+  - **Use condition 2**: Reasonable to recover from (There is no point telling callers to anticipate exceptions that they cannot recover from. If a user attempts to read from an non-existing file, the caller can prompt them for a new filename. On the other hand, if the method fails due to a programming bug (invalid method arguments or buggy method implementation) there is nothing the application can do to fix the problem in mid-execution. The best it can do is log the problem and wait for the developer to fix it at a later time.)
+* **Unchecked exception**: 
+  - **Runtime exception**
+    + **Use case**: Use runtime exceptions to indicate programming errors. Runtime exceptions indicate precondition violations. A precondition violation is simply a failure by the client of an API to adhere to the contract established by the API specification. For example, the contract for array access specifies that the array index must be between zero and the array length minus one. ArrayIndexOutOfBoundsException indicates that this precondition was violated.
+    + **Examples**:
+      * IllegalArgumentException ( check input of function arguments )
+      * IllegalStateException ( illegal state of variables )
+      * ArithmeticException ( 1 / 0 )
+      * IndexOutOfBoundaryException ( example problem: search in unknown size sorted array )
 
 #### Immutable class <a id="immutable-objects"></a>
 * Benefits:
