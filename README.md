@@ -2376,7 +2376,32 @@ private void dfs( T[][] grid, int x, int y, boolean[][] discovered )
 ```
 
 ##### Union find <a id="algo-union-find"></a>
-* Suitable in a dynamically changing graph. Example problems: Number of Island II, find weakly connected components in directed graph, find connected components in undirected graph
+* Suitable in a dynamically changing graph. 
+  - Complexity: O(lgn)
+  - Example problems: Number of Island II, find weakly connected components in directed graph, find connected components in undirected graph
+```java
+Map<Integer, Integer> father = new HashMap<>();
+
+int find( int x )
+{
+  int parent = x;
+  while ( parent != father.get( parent ) )
+  {
+    parent = father.get( parent );
+  }
+  return parent;
+}
+
+void union( int x, int y )
+{
+  int fa_x = find( x );
+  int fa_y = find( y );
+  if ( fa_x != fa_y )
+  {
+    father.put( fa_x, fa_y );  
+  }
+}
+```
 
 #### Greedy <a id="algo-greedy"></a>
 * Usually greedy algo are not covered in an interview setting:
