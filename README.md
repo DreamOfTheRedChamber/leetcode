@@ -1208,8 +1208,31 @@ public void treeHighSpaceTraverse( TreeNode root, int order )
     return currNode;
   } 
 ```
+* Tree level order traversal
+```java
+Queue<TreeNode> bfsQueue = new LinkedList<>();
+bfsQueue.offer( root );
+while ( !bfsQueue.isEmpty() )
+{
+  TreeNode head = bfsQueue.poll();
+  // do stuff
+  if ( head.left != null )
+  {
+    bfsQueue.offer( head.left );
+  }
+  if ( head.right != null )
+  {
+    bfsQueue.offer( head.right );
+  }  
+}
+```
 
 ##### View <a id="ds-tree-view"></a>
+* Right side view (Binary tree right side view)
+  - Use List + tree traversal ( level order / preorder / reverse-preorder )
+* Outer-inner order / Vertical order (Find binary tree leaves / Binary tree vertical order traversal)
+  - Use HashMap + tree traversal ( level order / preorder )
+
 ##### Serialize/Deserialize <a id="ds-tree-serialize-deserialize"></a>
 * Two popular ways:
   - Preorder: preorder leads to a recursive dfs-like implementation. Since Java is passed by value, it is really hard to implement elegantly without using a global variable.
@@ -1631,7 +1654,6 @@ private boolean search( String word, int index, TrieNode root )
 ```
 
 ### Algorithms <a id="algo"></a>
-
 
 #### Math <a id="algo-math"></a>
 ##### Random <a id="algo-math-random"></a>

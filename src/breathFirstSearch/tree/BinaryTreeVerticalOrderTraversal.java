@@ -81,12 +81,17 @@ public class BinaryTreeVerticalOrderTraversal
     	}
     	
     	// traverse the tree
+    	int minLevel = 0;
+    	int maxLevel = 0;
     	Map<Integer, List<Integer>> orderToVal = new HashMap<>();
     	Queue<Pair> bfsQueue = new LinkedList<>();
     	bfsQueue.offer( new Pair( root, 0 ) );
     	while ( !bfsQueue.isEmpty() )
     	{
     		Pair head = bfsQueue.poll();
+    		
+    		minLevel = Math.min( minLevel, head.col );
+    		maxLevel = Math.max( maxLevel, head.col );
     		
     		orderToVal.putIfAbsent( head.col, new ArrayList<>() );
     		orderToVal.get( head.col ).add( head.node.val );
@@ -100,17 +105,8 @@ public class BinaryTreeVerticalOrderTraversal
     		}
     	}
     	
-    	// build
-    	int minVerti = orderToVal.keySet()
-    							 .stream()
-    							 .min( Integer::compare )
-    							 .get();
-    	int maxVerti = orderToVal.keySet()
-    							 .stream()
-    							 .max( Integer::compare )
-    							 .get();
     	List<List<Integer>> result = new ArrayList<>();
-    	for ( int i = minVerti; i <= maxVerti; i++ )
+    	for ( int i = minLevel; i <= maxLevel; i++ )
     	{
     		result.add( orderToVal.get( i ) );
     	}
