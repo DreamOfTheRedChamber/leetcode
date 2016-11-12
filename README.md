@@ -802,27 +802,18 @@ return dummy.next; // pointing to the actual list head
 ```java
   public ListNode findMedian( ListNode head )
   {
-    ListNode fast = head;
-    ListNode slow = head;
-    while ( fast != null )
+    ListNode fast = head, slow = head;
+    while ( fast != null && fast.next != null )
     {
-      fast = fast.next;
-      if ( fast == null )
-      {
-        break;
-      }
-      else
-      {
-        fast = fast.next;
-        slow = slow.next;
-      }
+      slow = slow.next;
+      fast = fast.next.next;
     }
     return slow;
   }
 ```
 * Reverse list 
-  - recursively, the key point here is record the reversed list tail before recursion
 ```java
+// recursively, the key point here is record the reversed list tail before recursion
   public ListNode reverseListRecusively( ListNode head )
   {
     if ( head == null
@@ -836,6 +827,21 @@ return dummy.next; // pointing to the actual list head
     reversedListTail.next = head;
     head.next = null;
     return reversedListHead;
+  }
+ 
+  private ListNode reverseListIteratively( ListNode head )
+  {
+    ListNode prev = null;
+        
+    while (head != null) 
+    {
+      ListNode temp = head.next;
+      head.next = prev;
+      prev = head;
+      head = temp;
+    }
+        
+    return prev;
   }
 ```
 * Merge sorted list. 
