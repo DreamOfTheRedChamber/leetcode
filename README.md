@@ -1118,9 +1118,20 @@ boolean isValid( String s )
     + Stack-based O(n) time and space
     + Forward/backward sweep O(n) time and O(1) space
   - Return all solutions
-    + BFS-based
+    + BFS-based. The hard part of this problem is how to avoid generate duplicate strings. A straightforward solution is to use HashSet to avoid. The other solution is to avoid generating using heuristics. 
     + Observations for further trunning
-      * 
+      1. When we want to remove a ')' or '(' from several consecutive ones we only remove the first one, because remove any one the result will be the same. For example
+> "())" ---> "()"
+> only remove the first one of '))'    
+      2. When we remove a character it must behind it's parent removal position. 
+> we need remove 2 from "(())(("
+> we want to remove positions combination i,j with no duplicate
+> so we let i < j then it will not generate duplicate combinations
+> in practice, we record the position i and put it in to queue
+> which is then polled out and used as the starting point of the next removal
+      3. If the previous step we removed a "(", we should never remove a ")" in the following steps. This is obvious since otherwise we could just save these two removals and still be valid with less removals. With this observation all the possible removals will be something like this
+> ")))))))))((((((((("
+
 
 #### Queue <a id="ds-queue"></a>
 ##### Interfaces <a id="ds-queue-interfaces"></a>
