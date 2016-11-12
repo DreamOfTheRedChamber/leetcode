@@ -1027,7 +1027,13 @@ Queue<ValAndIter> minQueue = new PriorityQueue<>( ( o1, o2 ) -> o1.val - o2.val 
 
 ##### Parentheses <a id="ds-stack-parent"></a>
 * Check if string s contains valid parenthese
+  - Questions to confirm
+    + Whether the string contains non-parentheses characters
+    + Whether the string contains curly braces, brackets or parentheses
+    + Need to calculate the invalid number or just judge it is valid or not
 ```java
+// Case 1: When only contains parentheses
+// Judge whether a string is valid or not
 boolean isValid( String s )
 {
   int count = 0;
@@ -1045,20 +1051,22 @@ boolean isValid( String s )
       }
       count--;
     }
+    // for non-parenthese chars, we will not process them
   }
   return count == 0;
 }
-```  
-* Calculate the number of invalid parenthese
-```java
 int calcNumInvalid( String s )
 {
   Stack<Character> stack = new Stack<>();
   for ( char ch : s.toCharArray() )
   {
-    if ( ch == '(' || ch == ')' )
+    if ( ch == '(' ) 
     {
-      if ( !stack.isEmpty() && stack.peek() == '(' && ch == ')' )
+      stack.push( ch );
+    }
+    else if ( ch == ')' )
+    {
+      if ( !stack.isEmpty() && stack.peek() == '(' )
       {
         stack.pop();
       }
@@ -1069,6 +1077,35 @@ int calcNumInvalid( String s )
     }
   }
   return stack.size();
+}
+
+// Case 2: If contains curly braces and brackets
+// The basic idea is similar to Case 1. Things need to be changed here is using a Map<Ch, Ch> to store open and close mapping. 
+boolean isValid( String s )
+{
+  Stack<Character> stack = new Stack<>();
+  Map<Character, Character> openToClose = new HashMap<>();
+  openToClose.put( '(', ')' );
+  openToClose.put( '[', ']' );
+  openToClose.put( '{', '}' );
+        
+  for ( char ch : s.toCharArray() )
+  {
+    if ( openToClose.containsKey( ch ) )
+    {
+      stack.push( ch );
+    }
+    else if ( openToClose.values.contains( ch ))
+    {
+      if ( stack.isEmpty() || ch != openToClose.get( stack.peek() ) )
+      {
+        return false;
+      }
+      stack.pop();
+    }
+  }
+        
+  return stack.size() == 0;
 }
 ```
 

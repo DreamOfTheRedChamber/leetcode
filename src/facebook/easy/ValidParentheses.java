@@ -1,7 +1,10 @@
 package facebook.easy;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Stack;
 
 import org.junit.Test;
@@ -17,18 +20,24 @@ public class ValidParentheses
     public boolean isValid( String s )
     {
         Stack<Character> stack = new Stack<>();
+        Map<Character, Character> openToClose = new HashMap<>();
+        openToClose.put( '(', ')' );
+        openToClose.put( '[', ']' );
+        openToClose.put( '{', '}' );
+        
         for ( char ch : s.toCharArray() )
         {
-        	if ( !stack.isEmpty() 
-        			&& ( ch == ')' && stack.peek() == '(' 
-        				||  ch == ']' && stack.peek() == '[' 
-        				|| ch == '}' && stack.peek() == '{' ) )
-        	{
-        		stack.pop();
-        	}        		
-        	else
+        	if ( openToClose.containsKey( ch ) )
         	{
         		stack.push( ch );
+        	}
+        	else
+        	{
+        		if ( stack.isEmpty() || ch != openToClose.get( stack.peek() ) )
+        		{
+        			return false;
+        		}
+        		stack.pop();
         	}
         }
         
