@@ -90,6 +90,7 @@
       - [Intersection](#ds-hashmap-intersection)
       - [Histogram and hashmap list](#ds-hashmap-histogram-hashmap-list)
       - [Anagram](#ds-hashmap-anagram)
+      - [Sparse matrix](#ds-hashmap-sparse-matrix)
     * [TreeMap](#ds-treemap)
     * [Graph](#ds-graph)
       - [Edge list vs Adjacent list vs Adjacent matrix](#ds-graph-tradeoffs)
@@ -1576,6 +1577,30 @@ public List<List<String>> groupAnagrams( String[] strs )
   return groupedAnagrams.values( ).stream( ).collect( Collectors.toList( ) );
 }
 ```
+
+##### Sparse matrix <a id="ds-hashmap-sparse-matrix"></a>
+* Represent sparse vector
+  - What are the operations that need to be supported
+    + Look up
+    + Iterate through the array
+    + Add/Delete
+  - Comparison
+
+| Representation    | In-order iteration | Add/Delete complexity | Lookup Complexity | 
+| ------------------|:------------------:|:---------------------:| -----------------:|
+| List of pairs     |     Support        |        O(n)           |      O(n)         |
+| Array of pairs    |     Support        |        O(n)           |      O(lgn)         |
+| Map&lt;Index,Value&gt; |       No        |        O(1)           |      O(1)         |
+| TreeMap&lt;Index,Value&gt;   |       Support       |        O(lgn)           |      O(lgn) | 
+
+* Represent sparse matrix ( Supported operations similar to above )
+
+| Representation    | In-order iteration | Add/Delete complexity | Lookup Complexity | 
+| ------------------|:------------------:|:---------------------:| -----------------:|
+| List of List     |     Support        |        O(m+n)           |      O(m+n)         |
+| Array of Array    |     Support        |        O(m+n)           |      O(lgm+lgn)         |
+| Map of Map |       No        |        O(1)           |      O(1)         |
+| TreeMap of TreeMap  |       Support       |        O(lgn)           |      O(lgn) | 
 
 #### TreeMap <a id="ds-treemap"></a>
 * Get Key/Entry APIs: firstKey/firstEntry, lastKey/lastEntry, lowerKey/lowerEntry, higherKey/higherEntry, CeilingKey/CeilingEntry, floorKey/floorEntry
