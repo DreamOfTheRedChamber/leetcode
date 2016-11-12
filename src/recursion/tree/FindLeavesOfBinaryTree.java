@@ -1,9 +1,10 @@
 package recursion.tree;
 
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
-
-import org.junit.Test;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import utility.TreeNode;
 
@@ -38,26 +39,24 @@ public class FindLeavesOfBinaryTree
 {
     public List<List<Integer>> findLeaves( TreeNode root )
     {
-    	List<List<Integer>> result = new ArrayList<>();
-    	helper( result, root );    	
-    	return result;
+    	Map<Integer, List<Integer>> indexToNodes = new HashMap<>();
+    	helper( indexToNodes, root );
+    	return indexToNodes.values().stream().collect( Collectors.toList() );
     }
     
-    private int helper( List<List<Integer>> result, TreeNode root )
+    private int helper( Map<Integer, List<Integer>> indexToNodes, TreeNode root )
     {
     	if ( root == null )
     	{
     		return -1;
     	}
     	
-    	int left = helper( result, root.left );
-    	int right = helper( result, root.right );
-    	int curr = Math.max( left, right ) + 1;
-    	if ( result.size() == curr )
-    	{
-    		result.add( new ArrayList<>() );
-    	}
-    	result.get( curr ).add( root.val );
-    	return curr;
+    	int lIndex = helper( indexToNodes, root.left );
+    	int rIndex = helper( indexToNodes, root.right );
+    	int currIndex = Math.max( lIndex, rIndex ) + 1;
+    	indexToNodes.putIfAbsent( currIndex, new LinkedList<>() );
+    	
+    	indexToNodes.get( currIndex ).add( root.val );
+    	return currIndex;
     }
 }
