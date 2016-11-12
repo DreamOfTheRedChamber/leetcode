@@ -82,23 +82,21 @@ public class BinaryTreeVerticalOrderTraversal
     	
     	// traverse the tree
     	Map<Integer, List<Integer>> orderToVal = new HashMap<>();
-    	Queue<Map.Entry<TreeNode, Integer>> bfsQueue = new LinkedList<>();
-    	bfsQueue.offer( new AbstractMap.SimpleEntry<>( root, 0 ) );
+    	Queue<Pair> bfsQueue = new LinkedList<>();
+    	bfsQueue.offer( new Pair( root, 0 ) );
     	while ( !bfsQueue.isEmpty() )
     	{
-    		Map.Entry<TreeNode, Integer> qHead = bfsQueue.poll();
-    		TreeNode curr = qHead.getKey();
-    		int vertiOrder = qHead.getValue();
+    		Pair head = bfsQueue.poll();
     		
-    		orderToVal.putIfAbsent( vertiOrder, new ArrayList<>() );
-    		orderToVal.get( vertiOrder ).add( curr.val );
-    		if ( curr.left != null )
+    		orderToVal.putIfAbsent( head.col, new ArrayList<>() );
+    		orderToVal.get( head.col ).add( head.node.val );
+    		if ( head.node.left != null )
     		{
-    			bfsQueue.offer( new AbstractMap.SimpleEntry<>( curr.left, vertiOrder - 1 ) );
+    			bfsQueue.offer( new Pair( head.node.left, head.col - 1 ) );
     		}
-    		if ( curr.right != null )
+    		if ( head.node.right != null )
     		{
-    			bfsQueue.offer( new AbstractMap.SimpleEntry<>( curr.right, vertiOrder + 1 ) );
+    			bfsQueue.offer( new Pair( head.node.right, head.col + 1 ) );
     		}
     	}
     	
@@ -117,6 +115,17 @@ public class BinaryTreeVerticalOrderTraversal
     		result.add( orderToVal.get( i ) );
     	}
     	return result;
+    }
+    
+    class Pair
+    {
+    	public final TreeNode node;
+    	public final int col;
+    	public Pair( TreeNode node, int col )
+    	{
+    		this.node = node;
+    		this.col = col;
+    	}
     }
 }
 
