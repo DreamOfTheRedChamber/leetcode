@@ -46,4 +46,27 @@ public class BinaryTreeRightSideView
         }
         return rightMostNodes;
     }
+    
+    public List<Integer> rightSideViewRecurse( TreeNode root )
+    {
+    	List<Integer> result = new LinkedList<>();
+    	rightViewRecurse( root, result, 0 );
+    	return result;
+    }
+    
+    private void rightViewRecurse( TreeNode root, List<Integer> result, int currDepth )
+    {
+    	if ( root == null )
+    	{
+    		return;
+    	}
+    	
+    	if ( currDepth == result.size() )
+    	{
+    		result.add( root.val );
+    	}
+    	
+    	rightViewRecurse( root.right, result, currDepth + 1 );
+    	rightViewRecurse( root.left, result, currDepth + 1 );
+    }
 }
