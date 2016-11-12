@@ -1108,6 +1108,19 @@ boolean isValid( String s )
   return stack.size() == 0;
 }
 ```
+* Modifiy parenthese to make string valid
+  - Questions to confirm
+    + Contains other chars
+    + min modification or not
+    + return all valid solutions or just one solution
+    + remove or insert parenthese
+  - Return only one solution
+    + Stack-based O(n) time and space
+    + Forward/backward sweep O(n) time and O(1) space
+  - Return all solutions
+    + BFS-based
+    + Observations for further trunning
+      * 
 
 #### Queue <a id="ds-queue"></a>
 ##### Interfaces <a id="ds-queue-interfaces"></a>

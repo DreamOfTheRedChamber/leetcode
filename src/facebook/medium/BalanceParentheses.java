@@ -2,6 +2,7 @@ package facebook.medium;
 
 import java.util.Stack;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -58,6 +59,80 @@ public class BalanceParentheses
 		return sb.toString();
 	}
 	
+	public String balanceForwardBackwardSweep( String s )
+	{
+		StringBuilder result = removeInvalidOpenParen( new StringBuilder( s ) );
+		result = removeInvalidCloseParen( result );
+		return result.toString();
+	}
+	
+	private StringBuilder removeInvalidOpenParen( StringBuilder input )
+	{
+		StringBuilder result = new StringBuilder( input );
+		int numClose = 0;
+		for ( int i = result.length() - 1; i >= 0; i-- )
+		{
+			if ( result.charAt( i ) == ')' )
+			{
+				numClose++;
+			}
+			else if ( result.charAt( i ) == '(' )
+			{
+				if ( numClose == 0 )
+				{
+					result.deleteCharAt( i );
+				}
+				else
+				{
+					numClose--;
+				}
+			}
+		}
+		return result;
+	}
+	
+	private StringBuilder removeInvalidCloseParen( StringBuilder input )
+	{
+		StringBuilder result = new StringBuilder();
+		int numOpen = 0;
+		for ( int i = 0; i < input.length(); i++ )
+		{
+			if ( input.charAt( i ) != ')' )
+			{
+				result.append( input.charAt( i ) );
+				if ( input.charAt( i ) == '(' )
+				{
+					numOpen++;
+				}
+			}
+			else
+			{
+				if ( numOpen > 0 )
+				{
+					result.append( input.charAt( i ) );
+					numOpen--;
+				}
+			}
+		}
+		return result;
+	}
+
+	@Test
+	public void testBalanceForwardBackwardSweep()
+	{
+		/*
+"(a)()" -> "(a)()"
+"((bc)" -> "(bc)"
+")))a((" -> "a"
+"(a(b)" ->"(ab)" or "a(b)"
+		 * */
+		System.out.println( balanceForwardBackwardSweep( "(a)()") );
+		System.out.println( balanceForwardBackwardSweep( "((bc)" ) );
+		System.out.println( balanceForwardBackwardSweep( ")))a((" ) );
+		System.out.println( balanceForwardBackwardSweep( "(a(b)" ) );
+	}
+	
+	@Ignore
 	@Test
 	public void test()
 	{
