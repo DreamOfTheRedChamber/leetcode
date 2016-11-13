@@ -143,7 +143,7 @@
       - [Avoid duplicated recursion](#algo-recursion-avoid-duplicated-recursion)
       - [Types](#algo-recursion-types)
         + [Tree-based recursion](#algo-recursion-tree-based)
-        + [String-based recursion](#algo-recursion-string-based)
+        + [Deep copy](#algo-recursion-deep-copy)
         + [Array-based recursion](#algo-recursion-array-based)
     * [Backtrack](#algo-backtrack)
       - [Best practices](#algo-backtrack-best-practices)
@@ -2327,8 +2327,12 @@ public ResultWrapper secondApproach( TreeNode currNode )
   // return new ResultWrapper(...);
 }
 ```
-* String-based recursion < a id="algo-recursion-string-based"></a>
-* Array-based recursion < a id="algo-recursion-array-based"></a>
+
+* Deep copy <a id="algo-backtrack"></a>
+  - Key points: Use a hashmap to store old to new reference mapping
+  - Examples: Clone graph, Copy list with random pointer
+
+* Array-based recursion <a id="algo-recursion-array-based"></a>
 
 #### Backtrack <a id="algo-backtrack"></a>
 ##### Best practices <a id="algo-backtrack-best-practices"></a>
