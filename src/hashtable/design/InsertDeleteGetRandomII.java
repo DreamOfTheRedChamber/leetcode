@@ -3,6 +3,7 @@ package hashtable.design;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -70,30 +71,22 @@ public class InsertDeleteGetRandomII
     /** Removes a value from the collection. Returns true if the collection contained the specified element. */
     public boolean remove( int val )
     {
-    	if ( !valToIndexes.containsKey( val ) || valToIndexes.get( val ).size() == 0 )
+    	Set<Integer> indexes = valToIndexes.get( val );
+    	if ( indexes == null || indexes.size() == 0 )
     	{
     		return false;
     	}
-    	// change in map, then in list
-    	if ( valToIndexes.get( val ).contains( list.size() - 1 ) )
-    	{
-    		valToIndexes.get( val ).remove( list.size() - 1 );
-    		
-    		list.remove( list.size() - 1 );
-    	}
-    	else
-    	{   
-        	int indexToRemove = valToIndexes.get( val ).iterator().next();
-        	valToIndexes.get( val ).remove( indexToRemove );
-    		int lastValue = list.get( list.size() - 1 );
-    		valToIndexes.get( lastValue ).remove( list.size() - 1 );
-    		valToIndexes.get( lastValue ).add( indexToRemove );
-
-    		list.set( indexToRemove, lastValue );
-    		list.remove( list.size() - 1 );
-    	}
+    	
+    	int indexToRemove = indexes.iterator().next();
+    	indexes.remove( indexToRemove );    	
+    	Set<Integer> indexesSwapped = valToIndexes.get( list.get( list.size() - 1 ) );
+    	indexesSwapped.add( indexToRemove );	// add operation comes before remove
+    	indexesSwapped.remove( list.size() - 1 );
+    	
+    	Collections.swap( list, indexToRemove, list.size() - 1 );
+    	list.remove( list.size() - 1 );
     	return true;
-    }
+     }
     
     /** Get a random element from the collection. */
     public int getRandom()
