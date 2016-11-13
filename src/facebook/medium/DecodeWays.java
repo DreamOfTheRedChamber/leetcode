@@ -23,67 +23,47 @@ public class DecodeWays
 {
     public int numDecodings( String s )
     {
-        if ( s == null )
-        {
-        	throw new IllegalArgumentException("");
-        }
-        if ( s.length() == 0 )
-        {
-        	return 0;
-        }
-        if ( s.length () == 1 )
-        {
-        	return s.charAt( 0 ) == '0' ? 0 : 1;
-        }
-        
-        int[] numEndingAtPos = new int[s.length()];
-        // init dp table
-        numEndingAtPos[0] = s.charAt( 0 ) == '0' ? 0 : 1;
-        if ( s.charAt( 1 ) == '0' )
-        {
-        	numEndingAtPos[1] = isValidChar( s, 0, 1 ) ? 1 : 0;
-        }
-        else
-        {
-        	numEndingAtPos[1] = numEndingAtPos[0] + ( isValidChar( s, 0, 1 ) ? 1 : 0 );
-        }
-        		
-        // fill in dp table
-        for ( int i = 2; i < s.length(); i++ )
-        {
-        	if ( s.charAt( i ) == '0' )
-        	{
-        		numEndingAtPos[i] = isValidChar( s, i-1, i ) ? numEndingAtPos[i-2] : 0; // assume always valid
-        	}
-        	else
-        	{
-                numEndingAtPos[i] = numEndingAtPos[i-1] + ( isValidChar( s, i-1, i ) ? numEndingAtPos[i-2] : 0 );
-        	}
-        }
-        return numEndingAtPos[s.length()-1];
-    }
-    
-    private boolean isValidChar( String s, int start, int end )
-    {
-    	int convertedInt = Integer.parseInt( s.substring( start, end + 1 ) );
-    	if ( convertedInt >= 10		
-    			&& convertedInt <= 26 )		// '06' not valid
+    	if ( s == null || s.length() == 0 || s.charAt( 0 ) == '0' )
     	{
-    		return true;
+    		return 0;
     	}
-    	else
+    	if ( s.length() == 0 )
     	{
-    		return false;
+    		return 1;
     	}
+    	
+    	int[] numWays = new int[3];
+    	numWays[0] = 1;
+    	numWays[1] = s.charAt( 0 ) == 0 ? 0 : 1;
+    	for ( int i = 2; i <= s.length(); i++ )
+    	{
+    		numWays[i % 3] = 0;
+    		int secondVal = s.charAt( i - 1 ) - '0';
+    		if ( secondVal > 0 )
+    		{
+    			numWays[i % 3] = numWays[(i - 1) % 3];
+    		}
+    		
+    		int firstVal = s.charAt( i - 2 ) - '0';
+    		if ( firstVal > 0 )
+    		{
+    			int value = firstVal * 10 + secondVal;
+    			if ( value >= 1 && value <= 26 )
+    			{
+    				numWays[i % 3] += numWays[(i - 2) % 3];
+    			}
+    		}
+    	}
+    	return numWays[s.length() % 3];
     }
 
     @Test
     public void test()
     {
-    	assertEquals( 2, numDecodings( "12" ) );
-    	assertEquals( 2, numDecodings( "26" ) );
-    	assertEquals( 0, numDecodings( "0" ) );
-    	assertEquals( 1, numDecodings( "10" ) );
+//    	assertEquals( 2, numDecodings( "12" ) );
+//    	assertEquals( 2, numDecodings( "26" ) );
+//    	assertEquals( 0, numDecodings( "0" ) );
+//    	assertEquals( 1, numDecodings( "10" ) );
     	assertEquals( 0, numDecodings( "100" ) );
     }
 }
