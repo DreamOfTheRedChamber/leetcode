@@ -1,6 +1,7 @@
 package hashtable.design;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,14 +10,14 @@ import java.util.Random;
 import org.junit.Ignore;
 import org.junit.Test;
 
-public class RandomizedSet
+public class InsertDeleteRandomI
 {
 	private List<Integer> list;
 	private Map<Integer,Integer> valToIndex;	
 	private Random rand;
 	
 	/** Initialize your data structure here. */
-	public RandomizedSet( )
+	public InsertDeleteRandomI( )
 	{
 		list = new ArrayList<>();
 		valToIndex = new HashMap<>();
@@ -48,19 +49,15 @@ public class RandomizedSet
 		{
 			return false;
 		}
-		if ( valToIndex.get( val ) == list.size() - 1 )
-		{
-			valToIndex.remove( val );
-			list.remove( list.size() - 1 );
-		}
-		else
-		{
-			int indexToRemove = valToIndex.get( val );
-			int lastValue = list.get( list.size() - 1 );
-			valToIndex.put( lastValue, indexToRemove );
-			valToIndex.remove( val, indexToRemove );
-			list.set( indexToRemove, lastValue );
-		}
+		
+		int indexToRemove = valToIndex.get( val );
+			
+		valToIndex.put( list.get( list.size() - 1 ), indexToRemove );
+		valToIndex.remove( val );
+			
+		Collections.swap( list, indexToRemove, list.size() - 1 );
+		list.remove( list.size() - 1 );
+		
 		return true;
 	}
 	
@@ -81,7 +78,7 @@ public class RandomizedSet
 	@Test
 	public void test()
 	{
-		RandomizedSet set = new RandomizedSet();
+		InsertDeleteRandomI set = new InsertDeleteRandomI();
 		set.insert( 3 );
 		set.insert( -2 );
 		set.remove( 2 );
@@ -117,7 +114,7 @@ public class RandomizedSet
 	@Test
 	public void test2()
 	{
-		RandomizedSet set = new RandomizedSet();
+		InsertDeleteRandomI set = new InsertDeleteRandomI();
 		set.insert( 0 );
 		set.remove( 0 );
 		set.insert( -1 );
