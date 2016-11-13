@@ -13,6 +13,7 @@
     * [When met with easy/hard/tricky problems](#met-with-easy-hard-tricky-problems)
     * [Whiteboard coding pros and cons](#whiteboard-coding-pros-cons)
 * [Practice mindset](#practice-patterns)
+    * [Goal](#practice-goal)
     * [Attitudes](#practice-attitudes)
     * [Tools](#practice-tools)
     * [Strategies](#practice-strategies)
@@ -342,11 +343,6 @@
 * For problems I have seen before, 
   * Notice that the assumption might have been changed. 
   * Still need to walk through the entire thought process instead of jumping to the right answer directly.
-* For hard problems,
-  * It is of no shame to admit that it is really hard to finish a tricky problems in a 45 minutes setting from scratch and in a bug-free way.
-    * Some hard problems are already pretty popular. This means that the interviewer is trying to see you are really proficient in Leetcode.
-    * Talk with interviewers about my thoughts before implementing.
-    * Outline the code skeleton before implement every detail.
 
 #### Whiteboard coding pros and cons <a id="whiteboard-coding-pros-cons"></a>
 * Pros
@@ -360,11 +356,17 @@
   * Stand and write code on whiteboard is really exhausting if lasting for 4-5 hours.
 
 ### Practice mindset <a id="practice-patterns"></a>
+#### Goal <a id="practice-goal"></a>
+  * Proficiency: Given an original Leetcode problem you should be able to finish it no more than 10 minutes no matter what its difficulty level is.
+  * Understanding: You should be able to start from brute force solution, discuss tradeoffs along the way and optimize to a solution the interviewer is satisfied with.
+  * Cleaness: No interview code should be longer than 100 lines. In most cases it is within 50 lines. Keep optimizing your code until it is short enough. 
+
 #### Attitudes <a id="practice-attitudes"></a>
   * This might be the last time in my life that I spent so much time and efforts in algorithm questions. Next time when I hunt for jobs, either HRs will invite me or I will have far less time to prepare.
+  * An interview is a matter of preparation. To enable yourself explain solutions well and code in a bug free way, you need to practice a lot. 
   * The way an engineer approach a algorithm problem can reflect their efficiency at work. 
   * Hiring system is broken. But currently there is no better way to do it.
-  
+
 #### Tools<a id="practice-tools"></a>
   * Task planning: Use tags ( TO_START, TO_HURRY, TO_TEST ) to manage algorithm question status and prioritize important tasks
   * Feedbacks: Use git commit number per day as feedback for progress
@@ -743,22 +745,8 @@ private List<List<Integer>> kSum( int kVal, int target, int startIndex, int[] nu
 
 #### Collections <a id="ds-collections"></a>
 ##### Iterator <a id="ds-collections-iterator"></a>
-* ListIterator vs iterator: additional interface for 
-  * iterating bidirectional
-  * remove elements while iterating
-* iterator vs for-each loop: remove elements while iterating/avoid ConcurrentModificationException
-```java
-List<Integer> list = ...; // 1, 2, 3, 4
-Iterator<Integer> iterator = list.iterator();
-while ( iterator.hasNext() )
-{
-    if ( iterator.next() == 3 )
-    {
-        iterator.remove()
-    }
-}
-// list 1, 2, 4
-```
+* When implementing hasNext() and next() function for an interator, should put the logic checking whether next elemement exists inside hasNext() function. 
+
 ##### Immutability <a id=""></a>
 * If do not want to change the original array/list, could create a copy instead.
 ```java

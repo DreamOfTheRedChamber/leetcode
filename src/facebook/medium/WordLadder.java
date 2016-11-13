@@ -2,7 +2,6 @@ package facebook.medium;
 
 import static org.junit.Assert.assertEquals;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -12,6 +11,7 @@ import java.util.Queue;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -35,6 +35,15 @@ All words contain only lowercase alphabetic characters.
  */
 public class WordLadder
 {
+	
+	@Test
+	public void test2()
+	{
+		List<Integer> list1 = new LinkedList<>();
+		System.out.println( list1.iterator().next() );
+	}
+	
+	@Ignore
 	@Test
 	public void test()
 	{
