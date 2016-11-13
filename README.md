@@ -152,6 +152,7 @@
       - [Types](#algo-recursion-types)
         + [Combination](#algo-backtrack-combination)
         + [Permutation](#algo-backtrack-permutation)
+        + [Grid-based](#algo-backtrack-grid-based)
     * [Graph](#algo-graph)
       - [Grid-based best practices](#algo-grid)
       - [Breath first search](#algo-bfs)
@@ -1173,101 +1174,6 @@ PriorityQueue<NumAndFreq> minQueue = new PriorityQueue<>( ( o1, o2 ) -> ( o1.fre
 #### Tree <a id="ds-tree"></a>
 ##### Build <a id="ds-tree-build"></a>
 ##### Traversal <a id="ds-tree-traversal"></a>
-* Tree iterative traversal with O(logn) space: preorder/inorder/postorder traversal
-```java
-class Pair
-{
-    TreeNode node;
-    int type; // 0 for first time, 1 for second time
-    public Pair( TreeNode node, int type )
-    {
-        this.node = node;
-        this.type = type;
-    }
-}
-
-/** 
- * @param order  0 preorder; 1 inorder; 2 postorder
-*/
-public void treeHighSpaceTraverse( TreeNode root, int order ) 
-{
-    Stack<Pair> stack = new Stack<>();
-    stack.push( new Pair( root, 0 ) );
-    while ( !stack.isEmpty() )
-    {
-        Pair stackTop = stack.pop();
-        if ( stackTop.node == null )
-        {
-            continue;
-        }
-        if ( stackTop.type == 1 )
-        {
-            System.out.println(stackTop.node.value);
-            continue;
-        }
-        switch ( order )
-        {
-            case 0:
-                stack.push( new Pair( stackTop.node.rigth, 0 ) );
-                stack.push( new Pair( stackTop.node.left, 0 ) );
-                stack.push( new Pair( stackTop.node, 1 ) );
-                break;
-            case 1:
-                stack.push( new Pair( stackTop.node.rigth, 0 ) );
-                stack.push( new Pair( stackTop.node.left, 0 ) );
-                stack.push( new Pair( stackTop.node, 1 ) );
-                break;
-            case 2:
-                stack.push( new Pair( stackTop.node.rigth, 0 ) );
-                stack.push( new Pair( stackTop.node.left, 0 ) );
-                stack.push( new Pair( stackTop.node, 1 ) );
-                break;              
-        }
-    }
-}
-```
-* Tree iterative traversal with O(1) space: Binary threaded tree
-```java
-  public void constantSpaceTraverse( TreeNode root )
-  {
-    TreeNode currNode = root;
-    while ( currNode != null )
-    {
-      if ( currNode.left == null )
-      {
-        System.out.println( currNode.val );
-        currNode = currNode.right;
-      }
-      else
-      {
-        TreeNode rightMostChild = findRightMostChild( currNode );
-        // second time traverse the node
-        if ( rightMostChild.right == currNode )
-        {
-          System.out.println( currNode.val );
-          rightMostChild.right = null;
-          currNode = currNode.right;
-        }
-        // first time traverse the node
-        else
-        {
-          rightMostChild.right = currNode;
-          currNode = currNode.left;
-        }
-      }
-    }
-  }
-  
-  private TreeNode findRightMostChild( TreeNode root )
-  {
-    TreeNode currNode = root.left;
-    while ( currNode.right != null && currNode.right != root )
-    {
-      currNode = currNode.right;
-    }
-    return currNode;
-  } 
-```
 * Tree level order traversal
 ```java
 Queue<TreeNode> bfsQueue = new LinkedList<>();
@@ -1435,7 +1341,104 @@ class SegmentTreeNode
   - Augment every tree node with a count field.
     + Benefits 1: Reduce height of tree, complexity of search/insert/delete operations
     + Benefits 2: Search/Insert/Delete easier to do
-    + Benefits 3: Suited for rotation operation inside self balancing BSTs. 
+    + Benefits 3: Suited for rotation operation inside self balancing BSTs.
+* Validate binary search tree
+
+* Tree iterative traversal with O(logn) space: preorder/inorder/postorder traversal
+```java
+class Pair
+{
+    TreeNode node;
+    int type; // 0 for first time, 1 for second time
+    public Pair( TreeNode node, int type )
+    {
+        this.node = node;
+        this.type = type;
+    }
+}
+
+/** 
+ * @param order  0 preorder; 1 inorder; 2 postorder
+*/
+public void treeHighSpaceTraverse( TreeNode root, int order ) 
+{
+    Stack<Pair> stack = new Stack<>();
+    stack.push( new Pair( root, 0 ) );
+    while ( !stack.isEmpty() )
+    {
+        Pair stackTop = stack.pop();
+        if ( stackTop.node == null )
+        {
+            continue;
+        }
+        if ( stackTop.type == 1 )
+        {
+            System.out.println(stackTop.node.value);
+            continue;
+        }
+        switch ( order )
+        {
+            case 0:
+                stack.push( new Pair( stackTop.node.rigth, 0 ) );
+                stack.push( new Pair( stackTop.node.left, 0 ) );
+                stack.push( new Pair( stackTop.node, 1 ) );
+                break;
+            case 1:
+                stack.push( new Pair( stackTop.node.rigth, 0 ) );
+                stack.push( new Pair( stackTop.node.left, 0 ) );
+                stack.push( new Pair( stackTop.node, 1 ) );
+                break;
+            case 2:
+                stack.push( new Pair( stackTop.node.rigth, 0 ) );
+                stack.push( new Pair( stackTop.node.left, 0 ) );
+                stack.push( new Pair( stackTop.node, 1 ) );
+                break;              
+        }
+    }
+}
+```
+* Tree iterative traversal with O(1) space: Binary threaded tree
+```java
+  public void constantSpaceTraverse( TreeNode root )
+  {
+    TreeNode currNode = root;
+    while ( currNode != null )
+    {
+      if ( currNode.left == null )
+      {
+        System.out.println( currNode.val );
+        currNode = currNode.right;
+      }
+      else
+      {
+        TreeNode rightMostChild = findRightMostChild( currNode );
+        // second time traverse the node
+        if ( rightMostChild.right == currNode )
+        {
+          System.out.println( currNode.val );
+          rightMostChild.right = null;
+          currNode = currNode.right;
+        }
+        // first time traverse the node
+        else
+        {
+          rightMostChild.right = currNode;
+          currNode = currNode.left;
+        }
+      }
+    }
+  }
+  
+  private TreeNode findRightMostChild( TreeNode root )
+  {
+    TreeNode currNode = root.left;
+    while ( currNode.right != null && currNode.right != root )
+    {
+      currNode = currNode.right;
+    }
+    return currNode;
+  } 
+``` 
 * Get inorder traversal predecessor/successor
 ```java
     TreeNode getPredecessor( TreeNode root, TreeNode target )
@@ -2374,6 +2377,36 @@ public void recursivefunction()
 ##### Types <a id="algo-recursion-types"></a>
 * Combination <a id="algo-backtrack-combination"></a>
 * Permutation <a id="algo-backtrack-permutation"></a>
+```java
+private void generatePerms( List<List<Integer>> allPerms, List<Integer> onePerm, int[] nums, boolean[] isUsed )
+{     
+  if ( onePerm.size() == nums.length )
+  {
+    allPerms.add( new LinkedList<>( onePerm ) );
+    return;
+  }
+      
+  for ( int i = 0 ; i < nums.length; i++ )
+  {       
+    if ( !isUsed[i] )
+    {
+      if ( i > 0 && nums[i] == nums[i-1] && !isUsed[i-1] )
+      {
+        continue;
+      }
+          
+      isUsed[i] = true;
+      onePerm.add( nums[i] );
+      generatePerms( allPerms, onePerm, nums, isUsed );
+      onePerm.remove( onePerm.size( ) - 1 );
+      isUsed[i] = false;
+    }
+  }
+}
+
+```
+
+* Grid-based <a id="algo-backtrack-grid-based"></a>
 
 #### Graph <a id="algo-graph"></a>
 ##### Grid-based graph best practices <a id="algo-grid"></a>

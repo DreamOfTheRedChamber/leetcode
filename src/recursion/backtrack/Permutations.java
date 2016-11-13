@@ -24,36 +24,31 @@ public class Permutations
     public List<List<Integer>> permute( int[] nums ) 
     {
     	List<List<Integer>> allPerms = new LinkedList<>();
-    	List<Integer> onePerm = new LinkedList<>();
-    	
-    	generatePerms( allPerms, onePerm, nums, 0 );
-    	
+    	LinkedList<Integer> onePerm = new LinkedList<>();
+    	boolean[] isUsed = new boolean[nums.length];
+    	generatePermutation( allPerms, onePerm, nums, isUsed );    	
     	return allPerms;
     }
     
-    private void generatePerms( List<List<Integer>> allPerms, List<Integer> onePerm, int[] nums, int startPos )
+    public void generatePermutation( List<List<Integer>> allPerms, LinkedList<Integer> onePerm, int[] nums, boolean[] isUsed )
     {
-    	if ( startPos == nums.length )
+    	if ( onePerm.size() == nums.length )
     	{
     		allPerms.add( new LinkedList<>( onePerm ) );
     		return;
     	}
     	
-    	for ( int i = startPos; i < nums.length; i++ )
+    	for ( int i = 0; i < nums.length; i++ )
     	{
-    		swap( nums, i, startPos );
-    		onePerm.add( nums[startPos] );
-    		generatePerms( allPerms, onePerm, nums, startPos + 1 );
-    		onePerm.remove( onePerm.size( ) - 1 );
-    		swap( nums, i, startPos );
+    		if ( !isUsed[i] )
+    		{
+    			isUsed[i] = true;
+    			onePerm.addLast( nums[i] );
+    			generatePermutation( allPerms, onePerm, nums, isUsed );
+    			onePerm.removeLast();
+    			isUsed[i] = false;
+    		}
     	}
-    }
-    
-    private void swap( int[] nums, int pos1, int pos2 )
-    {
-    	int pos1NumBuffer = nums[pos1];
-    	nums[pos1] = nums[pos2];
-    	nums[pos2] = pos1NumBuffer;
     }
     
     @Test

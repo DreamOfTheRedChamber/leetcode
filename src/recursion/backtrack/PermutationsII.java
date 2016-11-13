@@ -23,16 +23,17 @@ public class PermutationsII
     {
     	List<List<Integer>> allPerms = new LinkedList<>();
     	List<Integer> onePerm = new LinkedList<>();
-    	Arrays.sort( nums );
     	boolean[] isUsed = new boolean[nums.length];
-    	generatePerms( allPerms, onePerm, nums, isUsed, 0 );
+
+    	Arrays.sort( nums );
+    	generatePerms( allPerms, onePerm, nums, isUsed );
     	return allPerms;
     }
     
-    private void generatePerms( List<List<Integer>> allPerms, List<Integer> onePerm, int[] nums, boolean[] isUsed, int totalNumUsed )
+    private void generatePerms( List<List<Integer>> allPerms, List<Integer> onePerm, int[] nums, boolean[] isUsed )
     {   	
     	// recursion base
-    	if ( totalNumUsed == nums.length )
+    	if ( onePerm.size() == nums.length )
     	{
     		allPerms.add( new LinkedList<>( onePerm ) );
     		return;
@@ -52,7 +53,7 @@ public class PermutationsII
 	    		
 	    		isUsed[i] = true;
 	    		onePerm.add( nums[i] );
-	    		generatePerms( allPerms, onePerm, nums, isUsed, totalNumUsed + 1 );
+	    		generatePerms( allPerms, onePerm, nums, isUsed );
 	    		onePerm.remove( onePerm.size( ) - 1 );
 	    		isUsed[i] = false;
     		}
