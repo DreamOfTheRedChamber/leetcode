@@ -1578,13 +1578,13 @@ public List<List<String>> groupAnagrams( String[] strs )
 }
 ```
 
-##### Sparse matrix <a id="ds-hashmap-sparse-matrix"></a>
-* Represent sparse vector
-  - What are the operations that need to be supported
-    + Look up
-    + Iterate through the array
-    + Add/Delete
-  - Comparison
+##### Sparse Vector/matrix <a id="ds-hashmap-sparse-matrix"></a>
+* What are the operations that need to be supported
+  - Look up
+  - Iterate through the array
+  - Add/Delete
+
+* Sparse vector representation comparison
 
 | Representation    | In-order iteration | Add/Delete complexity | Lookup Complexity | 
 | ------------------|:------------------:|:---------------------:| -----------------:|
@@ -1593,7 +1593,7 @@ public List<List<String>> groupAnagrams( String[] strs )
 | Map&lt;Index,Value&gt; |       No        |        O(1)           |      O(1)         |
 | TreeMap&lt;Index,Value&gt;   |       Support       |        O(lgn)           |      O(lgn) | 
 
-* Represent sparse matrix ( Supported operations similar to above )
+* Sparse matrix representation comparison
 
 | Representation    | In-order iteration | Add/Delete complexity | Lookup Complexity | 
 | ------------------|:------------------:|:---------------------:| -----------------:|
@@ -1601,6 +1601,46 @@ public List<List<String>> groupAnagrams( String[] strs )
 | Array of Array    |     Support        |        O(m+n)           |      O(lgm+lgn)         |
 | Map of Map |       No        |        O(1)           |      O(1)         |
 | TreeMap of TreeMap  |       Support       |        O(lgn)           |      O(lgn) | 
+
+* Sparse vector m * Sparse vector n
+  - Array-based and TreeMap-based representation both work here
+  - Similar size: Two pointers O(m + n)
+  - Small + large size: Iterate one while binary search on the other one O(nlogm)
+
+* Sparse matrix
+  - The straightforward way to do this will result in three-level for loop. To reduce the complexity, needs to eliminate inner loop number.
+  - Solution1: detecting empty entries on the fly
+  - Solution2: compress one matrix as hashtable first and then multiply with the other one
+```java
+// the most naive way: O(m*n*t)
+for ( int i = 0; i < A.length; i++ )
+{
+  for ( int j = 0; j < B[0].length; j++ )
+  {
+    for ( int k = 0; k < A[0].length; k++ )
+    {
+      result[i][j] += A[i][k] * B[k][j];
+    }
+  }
+}
+// move looping order
+for ( int i = 0; i < A.length; i++ )
+{
+  for ( int k = 0; k < A[0].length; k++ )
+  {
+    if ( A[i][k] != 0 )
+    {
+      for ( int j = 0; j < B[0].length; j++ )
+      {
+        if ( B[k][j] != 0 )
+        {
+          result[i][j] += A[i][k] * B[k][j];
+        }
+      }
+    }
+  }
+}
+```
 
 #### TreeMap <a id="ds-treemap"></a>
 * Get Key/Entry APIs: firstKey/firstEntry, lastKey/lastEntry, lowerKey/lowerEntry, higherKey/higherEntry, CeilingKey/CeilingEntry, floorKey/floorEntry

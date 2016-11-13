@@ -1,5 +1,8 @@
 package facebook.medium;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * 
 What is a memory-efficient way to store a vector of integers? Follow-up question: using your proposed data structure, find an algorithm with constant memory usage to calculate the dot product of two vectors.
@@ -28,4 +31,34 @@ sparse vector dot product。follow up: what if the number of nonzero elements of
 
 public class VectorDotProduct
 {
+	public int calcVectorDotProduct( int[] vector1, int[] vector2 )
+	{
+		if ( vector1.length != vector2.length )
+		{
+			throw new IllegalArgumentException();
+		}
+		if ( vector1 == null || vector2 == null || vector1.length == 0 || vector2.length == 0 )
+		{
+			return 0;
+		}
+		
+		Map<Integer, Integer> sparseVector1 = new HashMap<>();
+		for ( int i = 0; i < vector1.length; i++ )
+		{
+			if ( vector1[i] != 0 )
+			{
+				sparseVector1.put( i, vector1[i] );
+			}
+		}
+		
+		int product = 0;
+		for ( int i = 0; i < vector2.length; i++ )
+		{
+			if ( vector2[i] != 0 && sparseVector1.containsKey( i ) )
+			{
+				product += vector2[i] * sparseVector1.get( i );
+			}
+		}
+		return product;
+	}	
 }
