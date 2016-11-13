@@ -28,12 +28,12 @@ public class CombinationSumIII
     public List<List<Integer>> combinationSum3( int k, int n ) 
     {
     	List<List<Integer>> allCombs = new LinkedList<>();
-    	List<Integer> oneComb = new LinkedList<>();
+    	LinkedList<Integer> oneComb = new LinkedList<>();
     	generateCombs( allCombs, oneComb, k, n, 1, 9 );
     	return allCombs;
     }
     
-    private void generateCombs( List<List<Integer>> allCombs, List<Integer> oneComb, int targetNum, int targetSum, int startPos, int endPos )
+    private void generateCombs( List<List<Integer>> allCombs, LinkedList<Integer> oneComb, int targetNum, int targetSum, int startPos, int endPos )
     {
     	// recursion base
     	if ( oneComb.size() > targetNum 
@@ -52,9 +52,9 @@ public class CombinationSumIII
     	// recursion
     	for ( int i = startPos; i <= endPos; i++ )
     	{
-    		oneComb.add( i );
+    		oneComb.addLast( i );
     		generateCombs( allCombs, oneComb, targetNum, targetSum - i, i + 1, endPos );
-    		oneComb.remove( oneComb.size( ) - 1 );
+    		oneComb.removeLast( );
     	}
     }
 }

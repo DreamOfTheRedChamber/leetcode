@@ -1,5 +1,6 @@
 package recursion.backtrack;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -21,18 +22,17 @@ If n = 4 and k = 2, a solution is:
 ]
  * */
 public class Combinations 
-{
+{	
     public List<List<Integer>> combine( int n, int k )
     {
     	List<List<Integer>> allCombs = new LinkedList<>();
-    	List<Integer> oneComb = new LinkedList<>();
+    	LinkedList<Integer> oneComb = new LinkedList<>();
     	generateCombs( allCombs, oneComb, 1, n, k );
     	return allCombs;
     }
     
-    private void generateCombs( List<List<Integer>> allCombs, List<Integer> oneComb, int start, int end, int k )
+    private void generateCombs( List<List<Integer>> allCombs, LinkedList<Integer> oneComb, int start, int end, int k )
     {
-    	// recursion base
     	if ( k < 0 )
     	{
     		return;
@@ -43,13 +43,26 @@ public class Combinations
     		return;
     	}
     	
-    	// recursion body
     	for ( int i = start; i <= end; i++ )
     	{
-    		oneComb.add( i );
+    		oneComb.addLast( i );
     		generateCombs( allCombs, oneComb, i + 1, end, k - 1 );
-    		oneComb.remove( oneComb.size() - 1 );
+    		oneComb.removeLast();
     	}
+    }
+    
+    public List<List<Integer>> combine( int[] nums, int k )
+    {
+    	List<List<Integer>> allCombs = new LinkedList<>();
+    	LinkedList<Integer> oneComb = new LinkedList<>();
+    	Arrays.sort( nums );
+    	generateCombs( allCombs, oneComb, nums, k, 0 );
+    	return allCombs;    	
+    }
+    
+    private void generateCombs( List<List<Integer>> allCombs, LinkedList<Integer> oneComb, int[] nums, int k, int start )
+    {
+    	
     }
     
     @Test

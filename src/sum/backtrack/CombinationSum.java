@@ -23,17 +23,17 @@ public class CombinationSum
 	public List<List<Integer>> combinationSum(int[] candidates, int target) 
     {
 		List<List<Integer>> allCombs = new LinkedList<>();
-		List<Integer> oneComb = new LinkedList<>();
+		LinkedList<Integer> oneComb = new LinkedList<>();
 		
 		generateCombs( allCombs, oneComb, candidates, 0, target );
 		
 		return allCombs;
     }
 	
-	private void generateCombs( List<List<Integer>> allCombs, List<Integer> oneComb, int[] candidates, int startPos, int targetSum )
+	private void generateCombs( List<List<Integer>> allCombs, LinkedList<Integer> oneComb, int[] nums, int startPos, int targetSum )
 	{
 		if ( targetSum < 0 
-				|| startPos >= candidates.length )
+				|| startPos >= nums.length )
 		{
 			return;
 		}
@@ -44,11 +44,11 @@ public class CombinationSum
 			return;
 		}
 		
-		for ( int i = startPos; i < candidates.length; i++ )
+		for ( int i = startPos; i < nums.length; i++ )
 		{
-			oneComb.add( candidates[i] );
-			generateCombs( allCombs, oneComb, candidates, i, targetSum - candidates[i] );
-			oneComb.remove( oneComb.size() - 1 );
+			oneComb.addLast( nums[i] );
+			generateCombs( allCombs, oneComb, nums, i, targetSum - nums[i] );
+			oneComb.removeLast( );
 		}
 	}
 }

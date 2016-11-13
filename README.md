@@ -150,8 +150,10 @@
     * [Backtrack](#algo-backtrack)
       - [Best practices](#algo-backtrack-best-practices)
       - [Types](#algo-recursion-types)
-        + [Combination](#algo-backtrack-combination)
-        + [Permutation](#algo-backtrack-permutation)
+        + [Generate all permutations](#algo-backtrack-permutation)
+        + [Generate all subsets](#algo-backtrack-subsets)
+        + [Generate all combinations summing to a target](#algo-backtrack-combination-sum)
+        + [Generate Decode ways/Gray code](#algo-backtrack-generate-decode-ways)
         + [Grid-based](#algo-backtrack-grid-based)
     * [Graph](#algo-graph)
       - [Grid-based best practices](#algo-grid)
@@ -2375,10 +2377,9 @@ public void recursivefunction()
 ```
 
 ##### Types <a id="algo-recursion-types"></a>
-* Combination <a id="algo-backtrack-combination"></a>
-* Permutation <a id="algo-backtrack-permutation"></a>
+* Generate all unique permutations <a id="algo-backtrack-permutation"></a>
 ```java
-private void generatePerms( List<List<Integer>> allPerms, List<Integer> onePerm, int[] nums, boolean[] isUsed )
+void generatePerms( List<List<Integer>> allPerms, List<Integer> onePerm, int[] nums, boolean[] isUsed )
 {     
   if ( onePerm.size() == nums.length )
   {
@@ -2403,9 +2404,32 @@ private void generatePerms( List<List<Integer>> allPerms, List<Integer> onePerm,
     }
   }
 }
-
 ```
-
+* Generate all subsets <a id="algo-backtrack-combination-sum"></a>
+* Generate all combinations summing to a target <a id="algo-backtrack-combination-sum"></a>
+```java
+void generateCombs( List<List<Integer>> allCombs, LinkedList<Integer> oneComb, int[] nums, int startPos, int targetSum )
+{
+  if ( targetSum < 0 || startPos >= nums.length )
+  {
+    return;
+  }
+    
+  if ( targetSum == 0 )
+  {
+    allCombs.add( new LinkedList<>( oneComb ) );
+    return;
+  }
+    
+  for ( int i = startPos; i < nums.length; i++ )
+  {
+    oneComb.addLast( nums[i] );
+    generateCombs( allCombs, oneComb, nums, i, targetSum - nums[i] );
+    oneComb.removeLast( );
+  }
+}
+```
+* Generate Decode ways / Gray code<a id="algo-backtrack-generate-decode-ways"></a>
 * Grid-based <a id="algo-backtrack-grid-based"></a>
 
 #### Graph <a id="algo-graph"></a>
