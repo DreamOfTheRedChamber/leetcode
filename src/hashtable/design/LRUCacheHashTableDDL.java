@@ -18,7 +18,7 @@ class ListNode
     }
 }
 
-public class LRUCache 
+public class LRUCacheHashTableDDL 
 {
     private Map<Integer, ListNode> keyToNodeMap;
     // list ordered from oldest to latest
@@ -27,7 +27,7 @@ public class LRUCache
     private int capacity;
     private final static int SENTINEL = 0;
     
-    public LRUCache(int capacity) 
+    public LRUCacheHashTableDDL(int capacity) 
     {
         this.capacity = capacity;
         this.keyToNodeMap = new HashMap<>( capacity );

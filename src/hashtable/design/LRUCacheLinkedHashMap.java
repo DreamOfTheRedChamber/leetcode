@@ -5,50 +5,47 @@ import java.util.Map;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-public class LRUCacheLinkedHashMap<K,V> extends LinkedHashMap<K, V>
+public class LRUCacheLinkedHashMap
 {   
-	private final int maxCapacity;
-	private static final float DEFAULT_LOAD_FACTOR = 0.75f;
-	private final Lock lock = new ReentrantLock();
-	
-    public LRUCacheLinkedHashMap( int maxCapacity ) 
+    Map<Integer,Integer> cache ;
+    int capacity ;
+    
+    public LRUCacheLinkedHashMap( int capacity ) 
     {
-    	super( maxCapacity, DEFAULT_LOAD_FACTOR, true );
-    	this.maxCapacity = maxCapacity;
+        this.cache = new LinkedHashMap<>();
+        this.capacity = capacity;
     }
     
-    @Override
-    protected boolean removeEldestEntry( Map.Entry<K, V> eldest )
+    public int get( int key )
     {
-    	return size() > maxCapacity;
+        if( !cache.containsKey( key ) )
+        {
+            return -1;
+        }
+        int value = cache.get( key );
+        if( cache.size() > 1 ) 
+        {
+            cache.remove( key );
+            cache.put( key, value );
+        }
+        return value;
     }
     
-    @Override
-    public V get( Object key )
+    public void set( int key, int value ) 
     {
-    	try
-    	{
-    		lock.lock();
-    		return super.get( key );
-    	}
-    	finally
-    	{
-    		lock.unlock();
-    	}
-    }
-    
-    @Override
-    public V put( K key, V value ) 
-    {
-    	try 
-    	{
-    		lock.lock();
-    		return super.put( key, value );
-    	}
-    	finally
-    	{
-    		lock.unlock();
-    	}
-    }
-    
+        if( !cache.containsKey( key ) ) 
+        {
+            if( cache.size()==capacity ) 
+            {
+                int firstKey = cache.keySet().iterator().next();
+                cache.remove( firstKey );
+            } 
+            cache.put( key,value );
+        } 
+        else 
+        {
+            cache.remove( key );
+            cache.put( key, value );
+        }
+    }    
 }
