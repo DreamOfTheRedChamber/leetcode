@@ -92,6 +92,7 @@
       - [Histogram and hashmap list](#ds-hashmap-histogram-hashmap-list)
       - [Anagram](#ds-hashmap-anagram)
       - [Sparse matrix](#ds-hashmap-sparse-matrix)
+      - [LRU cache](#ds-hashmap-lru-cache)
     * [TreeMap](#ds-treemap)
     * [Graph](#ds-graph)
       - [Edge list vs Adjacent list vs Adjacent matrix](#ds-graph-tradeoffs)
@@ -1628,6 +1629,35 @@ for ( int i = 0; i < A.length; i++ )
     }
   }
 }
+```
+
+##### LRU Cache <a id="ds-hashmap-lru-cache"></a>
+* HashMap + DDL
+* LinkedHashMap + manual removing oldest entry and reset
+* LinkedHashMap ( access order + removeEldestEntry() )
+  - Access order
+    + When specified: The accessOrder flag is set when creating the LinkedHashMap instance using the LinkedHashMap(int initialCapacity, float loadFactor, boolean accessOrder) constructor
+    + accessOrder=true: The elements are ordered according to their access: When iterating over the map the most recently accessed entry is returned first and the least recently accessed element is returned last. Only the get, put, and putAll methods influence this ordering.
+    + accessOrder=false: The elements are ordered according to their insertion. This is the default if any of the other LinkedHashMap constructors is used. In this ordering read access to the map has no influence on element ordering.
+  - removeEldestEntry(Entry)
+    + This method is called with the eldest entry whenever an element is added to the map. Eldest means the element which is returned last when iterating over the map. So the notion of eldest is influenced by accessOrder set on the map. The removeEldestElement in its default implementation just returns false to indicate, that nothing should happen. An extension of the LinkedHashMap may overwrite the default implementation to do whatever would be required:
+```java
+public class LRUCache<K, V> extends LinkedHashMap<K, V> 
+{
+  private final int limit;
+  public LRUCache( int limit ) 
+  {
+    super( 16, 0.75f, true );
+    this.limit = limit;
+  }
+
+  @Override
+  protected boolean removeEldestEntry( Map.Entry<K,V> eldest )
+  {
+    return size() > limit;
+  }
+}
+
 ```
 
 #### TreeMap <a id="ds-treemap"></a>
