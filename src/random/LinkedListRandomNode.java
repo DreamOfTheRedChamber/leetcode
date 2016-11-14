@@ -1,5 +1,9 @@
 package random;
 
+import java.util.Random;
+
+import utility.ListNode;
+
 /**
 Given a singly linked list, return a random node's value from the linked list. Each node must have the same probability of being chosen.
 
@@ -17,19 +21,38 @@ Solution solution = new Solution(head);
 // getRandom() should return either 1, 2, or 3 randomly. Each element should have equal probability of returning.
 solution.getRandom();
  */
-//TO_HURRY
 public class LinkedListRandomNode 
 {
 
+	ListNode head;
+	Random rand;
     /** @param head The linked list's head.
         Note that the head is guaranteed to be not null, so it contains at least one node. */
-    public LinkedListRandomNode(ListNode head) {
-        
+    public LinkedListRandomNode( ListNode head )
+    {
+    	this.head = head;
+    	this.rand = new Random();
     }
     
     /** Returns a random node's value. */
-    public int getRandom() {
-        
+    public int getRandom() 
+    {
+    	if ( head == null )
+    	{
+    		throw new IllegalStateException();
+    	}
+    	
+    	int result = head.val;
+    	ListNode node = head;
+    	for ( int i = 0; node != null; i++, node = node.next )
+    	{
+    		int randomNum = rand.nextInt( i + 1 );
+    		if ( randomNum == i )
+    		{
+    			result = node.val;
+    		}
+    	}
+    	return result;
     }
 }
 
