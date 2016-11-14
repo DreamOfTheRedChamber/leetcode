@@ -21,19 +21,19 @@ public class ReadNCharactersGivenRead4 extends Reader4
     public int read( char[] buf, int n )
     {
 		char[] localBuf = new char[4];
-		int i = 0;
-		while ( i < n )
+		int totalNumRead = 0;
+		while ( totalNumRead < n )
     	{
-    		int numRead = read4( localBuf );
-    		for ( int j = 0; i < n && j < numRead; j++, i++ )
+    		int localNumRead = read4( localBuf );
+    		for ( int j = 0; totalNumRead < n && j < localNumRead; j++, totalNumRead++ )
     		{
     			buf[i] = localBuf[j];
     		}
-    		if ( numRead < 4 )
+    		if ( localNumRead < 4 )
     		{
     			break;
     		}
     	}
-    	return i;
+    	return totalNumRead;
     }
 }

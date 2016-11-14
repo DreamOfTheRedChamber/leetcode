@@ -27,53 +27,34 @@ public class ReadNCharactersGivenRead4II  extends Reader4
 	*/
 	public int read( char[] buf, int n )
 	{
-		if ( n < 0 || buf.length < n )
+		int totalNumRead = 0;
+		char[] buf4 = new char[4];
+		while ( localCache.size() > 0 && totalNumRead < n )
 		{
-			throw new IllegalArgumentException("");
+			buf[totalNumRead++] = localCache.poll();
 		}
 		
-		int numRead = 0;
-		for ( ; numRead < Math.min( n, localCache.size() ); numRead++ )
+		while ( totalNumRead < n )
 		{
-			buf[numRead] = localCache.poll();
-		}
-		if ( numRead == n )
-		{
-			return n;
-		}
-		
-		int numRound = ( n - numRead ) / 4;
-		int remainder = ( n - numRead ) % 4;
-		for ( int i = 0; i < numRound; i++ )
-		{
-			char[] buf4 = new char[4];
-			int roundNumRead = read4( buf4 );
-			for ( int j = 0; j < roundNumRead; j++, numRead++ ) 
+			int readNum = read4( buf4 );
+			int writeNum = n - totalNumRead;
+			for ( int i = 0; i < readNum; i++ )
 			{
-				buf[numRead] = buf4[j];
-			}
-			if ( roundNumRead < 4 )
-			{
-				return numRead;
-			}
-		}
-		
-		if ( remainder != 0 )
-		{
-			char[] buf4 = new char[4];
-			int roundNumRead = read4( buf4 );
-			for ( int i = 0; i < Math.min( roundNumRead, remainder ); numRead++, i++ )
-			{
-				buf[numRead] = buf4[i];
-			}						
-			if ( roundNumRead > remainder )
-			{
-				for ( int i = remainder; i < roundNumRead; i++ )
+				if ( i < writeNum )
 				{
-					localCache.offer( buf[i] );
+					buf[totalNumRead++] = buf4[i];
+				}
+				else
+				{
+					localCache.offer( buf4[i] );
 				}
 			}
+			
+			if ( readNum < 4 )
+			{
+				break;
+			}
 		}
-		return numRead;
+		return totalNumRead;
 	}
 }
