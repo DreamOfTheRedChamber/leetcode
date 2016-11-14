@@ -26,15 +26,14 @@ public class SubsetsII
     public List<List<Integer>> subsetsWithDup(int[] nums ) 
     {
     	List<List<Integer>> allSubsets = new LinkedList<>();
-    	List<Integer> oneSubset = new LinkedList<>();
+    	LinkedList<Integer> oneSubset = new LinkedList<>();
     	Arrays.sort( nums );
     	generateSubsets( allSubsets, oneSubset, nums, 0 );
     	return allSubsets;
     }
     
-    private void generateSubsets( List<List<Integer>> allSubsets, List<Integer> oneSubset, int[] nums, int startPos )
+    private void generateSubsets( List<List<Integer>> allSubsets, LinkedList<Integer> oneSubset, int[] nums, int startPos )
     {
-    	// recursion base
     	if ( startPos > nums.length )
     	{
     		return;
@@ -42,7 +41,6 @@ public class SubsetsII
     	
     	allSubsets.add( new LinkedList<>( oneSubset ) );
     	
-    	// recursion body
     	for ( int i = startPos; i < nums.length; i++ )
     	{
     		if ( i > startPos 
@@ -51,9 +49,9 @@ public class SubsetsII
     			continue;
     		}
     		
-    		oneSubset.add( nums[i] );
+    		oneSubset.addLast( nums[i] );
     		generateSubsets( allSubsets, oneSubset, nums, i + 1 );
-    		oneSubset.remove( oneSubset.size( ) - 1 );
+    		oneSubset.removeLast( );
     	}
     }
 }

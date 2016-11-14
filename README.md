@@ -855,6 +855,7 @@ return dummy.next; // pointing to the actual list head
         * Merge list two by two: O( n^2 )
         * Divide and conquer: O( nlogn )
         * Heap: O( nlogk )
+  - When there is any one list left, could merge directly
 ```java
 // k == 2 case
 private ListNode merge( ListNode list1, ListNode list2 )
@@ -2409,6 +2410,30 @@ void generatePerms( List<List<Integer>> allPerms, List<Integer> onePerm, int[] n
 }
 ```
 * Generate all subsets <a id="algo-backtrack-combination-sum"></a>
+```java
+void generateSubsets( List<List<Integer>> allSubsets, LinkedList<Integer> oneSubset, int[] nums, int startPos )
+{
+  if ( startPos > nums.length )
+  {
+    return;
+  }
+      
+  allSubsets.add( new LinkedList<>( oneSubset ) );
+      
+  for ( int i = startPos; i < nums.length; i++ )
+  {
+    if ( i > startPos 
+        && nums[i] == nums[i-1] )
+    {
+      continue;
+    }
+        
+    oneSubset.addLast( nums[i] );
+    generateSubsets( allSubsets, oneSubset, nums, i + 1 );
+    oneSubset.removeLast( );
+  }
+}
+```
 * Generate all combinations summing to a target <a id="algo-backtrack-combination-sum"></a>
 ```java
 void generateCombs( List<List<Integer>> allCombs, LinkedList<Integer> oneComb, int[] nums, int startPos, int targetSum )
