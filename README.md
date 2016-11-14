@@ -1845,6 +1845,9 @@ public List<Integer> sample( List<Integer> list, int k )
     return samples;
 }
 ```
+* Generate weighted random number
+  - Build a prefix sum array of frequency
+  - Generate random number and use binary search for last smaller entry
 
 ##### Mod <a id="algo-math-mod"></a>
 * judge whether a value is even or odd
