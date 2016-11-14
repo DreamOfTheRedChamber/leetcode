@@ -1346,6 +1346,10 @@ class SegmentTreeNode
     + Benefits 2: Search/Insert/Delete easier to do
     + Benefits 3: Suited for rotation operation inside self balancing BSTs.
 * Validate binary search tree
+  - Iterative inorder traversal, current node > successor (stack top). Works for BST with no duplication constraints
+  - Divide and conquer, pass down value range in children nodes
+* Kth node in a BST
+  - 
 
 * Tree iterative traversal with O(logn) space: preorder/inorder/postorder traversal
 ```java
@@ -2409,7 +2413,7 @@ void generatePerms( List<List<Integer>> allPerms, List<Integer> onePerm, int[] n
   }
 }
 ```
-* Generate all subsets <a id="algo-backtrack-combination-sum"></a>
+* Generate all subsets <a id="algo-backtrack-subsets"></a>
 ```java
 void generateSubsets( List<List<Integer>> allSubsets, LinkedList<Integer> oneSubset, int[] nums, int startPos )
 {
