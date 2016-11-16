@@ -21,8 +21,8 @@
     * [Interview Java pros and cons](#java-pros-cons)
 * [Java language](#java-language)
     * [Characteristics of Object oriented](#characteristics)
-    * [Java vs Javascript](#java-vs-javascript)
     * [Java vs C++](#java-vs-c++)
+    * [Thread vs process](#thread-vs-process)
     * [Access modifiers](#access-modifiers)
     * [Stack vs heap vs static area](#stack-heap-staticarea)
     * [OutOfMemoryError](#outof-memory-error)
@@ -410,7 +410,19 @@
 
 ### Java language<a id="java-language"></a>
 #### Characteristics of Object oriented<a id="characteristics"></a>
-#### Java vs Javascript<a id="java-vs-javascript"></a>
+#### Thread vs process<a id="thread-vs-process"></a>
+* For most computing tasks, there is great advantage to splitting up workload into multiple actors and partitioning the task into different, multiple tasks for these multiple actors. Two common ways of doing this are multi-threaded programs and multi-process systems.
+
+| Differences |  Thread |  Process  |
+| --------------------- |:-------------:| -----:|
+| Def | A lightweight process with less resource consumption | A running instance of a program |
+| Data sharing | A process has separate virtual address space. Inter process mechanism such as pipes, sockets, shared memory | All threads of a process share its virtual address space and system resources but have their own stack created. No specific mechanism for sharing. |
+| Overhead to create/terminate  | Faster due to very little memory copying (just thread stack) | Slower because whole process area needs to be copied |
+| Task switching  | Faster because CPU caches and program context can be maintained | Slower because all process area needs to be reloaded |
+| Synchronization overhead | Shared data that is modified requires special handling in the form of locks, mutexes and primitives | No synchronization needed |
+| Program debugging | More difficulties including synchronization, non-deterministic timing and accidental data corruption | Easier |
+| Use cases  | Threads are a useful choice when you have a workload that consists of lightweight tasks (in terms of processing effort or memory size) that come in, for example with a web server servicing page requests. There, each request is small in scope and in memory usage. Threads are also useful in situations where multi-part information is being processed – for example, separating a multi-page TIFF image into separate TIFF files for separate pages. In that situation, being able to load the TIFF into memory once and have multiple threads access the same memory buffer leads to performance benefits. | Processes are a useful choice for parallel programming with workloads where tasks take significant computing power, memory or both. For example, rendering or printing complicated file formats (such as PDF) can sometimes take significant amounts of time – many milliseconds per page – and involve significant memory and I/O requirements. In this situation, using a single-threaded process and using one process per file to process allows for better throughput due to increased independence and isolation between the tasks vs. using one process with multiple threads. |
+
 #### Java vs C++<a id="java-vs-c++"></a>
 
 | Differences | C++          | Java  |
@@ -2803,3 +2815,4 @@ public int houseRobber_RollingArray( int[] A )
 * [Massive tech interview](http://massivetechinterview.blogspot.com/)
 * [Java best practices](http://www.javapractices.com/home/HomeAction.do)
 * [Java revisited](http://javarevisited.blogspot.com/)
+* [Programming interview](http://www.programmerinterview.com/)
