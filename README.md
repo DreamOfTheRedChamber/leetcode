@@ -377,9 +377,16 @@
   * Summarizing lessons: Use git commit message as a place to learn from mistakes and summarize lessons
 
 #### Strategies<a id="practice-strategies"></a>
-  * Focus on recently popular, medium to hard questions.
-  * Practice questions again and again until I could code it bugfree and fast even when I am sleeping.
-  * For each category of problems, summarize common tricks/techniques used.
+  * Chunk it up
+    * Focus on recently popular, medium to hard questions.
+    * For each category of problems, summarize common tricks/techniques used.
+  * Deliberate practicing
+    * Try new ways to solve problems. 
+    * Try to generalize my mistake or lessons.
+    * How does current problem relates to other problems.
+  * Feedbacks
+    * Interview a lot. 
+    * Reflection on what I do good and bad
 
 #### Leetcode pros and cons <a id="leetcode-pros-cons"></a>
 * Pros
