@@ -60,98 +60,39 @@ public class WordLadder
 	}
 	
     public int ladderLength( String beginWord, String endWord, Set<String> wordList )
-    {
-    	if ( beginWord == null 
-    			|| endWord == null 
-    			|| wordList == null )
-    	{
-    		throw new IllegalArgumentException();
-    	}
-    	// equal case
-    	
-    	Map<String, Set<String>> graph = buildGraph( beginWord, endWord, wordList );
-    	
-    	// bfs for shortest transformation
-    	Set<String> visited = new HashSet<>();
+    {    	
+    	wordList.add( endWord );
     	Queue<String> bfsQueue = new LinkedList<>();
-    	bfsQueue.offer( beginWord );
-    	visited.add( beginWord );
-    	int distance = 1;
+    	bfsQueue.add( beginWord );
+    	int level = 0;
     	while ( !bfsQueue.isEmpty() )
     	{
-    		int levelSize = bfsQueue.size();
-    		for ( int i = 0; i < levelSize; i++ )
+    		int size = bfsQueue.size();
+    		for ( int i = 0; i < size; i++ )
     		{
-    			String head = bfsQueue.poll( );
+    			String head = bfsQueue.poll();
     			if ( head.equals( endWord ) )
     			{
-    				return distance;
+    				return level + 1;
     			}
-    			for ( String neighbor : graph.get( head ) )
+    			for ( int j = 0; j < head.length(); j++ )
     			{
-    				if ( !visited.contains( neighbor ) )
+    				char[] word = head.toCharArray();
+    				for ( char ch = 'a'; ch < 'z'; ch++ )
     				{
-    					visited.add( neighbor );
-    					bfsQueue.add( neighbor );
+    					word[j] = ch;
+    					String check = new String( word );
+    					if ( !check.equals( head ) && wordList.contains( check ) )
+    					{
+    						bfsQueue.add( check );
+    						wordList.remove( check );
+    					}
     				}
     			}
-    		}
-    		distance++;
+    		}    		
+			level++;
     	}
-    	
     	return 0;
     }
     
-    private Map<String, Set<String>> buildGraph( String beginWord, String endWord, Set<String> wordList )
-    {
-    	Map<String, Set<String>> graph = new HashMap<>();
-    	Set<String> allUniqueNodes = new HashSet<>( wordList );
-    	allUniqueNodes.add( beginWord );
-    	allUniqueNodes.add( endWord );
-    	List<String> allNodes = allUniqueNodes.stream().collect( Collectors.toList() );
-    	
-    	for ( String node : allNodes )
-    	{
-    		graph.put( node, new HashSet<>() );
-    	}
-    	
-    	for ( int i = 0; i < allNodes.size() - 1; i++ )
-    	{
-    		for ( int j = i + 1; j < allNodes.size(); j++ )
-    		{
-    			if ( isAdjacent( allNodes.get( i ), allNodes.get( j ) ) )
-    			{
-    				graph.get( allNodes.get( i ) ).add( allNodes.get( j ) );
-    				graph.get( allNodes.get( j ) ).add( allNodes.get( i ) );
-    			}
-    		}
-    	}
-    	
-    	return graph;
-    }
-    
-    private boolean isAdjacent( String word1, String word2 )
-    {
-    	if ( word1.length( ) != word2.length( ) )
-    	{
-    		return false;
-    	}
-    	
-    	boolean isFirstDiffFound = false;
-    	for ( int i = 0; i < word1.length( ); i++ )
-    	{
-    		if ( word1.charAt( i ) != word2.charAt( i ) )
-    		{
-    			if ( !isFirstDiffFound )
-    			{
-    				isFirstDiffFound = true;
-    			}
-    			else
-    			{
-    				return false;
-    			}
-    		}
-    	}
-    	return true;
-    }
 }
