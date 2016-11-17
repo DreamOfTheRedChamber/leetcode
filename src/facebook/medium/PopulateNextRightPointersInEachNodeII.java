@@ -1,5 +1,7 @@
 package facebook.medium;
 
+import utility.TreeLinkNode;
+
 /**
 Follow up for problem "Populating Next Right Pointers in Each Node".
 
@@ -25,8 +27,28 @@ After calling your function, the tree should look like:
 
 public class PopulateNextRightPointersInEachNodeII
 {
-    public void connect(TreeLinkNode root) 
+    public void connect( TreeLinkNode root )
     {
-        
+    	TreeLinkNode leftmostNode = root;
+    	while ( leftmostNode != null )
+    	{
+    		TreeLinkNode node = leftmostNode;
+    		TreeLinkNode dummy = new TreeLinkNode( 0 );
+    		TreeLinkNode prev = dummy;
+    		while ( node != null )
+    		{
+    			if ( node.left != null )
+    			{
+    				prev.next = node.left;
+    				prev = prev.next;
+    			}
+    			if ( node.right != null )
+    			{
+    				prev.next = node.right;
+    				prev = prev.next;
+    			}
+    		}
+    		leftmostNode = dummy.next;
+    	}
     }
 }

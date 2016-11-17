@@ -1198,7 +1198,7 @@ PriorityQueue<NumAndFreq> minQueue = new PriorityQueue<>( ( o1, o2 ) -> ( o1.fre
 #### Tree <a id="ds-tree"></a>
 ##### Build <a id="ds-tree-build"></a>
 ##### Traversal <a id="ds-tree-traversal"></a>
-* Tree level order traversal
+* Classic tree level order traversal with O(n) space
 ```java
 Queue<TreeNode> bfsQueue = new LinkedList<>();
 bfsQueue.offer( root );
@@ -1216,6 +1216,7 @@ while ( !bfsQueue.isEmpty() )
   }  
 }
 ```
+* Special tree level order traversal with O(1) space: example problem (populate next right pointers in each node II)
 
 ##### View <a id="ds-tree-view"></a>
 * Right side view (Binary tree right side view)
