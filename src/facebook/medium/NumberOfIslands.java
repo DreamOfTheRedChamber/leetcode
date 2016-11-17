@@ -49,7 +49,7 @@ public class NumberOfIslands
     			if ( grid[i][j] == '1' && !isVisited[i][j] )
     			{
     				numIsland++;
-    				visitIsland( grid, isVisited, i, j );
+    				visitIslandBFS( grid, isVisited, i, j );
     			}
     		}
     	}
@@ -68,11 +68,27 @@ public class NumberOfIslands
     	}
     }
     
-    private void visitIsland( char[][] grid, boolean[][] isVisited, int xStart, int yStart )
+    private void visitIslandDFS( char[][] grid, boolean[][] isDiscovered, int xStart, int yStart)
+    {
+    	int height = grid.length;
+    	int width = grid[0].length;
+    	if ( xStart < 0 || xStart >= height || yStart < 0 || yStart >= width || isDiscovered[xStart][yStart])
+    	{
+    		return;
+    	}
+    	
+    	isDiscovered[xStart][yStart] = true;
+    	visitIslandDFS( grid, isDiscovered, xStart + 1, yStart );
+    	visitIslandDFS( grid, isDiscovered, xStart - 1, yStart );
+    	visitIslandDFS( grid, isDiscovered, xStart, yStart + 1 );
+    	visitIslandDFS( grid, isDiscovered, xStart, yStart - 1 );    	
+    }
+    
+    private void visitIslandBFS( char[][] grid, boolean[][] isDiscovered, int xStart, int yStart )
     {
     	Queue<Pair> bfsQueue = new LinkedList<>();
     	bfsQueue.offer( new Pair( xStart, yStart ) );
-    	isVisited[xStart][yStart] = true;
+    	isDiscovered[xStart][yStart] = true;
     	
     	int height = grid.length;
     	int width = grid[0].length;
@@ -87,10 +103,10 @@ public class NumberOfIslands
     					&& neighborX < height 
     					&& neighborY >= 0 
     					&& neighborY < width 
-    					&& !isVisited[neighborX][neighborY] 
+    					&& !isDiscovered[neighborX][neighborY] 
     					&& grid[neighborX][neighborY] == '1'		)
     			{
-    				isVisited[neighborX][neighborY] = true;
+    				isDiscovered[neighborX][neighborY] = true;
     				bfsQueue.offer( new Pair( neighborX, neighborY ) );
     			}
     		}

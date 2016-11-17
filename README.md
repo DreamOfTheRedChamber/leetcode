@@ -157,8 +157,10 @@
         + [Grid-based](#algo-backtrack-grid-based)
     * [Graph](#algo-graph)
       - [Grid-based best practices](#algo-grid)
-      - [Breath first search](#algo-bfs)
-      - [Depth first search](#algo-dfs)
+      - [Grid-based breath first search](#algo-grid-based-bfs)
+      - [Grid-based depth first search](#algo-grid-based-dfs)
+      - [Grid-based count number of components](#algo-grid-based-count-number-of-components)
+      - [Word-based breath first search](#algo-word-based-bfs)
       - [Topological sort](#algo-topo)
       - [Union find](#algo-union-find)
     * [Greedy](#algo-greedy)
@@ -209,7 +211,7 @@
       * Input - String<a id="question-string"></a>
          * Whether the string contains space
          * How are tokens separated, using comma, slash or something else
-         * Alphabetic characters, ascii characters, or unicode characters  
+         * Alphabetic characters(lower/upper case), ascii characters, or unicode characters  
       * Input - LinkedList<a id="question-linkedlist"></a>
          * Doubly or singly linkedlist
       * Input - Tree<a id="question-tree"></a>
@@ -1748,7 +1750,6 @@ public Map<Integer, Set<Integer>> buildGraph( int n, int[][] edges )
   }
 }
 ```
-* **Count number of connected components in an undirected graph** with dfs + discovered set. 
 * **Detect cycles inside undirected graph** with dfs + discovered set. 
 * **Detect cycles inside directed graph** with dfs + visited set + discovered set.
 
@@ -2507,7 +2508,7 @@ class Coor
 }
 ```
 
-##### Breath first search <a id="algo-bfs"></a>
+##### Grid-based breath first search <a id="algo-grid-based-bfs"></a>
 * When the problem asks for the minimum 
 ```java
 public void bfsMainFunction( T[][] grid )
@@ -2558,7 +2559,7 @@ public void bfsMainFunction( T[][] grid )
 * When there are multiple sources/destinations, need to decide whether to start from source/destination according to time complexity analysis
   - Shortest distances to all buildings, walls and gates
   
-##### Depth first search <a id="algo-dfs"></a>
+##### Grid-based depth first search <a id="algo-grid-based-dfs"></a>
 * When the problem requires a complete search and asks for traversal paths (record path in bfs is much more complicated)
 * Grid-based ( e.g. int[][] grid )
 ```java
@@ -2593,6 +2594,35 @@ private void dfs( T[][] grid, int x, int y, boolean[][] discovered )
 }
 
 ```
+
+##### Count number of components <a id="algo-grid-based-count-number-of-components"></a>
+```java
+int numIsland = 0;
+boolean[][] isVisited = new boolean[height][width];
+for ( int i = 0; i < height; i++ )
+{
+  for ( int j = 0; j < width; j++ )
+  {
+    if ( grid[i][j] == '1' && !isVisited[i][j] )
+    {
+      numIsland++;
+      visitIslandBFS/DFS( grid, isVisited, i, j );
+    }
+  }
+}
+```
+
+##### Word-based breath first search <a id="algo-word-based-bfs"></a>
+* Example problem: word ladder
+* Solution 1: Build a graph explicitly and then search for bfs path. 
+  - Use case: When the word list is small
+  - Complexity
+    + Build a graph: O( list.length() * word.length() * list.length() )
+    + Breath first search O( list.length() )
+* Solution 2: Do not build graph explicity, start bfs from current word
+  - Use case: When the character set is small (e.g. only contains lower case alphabetical letters) and word list length is large
+  - Complexity
+    + Breath first search O( list.length() * word.length() * 26 )
 
 ##### Topological sort <a id="algo-topo"></a>
 * There are basically two categories of methods for topological sort. The first one is greedy algorithm with O(|V|^2 + |E|) time complexity. The second is based on depth first search with O(|V| + |E|) time complexity. Here only discusses DFS based approach. 

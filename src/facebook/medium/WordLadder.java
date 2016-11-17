@@ -78,7 +78,7 @@ public class WordLadder
     			for ( int j = 0; j < head.length(); j++ )
     			{
     				char[] word = head.toCharArray();
-    				for ( char ch = 'a'; ch < 'z'; ch++ )
+    				for ( char ch = 'a'; ch <= 'z'; ch++ )
     				{
     					word[j] = ch;
     					String check = new String( word );
