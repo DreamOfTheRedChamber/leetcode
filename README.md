@@ -1193,7 +1193,9 @@ PriorityQueue<NumAndFreq> minQueue = new PriorityQueue<>( ( o1, o2 ) -> ( o1.fre
                      .map( o -> o.getKey() )
                      .collect( Collectors.toList() );
 ```
-
+* The largest Kth element in an array
+  - PriorityQueue O(nlogk)
+  - Quicksort O(n)
 
 #### Tree <a id="ds-tree"></a>
 ##### Build <a id="ds-tree-build"></a>
@@ -1371,7 +1373,6 @@ class SegmentTreeNode
   - Iterative inorder traversal, current node > successor (stack top). Works for BST with no duplication constraints
   - Divide and conquer, pass down value range in children nodes
 * Kth node in a BST
-  - 
 
 * Generic tree preorder/inorder/postorder iterative traversal with O(logn) space. Three types of implementation could be changed with minimal code change.
 ```java
