@@ -5,8 +5,10 @@ import static org.junit.Assert.assertEquals;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Map;
 import java.util.PriorityQueue;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -33,83 +35,36 @@ http://massivealgorithms.blogspot.com/search?q=task+schedule
 
 public class Task
 {
+	
 	@Test
-	public void test()
+	public void testCalc()
 	{
-		assertEquals( 7, calcShortestSchedule( new int[]{ 1, 1, 2, 1 }, 2 ) );
-		assertEquals( 7, calcShortestSchedule( new int[]{ 1, 2, 3, 1, 2, 3 }, 3 ) );
-		assertEquals( 18, calcShortestSchedule( new int[]{ 1, 2, 3 ,4, 5, 6, 2, 4, 6, 1, 2, 4 }, 6 ) );
+		assertEquals( 7, calcShortSchedule( new int[]{ 1, 1, 2, 1 }, 2 ) );
+		assertEquals( 7, calcShortSchedule( new int[]{ 1, 2, 3, 1, 2, 3 }, 3 ) );
+		assertEquals( 18, calcShortSchedule( new int[]{ 1, 2, 3 ,4, 5, 6, 2, 4, 6, 1, 2, 4 }, 6 ) );
 	}
 	
-	public class Element 
+	public int calcShortSchedule( int[] tasks, int recover )
 	{
-		int val;
-	    int appr;
-	    public Element( int value ) 
-	    {
-	            this.val = value;
-	            this.appr = 1;
-	    }
-	}
-	
-	public int calcShortestSchedule( int[] arr, int recover )
-	{
-        HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
-        PriorityQueue<Element> queue = new PriorityQueue<Element>(11, new Comparator<Element>() {
-            public int compare(Element e1, Element e2) {
-                return e2.appr-e1.appr;
-            }
-        });
-        Element[] summary = new Element[10];
-        for (int each : arr) {
-            if (summary[each] == null) {
-                summary[each] = new Element(each);
-            }
-            else summary[each].appr++;
-        }
-        for (Element elem : summary) {
-            if (elem != null)
-                queue.offer(elem);
-        }                      
-        
-        int time = 0;
-        LinkedList<Element> temp = new LinkedList<Element>();
-        while (!queue.isEmpty() || !temp.isEmpty()) {
-            if (!queue.isEmpty()) {
-                Element cur = queue.poll();
-                if (!map.containsKey(cur.val)) {
-                    map.put(cur.val, time+recover+1);
-                    cur.appr--;
-                    if (cur.appr > 0) temp.offer(cur);
-                    while (!temp.isEmpty()) {
-                        queue.offer(temp.poll());
-                    }
-                    time++;
-                }
-                
-                else { //map contains cur.val
-                    if (time >= map.get(cur.val)) { //time is feasible
-                        map.put(cur.val, time+recover+1);
-                        cur.appr--;
-                        if (cur.appr > 0) temp.offer(cur);
-                        while (!temp.isEmpty()) {
-                            queue.offer(temp.poll());
-                        }
-                        time++;
-                    }
-                    else { //time is not feasible
-                        temp.offer(cur);
-                    }
-                }
-            }
-            
-            else { //queue is empty, but temp is not empty
-                while (!temp.isEmpty()) {
-                    queue.offer(temp.poll());
-                }
-                time++;
-            }
-        }
-        return time;
-	}
+		int time = 0;
+		Map<Integer, Integer> taskToNextTime = new HashMap<>();
+		for ( int i = 0; i < tasks.length; i++ )
+		{
+			if ( !taskToNextTime.containsKey( tasks[i] ) )
+			{
+				taskToNextTime.put( tasks[i], time + recover + 1 );
+				time++;
+			}
+			else
+			{
+				while ( taskToNextTime.get( tasks[i] ) > time )
+				{
+					time++;
+				}
+				taskToNextTime.put( tasks[i], time + recover + 1 );
+				time++;
+			}
+		}
+		return time;
+	}	
 }
