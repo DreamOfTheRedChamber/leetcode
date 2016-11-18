@@ -1373,16 +1373,16 @@ class SegmentTreeNode
 * Kth node in a BST
   - 
 
-* Tree iterative traversal with O(logn) space: preorder/inorder/postorder traversal
+* Generic tree preorder/inorder/postorder iterative traversal with O(logn) space. Three types of implementation could be changed with minimal code change.
 ```java
 class Pair
 {
     TreeNode node;
-    int type; // 0 for first time, 1 for second time
-    public Pair( TreeNode node, int type )
+    boolean isFirst; // 0 for first time, 1 for second time
+    public Pair( TreeNode node, boolean isFirst )
     {
         this.node = node;
-        this.type = type;
+        this.isFirst = isFirst;
     }
 }
 
@@ -1392,7 +1392,7 @@ class Pair
 public void treeHighSpaceTraverse( TreeNode root, int order ) 
 {
     Stack<Pair> stack = new Stack<>();
-    stack.push( new Pair( root, 0 ) );
+    stack.push( new Pair( root, true ) );
     while ( !stack.isEmpty() )
     {
         Pair stackTop = stack.pop();
@@ -1400,7 +1400,7 @@ public void treeHighSpaceTraverse( TreeNode root, int order )
         {
             continue;
         }
-        if ( stackTop.type == 1 )
+        if ( !stackTop.isFirst )
         {
             System.out.println(stackTop.node.value);
             continue;
@@ -1408,19 +1408,19 @@ public void treeHighSpaceTraverse( TreeNode root, int order )
         switch ( order )
         {
             case 0:
-                stack.push( new Pair( stackTop.node.rigth, 0 ) );
-                stack.push( new Pair( stackTop.node.left, 0 ) );
-                stack.push( new Pair( stackTop.node, 1 ) );
+                stack.push( new Pair( stackTop.node.right, true ) );
+                stack.push( new Pair( stackTop.node.left, true ) );
+                stack.push( new Pair( stackTop.node, false ) );
                 break;
             case 1:
-                stack.push( new Pair( stackTop.node.rigth, 0 ) );
-                stack.push( new Pair( stackTop.node.left, 0 ) );
-                stack.push( new Pair( stackTop.node, 1 ) );
+                stack.push( new Pair( stackTop.node.right, true ) );
+                stack.push( new Pair( stackTop.node, false ) );
+                stack.push( new Pair( stackTop.node.left, true ) );
                 break;
             case 2:
-                stack.push( new Pair( stackTop.node.rigth, 0 ) );
-                stack.push( new Pair( stackTop.node.left, 0 ) );
-                stack.push( new Pair( stackTop.node, 1 ) );
+                stack.push( new Pair( stackTop.node, false ) );
+                stack.push( new Pair( stackTop.node.right, true ) );
+                stack.push( new Pair( stackTop.node.left, true ) );
                 break;              
         }
     }

@@ -14,44 +14,65 @@ import utility.TreeNode;
  * }
  */
 
+
 public class BSTIterator 
 {
-
-    private Stack<TreeNode> inorderTravStack;
-
+	class Pair
+	{
+		public TreeNode node;
+		public boolean isFirst;
+		public Pair( TreeNode node, boolean isFirst )
+		{
+			this.node = node;
+			this.isFirst = isFirst;
+		}
+	}
+	
+	Stack<Pair> stack = new Stack<>();
+	
     public BSTIterator(TreeNode root) 
     {
-        inorderTravStack = new Stack<>();
-        pushAllPureLeftChildren( inorderTravStack, root );
+    	if ( root != null )
+    	{
+    		stack.push( new Pair( root, true ) );
+    	}
     }
 
     /** @return whether we have a next smallest number */
     public boolean hasNext() 
     {
-        return !inorderTravStack.isEmpty();
+    	return !stack.isEmpty();
     }
 
     /** @return the next smallest number */
     public int next() 
     {
-        TreeNode nextSmallestNode = inorderTravStack.pop();
-        if ( nextSmallestNode.right != null )
-        {
-            pushAllPureLeftChildren( inorderTravStack, nextSmallestNode.right);
-        }
-        return nextSmallestNode.val;
-    }
-    
-    private void pushAllPureLeftChildren( Stack<TreeNode> inorderTravStack, TreeNode root )
-    {
-        TreeNode currNode = root;
-        while ( currNode != null )
-        {
-            inorderTravStack.push( currNode );
-            currNode = currNode.left;
-        }
-    }
-    
+    	int result = 0;
+    	while ( !stack.isEmpty() )
+    	{
+    		Pair top = stack.pop();
+    		if ( top.isFirst )
+    		{
+    			if ( top.node.right != null )
+    			{
+    				stack.push( new Pair( top.node.right, true ) );
+    			}
+    			top.isFirst = false;
+    			stack.push( top );
+    			if ( top.node.left != null )
+    			{
+    				stack.push( new Pair( top.node.left, true ) );
+    			}
+
+    		}
+    		else
+    		{
+    			result = top.node.val;
+    			break;
+    		}
+    	}
+    	return result;
+    }        
 }
 
 /**
