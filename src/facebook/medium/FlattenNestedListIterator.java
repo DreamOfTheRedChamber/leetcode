@@ -26,49 +26,40 @@ By calling next repeatedly until hasNext returns false, the order of elements re
 
 public class FlattenNestedListIterator implements Iterator<Integer> 
 {
-	private Stack<Iterator<NestedInteger>> nestedIter;	
-	private NestedInteger peekedVal;
-	
+	Stack<NestedInteger> stack = new Stack<>();
+		
     public FlattenNestedListIterator( List<NestedInteger> nestedList ) 
     {
-    	if ( nestedList == null )
+    	for ( int i = nestedList.size() - 1; i >= 0; i-- )
     	{
-    		throw new IllegalArgumentException();
+    		stack.push( nestedList.get( i ) );
     	}
-    	
-    	nestedIter = new Stack<>();
-    	nestedIter.push( nestedList.iterator() );
-    	peekedVal = null;
     }
 
     @Override
     public Integer next()
     {
-    	NestedInteger lastPeekedVal = peekedVal;
-    	peekedVal = null;    	
-    	return lastPeekedVal.getInteger();
+    	return stack.pop().getInteger();
     }
 
     @Override
     public boolean hasNext() 
     {
-    	while ( !nestedIter.isEmpty() )
+    	while ( !stack.isEmpty() )
     	{
-	        Iterator<NestedInteger> currIter = nestedIter.pop();
-	    	while ( currIter.hasNext() )
-	    	{
-	    		peekedVal = currIter.next();
-	    		if ( !peekedVal.isInteger() )
-	    		{
-	    			nestedIter.push( currIter );
-	    			currIter = peekedVal.getList().iterator();
-	    		}
-	    		else
-	    		{
-	    			nestedIter.push( currIter );
-	    			return true;
-	    		}
-	    	}
+    		NestedInteger curr = stack.peek();
+    		if ( curr.isInteger() ) 
+    		{
+    			return true;
+    		}
+    		else
+    		{
+    			stack.pop();
+    			for ( int i = curr.getList().size() - 1; i >= 0; i-- )
+    			{
+    				stack.push( curr.getList().get( i ) );
+    			}
+    		}
     	}
     	return false;
     }
