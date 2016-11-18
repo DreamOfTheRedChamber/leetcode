@@ -33,10 +33,12 @@ public class GroupAnagrams
         	{
         		freqMap[ch-'a']++;
         	}
-        	
-        	groupedAnagrams.putIfAbsent( String.valueOf( freqMap ), new ArrayList<>() );
-        	groupedAnagrams.get( String.valueOf( freqMap ) ).add( str );
+        	String anagramKey = String.valueOf( freqMap );
+        	groupedAnagrams.putIfAbsent( anagramKey, new ArrayList<>() );
+        	groupedAnagrams.get( anagramKey ).add( str );
         }
         return groupedAnagrams.values( ).stream( ).collect( Collectors.toList( ) );
     }
+    
+    
 }

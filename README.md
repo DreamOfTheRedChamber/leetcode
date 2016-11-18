@@ -1577,7 +1577,7 @@ map.putIfAbsent( key, new ArrayList<>() );
 ##### Anagram <a id="ds-hashmap-anagram"></a>
 * Given an array of string, group it into anagrams (the number of strings is m, the number of chars in a string is n). The key of the problem is how to identify anagrams:
   - Use sorted string as key, T.C. O(mnlogn), S.C. O(mn)
-  - Use histogram of string as key (like counting sort) T.C. O(mn), S.C. O(mn)
+  - If the charset is not too big (like lowercase/uppercase letters), use histogram of string as key (like counting sort) T.C. O(mn), S.C. O(mn)
 ```java
 private final static int CHARSET_SIZE = 26;
 public List<List<String>> groupAnagrams( String[] strs )
