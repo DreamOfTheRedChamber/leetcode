@@ -3,6 +3,8 @@ package facebook.hard;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.junit.Test;
+
 /**
 Given a string that contains only digits 0-9 and a target value, return all possibilities to add binary operators (not unary) +, -, or * between the digits so they evaluate to the target value.
 
@@ -15,6 +17,15 @@ Examples:
  */
 public class ExpressionAddOperators
 {
+	@Test
+	public void test()
+	{
+		System.out.println( addOperators( "123", 6 ) );
+		System.out.println( addOperators( "232", 8 ) );
+		System.out.println( addOperators( "105", 5 ) );
+		System.out.println( addOperators( "00", 0 ));
+	}
+	
     public List<String> addOperators( String num, int target )
     {
     	List<String> result = new LinkedList<>();
@@ -39,16 +50,16 @@ public class ExpressionAddOperators
     		}
     		long num = Long.parseLong( numStr );
     		String remainedStr = toBeParsed.substring( i );
-    		if ( ! "".equals( dfsPath ) )
+    		if ( dfsPath.length() > 0 )
     		{
     			addOperators( remainedStr, target, result, currSum + num, currSum, dfsPath + "+" + numStr );
     			addOperators( remainedStr, target, result, currSum - num, currSum, dfsPath + "-" + numStr );
-    			addOperators( remainedStr, target, result, ( currSum - prevSum ) * num + prevSum, currSum, dfsPath + "*" + numStr );
+    			addOperators( remainedStr, target, result, ( currSum - prevSum ) * num + prevSum, prevSum, dfsPath + "*" + numStr );
     		}
     		else
     		{
     			addOperators( remainedStr, target, result, currSum + num, currSum, numStr );
     		}
     	}    	
-    }
+    }       
 }
