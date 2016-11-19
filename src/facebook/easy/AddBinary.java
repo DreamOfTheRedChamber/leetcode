@@ -17,12 +17,7 @@ public class AddBinary
     	{
     		throw new IllegalArgumentException();
     	}
-    	
-    	if ( a.length() < b.length() )
-    	{
-    		return addBinary( b, a );
-    	}
-    	
+    	    	
     	StringBuilder result = new StringBuilder();
     	
     	int carry = 0;
