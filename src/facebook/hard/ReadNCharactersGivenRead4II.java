@@ -37,10 +37,10 @@ public class ReadNCharactersGivenRead4II  extends Reader4
 		while ( totalNumRead < n )
 		{
 			int readNum = read4( buf4 );
-			int writeNum = n - totalNumRead;
+			int remainingNum = n - totalNumRead;
 			for ( int i = 0; i < readNum; i++ )
 			{
-				if ( i < writeNum )
+				if ( i < remainingNum )
 				{
 					buf[totalNumRead++] = buf4[i];
 				}
