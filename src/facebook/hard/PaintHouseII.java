@@ -18,44 +18,37 @@ public class PaintHouseII
 {
     public int minCostII( int[][] costs )
     {
+    	if ( costs.length == 0 || costs[0].length == 0 )
+    	{
+    		return 0;
+    	}
     	int numHouse = costs.length;
     	int numColor = costs[0].length;
     	
-    	int[] minCost = new int[numColor];
-    	int min1 = 0;
-    	int min2 = 0;
-    	
+    	int prevMin = 0, prevSecondMin = 0, prevMinIndex = 0;
     	for ( int i = 0; i < numHouse; i++ )
     	{
-    		int oldMin1 = min1;
-    		int oldMin2 = min2;
-    		
-    		min1 = Integer.MAX_VALUE;
-    		min2 = Integer.MAX_VALUE;
-    		
+    		int currMin = Integer.MAX_VALUE;
+    		int currMinIndex = 0;
+    		int currSecondMin = Integer.MAX_VALUE;
     		for ( int j = 0; j < numColor; j++ )
     		{
-    			if ( minCost[j] != oldMin1 || oldMin1 == oldMin2 )
+    			int cost = costs[i][j] + ( prevMinIndex != j ? prevMin : prevSecondMin );
+    			if ( cost < currMin )
     			{
-    				minCost[j] = oldMin1 + costs[i][j];
+    				currSecondMin = currMin;
+    				currMin = cost;
+    				currMinIndex = j;
     			}
     			else
     			{
-    				minCost[j] = oldMin2 + costs[i][j];
-    			}
-    			
-    			if ( min1 <= minCost[j] )
-    			{
-    				min2 = Math.min( min2, minCost[j] );
-    			}
-    			else
-    			{
-    				min2 = min1;
-    				min1 = minCost[j];
+    				currSecondMin = Math.min( currSecondMin, cost );
     			}
     		}
+    		prevMin = currMin;
+    		prevSecondMin = currSecondMin;
+    		prevMinIndex = currMinIndex;
     	}
-    	
-    	return min1;    	
+    	return prevMin;
     }
 }
