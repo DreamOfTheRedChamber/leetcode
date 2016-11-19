@@ -32,15 +32,16 @@ public class DecodeWays
     		return 1;
     	}
     	
-    	int[] numWays = new int[s.length() + 1];
+    	int[] numWays = new int[3];
     	numWays[0] = 1;
     	numWays[1] = s.charAt( 0 ) == '0' ? 0 : 1;
     	for ( int i = 2; i <= s.length(); i++ )
     	{
+    		numWays[i % 3] = 0;
     		int oneDigitNum = s.charAt( i - 1 ) - '0';
     		if ( oneDigitNum > 0 )
     		{
-    			numWays[i] = numWays[(i - 1)];
+    			numWays[i % 3] += numWays[(i - 1) % 3];
     		}
     		
     		int twoDigitNum = s.charAt( i - 2 ) - '0';
@@ -49,11 +50,11 @@ public class DecodeWays
     			int value = twoDigitNum * 10 + oneDigitNum;
     			if ( value >= 1 && value <= 26 )
     			{
-    				numWays[i] += numWays[(i - 2)];
+    				numWays[i % 3] += numWays[(i - 2) % 3];
     			}
     		}
     	}
-    	return numWays[s.length()];
+    	return numWays[s.length() % 3];
     }
 
     @Test
