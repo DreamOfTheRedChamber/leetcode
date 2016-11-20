@@ -10,6 +10,8 @@ For example,
 add(1); add(3); add(5);
 find(4) -> true
 find(7) -> false
+
+https://discuss.leetcode.com/topic/32449/trade-off-in-this-problem-should-be-considered/3
  * */
 
 import java.util.HashMap;
@@ -17,35 +19,26 @@ import java.util.Map;
 
 public class TwoSumIII 
 {
-	private Map<Integer, Integer> numToFreqMap = new HashMap<>();
+	private Map<Integer, Integer> histogram = new HashMap<>();
 	
     // Add the number to an internal data structure.
 	public void add( int number )
 	{
-		numToFreqMap.put( number, numToFreqMap.getOrDefault( number, 1 )  );
+		histogram.put( number, 1 + histogram.getOrDefault( number, 0 )  );
 	}
 
     // Find if there exists any pair of numbers which sum is equal to the value.
 	public boolean find( int value ) 
 	{
-		for ( Map.Entry<Integer, Integer> entry : numToFreqMap.entrySet() )
-		{
-			int key = entry.getKey();
-			int freq = entry.getValue();
-			
-			if ( ( value == key + key )
-				&& ( freq > 1 ) ) 
+		for ( int numOne : histogram.keySet() )
+		{			
+			int numTwo = value - numOne;
+			if ( numOne == numTwo && histogram.get( numOne ) > 1 
+					|| numOne != numTwo && histogram.containsKey( numTwo ) ) 				
 			{
 				return true;
 			}
-			
-			if ( numToFreqMap.containsKey( value - key ) )
-			{
-				return true;
-			}			
-			
-		}
-		
+		}		
 		return false;
 	}
 }
