@@ -34,15 +34,11 @@ public class LowestCommonAncestorOfBinaryTree
     {
     	if ( root == null )
     	{
-    		throw new IllegalArgumentException();
+    		return root;
     	}
-    	if ( p == null )
+    	if ( p == null || q == null )
     	{
-    		return q;
-    	}
-    	if ( q == null )
-    	{
-    		return p;
+    		return p == null ? q : p;
     	}
     	
     	ResultWrapper result = lcaRecurse( root, p, q );
