@@ -23,12 +23,11 @@ public class WordBreak
     {
     	boolean[] canBreak = new boolean[s.length( )+1]; // whether first i characters can be broken
     	canBreak[0] = true;
-    	int maxLength = getMaxLength( wordDict );
     	for ( int i = 1; i <= s.length() ; i++ )
     	{    		    		
-    		for ( int lastWordLength = 1; lastWordLength <= i && lastWordLength <= maxLength; lastWordLength++ )
+    		for ( int lastWordLength = 1; lastWordLength <= i; lastWordLength++ )
     		{
-    			if ( canBreak[i-lastWordLength] 
+    			if ( canBreak[i - lastWordLength] 
     				&& wordDict.contains( s.substring( i - lastWordLength, i ) ) )
     			{
     				canBreak[i] = true;
@@ -37,16 +36,6 @@ public class WordBreak
     		}
     	}    	
     	return canBreak[s.length( )];
-    }
-    
-    private int getMaxLength( Set<String> dict )
-    {
-    	int maxLength = 0;
-    	for ( String word : dict )
-    	{
-    		maxLength = Math.max( maxLength, word.length() );
-    	}
-    	return maxLength;
     }
     
     @Test
