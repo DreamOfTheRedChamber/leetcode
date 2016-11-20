@@ -19,31 +19,25 @@ public class MultiplyStrings
     	}
     	
     	int[] buffer = new int[num1.length() + num2.length()];
-    	int carry = 0, product = 0, i, j;
-    	for ( i = num1.length() - 1; i >= 0; i-- )
+    	for ( int i = num1.length() - 1; i >= 0; i-- )
     	{
-    		carry = 0;
-    		for ( j = num2.length() - 1; j >= 0; j-- )
+    		for ( int j = num2.length() - 1; j >= 0; j-- )
     		{
-    			product = carry + buffer[ i + j + 1 ] + Character.getNumericValue( num1.charAt( i ) ) * Character.getNumericValue( num2.charAt( j ) );
-    			buffer[ i + j + 1 ] = product % 10;
-    			carry = product / 10;
+    			int product = ( num1.charAt( i ) - '0' ) * ( num2.charAt( j ) - '0' );
+    			int sum = product + buffer[i + j + 1];
+    			buffer[ i + j + 1 ] = sum % 10;
+    			buffer[ i + j ] += sum / 10;
     		}
-    		buffer[ i + j + 1 ] = carry;
     	}
     	
     	StringBuilder result = new StringBuilder();
-    	i = 0;
-    	while ( i < num1.length() + num2.length() )
+    	for ( int digit : buffer )
     	{
-    		i++;
+    		if ( !( result.length() == 0 && digit == 0 ) )
+    		{
+    			result.append( digit );
+    		}
     	}
-    	
-    	while ( i < num1.length() + num2.length() )
-    	{
-    		result.append( buffer[ i++ ] );
-    	}
-    	
-    	return result.toString();
+    	return result.length() == 0 ? "0" : result.toString();
     }
 }
