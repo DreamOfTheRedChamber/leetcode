@@ -44,8 +44,8 @@ public class ValidBinarySearchTree
     	{
     		return true;
     	}
-    	else if ( root.val < lowerBound
-    			|| root.val > upperBound )
+    	else if ( root.val <= lowerBound
+    			|| root.val >= upperBound )
     	{
     		return false;
     	}
