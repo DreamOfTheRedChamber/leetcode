@@ -24,42 +24,58 @@ Given the list [1,[4,[6]]],
 By calling next repeatedly until hasNext returns false, the order of elements returned by next should be: [1,4,6].
  * */
 
+// [],[[]],[]
+// 
+
 public class FlattenNestedListIterator implements Iterator<Integer> 
 {
-	Stack<NestedInteger> stack = new Stack<>();
-		
+	private Stack<Iterator<NestedInteger>> stack;	
+	private Integer nextInteger;
+	
     public FlattenNestedListIterator( List<NestedInteger> nestedList ) 
     {
-    	for ( int i = nestedList.size() - 1; i >= 0; i-- )
+    	if ( nestedList == null )
     	{
-    		stack.push( nestedList.get( i ) );
+    		throw new IllegalArgumentException();
     	}
+    	
+    	stack = new Stack<>();
+    	stack.push( nestedList.iterator() );
+    	nextInteger = null;
     }
 
     @Override
     public Integer next()
     {
-    	return stack.pop().getInteger();
+    	Integer result = nextInteger;
+    	nextInteger = null;
+    	return result;
     }
 
     @Override
     public boolean hasNext() 
     {
+    	if ( nextInteger != null )
+    	{
+    		return true;
+    	}
+    	
     	while ( !stack.isEmpty() )
     	{
-    		NestedInteger curr = stack.peek();
-    		if ( curr.isInteger() ) 
-    		{
-    			return true;
-    		}
-    		else
-    		{
-    			stack.pop();
-    			for ( int i = curr.getList().size() - 1; i >= 0; i-- )
-    			{
-    				stack.push( curr.getList().get( i ) );
-    			}
-    		}
+	        Iterator<NestedInteger> currIter = stack.peek();
+	    	if ( currIter.hasNext() )
+	    	{
+	    		NestedInteger nextNested = currIter.next();
+	    		if ( nextNested.isInteger() )
+	    		{
+	    			nextInteger = nextNested.getInteger();
+	    			return true;
+	    		}
+	    		else
+	    		{
+	    			stack.push( nextNested.getList().iterator() );
+	    		}
+	    	}
     	}
     	return false;
     }
