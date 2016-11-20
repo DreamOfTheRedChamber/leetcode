@@ -30,7 +30,7 @@ public class MinimumSizeSubarraySum
     	
     	int right = 0;
     	int windSum = 0;
-    	int minLength = Integer.MAX_VALUE;
+    	Integer minLength = null;
     	for ( int left = 0; left < nums.length; windSum -= nums[left], left++  )
     	{
     		while ( right < nums.length && windSum < s )
@@ -41,7 +41,7 @@ public class MinimumSizeSubarraySum
     		
     		if ( windSum >= s )
     		{
-    			minLength = Math.min( minLength, right - left );    			
+    			minLength = minLength == null ? right - left : Math.min( minLength, right - left );    			
     		}
     		else
     		{
@@ -49,7 +49,7 @@ public class MinimumSizeSubarraySum
     		}
     	}
     	
-    	if ( minLength == Integer.MAX_VALUE )
+    	if ( minLength == null )
     	{
     		return 0;
     	}
