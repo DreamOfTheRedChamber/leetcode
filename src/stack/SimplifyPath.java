@@ -2,9 +2,8 @@ package stack;
 
 import static org.junit.Assert.assertEquals;
 
-import java.util.Stack;
+import java.util.LinkedList;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 /*
@@ -19,69 +18,60 @@ public class SimplifyPath
 {
     public String simplifyPath( String path )
     {
-    	// whether the path always starts with '/'
     	String[] tokens = path.split( "/" );
-    	Stack<String> tokenStack = new Stack<>();
+    	LinkedList<String> simplified = new LinkedList<>();
 
-    	// remove .. and .
     	for ( String token : tokens )
     	{
     		if ( token.equals( "." )
-    				|| token.equals( "" ) ) // handle "//" case
+    				|| token.equals( "" ) ) 
     		{
     			continue;
     		}
     		else if ( token.equals( ".." ) )
     		{
-    			if ( !tokenStack.isEmpty() )
+    			if ( !simplified.isEmpty() )
     			{
-    				tokenStack.pop( );
+    				simplified.removeLast( );
     			}
     		}
     		else
     		{
-    			tokenStack.push( token );
+    			simplified.addLast( token );
     		}
     	}
     	
-    	// reconstruct path
-    	StringBuilder simplifiedPath = new StringBuilder();
-    	if ( tokenStack.isEmpty() )
+    	if ( simplified.isEmpty() )
     	{
-    		simplifiedPath.append( "/" );
+    		return "/";
     	}
     	else
     	{
-		    while( !tokenStack.isEmpty( ) )
+        	StringBuilder result = new StringBuilder();
+		    for ( String token : simplified )
 		    {
-		    	String token = tokenStack.pop();
-		       	simplifiedPath.insert( 0, token );
-		    	simplifiedPath.insert( 0, "/" );
+		       	result.append( "/" + token );
 		    }
+	    	return result.toString( );
     	}
-    	return simplifiedPath.toString( );
     }
-    
+        
     @Test
-    public void test2()
+    public void testEdgeCase()
     {
-    	//assertEquals( "/", simplifyPath( "/.." ) );
-    	assertEquals( "/...", simplifyPath( "/..." ) );
-    }
-    
-    @Ignore
-    @Test
-    public void test()
-    {
-    	assertEquals( "", simplifyPath( "/home/../../.." ) );
-
+    	// multi ..
+    	assertEquals( "/", simplifyPath( "/home/../../.." ) );
+    	// single /
     	assertEquals( "/", simplifyPath( "/" ) );
-    	assertEquals( "/", simplifyPath( "/." ) );
-    	assertEquals( "/", simplifyPath( "/.." ) );
-    	
-    	assertEquals( "", simplifyPath( "/../" ) );
-    	assertEquals( "/c", simplifyPath( "/a/./b/../../c/" ) );
-    	
+    	// double //
     	assertEquals( "/home/foo", simplifyPath( "/home//foo/" ) );
+    	// empty split
+    	assertEquals( "/", simplifyPath( "/../" ) );
+    }
+    
+    @Test
+    public void testNormalCase()
+    {
+    	assertEquals( "/c", simplifyPath( "/a/./b/../../c/" ) );    	
     }
 }
