@@ -2,9 +2,8 @@ package facebook.medium;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Stack;
-
-import org.junit.Test;
 
 import utility.NestedInteger;
 
@@ -29,54 +28,41 @@ By calling next repeatedly until hasNext returns false, the order of elements re
 
 public class FlattenNestedListIterator implements Iterator<Integer> 
 {
-	private Stack<Iterator<NestedInteger>> stack;	
-	private Integer nextInteger;
+	Stack<NestedInteger> stack = new Stack<>();
 	
     public FlattenNestedListIterator( List<NestedInteger> nestedList ) 
     {
-    	if ( nestedList == null )
-    	{
-    		throw new IllegalArgumentException();
-    	}
-    	
-    	stack = new Stack<>();
-    	stack.push( nestedList.iterator() );
-    	nextInteger = null;
+    	pushReversely( nestedList.listIterator(), stack );
     }
 
     @Override
     public Integer next()
     {
-    	Integer result = nextInteger;
-    	nextInteger = null;
-    	return result;
+    	return stack.pop().getInteger();
     }
 
     @Override
     public boolean hasNext() 
     {
-    	if ( nextInteger != null )
-    	{
-    		return true;
-    	}
-    	
     	while ( !stack.isEmpty() )
     	{
-	        Iterator<NestedInteger> currIter = stack.peek();
-	    	if ( currIter.hasNext() )
-	    	{
-	    		NestedInteger nextNested = currIter.next();
-	    		if ( nextNested.isInteger() )
-	    		{
-	    			nextInteger = nextNested.getInteger();
-	    			return true;
-	    		}
-	    		else
-	    		{
-	    			stack.push( nextNested.getList().iterator() );
-	    		}
-	    	}
+    		if ( stack.peek().isInteger() ) 
+    		{
+    			return true;
+    		}
+    		else
+    		{
+    			pushReversely( stack.pop().getList().listIterator(), stack );
+    		}
     	}
     	return false;
+    }
+    
+    private void pushReversely( ListIterator<NestedInteger> iterator, Stack<NestedInteger> stack )
+    {
+    	while ( iterator.hasPrevious() )
+    	{
+    		stack.push( iterator.previous() );
+    	}
     }
 }
