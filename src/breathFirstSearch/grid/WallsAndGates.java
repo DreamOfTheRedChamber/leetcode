@@ -43,7 +43,7 @@ public class WallsAndGates
     			|| rooms.length == 0 
     			|| rooms[0].length == 0 )
     	{
-    		throw new IllegalArgumentException();
+    		return;
     	}
     	
     	int height = rooms.length;
@@ -69,14 +69,16 @@ public class WallsAndGates
     		Coor qHead = bfsQueue.poll();
     		for ( int[] direction : directions )
     		{
-    			int neighborXCoor = qHead.xCoor + direction[0];
-    			int neighborYCoor = qHead.yCoor + direction[1];
-    			if ( neighborXCoor < height 
-    					&& neighborYCoor < width
-    					&& rooms[neighborXCoor][neighborYCoor] == Integer.MAX_VALUE )
+    			int nextX = qHead.xCoor + direction[0];
+    			int nextY = qHead.yCoor + direction[1];
+    			if ( nextX >= 0 
+    					&& nextY >= 0
+    					&& nextX < height 
+    					&& nextY < width
+    					&& rooms[nextX][nextY] == Integer.MAX_VALUE )
     			{
-    				rooms[neighborXCoor][neighborYCoor] = rooms[qHead.xCoor][qHead.yCoor] + 1;
-    				bfsQueue.offer( new Coor( neighborXCoor, neighborYCoor ) );
+    				rooms[nextX][nextY] = rooms[qHead.xCoor][qHead.yCoor] + 1;
+    				bfsQueue.offer( new Coor( nextX, nextY ) );
     			}
     		}
     	}    	
