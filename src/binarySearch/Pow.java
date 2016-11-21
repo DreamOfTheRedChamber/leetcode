@@ -38,7 +38,7 @@ public class Pow
     	boolean isNeg = ( x < 0 ) && ( Math.abs( n ) % 2 != 0 );
     	x = Math.abs( x );
     	    	
-    	return isNeg ? -1 * myPowRecurse( x, n ) : myPowRecurse( x, n );
+    	return ( isNeg ? -1 : 1 ) * myPowRecurse( x, n );
     }
     
     private double myPowRecurse( double x, int n )
