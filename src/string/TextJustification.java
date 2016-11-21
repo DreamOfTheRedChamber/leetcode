@@ -59,53 +59,55 @@ public class TextJustification
 	private void evenlyDisperse( List<String> result, String[] words, int startPos, int numWords, int maxWidth )
 	{
  	   int numSpaces = maxWidth;
- 	   for ( int currPos = startPos; currPos < startPos + numWords; currPos++ )
+ 	   for ( int i = 0; i < numWords; i++ )
  	   {
- 		   numSpaces -= words[currPos].length();
- 	   }    	   
- 	   int averageSpaces = numSpaces / ( numWords - 1 );
- 	   int additionSpaces = numSpaces % ( numWords - 1 );
+ 		   numSpaces -= words[i + startPos].length();
+ 	   }
+ 	   int average = numSpaces / ( numWords - 1 );
+ 	   int residual = numSpaces % ( numWords - 1 );
  	       	   
  	   StringBuilder currLine = new StringBuilder();
- 	   for ( int currPos = startPos; currPos < startPos + numWords; currPos++ )
+ 	   for ( int i = 0; i < numWords - 1; i++ )
  	   {
- 		   // append word
- 		   currLine.append( words[currPos] );
+ 		   currLine.append( words[startPos + i] );
  		   
- 		   if ( currPos != startPos + numWords - 1 )
+ 		   for ( int j = 0; j < average; j++ )
  		   {
-	    		   // append space
-	    		   for ( int i = 0; i < averageSpaces; i++ )
-	    		   {
-	    			   currLine.append(' ');
-	    		   }
-	    		   
-	    		   // append additional space
-	    		   if ( additionSpaces > 0 )
-	    		   {
-	    			   currLine.append(' ');
-	    			   additionSpaces--;
-	    		   }
- 		   }    		   
+ 			   currLine.append(' ');
+ 		   }	    		   
+ 		   if ( residual > 0 )
+ 		   {
+ 			   currLine.append(' ');
+ 			   residual--;
+ 		   }
  	   }
- 	   // build this line
+ 	   currLine.append( words[startPos + numWords - 1] );
  	   result.add( currLine.toString() );
-
+	}
+	
+	private int calcNumWords( int startPos, String[] words, int maxWidth )
+	{
+		int numWords = 0;
+		int lineLength = 0;
+		while ( startPos + numWords < words.length && words[startPos + numWords].length() + lineLength <= maxWidth )
+		{
+			lineLength += words[startPos + numWords].length();
+			lineLength += 1;
+			numWords++;
+		}
+		return numWords;
 	}
 	
     public List<String> fullJustify( String[] words, int maxWidth )
     {
        List<String> result = new ArrayList<>();
-       int endPos = 0;
-       while ( endPos < words.length )
-       {
+       
+       for ( int endPos = 0; endPos < words.length; )
+       {    	       	   
     	   // calculate num of words in this line
     	   int startPos = endPos;
-    	   for ( int usedCharNum = 0; endPos < words.length && usedCharNum + words[endPos].length() <= maxWidth; usedCharNum++, endPos++ ) // usedCharNum++ is used for white spaces
-    	   {
-    		   usedCharNum += words[endPos].length();
-    	   }
-    	   int numWords = endPos - startPos;
+    	   int numWords = calcNumWords( endPos, words, maxWidth );
+    	   endPos += numWords;
 
     	   // handle edge case: single word a line or last line
     	   if ( numWords == 1 
