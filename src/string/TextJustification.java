@@ -36,9 +36,66 @@ public class TextJustification
 		System.out.println( fullJustify( new String[]{ "What", "must", "be", "shall", "be" }, 12 ) );
 	}
 	
+	private void leftAlign( List<String> result, String[] words, int startPos, int numWords, int maxWidth )
+	{
+		StringBuilder currLine = new StringBuilder();
+		for ( int i = 0; i < numWords; i++ )
+		{
+			currLine.append( words[startPos + i] );
+			currLine.append( ' ' );
+		}
+		if ( currLine.length() > maxWidth )
+		{
+			currLine.deleteCharAt( currLine.length() - 1 );
+		}
+		
+		for ( int i = 0; i < maxWidth - currLine.length(); i++ )
+		{
+			currLine.append( ' ' );
+		}
+		result.add( currLine.toString() );
+	}
+	
+	private void evenlyDisperse( List<String> result, String[] words, int startPos, int numWords, int maxWidth )
+	{
+ 	   int numSpaces = maxWidth;
+ 	   for ( int currPos = startPos; currPos < startPos + numWords; currPos++ )
+ 	   {
+ 		   numSpaces -= words[currPos].length();
+ 	   }    	   
+ 	   int averageSpaces = numSpaces / ( numWords - 1 );
+ 	   int additionSpaces = numSpaces % ( numWords - 1 );
+ 	       	   
+ 	   StringBuilder currLine = new StringBuilder();
+ 	   for ( int currPos = startPos; currPos < startPos + numWords; currPos++ )
+ 	   {
+ 		   // append word
+ 		   currLine.append( words[currPos] );
+ 		   
+ 		   if ( currPos != startPos + numWords - 1 )
+ 		   {
+	    		   // append space
+	    		   for ( int i = 0; i < averageSpaces; i++ )
+	    		   {
+	    			   currLine.append(' ');
+	    		   }
+	    		   
+	    		   // append additional space
+	    		   if ( additionSpaces > 0 )
+	    		   {
+	    			   currLine.append(' ');
+	    			   additionSpaces--;
+	    		   }
+ 		   }    		   
+ 	   }
+ 	   // build this line
+ 	   result.add( currLine.toString() );
+
+	}
+	
     public List<String> fullJustify( String[] words, int maxWidth )
     {
-       List<String> justifiedLines = new ArrayList<>();
+       List<String> result = new ArrayList<>();
        int endPos = 0;
        while ( endPos < words.length )
        {
@@ -54,58 +111,14 @@ public class TextJustification
     	   if ( numWords == 1 
     			   || endPos == words.length )
     	   {
-    		   StringBuilder currLine = new StringBuilder();
-    		   currLine.append( words[startPos] );
-    		   for ( int i = startPos + 1; i < endPos; i++ )
-    		   {
-    			   currLine.append( ' ' );
-    			   currLine.append( words[i] );
-    		   }
-    		   int numSpaces = maxWidth - currLine.length();
-    		   for ( int i = 0; i < numSpaces; i++ )
-    		   {
-    			   currLine.append( ' ' );
-    		   }
-    		   justifiedLines.add( currLine.toString() );
+    		   leftAlign( result, words, startPos, numWords, maxWidth );
     	   }
     	   else
     	   {
-	    	   // calculate how to disperse space
-	    	   int numSpaces = maxWidth;
-	    	   for ( int currPos = startPos; currPos < endPos; currPos++ )
-	    	   {
-	    		   numSpaces -= words[currPos].length();
-	    	   }    	   
-	    	   int averageSpaces = numSpaces / ( numWords - 1 );
-	    	   int additionSpaces = numSpaces % ( numWords - 1 );
-	    	       	   
-	    	   StringBuilder currLine = new StringBuilder();
-	    	   for ( int currPos = startPos; currPos < endPos; currPos++ )
-	    	   {
-	    		   // append word
-	    		   currLine.append( words[currPos] );
-	    		   
-	    		   if ( currPos != endPos - 1 )
-	    		   {
-		    		   // append space
-		    		   for ( int i = 0; i < averageSpaces; i++ )
-		    		   {
-		    			   currLine.append(' ');
-		    		   }
-		    		   
-		    		   // append additional space
-		    		   if ( additionSpaces > 0 )
-		    		   {
-		    			   currLine.append(' ');
-		    			   additionSpaces--;
-		    		   }
-	    		   }    		   
-	    	   }
-	    	   // build this line
-	    	   justifiedLines.add( currLine.toString() );
+    		   evenlyDisperse( result, words, startPos, numWords, maxWidth );
     	   }
        }
        
-       return justifiedLines;
+       return result;
     }
 }
