@@ -1,5 +1,10 @@
 package facebook.medium;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
+import org.junit.Test;
+
 /*
 Given an unsorted array return whether an increasing subsequence of length 3 exists or not in the array.
 
@@ -24,24 +29,31 @@ public class IncreasingTripleetSubsequence
         {
         	return false;
         }
-        
-        int one = nums[0];
-        int two = Integer.MAX_VALUE;
-        for ( int i = 1; i < nums.length; i++ )
+
+        int secondSmallest = Integer.MAX_VALUE;
+        int smallest = Integer.MAX_VALUE;
+        for ( int i = 0; i < nums.length; i++ )
         {
-        	if ( nums[i] > two )
+        	if ( nums[i] > secondSmallest )
         	{
         		return true;
         	}
-        	else if ( nums[i] > one && nums[i] < two )
+        	else if ( nums[i] <= smallest )
         	{
-        		two = nums[i];
+        		smallest = nums[i];
         	}
-        	else if ( nums[i] < one )
+        	else
         	{
-        		one = nums[i];
-        	}
+        		secondSmallest = nums[i];
+        	}        	
         }
         return false;
+    }
+    
+    @Test
+    public void test()
+    {
+    	assertTrue( increasingTriplet( new int[]{ 1, 4, 3, 2, 5 } ) );
+    	assertFalse( increasingTriplet( new int[]{ 1, 1, -2, 6 } ) ); // smallest, second smallest must be different
     }
 }
