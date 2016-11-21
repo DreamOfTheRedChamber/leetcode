@@ -27,36 +27,37 @@ public class LongestConsecutiveSequence
     		return 0;
     	}    	
     	
-    	Set<Integer> existingNums = new HashSet<>();
+    	Set<Integer> numSet = new HashSet<>();
     	for ( int num : nums )
     	{
-    		existingNums.add( num );
+    		numSet.add( num );
     	}
     	
-    	int longestConsecSeq = 0;
+    	int longestLength = 0;
     	for ( int num : nums )
     	{
-    		if ( existingNums.contains( num ) )
+    		if ( !numSet.contains( num ) )
     		{
-    			existingNums.remove( num );
-	    		int currConsecSeq = 1;    	
-	    		
-	    		for ( int nextBigger = num + 1; existingNums.contains( nextBigger ); nextBigger += 1 )
-	    		{
-	    			currConsecSeq++;
-	    			existingNums.remove( nextBigger );
-	    			nextBigger += 1;
-	    		}	    			    		
-	    		for ( int nextSmaller = num - 1; existingNums.contains( nextSmaller ); nextSmaller -= 1 )
-	    		{
-	    			currConsecSeq++;
-	    			existingNums.remove( nextSmaller );	    			
-	    		}
-	    		
-	    		longestConsecSeq = Math.max( longestConsecSeq, currConsecSeq );
+    			continue;
     		}
+    		
+    		numSet.remove( num );
+	    	int currLength = 1;    	
+	    		
+	    	for ( int nextBigger = num + 1; numSet.contains( nextBigger ); nextBigger += 1 )
+	    	{
+	    		currLength++;
+	    		numSet.remove( nextBigger );
+	    	}	    			    		
+	    	for ( int nextSmaller = num - 1; numSet.contains( nextSmaller ); nextSmaller -= 1 )
+	    	{
+	    		currLength++;
+	    		numSet.remove( nextSmaller );	    			
+	    	}
+	    		
+	    	longestLength = Math.max( longestLength, currLength );
     	}
-    	return longestConsecSeq;
+    	return longestLength;
      }
     
     @Test
