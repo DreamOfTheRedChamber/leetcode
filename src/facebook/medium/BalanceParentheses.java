@@ -97,21 +97,22 @@ public class BalanceParentheses
 		int numOpen = 0;
 		for ( int i = 0; i < input.length(); i++ )
 		{
-			if ( input.charAt( i ) != ')' )
-			{
-				result.append( input.charAt( i ) );
-				if ( input.charAt( i ) == '(' )
-				{
-					numOpen++;
-				}
-			}
-			else
+			if ( input.charAt( i ) == ')' )
 			{
 				if ( numOpen > 0 )
 				{
 					result.append( input.charAt( i ) );
 					numOpen--;
 				}
+			}
+			else if ( input.charAt( i ) == '(' )
+			{
+				result.append( input.charAt( i ) );
+				numOpen++;
+			}
+			else
+			{
+				result.append( input.charAt( i ) );
 			}
 		}
 		return result;
