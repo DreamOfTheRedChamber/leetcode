@@ -1,6 +1,8 @@
 package depthFirstSearch;
 
+import java.util.Iterator;
 import java.util.List;
+import java.util.Stack;
 
 import utility.NestedInteger;
 
@@ -40,5 +42,35 @@ public class NestedListWeightSum
     	return totalSum;
     }
     
+    public int depthSumIterative( List<NestedInteger> nestedList )
+    {
+    	Stack<Iterator<NestedInteger>> stackIter = new Stack<>();
+    	Stack<Integer> stackDepth = new Stack<>();
+    	stackIter.push( nestedList.iterator() );
+    	stackDepth.push( 1 );
+    	int totalSum = 0;
+    	while ( !stackIter.isEmpty() )
+    	{
+    		Iterator<NestedInteger> iterator = stackIter.pop();
+    		int depth = stackDepth.pop();
+    		while ( iterator.hasNext() )
+    		{
+    			NestedInteger next = iterator.next();
+    			if ( next.isInteger() )
+    			{
+    				totalSum += depth * next.getInteger();
+    			}
+    			else
+    			{
+    				stackDepth.push( depth );
+    				stackIter.push( iterator );
+    				stackDepth.push( depth + 1 );
+    				stackIter.push( next.getList().iterator() );
+    				break;
+    			}
+    		}
+    	}
+    	return totalSum;    	
+    }
     
 }
