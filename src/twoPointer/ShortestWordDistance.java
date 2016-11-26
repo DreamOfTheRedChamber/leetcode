@@ -18,32 +18,28 @@ public class ShortestWordDistance
     public int shortestDistance( String[] words, String word1, String word2 )
     {    	
     	int minDistance = Integer.MAX_VALUE;
-    	int word1Pos = findNextAppear( words, word1, 0 );
-    	int word2Pos = findNextAppear( words, word2, 0 );
-    	while ( word1Pos < words.length && word2Pos < words.length )
+    	int word1Pos = -1;
+    	int word2Pos = -1;
+    	for ( int i = 0; i < words.length; i++ )
     	{
-    		minDistance = Math.min( minDistance, Math.abs( word1Pos - word2Pos ) );
-    		if ( word1Pos < word2Pos )
+    		if ( word1.equals( words[i] ) )
     		{
-    			word1Pos = findNextAppear( words, word1, word1Pos + 1 );
+    			word1Pos = i;
+    		}
+    		else if ( word2.equals( words[i] ) )
+    		{
+    			word2Pos = i;
     		}
     		else
     		{
-    			word2Pos = findNextAppear( words, word2, word2Pos + 1 );
+    			continue;
+    		}
+    		
+    		if ( word1Pos != -1 && word2Pos != -1 )
+    		{
+    			minDistance = Math.min( minDistance, Math.abs( word1Pos - word2Pos ) );
     		}
     	}
     	return minDistance;
-    }
-    
-    private int findNextAppear( String[] words, String word, int startPos )
-    {
-    	for ( int i = startPos; i < words.length; i++ )
-    	{
-    		if ( words[i].equals( word ) )    			
-    		{
-    			return i;
-    		}
-    	}
-    	return words.length;
     }
 }
