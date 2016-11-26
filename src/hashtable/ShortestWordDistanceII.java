@@ -14,7 +14,7 @@ Design a class which receives a list of words in the constructor, and implements
 For example,
 Assume that words = ["practice", "makes", "perfect", "coding", "makes"].
 
-Given word1 = �coding�, word2 = �practice�, return 3.
+Given word1 = "coding", word2 = "practice", return 3.
 Given word1 = "makes", word2 = "coding", return 1.
 
 Note:
@@ -24,49 +24,45 @@ You may assume that word1 does not equal to word2, and word1 and word2 are both 
 public class ShortestWordDistanceII
 {
 
-	private Map<String, List<Integer>> wordToPositions;
+	private Map<String, List<Integer>> wordToIndexes;
 	
     public WordDistance(String[] words) 
     {
-        wordToPositions = new HashMap<>();
+        wordToIndexes = new HashMap<>();
         for ( int i = 0; i < words.length; i++ )
         {
-        	wordToPositions.putIfAbsent( words[i], new ArrayList<>() );
-        	wordToPositions.get( words[i] ).add( i );
+        	wordToIndexes.putIfAbsent( words[i], new ArrayList<>() );
+        	wordToIndexes.get( words[i] ).add( i );
         }
     }
 
     public int shortest(String word1, String word2) 
     {
-    	List<Integer> word1Positions = wordToPositions.get( word1 );
-    	List<Integer> word2Positions = wordToPositions.get( word2 );
-    	if (	word1Positions == null 
-    			|| word2Positions == null 
-    			|| word1Positions.size() == 0 
-    			|| word2Positions.size() == 0 )
+    	List<Integer> indexes1 = wordToIndexes.get( word1 );
+    	List<Integer> indexes2 = wordToIndexes.get( word2 );
+    	if (	indexes1 == null 
+    			|| indexes2 == null 
+    			|| indexes1.size() == 0 
+    			|| indexes2.size() == 0 )
     	{
     		throw new IllegalArgumentException(""); 
     	}
     	
-    	int currWord1Pos = 0;
-    	int currWord2Pos = 0;
+    	int index1 = 0;
+    	int index2 = 0;
     	int minDis = Integer.MAX_VALUE;
-    	while ( currWord1Pos < word1Positions.size() 
-    			&& currWord2Pos < word2Positions.size() )
+    	while ( index1 < indexes1.size() 
+    			&& index2 < indexes2.size() )
     	{
-    		minDis = Math.min( minDis, Math.abs( word1Positions.get( currWord1Pos ) - word2Positions.get( currWord2Pos ) ) );
-    		if ( word1Positions.get( currWord1Pos ) < word2Positions.get( currWord2Pos ) )
+    		minDis = Math.min( minDis, Math.abs( indexes1.get( index1 ) - indexes2.get( index2 ) ) );
+    		if ( indexes1.get( index1 ) < indexes2.get( index2 ) )
     		{
-    			currWord1Pos++;
-    		}
-    		else if ( word1Positions.get( currWord1Pos ) > word2Positions.get( currWord2Pos ) ) 
-    		{
-    			currWord2Pos++;
+    			index1++;
     		}
     		else
     		{
-    			throw new IllegalStateException("");
-    		}    			
+    			index2++;
+    		}
     	}
     	return minDis;
     }
