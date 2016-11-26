@@ -2531,7 +2531,7 @@ public void bfsMainFunction( T[][] grid )
   int depth = 1;
   while ( !bfsQueue.isEmpty() )
   {
-    // loop through curr level
+    // loop through curr level. Note: Do not put bfsQueue.size() inside for loop
     int levelSize = bfsQueue.size();
     for ( int i = 0; i < levelSize; i++ )
     {

@@ -1,7 +1,9 @@
 package depthFirstSearch;
 
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 import java.util.Stack;
 
 import utility.NestedInteger;
@@ -41,6 +43,40 @@ public class NestedListWeightSum
     	}
     	return totalSum;
     }
+    
+	public int depthSumBFS( List<NestedInteger> nestedList )
+	{
+		Queue<NestedInteger> bfsQueue = new LinkedList<>();
+		enqueueAllList( bfsQueue, nestedList );
+		int depth = 1;
+		int totalSum = 0;
+		while ( !bfsQueue.isEmpty() )
+		{
+			int levelSize = bfsQueue.size();
+			for ( int i = 0; i < levelSize; i++ )
+			{
+				NestedInteger head = bfsQueue.poll();
+				if ( head.isInteger() )
+				{
+					totalSum += head.getInteger() * depth;
+				}
+				else
+				{
+					enqueueAllList( bfsQueue, head.getList() );
+				}
+			}
+			depth++;
+		}
+		return totalSum;
+	}
+	
+	private void enqueueAllList( Queue<NestedInteger> bfsQueue, List<NestedInteger> nestedList )
+	{
+		for ( NestedInteger nestedInteger : nestedList )
+		{
+			bfsQueue.offer( nestedInteger );
+		}
+	}
     
     public int depthSumIterative( List<NestedInteger> nestedList )
     {
