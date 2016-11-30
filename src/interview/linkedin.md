@@ -372,3 +372,79 @@ Write a program that takes an integer and prints out all ways to multiply smalle
 Eg: PrintFactors(12) 12 * 1 6 * 2 4 * 3 3 * 2 * 2
 
 
+
+
+1. Host manager. 像是中东人，但本科是UIUC读的，很年轻，刚升经理没几个月。behavior问题加一些小的设计问题，大概就是给你一个任务，你从哪些方面着手之类的。
+
+2.      2. Coding, 小韩和老中.
+1) Same Tree; 2) Word Ladder II (Only needto return one shortest path)见到这道题我就觉得基本可以结束今天的面试了。根本没看这道题，心想面到这道题，我就认栽。按照word ladder I 的写法往外扩展，写的很乱。写完第一道题的时候，被小韩BS了一下，问我不是学CS的为什么要找码工的工作。
+
+3.       3. Lunch. 小美。瞎扯。
+4.      
+4.4. 4. System Design. 国人大哥+小美.
+In shared articles, some URLs maybecontained. Design a system that can return top shared URLs in past 5 minutes, 1hour and 1 day. Suppose the article sharing service and URL extracting functionsare already there. 当时就觉的他们不喜欢我的设计，国人大哥坐在椅子上都快成葛优躺的姿势了。
+5.      
+5. C5.Coding. 小中和小印.
+小中说给我一道"VERY simple problem", 其实也是道面经题，看到但没有想过怎么做，所以做的不好。设计一个数据结构使得 add(T t), remove(T t), removeRandom() 都是O(1). 第二题，LC原题。二叉树求lowest common ancestor.
+
+6.       6. Technical communication. 国人大哥+烙印。讲自己做过的一个项目。
+LinkedIn 明显感觉不像是在招人。面试官都是资料较浅的，懂的东西也不是很多的样子，有些还挺拽的。两天后悲剧。
+
+
+
+
+前几天刚面完了Linkedin的onsite, 这次onsite的时间可能是我人生中最昏暗的时刻，因为前几天我正好有家人去世了但是还是硬着头皮去面试了，现在来贡献一下面经希望好运吧。另外还有我自己总结的L家的全部算法题和设计题大部分的资源都来自于版上，然后我按频率以及是不是leetcode的题目分类了一下，然后同时献上我自己做了一些非leetcode上的题目的解法，附件稍微设了一点权限避免滥用望理解。
+过些天可能还要面试一下Google，我半年前面试的时候有过一个面试总结但是可能已经比较老了，要是哪位同学有比较近期的好的总结麻烦私信我分享下，这样我就不需要自己再花很多个小时总结了。
+
+
+电面的链接在这：
+http://www.1point3acres.com/bbs/thread-197717-1-1.html
+
+Onsite:
+
+1, Technical Communication
+.鐣欏璁哄潧-涓€浜�-涓夊垎鍦�
+一个小中面的，面试的时候感觉没什么不好的也没什么好的，面完了我朋友帮我问了下面试官，他说感觉不是很好，但是具体不知道，希望大家都中国人这种behavior的东西还是不要黑了。
+
+2， Hiring Manager
+
+一个年纪不大也不小的ABC，这轮面的时候感觉就很不好，面试官全程黑脸然后各种challange我，所以真不知道会咋样。.鐣欏璁哄潧-涓€浜�-涓夊垎鍦�
+
+3， Coding
+. visit 1point3acres.com for more.
+年轻白男，刚上来想问interval的题目我告诉他电面面过了，然后他就出了一个两个Integer List 求union。Follow up1 是K个integer list 求union， follow up2 是多线程或者多台机器怎么做。 然后又出了一个题目感觉非常难，也是关于interval的不是题库里的题目应该是他自己想的，题目拿文字形容起来比较复杂感觉大家也没可能碰到这题所以我就跳过吧，我代码没写完但是把思想全给他说了。他最后跟我说这个是bonus的题目我也不知道是不是真的。
+
+4， Coding
+
+中年白男， 第一个题目是两个List求是不是merge, 不用考虑有环的情况。 第二个题目是paint house II
+
+5， System design
+
+中国大哥面的，感觉人态度很好，也有给提示和引导，在这要谢谢这位国人大哥。题目是版上见过的hangman game的design.
+
+总结就是三轮技术面我都感觉还行，两轮behavior都感觉不好，最后只能希望好运了。
+
+
+
+
+2016(10-12月) 码农类 硕士 全职@Linkedin - 内推 - 技术电面 |Other在职跳槽
+注册一亩三分地论坛，查看更多干货！
+
+您需要 登录 才可以下载或查看，没有帐号？获取更多干货,去instant注册!
+x 刚面完重新安排的linkedin电面。-google 1point3acres
+一个参加工作没多久的中国小哥，先互相介绍，然后2道题，最后QA。
+1. LC 170, Two SumIII, 先讨论了哪个操作多，然后说的是find操作多，用的set. 鐗涗汉浜戦泦,涓€浜╀笁鍒嗗湴
+2. LC 187, DNA, 唯一不同是要求输出是in order的，而且时间O(n)，这个让我想了很久。最后用了不是很好的办法做的，把所有可能按从小到大loop一遍，存在结果里的就输出来。因为前提说了数据量很大。不知道大家有没有更好的办法。小哥提示了说在中间过程就已经是ordered，但是一直没get到点。
+
+
+
+
+
+面试人是一个国人小哥 人很好 上来自我介绍然后开始做题 lc151 刚开始不用考虑前后有空格以及每个word之间大于一个空格情况，很快写出来了. more info on 1point3acres.com
+接着followup 如果word之间大于一个空格保留空格数，可能因为太紧张调来调去都不对，然后问小哥有没有hint
+结果小哥说了一个很好的方法 把中间的空格也按照word一样reverse 然后在整体reverse.鏈枃鍘熷垱鑷�1point3acres璁哄潧
+但是就是corner case调了半天 最后将将算是做完了 但是就做了一题， 听别人说二面都是两道题目 是不是就跪了
+. visit 1point3acres.com for more.
+发个面经 积攒人品 希望小哥能给过 真的很想去linkedin。。。
+
+
