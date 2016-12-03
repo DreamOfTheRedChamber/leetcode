@@ -29,9 +29,8 @@
     * [Equals and hashcode](#equals-hashcode)
     * [Overload vs override](#overload-vs-override)
     * [Abstract class vs interface](#abstract-class-vs-interface)
-    * [Char and unicode](#char-and-unicode)
-    * [Abstract, static, native, synchronize method keyword](#abstract-static-native-synchronized-method-keyword)
-    * [Static nested class vs inner class](#static-nested-class-vs-inner-class)
+    * [Static](#static-keyword)
+    * [Volatile](#volatile-keyword)
     * [Clone](#clone)
     * [Assert](#assert)
     * [Error vs exception](#error-vs-exception)
@@ -39,7 +38,15 @@
     * [Immutable objects](#immutable-objects)
     * [Final vs finally vs finalize](#final-finally-finalize)
     * [Comparable vs comparator](#comparable-vs-comparator)
+    * [Memory leak](#memory-leak)
     * [Garbage collector](#garbage-collector)
+    * [JVM](#jvm)
+    * [Design pattern](#design-pattern)
+      - [Singleton](#design-pattern-singleton)
+      - [Factory](#design-pattern-factory)
+      - [Template](#design-pattern-template)
+      - [Strategy](#design-pattern-strategy)
+    * [Multi-threading comparison](#multithreading)
 * [Data structures](#ds)
     * [Data structure relationships](#ds-relationship)
     * [Type size](#ds-type-size)
@@ -491,9 +498,9 @@
 | Modifiers  | no limits | fields are public/static/final, methods are public automatically |
 | Inheritance  | Single  | Multiple |
 
-#### Abstract, static, native, synchronize method keyword<a id="abstract-static-native-synchronized-method-keyword"></a>
-#### Static nested class vs inner class<a id="static-nested-class-vs-inner-class"></a>
-#### Char and unicode<a id="char-and-unicode"></a>
+#### Static keyword <a id="static-keyword"></a>
+
+#### Volatile keyword <a id="volatile-keyword"></a>
 
 #### Clone<a id="clone"></a>
 * Deep and shallow copy
@@ -614,6 +621,19 @@ class FinalizeExample
 ```
 
 #### Comparable vs comparator<a id="comparable-vs-comparator"></a>
+
+#### Java memory leak <a id="memory-leak"></a>
+
+#### Garbage collector <a id="garbage-collector"></a>
+
+#### JVM <a id="jvm"></a>
+
+#### Design pattern <a id="design-pattern"></a>
+##### Singleton pattern <a id=""></a>
+##### Factory <a id="design-pattern-factory"></a>
+##### Template <a id="design-pattern-template"></a>
+##### Strategy <a id="design-pattern-strategy"></a>
+
 
 ### Data structures <a id="ds"></a>
 
@@ -1701,14 +1721,7 @@ public class LRUCache<K, V> extends LinkedHashMap<K, V>
 #### Graph <a id="ds-graph"></a>
 ##### Edge list vs Adjacent list vs Adjacent matrix<a id="ds-graph-tradeoffs"></a>
 * Time complexity comparison between different graph representation
-
-| Representation\Complexity | Delete a vertex | Delete an edge | Edge exists? | iterating vertex neighbors |
-| --------------------- |:-------------:|:-------------:| -----:|-----:|
-| Edge List  | O(E) | O(E) | O(E) | O(E) |
-| Adjacent matrix  | O(V^2) | O(1) |  O(1) | O(V) |
-| Adjacent List | O(E) | O(list length) | O(list length) | O(list length) |
-
-* Use cases for different representations
+ * Use cases for different representations
   * Edge list is usually not used because looping through neighbor of a vertex is too expensive. This makes it really appropriate for many graph algo (bfs, dfs).
   * Adjacent matrix is usually used for dense graph, where vertexes are seldomly added or removed.
   * Adjacent list is usually used for sparse graph to save space.
