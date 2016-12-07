@@ -501,8 +501,8 @@
 | Inheritance  | Single  | Multiple |
 
 #### Static keyword <a id="static-keyword"></a>
-
 * Detailed comparison
+
 |                 |    Use case   | Accessibility  |  Benefits |
 | --------------- |:-------------:| --------------:| ---------:|
 | Static class    | Static classes are nested classes that act like top-level classes, even if they appear somewhere in the middle or the bottom of the program hierarchy (within a class). Static classes do not need the reference of the outer class. They act like an outer class within themselves. Normal non-static nested classes, on the other hand, need reference of the outer class.  In other words, static classes are independent of the outer class, while other inner classes are dependent on the outer class. | Static classes can only access static members of an outer class, while non-static nested classes can interact with both static and non-static members of an outer class. This functionality allows static nested classes to interact with other parts of the program and provides code re-usability. | A static class, like other nested classes, can access the private variables and methods of its outer class. Static classes can be declared to remove restrictions on member classes of an outer class. If we think the outer class is too limiting and we want a member class to perform more functions, we use the “static” keyword to provide that added functionality. A static class can never be instantiated. Static classes can’t directly access non-static members of a class. It can interact with them only through an object reference. This is both a drawback and an advantage of a static class. | 
