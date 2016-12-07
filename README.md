@@ -30,6 +30,7 @@
     * [Overload vs override](#overload-vs-override)
     * [Abstract class vs interface](#abstract-class-vs-interface)
     * [Static](#static-keyword)
+    * [Main method](#main-method)
     * [Volatile](#volatile-keyword)
     * [Clone](#clone)
     * [Assert](#assert)
@@ -307,8 +308,9 @@
   1. Synchronize with interviewer: "***Then I would usually check my code against tests***" 
   2. Check the code by myself
      * Check steps:
-       1. Review the entire code, check whether there are unused variables, loop counters while does not change as expected, unnecessary edge case checkings, boundaries index overflow/underflow 
-       2. Review the problem description, check whether there are unhandled problem assumptions
+       1. Look for typos
+       1. Look for unused variables, counters, unnecessary edge case checkings, boundaries index overflow/underflow 
+       2. Look for unhandled problem assumptions
        3. Use small test cases to test different logical branches of the code
      * When there is a bug: do not rush to change. Identify the root cause first.
        * "***Give me a moment, I feel there is a bug here. Let's have a double check.***"
@@ -499,6 +501,50 @@
 | Inheritance  | Single  | Multiple |
 
 #### Static keyword <a id="static-keyword"></a>
+
+* Detailed comparison
+|                 |    Use case   | Accessibility  |  Benefits |
+| --------------- |:-------------:| --------------:| ---------:|
+| Static class    | Static classes are nested classes that act like top-level classes, even if they appear somewhere in the middle or the bottom of the program hierarchy (within a class). Static classes do not need the reference of the outer class. They act like an outer class within themselves. Normal non-static nested classes, on the other hand, need reference of the outer class.  In other words, static classes are independent of the outer class, while other inner classes are dependent on the outer class. | Static classes can only access static members of an outer class, while non-static nested classes can interact with both static and non-static members of an outer class. This functionality allows static nested classes to interact with other parts of the program and provides code re-usability. | A static class, like other nested classes, can access the private variables and methods of its outer class. Static classes can be declared to remove restrictions on member classes of an outer class. If we think the outer class is too limiting and we want a member class to perform more functions, we use the “static” keyword to provide that added functionality. A static class can never be instantiated. Static classes can’t directly access non-static members of a class. It can interact with them only through an object reference. This is both a drawback and an advantage of a static class. | 
+| Static block    | Static blocks are also called Static initialization blocks . A static initialization block is a normal block of code enclosed in braces, { }, and preceded by the static keyword. Static block is mostly used for changing the default values of static variables. This block get executed when the class is loaded into memory. A class can have multiple static blocks, which will be executed in the same sequence in which they have been written into the program. | non-static variables cannot be accessed in static block.  | <ul><li>If you’re loading drivers and other items into the namespace. For ex, Class class has a static block where it registers the natives.</li><li>If you need to do computation in order to initialize your static variables,you can declare a static block which gets executed exactly once,when the class is first loaded.</li><li>Security related issues or logging related tasks</li></ul> |
+| Static method   | A static method belongs to the class rather than instances. You can call a static method without creating any object, just by using it's class name. So if you need a method, which you want to call directly by class name, make that method static. Utility classes e.g. java.lang.Math or StringUtils, are good examples of classes, which uses static methods. Before making a method static, you should look into limitation of static methods as well, as you can not override static method in Java. | <ul><li>Static methods can access static variables and invoke only static methods of the class. The static method cannot use non static data member or call non-static method directly.</li><li>this and super cannot be used in static context.</li></ul> | | 
+| Static variable | A static variable is a class variable and doesn't belong to object/instance of the class. Memory allocation for such variables only happens once when the class is loaded in the memory. | These variables can be accessed in any other class using class name. Unlike non-static variables, such variables can be accessed directly in static and non-static methods. | Memory more efficient because the static variable allocate memory only once in class area at the time of class loading. Static variables are shared across all the instances of object, thus not thread-safe. |
+| Interface static method |  |  |  |
+| static import | | | | 
+
+* Rules to use static method
+  1. If a method doesn't modify state of object, or not using any instance variables.
+  2. You want to call method without creating instance of that class.
+  3. A method is good candidate of being static, if it only work on arguments provided to it e.g. public int factorial(int number){}, this method only operate on number provided as argument.
+  4. Utility methods are also good candidate of being static e.g. StringUtils.isEmpty(String text), this a utility method to check if a String is empty or not.
+  5. If function of method will remain static across class hierarchy e.g. equals() method is not a good candidate of making static because every Class can redefine equality.
+
+* When to use static method
+  - it makes sense to use static methods when 
+    + Along with creational design pattern e.g. Factory and Singleton.
+    + As utility method, which operate on arguments.
+    + A conversion tool e.g. valueOf().
+  - Detailed explanation
+    1. Factory design pattern provides a good use of static method. You can use static method to create instance of a class. Even Effective Java book advises about using static factory method, couple of example of these in Java library is creating thread pool from Executors class. Executors provides lots of static methods to create different types of thread pool e.g. public static ExecutorService newCachedThreadPool(), public static ExecutorService newFixedThreadPool(int nThreads) etc
+    2. Another interesting use of static methods from JDK is collection classes e.g. Collections and Arrays which provides lot of static utility methods to operate on different kinds of collection.
+    3. Static method can also be combined with variable arguments to create a collection of explicitly elements e.g. EnumSet.of(E first, E... rest). Apart from these, if you loot at Apache commons lang library, you will find a pattern of utils class e.g. StringUtils, ArrayUtils, which provides utility methods to operate on String and arrays.
+    4. One more interesting use of static method I have seen is valueOf() method inside different value classes e.g. java.lang.String, though this is also an example of factory method, but it's also a nice way to convert one type to another. For example valueOf() can also be used to convert String to Integer in Java.
+  
+* Cannot override static methods in Java
+No, you cannot override static method in Java because method overriding is based upon dynamic binding at runtime and static methods are bonded using static binding at compile time. Though you can declare a method with same name and method signature in sub class which does look like you can override static method in Java but in reality that is method hiding. Java won't resolve method call at runtime and depending upon type of Object which is used to call static method, corresponding method will be called. It means if you use Parent class's type to call static method, original static will be called from patent class, on ther other hand if you use Child class's type to call static method, method from child class will be called. In short you can not override static method in Java. If you use Java IDE like Eclipse or Netbeans, they will show warning that static method should be called using class name and not by using object becaues static method can not be overridden in Java.
+
+#### Main method <a id="main-method"></a>
+* Why main method is static
+  1. Since the main method is static Java virtual Machine can call it without creating any instance of a class which contains the main method.
+  2. Since C and C++ also have similar main method which serves as entry point for program execution, following that convention will only help Java.
+  3. If main method were not declared static than JVM has to create instance of main Class and since constructor can be overloaded and can have arguments there would not be any certain and consistent way for JVM to find main method in Java.
+  4. Anything which is declared in class in Java comes under reference type and requires object to be created before using them but static method and static data are loaded into separate memory inside JVM called context which is created when a class is loaded. If main method is static than it will be loaded in JVM context and are available to execution.
+* Why main method is public
+Java specifies several access modifiers e.g. private, protected and public. Any method or variable which is declared public in Java can be accessible from outside of that class. Since the main method is public in
+Java, JVM can easily access and execute it.
+* Why the main method is void
+Since the main method in Java is not supposed to return any value, it's made void which simply means main is not returning anything.
+
 
 #### Volatile keyword <a id="volatile-keyword"></a>
 
