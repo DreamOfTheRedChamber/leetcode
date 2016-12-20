@@ -645,8 +645,12 @@ finally
 ```
 
 * Finalize 
-  + Def: It is a method which will be called when an object is about to be garbage collected. 
-  + Use case: Normally it should be overridden to clean-up non-Java resources ie closing a file. But it is not a good practice to use finalize() because it has all kinds of subtle issues and greatly slows garbage collection. 
+  + How it is going to work
+    - When the garbage collector is ready to release the storage used for your object, it will first call finalize()
+    - Only on the next garbage-collection pass will it reclaim the object's memory. 
+  + Use case: 
+    - Finalize() should not be used as a general-purpose cleanup method. Finalize() is limited to special cases in which your object can allocate storage in some way other than creating an object. Finalize() is in place because of the possibility that you'll do something C-like by allocating memory using a mechanism other than the normal one in Java. This can happen primarily through native methods, which are a way to call non-Java code from Java. Inside the non-Java code, C's malloc() family of functions might be called to allocate storage, and unless you call free(), that storage will not be released, causing a memory leak. 
+    - An interesting use of finalize() is the verification of the termination condition of an object. When the object is ready to be cleaned up - the object should be in a state whereby its memory can be safely released. 
 ```java
 class FinalizeExample
 {

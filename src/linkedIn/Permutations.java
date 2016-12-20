@@ -44,11 +44,16 @@ public class Permutations
     		{
     			isUsed[i] = true;
     			onePerm.addLast( nums[i] );
-    			generatePermutation( allPerms, onePerm, nums, isUsed );
+    			this.generatePermutation( allPerms, onePerm, nums, isUsed );
     			onePerm.removeLast();
     			isUsed[i] = false;
     		}
     	}
+    }
+    
+    public static void main( String[] args )
+    {
+    	
     }
     
     @Test
