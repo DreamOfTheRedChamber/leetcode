@@ -676,8 +676,8 @@ class FinalizeExample
 #### JVM <a id="jvm"></a>
 
 #### Design pattern <a id="design-pattern"></a>
-| Name      | Intent | Real world example | 
-|-----------|--------|--------------------| 
+| Name      | Intent                 | Real world example | 
+|-----------|------------------------|--------------------| 
 | Builder   | Separate the construction of a complex object from its representation so that the same construction process can create different representations.  | java.lang.StringBuilder#append()/java.lang.StringBuffer#append | 
 | Singleton | Ensure a class has only one instance, and provide a global point of access to it. | java.lang.Runtime#getRuntime() |
 | Adapter   | Convert the interface of a class into another interface clients expect. Adapter lets classes work together that couldn't otherwise because of incompatible interfaces. | java.util.Arrays#asList()/java.util.Collections#list() | 
