@@ -1,193 +1,169 @@
 # Fight towards 1000 commits !!!
-* [Typical whiteboard coding workflow](#whiteboard-workflow)
-    * [Clarify questions](#whiteboard-workflow-clarify)
-    * [Give a small but general enough example for discussing algo/DS](#whiteboard-workflow-context)
-    * [Come up with a brute force algorithm](#whiteboard-workflow-bruteforce)
-    * [Come up with an optimized solution](#whiteboard-workflow-optimize)
-    * [Write test cases](#whiteboard-workflow-test-cases)
-    * [Write code](#whiteboard-workflow-write-code)
-    * [Walk through a test case](#whtieboard-workflow-walk-test-cases)
-    * [Solve follow up questions](#whiteboard-workflow-follow-up)
-* [Interview mindset](#strategy)
-    * [Understanding what interviewers really wants](#undertand-interviewers)
-    * [When met with easy/hard/tricky problems](#met-with-easy-hard-tricky-problems)
-    * [Whiteboard coding pros and cons](#whiteboard-coding-pros-cons)
-* [Practice mindset](#practice-patterns)
-    * [Goal](#practice-goal)
-    * [Attitudes](#practice-attitudes)
-    * [Tools](#practice-tools)
-    * [Strategies](#practice-strategies)
-    * [Leetcode pros and cons](#leetcode-pros-cons)
-    * [Interview Java pros and cons](#java-pros-cons)
-* [Java language](#java-language)
-    * [Characteristics of Object oriented](#characteristics)
-    * [Java vs C++](#java-vs-c++)
-    * [Thread vs process](#thread-vs-process)
-    * [Access modifiers](#access-modifiers)
-    * [Stack vs heap vs static area](#stack-heap-staticarea)
-    * [OutOfMemoryError](#outof-memory-error)
-    * [Equals and hashcode](#equals-hashcode)
-    * [Overload vs override](#overload-vs-override)
-    * [Abstract class vs interface](#abstract-class-vs-interface)
-    * [Static](#static-keyword)
-    * [Main method](#main-method)
-    * [Volatile](#volatile-keyword)
-    * [Clone](#clone)
-    * [Assert](#assert)
-    * [Error vs exception](#error-vs-exception)
-    * [Checked vs unchecked exception](#checked-vs-unchecked-exception)
-    * [Immutable objects](#immutable-objects)
-    * [Final vs finally vs finalize](#final-finally-finalize)
-    * [Memory leak](#memory-leak)
-    * [Garbage collector](#garbage-collector)
-    * [JVM](#jvm)
-    * [Design pattern](#design-pattern)
-      - [Singleton](#design-pattern-singleton)
-      - [Factory](#design-pattern-factory)
-      - [Template](#design-pattern-template)
-      - [Strategy](#design-pattern-strategy)
-    * [Multi-threading comparison](#multithreading)
-* [Data structures](#ds)
-    * [Data structure relationships](#ds-relationship)
-    * [Type size](#ds-type-size)
-    * [Type conversions](#ds-type-conversions)
-      - [Automated cast](#ds-type-conversions-automated-cast)
-      - [Between string and primitive types](#ds-type-conversions-string-and-integer)
-      - [Between array and collections](#ds-type-conversions-array-and-collections)
-      - [Between collections](#ds-type-conversions-collections)
-    * [Array](#ds-array)
-      - [Circular array](#ds-circular-array)
-      - [Array sum](#ds-array-array-sum)
-      - [Forward backward traversal](#ds-array-forward-backward-traversal)
-    * [String](#ds-string)
-      - [Why String is immutable or final](#ds-string-immutable)  
-      - [String vs StringBuilder vs StringBuffer](#ds-string-tradeoffs)
-      - [String reverse](#ds-string-reverse)
-      - [Encode and decode](#ds-string-encode-decode)
-      - [Palindrome](#ds-string-palindrome)
-      - [String parsing](#ds-string-parsing)
-    * [Collections](#ds-collections)
-      - [Iterator](#ds-collections-iterator)
-      - [Immutability](#ds-collections-immutability)
-    * [List](#ds-list) 
-      - [ArrayList vs LinkedList](#ds-list-tradeoffs)
-      - [LinkedListNode](#ds-list-linkedlistnode)
-      - [Common tasks](#ds-list-common-tasks)
-    * [Stack](#ds-stack)
-      - [Calculator](#ds-stack-calculator)
-      - [Parentheses](#ds-stack-parentheses)
-    * [Queue](#ds-queue)
-      - [Interfaces](#ds-queue-interfaces)
-    * [PriorityQueue](#ds-priorityqueue)
-      - [Heapify](#ds-priorityqueue-heapify)
-      - [Sift up/down](#ds-priorityqueue-sift-up-down)
-      - [Improve built-in remove](#ds-priorityqueue-improve-built-in-remove)
-      - [Lambda expression as comparator](#ds-priorityqueue-lambda-expression)
-    * [Tree](#ds-tree)
-      - [Build](#ds-tree-build)
-      - [Traversal](#ds-tree-traversal)
-      - [View](#ds-tree-view)
-      - [Serialize/Deserialize](#ds-tree-serialize-deserialize)
-      - [Path on tree](#ds-tree-path)
-      - [Segment tree](#ds-tree-segment-tree)
-      - [Binary search tree](#ds-tree-binary-search-tree)
-    * [HashMap](#ds-hashmap)
-      - [Use case](#ds-hashmap-usecase)
-      - [Best practices](#ds-hashmap-best-practices)
-      - [Collision resolution](#ds-hashmap-collision-resolution)
-      - [Intersection](#ds-hashmap-intersection)
-      - [Histogram and hashmap list](#ds-hashmap-histogram-hashmap-list)
-      - [Anagram](#ds-hashmap-anagram)
-      - [Sparse matrix](#ds-hashmap-sparse-matrix)
-      - [LRU cache](#ds-hashmap-lru-cache)
-    * [TreeMap](#ds-treemap)
-    * [Graph](#ds-graph)
-      - [Edge list vs Adjacent list vs Adjacent matrix](#ds-graph-tradeoffs)
-      - [Build graph](#ds-graph-build)
-    * [Trie](#ds-trie)
-      - [Use case](#ds-trie-use-case)
-      - [Trie definition](#ds-trie-def)
-      - [Common tasks](#ds-trie-common-tasks)
-* [Algorithms](#algo)
-    * [Math](#algo-math)
-      - [Random](#algo-math-random)
-      - [Mod](#algo-math-mod)
-      - [Power](#algo-math-power)
-      - [Sqrt](#algo-math-sqrt)
-      - [Divide](#algo-math-divide)
-      - [Multiply](#algo-math-multiply)
-      - [Prime](#algo-math-prime)
-    * [Bit manipulation](#algo-bit-manipulation)
-      - [Arithmetic vs logic right shift](#algo-bit-manipulation-arithmetic-vs-logic)
-      - [Common tasks](#algo-bit-manipulation-common-tasks)
-    * [Non-DP memorization](#algo-non-dp-memorization)
-      - [Array](#algo-non-dp-memo-array)
-      - [Stack](#algo-non-dp-memo-stack)
-      - [Hashmap](#algo-non-dp-memo-hashmap)
-    * [Two pointers](#algo-two-pointer)
-      - [Use case](#algo-two-pointer-use-case)
-      - [Types](#algo-two-pointer-types)
-        + [Begin and end type](#algo-boundary-to-center)
-        + [Slow and fast type](#algo-slow-and-fast)
-        + [Window type](#algo-window)
-        + [Two arrays type](#algo-two-arrays)
-    * [Sort](#algo-sort)
-      - [Common sorting algorithms](#algo-sort-common-algo)
-      - [Built-in sort interfaces](#algo-built-in-sort-interfaces)
-      - [Types](#algo-sort-types)
-        + [Interval-related](#algo-sort-types-interval-related)
-        + [TopK](#algo-sort-types-topK)
-    * [Binary search](#algo-binary-search)
-      - [Best practices](#algo-binary-search-best-practices)
-      - [How to handle duplicates](#algo-binary-search-handle-duplicates)
-      - [Types](#algo-binary-search-types)
-        + [First/Last smaller/bigger](#algo-binary-search-first-last-smaller-bigger)
-        + [Rotated array](#algo-binary-search-rotated-array)
-        + [2D array](#algo-binary-search-2d-array)
-    * [Recursion](#algo-recursive)
-      - [Recursive vs iterative solutions](#algo-recursive-iterative)
-      - [Recursion time complexity cheat sheet](#algo-recursive-tc)
-      - [Steps in using recursion](#algo-recursion-problems-to-consider)
-      - [Return multiple results](#algo-recursion-return-multiple-results)
-      - [Avoid duplicated recursion](#algo-recursion-avoid-duplicated-recursion)
-      - [Types](#algo-recursion-types)
-        + [Tree-based recursion](#algo-recursion-tree-based)
-        + [Deep copy](#algo-recursion-deep-copy)
-        + [Array-based recursion](#algo-recursion-array-based)
-    * [Backtrack](#algo-backtrack)
-      - [Best practices](#algo-backtrack-best-practices)
-      - [Types](#algo-recursion-types)
-        + [Generate all permutations](#algo-backtrack-permutation)
-        + [Generate all subsets](#algo-backtrack-subsets)
-        + [Generate all combinations summing to a target](#algo-backtrack-combination-sum)
-        + [Generate Decode ways/Gray code](#algo-backtrack-generate-decode-ways)
-        + [Grid-based](#algo-backtrack-grid-based)
-    * [Graph](#algo-graph)
-      - [Grid-based best practices](#algo-grid)
-      - [Grid-based breath first search](#algo-grid-based-bfs)
-      - [Grid-based depth first search](#algo-grid-based-dfs)
-      - [Grid-based count number of components](#algo-grid-based-count-number-of-components)
-      - [Word-based breath first search](#algo-word-based-bfs)
-      - [Topological sort](#algo-topo)
-      - [Union find](#algo-union-find)
-    * [Greedy](#algo-greedy)
-    * [Dynamic programming](#algo-dynamic-programming)
-      - [Use cases](#algo-dp-use-cases)
-      - [Problems to consider](#algo-dp-problems-to-consider)
-      - [Implementation methods](#algo-dp-implementation-methods)
-      - [Memorization array tricks](#algo-dp-memorization-array-tricks)
-      - [Types](#algo-dp-types)
-        + [Coordinate based](#algo-dp-types-coordinate)
-        + [1D sequence](#algo-dp-1d-sequence)
-        + [2D sequences](#algo-dp-2d-sequences)
-        + [Range based](#algo-dp-range-based)
-        + [Game](#algo-dp-game)
-        + [Backpack](#algo-dp-backpack)
-* [References](#references)
-  
-### Typical whiteboard coding workflow <a id="whiteboard-workflow"></a>
+<!-- MarkdownTOC -->
 
-#### Clarify question <a id="whiteboard-workflow-clarify"></a>
+- [Typical whiteboard coding workflow](#typical-whiteboard-coding-workflow)
+  - [Clarify question](#clarify-question)
+  - [Give a small but general enough example for discussing algo/DS](#give-a-small-but-general-enough-example-for-discussing-algods)
+  - [Come up with a brute force algorithm](#come-up-with-a-brute-force-algorithm)
+  - [Optimize the brute force solution](#optimize-the-brute-force-solution)
+  - [Write test cases](#write-test-cases)
+  - [Write code](#write-code)
+  - [Walk through test cases](#walk-through-test-cases)
+  - [Solve follow up questions](#solve-follow-up-questions)
+- [Interview mindset](#interview-mindset)
+  - [Understanding what interviewers really wants](#understanding-what-interviewers-really-wants)
+  - [When met with easy/hard/tricky problems \(although most time medium problems\):](#when-met-with-easyhardtricky-problems-although-most-time-medium-problems)
+  - [Whiteboard coding pros and cons](#whiteboard-coding-pros-and-cons)
+- [Practice mindset](#practice-mindset)
+  - [Goal](#goal)
+  - [Attitudes](#attitudes)
+  - [Tools](#tools)
+  - [Strategies](#strategies)
+  - [Leetcode pros and cons](#leetcode-pros-and-cons)
+  - [Interview Java pros and cons](#interview-java-pros-and-cons)
+- [Java language](#java-language)
+  - [Characteristics of Object oriented](#characteristics-of-object-oriented)
+  - [Thread vs process](#thread-vs-process)
+  - [Java vs C++](#java-vs-c)
+  - [Access modifiers](#access-modifiers)
+  - [Stack vs heap vs static area](#stack-vs-heap-vs-static-area)
+  - [OutOfMemoryError](#outofmemoryerror)
+  - [Equals and hashcode](#equals-and-hashcode)
+  - [Overload vs override](#overload-vs-override)
+  - [Abstract class vs interface](#abstract-class-vs-interface)
+  - [Static keyword](#static-keyword)
+  - [Main method](#main-method)
+  - [Volatile keyword](#volatile-keyword)
+  - [Clone](#clone)
+  - [Assertion](#assertion)
+  - [Error vs exception](#error-vs-exception)
+  - [Checked vs unchecked exception](#checked-vs-unchecked-exception)
+  - [Immutable class](#immutable-class)
+  - [Final vs finally vs finalize](#final-vs-finally-vs-finalize)
+  - [Java memory leak](#java-memory-leak)
+  - [Garbage collector](#garbage-collector)
+  - [JVM](#jvm)
+  - [Design pattern](#design-pattern)
+- [Data structures](#data-structures)
+  - [Data structure relationships](#data-structure-relationships)
+  - [Type size](#type-size)
+  - [Type conversions](#type-conversions)
+    - [Automated cast](#automated-cast)
+    - [Between string and primitive types](#between-string-and-primitive-types)
+    - [Between array and collections](#between-array-and-collections)
+    - [Between collections](#between-collections)
+  - [Array](#array)
+    - [Circular array](#circular-array)
+    - [Array sum](#array-sum)
+    - [Forward backward traversal](#forward-backward-traversal)
+  - [String](#string)
+    - [Why String is immutable or final](#why-string-is-immutable-or-final)
+    - [String vs StringBuilder vs StringBuffer](#string-vs-stringbuilder-vs-stringbuffer)
+    - [String reverse](#string-reverse)
+    - [Encode and decode](#encode-and-decode)
+    - [Palindrome](#palindrome)
+  - [Collections](#collections)
+    - [Iterator](#iterator)
+    - [Immutability](#immutability)
+  - [List](#list)
+    - [ArrayList vs LinkedList](#arraylist-vs-linkedlist)
+    - [LinkedListNode](#linkedlistnode)
+    - [Common tasks](#common-tasks)
+  - [Stack](#stack)
+    - [Calculator](#calculator)
+    - [Parentheses](#parentheses)
+  - [Queue](#queue)
+    - [Interfaces](#interfaces)
+  - [PriorityQueue](#priorityqueue)
+    - [Heapify](#heapify)
+    - [Sift up/down](#sift-updown)
+    - [Improve built-in remove O\(n\)](#improve-built-in-remove-on)
+    - [Lambda expression as comparator](#lambda-expression-as-comparator)
+    - [Top K problems](#top-k-problems)
+  - [Tree](#tree)
+    - [Build](#build)
+    - [Traversal](#traversal)
+    - [View](#view)
+    - [Serialize/Deserialize](#serializedeserialize)
+    - [Path on tree](#path-on-tree)
+    - [Segment tree](#segment-tree)
+    - [Binary search tree](#binary-search-tree)
+  - [HashMap](#hashmap)
+    - [Use case](#use-case)
+    - [Best practices](#best-practices)
+    - [Collision resolution](#collision-resolution)
+    - [Intersection](#intersection)
+    - [Histogram and hashmap list](#histogram-and-hashmap-list)
+    - [Anagram](#anagram)
+    - [Sparse Vector/matrix](#sparse-vectormatrix)
+    - [LRU Cache](#lru-cache)
+  - [TreeMap](#treemap)
+  - [Graph](#graph)
+    - [Edge list vs Adjacent list vs Adjacent matrix](#edge-list-vs-adjacent-list-vs-adjacent-matrix)
+    - [Build graph](#build-graph)
+  - [Trie](#trie)
+    - [Use case](#use-case-1)
+    - [Trie definition](#trie-definition)
+    - [Common tasks](#common-tasks-1)
+- [Algorithms](#algorithms)
+  - [Math](#math)
+    - [Random](#random)
+    - [Mod](#mod)
+    - [Power](#power)
+    - [Sqrt](#sqrt)
+    - [Divide](#divide)
+    - [Multiply](#multiply)
+    - [Prime](#prime)
+  - [Bit manipulation](#bit-manipulation)
+    - [Arithmetic vs logic right shift](#arithmetic-vs-logic-right-shift)
+    - [Common tasks](#common-tasks-2)
+  - [Non-DP Memorization](#non-dp-memorization)
+    - [Array](#array-1)
+    - [Stack](#stack-1)
+    - [HashMap](#hashmap-1)
+  - [Two pointers](#two-pointers)
+    - [Begin and end type](#begin-and-end-type)
+    - [Slow and fast type](#slow-and-fast-type)
+    - [Window type](#window-type)
+    - [Two arrays type](#two-arrays-type)
+  - [Sort](#sort)
+    - [Common sorting algorithms](#common-sorting-algorithms)
+    - [Built-in sort interfaces](#built-in-sort-interfaces)
+    - [Types](#types)
+    - [Top K](#top-k)
+    - [Stream API](#stream-api)
+  - [Binary search](#binary-search)
+    - [Best practices](#best-practices-1)
+    - [How to handle duplicates](#how-to-handle-duplicates)
+    - [Types](#types-1)
+  - [Recursive functions](#recursive-functions)
+    - [Recursive vs iterative solutions](#recursive-vs-iterative-solutions)
+    - [Recursion time complexity cheat sheet](#recursion-time-complexity-cheat-sheet)
+    - [Steps in using recursion](#steps-in-using-recursion)
+    - [How to return multiple results from recursive functions](#how-to-return-multiple-results-from-recursive-functions)
+    - [Avoid duplicated recursion](#avoid-duplicated-recursion)
+    - [Types](#types-2)
+  - [Backtrack](#backtrack)
+    - [Best practices](#best-practices-2)
+    - [Types](#types-3)
+  - [Graph](#graph-1)
+    - [Grid-based graph best practices](#grid-based-graph-best-practices)
+    - [Grid-based breath first search](#grid-based-breath-first-search)
+    - [Grid-based depth first search](#grid-based-depth-first-search)
+    - [Count number of components](#count-number-of-components)
+    - [Word-based breath first search](#word-based-breath-first-search)
+    - [Topological sort](#topological-sort)
+    - [Union find](#union-find)
+  - [Greedy](#greedy)
+  - [Dynamic-programming](#dynamic-programming)
+  - [References](#references)
+
+<!-- /MarkdownTOC -->
+
+  
+### Typical whiteboard coding workflow 
+
+#### Clarify question 
 1. Define public APIs to be implemented:
   * Things to define - Input type
   * Things to define - Number of input arguments
@@ -208,24 +184,24 @@
         * In most cases, one single public API
         * Multiple public APIs inside a class
         * Two associated APIs, like serialize and deserialize
-      * Input - Field types<a id="question-field-type"></a>
+      * Input - Field types
          * Integer or double
          * Positive or negative, non-positive or non-negative
-      * Input - Array<a id="question-array"></a>
+      * Input - Array
          * Sorted or unsorted, sorted increasingly or decreasingly
          * Given two arrays, which one's size is bigger
          * Whether could modify entries inside array
-      * Input - String<a id="question-string"></a>
+      * Input - String
          * Whether the string contains space
          * How are tokens separated, using comma, slash or something else
          * Alphabetic characters(lower/upper case), ascii characters, or unicode characters  
-      * Input - LinkedList<a id="question-linkedlist"></a>
+      * Input - LinkedList
          * Doubly or singly linkedlist
-      * Input - Tree<a id="question-tree"></a>
+      * Input - Tree
          * Binary tree
          * Binary search tree
          * Complete tree
-      * Input - Graph<a id="question-graph"></a>
+      * Input - Graph
          * Directed or undirected
          * Weighted or not
          * Connected or not
@@ -240,10 +216,10 @@
         * Whether duplicate entries exist
    * Edge cases: "***If input is like this, then what should I output?***"
 
-#### Give a small but general enough example for discussing algo/DS <a id="whiteboard-workflow-context"></a>
+#### Give a small but general enough example for discussing algo/DS 
 * Usually a size of 4~5 is enough.
 
-#### Come up with a brute force algorithm <a id="whiteboard-workflow-bruteforce"></a>
+#### Come up with a brute force algorithm 
 1. Synchronize with interviewer "***Let's come up with a brute force solution first.***"
 2. Unstuck strategy:
    1. The most straightforward way to list all possible solutions
@@ -253,7 +229,7 @@
       * Give it a try: "***Let's try a graph-based solution***"
 3. Calc time/space complexity: "***The time complexity of the algorithm is O(XXX) and space complexity is O(XXX)***"
 
-#### Optimize the brute force solution <a id="whiteboard-workflow-optimize"></a>
+#### Optimize the brute force solution 
 1. Synchronize with interviewer "***The time/space complexity of the brute force solution is too high and will be impractical.***"
 2. Consider the typical optimizing patterns below:
    1. Where the bottleneck is: "***The bottleneck of the algorithm lies in this section of code***"
@@ -267,7 +243,7 @@
    2. Be keen to what interviewer is saying: Every word the interviewer is saying has its meanings. ""
 5. Synchronize with interviewer "***Do you have any concerns for the proposed algorithm? Should we write code for this***."
 
-#### Write test cases <a id="whiteboard-workflow-test-cases"></a>
+#### Write test cases 
 * In general, the following types of test cases should be considered 
    * The normal case: e.g. array length of even or odd in sorting algo
    * The extremes: e.g. empty array, one element array, extremely large one array
@@ -291,7 +267,7 @@
       * List/Array of even length
       * List/Array of odd length
 
-#### Write code <a id="whiteboard-workflow-write-code"></a>
+#### Write code 
   1. Synchronize with interviewer "***There are XXX steps in this algorithm. The first is XXX. The second....***"
   2. Check input validity (already discussed thoroughly before)
   3. Use // or empty line to separate different steps and a place to synchronize with interviewer.
@@ -303,7 +279,7 @@
      * When need double check trivials (like +1 or plus two, loop termination conditions ): 
        * "***Not sure whether my loop should have "<" or "<=". Write a checkmark to remind yourself to figure out the details at the end.***""
 
-#### Walk through test cases <a id="whtieboard-workflow-walk-test-cases)"></a>
+#### Walk through test cases 
   1. Synchronize with interviewer: "***Then I would usually check my code against tests***" 
   2. Check the code by myself
      * Check steps:
@@ -315,7 +291,7 @@
        * "***Give me a moment, I feel there is a bug here. Let's have a double check.***"
        * "***The root cause of the problem is XXX.***"
   3. Explain shortcuts I have taken: Talk about sections which could be refactored/improved, but was done in a certain way in an interview setting
-     * Bad smells for refactoring and optimization <a id="bad-smells"></a>
+     * Bad smells for refactoring and optimization 
        * Code/function length > 100
        * Too many if statement checking for boundary cases
        * Code do not generalize well. Only work for current problem. e.g. merge 2 sorted list -> merge k sorted List
@@ -323,7 +299,7 @@
        * Global variables
   4. Synchronize with interviewer: "***I think I am done with the problem***".
 
-#### Solve follow up questions <a id="whiteboard-workflow-follow-up"></a>
+#### Solve follow up questions 
 * Typical follow-up questions
     * No duplicates -> duplicates exist
     * Whether result exist -> return all results
@@ -331,8 +307,8 @@
     * How to avoid global variables
     * How to improve performance
 
-### Interview mindset <a id="core-strategies"></a>
-#### Understanding what interviewers really wants <a id="#undertand-interviewers"></a>
+### Interview mindset 
+#### Understanding what interviewers really wants 
 * Evaluation criteria
   - Can s/he explain technical solutions well?
   - Does s/he understand basic concepts well?
@@ -349,7 +325,7 @@
 | Write code to solve problem | <ul><li>Jumps into writing code</li><li>Awkward silence</li></ul>     | <ul><li>Would I want to work with them everyday</li><li>Have they actually written production grade code</li><li>What do they do when stuck</li></ul> |
 | Maybe you could try this ... | <ul><li>Take advice without serious thinking</li></ul>  | <ul><li>Do they think independently</li><li>How fast can they absord new information</li><li>Do they take advice/directions well</li><li>Do they learn quickly and run with it</li></ul> |
 
-#### When met with easy/hard/tricky problems (although most time medium problems): <a id="met-with-easy-hard-tricky-problems"></a>
+#### When met with easy/hard/tricky problems (although most time medium problems): 
 * Always smile no matter how easy/hard/tricky the problem is, ;)
 * For easy problems,
   * Although interviewer says "I will only give you an easy question". Every interviewing question has its purpose. It might be the corner case, coding style or communication. 
@@ -358,7 +334,7 @@
   * Notice that the assumption might have been changed. 
   * Still need to walk through the entire thought process instead of jumping to the right answer directly.
 
-#### Whiteboard coding pros and cons <a id="whiteboard-coding-pros-cons"></a>
+#### Whiteboard coding pros and cons 
 * Pros
   * Every software engineer knows algo and data structures. It provides a common domain for interviewers and interviewees to discuss.
   * Smart people will always be smart wherever they go. There are just too many candidates there and there needs a way to differentiate it. At least, whiteboard coding could reflect candidates' understanding of algo/data structures and communication skills.
@@ -369,24 +345,24 @@
   * The optimization process in algorithm questions is kind of over-optimization. In practice, only improve performance when necessary.
   * Stand and write code on whiteboard is really exhausting if lasting for 4-5 hours.
 
-### Practice mindset <a id="practice-patterns"></a>
-#### Goal <a id="practice-goal"></a>
+### Practice mindset 
+#### Goal 
   * Proficiency: Given an original Leetcode problem you should be able to finish it no more than 10 minutes no matter what its difficulty level is.
   * Understanding: You should be able to start from brute force solution, discuss tradeoffs along the way and optimize to a solution the interviewer is satisfied with.
   * Cleaness: No interview code should be longer than 100 lines. In most cases it is within 50 lines. Keep optimizing your code until it is short enough. 
 
-#### Attitudes <a id="practice-attitudes"></a>
+#### Attitudes 
   * This might be the last time in my life that I spent so much time and efforts in algorithm questions. Next time when I hunt for jobs, either HRs will invite me or I will have far less time to prepare.
   * An interview is a matter of preparation. To enable yourself explain solutions well and code in a bug free way, you need to practice a lot. 
   * The way an engineer approach a algorithm problem can reflect their efficiency at work. 
   * Hiring system is broken. But currently there is no better way to do it.
 
-#### Tools<a id="practice-tools"></a>
+#### Tools
   * Task planning: Use tags ( TO_START, TO_HURRY, TO_TEST ) to manage algorithm question status and prioritize important tasks
   * Feedbacks: Use git commit number per day as feedback for progress
   * Summarizing lessons: Use git commit message as a place to learn from mistakes and summarize lessons
 
-#### Strategies<a id="practice-strategies"></a>
+#### Strategies
   * Chunk it up
     * Focus on recently popular, medium to hard questions.
     * For each category of problems, summarize common tricks/techniques used.
@@ -398,7 +374,7 @@
     * Interview a lot. 
     * Reflection on what I do good and bad
 
-#### Leetcode pros and cons <a id="leetcode-pros-cons"></a>
+#### Leetcode pros and cons 
 * Pros
   * Latest interview questions
   * Large pool of different question types
@@ -416,7 +392,7 @@
     * Could not search problems by specifying multiple tags
     * Function names do not follow best practices, which makes variables naming kind of difficult.
 
-#### Interview Java pros and cons <a id="java-pros-cons"></a>
+#### Interview Java pros and cons 
 * Pros
   * Readability
 * Cons
@@ -425,9 +401,9 @@
   * Lambda expressions are still not closures
   * Linkedhashset could not be iterated reversely
 
-### Java language<a id="java-language"></a>
-#### Characteristics of Object oriented<a id="characteristics"></a>
-#### Thread vs process<a id="thread-vs-process"></a>
+### Java language
+#### Characteristics of Object oriented
+#### Thread vs process
 * For most computing tasks, there is great advantage to splitting up workload into multiple actors and partitioning the task into different, multiple tasks for these multiple actors. Two common ways of doing this are multi-threaded programs and multi-process systems.
 
 | Differences |  Thread |  Process  |
@@ -440,7 +416,7 @@
 | Program debugging | More difficulties including synchronization, non-deterministic timing and accidental data corruption | Easier |
 | Use cases  | Threads are a useful choice when you have a workload that consists of lightweight tasks (in terms of processing effort or memory size) that come in, for example with a web server servicing page requests. There, each request is small in scope and in memory usage. Threads are also useful in situations where multi-part information is being processed – for example, separating a multi-page TIFF image into separate TIFF files for separate pages. In that situation, being able to load the TIFF into memory once and have multiple threads access the same memory buffer leads to performance benefits. | Processes are a useful choice for parallel programming with workloads where tasks take significant computing power, memory or both. For example, rendering or printing complicated file formats (such as PDF) can sometimes take significant amounts of time – many milliseconds per page – and involve significant memory and I/O requirements. In this situation, using a single-threaded process and using one process per file to process allows for better throughput due to increased independence and isolation between the tasks vs. using one process with multiple threads. |
 
-#### Java vs C++<a id="java-vs-c++"></a>
+#### Java vs C++
 
 | Differences | C++          | Java  |
 | --------------------- |:-------------:| -----:|
@@ -450,7 +426,7 @@
 | Memory management  | Managed by developers | Garbage collector |
 | Exception handling  | All unchecked | Error and RuntimeException unchecked, others checked |
 
-#### Access modifiers<a id="access-modifiers"></a>
+#### Access modifiers
 
 | Access modifiers | Current class | Same package | Children classes | Other packages |
 | ---------------- |:-------------:| ------------:| ----------------:| --------------:|
@@ -459,12 +435,12 @@
 | default          |     Yes       |     Yes      |       No         |      No        |
 | private          |     Yes       |      NO      |       No         |      No        |
 
-#### Stack vs heap vs static area<a id="stack-heap-staticarea"></a>
+#### Stack vs heap vs static area
 * Stack: local variables
 * Heap: new created variables
 * Static area: literal and constant variables
 
-#### OutOfMemoryError<a id="outof-memory-error"></a>
+#### OutOfMemoryError
 * Types
   - java.lang.OutOfMemoryError: Java heap space
   - java.lang.OutOfMemoryError: PermGen space
@@ -478,19 +454,19 @@
     2. Reproduce the problem
     3. Investigate the issue using heap dump file
 
-#### Equals and hashcode<a id="equals-hashcode"></a>
+#### Equals and hashcode
 * The contract between equals and hashCode is
   - If two objects are equal, then they must have the same hash code.
   - If two objects have the same hash code, they may or may not be equal.
 
-#### Overload vs override<a id="overload-vs-override"></a>
+#### Overload vs override
 
 | Differences | Overload          | Override  |
 | --------------------- |:-------------:| -----:|
 | Definition  | Two methods with same name but different signatures      |  Redefine a class already defined in the parent class |
 | Execution time | Compile time     |  Run time |
 
-#### Abstract class vs interface<a id="abstract-class-vs-interface"></a>
+#### Abstract class vs interface
 
 | Differences | Abstract class          | Interface  |
 | --------------------- |:-------------:| -----:|
@@ -499,8 +475,7 @@
 | Modifiers  | no limits | fields are public/static/final, methods are public automatically |
 | Inheritance  | Single  | Multiple |
 
-#### Static keyword <a id="static-keyword"></a>
-* Detailed comparison
+#### Static keyword 
 
 |                 |    Use case   | Accessibility  |  Benefits |
 | --------------- |:-------------:| --------------:| ---------:|
@@ -532,7 +507,7 @@
 * Cannot override static methods in Java
 No, you cannot override static method in Java because method overriding is based upon dynamic binding at runtime and static methods are bonded using static binding at compile time. Though you can declare a method with same name and method signature in sub class which does look like you can override static method in Java but in reality that is method hiding. Java won't resolve method call at runtime and depending upon type of Object which is used to call static method, corresponding method will be called. It means if you use Parent class's type to call static method, original static will be called from patent class, on ther other hand if you use Child class's type to call static method, method from child class will be called. In short you can not override static method in Java. If you use Java IDE like Eclipse or Netbeans, they will show warning that static method should be called using class name and not by using object becaues static method can not be overridden in Java.
 
-#### Main method <a id="main-method"></a>
+#### Main method 
 * Why main method is static
   1. Since the main method is static Java virtual Machine can call it without creating any instance of a class which contains the main method.
   2. Since C and C++ also have similar main method which serves as entry point for program execution, following that convention will only help Java.
@@ -545,9 +520,9 @@ Java, JVM can easily access and execute it.
 Since the main method in Java is not supposed to return any value, it's made void which simply means main is not returning anything.
 
 
-#### Volatile keyword <a id="volatile-keyword"></a>
+#### Volatile keyword 
 
-#### Clone<a id="clone"></a>
+#### Clone
 * Deep and shallow copy
   - Default clone() method creates the shallow copy of an object. 
     + The shallow copy of an object will have exact copy of all the fields of original object.
@@ -558,7 +533,7 @@ Since the main method in Java is not supposed to return any value, it's made voi
   - Implements Cloneable interface and override clone() 
   - Implements serializable interface and clone objects by serialize and deserialize
 
-#### Assertion <a id="assert"></a>
+#### Assertion 
 * Assertion. To put it short, assertion are for internal precondition/post-condition violation checking while exception are for external condition checking.
   - Where not to use
     + Implement any application functionality
@@ -572,14 +547,14 @@ Since the main method in Java is not supposed to return any value, it's made voi
       * Something that must be true after the 
     + Implement class invariants
 
-#### Error vs exception <a id="error-vs-exception"></a>
+#### Error vs exception 
 * Both java.lang.Error and java.lang.Exception classes are sub classes of java.lang.Throwable class
 * java.lang.Error class represents the errors which are mainly caused by the environment in which application is running. 
   + For example, OutOfMemoryError occurs when JVM runs out of memory or StackOverflowError occurs when stack overflows.
 * java.lang.Exception class represents the exceptions which are mainly caused by the application itself. 
   + For example, NullPointerException occurs when an application tries to access null object or ClassCastException occurs when an application tries to cast incompatible class types. In this article, we will discuss the differences between Error and Exception in java.
 
-#### Checked vs unchecked exception <a id="checked-vs-unchecked-exception"></a>
+#### Checked vs unchecked exception 
 * **Checked exception**
   - **Def**: Exceptions that are checked at compile time. Must be handled explicitly either by catching or throwing the exception. 
   - **Use condition 1**: Expected but unpreventable (The caller did everything within their power to validate the input parameters, but some condition outside their control has caused the operation to fail. For example, you try reading a file but someone deletes it between the time you check if it exists and the time the read operation begins. By declaring a checked exception, you are telling the caller to anticipate this failure.)
@@ -593,7 +568,7 @@ Since the main method in Java is not supposed to return any value, it's made voi
       * ArithmeticException ( 1 / 0 )
       * IndexOutOfBoundaryException ( example problem: search in unknown size sorted array )
 
-#### Immutable class <a id="immutable-objects"></a>
+#### Immutable class 
 * Benefits:
   - **Clone**: Don't need a copy constructor/an implementation of clone()
   - **Defensive copy**: Don't need to be copied defensively when used as a field
@@ -610,7 +585,7 @@ Since the main method in Java is not supposed to return any value, it's made voi
     + Do not provide methods that modify mutable objects
     + Do not share references of mutable objects. Create defensive copy of internal mutable objects when sharing.
 
-#### Final vs finally vs finalize<a id="final-finally-finalize"></a>
+#### Final vs finally vs finalize
 * Final class can't be inherited, final method can't be overriden and final variable can't be changed. A class/Method may never be both abstract and final. Abstract means the class/Method must be extended/Overriden, while final means it cannot be. 
 
 
@@ -669,13 +644,13 @@ class FinalizeExample
 }
 ```
 
-#### Java memory leak <a id="memory-leak"></a>
+#### Java memory leak 
 
-#### Garbage collector <a id="garbage-collector"></a>
+#### Garbage collector 
 
-#### JVM <a id="jvm"></a>
+#### JVM 
 
-#### Design pattern <a id="design-pattern"></a>
+#### Design pattern 
 | Name      | Intent                 | Real world example | 
 |-----------|------------------------|--------------------| 
 | Builder   | Separate the construction of a complex object from its representation so that the same construction process can create different representations.  | java.lang.StringBuilder#append()/java.lang.StringBuffer#append | 
@@ -690,9 +665,9 @@ class FinalizeExample
 | Template  | Define the skeleton of an algorithm in an operation, deferring some steps to client subclasses. Template Method lets subclasses redefine certain steps of an algorithm without changing the algorithm's structure.   | All non-abstract methods of java.io.InputStream,java.io.OutputStream,java.io.Reader,java.io.Writer/All non-abstract methods of java.util.AbstractList, java.util.AbstractSet and java.util.AbstractMap | 
 
 
-### Data structures <a id="ds"></a>
+### Data structures 
 
-#### Data structure relationships<a id="ds-relationship"></a>
+#### Data structure relationships
 
 | Enhancements | Original          | Improved  |
 | --------------------- |:-------------:| -----:|
@@ -702,23 +677,23 @@ class FinalizeExample
 | No order to insertion/sorted order  | Hashmap      |   linkedHashMap/TreeMap |
 | Partial to complete order | Priorityqueue | Treeset |
 
-#### Type size<a id="ds-type-size"></a>
+#### Type size
 * Reference types: 32-bit system (32 bit), 64-bit system (64 bit)
 * Enumeration type: 
 * Primitive types: boolean (8 bit), byte (8 bit), char (16 bit), short (16 bit), int (32 bit), long (64 bit), float (32 bit), double (64 bit)
 
-#### Type conversions<a id="ds-type-conversions"></a>
-##### Automated cast<a id="ds-type-conversions-automated-cast"></a>
+#### Type conversions
+##### Automated cast
 * Convert char to int, does not need explicit conversion
 ```java
 value = value * 10 +  s.charAt( currPos ) - '0' ; 
 ```
 
-##### Between string and primitive types <a id="ds-type-conversions-string-and-integer"></a>
+##### Between string and primitive types 
 * Convert string to primitive types: parseXXX(String) or valueOf(String)
 * Convert primitive types to string: String.valueOf() or add with an empty string ""
 
-##### Between array and collections <a id="ds-type-conversions-array-and-collections"></a>
+##### Between array and collections 
 * Array to collections 
   + To convert array of reference types into collections, there is an API Arrays.asList(). Then List collection could be easily casted to set/map collections. 
   + To convert array of primtive types into collections, need to do it manually.
@@ -745,7 +720,7 @@ for ( int num : nums )
   + There are built-in interfaces for this such as Object[] collections.toArray() or collections.toArray(T[] array)
   + Honestly, both of them are really ugly and would better to do it manually.
 
-##### Between collections <a id="ds-type-conversions-collections"></a>
+##### Between collections 
 * Map and list
 * Set and list
 * Map and set
@@ -764,8 +739,8 @@ List<String> list = //...
 Set<String> set = list.stream().collect( Collectors.toSet() );
 ```
 
-#### Array <a id="ds-array"></a>
-##### Circular array <a id="ds-array-circular"></a>
+#### Array 
+##### Circular array 
 * Common techniques used in circular arrays
   - double the array to 2n by concatenating original array to the end and then apply a sliding window of size n on it (whether is a sorted rotated array)
   - invert the sign of the array (circular array maximum sum)
@@ -814,17 +789,17 @@ private List<List<Integer>> kSum( int kVal, int target, int startIndex, int[] nu
 }
 ```
 
-##### Forward backward traversal <a id="ds-array-forward-backward-traversal"></a>
+##### Forward backward traversal 
 * Trapping rain water, Best time to buy and sell stock III, product of array exclude itself
 
-#### String <a id="ds-string"></a>
-##### Why String is immutable or final <a id="ds-string-immutable"></a>
+#### String 
+##### Why String is immutable or final 
 * By design: 
   - **String pool**: Strings are cached in String pool and shared between multiple clients. 
   - **Security**: No one could override the behavior of String class and don't need to worry about many security threats.
   - **Performance**: Cache its hashcode. Avoid synchronization.
 
-##### String vs StringBuilder vs StringBuffer <a id="ds-string-tradeoffs"></a>
+##### String vs StringBuilder vs StringBuffer 
 
 | Comparison | String         | StringBuilder | StringBuffer  |
 | --------------------- |:-------------:| -----:|-----:|
@@ -833,21 +808,21 @@ private List<List<Integer>> kSum( int kVal, int target, int startIndex, int[] nu
 | Thread safe   | Yes     |   No | Yes | 
 | Performance   | Fast    |   Fast | very slow| 
 
-##### String reverse <a id="ds-string-reverse"></a>
+##### String reverse 
 
-##### Encode and decode <a id="ds-string-encode-decode"></a>
+##### Encode and decode 
 
-##### Palindrome <a id="ds-string-palindrome"></a>
+##### Palindrome 
 * Several ways to solve the Longest palindrome substring problem
   - DP-based solution: O(n^2) space and time, if need to storing palindrome result, this is always better (e.g. palindrome partitioning)
   - Start looping from middle: O(n^2) time
   - Manacher's algorithm: O(n) time, not generic enough.
 
-#### Collections <a id="ds-collections"></a>
-##### Iterator <a id="ds-collections-iterator"></a>
+#### Collections 
+##### Iterator 
 * When implementing hasNext() and next() function for an interator, should put the logic checking whether next elemement exists inside hasNext() function. 
 
-##### Immutability <a id=""></a>
+##### Immutability 
 * If do not want to change the original array/list, could create a copy instead.
 ```java
 // array
@@ -860,8 +835,8 @@ List<Integer> listCopy = new ArrayList<>( list );
 ```
 * Collections.unmodifiableList/unmodifiableSet/unmodifiableMap()
 
-#### List <a id="ds-list"></a>
-##### ArrayList vs LinkedList <a id="ds-list-tradeoffs"></a>
+#### List 
+##### ArrayList vs LinkedList 
 * Both implements List interface, maintain the insertion-order, non-synchronized collections
 
 | Comparison | arraylist         | linkedlist  |
@@ -871,7 +846,7 @@ List<Integer> listCopy = new ArrayList<>( list );
 | Search performance  | O(1)     |   O(n) |
 | Memory overhead  | array and element      | two pointers and element |
 
-##### LinkedListNode<a id="ds-list-linkedlistnode"></a>
+##### LinkedListNode
 * Dummy Node trick: Maintain a list dummy head and actual tail pointer
   - Used across all linked list modification operations
 ```java
@@ -886,7 +861,7 @@ tail = appendedNode;
 return dummy.next; // pointing to the actual list head
 ```
 
-##### Common tasks<a id="ds-list-common-tasks"></a>
+##### Common tasks
 * Median
 ```java
   public ListNode findMedian( ListNode head )
@@ -1030,8 +1005,8 @@ Queue<ValAndIter> minQueue = new PriorityQueue<>( ( o1, o2 ) -> o1.val - o2.val 
 
 ```
 
-#### Stack <a id="ds-stack"></a>
-##### Calculator <a id="ds-stack-calculator"></a>
+#### Stack 
+##### Calculator 
 * Evaluate infix expression. The problem can have various follow-ups
   - How to define input: String s or String[] tokens. If input is defined as String s and numbers might include negative numbers, then parsing negative numbers can be kind of cumbersome. When possible, define input as String[] tokens. Even when required to define input as String s, double check whether we need to deal with negative numbers.
   - Whether contain space
@@ -1115,7 +1090,7 @@ Queue<ValAndIter> minQueue = new PriorityQueue<>( ( o1, o2 ) -> o1.val - o2.val 
     }
 ```
 
-##### Parentheses <a id="ds-stack-parent"></a>
+##### Parentheses 
 * Check if string s contains valid parenthese
   - Questions to confirm
     + Whether the string contains non-parentheses characters
@@ -1226,8 +1201,8 @@ boolean isValid( String s )
 > ")))))))))((((((((("
 
 
-#### Queue <a id="ds-queue"></a>
-##### Interfaces <a id="ds-queue-interfaces"></a>
+#### Queue 
+##### Interfaces 
 | Comparison | throws exception         | return special value  |
 | --------------------- |:-------------:| -----:|
 | insert  | boolean add(E e)    |  boolean offer(E e) |
@@ -1235,21 +1210,21 @@ boolean isValid( String s )
 | examine  | E element()     |   E peek() |
 
 
-#### PriorityQueue <a id="ds-priorityqueue"></a>
-##### Heapify <a id="ds-priorityqueue-heapify"></a>
-##### Sift up/down <a id="ds-priorityqueue-sift-up-down"></a>
+#### PriorityQueue 
+##### Heapify 
+##### Sift up/down 
 ##### Improve built-in remove O(n)
 * Built-in implementation remove() method for priorityqueue has O(n) time complexity.
   -  O(n) time is spent on looping through entire queue to find the element to be removed. O(logn) is used to remove the element
   -  But O(n) could be easily improved to O(logn) by adding an additional Map&lt;T, Node&gt; existingNodes. When Node has duplicate values, a counter could be added as Node class instance variable.
 
-##### Lambda expression as comparator <a id="ds-priorityqueue-lambda-expression"></a>
+##### Lambda expression as comparator 
 ```java
 PriorityQueue<NumAndFreq> maxQueue = new PriorityQueue<>( ( o1, o2 ) -> ( o2.freq - o1.freq ) ); // decreasing order
 PriorityQueue<NumAndFreq> minQueue = new PriorityQueue<>( ( o1, o2 ) -> ( o1.freq - o2.freq ) ); // increasing order
 ```
 
-##### Top K problems <a id="ds-priorityqueue-top-k"></a>
+##### Top K problems 
 * Calculate the top K most frequent characters in a string 
   - Use TreeMap to maintain topK sorted order. Suppose m is the number of input and n is the number of distinct input, then build treemap requires O(mlogn),  + nlogn) complexity.
   - A more efficient approach is to use HashMap + PriorityQueue. 
@@ -1272,9 +1247,9 @@ PriorityQueue<NumAndFreq> minQueue = new PriorityQueue<>( ( o1, o2 ) -> ( o1.fre
   - PriorityQueue O(nlogk)
   - Quicksort O(n)
 
-#### Tree <a id="ds-tree"></a>
-##### Build <a id="ds-tree-build"></a>
-##### Traversal <a id="ds-tree-traversal"></a>
+#### Tree 
+##### Build 
+##### Traversal 
 * Classic tree level order traversal with O(n) space
 ```java
 Queue<TreeNode> bfsQueue = new LinkedList<>();
@@ -1295,13 +1270,13 @@ while ( !bfsQueue.isEmpty() )
 ```
 * Special tree level order traversal with O(1) space: example problem (populate next right pointers in each node II)
 
-##### View <a id="ds-tree-view"></a>
+##### View 
 * Right side view (Binary tree right side view)
   - Use List + tree traversal ( level order / preorder / reverse-preorder )
 * Outer-inner order / Vertical order (Find binary tree leaves / Binary tree vertical order traversal)
   - Use HashMap + tree traversal ( level order / preorder )
 
-##### Serialize/Deserialize <a id="ds-tree-serialize-deserialize"></a>
+##### Serialize/Deserialize 
 * Two popular ways:
   - Preorder: preorder leads to a recursive dfs-like implementation. Since Java is passed by value, it is really hard to implement elegantly without using a global variable.
   - Level-order: Level-order leads to a iterative bfs-like implementation. Elegant solution.
@@ -1351,9 +1326,9 @@ serialize 3's children
 
 ```
 
-##### Path on tree <a id="ds-tree-path"></a>
+##### Path on tree 
 
-##### Segment tree <a id="ds-tree-segment-tree"></a>
+##### Segment tree 
 * Segment Tree: Range sum query and update in O(logn) time
 ```java
 class SegmentTreeNode
@@ -1436,7 +1411,7 @@ class SegmentTreeNode
   }
 ```
 
-##### Binary search tree<a id="ds-tree-binary-search-tree"></a>
+##### Binary search tree
 * Used to store a collection of items in sorted form
 * How to handle duplicates inside binary search tree
   - Allow same keys on left side ( or right side )
@@ -1609,22 +1584,22 @@ public void treeHighSpaceTraverse( TreeNode root, int order )
     }
 ```
 
-#### HashMap <a id="ds-hashmap"></a>
-##### Use case <a id="ds-hashmap-usecase"></a>
+#### HashMap 
+##### Use case 
 * need a symbol table with search, insert and delete operations
 
-##### Best practices <a id="ds-hashmap-best-practices"></a>
+##### Best practices 
 * Use Double as hashmap keys is a bad practice. Especially if needing to perform calculations on double keys, the hash of double could mess up.
 * Use Object as hashmap keys. When the hashCode() and equals(Object o) methods are not overriden by your class, the default implementation are used. The default behavior is to treat all objects as different, unless they are the same object. IdentityHashMap always does this by using reference-equality in place of object-equality
 
-##### Collision resolution <a id="ds-hashmap-collision-resolution"></a>
+##### Collision resolution 
 | Strategies | Use case         | 
 | --------------------- |:-------------:| 
 | Chaining with linked list  | worst case O(n), most commonly used    |
 | Chaining with BST  | worst case O(logn), input extremely nonuniform distribution     |
 | Open addressing with probing  | number of collisions really low  |
 
-##### Intersection <a id="ds-hashmap-intersection"></a>
+##### Intersection 
 ```java
 // Compute the intersection of two hashmap/hashset
 
@@ -1642,7 +1617,7 @@ setA.retainsAll( setB );
 
 ```
 
-##### Histogram and hashmap list <a id="ds-hashmap-histogram-hashmap-list"></a>
+##### Histogram and hashmap list 
 ```java
 // more concise code for histogram with getOrDefault() API
 map.put( key, 1 + map.getOrDefault( key, 0 ) );
@@ -1650,7 +1625,7 @@ map.put( key, 1 + map.getOrDefault( key, 0 ) );
 map.putIfAbsent( key, new ArrayList<>() );
 ```
 
-##### Anagram <a id="ds-hashmap-anagram"></a>
+##### Anagram 
 * Given an array of string, group it into anagrams (the number of strings is m, the number of chars in a string is n). The key of the problem is how to identify anagrams:
   - Use sorted string as key, T.C. O(mnlogn), S.C. O(mn)
   - If the charset is not too big (like lowercase/uppercase letters), use histogram of string as key (like counting sort) T.C. O(mn), S.C. O(mn)
@@ -1675,7 +1650,7 @@ public List<List<String>> groupAnagrams( String[] strs )
 }
 ```
 
-##### Sparse Vector/matrix <a id="ds-hashmap-sparse-matrix"></a>
+##### Sparse Vector/matrix 
 * What are the operations that need to be supported
   - Look up
   - Iterate through the array
@@ -1739,7 +1714,7 @@ for ( int i = 0; i < A.length; i++ )
 }
 ```
 
-##### LRU Cache <a id="ds-hashmap-lru-cache"></a>
+##### LRU Cache 
 * HashMap + DDL
 * LinkedHashMap + manual removing oldest entry and reset
 * LinkedHashMap ( access order + removeEldestEntry() )
@@ -1768,13 +1743,13 @@ public class LRUCache<K, V> extends LinkedHashMap<K, V>
 
 ```
 
-#### TreeMap <a id="ds-treemap"></a>
+#### TreeMap 
 * Get Key/Entry APIs: firstKey/firstEntry, lastKey/lastEntry, lowerKey/lowerEntry, higherKey/higherEntry, CeilingKey/CeilingEntry, floorKey/floorEntry
 * Remove Key/Entry APIs: pollFirstEntry/pollLastEntry, remove
 * Get Subset APIs: tailMap/headMap/subMap
 
-#### Graph <a id="ds-graph"></a>
-##### Edge list vs Adjacent list vs Adjacent matrix<a id="ds-graph-tradeoffs"></a>
+#### Graph 
+##### Edge list vs Adjacent list vs Adjacent matrix
 * Time complexity comparison between different graph representation
  * Use cases for different representations
   * Edge list is usually not used because looping through neighbor of a vertex is too expensive. This makes it really appropriate for many graph algo (bfs, dfs).
@@ -1798,7 +1773,7 @@ List<GraphNode> graph =...;
 Map<Integer, Set<Integer>> graph 
 ```
 
-##### Build graph <a id="ds-graph-build"></a>
+##### Build graph 
 * **Building graph**, it is will be less error-prone to separate the phase of building vertexes and edges. When they are merged together, it is easy to forget about the isolated vertexes. In a common setting, usually asked to build a graph given the number of vertex int n and an array of edges. 
 ```java
 public Map<Integer, Set<Integer>> buildGraph( int n, int[][] edges )
@@ -1823,15 +1798,15 @@ public Map<Integer, Set<Integer>> buildGraph( int n, int[][] edges )
 * **Detect cycles inside undirected graph** with dfs + discovered set. 
 * **Detect cycles inside directed graph** with dfs + visited set + discovered set.
 
-#### Trie <a id="ds-trie"></a>
-##### Use case <a id="ds-trie-use-case"></a>
+#### Trie 
+##### Use case 
 * Find prefix of string
 * Traverse character by character
 * Compared with hashmap: 
    - Space complexity: when storing a list of words (Especially when these words share prefix), using trie save space. 
    - Time complexity: to compute hashcode for a string, O(n) time complexity; find/insert a string in a trie, the same
 
-##### Trie definition <a id="ds-trie-def"></a>
+##### Trie definition 
 * Depending on the size of charset, children pointers could be either stored in a bitmap or hashmap. Although slightly suffering performance, hashmap implementation is more concise and generic.
 ```java
 class Trie
@@ -1853,7 +1828,7 @@ private class TrieNode
   }     
 } 
 ```
-##### Common tasks <a id="ds-trie-common-tasks"></a>
+##### Common tasks 
 * Add
 * Search (regular expression)
 * Start with
@@ -1906,10 +1881,10 @@ private boolean search( String word, int index, TrieNode root )
 }
 ```
 
-### Algorithms <a id="algo"></a>
+### Algorithms 
 
-#### Math <a id="algo-math"></a>
-##### Random <a id="algo-math-random"></a>
+#### Math 
+##### Random 
 * Reservoir sampling: sample k from n
   - Example problems: Shuffle an array, Random pick index, Linked list random node.
 ```java
@@ -1944,21 +1919,21 @@ public List<Integer> sample( List<Integer> list, int k )
   - Build a prefix sum array of frequency
   - Generate random number and use binary search for last smaller entry
 
-##### Mod <a id="algo-math-mod"></a>
+##### Mod 
 * judge whether a value is even or odd
   - Use num % 2 != 0 rather than num % 2 == 1 because of negative number mod ( e.g. -5 % 2 == -1 )
   - To guarantee mod result is always positive, if knowing num range RANGE, could consider ( num + RANGE ) % RANGE 
 
-##### Power <a id="algo-math-power"></a>
+##### Power 
 * Power of integer: Java does not provide a built-in function for Integer values
   - solution 1: It has a built-in function double Math.pow( double, double ). But the computation cost for double is much higher than int and the result needs to be downcasted.
   - solution 2: Use multiply instead when exponent is low. 
   - solution 3: When 2 is radix, use bit shifting
   - solution 4: Implement in-house pow for integers based on divide and conquer
 
-##### Sqrt <a id="algo-math-sqrt"></a>
+##### Sqrt 
 
-##### Divide <a id="algo-math-divide"></a>
+##### Divide 
 * Divide two integers ( useful names: dividend/numerator, divisor/denominator, quotient, residue )
   * handle boundary cases ( 0, Integer.MIN_VALUE )
     + return int quotient
@@ -1972,9 +1947,9 @@ public List<Integer> sample( List<Integer> list, int k )
             + use hashmap to record residue and occuring positions to handle recurring
         - concatenate symbol, integer part, dot, fraction part (possibly with parentheses)
 
-##### Multiply <a id="algo-math-multiply"></a>
+##### Multiply 
 
-##### Prime <a id="algo-math-prime"></a>
+##### Prime 
 * Check for primality
   * Naive solution: Iterate from 2 through i
   * Slightly better: Iterate from 2 through sqrt(i)
@@ -2022,12 +1997,12 @@ int getNextPrime( boolean[] flags, int prime )
 }
 ```
 
-#### Bit manipulation <a id="algo-bit-manipulation"></a>
-##### Arithmetic vs logic right shift <a id="algo-bit-manipulation-arithmetic-vs-logic"></a>
+#### Bit manipulation 
+##### Arithmetic vs logic right shift 
   * Arithmetic right shift >>, shift bits to the right but fill in the new bits with the value of the sign bit
   * Logic right shift >>>, shift bits to the right but fill in the new bits with 0.
 
-##### Common tasks <a id="algo-bit-manipulation-common-tasks"></a>
+##### Common tasks 
 * get bit, set bit, clear bit and update bit
 ```java
 boolean getBit( int num, int i )
@@ -2069,8 +2044,8 @@ int updateBit(int num, int i, boolean bitIs1)
 }
 ```
 
-#### Non-DP Memorization <a id="algo-non-dp-memorization"></a>
-##### Array <a id="algo-non-dp-memo-array"></a>
+#### Non-DP Memorization 
+##### Array 
 * 1D/2D Prefix sum
 ```java
 // 1D prefix sum
@@ -2097,15 +2072,15 @@ for ( int i = 1; i <= array2D.length; i++ )
 int areaSum = prefixSum2D[x_e][y_e] - prefixSum2D[x_s-1][y_e] - prefixSum2D[x_e][y_s-1] + prefixSum2D[x_s-1][y_s-1]
 ```
 
-##### Stack <a id="algo-non-dp-memo-stack"></a>
+##### Stack 
 * Maintain inc/dec sequences
   + Example problems: min stack, trapping rain water, largest rectangle in histogram, longest valid parentheses
 
-##### HashMap <a id="algo-non-dp-memo-hashmap"></a>
+##### HashMap 
 * Maximum size subarray sums to K, clone graph, two sum
 
-#### Two pointers <a id="algo-two-pointer"></a>
-##### Begin and end type <a id="algo-boundary-to-center"></a>
+#### Two pointers 
+##### Begin and end type 
 * Two sum type
   - example problems: two sum (sorted), three sum, four sum, three sum closest, three sum smaller
 ```java
@@ -2149,11 +2124,11 @@ else
      }
 ```
 
-##### Slow and fast type <a id="algo-slow-and-fast"></a>
+##### Slow and fast type 
 * Find the middle of linked list
 * Find linked list cycle
 
-##### Window type <a id="algo-window"></a>
+##### Window type 
 * Improve naive two level for loop to for-outer loop + while inner loop 
 * E.g. minimum window substring, minimum size subarray sum, Longest substring with at most K distinct characters, Longest substring without repeating characters
 ```java
@@ -2174,7 +2149,7 @@ for ( i = 0; i < n; i++ )
 }
 ```
 
-##### Two arrays type <a id="algo-two-arrays"></a>
+##### Two arrays type 
 * Interval related (merge interval, insert interval)
 ```java
 public List<Interval> insert( List<Interval> intervals, Interval newInterval )
@@ -2210,8 +2185,8 @@ public List<Interval> insert( List<Interval> intervals, Interval newInterval )
 }
 ```
 
-#### Sort <a id="algo-sort"></a>
-##### Common sorting algorithms <a id="algo-sort-common-algo"></a>
+#### Sort 
+##### Common sorting algorithms 
 
 | Algorithm | memory    | Use case  | 
 | --------------------- |:---------:| -----:|  
@@ -2220,11 +2195,11 @@ public List<Interval> insert( List<Interval> intervals, Interval newInterval )
 | Heapsort   | O(1)     |  unstable sort |
 | Bucketsort | O(1)     |  when knowing range and evenly distributed O(n+k) |
 
-##### Built-in sort interfaces <a id="algo-built-in-sort-interfaces"></a>
+##### Built-in sort interfaces 
 * Sort interfaces: Arrays.sort( array, comparator ) Collections.sort( collection, comparator ) method, list.sort( comparator )
 
-##### Types <a id="algo-sort-types"></a>
-* Interval-related<a id="algo-sort-types-interval-related"></a>
+##### Types 
+* Interval-related
   - Judge whether intervals overlap
 ```java
 boolean isOverlapping( Interval o1, Interval o2 )
@@ -2261,8 +2236,8 @@ for ( Interval interval : intervalList )
 pairList.sort( (o1, o2) -> (o1.start-o2.start) );
 ```
 
-##### Top K<a id="algo-sort-types-topK"></a>
-##### Stream API<a id="algo-sort-types-stream-API"></a>
+##### Top K
+##### Stream API
 * Get min/max from a list of integer
 ```java
 List<Integer> list = //...
@@ -2274,8 +2249,8 @@ int max = list.stream()
               .get();
 ```
 
-#### Binary search <a id="algo-binary-search"></a>
-##### Best practices <a id="algo-binary-search-best-practices"></a>
+#### Binary search 
+##### Best practices 
 ```java
 public int binarySearchIterative( int[] array, int target)
 {
@@ -2333,22 +2308,22 @@ public int binarySearchRecursive( int[] array, int target, int start, int end )
     }
 }
 ```
-##### How to handle duplicates <a id="algo-binary-search-handle-duplicates"></a>
+##### How to handle duplicates 
 
-##### Types <a id="algo-binary-search-types"></a>
-* First/Last smaller/bigger than target <a id="algo-binary-search-first-last-smaller-bigger"></a>
+##### Types 
+* First/Last smaller/bigger than target 
 
-* Rotated array <a id="algo-binary-search-rotated-array"></a>
+* Rotated array 
 
-* Two dimensional array <a id="algo-binary-search-2d-array"></a>
+* Two dimensional array 
 
-#### Recursive functions <a id="algo-recursion"></a>
-##### Recursive vs iterative solutions <a id="algo-recursive-iterative"></a>
+#### Recursive functions 
+##### Recursive vs iterative solutions 
   - Recursive algo can be very space inefficient. Each recursive call adds a new layer to the stack. If the algorithm recurses to a depth of n, it uses at least O(n) space.
   - All recursive algo can be implemented iteratively, although sometimes the code is more complex. 
   - Before diving into writing recursive code, ask myself how hard it would be to implement iteratively and discuss tradeoffs with your interviewer.
 
-##### Recursion time complexity cheat sheet <a id="algo-recursive-tc"></a>
+##### Recursion time complexity cheat sheet 
 
 | Recurrence | Algorithm           | Big-O Solution  |
 | --------------------- |:-------------:| -----:|
@@ -2359,7 +2334,7 @@ public int binarySearchRecursive( int[] array, int target, int start, int end )
 | T(n) = T(n-1) + O(n)  | Selection sort      |  O(n^2) |
 
 
-##### Steps in using recursion <a id="algo-recursion-problems-to-consider"></a>
+##### Steps in using recursion 
   - What does the recursive function do?
     + Take what parameters
     + Do what
@@ -2368,7 +2343,7 @@ public int binarySearchRecursive( int[] array, int target, int start, int end )
   - Initialization
   - Prunning
 
-##### How to return multiple results from recursive functions<a id="algo-recursion-return-multiple-results"></a>
+##### How to return multiple results from recursive functions
   - Use global variable. 
     + The first is to use private instance variables to store results
     + The second is to use a mutable argument of type ( int[], List&lt;&gt; ). Modify the value of this argument while travering.
@@ -2409,7 +2384,7 @@ private class ResultWrapper
 }
 ```
 
-##### Avoid duplicated recursion <a id="algo-recursion-avoid-duplicated-recursion"></a>
+##### Avoid duplicated recursion 
 * ensuring that the never two recursion tree branches overlap 
 ```java
 if ( i > 0 && candidates[i] == candidates[i-1] )
@@ -2419,9 +2394,9 @@ if ( i > 0 && candidates[i] == candidates[i-1] )
 }
 // invoking functions based on index i
 ```
-##### Types <a id="algo-recursion-types"></a>
+##### Types 
 
-* Tree-based recursion <a id="algo-recursion-tree-based"></a>
+* Tree-based recursion 
   - One of the key problems resulting from TreeNode definition is that TreeNode has no info about its parent node. But to resolve a tree-based problem, it is usually required to combine child and parent information.
   - Two basic strategies to solve this problem
     + Pass parent node as an input argument to child recursive function, then resolve problem inside child function. This approach usually needs some global variables, as discussed before.
@@ -2449,14 +2424,14 @@ public ResultWrapper secondApproach( TreeNode currNode )
 }
 ```
 
-* Deep copy <a id="algo-backtrack"></a>
+* Deep copy 
   - Key points: Use a hashmap to store old to new reference mapping
   - Examples: Clone graph, Copy list with random pointer
 
-* Array-based recursion <a id="algo-recursion-array-based"></a>
+* Array-based recursion 
 
-#### Backtrack <a id="algo-backtrack"></a>
-##### Best practices <a id="algo-backtrack-best-practices"></a>
+#### Backtrack 
+##### Best practices 
 * There are two popular ways to keep track of traverse path
   * List
     - list.sublist(startIndex, endIndex) returns a sublist of List
@@ -2474,8 +2449,8 @@ public void recursivefunction()
 }
 ```
 
-##### Types <a id="algo-recursion-types"></a>
-* Generate all unique permutations <a id="algo-backtrack-permutation"></a>
+##### Types 
+* Generate all unique permutations 
 ```java
 void generatePerms( List<List<Integer>> allPerms, List<Integer> onePerm, int[] nums, boolean[] isUsed )
 {     
@@ -2503,7 +2478,7 @@ void generatePerms( List<List<Integer>> allPerms, List<Integer> onePerm, int[] n
   }
 }
 ```
-* Generate all subsets <a id="algo-backtrack-subsets"></a>
+* Generate all subsets 
 ```java
 void generateSubsets( List<List<Integer>> allSubsets, LinkedList<Integer> oneSubset, int[] nums, int startPos )
 {
@@ -2528,7 +2503,7 @@ void generateSubsets( List<List<Integer>> allSubsets, LinkedList<Integer> oneSub
   }
 }
 ```
-* Generate all combinations summing to a target <a id="algo-backtrack-combination-sum"></a>
+* Generate all combinations summing to a target 
 ```java
 void generateCombs( List<List<Integer>> allCombs, LinkedList<Integer> oneComb, int[] nums, int startPos, int targetSum )
 {
@@ -2551,11 +2526,11 @@ void generateCombs( List<List<Integer>> allCombs, LinkedList<Integer> oneComb, i
   }
 }
 ```
-* Generate Decode ways / Gray code<a id="algo-backtrack-generate-decode-ways"></a>
-* Grid-based <a id="algo-backtrack-grid-based"></a>
+* Generate Decode ways / Gray code
+* Grid-based 
 
-#### Graph <a id="algo-graph"></a>
-##### Grid-based graph best practices <a id="algo-grid"></a>
+#### Graph 
+##### Grid-based graph best practices 
 * How to store coordinates: 
    * A customized class Coor
    * If allowing to modify grid, could temporarily place special chars/values to indicate that this position has been visited before. Depending on whether input int grid[][] is a defensive copy, we could decide whether to recover the grid[][] by replacing previously set special chars/values.
@@ -2578,7 +2553,7 @@ class Coor
 }
 ```
 
-##### Grid-based breath first search <a id="algo-grid-based-bfs"></a>
+##### Grid-based breath first search 
 * When the problem asks for the minimum 
 ```java
 public void bfsMainFunction( T[][] grid )
@@ -2629,7 +2604,7 @@ public void bfsMainFunction( T[][] grid )
 * When there are multiple sources/destinations, need to decide whether to start from source/destination according to time complexity analysis
   - Shortest distances to all buildings, walls and gates
   
-##### Grid-based depth first search <a id="algo-grid-based-dfs"></a>
+##### Grid-based depth first search 
 * When the problem requires a complete search and asks for traversal paths (record path in bfs is much more complicated)
 * Grid-based ( e.g. int[][] grid )
 ```java
@@ -2665,7 +2640,7 @@ private void dfs( T[][] grid, int x, int y, boolean[][] discovered )
 
 ```
 
-##### Count number of components <a id="algo-grid-based-count-number-of-components"></a>
+##### Count number of components 
 ```java
 int numIsland = 0;
 boolean[][] isVisited = new boolean[height][width];
@@ -2682,7 +2657,7 @@ for ( int i = 0; i < height; i++ )
 }
 ```
 
-##### Word-based breath first search <a id="algo-word-based-bfs"></a>
+##### Word-based breath first search 
 * Example problem: word ladder
 * Solution 1: Build a graph explicitly and then search for bfs path. 
   - Use case: When the word list is small
@@ -2694,7 +2669,7 @@ for ( int i = 0; i < height; i++ )
   - Complexity
     + Breath first search O( list.length() * word.length() * 26 )
 
-##### Topological sort <a id="algo-topo"></a>
+##### Topological sort 
 * There are basically two categories of methods for topological sort. The first one is greedy algorithm with O(|V|^2 + |E|) time complexity. The second is based on depth first search with O(|V| + |E|) time complexity. Here only discusses DFS based approach. 
 * When using DFS based approach, there are two cases which should be taken care of. The first one is what if there exists no topological order at all. The second is how to return topological order.
    * What if there exists no topological order - a cycle is detected. 
@@ -2762,7 +2737,7 @@ for ( int i = 0; i < height; i++ )
     }
 ```
 
-##### Union find <a id="algo-union-find"></a>
+##### Union find 
 * Suitable in a dynamically changing graph. 
   - Complexity: O(lgn)
   - Example problems: Number of Island II, find weakly connected components in directed graph, find connected components in undirected graph
@@ -2790,15 +2765,15 @@ void union( int x, int y )
 }
 ```
 
-#### Greedy <a id="algo-greedy"></a>
+#### Greedy 
 * Usually greedy algo are not covered in an interview setting:
   - Greedy algo do not generalize as a useful way to decompose and solve problems. 
   - Naive greedy algo are usually "short sighted" algo, which will not lead to global maximal. Working greedy algo are usually hard to think of. 
 * But there are exceptions
   - Increasing triplet sequence, paint house II
 
-#### Dynamic-programming <a id="algo-dynamic-programming"></a>
-* Use cases: <a id="algo-dp-use-cases"></a>
+#### Dynamic-programming 
+* Use cases: 
   - When to use - optimize time complexity from O(n!,2^n) to O(n^2, n^3)
     + Calculate max or min
     + Calculate the number of solutions
@@ -2806,12 +2781,12 @@ void union( int x, int y )
   - When not to use - optimize time complexity from O(n^3, n^2) further
     + Calculate concrete solutions themselves rather than just the number of solutions
     + Input is a collection rather than a sequence (e.g. Longest consecutive sequence)
-* Problems to consider: <a id="algo-dp-problems-to-consider"></a>
+* Problems to consider: 
   - State: how to define dp[i] or dp[i][j]
   - Induction rule: how to calculate big problems into smaller ones
   - Initialization: starting point
   - Answer: ending point
-* Implementation methods: <a id="algo-dp-implementation-methods"></a>
+* Implementation methods: 
   - Multi-loop: bottom-up approach
   - Memorized search: top-down approach
   - Use cases:
@@ -2820,7 +2795,7 @@ void union( int x, int y )
       * When it is easier to start thinking from the last step rather than the first step. Example: Burst ballons, Stone-game (Lintcode)
       * When the induction rule is not sequential, thus hard to define.  Example: Longest increasing subsequences in 2D (Lintcode)
       * When the initialization state is hard to find. Example: Longest increasing subsequences in 2D (Lintcode)
-* Memorization array tricks <a id="algo-dp-memorization-array-tricks"></a>
+* Memorization array tricks 
   - For non grid-based dynamic programming problems, for N number/character, array of size N+1 is allocated. The position at 0 index is used for specially used for initialization.
   - Rolling array
     + for 1D dp, e.g.
@@ -2873,43 +2848,43 @@ public int houseRobber_RollingArray( int[] A )
 }
 ```
 
-* Type: <a id="algo-dp-types"></a>
-  - Coordinate based <a id="algo-dp-types-coordinate"></a>
+* Type: 
+  - Coordinate based 
     + Patterns:
       * state: f[x,y] represents goes to x,y position from starting point
       * induction rule: f[x,y] from f[x-1, y] or f[x, y-1]
       * initialization: f[0,0~width], f[0~height, 0]
       * answer: usually f[m,n]
     + Examples: Minimum Path Sum, Unique Path I�, Climbing stairs, Jump game I/II
-  - 1D sequence <a id="algo-dp-1d-sequence"></a>
+  - 1D sequence 
     + Patterns:
       * state: f[i] represents first i position, digits, characters
       * induction rule: f[i] from f[j], j < i
       * initialize: f[0] = 0, f[1]
       * answer: f[n]
     + Examples: Longest increasing subsequence, Word break I, House robber
-  - 2D sequences <a id="algo-dp-2d-sequences"></a>
+  - 2D sequences 
     + Patterns: 
       * state: f[i,j] represents the results of first i numbers/characters in sequence one matching the first j numbers/characters in sequence two
       * induction rule: how to decide f[i,j] from previous (varies a lot here)
       * initialize: f[0,i] and f[i,0]
       * answer: f[n,m]( n = s1.length(), m = s2.length() )
     + Examples: Edit distance, Regular expression matching, Longest common subsequences, Maximal rectangle/Square
-  - Range based <a id="algo-dp-range-based"></a>
+  - Range based 
     + Patterns:
       * state: f[i,j] represents whether the substring from i to j is a palindrome
       * induction rule: f[i,j] = f[i+1,j-1] && (s[i] == s[j])
       * initialize: f[i][i] = true, f[i][i+1] = s[i] == s[i+1]
       * answer: f[0,n]
     + Examples: Palindrome partition II, Coins in a line III (Lintcode), Stone game, Burst ballons, Scramble string 
-  - Game <a id="algo-dp-game"></a>
+  - Game 
     + Patterns:
       * state: f[i] represents win/lose max/min profit for the first person
       * induction rule: avoid defining second person's state because second person always tries his best to defeat first person/make first person profit least.
       * initialize: varies with problem
       * answer: f[n]
     + Examples: Coin in a line (Lintcode), Coin in a line II (Lintcode), Flip game II
-  - Backpack <a id="algo-dp-backpack"></a>
+  - Backpack 
     + Patterns:
       * state: f[i][S]: whether the first i items could form S/Max value/number of ways
       * induction rule: varies with problems
@@ -2917,7 +2892,7 @@ public int houseRobber_RollingArray( int[] A )
       * answer: varies with problems
     + Examples: Backpack I-VI (Lintcode), K Sum (Lintcode), Minimum adjustment cost (Lintcode)
 
-#### References <a id="references"></a>
+#### References 
 * [Java-success.com](http://www.java-success.com/)
 * [Massive tech interview](http://massivetechinterview.blogspot.com/)
 * [Java best practices](http://www.javapractices.com/home/HomeAction.do)
