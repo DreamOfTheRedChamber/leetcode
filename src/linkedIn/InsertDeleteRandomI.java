@@ -10,10 +10,10 @@ import java.util.Random;
 import org.junit.Ignore;
 import org.junit.Test;
 
-public class InsertDeleteRandomI
+public class InsertDeleteRandomI<T>
 {
-	private List<Integer> list;
-	private Map<Integer,Integer> valToIndex;	
+	private List<T> list;
+	private Map<T,Integer> valToIndex;	
 	private Random rand;
 	
 	/** Initialize your data structure here. */
@@ -28,7 +28,7 @@ public class InsertDeleteRandomI
 	 * Inserts a value to the set. Returns true if the set did not already
 	 * contain the specified element.
 	 */
-	public boolean insert( int val )
+	public boolean insert( T val )
 	{
 		if ( valToIndex.containsKey( val ) )
 		{
@@ -50,19 +50,19 @@ public class InsertDeleteRandomI
 			return false;
 		}
 		
-		int indexToRemove = valToIndex.get( val );
-			
-		valToIndex.put( list.get( list.size() - 1 ), indexToRemove );
+		int indexOfRemovedVal = valToIndex.get( val );
+		T lastEntryVal = list.get ( list.size() - 1 );	
+		valToIndex.put( lastEntryVal, indexOfRemovedVal );
 		valToIndex.remove( val );
 			
-		Collections.swap( list, indexToRemove, list.size() - 1 );
+		Collections.swap( list, indexOfRemovedVal, list.size() - 1 );
 		list.remove( list.size() - 1 );
 		
 		return true;
 	}
 	
 	/** Get a random element from the set. */
-	public int getRandom( )
+	public T getRandom( )
 	{
 		return list.get( rand.nextInt( list.size() ) );
 	}
