@@ -1,5 +1,6 @@
 package linkedIn;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
@@ -40,14 +41,45 @@ public class CanIWin
 {
 	
     public boolean canIWin( int maxChoosableInteger, int desiredTotal ) 
+    {    	
+    	if ( maxChoosableInteger > desiredTotal )
+    	{
+    		return true;
+    	}
+    	
+    	int[] memorized = new int[desiredTotal + 1];
+    	for ( int i = 0; i < maxChoosableInteger; i++ )
+    	{
+    		memorized[i] = 1;
+    	}
+    	return canIWin( maxChoosableInteger, desiredTotal, memorized );    	
+    }
+    
+    private boolean canIWin( int maxChoosableInteger, int desiredTotal, int[] memorized )
     {
-    	return false;
+    	if ( memorized[desiredTotal] != 0 )
+    	{
+    		return memorized[desiredTotal] == 1 ? true : false;
+    	}
+    	
+    	for ( int i = 1; i <= maxChoosableInteger; i++ )
+    	{
+    		if ( canIWin( maxChoosableInteger, desiredTotal - i, memorized ) )
+    		{
+    			memorized[desiredTotal] = -1;
+    			return false;
+    		}
+    	}
+    	
+    	memorized[desiredTotal] = 1;
+    	return true;    	
     }
     
     @Test
     public void test()
     {
-    	assertTrue( canIWinUsedOnce( 10, 0 ) );
+    	assertFalse( canIWin( 10, 11 ) );    	
+     	assertTrue( canIWin( 10, 0 ) );
     }
     
     public boolean canIWinUsedOnce( int maxChoosableInteger, int desiredTotal )
