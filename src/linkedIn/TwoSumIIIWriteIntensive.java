@@ -17,7 +17,7 @@ https://discuss.leetcode.com/topic/32449/trade-off-in-this-problem-should-be-con
 import java.util.HashMap;
 import java.util.Map;
 
-public class TwoSumIII 
+public class TwoSumIIIWriteIntensive 
 {
 	private Map<Integer, Integer> histogram = new HashMap<>();
 	
