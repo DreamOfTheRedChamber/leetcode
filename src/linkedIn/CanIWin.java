@@ -3,8 +3,8 @@ package linkedIn;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
+import java.util.HashMap;
 
 import org.junit.Test;
 
@@ -42,79 +42,52 @@ public class CanIWin
 	
     public boolean canIWin( int maxChoosableInteger, int desiredTotal ) 
     {    	
-    	if ( maxChoosableInteger > desiredTotal )
-    	{
-    		return true;
-    	}
     	
-    	int[] memorized = new int[desiredTotal + 1];
-    	for ( int i = 0; i < maxChoosableInteger; i++ )
-    	{
-    		memorized[i] = 1;
-    	}
-    	return canIWin( maxChoosableInteger, desiredTotal, memorized );    	
     }
-    
-    private boolean canIWin( int maxChoosableInteger, int desiredTotal, int[] memorized )
-    {
-    	if ( memorized[desiredTotal] != 0 )
-    	{
-    		return memorized[desiredTotal] == 1 ? true : false;
-    	}
-    	
-    	for ( int i = 1; i <= maxChoosableInteger; i++ )
-    	{
-    		if ( canIWin( maxChoosableInteger, desiredTotal - i, memorized ) )
-    		{
-    			memorized[desiredTotal] = -1;
-    			return false;
-    		}
-    	}
-    	
-    	memorized[desiredTotal] = 1;
-    	return true;    	
-    }
-    
+        
     @Test
     public void test()
     {
     	assertFalse( canIWin( 10, 11 ) );    	
      	assertTrue( canIWin( 10, 0 ) );
+     	assertTrue( canIWin( 4, 6 ) );     	
     }
     
     public boolean canIWinUsedOnce( int maxChoosableInteger, int desiredTotal )
     {
-    	if ( maxChoosableInteger <= 0 || desiredTotal <= 0 )
-    	{
-    		return false;
-    	}
-    	
-    	List<Integer> pool = new ArrayList<>( maxChoosableInteger );
-    	for ( int i = 1; i <= maxChoosableInteger; i++ )
-    	{
-    		pool.add( i );
-    	}
-    	return canIWinUsedOnce( pool, desiredTotal );
-    }
-    
-    public boolean canIWinUsedOnce( List<Integer> pool, int desiredTotal )
-    {
-    	if ( pool.get( pool.size() - 1 ) >= desiredTotal )
+    	if ( desiredTotal <= 0 )
     	{
     		return true;
     	}
-    	
-    	for ( int i = 0; i < pool.size(); i++ )
+    	if ( maxChoosableInteger * ( maxChoosableInteger + 1 ) / 2 < desiredTotal )
     	{
-    		int removed = pool.remove( i );
-    		boolean win = !canIWinUsedOnce( pool, desiredTotal - removed );
-    		pool.add( i, removed );
-    		if ( win )
-    		{
-    			return true;
-    		}
+    		return false;
     	}
-    	
-    	return false;
+    	return canIWinUsedOnce( desiredTotal, new int[maxChoosableInteger], new HashMap<>() );
     }
+    
+	private boolean canIWinUsedOnce( int total, int[] state, HashMap<String, Boolean> hashMap ) 
+	{
+		String curr = Arrays.toString ( state );
+		if ( hashMap.containsKey ( curr ) )
+		{
+			return hashMap.get ( curr );
+		}
+		for ( int i = 0; i < state.length; i++ )
+		{
+			if ( state[i] == 0 )
+			{
+				state[i] = 1;
+				if ( total <= i + 1 || !canIWinUsedOnce ( total - ( i + 1 ), state, hashMap ) )
+				{
+					hashMap.put ( curr, true );
+					state[i] = 0;
+					return true;
+				}
+				state[i] = 0;
+			}
+		}
+		hashMap.put ( curr, false );
+		return false;
+	}
 }
