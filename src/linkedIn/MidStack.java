@@ -10,6 +10,9 @@ package linkedIn;
 follow up是写popMid()函数。不仅返回，同时删除中值。 最后设计test case。
 .1point3acres缃�
 其实follow up由于比较紧张，也没答好，有一个bug，不过好像面试官也没看出来，我是面完之后才想起来的。
+
+
+http://massivealgorithms.blogspot.com/2015/12/linkedin-interview-misc-2.html
  * */
 
 public class MidStack {

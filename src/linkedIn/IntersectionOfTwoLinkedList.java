@@ -25,6 +25,8 @@ Your code should preferably run in O(n) time and use only O(1) memory.
 两个没有环，相交
 两个有环，不想交
 两个有环，相交"
+
+http://123.57.208.150/bbs/forum.php?mod=viewthread&tid=208020&extra=&page=1&mobile=2
  * */
 
 public class IntersectionOfTwoLinkedList {

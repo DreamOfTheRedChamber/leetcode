@@ -448,3 +448,106 @@ x 刚面完重新安排的linkedin电面。-google 1point3acres
 发个面经 积攒人品 希望小哥能给过 真的很想去linkedin。。。
 
 
+
+
+
+电面：
+  对面是LinkedIn做Ads Reporting的小哥，在Nebraska，上来迅速寒暄几句，然后上题.1point3acres缃�
+1. 给一个sort好的数组里面全是character， 比如a, a ,b, c, d, d, e, f，给一个input character，在数组里找到第一个比它大的character，如果没有，返回第一个，不多说标准BS, 但是处理好edge cases, 秒了
+2. 李口德244, 秒 ＝＝》这里稍微注意一点是小哥很细，说用for(int i) 循环遍历List会有什么潜在问题，大家注意因为Abstract List可能是LinkedList，所以最好不要用index for loop去遍历。
+
+Oniste: 
+1. 烙印Director, 纯聊天＋过去项目的一些介绍. 鍥磋鎴戜滑@1point 3 acres
+2. Coding， 李口德254 ＋ 138 鏉ユ簮涓€浜�.涓夊垎鍦拌鍧�. 
+3. LeaderShip Behavior， 聊天不多说了
+4. Coding,  nested List iterator，followup如果输入很大不能一次放内存怎么搞。 第二个是一道Interval的题，给一个iterator of Interval，每次add一个interval返回当前所有interval cover的length
+5. System Design  设计guess word的game.
+
+总体来说题目不难，不是原题就是基本都可以自己想得出的。需要特别说一下的是第四轮的第二个题，那哥们似乎不要求特别的时间复杂度和空间复杂度，但是很希望我用他事先想好的一种方法去
+解决这个问题，本来这个题用insert interval也就办完了，纠结半天原来他希望先sort好，然后start 时候count++, end的时候count--，当count为0的时候纪录一个length，Anyway..后来我也想了这个方法，所以也就没问题了。
+
+
+
+
+Linkedin官网投的简历，两个月了才被鸟。
+   Phone interview：电面前recruiter会打电话来做最基本的phone screen，然后会发给你面试官的linkedin链接，让你做好迎接老印的准备。
+   1. 电话对面两个面试官，老中+毛子，collabedit上写题。第一题，验证一个string是不是valid number，需要考虑正负和小数，不用考虑指数。第二题也是被问烂的，print a binary tree in level order。感觉发挥得不好，虽然写出来了但是被指出了几个bug。当时脑袋犯糊涂了做过的题竟然都写得不顺。
+   2. 本来以为上一面跪了，结果一天之后HR又约了第二个电面。老印+毛子。第一题，求pow(n, x)，要求O(logn)解法。第二题，maximum subarray。第三题，实现singleton并让其thread-safe，还问到了lazy initialiation的和volatile关键字的意义。这一面相当顺畅，没有任何差错。
+   Onsite：Mountain view总部，一共五轮，除了第一轮，每轮两位面试官，时长一小时,看来2v1是他们的特色。虽然每轮有两位面试官，但是其中一个是shadow，全程基本不发言，也就是来学习面试流程的，所以不用慌张。从这些shadow的脸色来看，他们其实比你更紧张。当我问他们问题的时候，他们的回答都是都结结巴巴的。当然主面试官还是相当老练的。因为签了NDA，而且拿到offer了，为了以防万一，下面的题目故意写得模糊些。.鐣欏璁哄潧-涓€浜�-涓夊垎鍦�
+   1. 老印，主要问简历，每一项都被问到，而且非常细节。要求画出实习project的架构图。
+   2. 老印+老印，依然是问简历，基本同上，并且要求你从algorithm和design的角度说出怎么improve你的project。面完以后被其中一个老印带去lunch interview。. 涓€浜�-涓夊垎-鍦帮紝鐙鍙戝竷
+   3. 老美+老中，两个coding题，一题简单10分钟，一题复杂30-35分钟，题目就不说了，leetcode上有类似的。. 1point 3acres 璁哄潧
+   4. 老美+老中，也是两个coding题，难度基本同上。. Waral 鍗氬鏈夋洿澶氭枃绔�,
+   5. 老美+老印，design题，如何设计一个web的多人在线游戏。写出所需的类和data member，还要画出系统架构图。
+   从电面到onsite，见过的coding题都是leetcode上的类似题，所以各位应该知道我的意思。我比较惊讶的是linkedin竟然这么重视design，甚至重于coding。虽然前两轮都是问简历，但是都讨论到了很多design方面的问题。所以整个面试应该是三轮design和两轮coding。Onsite结束后一星期，recruiter打电话来follow-up，说feedback没齐。第二个星期来了口头offer，说是还要跟hiring manager电话聊一聊。聊完之后给了正式offer。我被分到的组是Core team里面的presentation team，做profile page的，也就是个人主页。感觉这个team相当不错，离用户最近，impact大，也符合我的兴趣。版上好像有个帖求证Linkedin的package，这里报一下fresh master的，以作参考：105k base + 1500RSU/4yr (worth 170k) + 10% target bonus + 10k relocation。除此之外，公司三餐免费(不过很难吃)，还有免费饮料和零食，报销公共交通，入职发macbook，假期很多。公司里面的文化相对于大多数tech公司比较formal，办公室非常整洁，没有那么多geek元素。老印很多，但是我遇到的都很好。
+
+   
+   
+   
+
+
+Tiny URL 设计数据结构，能够add(), remove(), randomremove() in O(1)复杂度 Monitor System 
+设计Amazon Product Page, 就是在SQL里面一个产品有多个图片多个价格的话怎么设计数据库。然后后台提取数值render到页面上得时候，class怎么设计，服务器怎么安排之类的, 中间也有讨论怎样给suggest product，我提到可以建一个Product weighted graph, 然后用BFS linkedin有很多server在做很多不同的事情，设计一个系统，监测24小时之内top 500的exceptions dashboard to monitor the top shared url in the last 5 minutes 
+
+对于key,value pairs， 在给定的文件系统中实现 put，get，delete 的方法。其中key比较小，全部key可以放在内存中，value有的会比较大。已知一个文件系统，可以create files, delete files, sequentially scan file content, read file content randomly, append file content. 
+
+已知一个函数，输入用户ID，可以返回该用户的所有友好（degree 1 friends），按好友ID从小到大排序。要求实现函数来输出返回一个用户的所有好友的好友(degree 2 friends), 以及 degree 3 friends。 
+
+Design LinkedIn. search功能里inverted index 和data of user , data of company 怎么存，分别用Nosql还是sql？然后设计timeline， 问我push/pull模型在哪儿看的 design the backend of linkedin, 讨论各个service如何实现 design a notebook application like Evernote or Onenote, it should support search, collaboration 社交网站上的文章转发，如何设计系统可以得到实时的转发量榜单和weekly digest，要求数据库的设计，有人转发一个文章时request是什么样的，如何快速得到实时的转发量榜单，如何得到weekly digest等。 
+
+design a system to block malicious IPs a restful server with 4GB, given a request such as: 你需要登录以查看此链接. the system will store the binary data with that sequence number. given a request: 你需要登录以查看此链接. the system returns all data objects with sequence >= 3 with total data length less equal than 100. multiple clients calling simutaneous what data structure, concurrency, locking, etc.. 问了一个类似dropbox的系统设计问题 
+
+设计Delay Scheduler，能够把task schedule在特定的时间执行。 
+
+设计一个Message Broker when a new version of API 上线，怎么和client side 协调好切换版本，出问题了rollback 怎么做
+
+链接: https://instant.1point3acres.com/thread/163613
+来源: 一亩三分地
+
+
+
+
+
+
+
+Linkedin算是move很快的，recruiter在linkedin上找的我，然后开始面试。一轮电话，然后onsite，从电面到拒信一个月。我是刷过了Linkedin的面经(leetcode的L家题加地里的题)两边并且准备了地里所有的system design去的。
+
+电面一月底，两个人，一个不说话，两道题，高频leetcode：
+Maximum Subarray. 鐗涗汉浜戦泦,涓€浜╀笁鍒嗗湴
+Shortest Word Distance II
+主面一直在墨迹Corner case check还有invalid 输入的时候返回啥最好。
+尤其这个返回值的讨论我对他的意见表示不苟同，但是想想特么算了找工作要紧只能说always good to learn new idea.
+
+周三电话完了周五叫onsite，因为没空我安排到隔了一周。中间还因为时间冲突推了一次，结果推到的那天是他们股票腰斩传言hiring freeze的第二天，我也是醉了。
+onsite两轮coding一轮design一轮HM聊天一轮project div再加一轮吃饭
+design跟coding全部面经leetcode题，稍有改动。
+我面完自我感觉良好，结果拒了，feedback也没说出个所以然到底哪一轮有问题。所以大家稍微参考我的经验，没办法给出太多建议。
+
+1 HM聊天. visit 1point3acres.com for more.
+很nice，瞎聊，多culture问题，工作上遇到的困难啊，最有挑战的task啊怎么克服的啊, why linkedin啊巴拉巴拉
+.1point3acres缃�
+2 System Design
+canlendar design
+准备了二十几道L家design题没准备这道，主要我还看见面经了，我当下想抽自己，不过还好其他design题也不是白准备的就照样侃。. 1point3acres.com/bbs
+几个主要功能，添加修改删除event，邀请别人，看别人的availability。 
+然后跟server怎么交互，数据怎么load，数据库schema设计等等。说完功能考量scalability，都常规的design题步骤走一下. 
+我自认为（注意是自认为）聊得还可以，但是面试官全程冷漠脸，一直噼里啪啦敲键盘做记录。所以可能这里折了。
+
+3 吃饭
+中国大叔，对我目前公司的产品表示不可接受，我又囧，我又不能撸袖子跟他辩论太多。其他聊得还可以，人很热情nice的。. 鍥磋鎴戜滑@1point 3 acres
+. visit 1point3acres.com for more.
+4 coding
+实现sqrt(x) 没啥可说的
+改动是输入x是整数，输出要求是float。float啊请注意，二分搜索的range怎么搞，输出精度怎么控制，稍微想一下啊同学们。然后怎么测。
+
+5 project div
+同样没啥可说的。因为前段时间公司的系统正好做大扩展，scale能用的都用了没用的也都学了，database sharding啥的。所以我把这个project给讲了一遍，基本就是redesign arch啊。
+要在1小时里把前因后果讲明白时间是远远不够的，只能high level讲，就这对方听完也没啥反应，最后问了我几个问题，我一听就知道I lost them somewhere。. 1point 3acres 璁哄潧
+所以应该有可能是我这一次表达得一般，需要站在听者角度上想一遍。同样的project后面跟airbnb的面试官讲全程就有交流聊得非常好。
+
+6 coding
+interval类的问题. 1point 3acres 璁哄潧
+不是跟leetcode一样的题，但也差不多吧，merge，insert都有，也玩不出啥花儿来。
+因为撸的太快了又说什么那每个interval带颜色属性，再要merge怎么整。然后OOD下class怎么写。
+
+   

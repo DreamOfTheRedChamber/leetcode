@@ -15,6 +15,8 @@ Given array S = [4,4,4,4], return 4. They are:
 [4(1),4(2),4(4)]
 [4(1),4(3),4(4)]
 [4(2),4(3),4(4)]
+
+http://wxx5433.github.io/valid-triangles.html
  */
 
 public class TriangleCount

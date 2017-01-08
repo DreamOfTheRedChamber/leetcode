@@ -15,6 +15,6 @@ package interview.airbnb;
 
 public class FindEmptyPeriod
 {
-	public List<Interval> findEmptyPeriod( int start, int end, List<Interval> meetingSchedules )
+//	public List<Interval> findEmptyPeriod( int start, int end, List<Interval> meetingSchedules )
 
 }

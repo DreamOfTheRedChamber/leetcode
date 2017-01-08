@@ -32,6 +32,8 @@ Note:
 Return 0 if there is no such transformation sequence.
 All words have the same length.
 All words contain only lowercase alphabetic characters.
+
+http://massivealgorithms.blogspot.com/search?q=word+ladder
  */
 public class WordLadder
 {
