@@ -16,15 +16,18 @@ Given [1,4,2,3] and target = 1, one of the solutions is [2,3,2,3], the adjustmen
 Return 2.
  * */
 
-public class MinimumAdjustmentCost 
+import java.util.List;
+
+public class MinimumAdjustmentCost
 {
     /**
      * @param A: An integer array.
      * @param target: An integer.
      */
-    public int MinAdjustmentCost( List<Integer> A, int target ) 
+    public int MinAdjustmentCost(List<Integer> A, int target )
     {
         // write your code here
+        return 0;
     }
 
 }

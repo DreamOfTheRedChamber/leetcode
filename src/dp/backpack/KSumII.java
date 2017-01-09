@@ -15,7 +15,10 @@ Given [1,2,3,4], k = 2, target = 5. Return:
 ]
  * */
 
-public class KSumII 
+import java.util.ArrayList;
+import java.util.List;
+
+public class KSumII
 {
     /**
      * @param A: an integer array.
@@ -23,8 +26,9 @@ public class KSumII
      * @param target: a integer
      * @return a list of lists of integer 
      */ 
-    public List<List<Integer>> kSumII( int[] A, int k, int target )
+    public List<List<Integer>> kSumII(int[] A, int k, int target )
     {
         // write your code here
+        return new ArrayList<>();
     }
 }

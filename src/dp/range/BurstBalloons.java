@@ -29,5 +29,6 @@ public class BurstBalloons
     public int maxCoins( int[] nums ) 
     {
         // Write your code here
+        return 0;
     }
 }

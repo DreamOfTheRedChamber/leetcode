@@ -27,6 +27,6 @@ public class LongestSubstringWithAtLeastKRepeatingCharacters
 {
     public int longestSubstring( String s, int k ) 
     {
-        
+        return 1;
     }
 }

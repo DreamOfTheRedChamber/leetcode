@@ -1,5 +1,8 @@
 package math;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
 A strobogrammatic number is a number that looks the same when rotated 180 degrees (looked at upside down).
 
@@ -13,6 +16,6 @@ public class StrobogrammaticNumberII
 {
 // TO_HURRY
     public List<String> findStrobogrammatic(int n) {
-        
+        return new ArrayList<>();
     }
 }

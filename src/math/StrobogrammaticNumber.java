@@ -8,6 +8,6 @@ public class StrobogrammaticNumber
 {
 
     public boolean isStrobogrammatic(String num) {
-        
+        return true;
     }
 }

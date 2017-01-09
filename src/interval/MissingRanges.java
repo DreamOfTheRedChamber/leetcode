@@ -1,5 +1,8 @@
 package interval;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
 Given a sorted integer array where the range of elements are [lower, upper] inclusive, return its missing ranges.
 
@@ -8,9 +11,8 @@ For example, given [0, 1, 3, 50, 75], lower = 0 and upper = 99, return ["2", "4-
 //TO_HURRY
 public class MissingRanges
 {
-    public List<String> findMissingRanges(int[] nums, int lower, int upper) 
+    public List<String> findMissingRanges(int[] nums, int lower, int upper)
     {
-        
+        return new ArrayList<>();
     }
-
 }

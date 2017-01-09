@@ -59,6 +59,6 @@ public class SentenceScreenFitting
 {
     public int wordsTyping( String[] sentence, int rows, int cols )
     {
-        
+        return 0;
     }
 }

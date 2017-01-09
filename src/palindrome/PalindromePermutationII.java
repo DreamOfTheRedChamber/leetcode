@@ -15,9 +15,12 @@ If a palindromic permutation exists, we just need to generate the first half of 
 To generate all distinct permutations of a (half of) string, use a similar approach from: Permutations II or Next Permutation.
  * */
 
+import java.util.ArrayList;
+import java.util.List;
+
 // TO_IMME
 public class PalindromePermutationII {
     public List<String> generatePalindromes(String s) {
-        
+        return new ArrayList<>();
     }
 }

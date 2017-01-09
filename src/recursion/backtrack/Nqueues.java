@@ -1,5 +1,8 @@
 package recursion.backtrack;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
 The n-queens puzzle is the problem of placing n queens on an n×n chessboard such that no two queens attack each other.
 
@@ -27,6 +30,6 @@ There exist two distinct solutions to the 4-queens puzzle:
 
 public class Nqueues {
     public List<List<String>> solveNQueens(int n) {
-        
+        return new ArrayList<>();
     }
 }

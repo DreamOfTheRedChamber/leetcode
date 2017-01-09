@@ -20,10 +20,13 @@ The hour must not contain a leading zero, for example "01:00" is not valid, it s
 The minute must be consist of two digits and may contain a leading zero, for example "10:2" is not valid, it should be "10:02".
  * */
 
-public class BinaryWatch 
+import java.util.ArrayList;
+import java.util.List;
+
+public class BinaryWatch
 {
-    public List<String> readBinaryWatch( int num ) 
+    public List<String> readBinaryWatch(int num )
     {
-        
+        return new ArrayList<>();
     }
 }

@@ -11,6 +11,8 @@ Example
 Give [3, 1, -100, -3, 4], return [4,1].
  * */
 
+import java.util.ArrayList;
+
 public class ContinuousSubarraySumII
 {
     /**
@@ -19,6 +21,6 @@ public class ContinuousSubarraySumII
      */
     public ArrayList<Integer> continuousSubarraySumII(int[] A) 
     {
-    
+        return new ArrayList<>();
     }
 }

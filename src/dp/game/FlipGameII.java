@@ -15,6 +15,6 @@ public class FlipGameII
 {
     public boolean canWin( String s )
     {
-        
+        return true;
     }
 }

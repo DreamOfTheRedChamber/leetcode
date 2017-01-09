@@ -25,5 +25,6 @@ public class CoinInALineI {
     public boolean firstWillWin( int n )
     {
         // write your code here
+        return true;
     }
 }

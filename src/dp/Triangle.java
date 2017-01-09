@@ -1,5 +1,8 @@
 package dp;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
 Given a triangle, find the minimum path sum from top to bottom. Each step you may move to adjacent numbers on the row below.
 
@@ -18,8 +21,8 @@ Bonus point if you are able to do this using only O(n) extra space, where n is t
 //TO_START
 public class Triangle
 {
-    public int minimumTotal(List<List<Integer>> triangle) 
+    public int minimumTotal(List<List<Integer>> triangle)
     {
-        
+        return 0;
     }
 }

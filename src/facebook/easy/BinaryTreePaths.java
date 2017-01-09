@@ -15,10 +15,15 @@ All root-to-leaf paths are:
 ["1->2->5", "1->3"]
  * */
 
-public class BinaryTreePaths 
+import utility.TreeNode;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class BinaryTreePaths
 {
-    public List<String> binaryTreePaths( TreeNode root ) 
+    public List<String> binaryTreePaths(TreeNode root )
     {
-        
+        return new ArrayList<>();
     }
 }

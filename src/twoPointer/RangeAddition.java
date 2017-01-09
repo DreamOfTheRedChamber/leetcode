@@ -40,6 +40,6 @@ public class RangeAddition
 {
     public int[] getModifiedArray(int length, int[][] updates) 
     {
-        
+        return new int[0];
     }
 }

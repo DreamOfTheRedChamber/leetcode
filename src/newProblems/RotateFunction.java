@@ -28,6 +28,6 @@ public class RotateFunction
 {
     public int maxRotateFunction( int[] A ) 
     {
-        
+        return 0;
     }
 }

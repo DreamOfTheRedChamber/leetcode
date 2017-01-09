@@ -25,5 +25,6 @@ public class KSum
     public int kSum( int A[], int k, int target ) 
     {
         // write your code here
+        return 0;
     }
 }

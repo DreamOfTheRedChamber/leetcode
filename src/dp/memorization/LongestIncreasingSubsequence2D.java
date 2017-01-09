@@ -26,5 +26,6 @@ public class LongestIncreasingSubsequence2D
     public int longestIncreasingContinuousSubsequenceII( int[][] A )
     {
         // Write your code here
+        return 0;
     }
 }

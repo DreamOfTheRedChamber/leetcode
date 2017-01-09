@@ -28,7 +28,7 @@ public class ShortestWordDistanceII
 
 	private Map<String, List<Integer>> wordToIndexes;
 	
-    public WordDistance(String[] words) 
+    public ShortestWordDistanceII(String[] words)
     {
         wordToIndexes = new HashMap<>();
         for ( int i = 0; i < words.length; i++ )

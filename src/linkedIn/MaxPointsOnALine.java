@@ -8,6 +8,8 @@ Given n points on a 2D plane, find the maximum number of points that lie on the 
  * 斜率要用GCD表示
  * */
 
+import utility.Point;
+
 /**
  * Definition for a point.
  * class Point {
@@ -21,8 +23,8 @@ Given n points on a 2D plane, find the maximum number of points that lie on the 
 
 public class MaxPointsOnALine 
 {
-    public int maxPoints( Point[] points ) 
+    public int maxPoints( Point[] points )
     {
-        
+        return 0;
     }
 }

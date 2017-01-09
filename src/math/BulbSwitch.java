@@ -9,6 +9,6 @@ public class BulbSwitch
 
     public int bulbSwitch(int n) 
     {
-        
+        return 0;
     }
 }

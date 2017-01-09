@@ -49,6 +49,6 @@ public class IntersectionAndUnionOfTwoSortedList
 {
     public ListNode getIntersectionNode( ListNode headA, ListNode headB ) 
     {
-        
+        return null;
     }
 }

@@ -1,5 +1,6 @@
 package string;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /*
@@ -21,6 +22,6 @@ public class FlipGame
 {
     public List<String> generatePossibleNextMoves( String s ) 
     {
-    	
+    	return new ArrayList<>();
     }
 }

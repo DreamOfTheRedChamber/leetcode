@@ -27,11 +27,11 @@ public class ImplementQueueUsingStacks
 
     // Get the front element.
     public int peek() {
-        
+        return 0;
     }
 
     // Return whether the queue is empty.
     public boolean empty() {
-        
+        return true;
     }
 }

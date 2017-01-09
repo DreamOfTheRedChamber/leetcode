@@ -1,5 +1,8 @@
 package recursion.string;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
 Given a string of numbers and operators, return all possible results from computing all the different possible ways to group numbers and operators. The valid operators are +, - and *.
 
@@ -25,8 +28,8 @@ Output: [-34, -14, -10, -10, 10]
 //TO_HURRY
 public class DifferentWaysToAddParentheses
 {
-    public List<Integer> diffWaysToCompute(String input) 
+    public List<Integer> diffWaysToCompute(String input)
     {
-        
+        return new ArrayList<>();
     }
 }

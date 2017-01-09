@@ -19,7 +19,7 @@ public class LineReflection
 
     public boolean isReflected(int[][] points) 
     {
-        
+        return true;
     }
 
 }

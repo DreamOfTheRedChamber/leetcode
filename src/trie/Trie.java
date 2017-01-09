@@ -1,23 +1,5 @@
 package trie;
-class TrieNode 
-{
-    private final static int CHARSET_SIZE = 26;
-    public TrieNode[] children;
-    public boolean isLeaf;
-    public char val;
-    
-    // Initialize your data structure here.
-    public TrieNode() 
-    {
-        children = new TrieNode[CHARSET_SIZE];
-    }
-    
-    public TrieNode( char val )
-    {
-        this();
-        this.val = val;
-    }
-}
+
 
 public class Trie 
 {

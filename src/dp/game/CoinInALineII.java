@@ -20,5 +20,6 @@ public class CoinInALineII
     public boolean firstWillWin( int[] values )
     {
         // write your code here
+        return true;
     }
 }

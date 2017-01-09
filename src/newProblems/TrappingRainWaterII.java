@@ -27,6 +27,6 @@ public class TrappingRainWaterII
 {
     public int trapRainWater( int[][] heightMap )
     {
-        
+        return 1;
     }
 }

@@ -11,6 +11,6 @@ public class CountNumbersWithUniqueDigits
 {
     public int countNumbersWithUniqueDigits( int n ) 
     {
-        
+        return 0;
     }
 }

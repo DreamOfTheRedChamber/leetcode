@@ -38,6 +38,6 @@ public class LongestAbsoluteFilePath
 {
     public int lengthLongestPath( String input )
     {
-        
+        return 0;
     }
 }

@@ -27,6 +27,6 @@ public class GuessNumberHigherOrLowerII
 {
     public int getMoneyAmount(int n) 
     {
-        
+        return 1;
     }
 }

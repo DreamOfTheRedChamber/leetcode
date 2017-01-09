@@ -5,10 +5,12 @@ Merge two sorted linked lists and return it as a new list. The new list should b
 
  * */
 
-public class MergeTwoSortedList 
+import utility.ListNode;
+
+public class MergeTwoSortedList
 {
-    public ListNode mergeTwoLists( ListNode l1, ListNode l2 ) 
+    public ListNode mergeTwoLists( ListNode l1, ListNode l2 )
     {
-        
+        return null;
     }
 }

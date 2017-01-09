@@ -1,5 +1,8 @@
 package recursion.matrix;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
 Given a matrix of m x n elements (m rows, n columns), return all elements of the matrix in spiral order.
 
@@ -16,8 +19,8 @@ You should return [1,2,3,6,9,8,7,4,5].
 //TO_HURRY
 public class SpiralMatrix
 {
-    public List<Integer> spiralOrder(int[][] matrix) 
+    public List<Integer> spiralOrder(int[][] matrix)
     {
-        
+        return new ArrayList<>();
     }
 }

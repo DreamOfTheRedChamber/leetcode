@@ -30,5 +30,6 @@ public class StoneGame
     public int stoneGame( int[] A )
     {
         // Write your code here
+        return 0;
     }
 }

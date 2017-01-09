@@ -14,7 +14,7 @@ public class WordDictionary
 	// contain the dot character '.' to represent any one letter.
 	public boolean search( String word )
 	{
-		
+		return true;
 	}
 }
 

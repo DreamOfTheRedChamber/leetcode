@@ -18,5 +18,6 @@ public class DistinctSubsequence
     public int numDistinct( String S, String T )
     {
         // write your code here
+        return 0;
     }
 }

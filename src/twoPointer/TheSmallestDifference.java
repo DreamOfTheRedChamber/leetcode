@@ -9,5 +9,6 @@ public class TheSmallestDifference
 {
 	 public int smallestDifference(int[] A, int[] B) 
 	 {
+		 return 0;
 	 }
 }

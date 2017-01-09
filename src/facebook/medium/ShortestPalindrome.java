@@ -13,6 +13,6 @@ Given "abcd", return "dcbabcd".
 // TO_IMME
 public class ShortestPalindrome {
     public String shortestPalindrome(String s) {
-        
+        return "";
     }
 }

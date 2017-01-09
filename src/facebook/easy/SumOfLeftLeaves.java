@@ -14,10 +14,12 @@ Example:
 There are two left leaves in the binary tree, with values 9 and 15 respectively. Return 24.
  * */
 
-public class SumOfLeftLeaves 
+import utility.TreeNode;
+
+public class SumOfLeftLeaves
 {
-    public int sumOfLeftLeaves(TreeNode root) 
+    public int sumOfLeftLeaves(TreeNode root)
     {
-        
+        return 0;
     }
 }

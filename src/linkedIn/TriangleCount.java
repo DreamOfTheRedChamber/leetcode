@@ -27,5 +27,6 @@ public class TriangleCount
      */
     public int triangleCount(int S[]) {
         // write your code here
+        return 0;
     }
 }

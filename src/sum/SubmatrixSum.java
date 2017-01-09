@@ -24,5 +24,6 @@ public class SubmatrixSum
     public int[][] submatrixSum(int[][] matrix) 
     {
         // Write your code here
+        return new int[0][0];
     }
 }

@@ -39,6 +39,6 @@ public class UTF8Validation
 {
     public boolean validUtf8( int[] data ) 
     {
-        
+        return true;
     }
 }

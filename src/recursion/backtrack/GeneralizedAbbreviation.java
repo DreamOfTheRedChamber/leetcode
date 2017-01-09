@@ -1,5 +1,8 @@
 package recursion.backtrack;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /*
 Write a function to generate the generalized abbreviations of a word.
 
@@ -10,8 +13,8 @@ Given word = "word", return the following list (order does not matter):
 //TO_HURRY
 public class GeneralizedAbbreviation 
 {
-    public List<String> generateAbbreviations(String word) 
+    public List<String> generateAbbreviations(String word)
     {
-        
+        return new ArrayList<>();
     }
 }

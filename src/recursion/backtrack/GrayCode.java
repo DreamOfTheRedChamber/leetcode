@@ -1,5 +1,8 @@
 package recursion.backtrack;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /*
 The gray code is a binary numeral system where two successive values differ in only one bit.
 
@@ -21,8 +24,8 @@ For now, the judge is able to judge based on one instance of gray code sequence.
 //TO_HURRY
 public class GrayCode 
 {
-    public List<Integer> grayCode(int n) 
+    public List<Integer> grayCode(int n)
     {
-        
+        return new ArrayList<>();
     }
 }

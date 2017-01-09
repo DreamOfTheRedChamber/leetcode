@@ -1,5 +1,9 @@
 package dp;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
 /**
  *
 Given a string s and a dictionary of words dict, add spaces in s to construct a sentence where each word is a valid dictionary word.
@@ -15,8 +19,8 @@ A solution is ["cats and dog", "cat sand dog"].
 //TO_START
 public class WordBreakII
 {
-    public List<String> wordBreak(String s, Set<String> wordDict) 
+    public List<String> wordBreak(String s, Set<String> wordDict)
     {
-        
+        return new ArrayList<>();
     }
 }
