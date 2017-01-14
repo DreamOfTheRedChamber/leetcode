@@ -28,71 +28,60 @@ public class SpiralMatrix
     	{
     		return new ArrayList<>();
     	}
-
+    	
     	List<Integer> result = new ArrayList<>();
-    	int height = matrix.length;
-    	int width = matrix[0].length;
-    	int shorterEdge = Math.min( height, width );
-    	for ( int i = 0; i < shorterEdge / 2 ; i++ )
-    	{
-    		processOneRound( i, height - i * 2, width - i * 2, result, matrix );
-    	}
-
-    	if ( shorterEdge % 2 == 1 )
-    	{
-    		int xCoor = shorterEdge / 2;
-    		int yCoor = shorterEdge / 2;
-
-    		if ( height > width )
-    		{
-    			for ( int i = 0; i < height - shorterEdge / 2 * 2; i++ )
-    			{
-    				result.add( matrix[xCoor + i][yCoor] );
-    			}
-    		}
-    		else
-    		{
-    			for ( int i = 0; i < width - shorterEdge / 2 * 2; i++ )
-    			{
-    				result.add( matrix[xCoor][yCoor + i] );
-    			}
-    		}
-    	}
+    	spiralOrder( matrix, 0, 0, matrix.length, matrix[0].length, result );
     	return result;
     }
     
-    private void processOneRound( int start, int height, int width, List<Integer> result, int[][] matrix )
+    private void spiralOrder( int[][] matrix, int xCoor, int yCoor, int height, int width, List<Integer> result )
     {
-    	int xCoor = start;
-    	int yCoor = start;
+    	// handle edge cases
+    	if ( height <= 0 || width <= 0 )
+    	{
+    		return;
+    	}    	
+    	if ( height == 1 && width == 1 )
+    	{
+    		result.add( matrix[xCoor][yCoor] );
+    		return;
+    	}
     	
-    	// print upper edge
+    	// handle current level
     	for ( int i = 0; i < width - 1; i++ )
     	{
-    		result.add( matrix[xCoor][yCoor + i] );
+    		result.add( matrix[xCoor][yCoor++] );
     	}
-    	yCoor += width - 1;
-    	
-    	// print righter edge
     	for ( int i = 0; i < height - 1; i++ )
     	{
-    		result.add( matrix[xCoor + i][yCoor] );
+    		result.add( matrix[xCoor++][yCoor] );
     	}
-    	xCoor += height - 1;
     	
-    	// print lower edge
-    	for ( int i = 0; i < width - 1; i++ )
+    	if ( height > 1 )
     	{
-    		result.add( matrix[xCoor][yCoor - i ] );
+    		for ( int i = 0; i < width - 1; i++ )
+    		{
+    			result.add( matrix[xCoor][yCoor--] );
+    		}
     	}
-    	yCoor -= width - 1;
     	
-    	// print left edge
-    	for ( int i = 0; i < height - 1; i++ )
+    	if ( width > 1 )
     	{
-    		result.add( matrix[xCoor - i][yCoor] );
+    		for ( int i = 0; i < height - 1; i++ )
+    		{
+    			result.add( matrix[xCoor--][yCoor] );
+    		}
     	}
     	
+    	// recurse for the next level
+    	if ( height == 1 || width == 1 )
+    	{
+    		spiralOrder( matrix, xCoor, yCoor, 1, 1, result );
+    	}
+    	else
+    	{
+    		spiralOrder( matrix, xCoor + 1, yCoor + 1, height - 2, width - 2, result );
+    	}    	
     }
     
     @Test
