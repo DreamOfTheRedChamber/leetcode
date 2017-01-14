@@ -33,12 +33,31 @@ public class SpiralMatrix
     	int height = matrix.length;
     	int width = matrix[0].length;
     	int shorterEdge = Math.min( height, width );
-    	int numCycles = shorterEdge / 2 + ( shorterEdge % 2 == 0 ? 0 : 1 ) ;
-    	for ( int i = 0; i < numCycles; i++ )
+    	for ( int i = 0; i < shorterEdge / 2 ; i++ )
     	{
-    		processOneRound( i, height - i * 2, width - i * 2, result, matrix ); 
+    		processOneRound( i, height - i * 2, width - i * 2, result, matrix );
     	}
-    	
+
+    	if ( shorterEdge % 2 == 1 )
+    	{
+    		int xCoor = shorterEdge / 2;
+    		int yCoor = shorterEdge / 2;
+
+    		if ( height > width )
+    		{
+    			for ( int i = 0; i < height - shorterEdge / 2 * 2; i++ )
+    			{
+    				result.add( matrix[xCoor + i][yCoor] );
+    			}
+    		}
+    		else
+    		{
+    			for ( int i = 0; i < width - shorterEdge / 2 * 2; i++ )
+    			{
+    				result.add( matrix[xCoor][yCoor + i] );
+    			}
+    		}
+    	}
     	return result;
     }
     
