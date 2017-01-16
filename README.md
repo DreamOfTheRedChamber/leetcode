@@ -23,7 +23,6 @@
   - [Interview Java pros and cons](#interview-java-pros-and-cons)
 - [Java language](#java-language)
   - [Characteristics of Object oriented](#characteristics-of-object-oriented)
-  - [Thread vs process](#thread-vs-process)
   - [Java vs C++](#java-vs-c)
   - [Access modifiers](#access-modifiers)
   - [Stack vs heap vs static area](#stack-vs-heap-vs-static-area)
@@ -33,16 +32,25 @@
   - [Abstract class vs interface](#abstract-class-vs-interface)
   - [Static keyword](#static-keyword)
   - [Main method](#main-method)
-  - [Volatile keyword](#volatile-keyword)
   - [Clone](#clone)
   - [Assertion](#assertion)
   - [Error vs exception](#error-vs-exception)
   - [Checked vs unchecked exception](#checked-vs-unchecked-exception)
   - [Immutable class](#immutable-class)
   - [Final vs finally vs finalize](#final-vs-finally-vs-finalize)
-  - [Java memory leak](#java-memory-leak)
-  - [Garbage collector](#garbage-collector)
-  - [JVM](#jvm)
+  - [Java garbage collection](#java-garbage-collection)
+    - [Components](#components)
+    - [Memory allocation](#memory-allocation)
+    - [What does live mean](#what-does-live-mean)
+    - [Types of Java garbage collectors](#types-of-java-garbage-collectors)
+  - [Java reference classes](#java-reference-classes)
+    - [Types](#types)
+    - [Reference rules](#reference-rules)
+    - [Usage of reference types](#usage-of-reference-types)
+    - [Use Weak reference](#use-weak-reference)
+    - [Use WeakHashMap](#use-weakhashmap)
+    - [Use ReferenceQueue](#use-referencequeue)
+    - [Use PhantomReference](#use-phantomreference)
   - [Design pattern](#design-pattern)
 - [Data structures](#data-structures)
   - [Data structure relationships](#data-structure-relationships)
@@ -129,23 +137,23 @@
   - [Sort](#sort)
     - [Common sorting algorithms](#common-sorting-algorithms)
     - [Built-in sort interfaces](#built-in-sort-interfaces)
-    - [Types](#types)
+    - [Types](#types-1)
     - [Top K](#top-k)
     - [Stream API](#stream-api)
   - [Binary search](#binary-search)
     - [Best practices](#best-practices-1)
     - [How to handle duplicates](#how-to-handle-duplicates)
-    - [Types](#types-1)
+    - [Types](#types-2)
   - [Recursive functions](#recursive-functions)
     - [Recursive vs iterative solutions](#recursive-vs-iterative-solutions)
     - [Recursion time complexity cheat sheet](#recursion-time-complexity-cheat-sheet)
     - [Steps in using recursion](#steps-in-using-recursion)
     - [How to return multiple results from recursive functions](#how-to-return-multiple-results-from-recursive-functions)
     - [Avoid duplicated recursion](#avoid-duplicated-recursion)
-    - [Types](#types-2)
+    - [Types](#types-3)
   - [Backtrack](#backtrack)
     - [Best practices](#best-practices-2)
-    - [Types](#types-3)
+    - [Types](#types-4)
   - [Graph](#graph-1)
     - [Grid-based graph best practices](#grid-based-graph-best-practices)
     - [Grid-based breath first search](#grid-based-breath-first-search)
@@ -403,18 +411,6 @@
 
 ### Java language
 #### Characteristics of Object oriented
-#### Thread vs process
-* For most computing tasks, there is great advantage to splitting up workload into multiple actors and partitioning the task into different, multiple tasks for these multiple actors. Two common ways of doing this are multi-threaded programs and multi-process systems.
-
-| Differences |  Thread |  Process  |
-| --------------------- |:-------------:| -----:|
-| Def | A lightweight process with less resource consumption | A running instance of a program |
-| Data sharing | A process has separate virtual address space. Inter process mechanism such as pipes, sockets, shared memory | All threads of a process share its virtual address space and system resources but have their own stack created. No specific mechanism for sharing. |
-| Overhead to create/terminate  | Faster due to very little memory copying (just thread stack) | Slower because whole process area needs to be copied |
-| Task switching  | Faster because CPU caches and program context can be maintained | Slower because all process area needs to be reloaded |
-| Synchronization overhead | Shared data that is modified requires special handling in the form of locks, mutexes and primitives | No synchronization needed |
-| Program debugging | More difficulties including synchronization, non-deterministic timing and accidental data corruption | Easier |
-| Use cases  | Threads are a useful choice when you have a workload that consists of lightweight tasks (in terms of processing effort or memory size) that come in, for example with a web server servicing page requests. There, each request is small in scope and in memory usage. Threads are also useful in situations where multi-part information is being processed – for example, separating a multi-page TIFF image into separate TIFF files for separate pages. In that situation, being able to load the TIFF into memory once and have multiple threads access the same memory buffer leads to performance benefits. | Processes are a useful choice for parallel programming with workloads where tasks take significant computing power, memory or both. For example, rendering or printing complicated file formats (such as PDF) can sometimes take significant amounts of time – many milliseconds per page – and involve significant memory and I/O requirements. In this situation, using a single-threaded process and using one process per file to process allows for better throughput due to increased independence and isolation between the tasks vs. using one process with multiple threads. |
 
 #### Java vs C++
 
@@ -518,9 +514,6 @@ Java specifies several access modifiers e.g. private, protected and public. Any 
 Java, JVM can easily access and execute it.
 * Why the main method is void
 Since the main method in Java is not supposed to return any value, it's made void which simply means main is not returning anything.
-
-
-#### Volatile keyword 
 
 #### Clone
 * Deep and shallow copy
@@ -644,11 +637,356 @@ class FinalizeExample
 }
 ```
 
-#### Java memory leak 
+#### Java garbage collection
+##### Components
+* Reference counting
+  - Cyclic reference
+  - When the reference counting is zero, the object is freed. 
+* Mark and sweep
+  - 'mark' phase identifies the objects that are still in use.
+  - 'sweep' phase remove unused objects
+  - 'compact' phase to compact memory
+* Copying
+  - Use different spaces to manage memory
+  - When the fromspace is full, compact it to the tospace
+* Generational
+  - Maintain different generations for memory
+    + Long living objects promoted to a different generation
+    + For a given definition of long
+  - Young generation
+    + One eden space:       
+      * Objects allocated into Eden space
+    + Two survivor spaces
+      * Objects that survive a GC get moved to the survivor space
+      * Only one survivor space in use at a time
+      * Objects copied between survivor spaces
+    + Minor garbage collection
+        - When GC runs objects are copied to 'newer' survivor space
+        - Objects from 'older' survivor space also copied to 'newer' survivor space
+        - Survivior spaces are swapped
+    + Major garbage collection
+      * Triggered when the tenured space is full
+      * Collects old and young generations
+      * JVM will eventually promot to old: 
+        - After a certain number of garbage collects
+        - If survivor space is full
+        - If JVM has been told to always create objects in old space
+          + -XX:+AlwaysTenure flag to JVM
+  - Old generation / Tenured space
+    + Where long lived objects go to die
+    + Garbage collector tends to run less on old generation
 
-#### Garbage collector 
+##### Memory allocation
+* Java use thread local allocation buffers
+* Each thread gets its own buffer inside eden space
 
-#### JVM 
+##### What does live mean
+* Live roots
+  - From stack frames
+  - Static variables
+  - Others such as JNI and synchronization 'monitors'
+* References from live rooted objects are followed to other objects
+* What about references from old generation to young
+  - This is an issue - Young GC has to scan old space
+  - Sort of defeats the purpose of having multiple generation spaces
+    + CardTable
+      * Each write a reference to a young object goes through a write barrier. 
+      * This barrier updates a card table entry
+      * One entry per 512 bytes of memory
+      * Minor GC scans
+
+##### Types of Java garbage collectors
+* Serial collector
+  - Single threaded. Stop the world collector
+  - Mark and sweep
+  - Ok for small applications running on the client
+* Parallel collector
+  - Multiple threads for minor collection
+  - Single thread for major collection
+  - Same process as serial
+  - Use on servers
+* Parallel old collector
+  - Multiple threads for minor and major collections
+  - Preferred over parallel GC
+* Concurrent mark and sweep collector
+  - Only collects old space
+  - No longer bump the pointer allocation
+  - Causes heap fragmentation
+  - Designed to be lower latency. 
+
+| Phase            | Notes          | Description                                                                                                             | 
+|------------------|----------------|-------------------------------------------------------------------------------------------------------------------------| 
+| Initial mark     | Stop the world | Mark objects in the old generation reachable from root references                                                       | 
+| Concurrent mark  | Concurrent     | Traverse object graph looking for live objects. Any allocations made during this phase are automatically marked as live | 
+| Remark           | Stop the world | Finds objects created after the previous phase stopped                                                                  | 
+| Concurrent sweep | Concurrent     | Collect objects                                                                                                         | 
+| Resetting        | Concurrent     | Get ready for the next run                                                                                              | 
+
+* G1 collector
+  - New in Java 6
+  - Is a compacting collector, as a replacement for CMS
+  - Meant for server applications
+    + Running on multiprocessor machines with large memories
+  - Breaks heap into regions
+
+#### Java reference classes
+##### Types
+* Java has always had strong references
+* Other types of references are available
+  - Special class in java.lang.ref package
+  - Soft, weak, phantom
+
+##### Reference rules
+* Strong &gt; Soft &gt; Weak &gt; Phantom
+* Object not GC'd if there is a strong reference
+  - Can be GC'd if there is a soft, weak or phantom reference
+* Soft will be collected if there is memory pressue
+* Weak will be collected immediately
+* Phantom refernces different to the other two
+  - Cannot retrieve the object through a phantom reference
+
+##### Usage of reference types
+* WeakReference
+  - Associate meta data with another type
+  - Usually used in conjunction with weakhashmap
+* SoftReference
+  - When strong references is cleared soft is still available
+  - Can be used for caching
+    + No control over the cache
+    + It's all managed by the garbage collector
+* PhantomReference
+  - Interaction with the garbage collector
+
+##### Use Weak reference
+
+```java
+package com.pluralsight;
+
+import java.lang.ref.WeakReference;
+
+public class Main {
+
+    public static void main(String[] args) {
+
+        Person person = new Person();
+        WeakReference<Person> wr = new WeakReference<Person>(person);
+
+        Person p1 = wr.get();
+        System.out.println(p1);
+
+        person = null;
+        p1 = null;
+        Person p2 = wr.get();
+        System.out.println(p2);
+
+        p2 = null;
+        System.gc();
+        Person p3 = wr.get();
+        System.out.println(p3);
+
+    }
+}
+
+class Person {
+
+}
+
+```
+
+##### Use WeakHashMap
+* Like a hashMap
+* Key is a weak reference to an object
+  - Store a weak reference to an object as a key
+  - Value is the object's meta data
+* When object has no more strong references
+  - The key is released
+  - Meta data goes away
+
+```java
+package com.pluralsight;
+
+import java.util.Date;
+import java.util.WeakHashMap;
+
+public class Main {
+
+    public static void main(String[] args) {
+        WeakHashMap<Person, PersonMetaData> weakHashMap = new WeakHashMap<Person, PersonMetaData>();
+        Person kevin = new Person();
+        weakHashMap.put(kevin, new PersonMetaData());
+
+        PersonMetaData p = weakHashMap.get(kevin);
+
+        System.out.println(p);
+
+        kevin = null;
+        System.gc();
+
+        if(weakHashMap.containsValue(p)){
+            System.out.println("Still contains key");
+        } else {
+            System.out.println("Key gone");
+        }
+    }
+}
+
+final class Person {
+
+}
+
+class PersonMetaData {
+    Date date;
+
+    PersonMetaData() {
+        date = new Date();
+    }
+
+    @Override
+    public String toString() {
+        return "PersonMetaData {" +
+                "date=" + date +
+                '}';
+    }
+}
+```
+
+##### Use ReferenceQueue
+* Pass a reference queue to constructor when creating the reference object
+  - Optional except for PhantomReference
+* References types enqueued to ReferenceQueue
+* When all strong references cleared
+  - Reference object is added to the reference queue
+* ReferenceQueue has poll and remove methods
+  - Poll returns immediately
+  - Remove has a timeout
+  - Both remove object from the queue
+* Can be used to attach clean up code
+  - Extend reference type
+* When all strong references cleared
+  - Reference object added to the queue
+
+```java
+package com.pluralsight;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.lang.ref.ReferenceQueue;
+import java.lang.ref.WeakReference;
+import java.sql.Ref;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+public class Main {
+
+    public static void main(String[] args) throws IOException {
+        Person p = new Person();
+        final ReferenceQueue<Person> referenceQueue = new ReferenceQueue<Person>();
+        PersonCleaner cleaner = new PersonCleaner();
+        PersonWeakReference weakReference = new PersonWeakReference(p, cleaner, referenceQueue );
+
+        ExecutorService executorService = Executors.newSingleThreadExecutor();
+        executorService.execute(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    PersonWeakReference wr = (PersonWeakReference) referenceQueue.remove();
+                    wr.clean();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        p = null;
+        System.gc();
+
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        System.out.println("Press any key to continue");
+        br.readLine();
+        executorService.shutdown();
+
+    }
+}
+
+final class Person {
+
+}
+
+class PersonCleaner {
+
+    public void clean() {
+        System.out.println("Cleaned");
+    }
+}
+
+class PersonWeakReference extends WeakReference<Person> {
+
+    PersonCleaner cleaner;
+    public PersonWeakReference(Person referent, PersonCleaner cleaner, ReferenceQueue<? super Person> q) {
+        super(referent, q);
+        this.cleaner = cleaner;
+    }
+
+    public void clean(){
+        cleaner.clean();
+    }
+}
+```
+
+##### Use PhantomReference
+
+```java
+package com.pluralsight;
+
+import java.lang.ref.PhantomReference;
+import java.lang.ref.Reference;
+import java.lang.ref.ReferenceQueue;
+import java.util.ArrayList;
+
+public class Main {
+
+    public static void main(String[] args) {
+        ReferenceQueue<Person> queue = new ReferenceQueue<Person>();
+        ArrayList<FinalizePerson> list = new ArrayList<FinalizePerson>();
+        ArrayList<Person> people = new ArrayList<Person>();
+
+        for (int i = 0; i< 10; i++){
+            Person p = new Person();
+            people.add(p);
+            list.add(new FinalizePerson(p, queue));
+        }
+
+        people = null;
+        System.gc();
+
+        for (PhantomReference<Person> reference : list) {
+            System.out.println(reference.isEnqueued());
+        }
+
+        Reference<? extends Person> referenceFromQueue;
+        while ((referenceFromQueue = queue.poll()) != null) {
+            ((FinalizePerson) referenceFromQueue).cleanup();
+        }
+
+    }
+}
+
+class FinalizePerson extends PhantomReference<Person>{
+
+    public FinalizePerson(Person referent, ReferenceQueue<? super Person> q) {
+        super(referent, q);
+    }
+
+    public void cleanup() {
+        System.out.println("person is finalizing resources");
+    }
+
+}
+
+class Person {
+}
+```
 
 #### Design pattern 
 | Name      | Intent                 | Real world example | 
