@@ -935,6 +935,10 @@ class PersonWeakReference extends WeakReference<Person> {
 ```
 
 ##### Use PhantomReference
+* Used instead of finalizers
+* Finalizers have issues
+  - Can be expensive
+  - Not sure when they will be called
 
 ```java
 package com.pluralsight;
