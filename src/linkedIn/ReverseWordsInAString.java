@@ -54,8 +54,19 @@ public class ReverseWordsInAString
     @Test
     public void test()
     {   
-    	assertEquals( "a", reverseWords( "a " ));
+    	// strange input
+    	assertEquals( "", reverseWords( "    " ) );
+    	assertEquals( "word", reverseWords( "word" ) );
+    	
+    	// extremes
+    	assertEquals( "a", reverseWords( "a " ) );
     	assertEquals( "", reverseWords( " " ) );
+    	
+    	// normal cases
     	assertEquals( "blue is sky the", reverseWords( "the sky is  blue" ) );
+    	
+    	// illegal input, leading/trailing spaces handled properly
+    	assertEquals( "blue is sky the", reverseWords( "  the sky is blue  " ) );
     }
+    
 }
