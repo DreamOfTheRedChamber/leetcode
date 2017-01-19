@@ -1,5 +1,9 @@
 package facebook.easy;
 
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
+
 /*
 Given a positive integer, return its corresponding column title as appear in an Excel sheet.
 
@@ -16,8 +20,30 @@ For example:
 
 public class ExcelSheetColumnTitle 
 {
-    public String convertToTitle(int n) 
+    public String convertToTitle( int n )
     {
-        return "";
+    	if ( n <= 0 )
+    	{
+    		throw new IllegalArgumentException( "" );
+    	}
+    	
+    	StringBuilder result = new StringBuilder();
+    	while ( n != 0 )
+    	{
+    		char currChar =  ( char ) ( n % 26 - 1 + 'A' );
+    		n = n / 26;
+    		result.append( currChar );
+    	}
+    	
+    	return result.reverse().toString();
+    }
+    
+    @Test
+    public void test()
+    {
+    	assertEquals( "A", convertToTitle( 1 ) );
+    	assertEquals( "AA", convertToTitle( 27 ) );
+    	assertEquals( "AB", convertToTitle( 28 ) );
+
     }
 }
