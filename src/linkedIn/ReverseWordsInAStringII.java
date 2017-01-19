@@ -1,5 +1,9 @@
 package linkedIn;
 
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
+
 /*
 Given an input string, reverse the string word by word. A word is defined as a sequence of non-space characters.
 
@@ -16,21 +20,33 @@ Related problem: Rotate Array
 
 public class ReverseWordsInAStringII 
 {
-    public void reverseWords( char[] s ) 
-    {
-    	reverse( s, 0, s.length - 1 );
-    	for ( int i = 0, wordStart = 0; i < s.length; i++ )
+    public void reverseWords( char[] s )
+    {	
+    	if ( s == null || s.length == 0 )
     	{
-    		if ( s[i] == ' ' )
-    		{
-    			reverse( s, wordStart, i - 1 );
-    			wordStart = i + 1;
-    		}
-    		else if ( i == s.length - 1 )
-    		{
-    			reverse( s, wordStart, i );
-    		}
+    		return;
     	}
+    	
+    	reverse( s, 0, s.length - 1 );
+    	for ( int wordStart = 0; wordStart < s.length;  )
+    	{
+    		if ( s[wordStart] == ' ' )
+    		{
+    			wordStart++;
+    		}
+    		else 
+    		{
+    			// find word end position
+    			int wordEnd = wordStart;
+    			while ( wordEnd + 1 < s.length && s[wordEnd + 1] != ' ' )
+    			{
+    				wordEnd++;
+    			}
+    			
+    			reverse( s, wordStart, wordEnd );    			
+    			wordStart = wordEnd + 1;
+    		}    		
+    	}    	
     }
     
     private void reverse( char[] s, int start, int end )
@@ -43,5 +59,15 @@ public class ReverseWordsInAStringII
     		start++;
     		end--;
     	}
+    }
+    
+    @Test
+    public void test()
+    {
+    	// strange input
+//    	assertEquals( "word", reverseWords( "word" ) );
+    	
+    	// normal cases
+//    	assertEquals( "blue is sky the", reverseWords( "the sky is blue" ) );
     }
 }
