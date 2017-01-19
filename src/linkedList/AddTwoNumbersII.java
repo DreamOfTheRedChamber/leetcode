@@ -1,5 +1,7 @@
 package linkedList;
 
+import java.util.Stack;
+
 import utility.ListNode;
 
 /*
@@ -18,7 +20,53 @@ Output: 7 -> 8 -> 0 -> 7
 
 public class AddTwoNumbersII
 {
-    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-        
-    }
+	public ListNode addTwoNumbers( ListNode l1, ListNode l2 )
+	{
+		Stack<Integer> s1 = new Stack<>();
+		Stack<Integer> s2 = new Stack<>();
+		
+		while ( l1 != null )
+		{
+			s1.push( l1.val );
+			l1 = l1.next;
+		}
+		
+		while ( l2 != null )
+		{
+			s2.push( l2.val );
+			l2 = l2.next;
+		}
+		
+		int carryBit = 0;
+		ListNode dummyHead = new ListNode( 0 );
+		while ( !s1.isEmpty() || !s2.isEmpty() )
+		{
+			if ( !s1.isEmpty() )
+			{
+				carryBit += s1.pop();
+			}
+			if ( !s2.isEmpty() )
+			{
+				carryBit += s2.pop();
+			}
+			
+			ListNode newNode = new ListNode( carryBit % 10 );			
+			ListNode dummyHeadNext = dummyHead.next;
+			dummyHead.next = newNode;
+			newNode.next = dummyHeadNext;
+			
+			carryBit = carryBit / 10;
+		}
+		
+		if ( carryBit == 1 )
+		{
+			ListNode dummyHeadNext = dummyHead.next;
+			ListNode newNode = new ListNode( 1 );
+			newNode.next = dummyHeadNext;
+			dummyHead.next = newNode;			
+		}
+		
+		return dummyHead.next;
+		
+	}
 }
