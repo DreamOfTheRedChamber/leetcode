@@ -25,18 +25,20 @@ Follow up:
 Can you figure out ways to solve it with O(n) time complexity?
  */
 
-// TODO: improve complexity
-
 public class LargestBSTSubtree
 {
 	private class ResultWrapper
 	{
 		public final boolean isBST;
 		public final int largestBSTSize;
-		public ResultWrapper( boolean isBST, int largestBSTSize )
+		public final int minValue;
+		public final int maxValue;
+		public ResultWrapper( boolean isBST, int largestBSTSize, int minValue, int maxValue )
 		{
 			this.isBST = isBST;
 			this.largestBSTSize = largestBSTSize;
+			this.minValue = minValue;
+			this.maxValue = maxValue;
 		}
 	}
 	
@@ -50,12 +52,12 @@ public class LargestBSTSubtree
     {
     	if ( root == null )
     	{
-    		return new ResultWrapper( true, 0 );
+    		return new ResultWrapper( false, 0, Integer.MIN_VALUE, Integer.MAX_VALUE );
     	}
     	if ( root.left == null 
     			&& root.right == null )
     	{
-    		return new ResultWrapper( true, 1 );
+    		return new ResultWrapper( true, 1, root.val, root.val );
     	}
     	
     	ResultWrapper leftResult = largestBSTSubtreeRecurse( root.left );
@@ -64,32 +66,32 @@ public class LargestBSTSubtree
     	if ( leftResult.isBST 
     			&& rightResult.isBST )
     	{
-    		int largestLeftChild = root.val;
-    		TreeNode currNode = root.left;
-    		while( currNode != null )
+    		if ( leftResult.maxValue < root.val 
+    			&& root.val < rightResult.minValue )
     		{
-    			largestLeftChild = currNode.val;
-    			currNode = currNode.right;
+    			return new ResultWrapper( true, leftResult.largestBSTSize + rightResult.largestBSTSize + 1, leftResult.minValue, rightResult.maxValue );
     		}
-    		
-    		int smallestRightChild = root.val;
-    		currNode = root.right;
-    		while ( currNode != null )
+    		else if ( leftResult.largestBSTSize > rightResult.largestBSTSize )
     		{
-    			smallestRightChild = currNode.val;
-    			currNode = currNode.left;
+    			return new ResultWrapper( false, leftResult.largestBSTSize, leftResult.minValue, leftResult.maxValue );
     		}
-    		
-    		if ( smallestRightChild >= root.val
-    				&& largestLeftChild <= root.val )
+    		else
     		{
-    			return new ResultWrapper( true, 
-    					leftResult.largestBSTSize + rightResult.largestBSTSize + 1 );
+    			return new ResultWrapper( false, rightResult.largestBSTSize, rightResult.minValue, rightResult.maxValue );
     		}
     	}
-
-    	return new ResultWrapper( false, 
-    			Math.max( leftResult.largestBSTSize, rightResult.largestBSTSize ) );
+    	else if ( leftResult.isBST )
+    	{
+    		return new ResultWrapper( false, leftResult.largestBSTSize, leftResult.minValue, leftResult.maxValue );
+    	}
+    	else if ( rightResult.isBST )
+    	{
+    		return new ResultWrapper( false, rightResult.largestBSTSize, rightResult.minValue, rightResult.maxValue );
+    	}
+    	else
+    	{
+    		return new ResultWrapper( false, 1, root.val, root.val );
+    	}
     }
     
     @Ignore
