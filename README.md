@@ -12,7 +12,7 @@
   - [Solve follow up questions](#solve-follow-up-questions)
 - [Interview mindset](#interview-mindset)
   - [Understanding what interviewers really wants](#understanding-what-interviewers-really-wants)
-  - [When met with easy/hard/tricky problems \(although most time medium problems\):](#when-met-with-easyhardtricky-problems-although-most-time-medium-problems)
+  - [Interview strategies](#interview-strategies)
   - [Whiteboard coding pros and cons](#whiteboard-coding-pros-and-cons)
 - [Practice mindset](#practice-mindset)
   - [Goal](#goal)
@@ -306,6 +306,7 @@
        * Global variables
   4. Synchronize with interviewer: "***I think I am done with the problem***".
 
+
 #### Solve follow up questions 
 * Typical follow-up questions
     * No duplicates -> duplicates exist
@@ -332,13 +333,20 @@
 | Write code to solve problem | <ul><li>Jumps into writing code</li><li>Awkward silence</li></ul>     | <ul><li>Would I want to work with them everyday</li><li>Have they actually written production grade code</li><li>What do they do when stuck</li></ul> |
 | Maybe you could try this ... | <ul><li>Take advice without serious thinking</li></ul>  | <ul><li>Do they think independently</li><li>How fast can they absord new information</li><li>Do they take advice/directions well</li><li>Do they learn quickly and run with it</li></ul> |
 
-#### When met with easy/hard/tricky problems (although most time medium problems): 
-* Always smile no matter how easy/hard/tricky the problem is, ;)
+#### Interview strategies 
+* For big companies, before onsite interview, practice all algorithm problems on Leetcode under the company's tag. Practice all algorithm problems on 1acre3points. 
+  - Come up with multiple solutions for each algorithm problem, know their tradeoffs and proficient in the best solution.
+  - Practice algorithm questions under each problem category. 
+* What if the interviewer just could not understand
+  - Relax. Do not repeat the same explanation again. Walk through an example and know where he could not understand.
+* Behavior interview
+  - Smile/handshake/look into eyes
+  - ***Thank you so much for speaking with me and sharing your insights about the new position inside XXX. I am looking forward to working with you in future.***
 * For easy problems,
-  * Although interviewer says "I will only give you an easy question". Every interviewing question has its purpose. It might be the corner case, coding style or communication. 
-  * There might be some follow-up questions. The easy problem is just for warming up.
+  - Although interviewer says "I will only give you an easy question". Every interviewing question has its purpose. It might be the corner case, coding style or communication. 
+  - There might be some follow-up questions. The easy problem is just for warming up.
 * For problems I have seen before, 
-  * Notice that the assumption might have been changed. 
+  - Notice that the assumption might have been changed. 
   * Still need to walk through the entire thought process instead of jumping to the right answer directly.
 
 #### Whiteboard coding pros and cons 
