@@ -12,26 +12,42 @@ Depending on your language, stack may not be supported natively. You may simulat
 You may assume that all operations are valid (for example, no pop or peek operations will be called on an empty queue).
  * */
 
-// TO_START
+import java.util.Stack;
+
 public class ImplementQueueUsingStacks 
 {
+	Stack<Integer> queue = new Stack<>();
+	
     // Push element x to the back of queue.
-    public void push(int x) {
-        
+    public void push( int x ) 
+    {
+        Stack<Integer> temp = new Stack<>();
+		while ( !queue.empty() )
+		{
+			temp.push( queue.pop() );
+		}
+		queue.push( x );
+		while ( !temp.empty() )
+		{
+			queue.push( temp.pop() );
+		}
     }
 
-    // Removes the element from in front of queue.
-    public void pop() {
-        
-    }
+	// Removes the element from in front of queue.
+	public void pop()
+	{
+		queue.pop();
+	}
 
-    // Get the front element.
-    public int peek() {
-        return 0;
-    }
+	// Get the front element.
+	public int peek()
+	{
+		return queue.peek();
+	}
 
-    // Return whether the queue is empty.
-    public boolean empty() {
-        return true;
-    }
+	// Return whether the queue is empty.
+	public boolean empty()
+	{
+		return queue.empty();
+	}
 }
