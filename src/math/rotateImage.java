@@ -11,29 +11,19 @@ Could you do this in-place?
 
 public class rotateImage
 {
+	// matrix[i][j] = matrix[n-1-j][i]
     public void rotate( int[][] matrix )
     {
-    	// transpose the image
-		for ( int i = 0; i < matrix.length; i++ )
+		int n = matrix.length;
+		for ( int i = 0; i < n / 2; i++ )
 		{
-			for ( int j = i; j < matrix[0].length; j++ )
+			for ( int j = 0; j < Math.ceil( ( ( double ) n ) / 2. ); j++ )
 			{
-				int temp = 0;
-				temp = matrix[i][j];
-				matrix[i][j] = matrix[j][i];
-				matrix[j][i] = temp;
-			}
-		}
-		
-		// flip horizontally
-		for ( int i = 0; i < matrix.length; i++ )
-		{
-			for ( int j = 0; j < matrix.length / 2; j++ )
-			{
-				int temp = 0;
-				temp = matrix[i][j];
-				matrix[i][j] = matrix[i][matrix.length - 1 - j];
-				matrix[i][matrix.length - 1 - j] = temp;
+				int temp = matrix[i][j];
+				matrix[i][j] = matrix[n - 1 - j][i];
+				matrix[n - 1 - j][i] = matrix[n - 1 - i][n - 1 - j];
+				matrix[n - 1 - i][n - 1 - j] = matrix[j][n - 1 - i];
+				matrix[j][n - 1 - i] = temp;
 			}
 		}
     }
