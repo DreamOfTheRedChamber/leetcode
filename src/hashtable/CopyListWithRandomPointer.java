@@ -23,39 +23,29 @@ public class CopyListWithRandomPointer
         }
 
         Map<RandomListNode, RandomListNode> map = new HashMap<RandomListNode, RandomListNode>();
-        RandomListNode dummy = new RandomListNode(0);
-        RandomListNode pre = dummy, newNode;
-        while ( head != null ) 
+        RandomListNode dummyHead = new RandomListNode(0);
+        RandomListNode resultTail = dummyHead, newNode;
+        RandomListNode currNode = head;
+        while ( currNode != null ) 
         {
-            if ( map.containsKey( head ) ) 
-            {
-                newNode = map.get( head );
-            } 
-            else 
-            {
-                newNode = new RandomListNode( head.label );
-                map.put( head, newNode );
-            }
-            pre.next = newNode;
+        	// create node
+        	map.putIfAbsent( currNode, new RandomListNode( currNode.label ) );
+        	newNode = map.get( currNode );        	
 
-            if ( head.random != null ) 
+            // assign random pointer
+            if ( currNode.random != null ) 
             {
-                if ( map.containsKey( head.random ) ) 
-                {
-                    newNode.random = map.get( head.random );
-                } 
-                else 
-                {
-                    newNode.random = new RandomListNode( head.random.label );
-                    map.put( head.random, newNode.random );
-                }
+            	map.putIfAbsent( currNode.random, new RandomListNode( currNode.label ) );
+            	newNode = map.get( currNode.random );        	
             }
-
-            pre = newNode;
-            head = head.next;
+            
+            // concatenate
+            resultTail.next = newNode;
+            resultTail = newNode;
+            currNode = currNode.next;
         }
 
-        return dummy.next;		
+        return dummyHead.next;		
 	}
 	
     public RandomListNode copyRandomList( RandomListNode head )
