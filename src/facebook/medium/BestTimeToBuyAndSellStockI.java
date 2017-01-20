@@ -1,4 +1,4 @@
-package facebook.easy;
+package facebook.medium;
 
 /**
 Say you have an array for which the ith element is the price of a given stock on day i.
@@ -16,11 +16,29 @@ Output: 0
 
 In this case, no transaction is done, i.e. max profit = 0.
  */
-//TO_START
 public class BestTimeToBuyAndSellStockI
 {
     public int maxProfit(int[] prices) 
     {
-        return 1;
+    	if ( prices == null || prices.length == 0 )
+    	{
+    		return 0;
+    	}
+    	
+    	int globalMax = 0;
+    	int leftMin = prices[0];
+    	for ( int i = 0; i < prices.length; i++ )
+    	{
+    		if ( prices[i] > leftMin )
+    		{
+    			globalMax = Math.max( globalMax, prices[i] - leftMin );
+    		}
+    		else
+    		{
+    			leftMin = prices[i];
+    		}
+    	}
+    	
+    	return globalMax;
     }
 }
