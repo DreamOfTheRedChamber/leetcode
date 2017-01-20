@@ -112,7 +112,6 @@
   - [Trie](#trie)
     - [Use case](#use-case-1)
     - [Trie definition](#trie-definition)
-    - [Common tasks](#common-tasks-1)
 - [Algorithms](#algorithms)
   - [Math](#math)
     - [Random](#random)
@@ -124,7 +123,7 @@
     - [Prime](#prime)
   - [Bit manipulation](#bit-manipulation)
     - [Arithmetic vs logic right shift](#arithmetic-vs-logic-right-shift)
-    - [Common tasks](#common-tasks-2)
+    - [Common tasks](#common-tasks-1)
   - [Non-DP Memorization](#non-dp-memorization)
     - [Array](#array-1)
     - [Stack](#stack-1)
@@ -2150,78 +2149,125 @@ public Map<Integer, Set<Integer>> buildGraph( int n, int[][] edges )
 
 ##### Trie definition 
 * Depending on the size of charset, children pointers could be either stored in a bitmap or hashmap. Although slightly suffering performance, hashmap implementation is more concise and generic.
-```java
-class Trie
-{
-  public TrieNode root;
-  // other functions
-}
+* Common tasks such as search() and startwith() can be implemented in a similar way. 
 
-private class TrieNode
-{
-  public final int CHARSET_SIZE = 26;
-  public char val;
-  public Map<Character, TrieNode> children;     
-  public boolean isLeaf;
-  public TrieNode( char val )
-  {
-    this.val = val;
-    children = new HashMap<>( CHARSET_SIZE );
-  }     
-} 
-```
-##### Common tasks 
-* Add
-* Search (regular expression)
-* Start with
 ```java
-// Adds a word into the data structure.
-public void addWord( String word )
-{
-  // error handling...
-  TrieNode curr = root;
-  for ( Character ch : word.toCharArray() )
+  class Trie
   {
-    curr.children.putIfAbsent( ch, new TrieNode( ch ) );
-    curr = curr.children.get( ch );
-  }
-  curr.isLeaf = true;
-}
 
-// Searches whether a word exists or not
-// startWith() has fewer constraints: does not need to check the boolean isLeaf flag
-public boolean search( String word )
-{
-  // error handling
-  return search( word, 0, root );
-}    
-private boolean search( String word, int index, TrieNode root )
-{
-  if ( root == null )
-  {
-    return false;
-  }
-  else if ( index == word.length() )
-  {
-    return root.isLeaf;
-  }
-  else if ( word.charAt( index ) != '.' )
-  {
-    return search( word, index + 1, root.children.get( word.charAt( index ) ) );        
-  }
-  else
-  {
-    for ( TrieNode child : root.children.values() )
+    class TrieNode 
     {
-      if ( search( word, index + 1, child ) )
+        public Map<Character, TrieNode> children;
+        public boolean isLeaf;
+        public char val;
+        
+        public TrieNode() 
+        {
+            children = new HashMap<>();
+        }
+        
+        public TrieNode( char val )
+        {
+            this();
+            this.val = val;
+        }
+    }
+
+    public TrieNode root;
+
+    // Inserts a word into the trie.
+    public void insert( String word )
+    {
+      TrieNode currNode = root;
+      for ( int i = 0; i < word.length(); i++ )
+      {
+        currNode.children.putIfAbsent( word.charAt( i ), new TrieNode( word.charAt( i ) ) );
+        currNode = currNode.children.get( word.charAt( i ) );
+      }
+      currNode.isLeaf = true;
+    }
+
+    public boolean searchIterative( String word )
+    {
+      TrieNode currNode = root;
+      for ( int i = 0; i < word.length(); i++ )
+      {
+        currNode = currNode.children.get( word.charAt( i ) );
+        if ( currNode == null )
+        {
+          return false;
+        }
+      }
+      return currNode.isLeaf;
+    }
+        
+    public boolean startWithIterative( String word )
+    {
+      TrieNode currNode = root;
+      for ( int i = 0; i < word.length(); i++ )
+      {
+        currNode = currNode.children.get( word.charAt( i ) );
+        if ( currNode == null )
+        {
+          return false;
+        }
+      }
+      return true;
+    }
+    
+    // Returns if the word is in the trie.
+    public boolean searchRecursive( String word )
+    {
+        if ( root == null )
+        {
+            throw new IllegalStateException( "" );
+        }
+        return searchRecursive( word, 0, root );
+    }
+
+    private boolean searchRecursive( String word, int wordPos, TrieNode currNode )
+    {
+      if ( currNode == null )
+      {
+        return false;
+      }
+      else if ( wordPos == word.length() )
+      {
+        return currNode.isLeaf;
+      }
+      else
+      {
+        return searchRecursive( word, wordPos + 1, currNode.children.get( word.charAt( wordPos ) ) );
+      }
+    }
+
+    // Returns if there is any word in the trie
+    // that starts with the given prefix.
+    public boolean startsWithRecursive( String prefix )
+    {
+      return startsWithRecursive( prefix, 0, root );
+    }
+    
+    private boolean startsWithRecursive( String prefix, int prefixPos, TrieNode currNode )
+    {
+      if ( currNode == null )
+      {
+        return false;
+      }
+      else if ( prefixPos == prefix.length() )
       {
         return true;
-      }             
+      }
+      else
+      {
+        return startsWithRecursive( prefix, prefixPos + 1, currNode.children.get( prefix.charAt( prefixPos ) ) );
+      }
     }
-    return false;
+
   }
-}
+
 ```
+
 
 ### Algorithms 
 
