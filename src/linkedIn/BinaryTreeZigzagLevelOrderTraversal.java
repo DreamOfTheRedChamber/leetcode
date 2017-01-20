@@ -10,7 +10,21 @@ import org.junit.Test;
 import utility.TreeNode;
 
 /**
- * 
+Given a binary tree, return the zigzag level order traversal of its nodes' values. (ie, from left to right, then right to left for the next level and alternate between).
+
+For example:
+Given binary tree [3,9,20,null,null,15,7],
+    3
+   / \
+  9  20
+    /  \
+   15   7
+return its zigzag level order traversal as:
+[
+  [3],
+  [20,9],
+  [15,7]
+]
  */
 
 public class BinaryTreeZigzagLevelOrderTraversal
@@ -32,57 +46,56 @@ public class BinaryTreeZigzagLevelOrderTraversal
 	
     public List<List<Integer>> zigzagLevelOrder( TreeNode root )
     {
-    	List<List<Integer>> allLevels = new ArrayList<>();
+    	List<List<Integer>> result = new ArrayList<>();
     	if ( root == null )
     	{
-    		return allLevels;
+    		return result;
     	}
     	
-    	Stack<TreeNode> oddLevelStack = new Stack<>();
-    	Stack<TreeNode> evenLevelStack = new Stack<>();
-    	oddLevelStack.push( root );
+    	Stack<TreeNode> currLayer = new Stack<>();
+    	currLayer.push( root );
+    	Stack<TreeNode> nextLayer = new Stack<>();
+    	List<Integer> layerOutput = new ArrayList<>();
+    	int direction = 0;
     	
-    	while ( !oddLevelStack.isEmpty() 
-    			|| !evenLevelStack.isEmpty() )
+    	while ( !currLayer.isEmpty() )
     	{
-    		List<Integer> oneLevel = new LinkedList<>();
-    		// odd layer, push right child first, left child last
-    		if ( !oddLevelStack.isEmpty() )
-    		{    			
-    			while ( !oddLevelStack.isEmpty() )
+    		TreeNode node = currLayer.pop();
+    		layerOutput.add( node.val );
+    		if ( direction == 0 )
+    		{
+    			if ( node.left != null )
     			{
-    				TreeNode stackTop = oddLevelStack.pop();
-    				oneLevel.add( stackTop.val );
-    				if ( stackTop.left != null )
-    				{
-    					evenLevelStack.push( stackTop.left );
-    				}
-    				if ( stackTop.right != null )
-    				{
-    					evenLevelStack.push( stackTop.right );
-    				}
+    				nextLayer.push( node.left );
+    			}
+    			if ( node.right != null )
+    			{
+    				nextLayer.push( node.right );
     			}
     		}
-    		// even layer, push left child first, right child last
     		else
     		{
-    			while ( !evenLevelStack.isEmpty() )
+    			if ( node.right != null )
     			{
-    				TreeNode stackTop = evenLevelStack.pop();
-    				oneLevel.add( stackTop.val );
-    				if ( stackTop.right != null )
-    				{
-    					oddLevelStack.push( stackTop.right );
-    				}
-    				if ( stackTop.left != null )
-    				{
-    					oddLevelStack.push( stackTop.left );
-    				}
+    				nextLayer.push( node.right );
+    			}
+    			if ( node.left != null )
+    			{
+    				nextLayer.push( node.left );
     			}
     		}
-    		allLevels.add( oneLevel );
+    		
+    		if ( currLayer.isEmpty() )
+    		{
+    			result.add( layerOutput );
+    			layerOutput = new ArrayList<>();
+    			currLayer = nextLayer;
+    			nextLayer = new Stack<>();
+    			
+    			direction ^= 1;
+    		}
     	}
-    	return allLevels;
+    	return result;    	
     }
 
 }
