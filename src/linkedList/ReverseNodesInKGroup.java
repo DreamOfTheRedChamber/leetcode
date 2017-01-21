@@ -25,69 +25,72 @@ For k = 3, you should return: 3->2->1->4->5
  */
 public class ReverseNodesInKGroup
 {
-    public ListNode reverseKGroup( ListNode head, int k )
-    {    	
-    	ListNode dummyHead = new ListNode( 0 );
-    	dummyHead.next = head;
-    	ListNode tailNode = dummyHead;
-    	
-    	ListNode currNode = head;
-    	while ( currNode != null )
-    	{
-    		// find the next k th node
-    		int nodeCounter = 1;
-    		ListNode kthNode = currNode;
-    		while ( nodeCounter < k
-    				&& kthNode != null )
-    		{
-    			nodeCounter++;
-    			kthNode = kthNode.next;
-    		}    			
-    		if ( kthNode == null )
-    		{
-    			break;
-    		}
-    		
-    		// reverse the next k nodes
-    		ListNode beforeThisRoundStart = tailNode;
-    		ListNode nextRoundStart = kthNode.next;		
-    		ListNode reversedListTail = currNode;
-    		ListNode reversedListHead = reverseKNodes( currNode, k );
-    		
-    		// concatenate list
-    		beforeThisRoundStart.next = reversedListHead;
-    		reversedListTail.next = nextRoundStart;
-    		
-    		// move to next round
-    		tailNode = reversedListTail;
-    		currNode = nextRoundStart;
-    	}
-    	
-    	return dummyHead.next;
-    }
-    
-    private ListNode reverseKNodes( ListNode head, int k )
-    {
-    	ListNode dummyHead = new ListNode( 0 );
-    	ListNode currNode = head;
-    	int count = 0;
-    	while ( currNode != null 
-    			&& count < k )
-    	{
-    		// prepare for next round loop
-    		ListNode dummyHeadNextBuffer = dummyHead.next;
-    		ListNode currNodeNextBuffer = currNode.next;
-    		
-    		// ... do job in  this round loop
-    		dummyHead.next = currNode;
-    		currNode.next = dummyHeadNextBuffer;
-    		
-    		// move to next round loop
-    		currNode = currNodeNextBuffer;
-    		count++;
-    	}
-    	return dummyHead.next;
-    }
+	public ListNode reverseKGroup( ListNode head, int k )
+	{
+		// Start typing your Java solution below
+		// DO NOT write main() function
+		if ( head == null || k == 1 )
+		{
+			return head;
+		}
+
+		ListNode dummy = new ListNode( 0 );
+		dummy.next = head;
+
+		ListNode beforeKGroup = dummy;
+		ListNode currNode = head;
+		
+		for ( int i = 1; currNode != null; i++ )
+		{
+			if ( i % k == 0 )
+			{
+				ListNode nextBeforeKGroup = beforeKGroup.next;
+				reverse( beforeKGroup, currNode.next );
+				beforeKGroup = nextBeforeKGroup;
+				currNode = beforeKGroup.next;
+			}
+			else
+			{
+				currNode = currNode.next;
+			}
+		}
+		
+		return dummy.next;
+	}
+
+    /**
+     * Reverse a link list between pre and next exclusively
+     * an example:
+     * a linked list:
+     * 0->1->2->3->4->5->6
+     * |           |   
+     * pre        next
+     * after call pre = reverse(pre, next)
+     * 
+     * 0->3->2->1->4->5->6
+     *          |  |
+     *          pre next
+     * @param pre 
+     * @param next
+     */
+	public void reverse( ListNode firstNode, ListNode lastNode )
+	{
+		ListNode dummyHead = new ListNode( 0 );
+		ListNode reverseTail = firstNode.next;
+		
+		ListNode currNode = firstNode.next;
+		while ( currNode != lastNode )
+		{
+			ListNode dummyHeadNext = dummyHead.next;
+			ListNode nextNode = currNode.next;
+			dummyHead.next = currNode;
+			currNode.next = dummyHeadNext;
+			currNode = nextNode;
+		}
+		
+		firstNode.next = dummyHead.next;
+		reverseTail.next = lastNode;
+	}
     
     @Test
     public void test()
