@@ -16,38 +16,44 @@ import java.util.Stack;
 
 public class ImplementQueueUsingStacks 
 {
-	Stack<Integer> queue = new Stack<>();
+	Stack<Integer> inbox = new Stack<>();
+	Stack<Integer> outbox = new Stack<>();
 	
     // Push element x to the back of queue.
     public void push( int x ) 
     {
-        Stack<Integer> temp = new Stack<>();
-		while ( !queue.empty() )
-		{
-			temp.push( queue.pop() );
-		}
-		queue.push( x );
-		while ( !temp.empty() )
-		{
-			queue.push( temp.pop() );
-		}
+    	inbox.push( x );
     }
 
 	// Removes the element from in front of queue.
-	public void pop()
+	public int pop()
 	{
-		queue.pop();
+		if ( outbox.isEmpty() )
+		{
+			while ( !inbox.isEmpty() )
+			{
+				outbox.push( inbox.pop() );
+			}
+		}
+		return outbox.pop();
 	}
 
 	// Get the front element.
 	public int peek()
 	{
-		return queue.peek();
+		if ( outbox.isEmpty() )
+		{
+			while ( !inbox.isEmpty() )
+			{
+				outbox.push( inbox.pop() );
+			}
+		}
+		return outbox.peek();
 	}
 
 	// Return whether the queue is empty.
 	public boolean empty()
 	{
-		return queue.empty();
+		return inbox.isEmpty() && outbox.isEmpty();
 	}
 }
