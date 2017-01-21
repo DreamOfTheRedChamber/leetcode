@@ -39,44 +39,25 @@ public class StringToInteger
     	}
     	
     	// trim beginning and trailing spaces
-    	int beginPos = 0;
-    	while ( beginPos < str.length() && str.charAt( beginPos ) == ' ' )
-    	{
-    		beginPos++;
-    	}
-    	int endPos = str.length() - 1;
-    	while ( endPos >= 0 && str.charAt( endPos ) == ' ' )
-    	{
-    		endPos--;
-    	}
-    	
-    	if ( beginPos >= str.length() )
-    	{
-    		return 0;
-    	}
+    	str = str.trim();
+    	int index = 0;
     	
     	// apply sign
     	int sign = 1;
-    	if ( str.charAt( beginPos ) == '-' )
+    	if ( str.charAt( index ) == '-' )
     	{
-    		beginPos++;
+    		index++;
     		sign = -1;
     	}
-    	else if ( str.charAt( beginPos ) == '+' )
+    	else if ( str.charAt( index ) == '+' )
     	{
-    		beginPos++;
+    		index++;
     		sign = 1;
-    	}
-
-    	// handle illegal input
-    	if ( beginPos >= str.length() )
-    	{
-    		return 0;
     	}
     	
     	// calculate result
     	long result = 0;
-    	for ( int i = beginPos; i <= endPos; i++ )
+    	for ( int i = index; i < str.length(); i++ )
     	{
     		if ( str.charAt( i ) < '0' || str.charAt( i ) > '9' )
     		{
