@@ -12,7 +12,7 @@
   - [Solve follow up questions](#solve-follow-up-questions)
 - [Interview mindset](#interview-mindset)
   - [Understanding what interviewers really wants](#understanding-what-interviewers-really-wants)
-  - [Interview strategies](#interview-strategies)
+  - [Interview mistakes made in past](#interview-mistakes-made-in-past)
   - [Whiteboard coding pros and cons](#whiteboard-coding-pros-and-cons)
 - [Practice mindset](#practice-mindset)
   - [Goal](#goal)
@@ -333,21 +333,11 @@
 | Write code to solve problem | <ul><li>Jumps into writing code</li><li>Awkward silence</li></ul>     | <ul><li>Would I want to work with them everyday</li><li>Have they actually written production grade code</li><li>What do they do when stuck</li></ul> |
 | Maybe you could try this ... | <ul><li>Take advice without serious thinking</li></ul>  | <ul><li>Do they think independently</li><li>How fast can they absord new information</li><li>Do they take advice/directions well</li><li>Do they learn quickly and run with it</li></ul> |
 
-#### Interview strategies 
-* For big companies, before onsite interview, practice all algorithm problems on Leetcode under the company's tag. Practice all algorithm problems on 1acre3points. 
-  - Come up with multiple solutions for each algorithm problem, know their tradeoffs and proficient in the best solution.
-  - Practice algorithm questions under each problem category. 
-* What if the interviewer just could not understand
-  - Relax. Do not repeat the same explanation again. Walk through an example and know where he could not understand.
-* Behavior interview
-  - Smile/handshake/look into eyes
-  - ***Thank you so much for speaking with me and sharing your insights about the new position inside XXX. I am looking forward to working with you in future.***
-* For easy problems,
-  - Although interviewer says "I will only give you an easy question". Every interviewing question has its purpose. It might be the corner case, coding style or communication. 
-  - There might be some follow-up questions. The easy problem is just for warming up.
-* For problems I have seen before, 
-  - Notice that the assumption might have been changed. 
-  * Still need to walk through the entire thought process instead of jumping to the right answer directly.
+#### Interview mistakes made in past
+* Too nervous: When I become too nervous, I just could not speak. This is the number one red flag during interviews. No one wants to work with people who cannot speak.
+* Ignore first impression importance: Don't smile/handshake/look into interviewers' eyes.
+* Wrong expectations about interviewers: You need to acknowledge that there are so many different types of interviewers. Some like to follow rules but others don't. For example, expecting all algorithm interview questions are under leetcode's company tag or from past interview experiences in 1acre3points is not practical. Some interviewers are bored with Leetcode and really want to ask unique questions to truely evaluate interviewees.
+* Anxious because too many things need to be prepared: Always prioritize and then act. You just cannot practice every possible question before interviews because there are too many. What you can do is to practice typical problems under each category and practice the most popular interview questions. Make sure that you practice each problem as if you are interviewing.
 
 #### Whiteboard coding pros and cons 
 * Pros
