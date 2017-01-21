@@ -1,5 +1,8 @@
 package facebook.medium;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 import utility.TreeLinkNode;
 
 /**
@@ -32,23 +35,55 @@ public class PopulateNextRightPointersInEachNodeII
     	TreeLinkNode leftmostNode = root;
     	while ( leftmostNode != null )
     	{
-    		TreeLinkNode node = leftmostNode;
-    		TreeLinkNode dummy = new TreeLinkNode( 0 );
-    		TreeLinkNode prev = dummy;
-    		while ( node != null )
+    		TreeLinkNode currNode = leftmostNode;
+    		TreeLinkNode nextLevelDummyHead = new TreeLinkNode( 0 );
+    		TreeLinkNode nextLevelTail = nextLevelDummyHead;
+    		
+    		while ( currNode != null )
     		{
-    			if ( node.left != null )
+    			if ( currNode.left != null )
     			{
-    				prev.next = node.left;
-    				prev = prev.next;
+    				nextLevelTail.next = currNode.left;
+    				nextLevelTail = currNode.left;
     			}
-    			if ( node.right != null )
+    			if ( currNode.right != null )
     			{
-    				prev.next = node.right;
-    				prev = prev.next;
+    				nextLevelTail.next = currNode.right;
+    				nextLevelTail = currNode.right;
     			}
+    			currNode = currNode.next;
     		}
-    		leftmostNode = dummy.next;
+    		
+    		leftmostNode = nextLevelDummyHead.next;
+    	}
+    }
+    
+    public void connectBFS( TreeLinkNode root )
+    {
+    	if ( root == null )
+    	{
+    		return;
+    	}
+    	
+    	Queue<TreeLinkNode> bfsQueue = new LinkedList<>();
+    	bfsQueue.add( root );
+    	while ( !bfsQueue.isEmpty() )
+    	{
+    		int levelSize = bfsQueue.size();
+    		for ( int i = 0; i < levelSize; i++ )
+    		{
+    			TreeLinkNode head = bfsQueue.poll();
+    			head.next = ( i == levelSize - 1 ) ? null : bfsQueue.peek();
+
+    			if ( head.left != null )
+    			{
+    				bfsQueue.offer( head.left );
+    			}
+    			if ( head.right != null )
+    			{
+    				bfsQueue.offer( head.right );
+    			}
+    		}    		    		
     	}
     }
 }
