@@ -28,29 +28,47 @@ public class BinaryTreeInorderTraversal
 
     public List<Integer> inorderTraversal( TreeNode root )
     {
-    	List<Integer> inorderSeqs = new ArrayList<>();
-    	Stack<TreeNode> inorderStack = new Stack<>();
-    	pushAllNodesOnLeftPath( root, inorderStack );
-    	while ( !inorderStack.isEmpty( ) )
+    	List<Integer> result = new ArrayList<>();
+    	Stack<TreeNode> stack = new Stack<>();
+    	pushAllLeftChild( root, stack );
+    	while ( !stack.isEmpty( ) )
     	{
-    		TreeNode top = inorderStack.pop( );
-    		inorderSeqs.add( top.val );
+    		TreeNode top = stack.pop( );
+    		result.add( top.val );
     		if ( top.right != null )
     		{
-    			pushAllNodesOnLeftPath( top.right, inorderStack );
+    			pushAllLeftChild( top.right, stack );
     		}
     	}
-    	return inorderSeqs;
+    	return result;
     }
-
-    private void pushAllNodesOnLeftPath( TreeNode root, Stack<TreeNode> inorderStack )
+    
+    private void pushAllLeftChild( TreeNode root, Stack<TreeNode> stack )
     {
     	TreeNode currNode = root;
     	while ( currNode != null )
     	{
-    		inorderStack.push( currNode );
+    		stack.push( currNode );
     		currNode = currNode.left;
     	}
+    }
+    
+    public List<Integer> inorderTraversalRecursively( TreeNode root )
+    {
+    	List<Integer> result = new ArrayList<>();
+    	traverse( root, result );
+    	return result;
+    }
+    
+    private void traverse( TreeNode root, List<Integer> result )
+    {
+    	if ( root == null )
+    	{
+    		return;
+    	}
+    	traverse( root.left, result );
+    	result.add( root.val );
+    	traverse( root.right, result );
     }
     
     @Test
