@@ -1,111 +1,113 @@
 package hashtable.design;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.HashMap;
 import java.util.Map;
 
-class ListNode
+import org.junit.Test;
+
+class DLLNode
 {
-    public int key;
+	public int key;
     public int value;
-    public ListNode prev;
-    public ListNode next;
-    public ListNode( int key, int value )
+    public DLLNode prev;
+    public DLLNode next;
+    public DLLNode( int key, int value )
     {
-        this.key = key;
+    	this.key = key;
         this.value = value;
-        this.prev = prev;
-        this.next = next;
     }
 }
 
 public class LRUCacheHashTableDDL 
 {
-    private Map<Integer, ListNode> keyToNodeMap;
+	
+    private Map<Integer, DLLNode> cache;
     // list ordered from oldest to latest
-    private ListNode listHeadSentinel;
-    private ListNode listTailSentinel;
+    private DLLNode dummyOldest;
+    private DLLNode dummyLatest;
     private int capacity;
-    private final static int SENTINEL = 0;
     
-    public LRUCacheHashTableDDL(int capacity) 
+    public LRUCacheHashTableDDL( int capacity )
     {
         this.capacity = capacity;
-        this.keyToNodeMap = new HashMap<>( capacity );
-        listHeadSentinel = new ListNode( SENTINEL, SENTINEL );
-        listTailSentinel = new ListNode( SENTINEL, SENTINEL );
-        listHeadSentinel.next = listTailSentinel;
-        listTailSentinel.prev = listHeadSentinel;
+        this.cache = new HashMap<>( capacity );
+        dummyOldest = new DLLNode( 0, 0 );
+        dummyLatest = new DLLNode( 0, 0 );
+        dummyLatest.prev = dummyOldest;
+        dummyOldest.next = dummyLatest;
     }
     
-    public int get(int key) 
+    public int get( int key )
     {
-        if ( keyToNodeMap.containsKey( key ) )
+        if ( !cache.containsKey( key ) )
         {
-            ListNode node = keyToNodeMap.get( key );
+        	return -1;
+        }
+        
+        DLLNode node = cache.get( key );
             
-            // move node to list tail
-            removeNodeFromList( node );
-            addNodeToListTail( node ); 
+        // move node to list tail
+        deleteNode( node );
+        addAsLatest( node ); 
 
-            if ( node != null )
-            {
-                return node.value;
-            }
-            else
-            {
-                throw new IllegalStateException("");
-            }
-        }
-        else
-        {
-            return -1;
-        }
+        return node.value;
     }
     
-    public void set(int key, int value) 
+    public void put( int key, int value )
     {
         // judge and pop up oldest entry when necessary
-        if ( !keyToNodeMap.containsKey( key ) )
+        if ( !cache.containsKey( key ) 
+        		&& cache.size() == capacity )
         {
-            if ( keyToNodeMap.size() == capacity )
-            {
-                ListNode cacheToBeRemoved = listHeadSentinel.next;
-                removeNodeFromList( cacheToBeRemoved );
-                keyToNodeMap.remove( cacheToBeRemoved.key );
-            }
+        	DLLNode oldest = dummyOldest.next;
+            deleteNode( oldest );
+            cache.remove( oldest.key );
         }
                 
-        if ( keyToNodeMap.containsKey( key ) )
+        if ( cache.containsKey( key ) )
         {
-            ListNode existingNode = keyToNodeMap.get( key );
-            removeNodeFromList( existingNode );
+            DLLNode existingNode = cache.get( key );
             existingNode.value = value;
-            addNodeToListTail( existingNode );
+
+            deleteNode( existingNode );
+            addAsLatest( existingNode );
         }
         else
         {
-            ListNode node = new ListNode( key, value );
-            addNodeToListTail( node );
-            keyToNodeMap.put( key, node );
+            DLLNode node = new DLLNode( key, value );
+            cache.put( key, node );
+            addAsLatest( node );
         }
     }
     
-    private void addNodeToListTail( ListNode nodeToBeAdded )
+    private void addAsLatest( DLLNode node )
     {
-        ListNode nodeBeforeTail = listTailSentinel.prev;
+        DLLNode beforeTail = dummyLatest.prev;
         
-        nodeBeforeTail.next = nodeToBeAdded;
-        nodeToBeAdded.prev = nodeBeforeTail;
+        beforeTail.next = node;
+        node.prev = beforeTail;
         
-        nodeToBeAdded.next = listTailSentinel;
-        listTailSentinel.prev = nodeToBeAdded;
+        node.next = dummyLatest;
+        dummyLatest.prev = node;
     }
     
-    private void removeNodeFromList( ListNode nodeToBeRemoved ) 
+    private void deleteNode( DLLNode node ) 
     {
-        ListNode nodeBeforeCurr = nodeToBeRemoved.prev;
-        ListNode nodeAfterCurr = nodeToBeRemoved.next;
-        nodeBeforeCurr.next = nodeAfterCurr;
-        nodeAfterCurr.prev = nodeBeforeCurr;
+        DLLNode beforeNode = node.prev;
+        DLLNode afterNode = node.next;
+        beforeNode.next = afterNode;
+        afterNode.prev = beforeNode;
+    }
+    
+    public static void main( String[] args )
+    {
+    	LRUCacheHashTableDDL table = new LRUCacheHashTableDDL( 2 );
+    	table.put( 1, 1 );
+    	table.put( 2, 2 );
+    	assertEquals( 1, table.get( 1 ) );
+    	table.put( 3, 3 );
+    	assertEquals( -1, table.get( 2 ));
     }
 }
