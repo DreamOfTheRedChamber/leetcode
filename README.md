@@ -234,7 +234,9 @@
       * Divide and conquer "***The problem could be decomposed into X subproblems.***"
    3. Brainstorm DS/Algo which might be used / Give it a try
       * Give it a try: "***Let's try a graph-based solution***"
-3. Calc time/space complexity: "***The time complexity of the algorithm is O(XXX) and space complexity is O(XXX)***"
+3. Talk about the data structures to be used.
+4. Talk about the algorithm to be used.
+5. Calc time/space complexity: "***The time complexity of the algorithm is O(XXX) and space complexity is O(XXX)***"
 
 #### Optimize the brute force solution 
 1. Synchronize with interviewer "***The time/space complexity of the brute force solution is too high and will be impractical.***"
@@ -338,6 +340,11 @@
 * Ignore first impression importance: Don't smile/handshake/look into interviewers' eyes.
 * Wrong expectations about interviewers: You need to acknowledge that there are so many different types of interviewers. Some like to follow rules but others don't. For example, expecting all algorithm interview questions are under leetcode's company tag or from past interview experiences in 1acre3points is not practical. Some interviewers are bored with Leetcode and really want to ask unique questions to truely evaluate interviewees.
 * Anxious because too many things need to be prepared: Always prioritize and then act. You just cannot practice every possible question before interviews because there are too many. What you can do is to practice typical problems under each category and practice the most popular interview questions. Make sure that you practice each problem as if you are interviewing.
+* Preparation time allocation: 70% should be on coding. 15% on system design. 15% on behavior questions.
+* Do not go straight to coding during interviews, give yourself a minute to think before speak. Thought well before speak and coding.
+* I am used to good words. When interviewer doubts/challenges me, I become kind of sad. Always stay in calm and smiles. 
+* Give myself a little break between interviews. Either sit down or drink some beverages. 
+* When interviewers keep interrupting me, do not be nervous. They are trying to help me!!! Always stay in calm and take their hints. No matter whether I could finish my current solution. Communication is the most important thing. 
 
 #### Whiteboard coding pros and cons 
 * Pros
