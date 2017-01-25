@@ -73,6 +73,42 @@ public class BSTIterator
     	}
     	return result;
     }        
+    
+// Original version:     
+//    private Stack<TreeNode> inorderTravStack;
+//
+//    public BSTIterator(TreeNode root) 
+//    {
+//        inorderTravStack = new Stack<>();
+//        pushAllPureLeftChildren( inorderTravStack, root );
+//    }
+//
+//    /** @return whether we have a next smallest number */
+//    public boolean hasNext() 
+//    {
+//        return !inorderTravStack.isEmpty();
+//    }
+//
+//    /** @return the next smallest number */
+//    public int next() 
+//    {
+//        TreeNode nextSmallestNode = inorderTravStack.pop();
+//        if ( nextSmallestNode.right != null )
+//        {
+//            pushAllPureLeftChildren( inorderTravStack, nextSmallestNode.right);
+//        }
+//        return nextSmallestNode.val;
+//    }
+//    
+//    private void pushAllPureLeftChildren( Stack<TreeNode> inorderTravStack, TreeNode root )
+//    {
+//        TreeNode currNode = root;
+//        while ( currNode != null )
+//        {
+//            inorderTravStack.push( currNode );
+//            currNode = currNode.left;
+//        }
+//    }
 }
 
 /**
