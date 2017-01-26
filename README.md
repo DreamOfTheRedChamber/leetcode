@@ -163,6 +163,7 @@
     - [Union find](#union-find)
   - [Greedy](#greedy)
   - [Dynamic-programming](#dynamic-programming)
+  - [Online IDE templates](#online-ide-templates)
   - [References](#references)
 
 <!-- /MarkdownTOC -->
@@ -3284,6 +3285,43 @@ public int houseRobber_RollingArray( int[] A )
       * initialize: varies with problems
       * answer: varies with problems
     + Examples: Backpack I-VI (Lintcode), K Sum (Lintcode), Minimum adjustment cost (Lintcode)
+
+#### Online IDE templates
+* Coderpad
+
+```java
+import org.junit.*;
+import org.junit.runner.*;
+import java.io.*;
+import java.util.*;
+
+public class Solution 
+{
+    
+    @Test
+    public void test1()
+    {
+      /* 
+
+      */
+    }    
+
+    @Ignore
+    @Test
+    public void test3()
+    {
+        /* 
+
+        */
+    }
+
+    public static void main(String[] args) 
+    {
+        JUnitCore.main("Solution");
+    }    
+    
+}
+```
 
 #### References 
 * [Java-success.com](http://www.java-success.com/)
