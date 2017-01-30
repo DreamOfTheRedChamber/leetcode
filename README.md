@@ -1,4 +1,4 @@
-# Fight towards 1000 commits !!!
+# My whiteboard coding interview operating system !!!
 <!-- MarkdownTOC -->
 
 - [Typical whiteboard coding workflow](#typical-whiteboard-coding-workflow)
@@ -22,7 +22,6 @@
   - [Leetcode pros and cons](#leetcode-pros-and-cons)
   - [Interview Java pros and cons](#interview-java-pros-and-cons)
 - [Java language](#java-language)
-  - [Characteristics of Object oriented](#characteristics-of-object-oriented)
   - [Java vs C++](#java-vs-c)
   - [Access modifiers](#access-modifiers)
   - [Stack vs heap vs static area](#stack-vs-heap-vs-static-area)
@@ -67,8 +66,7 @@
   - [String](#string)
     - [Why String is immutable or final](#why-string-is-immutable-or-final)
     - [String vs StringBuilder vs StringBuffer](#string-vs-stringbuilder-vs-stringbuffer)
-    - [String reverse](#string-reverse)
-    - [Encode and decode](#encode-and-decode)
+    - [Word reverse](#word-reverse)
     - [Palindrome](#palindrome)
   - [Collections](#collections)
     - [Iterator](#iterator)
@@ -163,8 +161,8 @@
     - [Union find](#union-find)
   - [Greedy](#greedy)
   - [Dynamic-programming](#dynamic-programming)
-  - [Online IDE templates](#online-ide-templates)
-  - [References](#references)
+- [Online IDE templates](#online-ide-templates)
+- [References](#references)
 
 <!-- /MarkdownTOC -->
 
@@ -346,6 +344,7 @@
 * I am used to good words. When interviewer doubts/challenges me, I become kind of sad. Always stay in calm and smiles. 
 * Give myself a little break between interviews. Either sit down or drink some beverages. 
 * When interviewers keep interrupting me, do not be nervous. They are trying to help me!!! Always stay in calm and take their hints. No matter whether I could finish my current solution. Communication is the most important thing. 
+* Preparing interview: What really matters is how many times you practice the leetcode problem, rather than how long you spend during a single practice round.
 
 #### Whiteboard coding pros and cons 
 * Pros
@@ -415,7 +414,6 @@
   * Linkedhashset could not be iterated reversely
 
 ### Java language
-#### Characteristics of Object oriented
 
 #### Java vs C++
 
@@ -1155,9 +1153,9 @@ private List<List<Integer>> kSum( int kVal, int target, int startIndex, int[] nu
 | Thread safe   | Yes     |   No | Yes | 
 | Performance   | Fast    |   Fast | very slow| 
 
-##### String reverse 
+##### Word reverse 
 
-##### Encode and decode 
+
 
 ##### Palindrome 
 * Several ways to solve the Longest palindrome substring problem
@@ -3286,7 +3284,7 @@ public int houseRobber_RollingArray( int[] A )
       * answer: varies with problems
     + Examples: Backpack I-VI (Lintcode), K Sum (Lintcode), Minimum adjustment cost (Lintcode)
 
-#### Online IDE templates
+### Online IDE templates
 * Coderpad
 
 ```java
@@ -3323,7 +3321,7 @@ public class Solution
 }
 ```
 
-#### References 
+### References 
 * [Java-success.com](http://www.java-success.com/)
 * [Massive tech interview](http://massivetechinterview.blogspot.com/)
 * [Java best practices](http://www.javapractices.com/home/HomeAction.do)
