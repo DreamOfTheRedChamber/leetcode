@@ -38,7 +38,7 @@ The substring with start index = 2 is "ab", which is an anagram of "ab".
  * */
 
 public class FindAllAnagramsInAString
-{
+{	
 	public List<Integer> findAnagrams( String s, String p )
 	{
 		List<Integer> result = new ArrayList<>();
@@ -79,6 +79,55 @@ public class FindAllAnagramsInAString
 
 			// verify match
 			if ( match == currWind.size() )
+			{
+				result.add( i - p.length() + 1 );
+			}
+		}
+		
+		return result;
+	}
+	
+	public List<Integer> findAnagramsHistograms( String s, String p )
+	{
+		List<Integer> result = new ArrayList<>();
+		if ( s.length() < p.length() )
+		{
+			return result;
+		}
+		
+		Map<Character, Integer> pHistogram = new HashMap<>();
+		for ( Character ch : p.toCharArray() )
+		{
+			pHistogram.put( ch, pHistogram.getOrDefault( ch, 0 ) + 1 );
+		}
+
+		Map<Character, Integer> sHistogram = new HashMap<>();
+		int numMatch = 0;
+		for ( int i = 0; i < s.length(); i++ )
+		{
+			if ( pHistogram.containsKey( s.charAt( i ) ) )
+			{
+				char chToAdd = s.charAt( i );
+				if ( !sHistogram.containsKey( chToAdd ) 
+						||  sHistogram.get( chToAdd ) < pHistogram.get( chToAdd ) )
+				{
+					numMatch++;
+				}
+				sHistogram.put( chToAdd, sHistogram.getOrDefault( chToAdd, 0 ) + 1 );				
+			}
+			
+			if ( i >= p.length() && pHistogram.containsKey( s.charAt( i - p.length() ) ) )
+			{
+				char chToRemove = s.charAt( i - p.length() );
+				if ( sHistogram.containsKey( chToRemove ) 
+						&& sHistogram.get( chToRemove ) <= pHistogram.get( chToRemove ) ) 
+				{
+					numMatch--;
+				}
+				sHistogram.put( chToRemove, sHistogram.get( chToRemove ) - 1 );
+			}
+			
+			if ( numMatch == p.length() )
 			{
 				result.add( i - p.length() + 1 );
 			}
