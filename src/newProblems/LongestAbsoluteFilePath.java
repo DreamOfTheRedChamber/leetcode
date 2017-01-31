@@ -1,5 +1,7 @@
 package newProblems;
 
+import java.util.Stack;
+
 /*
 Suppose we abstract our file system by a string in the following manner:
 
@@ -36,8 +38,41 @@ Notice that a/aa/aaa/file1.txt is not the longest file path, if there is another
 
 public class LongestAbsoluteFilePath 
 {
-    public int lengthLongestPath( String input )
-    {
-        return 0;
-    }
+	public int lengthLongestPath( String input )
+	{
+		String[] tokens = input.split( "\n" );
+		int result = 0;
+		int currPathLength = 0;
+		Stack<Integer> stack = new Stack<>();
+
+		for ( String token : tokens )
+		{
+			int level = countLevel( token );
+
+			// if current directory/file depth is lower that the top
+			// directory/file on the stack, pop from stack
+			while ( stack.size() > level )
+			{
+				currPathLength -= stack.pop();
+			}
+
+			// +1 here because a "/" needs to be counted following each diretory
+			int tokenLength = token.replaceAll( "\t", "" ).length() + 1;
+			currPathLength += tokenLength;
+
+			// if s contains ".", we have found a file!
+			if ( token.contains( "." ) )
+			{
+				result = currPathLength - 1 > result ? currPathLength - 1 : result;
+			}
+			stack.add( tokenLength );
+		}
+		return result;
+	}
+
+	private int countLevel( String s )
+	{
+		String cur = s.replaceAll( "\t", "" );
+		return s.length() - cur.length();
+	}
 }
