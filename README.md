@@ -1,4 +1,4 @@
-# My whiteboard coding interview operating system !!!
+# Fight towards 1000 commits
 <!-- MarkdownTOC -->
 
 - [Typical whiteboard coding workflow](#typical-whiteboard-coding-workflow)
@@ -80,9 +80,10 @@
     - [Parentheses](#parentheses)
   - [Queue](#queue)
     - [Interfaces](#interfaces)
-  - [PriorityQueue](#priorityqueue)
+  - [Heap](#heap)
     - [Heapify](#heapify)
     - [Sift up/down](#sift-updown)
+  - [PriorityQueue](#priorityqueue)
     - [Improve built-in remove O\(n\)](#improve-built-in-remove-on)
     - [Lambda expression as comparator](#lambda-expression-as-comparator)
     - [Top K problems](#top-k-problems)
@@ -1555,9 +1556,61 @@ boolean isValid( String s )
 | examine  | E element()     |   E peek() |
 
 
-#### PriorityQueue 
+#### Heap
+* Heap is a data structure, which usually have three methods: push, pop and top. where "push" add a new element the heap, "pop" delete the minimum/maximum element in the heap, "top" return the minimum/maximum element.
+
 ##### Heapify 
+* Def: Convert an unordered integer array into a heap array. If it is min-heap, for each element A[i], we will get A[i * 2 + 1] >= A[i] and A[i * 2 + 2] >= A[i].
+* Heapify is an O(n) operation. The reason is as follows:
+  - At the bottommost level, there are 2^(h)nodes, but we do not call heapify on any of these, so the work is 0. At the next to level there are 2^(h − 1) nodes, and each might move down by 1 level. At the 3rd level from the bottom, there are 2^(h − 2) nodes, and each might move down by 2 levels.
+
 ##### Sift up/down 
+
+```java
+private void siftdown( int[] A, int k ) 
+{
+    while ( k < A.length ) 
+    {
+        int smallest = k;
+        if ( k * 2 + 1 < A.length && A[k * 2 + 1] < A[smallest] )
+        {
+            smallest = k * 2 + 1;
+        }
+        if ( k * 2 + 2 < A.length && A[k * 2 + 2] < A[smallest] )
+        {
+            smallest = k * 2 + 2;
+        }
+
+        if ( smallest == k )
+        {        
+            break;
+        }
+        else
+        {
+          swap( A, smallest, k );
+          k = smallest;
+        }
+    }
+}
+
+private void swap( int[] A, int pos1, int pos2 )
+{
+  if ( pos1 != pos2 )
+  {
+        int temp = A[smallest];
+        A[smallest] = A[k];
+        A[k] = temp;  
+  }
+}
+
+public void heapify(int[] A) {
+    for (int i = A.length / 2; i >= 0; i--) {
+        siftdown(A, i);
+    } 
+}
+```
+
+#### PriorityQueue
 ##### Improve built-in remove O(n)
 * Built-in implementation remove() method for priorityqueue has O(n) time complexity.
   -  O(n) time is spent on looping through entire queue to find the element to be removed. O(logn) is used to remove the element
