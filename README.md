@@ -109,6 +109,8 @@
   - [Graph](#graph)
     - [Edge list vs Adjacent list vs Adjacent matrix](#edge-list-vs-adjacent-list-vs-adjacent-matrix)
     - [Build graph](#build-graph)
+    - [Detect cycles inside undirected graph](#detect-cycles-inside-undirected-graph)
+    - [Detect cycles inside directed graph](#detect-cycles-inside-directed-graph)
   - [Trie](#trie)
     - [Use case](#use-case-1)
     - [Trie definition](#trie-definition)
@@ -169,6 +171,7 @@
     - [Memorization array tricks](#memorization-array-tricks)
     - [Type](#type)
 - [Online IDE templates](#online-ide-templates)
+  - [Coderpad](#coderpad)
 - [References](#references)
 
 <!-- /MarkdownTOC -->
@@ -1827,7 +1830,6 @@ class SegmentTreeNode
 * Validate binary search tree
   - Iterative inorder traversal, current node > successor (stack top). Works for BST with no duplication constraints
   - Divide and conquer, pass down value range in children nodes
-* Kth node in a BST
 
 * Generic tree preorder/inorder/postorder iterative traversal with O(logn) space. Three types of implementation could be changed with minimal code change.
 ```java
@@ -2200,8 +2202,82 @@ public Map<Integer, Set<Integer>> buildGraph( int n, int[][] edges )
   }
 }
 ```
-* **Detect cycles inside undirected graph** with dfs + discovered set. 
-* **Detect cycles inside directed graph** with dfs + visited set + discovered set.
+
+##### Detect cycles inside undirected graph
+
+```java
+// Graph is represented by class GraphNode
+class GraphNode
+{
+  int nodeIndex;
+  List<GraphNode> neighbors;
+}
+
+private boolean hasCycle( GraphNode root )
+{
+  return hasCycle( root, new HashSet<>() );
+}
+
+private boolean hasCycle( GraphNode root, Set<GraphNode> isDiscovered )
+{
+  if ( isDiscovered.contains( root ) )
+  {
+    return true;
+  }
+
+  isDiscovered.add( root );
+  for ( List<GraphNode> neighbor : root.neighbors )
+  {
+    if ( hasCycle( neighbor, isVisited  ) )
+    {
+      return true;
+    }
+  }
+
+  return false;
+}
+```
+
+##### Detect cycles inside directed graph
+
+```java
+// Graph is represented by class GraphNode
+class GraphNode
+{
+  int nodeIndex;
+  List<GraphNode> neighbors;
+}
+
+private boolean hasCycle( GraphNode root )
+{
+  Set<GraphNode> isDiscovered = new HashSet<>();
+  Set<GraphNode> isVisited = new HashSet<>();
+  return hasCycle( root, isDiscovered, isVisited );
+}
+
+private boolean hasCycle( GraphNode root, Set<GraphNode> isDiscovered, Set<GraphNode> isVisited )
+{
+  if ( isVisited.contains( root ) )
+  {
+    return false;
+  }
+  if ( isDiscovered.contains( root ) && !isVisited.contains( root ) )
+  {
+    return true;
+  }
+
+  isDiscovered.add( root );
+  for ( List<GraphNode> neighbor : root.neighbors )
+  {
+    if ( hasCycle( neighbor, isDiscovered, isVisited  ) )
+    {
+      return true;
+    }
+  }
+  isVisited.add( root );
+  return false;
+}
+```
 
 #### Trie 
 ##### Use case 
@@ -2803,6 +2879,7 @@ public int binarySearchRecursive( int[] array, int target, int start, int end )
     + If multiple results are of same type, define return type as an array T[]
     + If only two results are returned, consider using AbstractMap.SimpleEntry<K,V>
     + Define a result wrapper class
+
 ```java
 // 1. not use use global variables
 // 1.1. global variables as class instance
@@ -2838,6 +2915,7 @@ private class ResultWrapper
 
 ##### Avoid duplicated recursion 
 * ensuring that the never two recursion tree branches overlap 
+
 ```java
 if ( i > 0 && candidates[i] == candidates[i-1] )
 {
@@ -2846,6 +2924,7 @@ if ( i > 0 && candidates[i] == candidates[i-1] )
 }
 // invoking functions based on index i
 ```
+
 ##### Types 
 
 * Tree-based recursion 
@@ -2879,8 +2958,6 @@ public ResultWrapper secondApproach( TreeNode currNode )
 * Deep copy 
   - Key points: Use a hashmap to store old to new reference mapping
   - Examples: Clone graph, Copy list with random pointer
-
-* Array-based recursion 
 
 #### Backtrack 
 ##### Best practices 
@@ -3349,7 +3426,7 @@ public int houseRobber_RollingArray( int[] A )
   + Examples: Backpack I-VI (Lintcode), K Sum (Lintcode), Minimum adjustment cost (Lintcode)
 
 ### Online IDE templates
-* Coderpad
+#### Coderpad
 
 ```java
 import org.junit.*;
