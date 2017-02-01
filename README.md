@@ -80,10 +80,11 @@
     - [Parentheses](#parentheses)
   - [Queue](#queue)
     - [Interfaces](#interfaces)
-  - [Heap](#heap)
+  - [PriorityQueue](#priorityqueue)
+    - [Internal structure](#internal-structure)
     - [Heapify](#heapify)
     - [Sift up/down](#sift-updown)
-  - [PriorityQueue](#priorityqueue)
+  - [PriorityQueue](#priorityqueue-1)
     - [Improve built-in remove O\(n\)](#improve-built-in-remove-on)
     - [Lambda expression as comparator](#lambda-expression-as-comparator)
     - [Top K problems](#top-k-problems)
@@ -162,6 +163,11 @@
     - [Union find](#union-find)
   - [Greedy](#greedy)
   - [Dynamic-programming](#dynamic-programming)
+    - [Use cases](#use-cases)
+    - [Problems to consider](#problems-to-consider)
+    - [Implementation methods:](#implementation-methods)
+    - [Memorization array tricks](#memorization-array-tricks)
+    - [Type](#type)
 - [Online IDE templates](#online-ide-templates)
 - [References](#references)
 
@@ -1556,8 +1562,9 @@ boolean isValid( String s )
 | examine  | E element()     |   E peek() |
 
 
-#### Heap
-* Heap is a data structure, which usually have three methods: push, pop and top. where "push" add a new element the heap, "pop" delete the minimum/maximum element in the heap, "top" return the minimum/maximum element.
+#### PriorityQueue
+##### Internal structure
+* An unbounded priority queue based on a priority heap. Heap is a data structure, which usually have three methods: push, pop and top. where "push" add a new element the heap, "pop" delete the minimum/maximum element in the heap, "top" return the minimum/maximum element.
 
 ##### Heapify 
 * Def: Convert an unordered integer array into a heap array. If it is min-heap, for each element A[i], we will get A[i * 2 + 1] >= A[i] and A[i * 2 + 2] >= A[i].
@@ -3218,38 +3225,42 @@ void union( int x, int y )
   - Increasing triplet sequence, paint house II
 
 #### Dynamic-programming 
-* Use cases: 
-  - When to use - optimize time complexity from O(n!,2^n) to O(n^2, n^3)
-    + Calculate max or min
-    + Calculate the number of solutions
-    + Calculate whether it is true or not
-  - When not to use - optimize time complexity from O(n^3, n^2) further
-    + Calculate concrete solutions themselves rather than just the number of solutions
-    + Input is a collection rather than a sequence (e.g. Longest consecutive sequence)
-* Problems to consider: 
-  - State: how to define dp[i] or dp[i][j]
-  - Induction rule: how to calculate big problems into smaller ones
-  - Initialization: starting point
-  - Answer: ending point
-* Implementation methods: 
-  - Multi-loop: bottom-up approach
-  - Memorized search: top-down approach
-  - Use cases:
-    + In most cases, both of them can be applied. Could start with bottom-up approach because it is usually more concise. 
-    + But some times memorized search is more appropriate
-      * When it is easier to start thinking from the last step rather than the first step. Example: Burst ballons, Stone-game (Lintcode)
-      * When the induction rule is not sequential, thus hard to define.  Example: Longest increasing subsequences in 2D (Lintcode)
-      * When the initialization state is hard to find. Example: Longest increasing subsequences in 2D (Lintcode)
-* Memorization array tricks 
-  - For non grid-based dynamic programming problems, for N number/character, array of size N+1 is allocated. The position at 0 index is used for specially used for initialization.
-  - Rolling array
-    + for 1D dp, e.g.
-      * If induction rule is f[i] = max(f[i-1], f[i-2]) + A[i], namely f[i] only depends on f[i-1] and f[i-2]
-      * To use rolling array, induction rule can be rewritten as f[i%2] = max(f[i-1]%2, f[i-2]%2)
-    + for 2D dp, e.g.
-      * if f[i][j] only depends on f[i][.], namely i th row only depends on i-1 th row
-      * To use rolling array, induction rule can be rewritten as f[i%2][j] = f[(i-1)%2] row
-    + procedures to use rolling array: write non-rolling version first, then write rolling version 
+##### Use cases
+* When to use - optimize time complexity from O(n!,2^n) to O(n^2, n^3)
+  - Calculate max or min
+  - Calculate the number of solutions
+  - Calculate whether it is true or not
+* When not to use - optimize time complexity from O(n^3, n^2) further
+  - Calculate concrete solutions themselves rather than just the number of solutions
+  - Input is a collection rather than a sequence (e.g. Longest consecutive sequence)
+
+##### Problems to consider
+* State: how to define dp[i] or dp[i][j]
+* Induction rule: how to calculate big problems into smaller ones
+* Initialization: starting point
+* Answer: ending point
+
+##### Implementation methods: 
+* Multi-loop: bottom-up approach
+* Memorized search: top-down approach
+* Use cases:
+  - In most cases, both of them can be applied. Could start with bottom-up approach because it is usually more concise. 
+  - But some times memorized search is more appropriate
+    + When it is easier to start thinking from the last step rather than the first step. Example: Burst ballons, Stone-game (Lintcode)
+    + When the induction rule is not sequential, thus hard to define.  Example: Longest increasing subsequences in 2D (Lintcode)
+    + When the initialization state is hard to find. Example: Longest increasing subsequences in 2D (Lintcode)
+
+##### Memorization array tricks 
+* For non grid-based dynamic programming problems, for N number/character, array of size N+1 is allocated. The position at 0 index is used for specially used for initialization.
+* Rolling array
+  - for 1D dp, e.g.
+    + If induction rule is f[i] = max(f[i-1], f[i-2]) + A[i], namely f[i] only depends on f[i-1] and f[i-2]
+    + To use rolling array, induction rule can be rewritten as f[i%2] = max(f[i-1]%2, f[i-2]%2)
+  - for 2D dp, e.g.
+    + if f[i][j] only depends on f[i][.], namely i th row only depends on i-1 th row
+    + To use rolling array, induction rule can be rewritten as f[i%2][j] = f[(i-1)%2] row
+  - procedures to use rolling array: write non-rolling version first, then write rolling version 
+
 ```java
 // this code snippets demonstrate procedures to use rolling array
 // 1D case
@@ -3293,49 +3304,49 @@ public int houseRobber_RollingArray( int[] A )
 }
 ```
 
-* Type: 
-  - Coordinate based 
-    + Patterns:
-      * state: f[x,y] represents goes to x,y position from starting point
-      * induction rule: f[x,y] from f[x-1, y] or f[x, y-1]
-      * initialization: f[0,0~width], f[0~height, 0]
-      * answer: usually f[m,n]
-    + Examples: Minimum Path Sum, Unique Path I�, Climbing stairs, Jump game I/II
-  - 1D sequence 
-    + Patterns:
-      * state: f[i] represents first i position, digits, characters
-      * induction rule: f[i] from f[j], j < i
-      * initialize: f[0] = 0, f[1]
-      * answer: f[n]
-    + Examples: Longest increasing subsequence, Word break I, House robber
-  - 2D sequences 
-    + Patterns: 
-      * state: f[i,j] represents the results of first i numbers/characters in sequence one matching the first j numbers/characters in sequence two
-      * induction rule: how to decide f[i,j] from previous (varies a lot here)
-      * initialize: f[0,i] and f[i,0]
-      * answer: f[n,m]( n = s1.length(), m = s2.length() )
-    + Examples: Edit distance, Regular expression matching, Longest common subsequences, Maximal rectangle/Square
-  - Range based 
-    + Patterns:
-      * state: f[i,j] represents whether the substring from i to j is a palindrome
-      * induction rule: f[i,j] = f[i+1,j-1] && (s[i] == s[j])
-      * initialize: f[i][i] = true, f[i][i+1] = s[i] == s[i+1]
-      * answer: f[0,n]
-    + Examples: Palindrome partition II, Coins in a line III (Lintcode), Stone game, Burst ballons, Scramble string 
-  - Game 
-    + Patterns:
-      * state: f[i] represents win/lose max/min profit for the first person
-      * induction rule: avoid defining second person's state because second person always tries his best to defeat first person/make first person profit least.
-      * initialize: varies with problem
-      * answer: f[n]
-    + Examples: Coin in a line (Lintcode), Coin in a line II (Lintcode), Flip game II
-  - Backpack 
-    + Patterns:
-      * state: f[i][S]: whether the first i items could form S/Max value/number of ways
-      * induction rule: varies with problems
-      * initialize: varies with problems
-      * answer: varies with problems
-    + Examples: Backpack I-VI (Lintcode), K Sum (Lintcode), Minimum adjustment cost (Lintcode)
+##### Type
+- Coordinate based 
+  + Patterns:
+    * state: f[x,y] represents goes to x,y position from starting point
+    * induction rule: f[x,y] from f[x-1, y] or f[x, y-1]
+    * initialization: f[0,0~width], f[0~height, 0]
+    * answer: usually f[m,n]
+  + Examples: Minimum Path Sum, Unique Path I�, Climbing stairs, Jump game I/II
+- 1D sequence 
+  + Patterns:
+    * state: f[i] represents first i position, digits, characters
+    * induction rule: f[i] from f[j], j < i
+    * initialize: f[0] = 0, f[1]
+    * answer: f[n]
+  + Examples: Longest increasing subsequence, Word break I, House robber
+- 2D sequences 
+  + Patterns: 
+    * state: f[i,j] represents the results of first i numbers/characters in sequence one matching the first j numbers/characters in sequence two
+    * induction rule: how to decide f[i,j] from previous (varies a lot here)
+    * initialize: f[0,i] and f[i,0]
+    * answer: f[n,m]( n = s1.length(), m = s2.length() )
+  + Examples: Edit distance, Regular expression matching, Longest common subsequences, Maximal rectangle/Square
+- Range based 
+  + Patterns:
+    * state: f[i,j] represents whether the substring from i to j is a palindrome
+    * induction rule: f[i,j] = f[i+1,j-1] && (s[i] == s[j])
+    * initialize: f[i][i] = true, f[i][i+1] = s[i] == s[i+1]
+    * answer: f[0,n]
+  + Examples: Palindrome partition II, Coins in a line III (Lintcode), Stone game, Burst ballons, Scramble string 
+- Game 
+  + Patterns:
+    * state: f[i] represents win/lose max/min profit for the first person
+    * induction rule: avoid defining second person's state because second person always tries his best to defeat first person/make first person profit least.
+    * initialize: varies with problem
+    * answer: f[n]
+  + Examples: Coin in a line (Lintcode), Coin in a line II (Lintcode), Flip game II
+- Backpack 
+  + Patterns:
+    * state: f[i][S]: whether the first i items could form S/Max value/number of ways
+    * induction rule: varies with problems
+    * initialize: varies with problems
+    * answer: varies with problems
+  + Examples: Backpack I-VI (Lintcode), K Sum (Lintcode), Minimum adjustment cost (Lintcode)
 
 ### Online IDE templates
 * Coderpad
