@@ -12,6 +12,10 @@
   - [Solve follow up questions](#solve-follow-up-questions)
 - [Interview mindset](#interview-mindset)
   - [Understanding what interviewers really wants](#understanding-what-interviewers-really-wants)
+  - [Checklist](#checklist)
+    - [Things to be careful.](#things-to-be-careful)
+    - [Phone interviews](#phone-interviews)
+    - [Onsite interviews](#onsite-interviews)
   - [Interview mistakes made in past](#interview-mistakes-made-in-past)
   - [Whiteboard coding pros and cons](#whiteboard-coding-pros-and-cons)
 - [Practice mindset](#practice-mindset)
@@ -84,7 +88,6 @@
     - [Internal structure](#internal-structure)
     - [Heapify](#heapify)
     - [Sift up/down](#sift-updown)
-  - [PriorityQueue](#priorityqueue-1)
     - [Improve built-in remove O\(n\)](#improve-built-in-remove-on)
     - [Lambda expression as comparator](#lambda-expression-as-comparator)
     - [Top K problems](#top-k-problems)
@@ -113,7 +116,7 @@
     - [Detect cycles inside directed graph](#detect-cycles-inside-directed-graph)
   - [Trie](#trie)
     - [Use case](#use-case-1)
-    - [Trie definition](#trie-definition)
+    - [Trie definition and common tasks](#trie-definition-and-common-tasks)
 - [Algorithms](#algorithms)
   - [Math](#math)
     - [Random](#random)
@@ -343,6 +346,29 @@
 | Compare data structure A and B  | <ul><li>Explain what A and B are respectively</li><li>List 1 difference between them</li></ul>     |  <ul><li>Does your explanation show that you have actually used them in a real project</li><li>Explain real situations where you would use A vs B.</li></ul> |
 | Write code to solve problem | <ul><li>Jumps into writing code</li><li>Awkward silence</li></ul>     | <ul><li>Would I want to work with them everyday</li><li>Have they actually written production grade code</li><li>What do they do when stuck</li></ul> |
 | Maybe you could try this ... | <ul><li>Take advice without serious thinking</li></ul>  | <ul><li>Do they think independently</li><li>How fast can they absord new information</li><li>Do they take advice/directions well</li><li>Do they learn quickly and run with it</li></ul> |
+
+#### Checklist
+##### Things to be careful.
+* Do not just give "yes" or "no" answers. Limit initial explanation to short summaries and allow the interviewer to ask follow up questions.
+* Your tone of voice and word choice. Interviewers use voice to judge how believable you are. Posture really have impact on your mind.
+* Eye contact and shake hands. Say thanks to interviewers at last. 
+
+##### Phone interviews
+* Test the online coding environment.
+* Make sure your cellphone has enough battery.
+* Have a copy of resume in front of you.
+* Take notes and write a follow up thank you email with details from the discussion.
+
+##### Onsite interviews
+* Show up 15 minutes early and have the interviewer's phone number for last minute changes.
+* Things to bring with you
+  - Identity card.
+  - Bring extra copies of your resume with you - for the interviewer and your own reference.
+  - Notes on the detailed schedule. Put interviewers' names and interview topic on a sticker and bring it with me. 
+  - Tea/Coffee.
+  - Whiteboard pen and erasers.
+  - A piece of pen and paper. Take notes when an interviewer speaks to help yourself focus and ask more specific questions. 
+  - Computers for last minute warm-up. 
 
 #### Interview mistakes made in past
 * Too nervous: When I become too nervous, I just could not speak. This is the number one red flag during interviews. No one wants to work with people who cannot speak.
@@ -773,8 +799,6 @@ class FinalizeExample
 ##### Use Weak reference
 
 ```java
-package com.pluralsight;
-
 import java.lang.ref.WeakReference;
 
 public class Main {
@@ -816,8 +840,6 @@ class Person {
   - Meta data goes away
 
 ```java
-package com.pluralsight;
-
 import java.util.Date;
 import java.util.WeakHashMap;
 
@@ -879,8 +901,6 @@ class PersonMetaData {
   - Reference object added to the queue
 
 ```java
-package com.pluralsight;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -954,8 +974,6 @@ class PersonWeakReference extends WeakReference<Person> {
   - Not sure when they will be called
 
 ```java
-package com.pluralsight;
-
 import java.lang.ref.PhantomReference;
 import java.lang.ref.Reference;
 import java.lang.ref.ReferenceQueue;
@@ -1620,7 +1638,6 @@ public void heapify(int[] A) {
 }
 ```
 
-#### PriorityQueue
 ##### Improve built-in remove O(n)
 * Built-in implementation remove() method for priorityqueue has O(n) time complexity.
   -  O(n) time is spent on looping through entire queue to find the element to be removed. O(logn) is used to remove the element
@@ -2287,7 +2304,7 @@ private boolean hasCycle( GraphNode root, Set<GraphNode> isDiscovered, Set<Graph
    - Space complexity: when storing a list of words (Especially when these words share prefix), using trie save space. 
    - Time complexity: to compute hashcode for a string, O(n) time complexity; find/insert a string in a trie, the same
 
-##### Trie definition 
+##### Trie definition and common tasks
 * Depending on the size of charset, children pointers could be either stored in a bitmap or hashmap. Although slightly suffering performance, hashmap implementation is more concise and generic.
 * Common tasks such as search() and startwith() can be implemented in a similar way. 
 
