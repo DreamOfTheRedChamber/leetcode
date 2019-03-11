@@ -1,4 +1,4 @@
-# Fight towards 1000 commits
+# A Better Me
 <!-- MarkdownTOC -->
 
 - [Typical whiteboard coding workflow](#typical-whiteboard-coding-workflow)
