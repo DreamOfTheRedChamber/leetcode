@@ -1,0 +1,17 @@
+import unittest
+
+class CourseSchedule(unittest.TestCase):
+    def canFinish(self, numCourses, prerequisites):
+        """
+        :type numCourses: int
+        :type prerequisites: List[List[int]]
+        :rtype: bool
+        """
+
+        return False
+
+    def test_circle(self):
+        self.assertEqual(self.canFinish(2, [[1, 0], [0, 1]]), False)
+
+if __name__ == '__main__':
+    unittest.main()
