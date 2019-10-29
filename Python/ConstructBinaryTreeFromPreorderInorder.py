@@ -10,15 +10,15 @@ class TreeNode:
         self.right = None
 
 class ConstructBinaryTreeFromPreorderInorder(unittest.TestCase):
-
-    def buildTree(self, preorder: list[int], inorder: list[int]) -> TreeNode:
+    def buildTree(self, preorder: list, inorder: list) -> TreeNode:
         inorderMap = {}
         for index, val in enumerate(inorder):
             inorderMap[val] = index
 
-        return TreeNode(1)
+        result = self.buildTreeRecursive(preorder, 0, len(preorder) - 1, inorderMap, 0)
+        return result
 
-    def buildTreeRecursive(self, preorder: list[int], preStart: int, preEnd: int, inorderMap: dict, inStart: int):
+    def buildTreeRecursive(self, preorder: list, preStart: int, preEnd: int, inorderMap: dict, inStart: int):
         if preStart > preEnd:
             return None
         elif preStart == preEnd:
@@ -31,37 +31,12 @@ class ConstructBinaryTreeFromPreorderInorder(unittest.TestCase):
             rootNode.right = self.buildTreeRecursive(preorder, preStart + numLeftTree + 1, preEnd, inorderMap, indexInorder + 1)
             return rootNode
 
-    def test_SymmetricTree(self):
-        pNode1 = TreeNode(1)
-        pNode2 = TreeNode(2)
-        pNode3 = TreeNode(2)
-        pNode4 = TreeNode(3)
-        pNode5 = TreeNode(4)
-        pNode6 = TreeNode(4)
-        pNode7 = TreeNode(3)
+    def test_NormalTree(self):
+        preorder = [3, 9, 20, 15, 7]
+        inorder = [9, 3, 15, 20, 7]
 
-        pNode1.left = pNode2
-        pNode1.right = pNode3
-        pNode2.left = pNode4
-        pNode2.right = pNode5
-        pNode3.left = pNode6
-        pNode3.right = pNode7
+        self.buildTree(preorder, inorder)
 
-        self.assertTrue(self.isSymmetricTree(pNode1))
-
-    def test_NonSymmetricTree(self):
-        pNode1 = TreeNode(1)
-        pNode2 = TreeNode(2)
-        pNode3 = TreeNode(3)
-        pNode4 = TreeNode(4)
-        pNode5 = TreeNode(5)
-
-        pNode1.left = pNode2
-        pNode1.right = pNode3
-        pNode2.right = pNode4
-        pNode3.right = pNode5
-
-        self.assertFalse(self.isSymmetricTree(pNode1))
 
 if __name__ == '__main__':
     unittest.main()
