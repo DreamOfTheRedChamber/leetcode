@@ -26,3 +26,4 @@
 
 ### 12/06/2019
 * For some corner cases, better add a todo item or test, otherwise easy to forget
+* Write test first, then write code. In this way could think from the big picture in the beginning
