@@ -1,9 +1,5 @@
 import unittest
 
-class LongestValidParentheses(unittest.TestCase):
-
-import unittest
-
 class LongestSubstringWithoutRepeatingCharacters(unittest.TestCase):
 
     def longestValidParentheses(self, s):
