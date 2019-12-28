@@ -82,6 +82,15 @@ class TestDataStructuresCollections(unittest.TestCase):
         while not maxQueue.empty():
             print(maxQueue.get())
 
+    @unittest.skip
+    def test_PriorityQueue_ThreadSafe_Tuple(self):
+        pq = queue.PriorityQueue()
+        pq.put((1, 3))
+        pq.put((4, 1))
+        pq.put((2, 5))
+
+        while not pq.empty():
+            print(pq.get())
 
 if __name__ == '__main__':
     unittest.main()
