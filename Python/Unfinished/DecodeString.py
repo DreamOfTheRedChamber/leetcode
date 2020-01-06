@@ -10,7 +10,7 @@ class DecodeString(unittest.TestCase):
     def decodeString(self, s):
         from collections import defaultdict
 
-        # hashmap explained: key = current level, value = tuple with (multiplier, string)
+        # Hashmap explained: key = current level, value = tuple with (multiplier, string)
         d = defaultdict(lambda: [0, ""])
         level = 1  # start at level 1 so level 0 is global chars not contained in brackets
         n = ""
