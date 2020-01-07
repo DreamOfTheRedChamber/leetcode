@@ -39,6 +39,26 @@ class BinaryTreeMaximumPathSum(unittest.TestCase):
         node1.left = node2
         self.assertEqual(2, self.maxPathSum(node1))
 
+    def testBinaryTreeMaximumPathSum(self):
+        node1 = TreeNode(5)
+        node2 = TreeNode(4)
+        node3 = TreeNode(8)
+        node4 = TreeNode(11)
+        node5 = TreeNode(13)
+        node6 = TreeNode(4)
+        node7 = TreeNode(7)
+        node8 = TreeNode(2)
+        node9 = TreeNode(1)
+        node1.left = node2
+        node1.right = node3
+        node2.left = node4
+        node4.left = node7
+        node4.right = node8
+        node3.left = node5
+        node3.right = node6
+        node6.right = node9
+        self.assertEqual(48, self.maxPathSum(node1))
+
     def maxPathSum(self, root: TreeNode) -> int:
         globalMax, passThroughRootMax = self.maxPathSumRecursive(root)
         return globalMax
@@ -53,8 +73,8 @@ class BinaryTreeMaximumPathSum(unittest.TestCase):
         (leftGlobalMax, leftChildRootedMax) = self.maxPathSumRecursive(root.left)
         (rightGlobalMax, rightChildRootedMax) = self.maxPathSumRecursive(root.right)
 
-        passThroughRootMax = root.val + max(leftChildRootedMax, 0) + max(rightChildRootedMax, 0)
-        globalMax = max(passThroughRootMax, leftGlobalMax, rightGlobalMax)
+        passThroughRootMax = root.val + max(max(leftChildRootedMax, 0), max(rightChildRootedMax, 0))
+        globalMax = max(root.val + max(leftChildRootedMax, 0) + max(rightChildRootedMax, 0), leftGlobalMax, rightGlobalMax)
 
         return (globalMax, passThroughRootMax)
 
