@@ -7,6 +7,7 @@ class Trie:
         Initialize your data structure here.
         """
         self.root = TrieNode()
+        self.root.isLeaf = True
 
     def insert(self, word: str) -> None:
         """
@@ -18,8 +19,11 @@ class Trie:
                 curNode = curNode.next[ch]
             else:
                 newNode = TrieNode()
+                newNode.isLeaf = False
                 curNode.next[ch] = newNode
                 curNode = newNode
+
+        curNode.isLeaf = True
 
     def search(self, word: str) -> bool:
         """
@@ -32,7 +36,7 @@ class Trie:
             else:
                 return False
 
-        return len(curNode.next) == 0
+        return curNode.isLeaf
 
     def startsWith(self, prefix: str) -> bool:
         """
@@ -51,6 +55,7 @@ class TrieNode:
 
     def __init__(self):
         self.next = dict()
+        self.isLeaf = True
 
 # Your Trie object will be instantiated and called as such:
 # obj = Trie()
@@ -68,6 +73,12 @@ class ImplementTrie(unittest.TestCase):
         self.assertTrue(trie.startsWith("app"))
         trie.insert("app")
         self.assertTrue(trie.search("app"))
+
+    def test_Edge(self):
+        trie = Trie()
+        trie.insert("")
+        self.assertTrue(trie.search(""))
+        self.assertFalse(trie.search("abc"))
 
 if __name__ == '__main__':
     unittest.main()
