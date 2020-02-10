@@ -36,5 +36,6 @@ class TestDataStructuresList(unittest.TestCase):
             for col in range(len(array2D2[row])):
                 print(array2D2[row][col])
 
+
 if __name__ == '__main__':
     unittest.main()

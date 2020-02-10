@@ -1,3 +1,22 @@
+
+<!-- MarkdownTOC -->
+
+- [Why should I be confident](#why-should-i-be-confident)
+- [Why it is time to change](#why-it-is-time-to-change)
+- [Basic data structure operations](#basic-data-structure-operations)
+  - [Array](#array)
+  - [List](#list)
+  - [Queue](#queue)
+  - [PriorityQueue](#priorityqueue)
+  - [Set](#set)
+  - [Dictionary](#dictionary)
+- [Diary](#diary)
+  - [12/05/2019](#12052019)
+  - [12/06/2019](#12062019)
+  - [12/07/2019](#12072019)
+
+<!-- /MarkdownTOC -->
+
 ## Why should I be confident
 * Work through leetcode two years ago, have systematic summarization. 
 * Have a great circle (Huanmin Wu, Timothy Liu)
@@ -13,8 +32,10 @@
 * Things are too slow in big companies
 
 ## Basic data structure operations
+### Array
 ### List
 ### Queue
+### PriorityQueue
 ### Set
 ### Dictionary
 
@@ -28,3 +49,6 @@
 * For some corner cases, better add a todo item or test, otherwise easy to forget
 * Write test first, then write code. In this way could think from the big picture in the beginning
 * Don't belittle easy problems. The edge case is the trap here. 
+
+### 12/07/2019
+* Every problem not taking more than 1 hour, otherwise the progress could not be guaranteed and it is easy to get tired.
