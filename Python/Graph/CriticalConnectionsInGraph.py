@@ -54,26 +54,28 @@ class CriticalConnectionsInGraph(unittest.TestCase):
                 low[curNode] = min(low[curNode], discovered[neighbor])
 
     def criticalConnections2(self, n: int, connections: list) -> list:
-        g = collections.defaultdict(list)
+        graph = collections.defaultdict(list)
         for a, b in connections:
-            g[a].append(b)
-            g[b].append(a)
-        low = [0] * n
+            graph[a].append(b)
+            graph[b].append(a)
 
-        def dfs(rank, cur, parent):
+        def dfs(rank, cur, parent, discovered, low, graph):
+            discovered[cur] = rank
             low[cur] = rank
-            ans = []
-            for child in g[cur]:
-                if child == parent: continue
-                if low[child] == 0:
-                    ans += dfs(rank + 1, child, cur)
+            result = []
+            for child in graph[cur]:
+                if child == parent:
+                    continue
+                if child not in discovered:
+                    result += dfs(rank + 1, child, cur, discovered, low, graph)
                 low[cur] = min(low[cur], low[child])
 
-                if low[child] > rank:
-                    ans.append([child, cur])
-            return ans
+                if low[child] > discovered[cur]:
+                    result.append([child, cur])
 
-        return dfs(1, 0, -1)
+            return result
+
+        return dfs(1, 0, -1, dict(), dict(), graph)
 
 if __name__ == '__main__':
     unittest.main()
