@@ -32,9 +32,6 @@ class TestDataStructureDict(unittest.TestCase):
         for state, cities in cities_by_state.items():
             print(state, ', '.join(cities))
 
-    def by_value(self, item):
-        return item[1]
-
     @unittest.skip
     def test_Loop(self):
         # Loop through tuples, keys, values
@@ -46,18 +43,38 @@ class TestDataStructureDict(unittest.TestCase):
         for value in dictionary.values():
             print(value)
 
-        # Loop through according to sorted key order
+    @unittest.skip
+    def test_LoopInOrder(self):
+        dictionary = {'apple': 5600.00, 'orange': 3500.00, 'banana': 5000.00}
+
+        # Loop through according to key or value
         for key in sorted(dictionary):
             print(key, '->', dictionary[key])
+        for key in sorted(dictionary, reverse=True):
+            print(key, '->', dictionary[key])
+        for value in sorted(dictionary.values()):
+            print(value)
+        for value in sorted(dictionary.values(), reverse=True):
+            print(value)
 
-        # Loop through according to sorted value order
+        # Loop through according to sorted key or value order
         for k, v in sorted(dictionary.items(), key=self.by_value):
+            print(k, '->', v)
+        for k, v in sorted(dictionary.items(), key=self.by_key):
             print(k, '->', v)
 
     @unittest.skip
     def test_DeleteElement(self):
         dictionary = {'color': 'blue', 'fruit': 'apple', 'pet': 'dog'}
-        dictionary.pop('vegetable', None)
+        removed_value = dictionary.pop('pet')
+        print(dictionary)
+        print(removed_value)
+
+        del dictionary['fruit']
+        print(dictionary)
+
+    def test_NestedDefaultDict(self):
+        myDict = defaultdict(lambda: defaultdict(dict))
 
 if __name__ == '__main__':
     unittest.main()
