@@ -41,6 +41,10 @@
 
 # Old problems
 ## Exploring algorithms
+1. https://leetcode.com/problems/minimum-falling-path-sum-ii/
+	- Algorithm idea: https://leetcode.com/problems/minimum-falling-path-sum-ii/discuss/452207/C%2B%2B-O(nm)-or-O(1)
+	- Simplest algorithm: https://leetcode.com/problems/minimum-falling-path-sum-ii/discuss/451273/Python-DP-O(MN)
+
 ## Implement optimal algorithm
 ## Debug edge cases
 ## Refine the solution
