@@ -1,54 +1,58 @@
-
 <!-- MarkdownTOC -->
 
-- [Why should I be confident](#why-should-i-be-confident)
-- [Why it is time to change](#why-it-is-time-to-change)
-- [Basic data structure operations](#basic-data-structure-operations)
-  - [Array](#array)
-  - [List](#list)
-  - [Queue](#queue)
-  - [PriorityQueue](#priorityqueue)
-  - [Set](#set)
-  - [Dictionary](#dictionary)
-- [Diary](#diary)
-  - [12/05/2019](#12052019)
-  - [12/06/2019](#12062019)
-  - [12/07/2019](#12072019)
+- [Philosophy](#philosophy)
+	- [First thing in the morning](#first-thing-in-the-morning)
+	- [Last thing in the evening](#last-thing-in-the-evening)
+	- [Timer \(Half an hour max each round\)](#timer-half-an-hour-max-each-round)
+	- [Benchmark with weekly competition](#benchmark-with-weekly-competition)
+	- [Priority](#priority)
+- [Toolbox](#toolbox)
+- [Old problems](#old-problems)
+	- [Exploring algorithms](#exploring-algorithms)
+	- [Implement optimal algorithm](#implement-optimal-algorithm)
+	- [Debug edge cases](#debug-edge-cases)
+	- [Refine the solution](#refine-the-solution)
+	- [End with toolbox](#end-with-toolbox)
+- [New problems](#new-problems)
+	- [Clarification](#clarification)
+	- [Brute force](#brute-force)
+	- [Optimization](#optimization)
+	- [Interface](#interface)
+	- [Test](#test)
 
 <!-- /MarkdownTOC -->
 
-## Why should I be confident
-* Work through leetcode two years ago, have systematic summarization. 
-* Have a great circle (Huanmin Wu, Timothy Liu)
-* Have enough time and could be consistent myself
-* Use another language Python which interests me
-* Practice speaking with coaches
-* Participate on weekly Leetcode contest
-* Have monthly mock interviews on Leetcode
-* Focus on target companies
+# Philosophy
+## First thing in the morning
+* 5 - 7am
 
-## Why it is time to change
-* Want to change to the open source community and mac environment
-* Things are too slow in big companies
+## Last thing in the evening
+* 10 - 11pm
 
-## Basic data structure operations
-### Array
-### List
-### Queue
-### PriorityQueue
-### Set
-### Dictionary
+## Timer (Half an hour max each round)
 
-## Diary
-### 12/05/2019
-* 说刷题会影响人的心态，不如说是品题，更为恰当一些
-* 有时一道题自己会出神挺长时间，这是一个练习冥想的好机会
-* 和他人比较是许多问题的源头，明确自己的目标，守住心中的亮光
+## Benchmark with weekly competition
 
-### 12/06/2019
-* For some corner cases, better add a todo item or test, otherwise easy to forget
-* Write test first, then write code. In this way could think from the big picture in the beginning
-* Don't belittle easy problems. The edge case is the trap here. 
+## Priority
+* Target company's high frequency
 
-### 12/07/2019
-* Every problem not taking more than 1 hour, otherwise the progress could not be guaranteed and it is easy to get tired.
+# Toolbox
+
+
+# Old problems
+## Exploring algorithms
+1. https://leetcode.com/problems/minimum-falling-path-sum-ii/
+	- Algorithm idea: https://leetcode.com/problems/minimum-falling-path-sum-ii/discuss/452207/C%2B%2B-O(nm)-or-O(1)
+	- Simplest algorithm: https://leetcode.com/problems/minimum-falling-path-sum-ii/discuss/451273/Python-DP-O(MN)
+
+## Implement optimal algorithm
+## Debug edge cases
+## Refine the solution
+## End with toolbox
+
+# New problems
+## Clarification
+## Brute force
+## Optimization
+## Interface
+## Test
