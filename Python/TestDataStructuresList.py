@@ -36,6 +36,23 @@ class TestDataStructuresList(unittest.TestCase):
             for col in range(len(array2D2[row])):
                 print(array2D2[row][col])
 
+    def test_RemoveItemFromList(self):
+        arr = [1, 9, 10, 4, 25, 2]
+
+        # remove an item by index and get its value: pop()
+        print(arr.pop(3))
+        print(arr.pop(-3))
+        print(arr.pop())  # the last item will be removed by default
+
+        # remove an item by value
+        itemList = ['Alice', 'Bob', 'Charlie', 'Bob', 'Dave']
+        # the first one will be deleted
+        print(itemList.remove('Bob'))
+
+        # list comprehensions
+        l = list(range(10))
+        print([i for i in l if i % 2 == 0])
+
 
 if __name__ == '__main__':
     unittest.main()
