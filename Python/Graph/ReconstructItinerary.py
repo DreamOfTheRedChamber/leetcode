@@ -25,7 +25,7 @@ class ReconstructItinerary(unittest.TestCase):
                 if len(result) > 0:
                     return result
 
-                path.remove(neighbor)
+                path.pop()
                 graph[start].append(neighbor)
 
             return []
@@ -41,7 +41,11 @@ class ReconstructItinerary(unittest.TestCase):
         print(self.findItinerary(tickets))
 
     def test_cycle(self):
-        tickets = [["JFK","SFO"],["JFK","ATL"],["SFO","ATL"],["ATL","JFK"],["ATL","SFO"]]
+        tickets = [["JFK", "SFO"], ["JFK", "ATL"], ["SFO", "ATL"], ["ATL", "JFK"], ["ATL", "SFO"]]
+        print(self.findItinerary(tickets))
+
+    def test_pythonGrammer(self):
+        tickets = [["EZE","TIA"],["EZE","HBA"],["AXA","TIA"],["JFK","AXA"],["ANU","JFK"],["ADL","ANU"],["TIA","AUA"],["ANU","AUA"],["ADL","EZE"],["ADL","EZE"],["EZE","ADL"],["AXA","EZE"],["AUA","AXA"],["JFK","AXA"],["AXA","AUA"],["AUA","ADL"],["ANU","EZE"],["TIA","ADL"],["EZE","ANU"],["AUA","ANU"]]
         print(self.findItinerary(tickets))
 
 if __name__ == '__main__':
