@@ -36,6 +36,11 @@ class TestDataStructuresList(unittest.TestCase):
             for col in range(len(array2D2[row])):
                 print(array2D2[row][col])
 
+    def test_AppendList(self):
+        arr = [0, 2, 4, 5]
+        print(arr + [0, 5])
+
+    @unittest.skip
     def test_RemoveItemFromList(self):
         arr = [1, 9, 10, 4, 25, 2]
 

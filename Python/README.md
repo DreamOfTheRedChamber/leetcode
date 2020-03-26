@@ -56,3 +56,8 @@
 ## Optimization
 ## Interface
 ## Test
+
+# Learning Python
+## Automatic import
+* Type hint https://stackoverflow.com/questions/32557920/what-are-type-hints-in-python-3-5
+* 

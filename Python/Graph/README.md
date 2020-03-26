@@ -1,6 +1,8 @@
 
 ![Reconstruct itinerary](./Images/reconstructItinerary.jpg)
 
+![Reconstruct itinerary2](./Images/reconstructItinerary_2.jpg)
+
 ![Delete tree nodes](./Images/deleteTreeNodes.jpg)
 
 ![Tree diameter](./Images/treeDiameter.jpg)
