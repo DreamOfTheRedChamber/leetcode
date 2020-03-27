@@ -16,16 +16,26 @@ except ImportError:
 
 class TestDataStructuresCollections(unittest.TestCase):
 
-    @unittest.skip
     def test_Stack_NonThreadSafe(self):
         stack = deque()
         stack.append('a')
         stack.append('b')
         stack.append('c')
 
+        # dequeue from right
         print(stack.pop())
         print(stack.pop())
         print(stack.pop())
+
+        queue = deque()
+        queue.append('a')
+        queue.append('b')
+        queue.append('c')
+
+        # dequeue from left
+        print(queue.popleft())
+        print(queue.popleft())
+        print(queue.popleft())
 
     @unittest.skip
     def test_Stack_ThreadSafe(self):
@@ -37,17 +47,6 @@ class TestDataStructuresCollections(unittest.TestCase):
         print(stack.get())
         print(stack.get())
         print(stack.get())
-
-    @unittest.skip
-    def test_Queue_NonThreadSafe(self):
-        queue = deque()
-        queue.append('a')
-        queue.append('b')
-        queue.append('c')
-
-        print(queue.popleft())
-        print(queue.popleft())
-        print(queue.popleft())
 
     @unittest.skip
     def test_Queue_ThreadSafe(self):
