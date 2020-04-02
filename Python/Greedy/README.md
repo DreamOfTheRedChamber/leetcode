@@ -1,0 +1,1 @@
+![Skyline problem](./images/skylineProblem.jpg)
