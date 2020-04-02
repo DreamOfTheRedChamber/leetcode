@@ -14,3 +14,5 @@
 ![Kill process](./Images/KillProcess.jpg)
 
 ![Minimum cost to make at least one valid path in a grid](./Images/minimumCostToMakeAtLeastOneValidPath.jpg)
+
+![Validate binary tree](./Images/validate_binaryTree.jpg)
