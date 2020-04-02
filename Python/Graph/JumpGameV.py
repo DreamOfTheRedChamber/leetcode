@@ -5,24 +5,23 @@ import unittest
 from collections import defaultdict
 from typing import List
 
-
 class JumpGameV(unittest.TestCase):
 
     def maxJumps(self, arr: List[int], d: int) -> int:
         def buildGraph(arr: List[int], d: int) -> dict:
 
-            graph = defaultdict(lambda: list)
+            graph = defaultdict(lambda: [])
             for index, value in enumerate(arr):
                 for i in range(1, d + 1):
                     leftIndex = index - i
-                    if leftIndex >= 0 and arr[leftIndex] < arr[leftIndex + 1]:
+                    if leftIndex >= 0 and arr[leftIndex] < arr[index]:
                         graph[index].append(leftIndex)
                     else:
                         break
 
                 for i in range(1, d + 1):
                     rightIndex = index + i
-                    if rightIndex < len(arr) and arr[rightIndex] < arr[rightIndex - 1]:
+                    if rightIndex < len(arr) and arr[rightIndex] < arr[index]:
                         graph[index].append(rightIndex)
                     else:
                         break
@@ -33,7 +32,7 @@ class JumpGameV(unittest.TestCase):
             if start in longestPathFromNode:
                 return longestPathFromNode[start]
 
-            longestLength = 0
+            longestLength = 1
             for neighbor in nodeNeighbors[start]:
                 if neighbor in longestPathFromNode:
                     longestLength = max(longestLength, 1 + longestPathFromNode[neighbor])
