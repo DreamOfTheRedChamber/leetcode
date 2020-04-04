@@ -9,3 +9,9 @@
 ![Brick wall](./images/BrickWall.jpg)
 
 ![Brick wall](./images/CourseScheduleIII.jpg)
+
+![Flight booking](./images/FlightBooking.jpg)
+
+![Maximum number of events to attend](./images/MaximumNumEventsToAttend.jpg)
+
+![Min number of tap to water garden](./images/MinNumToWaterGarden.jpg)
