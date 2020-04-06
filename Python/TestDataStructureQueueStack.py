@@ -16,6 +16,7 @@ except ImportError:
 
 class TestDataStructuresCollections(unittest.TestCase):
 
+    @unittest.skip
     def test_Stack_NonThreadSafe(self):
         stack = deque()
         stack.append('a')
@@ -68,7 +69,6 @@ class TestDataStructuresCollections(unittest.TestCase):
         print(heapq.heappop(li))
         print(heapq.heappop(li))
 
-    @unittest.skip
     def test_PriorityQueue_ThreadSafe(self):
         li = [5, 7, 9, 1, 3]
         maxQueue = queue.PriorityQueue()
@@ -77,6 +77,16 @@ class TestDataStructuresCollections(unittest.TestCase):
         maxQueue.put(9)
         maxQueue.put(1)
         maxQueue.put(3)
+
+        while not maxQueue.empty():
+            print(maxQueue.get())
+
+        maxQueue = queue.PriorityQueue()
+        maxQueue.put([5, 2])
+        maxQueue.put([4, 7])
+        maxQueue.put([2, 9])
+        maxQueue.put([1, 8])
+        maxQueue.put([3, 5])
 
         while not maxQueue.empty():
             print(maxQueue.get())
