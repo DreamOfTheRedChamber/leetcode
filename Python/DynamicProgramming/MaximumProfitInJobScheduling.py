@@ -22,11 +22,11 @@ class MaximumProfitInJobScheduling(unittest.TestCase):
         maxProfit = [0] * len(profit)
         maxProfit[0] = profit[0]
         for i in range(1, len(profit)):
-             includeProfit = profit[i]
+             includeProfit = jobs[i][2]
              # rightMostPos = bisect.bisect(jobs, (0, jobs[i][1], 0)) # look for the first job whose starting time >= i-th finishing time
              lastNonConflict = findLastNonConflict(jobs, i)
              if lastNonConflict != -1:
-                 includeProfit += profit[lastNonConflict]
+                 includeProfit += maxProfit[lastNonConflict]
 
              maxProfit[i] = max(includeProfit, maxProfit[i-1])
 
@@ -34,9 +34,9 @@ class MaximumProfitInJobScheduling(unittest.TestCase):
 
 
     def test_Leetcode(self):
-        # self.assertEqual(120, self.jobScheduling([1, 2, 3, 3], [3, 4, 5, 6], [50, 10, 40, 70]))
+        self.assertEqual(120, self.jobScheduling([1, 2, 3, 3], [3, 4, 5, 6], [50, 10, 40, 70]))
         self.assertEqual(150, self.jobScheduling([1, 2, 3, 4, 6], [3, 5, 10, 6, 9], [20, 20, 100, 70, 60]))
-        # self.assertEqual(6, self.jobScheduling([1, 1, 1], [2, 3, 4], [5, 6, 4]))
+        self.assertEqual(6, self.jobScheduling([1, 1, 1], [2, 3, 4], [5, 6, 4]))
 
 if __name__ == '__main__':
     unittest.main()
