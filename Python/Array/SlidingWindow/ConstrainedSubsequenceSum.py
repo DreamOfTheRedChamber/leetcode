@@ -7,7 +7,7 @@ from collections import defaultdict
 from typing import List
 
 
-class Template(unittest.TestCase):
+class ConstrainedSubsequenceSum(unittest.TestCase):
 
     def printVertically(self, s: str) -> list:
         return []
