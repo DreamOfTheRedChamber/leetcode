@@ -26,7 +26,6 @@ class BusRoutes(unittest.TestCase):
         discovered = set()
         bfsQueue = deque()
         bfsQueue.append(S)
-        discovered.add(S)
 
         levelSize = 1
         nextLevelSize = 0
@@ -34,32 +33,36 @@ class BusRoutes(unittest.TestCase):
         while bfsQueue:
             for i in range(levelSize):
                 queueTop = bfsQueue.popleft()
-                if queueTop != T:
+                if queueTop == T:
                     return depth
 
                 for routeIndex in nodeToRoutes[queueTop]:
+                    if routeIndex in discovered:
+                        continue
+
+                    discovered.add(routeIndex)
                     for node in routes[routeIndex]:
-                        if node not in discovered:
                             bfsQueue.append(node)
-                            discovered.add(node)
                             nextLevelSize += 1
 
             levelSize = nextLevelSize
             nextLevelSize = 0
             depth += 1
 
-        return depth
+        return -1
 
-    @unittest.skip
     def test_Leetcode(self):
         self.assertEqual(2, self.numBusesToDestination([[1, 2, 7], [3, 6, 7]], 1, 6))
 
     def test_EdgeCase(self):
         self.assertEqual(-1, self.numBusesToDestination([[1, 2, 7], [3, 6, 4]], 1, 6))
 
-        # self.assertEqual(1, self.numBusesToDestination([[1, 2, 7], [3, 6, 7]], 1, 6))
-        # self.assertEqual(2, self.numBusesToDestination([[1, 2, 3], [2, 4, 5], [3, 5, 6]], 1, 6))
-        # self.assertEqual(0, self.numBusesToDestination([[1, 2, 3], [2, 4, 5]], 1, 1))
+        self.assertEqual(1, self.numBusesToDestination([[1, 6, 7], [3, 6, 7]], 1, 6))
+        self.assertEqual(2, self.numBusesToDestination([[1, 2, 3], [2, 4, 5], [3, 5, 6]], 1, 6))
+        self.assertEqual(0, self.numBusesToDestination([[1, 2, 3], [2, 4, 5]], 1, 1))
+
+    def test_ErrorCase(self):
+        self.assertEqual(1, self.numBusesToDestination([[3,6,15,37,40,41,49,50,53],[5,13,34,38,46,56,58],[50],[12,17,18,24,26,27],[3,11,16,18,23,26,36,46,50,54,56,58],[0,1,7,12,14,18,26,38,42,48],[5,54],[54],[8,17,20,31,35,37,39],[2,5,13,17,24,47,59],[4,12,25,27,44],[1,3,7,19,22,23,36,47,48,49,53,58]], 37, 8))
 
 if __name__ == '__main__':
     unittest.main()
