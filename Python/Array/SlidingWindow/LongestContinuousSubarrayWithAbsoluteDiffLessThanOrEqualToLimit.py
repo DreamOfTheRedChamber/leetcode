@@ -24,6 +24,7 @@ class LongestContinuousSubarrayWithAbsoluteDiffLessThanOrEqualToLimit(unittest.T
             while maxDeque and nums[r] > nums[maxDeque[-1]]:
                 maxDeque.pop()
 
+            # reason for only enqueuing index:
             maxDeque.append(r)
             minDeque.append(r)
 
