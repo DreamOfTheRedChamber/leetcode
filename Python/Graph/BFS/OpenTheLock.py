@@ -18,7 +18,7 @@ class OpenTheLock(unittest.TestCase):
                 res.append(src[:i] + str((num + 1) % 10) + src[i + 1:])
             return res
 
-        bfsQueue = deque("0000")
+        bfsQueue = deque(["0000"])
         discovered = set(deadends)
         depth = 0
         while bfsQueue:
