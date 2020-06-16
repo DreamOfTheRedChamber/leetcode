@@ -12,34 +12,33 @@ class LargestRectangleInHistogram(unittest.TestCase):
     def test_Normal(self):
         self.assertEqual(10, self.largestRectangleArea([2, 1, 5, 6, 2, 3]))
 
-    def test_WrongAnswer(self):
+    def test_WrongAnswer1(self):
         self.assertEqual(3, self.largestRectangleArea([2, 1, 2]))
 
+    def test_WrongAnswer2(self):
+        self.assertEqual(6, self.largestRectangleArea([4, 2, 0, 3, 2, 5]))
+
+    def test_SameHeight(self):
+        self.assertEqual(20, self.largestRectangleArea([1, 5, 5, 5, 7]))
+
+    def test_Edgecase(self):
+        self.assertEqual(0, self.largestRectangleArea([]))
+
     def largestRectangleArea(self, heights: list) -> int:
-        monoIncreasingStack = []
-        largestRectangle = 0
+        incStack = []
+        heights.append(0)
+
+        result = 0
         for i in range(len(heights)):
-            while len(monoIncreasingStack) > 0 and heights[monoIncreasingStack[-1]] > heights[i]:
-                height = heights[monoIncreasingStack.pop()]
-                if len(monoIncreasingStack) == 0:
-                    width = i
+            while incStack and heights[incStack[-1]] > heights[i]:
+                head = incStack.pop()
+                if not incStack:
+                    result = max(result, i * heights[head])
                 else:
-                    width = i - 1 - monoIncreasingStack[-1]
-                largestRectangle = max(largestRectangle, height * width)
+                    result = max(result, (i - 1 - incStack[-1]) * heights[head])
+            incStack.append(i)
 
-            monoIncreasingStack.append(i)
-
-        while len(monoIncreasingStack) > 0:
-            xPos = monoIncreasingStack.pop()
-            height = heights[xPos]
-            if len(monoIncreasingStack) == 0:
-                width = i + 1
-            else:
-                width = i + 1 - monoIncreasingStack[-1] - 1
-
-            largestRectangle = max(largestRectangle, height * width)
-
-        return largestRectangle
+        return result
 
 if __name__ == '__main__':
     unittest.main()
