@@ -22,73 +22,85 @@ class BraceExpansionII(unittest.TestCase):
         typeStack = []
         expressionStack = []
         token = ""
-        union = set()
+        curSet = set()
         for i in range(len(expression)):
             if expression[i] == "{":
                 # normal example without comma: {a{b{c}}}
                 # reason to add two if condition:
                 # 1. successive left curly: {{{a}bd}c}
                 # 2. left curly prefixed by comma: {a{b,{c}}}
-                if not token:
-                    union.add(token)
+                if token and curSet:
+                    newUnion = set()
+                    for element in curSet:
+                        newUnion.add(element + token)
+                    curSet = newUnion
                     token = ""
-                if not union:
-                    expressionStack.append(union)
+                if token:
+                    curSet.add(token)
+                    token = ""
+                if curSet:
+                    expressionStack.append(curSet)
                     typeStack.append("{")
-                    union = set()
+                    curSet = set()
             elif expression[i] == ",":
                 # normal example with comma: {a, b, cd, e}, {a, {bc}, {d}e}
-                union.add(token)
-                token = ""
-
-                expressionStack.append(union)
-                typeStack.append(",")
-                union = set()
+                # avoid pushing empty token and union: {a{b,c},{ab,z}}
+                if token:
+                    curSet.add(token)
+                    token = ""
+                if curSet:
+                    expressionStack.append(curSet)
+                    typeStack.append(",")
+                    curSet = set()
             elif expression[i] == "}":
                 # example: does not push stack immediately after popping out {{{c}b}a}
-                if not token and not union:
-                    newUnion = set()
-                    for element in union:
-                        newUnion.add(element + token)
-                    union = newUnion
+
+                if token:
+                    curSet.add(token)
                     token = ""
 
                 while typeStack and typeStack[-1] == ",":
                     # example: {a,b,d,c}
-                    # example: will need to union all ones pushed inside due to comma: {b{a,b,d,c}c}
+                    # example: will need to curSet all ones pushed inside due to comma: {b{a,b,d,c}c}
                     top = expressionStack.pop()
-                    union.add(top)
+                    curSet = curSet.union(top)
                     typeStack.pop()
 
                 while typeStack and typeStack[-1] == "{":
                     top = expressionStack.pop()
-                    union = multiply(top, union)
+                    typeStack.pop()
+                    curSet = multiply(top, curSet)
 
             else:
                 # {{{c}b}abcc}
                 token += expression[i]
 
-        return expressionStack[-1] if expressionStack else []
+        return list(sorted(curSet)) if curSet else []
 
     def test_SimpleCase(self):
+        # only comma
+        print(self.braceExpansionII("{a,b,c}"))
+
+        # curly + comma
+        print(self.braceExpansionII("{a{b,c}d}"))
+
         # duplicate from comma
         print(self.braceExpansionII(""))
 
         # curly + curly
         print(self.braceExpansionII("{a,b}{c,d}"))
 
-        # curly + comma
-        print(self.braceExpansionII("{a{b,c}d}"))
-
         # only curly braces
         print(self.braceExpansionII("{ab{{de}c}}"))
 
-        # only comma
-        print(self.braceExpansionII("{a, b, c}"))
-
+    @unittest.skip
     def test_Leetcode(self):
         print(self.braceExpansionII("{a,b}{c,{d,e}}"))
         print(self.braceExpansionII("{{a,z},a{b,c},{ab,z}}"))
+
+    @unittest.skip
+    def test_WrongAnswer(self):
+        print(self.braceExpansionII("{a,b}c{d,e}f"))
 
 if __name__ == '__main__':
     unittest.main()
