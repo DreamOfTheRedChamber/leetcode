@@ -12,24 +12,26 @@ class NumberOfAtoms(unittest.TestCase):
 
     def countOfAtoms(self, formula: str) -> str:
         stack = []
-        token = ""
-
+        curHistogram = defaultdict(lambda: 0)
         i = 0
+
         while i < len(formula):
-            if formula[i].isalpha():
-                token += formula[i]
-                i += 1
-            elif formula[i].isnumeric():
+            if formula[i] >= "A" and formula[i] <= "Z":
                 end = i + 1
+                while end < len(formula) and formula[end] >= "a" and formula[end] <= "z":
+                    end += 1
+                token = formula[i:end]
+
+                i = end
                 while end < len(formula) and formula[end].isnumeric():
                     end += 1
-                number = int(formula[i:end])
-                lastChar = token[-1]
-                token += (number - 1) * lastChar
+                number = int(formula[i:end]) if i < end else 1
                 i = end
+
+                curHistogram[token] += number
             elif formula[i] == "(":
-                stack.append(token)
-                token = ""
+                stack.append(curHistogram)
+                curHistogram = defaultdict(lambda: 0)
                 i += 1
             else:
                 end = i + 1
@@ -37,17 +39,20 @@ class NumberOfAtoms(unittest.TestCase):
                     end += 1
                 if end > i + 1:
                     number = int(formula[i+1:end])
-                    token = token * number
+                    for key in curHistogram.keys():
+                        curHistogram[key] = curHistogram[key] * number
+
                 i = end
                 if stack:
-                    token = stack.pop() + token
+                    top = stack.pop()
+                    for key in top.keys():
+                        curHistogram[key] += top[key]
 
         result = ""
-        histogram = collections.Counter(token)
-        for key in sorted(histogram.keys()):
+        for key in sorted(curHistogram.keys()):
             result += key
-            if histogram[key] != 1:
-                result += str(histogram[key])
+            if curHistogram[key] != 1:
+                result += str(curHistogram[key])
 
         return result
 
@@ -57,9 +62,7 @@ class NumberOfAtoms(unittest.TestCase):
         self.assertEqual("K4N2O14S4", self.countOfAtoms("K4(ON(SO3)2)2"))
 
     def test_Edgecase(self):
-        self.assertEqual("H2O2", self.countOfAtoms("(H2O2)"))
-        self.assertEqual("M2R2T4g2", self.countOfAtoms("((Mg)RT2)2"))
-        self.assertEqual("Mg2M2")
+        self.assertEqual("H2O2", self.countOfAtoms("H2O2"))
 
 if __name__ == '__main__':
     unittest.main()
