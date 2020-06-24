@@ -12,29 +12,21 @@ class KthSmallestPrimeFraction(unittest.TestCase):
 
     def kthSmallestPrimeFraction(self, A: List[int], K: int) -> List[int]:
         def count(tar):
-            res,tmp = 0, [0,A[-1]]
+            totalCount = 0
+            result = [0, A[-1]]
             for i in range(len(A)):
-                loc = bisect.bisect_left(A,A[i]/tar)
-                res += len(A) - loc
-                if loc < len(A) and A[i]/A[loc] > tmp[0]/tmp[1]:
-                    tmp = [A[i],A[loc]]
-            return res, tmp
+                insertPos = bisect.bisect_left(A, A[i] / mid)
+                totalCount += len(A) - insertPos
+                if insertPos < len(A) and A[i]/A[insertPos] > result[0] / result[1]:
+                    result = [A[i], A[insertPos]]
+            return totalCount, result
 
         right = 1
         left = 0
 
-        result = [0, A[-1]]
         while left < right:
             mid = (left + right) / 2
             totalCount, result = count(mid)
-# Always wrong for test case 3)
-#            totalCount = 0
-#            for i in range(len(A)):
-#                insertPos = bisect.bisect_left(A, A[i] / mid)
-#                totalCount += len(A) - insertPos
-#                if insertPos < len(A) and A[i]/A[insertPos] > result[0] / result[1]:
-#                    result = [A[i], A[insertPos]]
-
             if totalCount == K:
                 break
             elif totalCount < K:
