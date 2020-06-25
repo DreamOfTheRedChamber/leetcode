@@ -36,20 +36,38 @@ class FindKthSmallestPairDistance(unittest.TestCase):
         for i in range(1, len(nums)):
             left = min(left, nums[i] - nums[i-1])
 
-        while left < right:
-            mid = (left + right) / 2
+        while left + 1 < right:
+            mid = (right - left) // 2 + left
             numOfSmaller, result = countsmallernum(mid)
             if numOfSmaller == k:
-                break
+                return abs(result[0] - result[1])
             elif numOfSmaller < k:
                 left = mid
             else:
                 right = mid
 
-        return abs(result[0] - result[1])
+        numOfSmaller, result = countsmallernum(left)
+        if numOfSmaller >= k:
+            return abs(result[0] - result[1])
+        else:
+            numOfSmaller, result = countsmallernum(right)
+            return abs(result[0] - result[1])
 
+    @unittest.skip
     def test_Leetcode(self):
         self.assertEqual(0, self.smallestDistancePair([1, 3, 1], 1))
+
+    @unittest.skip
+    def test_TLE(self):
+        self.assertEqual(2, self.smallestDistancePair([9,10,7,10,6,1,5,4,9,8], 18))
+
+    @unittest.skip
+    def test_WrongAnswer(self):
+        self.assertEqual(5, self.smallestDistancePair([1, 6, 1], 3))
+        self.assertEqual(58, self.smallestDistancePair([62, 100, 4], 2))
+
+    def testWrongAnswer2(self):
+        self.assertEqual(0, self.smallestDistancePair([2,2,0,1,1,0,0,1,2,0], 2))
 
 if __name__ == '__main__':
     unittest.main()
