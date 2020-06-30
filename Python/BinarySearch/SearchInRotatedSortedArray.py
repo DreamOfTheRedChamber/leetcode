@@ -8,48 +8,30 @@ from typing import List
 class SearchInRotatedSortedArray(unittest.TestCase):
 
     def search(self, nums: List[int], target: int) -> int:
-        def findPeak(nums: List[int]) -> int:
-            if len(nums) == 0:
-                return -1
-
-            low = 0
-            high = len(nums) - 1
-            while low + 1 < high:
-                mid = (high - low) // 2 + low
-                if nums[mid] > nums[low]:
-                    low = mid
-                else: # nums[mid] > nums[high]
-                    high = mid
-
-            return low if nums[low] > nums[high] else high
-
-        def findTarget(nums: List[int], target: int, low: int, high: int) -> int:
-            if len(nums) == 0 or low > high:
-                return -1
-
-            while low + 1 < high:
-                mid = (high - low) // 2 + low
-                if nums[mid] == target:
-                    return mid
-                elif nums[mid] > target:
-                    high = mid
-                else:
-                    low = mid
-
-            if nums[low] == target:
-                return low
-            elif nums[high] == target:
-                return high
-            else:
-                return -1
-
         if len(nums) == 0:
             return -1
-        peakIndex = findPeak(nums)
-        if target >= nums[0]:
-            return findTarget(nums, target, 0, peakIndex)
+
+        left = 0
+        right = len(nums) - 1
+        while left + 1 < right:
+            mid = (right - left) // 2 + left
+            if nums[mid] > nums[left]:
+                if target >= nums[left] and target <= nums[mid]:
+                    right = mid
+                else:
+                    left = mid
+            else:
+                if target >= nums[mid] and target <= nums[right]:
+                    left = mid
+                else:
+                    right = mid
+
+        if nums[left] == target:
+            return left
+        elif nums[right] == target:
+            return right
         else:
-            return findTarget(nums, target, peakIndex + 1, len(nums) - 1)
+            return -1
 
     def test_Leetcode(self):
         self.assertEqual(4, self.search([4, 5, 6, 7, 0, 1, 2], 0))
@@ -64,6 +46,9 @@ class SearchInRotatedSortedArray(unittest.TestCase):
     def test_TimeLimitExceeded(self):
         # use low + 1 < high in find peak function
         self.assertEqual(-1, self.search([1, 3], 0))
+
+    def test_WrongAnswer2(self):
+        self.assertEqual(0, self.search([1, 3, 5], 1))
 
 
 if __name__ == '__main__':
