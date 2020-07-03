@@ -12,15 +12,22 @@ class Heaters(unittest.TestCase):
 
     def findRadius(self, houses: List[int], heaters: List[int]) -> int:
 
-        heaters = sorted(heaters) + [float('inf')]
-        i = r = 0
-        for x in sorted(houses):
-            while x >= sum(heaters[i:i + 2]) / 2.:
-                i += 1
-            r = max(r, abs(heaters[i] - x))
-        return r
+        if not heaters:
+            return -1
 
-    @unittest.skip
+        heaters.sort()
+        result = float('-inf')
+        for house in houses:
+            index = bisect.bisect_left(heaters, house)
+            if index == 0:
+                result = max(result, heaters[0] - house)
+            elif index == len(heaters):
+                result = max(result, house - heaters[-1])
+            else:
+                result = max(result, min(heaters[index] - house, house - heaters[index - 1]))
+
+        return result
+
     def test_Leetcode(self):
         self.assertEqual(1, self.findRadius([1, 2, 3], [2]))
         self.assertEqual(1, self.findRadius([1, 2, 3, 4], [1, 4]))
