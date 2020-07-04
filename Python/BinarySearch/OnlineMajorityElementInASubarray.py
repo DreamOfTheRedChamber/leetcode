@@ -32,7 +32,8 @@ class MajorityChecker:
 
 class OnlineMajorityElementInASubarray(unittest.TestCase):
 
-
+    # Error case: left boundary inclusive search using bisect.bisect_left
+    #             right boundary search using bisect.bisect_right
     def test_Leetcode(self):
         major = MajorityChecker([1,1,2,2,1,1])
         self.assertEqual(1, major.query(0, 5, 4))
