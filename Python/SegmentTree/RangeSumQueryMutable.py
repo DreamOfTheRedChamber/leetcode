@@ -3,78 +3,80 @@ import heapq
 import unittest
 
 class SegNode:
-    def __init__(self, nums: list, start: int, end: int):
-        if len(nums) == 0:
-            return
-
+    def __init__(self, start: int, end: int, status: int):
         self.start = start
         self.end = end
-        self.nums = nums
+        self.status = status
+        self.left = None
+        self.right = None
 
-        if start == end:
-            self.sum = nums[start]
-            self.mid = start
-            self.left = None
-            self.right = None
-        else:
-            self.mid = (end - start) // 2 + start
-            self.left = SegNode(nums, start, self.mid)
-            self.right = SegNode(nums, self.mid + 1, end)
-            self.sum = self.left.sum + self.right.sum
+    def remove(self, node):
+        if not node:
+            return
+        self.remove(node.left)
+        self.remove(node.right)
+        node.left = None
+        node.right = None
+        node = None
+        return
 
-    def update(self, i: int, val: int) -> None:
-        diff = val - self.nums[i]
-        self.sum += diff
+    def setStatus(self, a: int, b: int, status: int) -> int:
+        if self.start >= b or self.end <= a:
+            return self.status
+        if a <= self.start and self.end <= b:
+            self.remove(self.left)
+            self.remove(self.right)
+            self.status = status
+            return self.status
+        if not self.left:
+            mid = (self.end - self.start) // 2 + self.start
+            self.left = SegNode(self.start, mid, status)
+            self.right = SegNode(mid, self.end, status)
 
-        if self.start == self.end and self.start == i:
-            self.nums[i] = val
-        else:
-            if i > self.mid:
-                self.right.update(i, val)
-            else:
-                self.left.update(i, val)
+        leftStatus = self.left.setStatus(a, b, status)
+        rightStatus = self.right.setStatus(a, b, status)
 
-    def sumRange(self, i: int, j: int) -> int:
-        if i > self.end or j < self.start:
+        self.status = leftStatus + rightStatus
+        return self.status
+
+    def getStatus(self, a: int, b: int) -> int:
+        if self.start >= b or self.end <= a:
             return 0
-        elif i == j and i == self.start and self.start == self.end:
-            return self.sum
-        elif i <= self.mid <= j:
-            return self.left.sumRange(i, self.mid) + self.right.sumRange(self.mid + 1, j)
-        elif self.mid > j:
-            return self.left.sumRange(i, j)
-        else:
-            return self.right.sumRange(i, j)
+        if a <= self.start and self.end <= b:
+            return self.status
+        if not self.left:
+            return self.status
+
+        leftStatus = self.left.getStatus(a, b)
+        rightStatus = self.right.getStatus(a, b)
+        return leftStatus + rightStatus
 
 class NumArray:
     def __init__(self, nums: list):
-        self.root = SegNode(nums, 0, len(nums) - 1)
-        return
+        self.root = SegNode(0, len(nums), 0)
+        for i in range(0, len(nums)):
+            self.root.setStatus(i, i+1, nums[i])
 
     def update(self, i: int, val: int) -> None:
-        self.root.update(i, val)
-        return None
+        self.root.setStatus(i, i+1, val)
 
     def sumRange(self, i: int, j: int) -> int:
-        return self.root.sumRange(i, j)
+        return self.root.getStatus(i, j+1)
 
 class RangeSumQuery(unittest.TestCase):
 
-    @unittest.skip
     def test_Leetcode(self):
         numArray = NumArray([1, 3, 5])
         self.assertEqual(9, numArray.sumRange(0, 2))
         numArray.update(1, 2)
         self.assertEqual(8, numArray.sumRange(0, 2))
 
-    @unittest.skip
     def test_Edgecase(self):
         numArray = NumArray([1, 2, 3, 4, 5, 6, 7, 8])
         self.assertEqual(15, numArray.sumRange(3, 5))
         numArray.update(3, 7)
         self.assertEqual(18, numArray.sumRange(3, 5))
 
-    @unittest.skip
     # should consider the empty array case
     def test_ErrorCase(self):
         numArray = NumArray([])
