@@ -5,25 +5,37 @@ from typing import List
 class CombinationSum(unittest.TestCase):
 
     def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
-        allResults = []
-        self.combinationSumReverse(allResults, [], candidates, 0, target)
-        return allResults
 
-    def combinationSumReverse(self, allResults: List[List[int]], oneResult: List[int], candidates: List[int], startPos: int, target: int):
-        if target == 0:
-            allResults.append(oneResult.copy())
-            return
+        def dfs(candidates: List[int], target: int, start: int, currSum: int, path: List[int], result: List[List[int]]):
 
-        for i in range(startPos, len(candidates)):
-            candidate = candidates[i]
-            if candidate <= target:
-                oneResult.append(candidate)
-                self.combinationSumReverse(allResults, oneResult, candidates, i, target - candidate)
-                oneResult.pop()
+            # edge case
+            if currSum > target:
+                return
+
+            if currSum == target:
+                result.append(path.copy())
+                return
+
+            # recursion
+            for i in range(start, len(candidates)):
+                path.append(candidates[i])
+
+                dfs(candidates, target, i, currSum + candidates[i], path, result)
+
+                path.pop()
+
+            return result
+
+        result = []
+        dfs(candidates, target, 0, 0, [], result)
+        return result
 
     def test_normal(self):
-        result = self.combinationSum([2, 3, 5], 8)
-        print(result)
+        print(self.combinationSum([2, 3, 5], 8))
+        print(self.combinationSum([2, 3, 6, 7], 7))
+
+    def test_Edgecase(self):
+        print(self.combinationSum([2, 4], 7))
 
 if __name__ == '__main__':
     unittest.main()
