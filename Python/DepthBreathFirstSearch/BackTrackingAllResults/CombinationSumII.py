@@ -5,30 +5,41 @@ from typing import List
 class CombinationSumII(unittest.TestCase):
 
     def combinationSum2(self, candidates: List[int], target: int) -> List[List[int]]:
-        allResults = []
-        sortedCandidates = candidates.copy()
-        sortedCandidates.sort()
-        self.combinationSumReverse(allResults, [], sortedCandidates, 0, target)
-        return allResults
+        def dfs(candidates: List[int], target: int, curSum: int, start: int, path: List[int], result: List[List[int]]):
+            # edge case
+            if curSum > target:
+                return
+            if curSum == target:
+                result.append(path.copy())
+                return
+            if start >= len(candidates):
+                return
 
-    def combinationSumReverse(self, allResults: List[List[int]], oneResult: List[int], candidates: List[int], startPos: int, target: int):
-        if target == 0:
-            allResults.append(oneResult.copy())
+            # recursion
+            uniqueNum = set()
+            for i in range(start, len(candidates)):
+                if candidates[i] in uniqueNum:
+                    continue
+                uniqueNum.add(candidates[i])
+
+                path.append(candidates[i])
+                dfs(candidates, target, curSum + candidates[i], i + 1, path, result)
+                path.pop()
+
             return
 
-        for i in range(startPos, len(candidates)):
-            # if i == 0 or candidates[i] != candidates[i-1]:
-            if i > startPos and candidates[i] == candidates[i - 1]:
-                continue
+        candidates = sorted(candidates)
+        result = []
+        dfs(candidates, target, 0, 0, [], result)
+        return result
 
-            if candidates[i] <= target:
-                oneResult.append(candidates[i])
-                self.combinationSumReverse(allResults, oneResult, candidates, i + 1, target - candidates[i])
-                oneResult.pop()
+    def test_Leetcode(self):
+        print(self.combinationSum2([10, 1, 2, 7, 6, 1, 5], 8))
+        print(self.combinationSum2([2, 5, 2, 1, 2], 5))
 
-    def test_normal(self):
-        result = self.combinationSum2([10, 1, 2, 7, 6, 1, 5], 8)
-        print(result)
+    def test_Edgecase(self):
+        print(self.combinationSum2([1, 1], 9))
+        print(self.combinationSum2([], 8))
 
 if __name__ == '__main__':
     unittest.main()
