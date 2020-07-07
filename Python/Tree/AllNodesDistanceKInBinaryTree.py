@@ -16,6 +16,67 @@ class AllNodesDistanceKInBinaryTree(unittest.TestCase):
 
     def distanceK(self, root: TreeNode, target: TreeNode, K: int) -> List[int]:
 
+        def kDistanceChildren(target: TreeNode, k: int, childrens: List[int]):
+            if not target or k < 0:
+                return
+
+            # base case
+            if k == 0:
+                childrens.append(target.val)
+                return
+
+            # recursion
+            kDistanceChildren(target.left, k - 1, childrens)
+            kDistanceChildren(target.right, k - 1, childrens)
+
+            return
+
+        def recursion(root: TreeNode, target: TreeNode, K: int, kDistanceNodes: List[int]) -> int:
+            if not root:
+                return -1
+
+            if root == target:
+                children = []
+                kDistanceChildren(root, K, children)
+                kDistanceNodes.extend(children)
+                return 0
+            else:
+                leftDepth = recursion(root.left, target, K, kDistanceNodes)
+                if leftDepth != -1:
+                    if leftDepth >= K:
+                        return K+1
+                    elif leftDepth == K-1:
+                        kDistanceNodes.append(root.val)
+                        return K
+                    else:
+                        disToRightChild = K - leftDepth - 2
+                        children = []
+                        kDistanceChildren(root.right, disToRightChild, children)
+                        kDistanceNodes.extend(children)
+                        return leftDepth + 1
+
+                rightDepth = recursion(root.right, target, K, kDistanceNodes)
+                if rightDepth != -1:
+                    if rightDepth >= K:
+                        return K+1
+                    elif rightDepth == K-1:
+                        kDistanceNodes.append(root.val)
+                        return K
+                    else:
+                        disToLeftChild = K - rightDepth - 2
+                        children = []
+                        kDistanceChildren(root.left, disToLeftChild, children)
+                        kDistanceNodes.extend(children)
+                        return  rightDepth + 1
+
+            return -1
+
+        results = []
+        recursion(root, target, K, results)
+        return results
+
+    def distanceK2(self, root: TreeNode, target: TreeNode, K: int) -> List[int]:
+
         def findPath(target: TreeNode, currNode: TreeNode, currPath: List[TreeNode], resultPath: List[TreeNode]):
 
             if not currNode:
