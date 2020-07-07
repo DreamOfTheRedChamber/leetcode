@@ -39,9 +39,6 @@ class RemoveInvalidParentheses(unittest.TestCase):
 
         def dfs(origin: str, start: int, leftInvalid: int, rightInvalid: int, result: List[str]):
 
-            if leftInvalid < 0 or rightInvalid < 0:
-                return
-
             if leftInvalid == 0 and rightInvalid == 0 and isValid(origin):
                 result.append(origin)
                 return
@@ -53,18 +50,21 @@ class RemoveInvalidParentheses(unittest.TestCase):
                 if i > start and origin[i] == origin[i-1]:
                     continue
 
-                if origin[i] == "(":
-                    dfs(origin[:i] + origin[i+1:], i + 1, leftInvalid - 1, rightInvalid, result)
-                else:
-                    dfs(origin[:i] + origin[i+1:], i + 1, leftInvalid, rightInvalid - 1, result)
+                if origin[i] == "(" and leftInvalid > 0:
+                    # Error case: The index needs to start at i, instead of i + 1
+                    dfs(origin[:i] + origin[i+1:], i, leftInvalid - 1, rightInvalid, result)
+                elif origin[i] == ")" and rightInvalid > 0:
+                    dfs(origin[:i] + origin[i+1:], i, leftInvalid, rightInvalid - 1, result)
 
             return
 
         result = []
         leftInvalid, rightInvalid = countInvalidLeftRight(s)
         dfs(s, 0, leftInvalid, rightInvalid, result)
+
         return result
 
+    @unittest.skip
     def test_Leetcode(self):
         # expected ["()()()", "(())()"]
         print(self.removeInvalidParentheses("()())()"))
@@ -72,10 +72,15 @@ class RemoveInvalidParentheses(unittest.TestCase):
         # expected ["(a)()()", "(a())()"]
         print(self.removeInvalidParentheses("(a)())()"))
 
+        print(self.removeInvalidParentheses("()"))
+
+    def test_Edgecase(self):
         # expected [""]
         print(self.removeInvalidParentheses(")("))
 
-        print(self.removeInvalidParentheses("()"))
+        # expected ["f"]
+        print(self.removeInvalidParentheses("f)("))
+
 
 if __name__ == '__main__':
     unittest.main()
