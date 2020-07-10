@@ -43,6 +43,7 @@ class TestDataStructureDict(unittest.TestCase):
         for value in dictionary.values():
             print(value)
 
+
     @unittest.skip
     def test_LoopInOrder(self):
         dictionary = {'apple': 5600.00, 'orange': 3500.00, 'banana': 5000.00}
