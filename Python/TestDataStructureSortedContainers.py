@@ -32,11 +32,9 @@ class TestDataStructuresSortedContainers(unittest.TestCase):
 
         return
 
-    @unittest.skip
     def test_SortedSet(self):
         # construct
-        sorted_set = SortedSet([1, 1, 2, 3, 4])
-        sorted_set = SortedSet()
+        sorted_set = SortedSet([1, 5, 2, 7, 4])
 
         # inserting values one by one
         for i in range(5, 0, -1):
@@ -51,6 +49,10 @@ class TestDataStructuresSortedContainers(unittest.TestCase):
         sorted_set.discard(4)
         print('set after discarding: ', sorted_set)
 
+        for i in sorted_set:
+            print(i)
+
+    @unittest.skip
     def test_SortedDict(self):
         # construct
         sorted_dict = SortedDict({'a': 1, 'c': 2, 'b': 3})
