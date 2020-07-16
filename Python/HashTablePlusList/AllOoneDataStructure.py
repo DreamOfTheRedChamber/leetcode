@@ -101,11 +101,16 @@ class AllOne:
 
             self.keyToNodeMap[key].remove()
 
-        # add the key to target node keySet
-        self.keyToNodeMap[key].prev.keySet.add(key)
+        if self.keyToNodeMap[key].value > 1:
+            # add the key to target node keySet
+            self.keyToNodeMap[key].prev.keySet.add(key)
 
-        # change the mapping of key -> node
-        self.keyToNodeMap[key] = self.keyToNodeMap[key].prev
+            # change the mapping of key -> node
+            self.keyToNodeMap[key] = self.keyToNodeMap[key].prev
+        else:
+            self.keyToNodeMap.pop(key)
+
+
 
     def getMaxKey(self) -> str:
         """
@@ -184,7 +189,18 @@ class AllOoneDataStructure(unittest.TestCase):
         newClass.dec("hello")
         self.assertEqual("", newClass.getMaxKey())
 
-    def tes
+    def test_ErrorCase5(self):
+        newClass = AllOne()
+        newClass.inc("hello")
+        newClass.inc("goodbye")
+        newClass.dec("hello")
+        newClass.dec("hello")
+        self.assertEqual("goodbye", newClass.getMaxKey())
+        newClass.inc("leet")
+        newClass.inc("code")
+        newClass.dec("leet")
+        newClass.dec("hello")
+        # self.assertEqual("leet", newClass.getMaxKey())
 
 if __name__ == '__main__':
     unittest.main()
