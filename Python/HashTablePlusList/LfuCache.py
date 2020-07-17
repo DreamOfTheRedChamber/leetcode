@@ -26,10 +26,13 @@ class LFUCache:
         """
         if key not in self.keyToFreq:
             return -1
+
+        # edge condition wrong causes to debug so many times
+        if len(self.freqToKeyValue[self.keyToFreq[key]]) == 1 and self.keyToFreq[key] == self.minFreq:
+            self.minFreq = self.keyToFreq[key] + 1
+
         freq = self.keyToFreq.pop(key)
         value = self.freqToKeyValue[freq].pop(key)
-        if len(self.freqToKeyValue[freq]) == 0 and freq == self.minFreq:
-            self.minFreq = freq + 1
         self.freqToKeyValue[freq + 1][key] = value
         self.keyToFreq[key] = freq + 1
         return value
