@@ -101,5 +101,13 @@ class TestDataStructuresCollections(unittest.TestCase):
         while not pq.empty():
             print(pq.get())
 
+    def test_PeekStackTop(self):
+        pq = []
+        heapq.heappush(pq, 3)
+        heapq.heappush(pq, 1)
+        heapq.heappush(pq, 4)
+        print(pq[0])
+        print(heapq.heappop(pq))
+
 if __name__ == '__main__':
     unittest.main()

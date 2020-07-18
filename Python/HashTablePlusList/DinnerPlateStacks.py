@@ -16,34 +16,112 @@ class DinnerPlates:
         return
 
     def push(self, val: int) -> None:
+        if self.capacity <= 0:
+            return
+
+        while self.pq and (self.pq[0] >= len(self.stacks) or len(self.stacks[self.pq[0]]) == self.capacity):
+            heapq.heappop(self.pq)
+
         if not self.pq:
-            self.stacks.append([val])
-            heapq.heappush(self.pq, (len(self.stacks)-1, 1))
-        else:
-            index, length = heapq.heappop(self.pq)
-            self.stacks[index].append(val)
-            if len(self.stacks[index]) == 1:
-                heapq.heappush(self.pq, (index, 1))
+            self.stacks.append([])
+            heapq.heappush(self.pq, len(self.stacks) - 1)
+
+        self.stacks[self.pq[0]].append(val)
+        if len(self.stacks[self.pq[0]]) == self.capacity:
+            heapq.heappop(self.pq)
+
         return
 
     def pop(self) -> int:
-
-        return 0
+        return self.popAtStack(len(self.stacks) - 1)
 
     def popAtStack(self, index: int) -> int:
-        if index >= len(self.stacks):
+        if index < 0 or index >= len(self.stacks) or len(self.stacks[index]) == 0:
             return -1
 
-        if len(self.stacks[index]) > 0:
+        result = self.stacks[index].pop()
+        heapq.heappush(self.pq, index)  # wrong answer 3 bug
+        while self.stacks and len(self.stacks[-1]) == 0:
+            self.stacks.pop()
+            # FUCK.... python without a treemap could not remove the corresponding entry from pq
 
-            return self.stacks[index][-1]
-
-        return -1
+        return result
 
 class DinnerPlateStacks(unittest.TestCase):
 
-    def test_Leetcode(self):
-        print([1])
+    def test_WrongAnswer(self):
+        # ["DinnerPlates", "push", "push", "push", "popAtStack", "pop", "pop"]
+        # [[1], [1], [2], [3], [1], [], []]
+        # expected: [null,null,null,null,3,2,1]
+        # output:   [null,null,null,null,2,3,1]
+        dinnerPlates = DinnerPlates(1)
+        dinnerPlates.push(1)
+        dinnerPlates.push(2)
+        dinnerPlates.push(3)
+        self.assertEqual(2, dinnerPlates.popAtStack(1))
+        self.assertEqual(3, dinnerPlates.pop())
+        self.assertEqual(1, dinnerPlates.pop())
+        return
+
+    def test_WrongAnswer2(self):
+        # ["DinnerPlates", "push", "push", "push", "push", "push", "push", "push", "push", "popAtStack", "popAtStack",
+        # "popAtStack", "popAtStack", "push", "push", "push", "push", "push", "push", "push", "push", "pop", "pop",
+        # "pop", "pop"]
+        # [[2], [471], [177], [1], [29], [333], [154], [130], [333], [1], [0], [2], [0], [165], [383], [267], [367], [53],
+        # [373], [388], [249], [], [], [], []]
+        # expected: [null,null,null,null,null,null,null,null,null,29,177,154,471,null,null,null,null,null,null,null,null,249,388,373,53]
+        # output:   [null,null,null,null,null,null,null,null,null,29,177,154,471,null,null,null,null,null,null,null,null,249,388,373,333]
+        dinnerPlates = DinnerPlates(2)
+        dinnerPlates.push(471)
+        dinnerPlates.push(177)
+        dinnerPlates.push(1)
+        dinnerPlates.push(29)
+        dinnerPlates.push(333)
+        dinnerPlates.push(154)
+        dinnerPlates.push(130)
+        dinnerPlates.push(333)
+        self.assertEqual(29, dinnerPlates.popAtStack(1))
+        self.assertEqual(177, dinnerPlates.popAtStack(0))
+        self.assertEqual(154, dinnerPlates.popAtStack(2))
+        self.assertEqual(471, dinnerPlates.popAtStack(0))
+        dinnerPlates.push(165)
+        dinnerPlates.push(383)
+        dinnerPlates.push(267)
+        dinnerPlates.push(367)
+        dinnerPlates.push(53)
+        dinnerPlates.push(373)
+        dinnerPlates.push(388)
+        dinnerPlates.push(249)
+        self.assertEqual(249, dinnerPlates.pop())
+        self.assertEqual(388, dinnerPlates.pop())
+        self.assertEqual(373, dinnerPlates.pop())
+        self.assertEqual(53, dinnerPlates.pop())
+
+        return
+
+    def test_WrongAnswer3(self):
+        # ["DinnerPlates", "push", "push", "push", "push", "push", "popAtStack", "push", "push", "popAtStack",
+        #  "popAtStack", "pop", "pop", "pop", "pop", "pop"]
+        # [[2], [1], [2], [3], [4], [5], [0], [20], [21], [0], [2], [], [], [], [], []]
+        # expected: [null,null,null,null,null,null,2,null,null,20,21,5,4,3,1,-1]
+        # output:   [null,null,null,null,null,null,2,null,null,1,20,21,5,4,3,-1]
+
+        return
+
+    def test_WrongAnswer4(self):
+        # ["DinnerPlates", "push", "push", "popAtStack", "pop", "push", "push", "pop", "pop"]
+        # [[1], [1], [2], [1], [], [1], [2], [], []]
+        # index out of order
+        dinnerPlates = DinnerPlates(1)
+        dinnerPlates.push(1)
+        dinnerPlates.push(2)
+        dinnerPlates.popAtStack(1)
+        dinnerPlates.pop()
+        dinnerPlates.push(1)
+        dinnerPlates.push(2)
+        dinnerPlates.pop()
+        dinnerPlates.pop()
+        return
 
 if __name__ == '__main__':
     unittest.main()
