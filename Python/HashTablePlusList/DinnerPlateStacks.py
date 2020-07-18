@@ -20,47 +20,31 @@ class DinnerPlates:
             return
 
         if not self.pq:
-            self.stacks.append([val])
-            if self.capacity > 1:
-                heapq.heappush(self.pq, len(self.stacks)-1)
-        else:
-            index = heapq.heappop(self.pq)
-            while len(self.stacks[index]) == self.capacity and self.pq:
-                index = heapq.heappop(self.pq)
+            self.stacks.append([])
+            heapq.heappush(self.pq, len(self.stacks) - 1)
 
-            if len(self.stacks[index]) < self.capacity:
-                self.stacks[index].append(val)
-                if len(self.stacks[index]) < self.capacity:
-                    heapq.heappush(self.pq, index)
-            else:
-                self.stacks.append([val])
-                if self.capacity > 1:
-                    heapq.heappush(self.pq, len(self.stacks) - 1)
+        while self.pq and (self.pq[0] >= len(self.stacks) or len(self.stacks[self.pq[0]]) == self.capacity):
+            heapq.heappop(self.pq)
+
+        self.stacks[self.pq[0]].append(val)
+        if len(self.stacks[self.pq[0]]) == self.capacity:
+            heapq.heappop(self.pq)
+
         return
 
     def pop(self) -> int:
-
-        resultIndex = len(self.stacks) - 1
-        while resultIndex >= 0 and len(self.stacks[resultIndex]) == 0:
-            resultIndex -= 1
-
-        result = self.popAtStack(resultIndex)
-        return result
+        return self.popAtStack(len(self.stacks) - 1)
 
     def popAtStack(self, index: int) -> int:
-        if self.capacity <= 0:
+        if index < 0 or index >= len(self.stacks) or len(self.stacks[index]) == 0:
             return -1
 
-        if index >= len(self.stacks):
-            return -1
+        result = self.stacks[index].pop()
+        while self.stacks and len(self.stacks[-1]) == 0:
+            self.stacks.pop()
+            # FUCK.... python without a treemap could not remove the corresponding entry from pq
 
-        if len(self.stacks[index]) > 0:
-            result = self.stacks[index].pop()
-            if len(self.stacks[index]) < self.capacity:
-                heapq.heappush(self.pq, index)
-            return result
-
-        return -1
+        return result
 
 class DinnerPlateStacks(unittest.TestCase):
 
