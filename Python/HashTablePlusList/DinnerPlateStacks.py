@@ -19,12 +19,12 @@ class DinnerPlates:
         if self.capacity <= 0:
             return
 
+        while self.pq and (self.pq[0] >= len(self.stacks) or len(self.stacks[self.pq[0]]) == self.capacity):
+            heapq.heappop(self.pq)
+
         if not self.pq:
             self.stacks.append([])
             heapq.heappush(self.pq, len(self.stacks) - 1)
-
-        while self.pq and (self.pq[0] >= len(self.stacks) or len(self.stacks[self.pq[0]]) == self.capacity):
-            heapq.heappop(self.pq)
 
         self.stacks[self.pq[0]].append(val)
         if len(self.stacks[self.pq[0]]) == self.capacity:
@@ -40,6 +40,7 @@ class DinnerPlates:
             return -1
 
         result = self.stacks[index].pop()
+        heapq.heappush(self.pq, index)  # wrong answer 3 bug
         while self.stacks and len(self.stacks[-1]) == 0:
             self.stacks.pop()
             # FUCK.... python without a treemap could not remove the corresponding entry from pq
@@ -96,6 +97,30 @@ class DinnerPlateStacks(unittest.TestCase):
         self.assertEqual(373, dinnerPlates.pop())
         self.assertEqual(53, dinnerPlates.pop())
 
+        return
+
+    def test_WrongAnswer3(self):
+        # ["DinnerPlates", "push", "push", "push", "push", "push", "popAtStack", "push", "push", "popAtStack",
+        #  "popAtStack", "pop", "pop", "pop", "pop", "pop"]
+        # [[2], [1], [2], [3], [4], [5], [0], [20], [21], [0], [2], [], [], [], [], []]
+        # expected: [null,null,null,null,null,null,2,null,null,20,21,5,4,3,1,-1]
+        # output:   [null,null,null,null,null,null,2,null,null,1,20,21,5,4,3,-1]
+
+        return
+
+    def test_WrongAnswer4(self):
+        # ["DinnerPlates", "push", "push", "popAtStack", "pop", "push", "push", "pop", "pop"]
+        # [[1], [1], [2], [1], [], [1], [2], [], []]
+        # index out of order
+        dinnerPlates = DinnerPlates(1)
+        dinnerPlates.push(1)
+        dinnerPlates.push(2)
+        dinnerPlates.popAtStack(1)
+        dinnerPlates.pop()
+        dinnerPlates.push(1)
+        dinnerPlates.push(2)
+        dinnerPlates.pop()
+        dinnerPlates.pop()
         return
 
 if __name__ == '__main__':
