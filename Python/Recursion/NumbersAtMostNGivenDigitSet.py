@@ -21,8 +21,6 @@ class NumbersAtMostNGivenDigitSet(unittest.TestCase):
             for candidate in D:
                 if candidate < N[pos]:
                     result += len(D) ** (len(N) - 1 - pos)
-                    for i in range(pos+1, len(N)):
-                        result += len(D) ** i
                 elif candidate == N[pos]:
                     currNum += candidate
                     result += recursion(currNum, N, pos + 1, D)
@@ -39,9 +37,13 @@ class NumbersAtMostNGivenDigitSet(unittest.TestCase):
         result += recursion("", str(N), 0, D)
         return result
 
+    @unittest.skip
     def test_Leetcode(self):
         self.assertEqual(20, self.atMostNGivenDigitSet(["1","3","5","7"], 100))
         self.assertEqual(29523, self.atMostNGivenDigitSet(["1","4","9"], 1000000000))
+
+    def test_WrongAnswer(self):
+        self.assertEqual(18, self.atMostNGivenDigitSet(["3","4","5","6"], 64))
 
 if __name__ == '__main__':
     unittest.main()
