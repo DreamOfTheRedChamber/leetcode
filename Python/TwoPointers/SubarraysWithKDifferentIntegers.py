@@ -13,27 +13,30 @@ class SubarraysWithKDifferentIntegers(unittest.TestCase):
         def subarrayWithAtMostKDistinct(A: List[int], K: int) -> int:
 
             result = 0
-            right = 0
+            left = 0
             windowHisto = defaultdict(lambda: 0)
-            for left in range(len(A)):
+            for right in range(len(A)):
+                windowHisto[A[right]] += 1
 
-                while right < len(A) and len(windowHisto) <= K:
-                    windowHisto[A[right]] += 1
-                    if len(windowHisto) <= K:
-                        result += 1
-                    right += 1
-
-                if windowHisto[A[left]] == 1:
-                    windowHisto.pop(A[left])
+                if len(windowHisto) <= K:
+                    result += right - left + 1
                 else:
-                    windowHisto[A[left]] -= 1
-
+                    while len(windowHisto) > K:
+                        windowHisto[A[left]] -= 1
+                        if windowHisto[A[left]] == 0:
+                            windowHisto.pop(A[left])
+                        left += 1
+                    result += right - left + 1
 
             return result
 
-        return subarrayWithAtMostKDistinct(A, K) - subarrayWithAtMostKDistinct(A, K - 1)
+        answerK = subarrayWithAtMostKDistinct(A, K)
+        answerKMinusOne = subarrayWithAtMostKDistinct(A, K - 1)
+
+        return answerK - answerKMinusOne
 
     def test_Leetcode(self):
+        # self.assertEqual(3, self.subarraysWithKDistinct([1, 4, 3], 2))
         self.assertEqual(7, self.subarraysWithKDistinct([1, 2, 1, 2, 3], 2))
         # self.assertEqual(3, self.subarraysWithKDistinct([1, 2, 1, 3, 4], 3))
 
