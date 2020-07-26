@@ -3,7 +3,7 @@ import heapq
 import unittest
 
 # Read about enumerate in python
-from collections import defaultdict
+from collections import defaultdict, deque
 from typing import List
 
 class AvoidFloodInTheCity(unittest.TestCase):
@@ -12,18 +12,18 @@ class AvoidFloodInTheCity(unittest.TestCase):
         # (urgency, city)
         urgencyHeap = []
         # city -> setOfRain represent uncleaned urgency
-        cityToRains = dict()
-        cityToUrgencyOccurDate = dict()
+        cityToRainsSet = dict()
+        cityToRainsDeque = dict()
 
-        # step1: build urgency heap and cityToRains
+        # step1: build cityToRainsSet
         for i in range(len(rains)):
             if rains[i] > 0:
-                if rains[i] not in cityToRains:
-                    cityToRains[rains[i]] = set()
-                    cityToUrgencyOccurDate[rains[i]] = i
+                if rains[i] not in cityToRainsSet:
+                    cityToRainsSet[rains[i]] = set()
+                    cityToRainsDeque[rains[i]] = deque()
                 else:
-                    heapq.heappush(urgencyHeap, (i, cityToUrgencyOccurDate[rains[i]], rains[i]))
-                    cityToRains[rains[i]].add(i)
+                    cityToRainsSet[rains[i]].add(i)
+                    cityToRainsDeque[rains[i]].append(i)
 
         # step2: for each entry in rains, if rain then put -1; if sunny then pop out one element from urgency map
         # when will fail: city to uncleaned urgency contains
@@ -31,23 +31,22 @@ class AvoidFloodInTheCity(unittest.TestCase):
         result = []
         for i in range(len(rains)):
             if rains[i] > 0:
-                if i in cityToRains[rains[i]]:
+                if i in cityToRainsSet[rains[i]]:
                     return []
+                if len(cityToRainsDeque[rains[i]]) > 0:
+                    heapq.heappush(urgencyHeap, (cityToRainsDeque[rains[i]].popleft(), rains[i]))
                 result.append(-1)
             else:
                 if urgencyHeap:
-                    urgency, cityToUrgencyOccurDate, city = heapq.heappop(urgencyHeap)
+                    urgency, city = heapq.heappop(urgencyHeap)
                     result.append(city)
-                    if city in cityToRains and urgency in cityToRains[city]:
-                        cityToRains[city].remove(urgency)
+                    if city in cityToRainsSet and urgency in cityToRainsSet[city]:
+                        cityToRainsSet[city].remove(urgency)
                 else:
                     result.append(10 ** 9)
 
-        if urgencyHeap:
-            return []
         return result
 
-    @unittest.skip
     def test_Leetcode(self):
         print(self.avoidFlood([1, 2, 3, 4]))
         print(self.avoidFlood([1, 2, 0, 0, 2, 1]))
@@ -55,6 +54,7 @@ class AvoidFloodInTheCity(unittest.TestCase):
         print(self.avoidFlood([69, 0, 0, 0, 69]))
         print(self.avoidFlood([10, 20, 20]))
 
+    @unittest.skip
     def test_WrongAnswer(self):
         print(self.avoidFlood([0,1,1]))
 
