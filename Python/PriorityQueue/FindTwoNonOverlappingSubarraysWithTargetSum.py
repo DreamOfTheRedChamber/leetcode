@@ -13,7 +13,7 @@ class FindTwoNonOverlappingSubarraysWithTargetSum(unittest.TestCase):
             return -1
 
         slidingWindowSum = 0
-        minLengthEndingBefore = float('inf')
+        minLengthEndingBefore = [float('inf') for i in range(len(arr))]
         start = 0
         result = float('inf')
         for end in range(len(arr)):
@@ -25,10 +25,12 @@ class FindTwoNonOverlappingSubarraysWithTargetSum(unittest.TestCase):
                 if slidingWindowSum == target:
                     currSubarrayLen = end - start + 1
                     if minLengthEndingBefore != float('inf'):
-                        result = min(result, currSubarrayLen + minLengthEndingBefore)
-                    minLengthEndingBefore = min(minLengthEndingBefore, currSubarrayLen)
-            else:
-                continue
+                        if start - 1 >= 0:
+                            result = min(result, currSubarrayLen + minLengthEndingBefore[start-1])
+                    minLengthEndingBefore[end] = min(minLengthEndingBefore[end], currSubarrayLen)
+
+            if end >= 1:
+                minLengthEndingBefore[end] = min(minLengthEndingBefore[end - 1], minLengthEndingBefore[end])
 
         return result if result != float('inf') else -1
 
@@ -38,6 +40,9 @@ class FindTwoNonOverlappingSubarraysWithTargetSum(unittest.TestCase):
         self.assertEqual(-1, self.minSumOfLengths([4, 3, 2, 6, 2, 3, 4], 6))
         self.assertEqual(-1, self.minSumOfLengths([5, 5, 4, 4, 5], 3))
         self.assertEqual(3, self.minSumOfLengths([3, 1, 1, 1, 5, 1, 2, 1], 3))
+
+    def test_Wrongcase(self):
+        self.assertEqual(-1, self.minSumOfLengths([1, 6, 1], 7))
 
 if __name__ == '__main__':
     unittest.main()
