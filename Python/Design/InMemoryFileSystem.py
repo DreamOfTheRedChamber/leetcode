@@ -19,7 +19,7 @@ class FileSystem:
                 resultNode = resultNode.children[segment]
 
         if resultNode.content is not None:
-            return segments[-1]
+            return [segments[-1]]
         else:
             result = []
             for key in sorted(resultNode.children.keys()):
@@ -63,6 +63,7 @@ class TestDataStructuresPriorityQueue(unittest.TestCase):
         print(fs.ls("/"))
         print(fs.readContentFromFile("/a/b/c/d"))
 
+    @unittest.skip
     def test_WrongAnswer(self):
         # input
         # ["FileSystem","mkdir","ls","ls","mkdir","ls","ls","addContentToFile","ls","ls","ls"]
@@ -85,6 +86,21 @@ class TestDataStructuresPriorityQueue(unittest.TestCase):
         fs.ls("/z")
         print(fs.ls("/goowmfn/c"))
         print(fs.ls("/goowmfn"))
+        return
+
+    def test_WrongAnswer2(self):
+        # ["FileSystem", "mkdir", "ls", "mkdir", "ls", "ls", "ls", "addContentToFile", "ls", "ls", "ls"]
+        # [[], ["/m"], ["/m"], ["/w"], ["/"], ["/w"], ["/"], ["/dycete", "emer"], ["/w"], ["/"], ["/dycete"]]
+
+        # input
+        # [null, null, [], null, ["m", "w"], [], ["m", "w"], null, [], ["dycete", "m", "w"],
+        # ["d", "y", "c", "e", "t", "e"]]
+
+        # output
+        # [null, null, [], null, ["m", "w"], [], ["m", "w"], null, [], ["dycete", "m", "w"], ["dycete"]]
+        fs = FileSystem()
+        fs.mkdir()
+
         return
 
 # Your FileSystem object will be instantiated and called as such:
