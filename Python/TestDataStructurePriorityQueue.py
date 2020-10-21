@@ -14,6 +14,21 @@ except ImportError:
     # Python3
     import Queue as queue
 
+
+class Element:
+    def __init__(self, count, word):
+        self.count = count
+        self.word = word
+
+    # whether self is smaller than other element
+    def __lt__(self, other):
+        if self.count == other.count:
+            return self.word > other.word
+        return self.count < other.count
+
+    def __eq__(self, other):
+        return self.count == other.count and self.word == other.word
+
 class TestDataStructuresPriorityQueue(unittest.TestCase):
 
     @unittest.skip
