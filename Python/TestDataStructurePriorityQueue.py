@@ -27,6 +27,7 @@ class TestDataStructuresPriorityQueue(unittest.TestCase):
         print(heapq.heappop(li))
         print(heapq.heappop(li))
 
+    @unittest.skip
     def test_PeekHeapTop(self):
         pq = []
         heapq.heappush(pq, 3)
@@ -40,7 +41,9 @@ class TestDataStructuresPriorityQueue(unittest.TestCase):
         heapq.heappush(pq, (3, 25))
         heapq.heappush(pq, (20, 3))
         heapq.heappush(pq, (5, 5))
-
+        print(heapq.heappop(pq))
+        print(heapq.heappop(pq))
+        print(heapq.heappop(pq))
 
 if __name__ == '__main__':
-    unittest.main(
+    unittest.main()

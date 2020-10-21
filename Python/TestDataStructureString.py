@@ -22,11 +22,13 @@ class TestDataStructureString(unittest.TestCase):
         result = " ".join(str1)
         print(result)
 
-    @unittest.skip
     def test_SplitString(self):
         s = " this    is   my string"
         result1 = s.split()
         result2 = s.split(' ')
+
+        result3 = "hello".split(' ')
+        print(result3)
 
     @unittest.skip
     def test_Convert(self):

@@ -6,6 +6,7 @@ from collections import defaultdict
 
 class TestDataStructureDict(unittest.TestCase):
 
+
     @unittest.skip
     def test_CreateDictionary(self):
         # default dictionary for string => string mapping
@@ -75,7 +76,12 @@ class TestDataStructureDict(unittest.TestCase):
         print(dictionary)
 
     def test_NestedDefaultDict(self):
-        myDict = defaultdict(lambda: defaultdict(dict))
+        # nestedDict = defaultdict(lambda: defaultdict(dict))
+
+        nestedDict = defaultdict(defaultdict)
+        nestedDict[0][1] = 2
+        print(nestedDict[0][1])
+
 
 if __name__ == '__main__':
     unittest.main()
