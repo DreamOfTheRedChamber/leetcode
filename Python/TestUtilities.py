@@ -20,12 +20,18 @@ class TestUtilities(unittest.TestCase):
         print("The rightmost index to insert, so list remains sorted is  : ", end="")
         print(bisect.bisect_right(li, 4))
 
+    @unittest.skip
     def test_collectionsCounter(self):
         li = [1, 3, 4, 4, 4, 6, 7]
 
         # returns a default dictionary
         result = collections.Counter(li)
         self.assertEqual(0, result[0])
+
+    def test_mod(self):
+        i = -2
+        a = i % 4
+        print(a)
 
 if __name__ == '__main__':
     unittest.main()
