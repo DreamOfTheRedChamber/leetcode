@@ -1712,23 +1712,19 @@ int areaSum = prefixSum2D[x_e][y_e] - prefixSum2D[x_s-1][y_e] - prefixSum2D[x_e]
 ### Begin and end type 
 * Two sum type
   - example problems: two sum (sorted), three sum, four sum, three sum closest, three sum smaller
-```java
-if ( A[i] and A[j] satisfy some condition )
-{
-  j--; // do not need to consider pairs composed of [i+1, j-1] and j
-  // do something
-}
-else if ( A[i] and A[j] do not satisfy some condition )
-{
-  i++; // do not need to consider pairs composed of [i+1, j-1] and i
-  // do something
-}
-else
-{
-  // do something
-  i++ or j--
-}
+```python
+while i < j:
+  if  A[i] and A[j] satisfy some condition:
+    j--; 
+    ...
+  elif A[i] and A[j] do not satisfy some condition:
+    i++; 
+    ...
+  else
+    i++ 
+    j--
 ```
+
 * Partition (quick select) type - calculate kth largest element O(n) = n + 1/2 n + 1/4 n + 1/8 n + ..... < 2n. E.g. Sort colors, wiggle sort II, Valid palindrome, partition array by odd and even
 ```java
 // int[] input, int left, int right
