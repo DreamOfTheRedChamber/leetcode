@@ -114,6 +114,7 @@
     - [Topological sort](#topological-sort)
     - [Union find](#union-find)
   - [Greedy](#greedy)
+  - [KMP algorithm](#kmp-algorithm)
   - [Dynamic-programming](#dynamic-programming)
     - [Use cases](#use-cases)
     - [Problems to consider](#problems-to-consider)
@@ -2484,6 +2485,39 @@ void union( int x, int y )
   - Naive greedy algo are usually "short sighted" algo, which will not lead to global maximal. Working greedy algo are usually hard to think of. 
 * But there are exceptions
   - Increasing triplet sequence, paint house II
+
+## KMP algorithm
+
+```python
+
+def Build(p: str) -> List[int]:
+  m = len(p)
+  nxt = [0, 0]
+  j = 0
+  for i in range(1, m):
+    while j > 0 and p[i] != p[j]:
+      j = nxt[j]
+      if p[i] == p[j]:
+        j += 1
+      nxt.append(j)
+  return nxt
+
+def Match(s: str, p: str) -> List[int]:
+  n, m = len(s), len(p)
+  nxt = Build(p)
+  answer = []
+  j = 0
+  for i in range(n):
+    while j > 0 and s[i] != p[j]:
+      j = nxt[j]
+    if s[i] == p[j]:
+      j += 1
+    if j == m:
+      answer.append(i - m + 1)
+      j = nxt[j]
+  return answer
+
+```
 
 ## Dynamic-programming 
 ### Use cases
