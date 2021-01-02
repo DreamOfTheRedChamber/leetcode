@@ -76,6 +76,8 @@
     - [Common tasks](#common-tasks-1)
   - [Non-DP Memorization](#non-dp-memorization)
     - [Array](#array-1)
+    - [Binary indexed tree / Fenwick tree](#binary-indexed-tree--fenwick-tree)
+    - [Segment tree](#segment-tree-1)
     - [Stack](#stack-1)
     - [HashMap](#hashmap-1)
   - [Two pointers](#two-pointers)
@@ -836,6 +838,7 @@ serialize 3's children
 ```
 
 ### Path on tree 
+
 
 ### Segment tree 
 * Segment Tree: Range sum query and update in O(logn) time
@@ -1699,6 +1702,90 @@ for ( int i = 1; i <= array2D.length; i++ )
 }
 // to calculate range sum from (x_s, y_s) to (x_e, y_e)
 int areaSum = prefixSum2D[x_e][y_e] - prefixSum2D[x_s-1][y_e] - prefixSum2D[x_e][y_s-1] + prefixSum2D[x_s-1][y_s-1]
+```
+
+### Binary indexed tree / Fenwick tree
+
+```python
+# source: https://www.hrwhisper.me/binary-indexed-tree-fenwick-tree/
+class BinaryIndexTree(object):
+    def __init__(self, nums):
+        n = len(nums)
+        self.nums = [0 for _ in xrange(n+1)]
+        self.N = [0 for _ in xrange(n+1)]
+        for i, v in enumerate(nums):
+            self.set(i+1, v)
+
+    def _lowbit(self, a):
+        return a & -a
+
+    def set(self, i, val):
+        diff = val - self.nums[i]
+        self.nums[i] = val
+        while i < len(self.N):
+            self.N[i] += diff
+            i += self._lowbit(i)
+
+    def get(self, i):
+        ret = 0
+        while i > 0:
+            ret += self.N[i]
+            i -= self._lowbit(i)
+
+        return ret
+
+```
+
+### Segment tree
+
+```python
+class TreeNode:
+    def __init__(self, start, end):
+        self.start = start
+        self.end = end
+        self.left = None
+        self.right = None
+        self.sum = 0
+        
+class SegmentTree:
+    def __init__(self, arr):
+        self.root = self.buildTree(arr, 0, len(arr)-1)
+        
+    def buildTree(self, arr, l, r):
+        if l > r: return None
+        root = TreeNode(l, r)
+        if l == r: root.sum = arr[l]; return root
+        m = l + (r - l) // 2
+        root.left = self.buildTree(arr, l, m)
+        root.right = self.buildTree(arr, m+1, r)
+        root.sum = root.left.sum + root.right.sum
+        return root
+        
+    def update(self, index, val, node=None):
+        if node is None: 
+          node = self.root
+        if node.start == node.end: 
+          node.sum = val; 
+          return 
+        m = node.start + (node.end - node.start) // 2
+        if index <= m: 
+          self.update(index, val, node.left)
+        else: 
+          self.update(index, val, node.right)
+        node.sum = node.left.sum + node.right.sum
+        
+    def sumRange(self, st, end, node=None): 
+        if node is None: 
+          node = self.root
+        if node.start == st and node.end == end: 
+          return node.sum
+        m = node.start + (node.end - node.start) // 2
+        if end <= m: 
+          return self.sumRange(st, end, node.left)
+        if st >= m+1: 
+          return self.sumRange(st, end, node.right)
+        return self.sumRange(st, m, node.left) + self.sumRange(m+1, end, node.right)
+
 ```
 
 ### Stack 
