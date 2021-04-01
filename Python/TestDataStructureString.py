@@ -1,4 +1,5 @@
 # Definition for a binary tree node.
+import re
 import unittest
 
 # Read about enumerate in python
@@ -22,6 +23,7 @@ class TestDataStructureString(unittest.TestCase):
         result = " ".join(str1)
         print(result)
 
+    @unittest.skip
     def test_SplitString(self):
         s = " this    is   my string"
         result1 = s.split()
@@ -29,6 +31,11 @@ class TestDataStructureString(unittest.TestCase):
 
         result3 = "hello".split(' ')
         print(result3)
+
+    def test_SplitStringWithMultipleSeparators(self):
+        s = "he is; such , a beautiful; boy"
+        splitted = re.split('[;,]', s)
+        print(splitted)
 
     @unittest.skip
     def test_Convert(self):

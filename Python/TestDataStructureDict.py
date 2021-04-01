@@ -75,6 +75,7 @@ class TestDataStructureDict(unittest.TestCase):
         del dictionary['fruit']
         print(dictionary)
 
+    @unittest.skip
     def test_NestedDefaultDict(self):
         # nestedDict = defaultdict(lambda: defaultdict(dict))
 
@@ -82,6 +83,10 @@ class TestDataStructureDict(unittest.TestCase):
         nestedDict[0][1] = 2
         print(nestedDict[0][1])
 
+    def test_NestedDefaultDictGetValue(self):
+        startToEndAndTotalTime = defaultdict(lambda: defaultdict(lambda: (0, 0)))
+        totalTime, num = startToEndAndTotalTime["spa"][0]
+        print(totalTime)
 
 if __name__ == '__main__':
     unittest.main()
