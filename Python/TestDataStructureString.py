@@ -49,5 +49,10 @@ class TestDataStructureString(unittest.TestCase):
         print(tempStr)
         print(temp2Int)
 
+    def test_regularExpression(self):
+        compressedStr = "L1e2t1C1o1d1e1"
+        split = re.findall('\D\d+', compressedStr)
+        print(split)
+
 if __name__ == '__main__':
     unittest.main()
