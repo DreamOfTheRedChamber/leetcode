@@ -1,444 +1,163 @@
 # A Better Me
 <!-- MarkdownTOC -->
 
-- [Typical whiteboard coding workflow](#typical-whiteboard-coding-workflow)
-  - [Clarify question](#clarify-question)
-  - [Give a small but general enough example for discussing algo/DS](#give-a-small-but-general-enough-example-for-discussing-algods)
-  - [Come up with a brute force algorithm](#come-up-with-a-brute-force-algorithm)
-  - [Optimize the brute force solution](#optimize-the-brute-force-solution)
-  - [Write test cases](#write-test-cases)
-  - [Write code](#write-code)
-  - [Walk through test cases](#walk-through-test-cases)
-  - [Solve follow up questions](#solve-follow-up-questions)
-- [Interview mindset](#interview-mindset)
-  - [Understanding what interviewers really wants](#understanding-what-interviewers-really-wants)
-  - [Checklist](#checklist)
-    - [Things to be careful.](#things-to-be-careful)
-    - [Phone interviews](#phone-interviews)
-    - [Onsite interviews](#onsite-interviews)
-  - [Interview mistakes made in past](#interview-mistakes-made-in-past)
-  - [Whiteboard coding pros and cons](#whiteboard-coding-pros-and-cons)
-- [Practice mindset](#practice-mindset)
-  - [Goal](#goal)
-  - [Attitudes](#attitudes)
-  - [Tools](#tools)
-  - [Strategies](#strategies)
-  - [Leetcode pros and cons](#leetcode-pros-and-cons)
-  - [Interview Java pros and cons](#interview-java-pros-and-cons)
-- [Java language](#java-language)
-  - [Java vs C++](#java-vs-c)
-  - [Access modifiers](#access-modifiers)
-  - [Stack vs heap vs static area](#stack-vs-heap-vs-static-area)
-  - [OutOfMemoryError](#outofmemoryerror)
-  - [Equals and hashcode](#equals-and-hashcode)
-  - [Overload vs override](#overload-vs-override)
-  - [Abstract class vs interface](#abstract-class-vs-interface)
-  - [Static keyword](#static-keyword)
-  - [Main method](#main-method)
-  - [Clone](#clone)
-  - [Assertion](#assertion)
-  - [Error vs exception](#error-vs-exception)
-  - [Checked vs unchecked exception](#checked-vs-unchecked-exception)
-  - [Immutable class](#immutable-class)
-  - [Final vs finally vs finalize](#final-vs-finally-vs-finalize)
-  - [Java garbage collection](#java-garbage-collection)
-    - [Components](#components)
-    - [Memory allocation](#memory-allocation)
-    - [What does live mean](#what-does-live-mean)
-    - [Types of Java garbage collectors](#types-of-java-garbage-collectors)
-  - [Java reference classes](#java-reference-classes)
-    - [Types](#types)
-    - [Reference rules](#reference-rules)
-    - [Usage of reference types](#usage-of-reference-types)
-    - [Use Weak reference](#use-weak-reference)
-    - [Use WeakHashMap](#use-weakhashmap)
-    - [Use ReferenceQueue](#use-referencequeue)
-    - [Use PhantomReference](#use-phantomreference)
-  - [Design pattern](#design-pattern)
-- [Data structures](#data-structures)
-  - [Data structure relationships](#data-structure-relationships)
-  - [Type size](#type-size)
-  - [Type conversions](#type-conversions)
-    - [Automated cast](#automated-cast)
-    - [Between string and primitive types](#between-string-and-primitive-types)
-    - [Between array and collections](#between-array-and-collections)
-    - [Between collections](#between-collections)
-  - [Array](#array)
-    - [Circular array](#circular-array)
-    - [Array sum](#array-sum)
-    - [Forward backward traversal](#forward-backward-traversal)
-  - [String](#string)
-    - [Why String is immutable or final](#why-string-is-immutable-or-final)
-    - [String vs StringBuilder vs StringBuffer](#string-vs-stringbuilder-vs-stringbuffer)
-    - [Word reverse](#word-reverse)
-    - [Palindrome](#palindrome)
-  - [Collections](#collections)
-    - [Iterator](#iterator)
-    - [Immutability](#immutability)
-  - [List](#list)
-    - [ArrayList vs LinkedList](#arraylist-vs-linkedlist)
-    - [LinkedListNode](#linkedlistnode)
-    - [Common tasks](#common-tasks)
-  - [Stack](#stack)
-    - [Calculator](#calculator)
-    - [Parentheses](#parentheses)
-  - [Queue](#queue)
-    - [Interfaces](#interfaces)
-  - [PriorityQueue](#priorityqueue)
-    - [Internal structure](#internal-structure)
-    - [Heapify](#heapify)
-    - [Sift up/down](#sift-updown)
-    - [Improve built-in remove O\(n\)](#improve-built-in-remove-on)
-    - [Lambda expression as comparator](#lambda-expression-as-comparator)
-    - [Top K problems](#top-k-problems)
-  - [Tree](#tree)
-    - [Build](#build)
-    - [Traversal](#traversal)
-    - [View](#view)
-    - [Serialize/Deserialize](#serializedeserialize)
-    - [Path on tree](#path-on-tree)
-    - [Segment tree](#segment-tree)
-    - [Binary search tree](#binary-search-tree)
-  - [HashMap](#hashmap)
-    - [Use case](#use-case)
-    - [Best practices](#best-practices)
-    - [Collision resolution](#collision-resolution)
-    - [Intersection](#intersection)
-    - [Histogram and hashmap list](#histogram-and-hashmap-list)
-    - [Anagram](#anagram)
-    - [Sparse Vector/matrix](#sparse-vectormatrix)
-    - [LRU Cache](#lru-cache)
-  - [TreeMap](#treemap)
-  - [Graph](#graph)
-    - [Edge list vs Adjacent list vs Adjacent matrix](#edge-list-vs-adjacent-list-vs-adjacent-matrix)
-    - [Build graph](#build-graph)
-    - [Detect cycles inside undirected graph](#detect-cycles-inside-undirected-graph)
-    - [Detect cycles inside directed graph](#detect-cycles-inside-directed-graph)
-  - [Trie](#trie)
-    - [Use case](#use-case-1)
-    - [Trie definition and common tasks](#trie-definition-and-common-tasks)
-- [Algorithms](#algorithms)
-  - [Math](#math)
-    - [Random](#random)
-    - [Mod](#mod)
-    - [Power](#power)
-    - [Sqrt](#sqrt)
-    - [Divide](#divide)
-    - [Multiply](#multiply)
-    - [Prime](#prime)
-  - [Bit manipulation](#bit-manipulation)
-    - [Arithmetic vs logic right shift](#arithmetic-vs-logic-right-shift)
-    - [Common tasks](#common-tasks-1)
-  - [Non-DP Memorization](#non-dp-memorization)
-    - [Array](#array-1)
-    - [Stack](#stack-1)
-    - [HashMap](#hashmap-1)
-  - [Two pointers](#two-pointers)
-    - [Begin and end type](#begin-and-end-type)
-    - [Slow and fast type](#slow-and-fast-type)
-    - [Window type](#window-type)
-    - [Two arrays type](#two-arrays-type)
-  - [Sort](#sort)
-    - [Common sorting algorithms](#common-sorting-algorithms)
-    - [Built-in sort interfaces](#built-in-sort-interfaces)
-    - [Types](#types-1)
-    - [Top K](#top-k)
-    - [Stream API](#stream-api)
-  - [Binary search](#binary-search)
-    - [Best practices](#best-practices-1)
-    - [How to handle duplicates](#how-to-handle-duplicates)
-    - [Types](#types-2)
-  - [Recursive functions](#recursive-functions)
-    - [Recursive vs iterative solutions](#recursive-vs-iterative-solutions)
-    - [Recursion time complexity cheat sheet](#recursion-time-complexity-cheat-sheet)
-    - [Steps in using recursion](#steps-in-using-recursion)
-    - [How to return multiple results from recursive functions](#how-to-return-multiple-results-from-recursive-functions)
-    - [Avoid duplicated recursion](#avoid-duplicated-recursion)
-    - [Types](#types-3)
-  - [Backtrack](#backtrack)
-    - [Best practices](#best-practices-2)
-    - [Types](#types-4)
-  - [Graph](#graph-1)
-    - [Grid-based graph best practices](#grid-based-graph-best-practices)
-    - [Grid-based breath first search](#grid-based-breath-first-search)
-    - [Grid-based depth first search](#grid-based-depth-first-search)
-    - [Count number of components](#count-number-of-components)
-    - [Word-based breath first search](#word-based-breath-first-search)
-    - [Topological sort](#topological-sort)
-    - [Union find](#union-find)
-  - [Greedy](#greedy)
-  - [Dynamic-programming](#dynamic-programming)
-    - [Use cases](#use-cases)
-    - [Problems to consider](#problems-to-consider)
-    - [Implementation methods:](#implementation-methods)
-    - [Memorization array tricks](#memorization-array-tricks)
-    - [Type](#type)
-- [Online IDE templates](#online-ide-templates)
-  - [Coderpad](#coderpad)
-- [References](#references)
+- [A Better Me](#a-better-me)
+      - [Interview Java pros and cons](#interview-java-pros-and-cons)
+    - [Java language](#java-language)
+      - [Java vs C++](#java-vs-c)
+      - [Access modifiers](#access-modifiers)
+      - [Stack vs heap vs static area](#stack-vs-heap-vs-static-area)
+      - [OutOfMemoryError](#outofmemoryerror)
+      - [Equals and hashcode](#equals-and-hashcode)
+      - [Overload vs override](#overload-vs-override)
+      - [Abstract class vs interface](#abstract-class-vs-interface)
+      - [Static keyword](#static-keyword)
+      - [Main method](#main-method)
+      - [Clone](#clone)
+      - [Assertion](#assertion)
+      - [Error vs exception](#error-vs-exception)
+      - [Checked vs unchecked exception](#checked-vs-unchecked-exception)
+      - [Immutable class](#immutable-class)
+      - [Final vs finally vs finalize](#final-vs-finally-vs-finalize)
+      - [Java garbage collection](#java-garbage-collection)
+        - [Components](#components)
+        - [Memory allocation](#memory-allocation)
+        - [What does live mean](#what-does-live-mean)
+        - [Types of Java garbage collectors](#types-of-java-garbage-collectors)
+      - [Java reference classes](#java-reference-classes)
+        - [Types](#types)
+        - [Reference rules](#reference-rules)
+        - [Usage of reference types](#usage-of-reference-types)
+        - [Use Weak reference](#use-weak-reference)
+        - [Use WeakHashMap](#use-weakhashmap)
+        - [Use ReferenceQueue](#use-referencequeue)
+        - [Use PhantomReference](#use-phantomreference)
+      - [Design pattern](#design-pattern)
+    - [Data structures](#data-structures)
+      - [Data structure relationships](#data-structure-relationships)
+      - [Type size](#type-size)
+      - [Type conversions](#type-conversions)
+        - [Automated cast](#automated-cast)
+        - [Between string and primitive types](#between-string-and-primitive-types)
+        - [Between array and collections](#between-array-and-collections)
+        - [Between collections](#between-collections)
+      - [Array](#array)
+        - [Circular array](#circular-array)
+        - [Array sum<a id="ds-array-array-sum">](#array-suma-idds-array-array-sum)
+        - [Forward backward traversal](#forward-backward-traversal)
+      - [String](#string)
+        - [Why String is immutable or final](#why-string-is-immutable-or-final)
+        - [String vs StringBuilder vs StringBuffer](#string-vs-stringbuilder-vs-stringbuffer)
+        - [Word reverse](#word-reverse)
+        - [Palindrome](#palindrome)
+      - [Collections](#collections)
+        - [Iterator](#iterator)
+        - [Immutability](#immutability)
+      - [List](#list)
+        - [ArrayList vs LinkedList](#arraylist-vs-linkedlist)
+        - [LinkedListNode](#linkedlistnode)
+        - [Common tasks](#common-tasks)
+      - [Stack](#stack)
+        - [Calculator](#calculator)
+        - [Parentheses](#parentheses)
+      - [Queue](#queue)
+        - [Interfaces](#interfaces)
+      - [PriorityQueue](#priorityqueue)
+        - [Internal structure](#internal-structure)
+        - [Heapify](#heapify)
+        - [Sift up/down](#sift-updown)
+        - [Improve built-in remove O(n)](#improve-built-in-remove-on)
+        - [Lambda expression as comparator](#lambda-expression-as-comparator)
+        - [Top K problems](#top-k-problems)
+      - [Tree](#tree)
+        - [Build](#build)
+        - [Traversal](#traversal)
+        - [View](#view)
+        - [Serialize/Deserialize](#serializedeserialize)
+        - [Path on tree](#path-on-tree)
+        - [Segment tree](#segment-tree)
+        - [Binary search tree](#binary-search-tree)
+      - [HashMap](#hashmap)
+        - [Use case](#use-case)
+        - [Best practices](#best-practices)
+        - [Collision resolution](#collision-resolution)
+        - [Intersection](#intersection)
+        - [Histogram and hashmap list](#histogram-and-hashmap-list)
+        - [Anagram](#anagram)
+        - [Sparse Vector/matrix](#sparse-vectormatrix)
+        - [LRU Cache](#lru-cache)
+      - [TreeMap](#treemap)
+      - [Graph](#graph)
+        - [Edge list vs Adjacent list vs Adjacent matrix](#edge-list-vs-adjacent-list-vs-adjacent-matrix)
+        - [Build graph](#build-graph)
+        - [Detect cycles inside undirected graph](#detect-cycles-inside-undirected-graph)
+        - [Detect cycles inside directed graph](#detect-cycles-inside-directed-graph)
+      - [Trie](#trie)
+        - [Use case](#use-case-1)
+        - [Trie definition and common tasks](#trie-definition-and-common-tasks)
+    - [Algorithms](#algorithms)
+      - [Math](#math)
+        - [Random](#random)
+        - [Mod](#mod)
+        - [Power](#power)
+        - [Sqrt](#sqrt)
+        - [Divide](#divide)
+        - [Multiply](#multiply)
+        - [Prime](#prime)
+      - [Bit manipulation](#bit-manipulation)
+        - [Arithmetic vs logic right shift](#arithmetic-vs-logic-right-shift)
+        - [Common tasks](#common-tasks-1)
+      - [Non-DP Memorization](#non-dp-memorization)
+        - [Array](#array-1)
+        - [Stack](#stack-1)
+        - [HashMap](#hashmap-1)
+      - [Two pointers](#two-pointers)
+        - [Begin and end type](#begin-and-end-type)
+        - [Slow and fast type](#slow-and-fast-type)
+        - [Window type](#window-type)
+        - [Two arrays type](#two-arrays-type)
+      - [Sort](#sort)
+        - [Common sorting algorithms](#common-sorting-algorithms)
+        - [Built-in sort interfaces](#built-in-sort-interfaces)
+        - [Types](#types-1)
+        - [Top K](#top-k)
+        - [Stream API](#stream-api)
+      - [Binary search](#binary-search)
+        - [Best practices](#best-practices-1)
+        - [How to handle duplicates](#how-to-handle-duplicates)
+        - [Types](#types-2)
+      - [Recursive functions](#recursive-functions)
+        - [Recursive vs iterative solutions](#recursive-vs-iterative-solutions)
+        - [Recursion time complexity cheat sheet](#recursion-time-complexity-cheat-sheet)
+        - [Steps in using recursion](#steps-in-using-recursion)
+        - [How to return multiple results from recursive functions](#how-to-return-multiple-results-from-recursive-functions)
+        - [Avoid duplicated recursion](#avoid-duplicated-recursion)
+        - [Types](#types-3)
+      - [Backtrack](#backtrack)
+        - [Best practices](#best-practices-2)
+        - [Types](#types-4)
+      - [Graph](#graph-1)
+        - [Grid-based graph best practices](#grid-based-graph-best-practices)
+        - [Grid-based breath first search](#grid-based-breath-first-search)
+        - [Grid-based depth first search](#grid-based-depth-first-search)
+        - [Count number of components](#count-number-of-components)
+        - [Word-based breath first search](#word-based-breath-first-search)
+        - [Topological sort](#topological-sort)
+        - [Union find](#union-find)
+      - [Greedy](#greedy)
+      - [Dynamic-programming](#dynamic-programming)
+        - [Use cases](#use-cases)
+        - [Problems to consider](#problems-to-consider)
+        - [Implementation methods:](#implementation-methods)
+        - [Memorization array tricks](#memorization-array-tricks)
+        - [Type](#type)
+    - [Online IDE templates](#online-ide-templates)
+      - [Coderpad](#coderpad)
+    - [References](#references)
 
 <!-- /MarkdownTOC -->
 
   
-### Typical whiteboard coding workflow 
-
-#### Clarify question 
-1. Define public APIs to be implemented:
-  * Things to define - Input type
-  * Things to define - Number of input arguments
-  * Things to define - Output type
-    - boolean: Whether solutions exist or not
-    - int: the number of solutions
-    - List&lt;?> : solutions themselves
-    - List&lt;?>: solutions without duplicates
-    - List&lt;?>: solutions with specific order
-     
-2. Clarify ambiguous problem statements / Gather all requirements
-   * Solution existence: "***What if no solution exists? How should I handle that?***"
-   * Solution uniqueness: "***Whether there are multiple solutions?***"
-   * Input emptiness: "***How should I handle null pointers and input of size zero?***"
-   * Input validity: "***Could I assume input is always invalid?***" 
-   * Input types:
-      * Typical scenarios
-        * In most cases, one single public API
-        * Multiple public APIs inside a class
-        * Two associated APIs, like serialize and deserialize
-      * Input - Field types
-         * Integer or double
-         * Positive or negative, non-positive or non-negative
-      * Input - Array
-         * Sorted or unsorted, sorted increasingly or decreasingly
-         * Given two arrays, which one's size is bigger
-         * Whether could modify entries inside array
-      * Input - String
-         * Whether the string contains space
-         * How are tokens separated, using comma, slash or something else
-         * Alphabetic characters(lower/upper case), ascii characters, or unicode characters  
-      * Input - LinkedList
-         * Doubly or singly linkedlist
-      * Input - Tree
-         * Binary tree
-         * Binary search tree
-         * Complete tree
-      * Input - Graph
-         * Directed or undirected
-         * Weighted or not
-         * Connected or not
-   * Problem types:
-      * Sort
-        * Stable or not
-        * External or internal
-        * Input almost sorted or not
-        * Input range
-        * Increasing/Decreasing order
-      * Search
-        * Whether duplicate entries exist
-   * Edge cases: "***If input is like this, then what should I output?***"
-
-#### Give a small but general enough example for discussing algo/DS 
-* Usually a size of 4~5 is enough.
-
-#### Come up with a brute force algorithm 
-1. Synchronize with interviewer "***Let's come up with a brute force solution first.***"
-2. Unstuck strategy:
-   1. The most straightforward way to list all possible solutions
-   2. Whether I could decompose the problem into subproblems and solve them individually
-      * Divide and conquer "***The problem could be decomposed into X subproblems.***"
-   3. Brainstorm DS/Algo which might be used / Give it a try
-      * Give it a try: "***Let's try a graph-based solution***"
-3. Talk about the data structures to be used.
-4. Talk about the algorithm to be used.
-5. Calc time/space complexity: "***The time complexity of the algorithm is O(XXX) and space complexity is O(XXX)***"
-
-#### Optimize the brute force solution 
-1. Synchronize with interviewer "***The time/space complexity of the brute force solution is too high and will be impractical.***"
-2. Consider the typical optimizing patterns below:
-   1. Where the bottleneck is: "***The bottleneck of the algorithm lies in this section of code***"
-   2. What the time complexity upper bound is: "***Theoretically, the best time complexity I could achieve is O(n) because I need to look through all items.***"
-   3. Whether space complexity is acceptable or not: "***algo with linear space complexity is usually acceptable.***"
-   4. Repetitive computation: "***We solve a lot of repetitive problems. If we could cache the solutions, it will be much more efficient.***"
-   5. Additional rounds of iterating input: "***We iterate through input twice. If we could reduce it to once, it will boost performance twice.***"
-3. Synchronize with interviewer "***The reason we could do better is XXX***."
-4. Ask for help when being stuck
-   1. Show interviewer all the approaches you tried and difficulties. ""
-   2. Be keen to what interviewer is saying: Every word the interviewer is saying has its meanings. ""
-5. Synchronize with interviewer "***Do you have any concerns for the proposed algorithm? Should we write code for this***."
-
-#### Write test cases 
-* In general, the following types of test cases should be considered 
-   * The normal case: e.g. array length of even or odd in sorting algo
-   * The extremes: e.g. empty array, one element array, extremely large one array
-   * Nulls and "illegal" input: e.g. input is negative when positive is expected 
-   * Strange input: an array already sorted
-* Typical test cases for different input types
-   * Integer
-      * Integer.MAX_VALUE, Integer.MIN_VALUE
-      * 0
-      * Positive/negative numbers
-   * String
-      * NULL
-      * Single character
-      * Two characters
-      * Contains duplicated characters
-      * Contains space, tab or other separators
-   * Array/List &lt;?> list
-      * NULL
-      * One element List/Array
-      * List/Array entry is NULL
-      * List/Array of even length
-      * List/Array of odd length
-
-#### Write code 
-  1. Synchronize with interviewer "***There are XXX steps in this algorithm. The first is XXX. The second....***"
-  2. Check input validity (already discussed thoroughly before)
-  3. Use // or empty line to separate different steps and a place to synchronize with interviewer.
-  4. Just get the general algorithm down first and avoid getting caught up in trivialities
-     * When forget some language-specific trivial
-       * "***I do not remember exactly how the interface looks like, but I'd guess it has an API like this.***"
-     * When need implement a large code block, or nested for/while loop, or repeated needed util methods, consider using a subroutine
-       * "***I am going to use a subroutine with the following interface. I will implement later***".
-     * When need double check trivials (like +1 or plus two, loop termination conditions ): 
-       * "***Not sure whether my loop should have "<" or "<=". Write a checkmark to remind yourself to figure out the details at the end.***""
-
-#### Walk through test cases 
-  1. Synchronize with interviewer: "***Then I would usually check my code against tests***" 
-  2. Check the code by myself
-     * Check steps:
-       1. Look for typos
-       1. Look for unused variables, counters, unnecessary edge case checkings, boundaries index overflow/underflow 
-       2. Look for unhandled problem assumptions
-       3. Use small test cases to test different logical branches of the code
-     * When there is a bug: do not rush to change. Identify the root cause first.
-       * "***Give me a moment, I feel there is a bug here. Let's have a double check.***"
-       * "***The root cause of the problem is XXX.***"
-  3. Explain shortcuts I have taken: Talk about sections which could be refactored/improved, but was done in a certain way in an interview setting
-     * Bad smells for refactoring and optimization 
-       * Code/function length > 100
-       * Too many if statement checking for boundary cases
-       * Code do not generalize well. Only work for current problem. e.g. merge 2 sorted list -> merge k sorted List
-       * Nested while loops ( really error prone )
-       * Global variables
-  4. Synchronize with interviewer: "***I think I am done with the problem***".
-
-
-#### Solve follow up questions 
-* Typical follow-up questions
-    * No duplicates -> duplicates exist
-    * Whether result exist -> return all results
-    * One dimension -> two dimension
-    * How to avoid global variables
-    * How to improve performance
-
-### Interview mindset 
-#### Understanding what interviewers really wants 
-* Evaluation criteria
-  - Can s/he explain technical solutions well?
-  - Does s/he understand basic concepts well?
-  - Does s/he has a good grasp of past project experiences?
-  - How is his/her attitude?
-  - Is s/he a good coder? (proficiency in leetcode and whether error-prone)
-* What are interviewers really asking
-
-| What they ask | Wrong response    | What they really want  |
-| --------------------- |:---------:| -----:|  
-| Tell me what you did for this project  | <ul><li>Describe the process in chronological order</li><li>Recites what's on their resume</li></ul>  | <ul><li>What are you able to do after completing this project4</li><li>How did you overcome obstacles</li><li>Details that are not on your resume</li></ul> |
-| Tell me what you did for this job  | <ul><li>Describe major projects</li><li>Describe daily tasks</li></ul>  |  <ul><li>Were you able to learn quickly</li><li>Did you add enough value at your previous job to prove that you can add value for me</li></ul> |
-| Compare data structure A and B  | <ul><li>Explain what A and B are respectively</li><li>List 1 difference between them</li></ul>     |  <ul><li>Does your explanation show that you have actually used them in a real project</li><li>Explain real situations where you would use A vs B.</li></ul> |
-| Write code to solve problem | <ul><li>Jumps into writing code</li><li>Awkward silence</li></ul>     | <ul><li>Would I want to work with them everyday</li><li>Have they actually written production grade code</li><li>What do they do when stuck</li></ul> |
-| Maybe you could try this ... | <ul><li>Take advice without serious thinking</li></ul>  | <ul><li>Do they think independently</li><li>How fast can they absord new information</li><li>Do they take advice/directions well</li><li>Do they learn quickly and run with it</li></ul> |
-
-#### Checklist
-##### Things to be careful.
-* Do not just give "yes" or "no" answers. Limit initial explanation to short summaries and allow the interviewer to ask follow up questions.
-* Your tone of voice and word choice. Interviewers use voice to judge how believable you are. Posture really have impact on your mind.
-* Eye contact and shake hands. Say thanks to interviewers at last. 
-
-##### Phone interviews
-* Test the online coding environment.
-* Make sure your cellphone has enough battery.
-* Have a copy of resume in front of you.
-* Take notes and write a follow up thank you email with details from the discussion.
-
-##### Onsite interviews
-* Show up 15 minutes early and have the interviewer's phone number for last minute changes.
-* Things to bring with you
-  - Identity card.
-  - Bring extra copies of your resume with you - for the interviewer and your own reference.
-  - Notes on the detailed schedule. Put interviewers' names and interview topic on a sticker and bring it with me. 
-  - Tea/Coffee.
-  - Whiteboard pen and erasers.
-  - A piece of pen and paper. Take notes when an interviewer speaks to help yourself focus and ask more specific questions. 
-  - Computers for last minute warm-up. 
-
-#### Interview mistakes made in past
-* Too nervous: When I become too nervous, I just could not speak. This is the number one red flag during interviews. No one wants to work with people who cannot speak.
-* Ignore first impression importance: Don't smile/handshake/look into interviewers' eyes.
-* Wrong expectations about interviewers: You need to acknowledge that there are so many different types of interviewers. Some like to follow rules but others don't. For example, expecting all algorithm interview questions are under leetcode's company tag or from past interview experiences in 1acre3points is not practical. Some interviewers are bored with Leetcode and really want to ask unique questions to truely evaluate interviewees.
-* Anxious because too many things need to be prepared: Always prioritize and then act. You just cannot practice every possible question before interviews because there are too many. What you can do is to practice typical problems under each category and practice the most popular interview questions. Make sure that you practice each problem as if you are interviewing.
-* Preparation time allocation: 70% should be on coding. 15% on system design. 15% on behavior questions.
-* Do not go straight to coding during interviews, give yourself a minute to think before speak. Thought well before speak and coding.
-* I am used to good words. When interviewer doubts/challenges me, I become kind of sad. Always stay in calm and smiles. 
-* Give myself a little break between interviews. Either sit down or drink some beverages. 
-* When interviewers keep interrupting me, do not be nervous. They are trying to help me!!! Always stay in calm and take their hints. No matter whether I could finish my current solution. Communication is the most important thing. 
-* Preparing interview: What really matters is how many times you practice the leetcode problem, rather than how long you spend during a single practice round.
-
-#### Whiteboard coding pros and cons 
-* Pros
-  * Every software engineer knows algo and data structures. It provides a common domain for interviewers and interviewees to discuss.
-  * Smart people will always be smart wherever they go. There are just too many candidates there and there needs a way to differentiate it. At least, whiteboard coding could reflect candidates' understanding of algo/data structures and communication skills.
-  * Whiteboard coding advocates a good workflow for developing code.
-* Cons
-  * The most important capability for a software engineer is abstraction and skipping complexity. algo questions are usually available in many online forums. Even if candidates could finish the problem in interview, it does not necessarily demonstrate the core perspective here. It might generate high false positives and false negatives. 
-  * Finish algo in 20 min in a bug-free and clean way requires lots of practice. It does not only require interviewee to understand algo and data structures, but also really proficient in these, sometimes even remember pretty tricky test cases. 
-  * The optimization process in algorithm questions is kind of over-optimization. In practice, only improve performance when necessary.
-  * Stand and write code on whiteboard is really exhausting if lasting for 4-5 hours.
-
-### Practice mindset 
-#### Goal 
-  * Proficiency: Given an original Leetcode problem you should be able to finish it no more than 10 minutes no matter what its difficulty level is.
-  * Understanding: You should be able to start from brute force solution, discuss tradeoffs along the way and optimize to a solution the interviewer is satisfied with.
-  * Cleaness: No interview code should be longer than 100 lines. In most cases it is within 50 lines. Keep optimizing your code until it is short enough. 
-
-#### Attitudes 
-  * This might be the last time in my life that I spent so much time and efforts in algorithm questions. Next time when I hunt for jobs, either HRs will invite me or I will have far less time to prepare.
-  * An interview is a matter of preparation. To enable yourself explain solutions well and code in a bug free way, you need to practice a lot. 
-  * The way an engineer approach a algorithm problem can reflect their efficiency at work. 
-  * Hiring system is broken. But currently there is no better way to do it.
-
-#### Tools
-  * Task planning: Use tags ( TO_START, TO_HURRY, TO_TEST ) to manage algorithm question status and prioritize important tasks
-  * Feedbacks: Use git commit number per day as feedback for progress
-  * Summarizing lessons: Use git commit message as a place to learn from mistakes and summarize lessons
-
-#### Strategies
-  * Chunk it up
-    * Focus on recently popular, medium to hard questions.
-    * For each category of problems, summarize common tricks/techniques used.
-  * Deliberate practicing
-    * Try new ways to solve problems. 
-    * Try to generalize my mistake or lessons.
-    * How does current problem relates to other problems.
-  * Feedbacks
-    * Interview a lot. 
-    * Reflection on what I do good and bad
-
-#### Leetcode pros and cons 
-* Pros
-  * Latest interview questions
-  * Large pool of different question types
-* Cons
-  * Testing
-    * Input is always valid. 
-    * Time exceed limit is too constraint. Sometimes we want to start from inefficient algo, verify its correctness and then optimize performance.
-  * Debug
-    * When problem occurs, too few stack trace
-    * No online debuggers
-  * Usability
-    * No history track along time axis. Really bad synchronous workflow
-    * Unable to mark different stages in solving a problem ( e.g. thought-out, implemented, optimized, on-line judged, summarized )
-    * Cannot add enough comments along the code
-    * Could not search problems by specifying multiple tags
-    * Function names do not follow best practices, which makes variables naming kind of difficult.
 
 #### Interview Java pros and cons 
 * Pros
