@@ -13,6 +13,6 @@ class TestDataStructuresTuple(unittest.TestCase):
         Point = namedtuple("Point", "x y")
         point = Point(2, 4)
         point
-        
+
 if __name__ == '__main__':
     unittest.main()
