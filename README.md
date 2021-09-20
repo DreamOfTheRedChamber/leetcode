@@ -21,18 +21,32 @@
 	- [Tools](#tools)
 	- [Strategies](#strategies)
 	- [Leetcode pros and cons](#leetcode-pros-and-cons)
-- [LeetCode难题代码和算法要点分析](#leetcode难题代码和算法要点分析)
+- [Python data structures](#python-data-structures)
+	- [Collections [TODO]](#collections-todo)
+		- [Compare heapq and SortedList complexity [TODO]](#compare-heapq-and-sortedlist-complexity-todo)
+		- [Sort comparator [TODO]](#sort-comparator-todo)
+	- [Type conversions](#type-conversions)
+		- [int and char](#int-and-char)
+- [LeetCode problem types](#leetcode-problem-types)
 	- [Two Pointers](#two-pointers)
+		- [Sliding window](#sliding-window)
+		- [Begin and end type](#begin-and-end-type)
+		- [Partition type](#partition-type)
+		- [Slow and fast](#slow-and-fast)
+		- [Window type](#window-type)
 		- [Sliding window : Distinct Characters](#sliding-window--distinct-characters)
 		- [Two pointers for two seuqences](#two-pointers-for-two-seuqences)
 	- [Binary Search](#binary-search)
 		- [Binary Processing](#binary-processing)
 		- [Binary Search by Value](#binary-search-by-value)
 	- [Hash Table](#hash-table)
+		- [LRU cache implementation](#lru-cache-implementation)
 		- [Hash+Prefix](#hashprefix)
 	- [Heap](#heap)
 	- [Tree](#tree)
 		- [Serialization & Hashing](#serialization--hashing)
+			- [Traversal](#traversal)
+			- [Get inorder traversal predecessor/successor](#get-inorder-traversal-predecessorsuccessor)
 		- [Tree & Sequence](#tree--sequence)
 		- [LCA](#lca)
 		- [N-ary Tree](#n-ary-tree)
@@ -46,20 +60,30 @@
 	- [Stack](#stack)
 		- [monotonic stack](#monotonic-stack)
 		- [parse expression](#parse-expression)
+		- [Calculator](#calculator)
+		- [Parentheses [TODO]](#parentheses-todo)
 	- [Deque](#deque)
 	- [Priority Queue](#priority-queue)
 		- [Sort+PQ](#sortpq)
 		- [Arrangement with Stride](#arrangement-with-stride)
+	- [Graph [TODO]](#graph-todo)
+		- [Edge list vs Adjacent list vs Adjacent matrix](#edge-list-vs-adjacent-list-vs-adjacent-matrix)
+		- [Build graph](#build-graph)
+			- [Detect cycles inside undirected graph](#detect-cycles-inside-undirected-graph)
+			- [Detect cycles inside directed graph](#detect-cycles-inside-directed-graph)
 	- [DFS](#dfs)
 		- [search in an array](#search-in-an-array)
 		- [memorization](#memorization)
 	- [BFS](#bfs)
 		- [Multi State](#multi-state)
 		- [拓扑排序](#拓扑排序)
+			- [Patterns](#patterns)
 		- [Dijkstra (BFS+PQ)](#dijkstra-bfspq)
 	- [Trie](#trie)
 		- [Trie and XOR](#trie-and-xor)
 	- [Linked List](#linked-list)
+		- [Dummy node trick](#dummy-node-trick)
+		- [Common tasks](#common-tasks)
 	- [Dynamic Programming](#dynamic-programming)
 		- [基本型 I](#基本型-i)
 		- [基本型 II](#基本型-ii)
@@ -76,6 +100,7 @@
 		- [Catalan](#catalan)
 		- [Permutation](#permutation)
 	- [Bit Manipulation](#bit-manipulation)
+		- [Common tasks](#common-tasks-1)
 		- [XOR](#xor)
 		- [Bit Mask](#bit-mask)
 	- [Divide and Conquer](#divide-and-conquer)
@@ -83,7 +108,9 @@
 		- [Rolling Hash](#rolling-hash)
 		- [KMP](#kmp)
 		- [Manacher](#manacher)
+		- [Palindrome](#palindrome)
 	- [Union Find](#union-find)
+			- [Patterns](#patterns-1)
 		- [Prime Factors](#prime-factors)
 		- [MST](#mst)
 	- [Recursion](#recursion)
@@ -93,7 +120,11 @@
 		- [Distances](#distances)
 		- [Geometry](#geometry)
 		- [Random Pick](#random-pick)
+			- [Random pattern](#random-pattern)
 		- [Combinatorics](#combinatorics)
+			- [Generate all unique permutations](#generate-all-unique-permutations)
+			- [Generate all subsets](#generate-all-subsets)
+			- [Generate all combinations summing to a target](#generate-all-combinations-summing-to-a-target)
 		- [Numerical Theory](#numerical-theory)
 	- [Greedy](#greedy)
 		- [LIS](#lis)
@@ -107,13 +138,14 @@
 		- [Constructive Problems](#constructive-problems)
 	- [Others](#others-1)
 		- [扫描线 / 差分数组](#扫描线--差分数组)
+			- [Interval](#interval)
 		- [Enumeration](#enumeration)
 		- [Presum](#presum)
 		- [Quick Select](#quick-select)
 	- [LeetCode Cup](#leetcode-cup)
 	- [Templates](#templates)
-- [Learning Python](#learning-python)
-	- [Automatic import](#automatic-import)
+- [Online IDE templates](#online-ide-templates)
+	- [Coderpad](#coderpad)
 
 # Typical whiteboard coding workflow 
 ## Clarify question 
@@ -374,7 +406,29 @@
     * Could not search problems by specifying multiple tags
     * Function names do not follow best practices, which makes variables naming kind of difficult.
 
-# LeetCode难题代码和算法要点分析
+# Python data structures
+
+## Collections [TODO]
+
+| `data type` |  `Original`     | `Improved` |
+| --------------------- |:-------------:| -----:|
+|  priorityQueue  |  heapq.* methods    | SortedList  |
+|  list / stack / queue  | [] | |
+|  deque          |  deque  | | 
+|  dictionary     |  dict  |  defaultdict | 
+
+### Compare heapq and SortedList complexity [TODO]
+
+### Sort comparator [TODO]
+* Pass comparator to Sorted() and sort()
+* Pass comparator to SortedContainers 
+
+## Type conversions
+### int and char
+* ord: int to char
+* char: char to int
+
+# LeetCode problem types
 ## [Two Pointers](https://github.com/wisdompeak/LeetCode/tree/master/Two_Pointers)
 [011.Container-With-Most-Water](https://github.com/wisdompeak/LeetCode/tree/master/Two_Pointers/011.Container-With-Most-Water)	(M+)  
 [015.3Sum](https://github.com/wisdompeak/LeetCode/tree/master/Two_Pointers/015.3Sum)  (M)  
@@ -400,7 +454,8 @@
 [1687.Delivering-Boxes-from-Storage-to-Ports](https://github.com/wisdompeak/LeetCode/tree/master/Two_Pointers/1687.Delivering-Boxes-from-Storage-to-Ports) (H)  
 [1793.Maximum-Score-of-a-Good-Subarray](https://github.com/wisdompeak/LeetCode/tree/master/Two_Pointers/1793.Maximum-Score-of-a-Good-Subarray) (M+)  
 [1798.Maximum-Number-of-Consecutive-Values-You-Can-Make/Readme.md](https://github.com/wisdompeak/LeetCode/blob/master/Greedy/1798.Maximum-Number-of-Consecutive-Values-You-Can-Make) (H-)  
-* Sliding window  
+
+### Sliding window  
 [532.K-diff-Pairs-in-an-Array](https://github.com/wisdompeak/LeetCode/tree/master/Two_Pointers/532.K-diff-Pairs-in-an-Array) (H-)   
 [611.Valid-Triangle-Number](https://github.com/wisdompeak/LeetCode/tree/master/Two_Pointers/611.Valid-Triangle-Number)	(M+)   
 [1004.Max-Consecutive-Ones-III](https://github.com/wisdompeak/LeetCode/tree/master/Two_Pointers/1004.Max-Consecutive-Ones-III) (M)   
@@ -408,6 +463,81 @@
 [1838.Frequency-of-the-Most-Frequent-Element](https://github.com/wisdompeak/LeetCode/tree/master/Two_Pointers/1838.Frequency-of-the-Most-Frequent-Element) (H-)  
 [395.Longest-Substring-with-At-Least-K-Repeating-Characters](https://github.com/wisdompeak/LeetCode/tree/master/Recursion/395.Longest-Substring-with-At-Least-K-Repeating-Characters) (H)    
 [1763.Longest-Nice-Substring](https://github.com/wisdompeak/LeetCode/tree/master/Two_Pointers/1763.Longest-Nice-Substring) (H)      
+
+### Begin and end type
+* example problems: two sum (sorted), three sum, four sum, three sum closest, three sum smaller
+
+```python
+if A[i] and A[j] satisfy some condition:
+  j--; // do not need to consider pairs composed of [i+1, j-1] and j
+  // do something
+elif A[i] and A[j] do not satisfy some condition:
+  i++; // do not need to consider pairs composed of [i+1, j-1] and i
+  // do something
+else:
+  // do something
+  i++ or j--
+```
+
+* Example problem: KSum
+
+```python
+def kSum(kVal: int, target: int, startIndex: int, nums: List[int]) -> List[List[int]]:
+  result = []
+  if kVal == 0:
+    if target == 0:
+      result.append([]);
+    return result;
+
+  for i in range(startIndex, len(nums) - kVal + 1):
+    if (i > startIndex) and (nums[i] == nums[i - 1]):
+      continue;
+
+    for partialResult in kSum( kVal - 1, target - nums[i], i + 1, nums )
+        partialResult.add( 0, nums[i] );
+        result.add( partialResult );
+
+  return result;
+```
+
+### Partition type
+* example problems: two sum (sorted), three sum, four sum, three sum closest, three sum smaller
+
+```python
+# int[] input, int left, int right
+pivot = input[(left+right)/2];
+while i <= j:
+    while input[i] < pivot:
+        i++
+    
+	while input[j] > pivot:
+        j--
+         
+    if i <= j:
+        swap(data, i, j);
+        i++;
+        j--;
+```
+
+### Slow and fast
+* Find the middle of linked list
+* Find linked list cycle
+
+### Window type
+* Improve naive two level for loop to for-outer loop + while inner loop
+* E.g. minimum window substring, minimum size subarray sum, Longest substring with at most K distinct characters, Longest substring without repeating characters
+
+```python
+for i in range(n):
+  while j < n:
+    # update j status
+    if satisfy some condition:
+      j++
+    else:
+      break
+  }
+}
+```
 
 ### Sliding window : Distinct Characters    
 [076.Minimum-Window-Substring](https://github.com/wisdompeak/LeetCode/tree/master/Two_Pointers/076.Minimum-Window-Substring) (M+)    
@@ -511,6 +641,17 @@
 [1487.Making-File-Names-Unique](https://github.com/wisdompeak/LeetCode/tree/master/Hash/1487.Making-File-Names-Unique) (M+)  
 [1573.Number-of-Ways-to-Split-a-String](https://github.com/wisdompeak/LeetCode/tree/master/Hash/1573.Number-of-Ways-to-Split-a-String) (M)  
 
+### LRU cache implementation
+* HashMap + DDL
+* LinkedHashMap + manual removing oldest entry and reset
+* LinkedHashMap ( access order + removeEldestEntry() )
+  - Access order
+    + When specified: The accessOrder flag is set when creating the LinkedHashMap instance using the LinkedHashMap(int initialCapacity, float loadFactor, boolean accessOrder) constructor
+    + accessOrder=true: The elements are ordered according to their access: When iterating over the map the most recently accessed entry is returned first and the least recently accessed element is returned last. Only the get, put, and putAll methods influence this ordering.
+    + accessOrder=false: The elements are ordered according to their insertion. This is the default if any of the other LinkedHashMap constructors is used. In this ordering read access to the map has no influence on element ordering.
+  - removeEldestEntry(Entry)
+    + This method is called with the eldest entry whenever an element is added to the map. Eldest means the element which is returned last when iterating over the map. So the notion of eldest is influenced by accessOrder set on the map. The removeEldestElement in its default implementation just returns false to indicate, that nothing should happen. An extension of the LinkedHashMap may overwrite the default implementation to do whatever would be required:
+
 ### Hash+Prefix    
 [525.Contiguous-Array](https://github.com/wisdompeak/LeetCode/tree/master/Hash/525.Contiguous-Array) (M)    
 [930.Binary-Subarrays-With-Sum](https://github.com/wisdompeak/LeetCode/tree/master/Hash/930.Binary-Subarrays-With-Sum) (M)   
@@ -593,6 +734,60 @@
 [297.Serialize-and-Deserialize-Binary-Tree](https://github.com/wisdompeak/LeetCode/tree/master/Tree/297.Serialize-and-Deserialize-Binary-Tree) （H-）  
 [652.Find-Duplicate-Subtrees](https://github.com/wisdompeak/LeetCode/tree/master/Tree/652.Find-Duplicate-Subtrees) (H)   
 [1948.Delete-Duplicate-Folders-in-System](https://github.com/wisdompeak/LeetCode/tree/master/Tree/1948.Delete-Duplicate-Folders-in-System) (H)  
+
+#### Traversal 
+* Classic tree level order traversal with O(n) space
+
+```python
+bfsQueue = deque()
+bfsQueue.append( root )
+while bfsQueue:
+  head = bfsQueue.popleft()
+  // do stuff
+  if head.left is not None:
+    bfsQueue.append(head.left)
+  if head.right is not None:
+    bfsQueue.append(head.right)
+```
+
+* Special tree level order traversal with O(1) space: example problem (populate next right pointers in each node II)
+
+#### Get inorder traversal predecessor/successor
+```python
+    def getPredecessor(root: TreeNode, target: TreeNode) -> TreeNode:
+      if target.left:
+        currNode = target.left
+        while currNode.right:
+          currNode = currNode.right
+        return currNode
+      else:
+        predecessor = None
+        currNode = root
+        while currNode != target:
+          if currNode.val >= target.val:
+            currNode = currNode.left
+          else:
+            predecessor = currNode
+            currNode = currNode.right
+        return predecessor
+    
+    def getSuccessor(root: TreeNode, target: TreeNode) -> TreeNode:
+      if target.right:
+        currNode = target.right
+        while currNode.left != null:
+          currNode = currNode.left
+        return currNode
+      else:
+        successor = None
+        currNode = root
+        while currNode != target:
+          if currNode.val >= target.val:
+            successor = currNode
+            currNode = currNode.left
+          else:
+            currNode = currNode.right
+        return successor
+```
 
 ### Tree & Sequence    
 [105.Construct-Binary-Tree-from-Preorder-and-Inorder-Traversal](https://github.com/wisdompeak/LeetCode/tree/master/Tree/105.Construct-Binary-Tree-from-Preorder-and-Inorder-Traversal) (H-)  
@@ -712,6 +907,146 @@
 [1106.Parsing-A-Boolean-Expression](https://github.com/wisdompeak/LeetCode/tree/master/Stack/1106.Parsing-A-Boolean-Expression) (H-)    
 [1896.Minimum-Cost-to-Change-the-Final-Value-of-Expression](https://github.com/wisdompeak/LeetCode/tree/master/Stack/1896.Minimum-Cost-to-Change-the-Final-Value-of-Expression) (H+)  
 
+### Calculator
+
+* Evaluate infix expression. The problem can have various follow-ups
+  - How to define input: String s or String[] tokens. If input is defined as String s and numbers might include negative numbers, then parsing negative numbers can be kind of cumbersome. When possible, define input as String[] tokens. Even when required to define input as String s, double check whether we need to deal with negative numbers.
+  - Whether contain space
+  - Whether need to deal with parentheses
+
+```python
+    def calculate(s: str) -> int:
+      valStack = []
+      opStack = []
+      for i in range(s.length()):
+        char token = s[i]
+        if token == " ":
+          continue
+        elif token == "(":
+          opStack.append(token)
+        elif token == ")":
+          while opStack[-1] != "(":
+            valStack.append( calc( opStack.pop(), valStack.pop(), valStack.pop() ) )
+          opStack.pop()
+        elif token.isnumeric():
+          start = i
+          while i + 1 < s.len() and s[i+1].isnumeric():
+            i++
+          valStack.append(int(s[start:i + 1]))
+        else:
+          while !opStack.isEmpty() and isLowerPrece(token, opStack[-1]):
+            valStack.append( calc( opStack.pop(), valStack.pop(), valStack.pop() ) )
+          opStack.append( token )
+      
+      while opStack:
+        valStack.append(calc( opStack.pop(), valStack.pop(), valStack.pop() ))
+
+      return valStack.pop()
+    }
+        
+    def isLowerPrece(curr: str, toBeCompared: str ) -> bool:
+      return toBeCompared == '*' or toBeCompared == '/'
+          or ( toBeCompared == '-' and ( curr == '+' or curr == '-' ) )
+    
+    def calc(operator: str, operand1: int, operand2: int) -> int:
+      if operator == '+':
+        return operand2 + operand1
+      elif operator == '-':
+        return operand2 - operand1
+      elif operator == '*':
+        return operand2 * operand1
+      else
+        return operand2 / operand1
+```
+
+### Parentheses [TODO]
+* Check if string s contains valid parenthese
+  - Questions to confirm
+    + Whether the string contains non-parentheses characters
+    + Whether the string contains curly braces, brackets or parentheses
+    + Need to calculate the invalid number or just judge it is valid or not
+
+```java
+// Case 1: When only contains parentheses
+// Judge whether a string is valid or not
+boolean isValid( String s )
+{
+  int count = 0;
+  for ( char ch : s.toCharArray() )
+  {
+    if ( ch == '(' )
+    {
+      count++;
+    }
+    else if ( ch == ')' )
+    {
+      if ( count == 0 )
+      {
+        return false;
+      }
+      count--;
+    }
+    // for non-parenthese chars, we will not process them
+  }
+  return count == 0;
+}
+int calcNumInvalid( String s )
+{
+  Stack<Character> stack = new Stack<>();
+  for ( char ch : s.toCharArray() )
+  {
+    if ( ch == '(' ) 
+    {
+      stack.push( ch );
+    }
+    else if ( ch == ')' )
+    {
+      if ( !stack.isEmpty() && stack.peek() == '(' )
+      {
+        stack.pop();
+      }
+      else
+      {
+        stack.push( ch );
+      }
+    }
+  }
+  return stack.size();
+}
+
+// Case 2: If contains curly braces and brackets
+// The basic idea is similar to Case 1. Things need to be changed here is using a Map<Ch, Ch> to store open and close mapping. 
+boolean isValid( String s )
+{
+  Stack<Character> stack = new Stack<>();
+  Map<Character, Character> openToClose = new HashMap<>();
+  openToClose.put( '(', ')' );
+  openToClose.put( '[', ']' );
+  openToClose.put( '{', '}' );
+        
+  for ( char ch : s.toCharArray() )
+  {
+    if ( openToClose.containsKey( ch ) )
+    {
+      stack.push( ch );
+    }
+    else if ( openToClose.values.contains( ch ))
+    {
+      if ( stack.isEmpty() || ch != openToClose.get( stack.peek() ) )
+      {
+        return false;
+      }
+      stack.pop();
+    }
+  }
+        
+  return stack.size() == 0;
+}
+```
+
+
+
+
 ## [Deque](https://github.com/wisdompeak/LeetCode/tree/master/Deque)
 [239.Sliding-Window-Maximum](https://github.com/wisdompeak/LeetCode/tree/master/Deque/239.Sliding-Window-Maximum) (H-)    
 [862.Shortest-Subarray-with-Sum-at-Least-K](https://github.com/wisdompeak/LeetCode/tree/master/Deque/862.Shortest-Subarray-with-Sum-at-Least-K) (H)   
@@ -756,6 +1091,130 @@
 [984.String-Without-AAA-or-BBB](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/984.String-Without-AAA-or-BBB) (M+)    
 [1405.Longest-Happy-String](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/1405.Longest-Happy-String) (H-)   
 [1953.Maximum-Number-of-Weeks-for-Which-You-Can-Work](https://github.com/wisdompeak/LeetCode/tree/master/Priority_Queue/1953.Maximum-Number-of-Weeks-for-Which-You-Can-Work) (M+)      
+
+## Graph [TODO]
+### Edge list vs Adjacent list vs Adjacent matrix
+* Time complexity comparison between different graph representation
+ * Use cases for different representations
+  * Edge list is usually not used because looping through neighbor of a vertex is too expensive. This makes it really appropriate for many graph algo (bfs, dfs).
+  * Adjacent matrix is usually used for dense graph, where vertexes are seldomly added or removed.
+  * Adjacent list is usually used for sparse graph to save space.
+
+* Adjacent list representation is the most commonly used graph representation in an interview setting. There are two common ways to realize this. One typical classical way is to define class GraphNode and then graph can be defined as List &lt; GraphNode &gt;. The other way is to define graph as Map&lt;Integer, Set&lt;Integer&gt;&gt; graph. Map&lt;Integer&gt;
+```java
+// first way, more official
+// but if there are redundant edges in input, might need to implement hashcode() and equal() methods to avoid add redundant nodes into neighbors. Kind of overkilling in an interview setting
+class GraphNode 
+{
+  int val;
+  int status; // used for track visiting status in DFS
+  List<GraphNode> neighbor;
+  // ...
+}
+List<GraphNode> graph =...;
+
+// second way, graph itself is more concise. But need additional data structures like Set<Integer> visited and Set<Integer> discovered to track dfs traverse status
+Map<Integer, Set<Integer>> graph 
+```
+
+### Build graph 
+* **Building graph**, it is will be less error-prone to separate the phase of building vertexes and edges. When they are merged together, it is easy to forget about the isolated vertexes. In a common setting, usually asked to build a graph given the number of vertex int n and an array of edges. 
+```java
+public Map<Integer, Set<Integer>> buildGraph( int n, int[][] edges )
+{
+  Map<Integer, Set<Integer>> graph = new HashMap<>();
+  
+  // build vertex
+  for ( int i = 0; i < n; i++ )
+  {
+    graph.put( i, new HashSet<>() );
+  }
+
+  // build edges
+  for ( int[] edge : edges  )
+  {
+    // undirected graph needs to add the edge twice
+    graph.get( edge[0] ).add( edge[1] );
+    graph.get( edge[1] ).add( edge[0] );
+  }
+}
+```
+
+#### Detect cycles inside undirected graph
+
+```java
+// Graph is represented by class GraphNode
+class GraphNode
+{
+  int nodeIndex;
+  List<GraphNode> neighbors;
+}
+
+private boolean hasCycle( GraphNode root )
+{
+  return hasCycle( root, new HashSet<>() );
+}
+
+private boolean hasCycle( GraphNode root, Set<GraphNode> isDiscovered )
+{
+  if ( isDiscovered.contains( root ) )
+  {
+    return true;
+  }
+
+  isDiscovered.add( root );
+  for ( List<GraphNode> neighbor : root.neighbors )
+  {
+    if ( hasCycle( neighbor, isVisited  ) )
+    {
+      return true;
+    }
+  }
+
+  return false;
+}
+```
+
+#### Detect cycles inside directed graph
+
+```java
+// Graph is represented by class GraphNode
+class GraphNode
+{
+  int nodeIndex;
+  List<GraphNode> neighbors;
+}
+
+private boolean hasCycle( GraphNode root )
+{
+  Set<GraphNode> isDiscovered = new HashSet<>();
+  Set<GraphNode> isVisited = new HashSet<>();
+  return hasCycle( root, isDiscovered, isVisited );
+}
+
+private boolean hasCycle( GraphNode root, Set<GraphNode> isDiscovered, Set<GraphNode> isVisited )
+{
+  if ( isVisited.contains( root ) )
+  {
+    return false;
+  }
+  if ( isDiscovered.contains( root ) && !isVisited.contains( root ) )
+  {
+    return true;
+  }
+
+  isDiscovered.add( root );
+  for ( List<GraphNode> neighbor : root.neighbors )
+  {
+    if ( hasCycle( neighbor, isDiscovered, isVisited  ) )
+    {
+      return true;
+    }
+  }
+  isVisited.add( root );
+  return false;
+}
+```
 
 ## [DFS](https://github.com/wisdompeak/LeetCode/tree/master/DFS)
 [037.Sudoku-Solver](https://github.com/wisdompeak/LeetCode/tree/master/DFS/037.Sudoku-Solver) (M+)    
@@ -844,6 +1303,74 @@
 [1591.Strange-Printer-II](https://github.com/wisdompeak/LeetCode/tree/master/BFS/1591.Strange-Printer-II) (H-)  
 [1857.Largest-Color-Value-in-a-Directed-Graph](https://github.com/wisdompeak/LeetCode/tree/master/BFS/1857.Largest-Color-Value-in-a-Directed-Graph) (H-)  
 
+#### Patterns
+* There are basically two categories of methods for topological sort. The first one is greedy algorithm with O(|V|^2 + |E|) time complexity. The second is based on depth first search with O(|V| + |E|) time complexity. Here only discusses DFS based approach. 
+* When using DFS based approach, there are two cases which should be taken care of. The first one is what if there exists no topological order at all. The second is how to return topological order.
+   * What if there exists no topological order - a cycle is detected. 
+      * How to detect cycle: use UNDISCOVERED, DISCOVERED, VISITED to represent three possible states of graph nodes. Use a Set&lt;?&gt; isDiscovered and Set&lt;?&gt; isVisited to record all history info. If met up with a node which has been discovered but not visited, then a cycle is detected. 
+      * How to handle cycle: return a boolean value (preferred) or throw an exception (not really suitable because they are expected cases)
+   * What if need to return topological order
+      * If do not need to detect cycle, could simply use a Stack&lt;&gt; order to record the visited node, namely using Set&lt;?&gt; discovered, Stack&lt;?&gt; visited 
+      * If need to detect cycle, namely using Set&lt;?&gt; discovered, LinkedHashSet&lt;?&gt; visited
+```java
+    public int[] getTopoOrder(Map<Integer, Set<Integer>> graph)
+    {
+        Set<Integer> discovered = new HashSet<>();
+        Set<Integer> visited = new LinkedHashSet<>();
+        for ( Integer node : graph.keySet() )
+        {
+          if ( !discoverd.contains( node ) )
+          {
+            if ( !topoSort( graph, node, discovered, visited ) )
+            {
+              // a cycle is detected....error handling
+            }
+          }
+        }
+
+        return visited.stream().reverse().collect( Collectors.toL);
+        int[] topoOrder = new int[visited.size()];
+        int pos = topoOrder.length - 1;
+        for ( Integer node : visited )
+        {
+          topoOrder[pos] = node;
+          pos--;
+        }
+
+        return topoOrder;
+    }
+
+    /**
+     * @return whether a cycle is detected
+     */ 
+    private boolean topoSort ( Map<Integer, Set<Integer>> graph, Integer startNode, Set<Integer> discovered, Set<Integer> visited )
+    {
+        discovered.add( startNode );
+        for ( Integer neighbor : graph.get( startNode ) )
+        {
+            if ( !discovered.contains( neighbor ) )
+            {
+                if ( topoSort( graph, neighbor, discovered, visited ) )
+                {
+                    return true;
+                }
+            }
+            else if ( discovered.contains( neighbor ) 
+                    && !visited.contains( neighbor ) )
+            {
+                return true;
+            }
+            else
+            {
+                // already visited, do nothing
+                ;
+            }
+        }
+        visited.add( startNode );
+        return false;
+    }
+```
+
 ### Dijkstra (BFS+PQ)   
 [743.Network-Delay-Time](https://github.com/wisdompeak/LeetCode/tree/master/BFS/743.Network-Delay-Time) (H)    
 [407.Trapping-Rain-Water-II](https://github.com/wisdompeak/LeetCode/tree/master/BFS/407.Trapping-Rain-Water-II) (H)      
@@ -899,6 +1426,28 @@
 [1474.Delete-N-Nodes-After-M-Nodes-of-a-Linked-List](https://github.com/wisdompeak/LeetCode/tree/master/Linked_List/1474.Delete-N-Nodes-After-M-Nodes-of-a-Linked-List) (M+)  
 [1670.Design-Front-Middle-Back-Queue](https://github.com/wisdompeak/LeetCode/tree/master/Linked_List/1670.Design-Front-Middle-Back-Queue) (M+)  
 [1756.Design-Most-Recently-Used-Queue](https://github.com/wisdompeak/LeetCode/tree/master/Linked_List/1756.Design-Most-Recently-Used-Queue) (H)  
+
+### Dummy node trick
+
+* Dummy Node trick: Maintain a list dummy head and actual tail pointer
+  - Used across all linked list modification operations
+
+```java
+LinkedListNode dummy = new LinkedListNode( 0 );
+LinkedListNode tail = dummy;
+
+// append one more element to the tail
+tail.next = appendedNode;
+// move tail pointer forward
+tail = appendedNode;
+
+return dummy.next; // pointing to the actual list head
+```
+
+### Common tasks
+* Find median
+* Reverse list
+* Merge sorted list
 
 ## [Dynamic Programming](https://github.com/wisdompeak/LeetCode/tree/master/Dynamic_Programming)
 [264.Ugly-Number-II](https://github.com/wisdompeak/LeetCode/tree/master/Dynamic_Programming/264.Ugly-Number-II) (H-)   
@@ -1106,6 +1655,48 @@
 1461.Check-If-a-String-Contains-All-Binary-Codes-of-Size-K (TBD)  
 [1521.Find-a-Value-of-a-Mysterious-Function-Closest-to-Target](https://github.com/wisdompeak/LeetCode/tree/master/Bit_Manipulation/1521.Find-a-Value-of-a-Mysterious-Function-Closest-to-Target) (H-)  
 
+### Common tasks 
+* get bit, set bit, clear bit and update bit
+```java
+boolean getBit( int num, int i )
+{
+    return ((num & (1 << i)) != 0 );
+}
+
+int setBit( int num, int i )
+{
+    return num | (1 << i);
+}
+
+int clearBit( int num, int i )
+{
+    int mask = ~(1 << i);
+    return num & mask;
+}
+
+// clear all bits from the most significant bit through i (inclusive)
+int clearBitsMSBthroughI( int num, int i )
+{
+    int mask = (1 << i) - 1;
+    return num & mask;
+}
+
+// clear all bits from i (inclusive) through 0
+int clearBitsIthrough0( int num, int i )
+{
+    int mask = ~(-1 >>> (31 - i));
+    return num & mask;
+}
+
+// set the ith bit to a value v
+int updateBit(int num, int i, boolean bitIs1)
+{
+    int value = bitIs1 ? 1 : 0;
+    int mask = ~(1 << i);
+    return (num & mask) | (value << i);
+}
+```
+
 ### XOR   
 [136.Single-Number](https://github.com/wisdompeak/LeetCode/tree/master/Bit_Manipulation/136.Single-Number) (M)   
 [268.Missing-Number](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/268.Missing-Number) (H-)  
@@ -1176,6 +1767,12 @@
 [647.Palindromic-Substrings](https://github.com/wisdompeak/LeetCode/tree/master/String/647.Palindromic-Substrings) (M+)   
 [1960.Maximum-Product-of-the-Length-of-Two-Palindromic-Substrings](https://github.com/wisdompeak/LeetCode/tree/master/String/1960.Maximum-Product-of-the-Length-of-Two-Palindromic-Substrings) (H)    
 
+### Palindrome
+* Several ways to solve the Longest palindrome substring problem
+  - DP-based solution: O(n^2) space and time, if need to storing palindrome result, this is always better (e.g. palindrome partitioning)
+  - Start looping from middle: O(n^2) time
+  - Manacher's algorithm: O(n) time, not generic enough.
+
 ## [Union Find](https://github.com/wisdompeak/LeetCode/tree/master/Union_Find)
 [547.Friend-Circles](https://github.com/wisdompeak/LeetCode/tree/master/Union_Find/547.Friend-Circles) (M)    
 [200.Number-of-Islands](https://github.com/wisdompeak/LeetCode/tree/master/DFS/200.Number-of-Islands) (H-)    
@@ -1202,6 +1799,36 @@
 [1722.Minimize-Hamming-Distance-After-Swap-Operations](https://github.com/wisdompeak/LeetCode/tree/master/Union_Find/1722.Minimize-Hamming-Distance-After-Swap-Operations) (M+)  
 [803.Bricks-Falling-When-Hit](https://github.com/wisdompeak/LeetCode/tree/master/DFS/803.Bricks-Falling-When-Hit) (H)   
 [1970.Last-Day-Where-You-Can-Still-Cross](https://github.com/wisdompeak/LeetCode/tree/master/Union_Find/1970.Last-Day-Where-You-Can-Still-Cross) (H-)    
+
+#### Patterns
+* Suitable in a dynamically changing graph. 
+  - Complexity: O(lgn)
+  - Example problems: Number of Island II, find weakly connected components in directed graph, find connected components in undirected graph
+
+```java
+Map<Integer, Integer> father = new HashMap<>();
+
+int find( int x )
+{
+  int parent = x;
+  while ( parent != father.get( parent ) )
+  {
+    parent = father.get( parent );
+  }
+  return parent;
+}
+
+void union( int x, int y )
+{
+  int fa_x = find( x );
+  int fa_y = find( y );
+  if ( fa_x != fa_y )
+  {
+    father.put( fa_x, fa_y );  
+  }
+}
+```
+
 
 ### Prime Factors    
 [952.Largest-Component-Size-by-Common-Factor](https://github.com/wisdompeak/LeetCode/tree/master/Union_Find/952.Largest-Component-Size-by-Common-Factor) (H)   
@@ -1322,6 +1949,39 @@
 [710.Random-Pick-with-Blacklist](https://github.com/wisdompeak/LeetCode/tree/master/Math/710.Random-Pick-with-Blacklist) (M+)    
 [1227.Airplane-Seat-Assignment-Probability](https://github.com/wisdompeak/LeetCode/tree/master/Math/1227.Airplane-Seat-Assignment-Probability) (M+)   
 
+#### Random pattern
+* Reservoir sampling: sample k from n
+  - Example problems: Shuffle an array, Random pick index, Linked list random node.
+
+```java
+public List<Integer> sample( List<Integer> list, int k )
+{
+    final List<Integer> samples = new ArrayList<Integer>( k );
+    int count = 0;
+    final Random random = new Random();
+    for ( Integer item : list ) 
+    {
+        if ( count < k ) 
+        {
+            samples.add( item );
+        } 
+        else 
+        {
+            // http://en.wikipedia.org/wiki/Reservoir_sampling
+            // In effect, for all i, the ith element of S is chosen to be included in the reservoir with probability
+            // k/i.
+            int randomPos = random.nextInt( count );
+            if ( randomPos < k ) 
+            {
+                samples.set( randomPos, item );
+            }
+        }
+        count++;
+    }
+    return samples;
+}
+```
+
 ### Combinatorics   
 [046.Permutations](https://github.com/wisdompeak/LeetCode/tree/master/Math/046.Permutations) (M+)    
 [047.Permutations-II](https://github.com/wisdompeak/LeetCode/tree/master/Math/047.Permutations-II) (H)   
@@ -1336,6 +1996,88 @@
 [1830.Minimum-Number-of-Operations-to-Make-String-Sorted](https://github.com/wisdompeak/LeetCode/tree/master/Math/1830.Minimum-Number-of-Operations-to-Make-String-Sorted) (H)  
 [1866.Number-of-Ways-to-Rearrange-Sticks-With-K-Sticks-Visible](https://github.com/wisdompeak/LeetCode/tree/master/Math/1866.Number-of-Ways-to-Rearrange-Sticks-With-K-Sticks-Visible) (H)  
 [1916.Count-Ways-to-Build-Rooms-in-an-Ant-Colony](https://github.com/wisdompeak/LeetCode/tree/master/Math/1916.Count-Ways-to-Build-Rooms-in-an-Ant-Colony) (H)  
+
+
+#### Generate all unique permutations 
+```java
+void generatePerms( List<List<Integer>> allPerms, List<Integer> onePerm, int[] nums, boolean[] isUsed )
+{     
+  if ( onePerm.size() == nums.length )
+  {
+    allPerms.add( new LinkedList<>( onePerm ) );
+    return;
+  }
+      
+  for ( int i = 0 ; i < nums.length; i++ )
+  {       
+    if ( !isUsed[i] )
+    {
+      if ( i > 0 && nums[i] == nums[i-1] && !isUsed[i-1] )
+      {
+        continue;
+      }
+          
+      isUsed[i] = true;
+      onePerm.add( nums[i] );
+      generatePerms( allPerms, onePerm, nums, isUsed );
+      onePerm.remove( onePerm.size( ) - 1 );
+      isUsed[i] = false;
+    }
+  }
+}
+```
+
+#### Generate all subsets 
+
+```java
+void generateSubsets( List<List<Integer>> allSubsets, LinkedList<Integer> oneSubset, int[] nums, int startPos )
+{
+  if ( startPos > nums.length )
+  {
+    return;
+  }
+      
+  allSubsets.add( new LinkedList<>( oneSubset ) );
+      
+  for ( int i = startPos; i < nums.length; i++ )
+  {
+    if ( i > startPos 
+        && nums[i] == nums[i-1] )
+    {
+      continue;
+    }
+        
+    oneSubset.addLast( nums[i] );
+    generateSubsets( allSubsets, oneSubset, nums, i + 1 );
+    oneSubset.removeLast( );
+  }
+}
+```
+
+#### Generate all combinations summing to a target 
+
+```java
+void generateCombs( List<List<Integer>> allCombs, LinkedList<Integer> oneComb, int[] nums, int startPos, int targetSum )
+{
+  if ( targetSum < 0 || startPos >= nums.length )
+  {
+    return;
+  }
+    
+  if ( targetSum == 0 )
+  {
+    allCombs.add( new LinkedList<>( oneComb ) );
+    return;
+  }
+    
+  for ( int i = startPos; i < nums.length; i++ )
+  {
+    oneComb.addLast( nums[i] );
+    generateCombs( allCombs, oneComb, nums, i, targetSum - nums[i] );
+    oneComb.removeLast( );
+  }
+}
+```
 
 ### Numerical Theory   
 [343.Integer-Break](https://github.com/wisdompeak/LeetCode/tree/master/Math/343.Integer-Break) (H-)    
@@ -1527,6 +2269,47 @@
 [850.Rectangle-Area-II](https://github.com/wisdompeak/LeetCode/tree/master/Others/850.Rectangle-Area-II) (H)   
 [1943.Describe-the-Painting](https://github.com/wisdompeak/LeetCode/tree/master/Others/1943.Describe-the-Painting) (H-)  
 
+#### Interval
+* Interval-related
+  - Judge whether intervals overlap
+
+```java
+boolean isOverlapping( Interval o1, Interval o2 )
+{
+  if ( o1.start >= o2.end || o2.start >= o1.end )
+  {
+    return false;
+  }
+  else
+  {
+    return true;
+  }
+}
+```
+
+  - Sort intervals
+```java
+List<Interval> list = //...
+// sort according to starting point
+list.sort( (o1,o2) -> o1.start - o2.start );
+// or sort according to ending point
+list.sort( (o1,o2) -> o1.end - o2.end );
+// sort according to both starting and ending point
+list.sort( (o1,o2) -> o1.start != o2.start ? o1.start - o2.start : o1.end - o2.end );
+```
+  - Split intervals into Pair(int start, boolean isStart), Pair(int end, boolean isEnd)
+```java
+List<Interval> intervalList = //...
+List<Pair> pairList = //...
+for ( Interval interval : intervalList )
+{
+  pairList.add( new Pair(interval.start, true) );
+  pairList.add( new Pair(interval.end, false) );
+}
+pairList.sort( (o1, o2) -> (o1.start-o2.start) );
+```
+
+
 ### Enumeration   
 [479.Largest-Palindrome-Product](https://github.com/wisdompeak/LeetCode/tree/master/Others/479.Largest-Palindrome-Product) (M+)   
 [866.Prime-Palindrome](https://github.com/wisdompeak/LeetCode/tree/master/Others/866.Prime-Palindrome) (H-)   
@@ -1566,7 +2349,40 @@
 [RB_Tree](https://github.com/wisdompeak/LeetCode/tree/master/Template/RB_Tree)  
 [IO](https://github.com/wisdompeak/LeetCode/tree/master/Template/IO)  
 
-# Learning Python
-## Automatic import
-* Type hint https://stackoverflow.com/questions/32557920/what-are-type-hints-in-python-3-5
-* 
+
+# Online IDE templates
+## Coderpad
+
+```java
+import org.junit.*;
+import org.junit.runner.*;
+import java.io.*;
+import java.util.*;
+
+public class Solution 
+{
+    
+    @Test
+    public void test1()
+    {
+      /* 
+
+      */
+    }    
+
+    @Ignore
+    @Test
+    public void test3()
+    {
+        /* 
+
+        */
+    }
+
+    public static void main(String[] args) 
+    {
+        JUnitCore.main("Solution");
+    }    
+    
+}
+```
