@@ -1794,158 +1794,193 @@ return dummy.next; // pointing to the actual list head
 
 * get bit, set bit, clear bit and update bit
 
-  \`\`\`java
+```java
+boolean getBit( int num, int i )
+{
+  return ((num & (1 << i)) != 0 );
+}
 
-  boolean getBit\( int num, int i \)
+int setBit( int num, int i ) 
+{ 
+  return num | (1 << i); 
+}
 
-  {
+int clearBit( int num, int i ) 
+{ 
+  int mask = ~(1 << i); 
+  return num & mask; 
+}
 
-    return \(\(num & \(1 &lt;&lt; i\)\) != 0 \);
+// clear all bits from the most significant bit through i (inclusive) 
+int clearBitsMSBthroughI( int num, int i ) 
+{ 
+  int mask = (1 << i) - 1; 
+  return num & mask; 
+}
 
-  }
+// clear all bits from i (inclusive) through 0 
+int clearBitsIthrough0( int num, int i ) 
+{ 
+  int mask = ~(-1 >>> (31 - i)); 
+  return num & mask; 
+}
 
-int setBit\( int num, int i \) { return num \| \(1 &lt;&lt; i\); }
+// set the ith bit to a value v 
+int updateBit(int num, int i, boolean bitIs1) 
+{ 
+  int value = bitIs1 ? 1 : 0; 
+  int mask = ~(1 << i); 
+  
+  return (num & mask) | (value << i); 
+}
 
-int clearBit\( int num, int i \) { int mask = ~\(1 &lt;&lt; i\); return num & mask; }
-
-// clear all bits from the most significant bit through i \(inclusive\) int clearBitsMSBthroughI\( int num, int i \) { int mask = \(1 &lt;&lt; i\) - 1; return num & mask; }
-
-// clear all bits from i \(inclusive\) through 0 int clearBitsIthrough0\( int num, int i \) { int mask = ~\(-1 &gt;&gt;&gt; \(31 - i\)\); return num & mask; }
-
-// set the ith bit to a value v int updateBit\(int num, int i, boolean bitIs1\) { int value = bitIs1 ? 1 : 0; int mask = ~\(1 &lt;&lt; i\); return \(num & mask\) \| \(value &lt;&lt; i\); }
-
-```text
-### XOR   
-[136.Single-Number](https://github.com/wisdompeak/LeetCode/tree/master/Bit_Manipulation/136.Single-Number) (M)   
-[268.Missing-Number](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/268.Missing-Number) (H-)  
-[1310.XOR-Queries-of-a-Subarray](https://github.com/wisdompeak/LeetCode/tree/master/Bit_Manipulation/1310.XOR-Queries-of-a-Subarray) (M)  
-[1442.Count-Triplets-That-Can-Form-Two-Arrays-of-Equal-XOR](https://github.com/wisdompeak/LeetCode/tree/master/Bit_Manipulation/1442.Count-Triplets-That-Can-Form-Two-Arrays-of-Equal-XOR) (M+)  
-[1506.Find-Root-of-N-Ary-Tree](https://github.com/wisdompeak/LeetCode/tree/master/Bit_Manipulation/1506.Find-Root-of-N-Ary-Tree) (M+)  
-[1734.Decode-XORed-Permutation](https://github.com/wisdompeak/LeetCode/tree/master/Bit_Manipulation/1734.Decode-XORed-Permutation) (M+)  
-[1738.Find-Kth-Largest-XOR-Coordinate-Value](https://github.com/wisdompeak/LeetCode/tree/master/Bit_Manipulation/1738.Find-Kth-Largest-XOR-Coordinate-Value) (M+)  
-[1835.Find-XOR-Sum-of-All-Pairs-Bitwise-AND](https://github.com/wisdompeak/LeetCode/tree/master/Bit_Manipulation/1835.Find-XOR-Sum-of-All-Pairs-Bitwise-AND) (M)  
-
-### Bit Mask   
-[1239.Maximum-Length-of-a-Concatenated-String-with-Unique-Characters](https://github.com/wisdompeak/LeetCode/tree/master/Bit_Manipulation/1239.Maximum-Length-of-a-Concatenated-String-with-Unique-Characters) (M+)  
-[1284.Minimum-Number-of-Flips-to-Convert-Binary-Matrix-to-Zero-Matrix](https://github.com/wisdompeak/LeetCode/tree/master/Bit_Manipulation/1284.Minimum-Number-of-Flips-to-Convert-Binary-Matrix-to-Zero-Matrix) (M+)  
-[1452.People-Whose-List-of-Favorite-Companies-Is-Not-a-Subset-of-Another-List](https://github.com/wisdompeak/LeetCode/tree/master/Bit_Manipulation/1452.People-Whose-List-of-Favorite-Companies-Is-Not-a-Subset-of-Another-List) (H-)  
-[1601.Maximum-Number-of-Achievable-Transfer-Requests](https://github.com/wisdompeak/LeetCode/tree/master/Bit_Manipulation/1601.Maximum-Number-of-Achievable-Transfer-Requests) (H-)  
-[1755.Closest-Subsequence-Sum](https://github.com/wisdompeak/LeetCode/tree/master/Bit_Manipulation/1755.Closest-Subsequence-Sum) (H)  
-[1774.Closest-Dessert-Cost](https://github.com/wisdompeak/LeetCode/tree/master/Bit_Manipulation/1774.Closest-Dessert-Cost) (M)  
-[2002.Maximum-Product-of-the-Length-of-Two-Palindromic-Subsequences](https://github.com/wisdompeak/LeetCode/tree/master/Bit_Manipulation/2002.Maximum-Product-of-the-Length-of-Two-Palindromic-Subsequences)      
+```
 
 
-## [Divide and Conquer](https://github.com/wisdompeak/LeetCode/tree/master/Divide_Conquer)
-[315.Count-of-Smaller-Numbers-After-Self](https://github.com/wisdompeak/LeetCode/tree/master/Divide_Conquer/315.Count-of-Smaller-Numbers-After-Self) (H-)    
-[327.Count-of-Range-Sum](https://github.com/wisdompeak/LeetCode/tree/master/Divide_Conquer/327.Count-of-Range-Sum) (H-)   
-[493.Reverse-Pairs](https://github.com/wisdompeak/LeetCode/tree/master/Divide_Conquer/493.Reverse-Pairs) (M+)    
-[1649.Create-Sorted-Array-through-Instructions](https://github.com/wisdompeak/LeetCode/tree/master/Divide_Conquer/1649.Create-Sorted-Array-through-Instructions) (H)  
 
-## [String](https://github.com/wisdompeak/LeetCode/tree/master/String)
-[006.ZigZag-Conversion](https://github.com/wisdompeak/LeetCode/tree/master/String/006.ZigZag-Conversion) (M+)    
-[336.Palindrome-Pairs](https://github.com/wisdompeak/LeetCode/tree/master/String/336.Palindrome-Pairs) (H-)   
-[388.Longest-Absolute-File-Path](https://github.com/wisdompeak/LeetCode/tree/master/String/388.Longest-Absolute-File-Path) (M+)    
-[408.Valid-Word-Abbreviation](https://github.com/wisdompeak/LeetCode/tree/master/String/408.Valid-Word-Abbreviation) (M)   
-411.Minimum-Unique-Word-Abbreviation (H)  
-[418.Sentence-Screen-Fitting](https://github.com/wisdompeak/LeetCode/tree/master/String/418.Sentence-Screen-Fitting) (M+)   
-[423.Reconstruct-Original-Digits-from-English](https://github.com/wisdompeak/LeetCode/tree/master/Others/423.Reconstruct-Original-Digits-from-English) (H-)   
-[527.Word-Abbreviation](https://github.com/wisdompeak/LeetCode/tree/master/String/527.Word-Abbreviation) (M+)   
-[556.Next Greater Element III](https://github.com/wisdompeak/LeetCode/tree/master/String/556.Next-Greater-Element-III) (H-)   
-616.Add-Bold-Tag-in-String (M)    
-[467.Unique-Substrings-in-Wraparound-String](https://github.com/wisdompeak/LeetCode/tree/master/String/467.Unique-Substrings-in-Wraparound-String) (H-)   
-[564.Find-the-Closest-Palindrome](https://github.com/wisdompeak/LeetCode/tree/master/String/564.Find-the-Closest-Palindrome) (H)   
-722.Remove-Comments (H)   
-[736.Parse-Lisp-Expression](https://github.com/wisdompeak/LeetCode/tree/master/String/736.Parse-Lisp-Expression) (H-)   
-[816.Ambiguous-Coordinates](https://github.com/wisdompeak/LeetCode/tree/master/String/816.Ambiguous-Coordinates) (M+)  
-[844.Backspace-String-Compare](https://github.com/wisdompeak/LeetCode/tree/master/String/844.Backspace-String-Compare) (M+)   
-[1616.Split-Two-Strings-to-Make-Palindrome](https://github.com/wisdompeak/LeetCode/tree/master/String/1616.Split-Two-Strings-to-Make-Palindrome) (M+)  
-[1754.Largest-Merge-Of-Two-Strings](https://github.com/wisdompeak/LeetCode/tree/master/String/1754.Largest-Merge-Of-Two-Strings) (M+)  
-[1849.Splitting-a-String-Into-Descending-Consecutive-Values](https://github.com/wisdompeak/LeetCode/tree/master/String/1849.Splitting-a-String-Into-Descending-Consecutive-Values) (M+)  
+#### XOR
 
-### Rolling Hash    
-[1044.Longest-Duplicate-Substring](https://github.com/wisdompeak/LeetCode/tree/master/String/1044.Longest-Duplicate-Substring) (H)    
-[1062.Longest-Repeating-Substring](https://github.com/wisdompeak/LeetCode/tree/master/String/1062.Longest-Repeating-Substring) (H-)   
-[1554.Strings-Differ-by-One-Character](https://github.com/wisdompeak/LeetCode/tree/master/String/1554.Strings-Differ-by-One-Character) (H)  
-[1698.Number-of-Distinct-Substrings-in-a-String](https://github.com/wisdompeak/LeetCode/tree/master/String/1698.Number-of-Distinct-Substrings-in-a-String) (H-)  
-[1923.Longest-Common-Subpath](https://github.com/wisdompeak/LeetCode/tree/master/String/1923.Longest-Common-Subpath) (H)  
+[136.Single-Number](https://github.com/wisdompeak/LeetCode/tree/master/Bit_Manipulation/136.Single-Number) \(M\)  
+[268.Missing-Number](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/268.Missing-Number) \(H-\)  
+[1310.XOR-Queries-of-a-Subarray](https://github.com/wisdompeak/LeetCode/tree/master/Bit_Manipulation/1310.XOR-Queries-of-a-Subarray) \(M\)  
+[1442.Count-Triplets-That-Can-Form-Two-Arrays-of-Equal-XOR](https://github.com/wisdompeak/LeetCode/tree/master/Bit_Manipulation/1442.Count-Triplets-That-Can-Form-Two-Arrays-of-Equal-XOR) \(M+\)  
+[1506.Find-Root-of-N-Ary-Tree](https://github.com/wisdompeak/LeetCode/tree/master/Bit_Manipulation/1506.Find-Root-of-N-Ary-Tree) \(M+\)  
+[1734.Decode-XORed-Permutation](https://github.com/wisdompeak/LeetCode/tree/master/Bit_Manipulation/1734.Decode-XORed-Permutation) \(M+\)  
+[1738.Find-Kth-Largest-XOR-Coordinate-Value](https://github.com/wisdompeak/LeetCode/tree/master/Bit_Manipulation/1738.Find-Kth-Largest-XOR-Coordinate-Value) \(M+\)  
+[1835.Find-XOR-Sum-of-All-Pairs-Bitwise-AND](https://github.com/wisdompeak/LeetCode/tree/master/Bit_Manipulation/1835.Find-XOR-Sum-of-All-Pairs-Bitwise-AND) \(M\)
 
-### KMP   
-[1392.Longest-Happy-Prefix](https://github.com/wisdompeak/LeetCode/tree/master/String/1392.Longest-Happy-Prefix) (H)    
-[028.Implement-strStr](https://github.com/wisdompeak/LeetCode/tree/master/String/028.Implement-strStr) (H)    
-[214.Shortest-Palindrome](https://github.com/wisdompeak/LeetCode/blob/master/String/214.Shortest-Palindrome) (H)     
-[459.Repeated-Substring-Pattern](https://github.com/wisdompeak/LeetCode/tree/master/String/459.Repeated-Substring-Pattern) (H)    
-[572.Subtree-of-Another-Tree](https://github.com/wisdompeak/LeetCode/tree/master/Tree/572.Subtree-of-Another-Tree) (H)  
-[1367.Linked-List-in-Binary-Tree](https://github.com/wisdompeak/LeetCode/tree/master/String/1367.Linked-List-in-Binary-Tree) (H)  
-1397.Find All Good Strings (TBD)  
-[1764.Form-Array-by-Concatenating-Subarrays-of-Another-Array](https://github.com/wisdompeak/LeetCode/tree/master/String/1764.Form-Array-by-Concatenating-Subarrays-of-Another-Array) (H)  
+#### Bit Mask
 
-### Manacher   
-[005.Longest-Palindromic-Substring](https://github.com/wisdompeak/LeetCode/tree/master/String/005.Longest-Palindromic-Substring) (H)  
-[214.Shortest-Palindrome](https://github.com/wisdompeak/LeetCode/blob/master/String/214.Shortest-Palindrome) (H)  
-[647.Palindromic-Substrings](https://github.com/wisdompeak/LeetCode/tree/master/String/647.Palindromic-Substrings) (M+)   
-[1960.Maximum-Product-of-the-Length-of-Two-Palindromic-Substrings](https://github.com/wisdompeak/LeetCode/tree/master/String/1960.Maximum-Product-of-the-Length-of-Two-Palindromic-Substrings) (H)    
+[1239.Maximum-Length-of-a-Concatenated-String-with-Unique-Characters](https://github.com/wisdompeak/LeetCode/tree/master/Bit_Manipulation/1239.Maximum-Length-of-a-Concatenated-String-with-Unique-Characters) \(M+\)  
+[1284.Minimum-Number-of-Flips-to-Convert-Binary-Matrix-to-Zero-Matrix](https://github.com/wisdompeak/LeetCode/tree/master/Bit_Manipulation/1284.Minimum-Number-of-Flips-to-Convert-Binary-Matrix-to-Zero-Matrix) \(M+\)  
+[1452.People-Whose-List-of-Favorite-Companies-Is-Not-a-Subset-of-Another-List](https://github.com/wisdompeak/LeetCode/tree/master/Bit_Manipulation/1452.People-Whose-List-of-Favorite-Companies-Is-Not-a-Subset-of-Another-List) \(H-\)  
+[1601.Maximum-Number-of-Achievable-Transfer-Requests](https://github.com/wisdompeak/LeetCode/tree/master/Bit_Manipulation/1601.Maximum-Number-of-Achievable-Transfer-Requests) \(H-\)  
+[1755.Closest-Subsequence-Sum](https://github.com/wisdompeak/LeetCode/tree/master/Bit_Manipulation/1755.Closest-Subsequence-Sum) \(H\)  
+[1774.Closest-Dessert-Cost](https://github.com/wisdompeak/LeetCode/tree/master/Bit_Manipulation/1774.Closest-Dessert-Cost) \(M\)  
+[2002.Maximum-Product-of-the-Length-of-Two-Palindromic-Subsequences](https://github.com/wisdompeak/LeetCode/tree/master/Bit_Manipulation/2002.Maximum-Product-of-the-Length-of-Two-Palindromic-Subsequences)
 
-### Palindrome
+### [Divide and Conquer](https://github.com/wisdompeak/LeetCode/tree/master/Divide_Conquer)
+
+[315.Count-of-Smaller-Numbers-After-Self](https://github.com/wisdompeak/LeetCode/tree/master/Divide_Conquer/315.Count-of-Smaller-Numbers-After-Self) \(H-\)  
+[327.Count-of-Range-Sum](https://github.com/wisdompeak/LeetCode/tree/master/Divide_Conquer/327.Count-of-Range-Sum) \(H-\)  
+[493.Reverse-Pairs](https://github.com/wisdompeak/LeetCode/tree/master/Divide_Conquer/493.Reverse-Pairs) \(M+\)  
+[1649.Create-Sorted-Array-through-Instructions](https://github.com/wisdompeak/LeetCode/tree/master/Divide_Conquer/1649.Create-Sorted-Array-through-Instructions) \(H\)
+
+### [String](https://github.com/wisdompeak/LeetCode/tree/master/String)
+
+[006.ZigZag-Conversion](https://github.com/wisdompeak/LeetCode/tree/master/String/006.ZigZag-Conversion) \(M+\)  
+[336.Palindrome-Pairs](https://github.com/wisdompeak/LeetCode/tree/master/String/336.Palindrome-Pairs) \(H-\)  
+[388.Longest-Absolute-File-Path](https://github.com/wisdompeak/LeetCode/tree/master/String/388.Longest-Absolute-File-Path) \(M+\)  
+[408.Valid-Word-Abbreviation](https://github.com/wisdompeak/LeetCode/tree/master/String/408.Valid-Word-Abbreviation) \(M\)  
+411.Minimum-Unique-Word-Abbreviation \(H\)  
+[418.Sentence-Screen-Fitting](https://github.com/wisdompeak/LeetCode/tree/master/String/418.Sentence-Screen-Fitting) \(M+\)  
+[423.Reconstruct-Original-Digits-from-English](https://github.com/wisdompeak/LeetCode/tree/master/Others/423.Reconstruct-Original-Digits-from-English) \(H-\)  
+[527.Word-Abbreviation](https://github.com/wisdompeak/LeetCode/tree/master/String/527.Word-Abbreviation) \(M+\)  
+[556.Next Greater Element III](https://github.com/wisdompeak/LeetCode/tree/master/String/556.Next-Greater-Element-III) \(H-\)  
+616.Add-Bold-Tag-in-String \(M\)  
+[467.Unique-Substrings-in-Wraparound-String](https://github.com/wisdompeak/LeetCode/tree/master/String/467.Unique-Substrings-in-Wraparound-String) \(H-\)  
+[564.Find-the-Closest-Palindrome](https://github.com/wisdompeak/LeetCode/tree/master/String/564.Find-the-Closest-Palindrome) \(H\)  
+722.Remove-Comments \(H\)  
+[736.Parse-Lisp-Expression](https://github.com/wisdompeak/LeetCode/tree/master/String/736.Parse-Lisp-Expression) \(H-\)  
+[816.Ambiguous-Coordinates](https://github.com/wisdompeak/LeetCode/tree/master/String/816.Ambiguous-Coordinates) \(M+\)  
+[844.Backspace-String-Compare](https://github.com/wisdompeak/LeetCode/tree/master/String/844.Backspace-String-Compare) \(M+\)  
+[1616.Split-Two-Strings-to-Make-Palindrome](https://github.com/wisdompeak/LeetCode/tree/master/String/1616.Split-Two-Strings-to-Make-Palindrome) \(M+\)  
+[1754.Largest-Merge-Of-Two-Strings](https://github.com/wisdompeak/LeetCode/tree/master/String/1754.Largest-Merge-Of-Two-Strings) \(M+\)  
+[1849.Splitting-a-String-Into-Descending-Consecutive-Values](https://github.com/wisdompeak/LeetCode/tree/master/String/1849.Splitting-a-String-Into-Descending-Consecutive-Values) \(M+\)
+
+#### Rolling Hash
+
+[1044.Longest-Duplicate-Substring](https://github.com/wisdompeak/LeetCode/tree/master/String/1044.Longest-Duplicate-Substring) \(H\)  
+[1062.Longest-Repeating-Substring](https://github.com/wisdompeak/LeetCode/tree/master/String/1062.Longest-Repeating-Substring) \(H-\)  
+[1554.Strings-Differ-by-One-Character](https://github.com/wisdompeak/LeetCode/tree/master/String/1554.Strings-Differ-by-One-Character) \(H\)  
+[1698.Number-of-Distinct-Substrings-in-a-String](https://github.com/wisdompeak/LeetCode/tree/master/String/1698.Number-of-Distinct-Substrings-in-a-String) \(H-\)  
+[1923.Longest-Common-Subpath](https://github.com/wisdompeak/LeetCode/tree/master/String/1923.Longest-Common-Subpath) \(H\)
+
+#### KMP
+
+[1392.Longest-Happy-Prefix](https://github.com/wisdompeak/LeetCode/tree/master/String/1392.Longest-Happy-Prefix) \(H\)  
+[028.Implement-strStr](https://github.com/wisdompeak/LeetCode/tree/master/String/028.Implement-strStr) \(H\)  
+[214.Shortest-Palindrome](https://github.com/wisdompeak/LeetCode/blob/master/String/214.Shortest-Palindrome) \(H\)  
+[459.Repeated-Substring-Pattern](https://github.com/wisdompeak/LeetCode/tree/master/String/459.Repeated-Substring-Pattern) \(H\)  
+[572.Subtree-of-Another-Tree](https://github.com/wisdompeak/LeetCode/tree/master/Tree/572.Subtree-of-Another-Tree) \(H\)  
+[1367.Linked-List-in-Binary-Tree](https://github.com/wisdompeak/LeetCode/tree/master/String/1367.Linked-List-in-Binary-Tree) \(H\)  
+1397.Find All Good Strings \(TBD\)  
+[1764.Form-Array-by-Concatenating-Subarrays-of-Another-Array](https://github.com/wisdompeak/LeetCode/tree/master/String/1764.Form-Array-by-Concatenating-Subarrays-of-Another-Array) \(H\)
+
+#### Manacher
+
+[005.Longest-Palindromic-Substring](https://github.com/wisdompeak/LeetCode/tree/master/String/005.Longest-Palindromic-Substring) \(H\)  
+[214.Shortest-Palindrome](https://github.com/wisdompeak/LeetCode/blob/master/String/214.Shortest-Palindrome) \(H\)  
+[647.Palindromic-Substrings](https://github.com/wisdompeak/LeetCode/tree/master/String/647.Palindromic-Substrings) \(M+\)  
+[1960.Maximum-Product-of-the-Length-of-Two-Palindromic-Substrings](https://github.com/wisdompeak/LeetCode/tree/master/String/1960.Maximum-Product-of-the-Length-of-Two-Palindromic-Substrings) \(H\)
+
+#### Palindrome
+
 * Several ways to solve the Longest palindrome substring problem
-  - DP-based solution: O(n^2) space and time, if need to storing palindrome result, this is always better (e.g. palindrome partitioning)
-  - Start looping from middle: O(n^2) time
-  - Manacher's algorithm: O(n) time, not generic enough.
+  * DP-based solution: O\(n^2\) space and time, if need to storing palindrome result, this is always better \(e.g. palindrome partitioning\)
+  * Start looping from middle: O\(n^2\) time
+  * Manacher's algorithm: O\(n\) time, not generic enough.
 
-## [Union Find](https://github.com/wisdompeak/LeetCode/tree/master/Union_Find)
-[547.Friend-Circles](https://github.com/wisdompeak/LeetCode/tree/master/Union_Find/547.Friend-Circles) (M)    
-[200.Number-of-Islands](https://github.com/wisdompeak/LeetCode/tree/master/DFS/200.Number-of-Islands) (H-)    
-[305.Number-of-Islands-II](https://github.com/wisdompeak/LeetCode/tree/master/Union_Find/305.Number-of-Islands-II) (H-)    
-[130.Surrounded-Regions](https://github.com/wisdompeak/LeetCode/tree/master/Union_Find/130.Surrounded-Regions) (H-)   
-[128.Longest-Consecutive-Sequence](https://github.com/wisdompeak/LeetCode/tree/master/Union_Find/128.Longest-Consecutive-Sequence) (H-)  
-[684.Redundant-Connection](https://github.com/wisdompeak/LeetCode/tree/master/Union_Find/684.Redundant-Connection) (M)    
-[685.Redundant-Connection-II](https://github.com/wisdompeak/LeetCode/tree/master/Union_Find/685.Redundant-Connection-II) (H)   
-[721.Accounts-Merge](https://github.com/wisdompeak/LeetCode/tree/master/Union_Find/721.Accounts-Merge) (M+)   
-[765.Couples-Holding-Hands](https://github.com/wisdompeak/LeetCode/tree/master/Union_Find/765.Couples-Holding-Hands) (H-)    
-[785.Is-Graph-Bipartite](https://github.com/wisdompeak/LeetCode/tree/master/BFS/785.Is-Graph-Bipartite) (M+)    
-[924.Minimize-Malware-Spread](https://github.com/wisdompeak/LeetCode/tree/master/Union_Find/924.Minimize-Malware-Spread) (H-)   
-[947.Most-Stones-Removed-with-Same-Row-or-Column](https://github.com/wisdompeak/LeetCode/tree/master/Union_Find/947.Most-Stones-Removed-with-Same-Row-or-Column) (M+)    
-[959.Regions-Cut-By-Slashes](https://github.com/wisdompeak/LeetCode/tree/master/DFS/959.Regions-Cut-By-Slashes) (H-)   
-[990.Satisfiability-of-Equality-Equations](https://github.com/wisdompeak/LeetCode/tree/master/Union_Find/990.Satisfiability-of-Equality-Equations) (M+)   
-[1061.Lexicographically-Smallest-Equivalent-String](https://github.com/wisdompeak/LeetCode/tree/master/Union_Find/1061.Lexicographically-Smallest-Equivalent-String) (M)  
-[1101.The-Earliest-Moment-When-Everyone-Become-Friends](https://github.com/wisdompeak/LeetCode/tree/master/Union_Find/1101.The-Earliest-Moment-When-Everyone-Become-Friends) (M+)  
-[1202.Smallest-String-With-Swaps](https://github.com/wisdompeak/LeetCode/tree/master/Union_Find/1202.Smallest-String-With-Swaps) (M+)   
-[1319.Number-of-Operations-to-Make-Network-Connected](https://github.com/wisdompeak/LeetCode/tree/master/Union_Find/1319.Number-of-Operations-to-Make-Network-Connected) (M+)   
-[1632.Rank-Transform-of-a-Matrix](https://github.com/wisdompeak/LeetCode/tree/master/Union_Find/1632.Rank-Transform-of-a-Matrix) (H)  
-[1631.Path-With-Minimum-Effort](https://github.com/wisdompeak/LeetCode/tree/master/Union_Find/1631.Path-With-Minimum-Effort) (H-)  
-[1697.Checking-Existence-of-Edge-Length-Limited-Paths](https://github.com/wisdompeak/LeetCode/tree/master/Union_Find/1697.Checking-Existence-of-Edge-Length-Limited-Paths) (H-)  
-[1724.Checking-Existence-of-Edge-Length-Limited-Paths-II](https://github.com/wisdompeak/LeetCode/tree/master/Union_Find/1724.Checking-Existence-of-Edge-Length-Limited-Paths-II) (H+)  
-[1722.Minimize-Hamming-Distance-After-Swap-Operations](https://github.com/wisdompeak/LeetCode/tree/master/Union_Find/1722.Minimize-Hamming-Distance-After-Swap-Operations) (M+)  
-[803.Bricks-Falling-When-Hit](https://github.com/wisdompeak/LeetCode/tree/master/DFS/803.Bricks-Falling-When-Hit) (H)   
-[1970.Last-Day-Where-You-Can-Still-Cross](https://github.com/wisdompeak/LeetCode/tree/master/Union_Find/1970.Last-Day-Where-You-Can-Still-Cross) (H-)    
+### [Union Find](https://github.com/wisdompeak/LeetCode/tree/master/Union_Find)
 
-#### Patterns
+[547.Friend-Circles](https://github.com/wisdompeak/LeetCode/tree/master/Union_Find/547.Friend-Circles) \(M\)  
+[200.Number-of-Islands](https://github.com/wisdompeak/LeetCode/tree/master/DFS/200.Number-of-Islands) \(H-\)  
+[305.Number-of-Islands-II](https://github.com/wisdompeak/LeetCode/tree/master/Union_Find/305.Number-of-Islands-II) \(H-\)  
+[130.Surrounded-Regions](https://github.com/wisdompeak/LeetCode/tree/master/Union_Find/130.Surrounded-Regions) \(H-\)  
+[128.Longest-Consecutive-Sequence](https://github.com/wisdompeak/LeetCode/tree/master/Union_Find/128.Longest-Consecutive-Sequence) \(H-\)  
+[684.Redundant-Connection](https://github.com/wisdompeak/LeetCode/tree/master/Union_Find/684.Redundant-Connection) \(M\)  
+[685.Redundant-Connection-II](https://github.com/wisdompeak/LeetCode/tree/master/Union_Find/685.Redundant-Connection-II) \(H\)  
+[721.Accounts-Merge](https://github.com/wisdompeak/LeetCode/tree/master/Union_Find/721.Accounts-Merge) \(M+\)  
+[765.Couples-Holding-Hands](https://github.com/wisdompeak/LeetCode/tree/master/Union_Find/765.Couples-Holding-Hands) \(H-\)  
+[785.Is-Graph-Bipartite](https://github.com/wisdompeak/LeetCode/tree/master/BFS/785.Is-Graph-Bipartite) \(M+\)  
+[924.Minimize-Malware-Spread](https://github.com/wisdompeak/LeetCode/tree/master/Union_Find/924.Minimize-Malware-Spread) \(H-\)  
+[947.Most-Stones-Removed-with-Same-Row-or-Column](https://github.com/wisdompeak/LeetCode/tree/master/Union_Find/947.Most-Stones-Removed-with-Same-Row-or-Column) \(M+\)  
+[959.Regions-Cut-By-Slashes](https://github.com/wisdompeak/LeetCode/tree/master/DFS/959.Regions-Cut-By-Slashes) \(H-\)  
+[990.Satisfiability-of-Equality-Equations](https://github.com/wisdompeak/LeetCode/tree/master/Union_Find/990.Satisfiability-of-Equality-Equations) \(M+\)  
+[1061.Lexicographically-Smallest-Equivalent-String](https://github.com/wisdompeak/LeetCode/tree/master/Union_Find/1061.Lexicographically-Smallest-Equivalent-String) \(M\)  
+[1101.The-Earliest-Moment-When-Everyone-Become-Friends](https://github.com/wisdompeak/LeetCode/tree/master/Union_Find/1101.The-Earliest-Moment-When-Everyone-Become-Friends) \(M+\)  
+[1202.Smallest-String-With-Swaps](https://github.com/wisdompeak/LeetCode/tree/master/Union_Find/1202.Smallest-String-With-Swaps) \(M+\)  
+[1319.Number-of-Operations-to-Make-Network-Connected](https://github.com/wisdompeak/LeetCode/tree/master/Union_Find/1319.Number-of-Operations-to-Make-Network-Connected) \(M+\)  
+[1632.Rank-Transform-of-a-Matrix](https://github.com/wisdompeak/LeetCode/tree/master/Union_Find/1632.Rank-Transform-of-a-Matrix) \(H\)  
+[1631.Path-With-Minimum-Effort](https://github.com/wisdompeak/LeetCode/tree/master/Union_Find/1631.Path-With-Minimum-Effort) \(H-\)  
+[1697.Checking-Existence-of-Edge-Length-Limited-Paths](https://github.com/wisdompeak/LeetCode/tree/master/Union_Find/1697.Checking-Existence-of-Edge-Length-Limited-Paths) \(H-\)  
+[1724.Checking-Existence-of-Edge-Length-Limited-Paths-II](https://github.com/wisdompeak/LeetCode/tree/master/Union_Find/1724.Checking-Existence-of-Edge-Length-Limited-Paths-II) \(H+\)  
+[1722.Minimize-Hamming-Distance-After-Swap-Operations](https://github.com/wisdompeak/LeetCode/tree/master/Union_Find/1722.Minimize-Hamming-Distance-After-Swap-Operations) \(M+\)  
+[803.Bricks-Falling-When-Hit](https://github.com/wisdompeak/LeetCode/tree/master/DFS/803.Bricks-Falling-When-Hit) \(H\)  
+[1970.Last-Day-Where-You-Can-Still-Cross](https://github.com/wisdompeak/LeetCode/tree/master/Union_Find/1970.Last-Day-Where-You-Can-Still-Cross) \(H-\)
+
+**Patterns**
+
 * Suitable in a dynamically changing graph. 
-  - Complexity: O(lgn)
-  - Example problems: Number of Island II, find weakly connected components in directed graph, find connected components in undirected graph
+  * Complexity: O\(lgn\)
+  * Example problems: Number of Island II, find weakly connected components in directed graph, find connected components in undirected graph
 
 ```java
-Map<Integer, Integer> father = new HashMap<>();
 
-int find( int x )
-{
-  int parent = x;
-  while ( parent != father.get( parent ) )
-  {
-    parent = father.get( parent );
-  }
-  return parent;
+int find( int x ) 
+{ 
+    int parent = x; 
+    while ( parent != father.get( parent ) ) 
+    { 
+        parent = father.get( parent ); 
+    } 
+    
+    return parent; 
 }
 
-void union( int x, int y )
-{
-  int fa_x = find( x );
-  int fa_y = find( y );
-  if ( fa_x != fa_y )
-  {
-    father.put( fa_x, fa_y );  
-  }
-}
+void union( int x, int y ) 
+{ 
+    int fa_x = find( x ); 
+    int fa_y = find( y ); 
+    if ( fa_x != fa_y ) 
+    { 
+        father.put( fa_x, fa_y );
+    } 
+}   
+
 ```
+
+
 
 #### Prime Factors
 
