@@ -50,41 +50,40 @@ class DeleteDuplicateFolderInSystems(unittest.TestCase):
             if root is None:
                 return
 
+                if root.val != "/":
+                    currPath.pop()
+                return
+
+            root = buildTrie(paths)
+
+    if __name__ == '__main__':
             if root.val != "/":
                 currPath.append(root.val)
 
+                keyToList = defaultdict(list)
+                categorizeByKey(root, keyToList)
+
+                # mark duplicate
+                for nodeList in keyToList.values():
+                    if len(nodeList) >= 2:
+                        for node in nodeList:
+                            node.isDuplicated = True
+
+                            # traverse trie to delete node
+                traverseAndDelete(root)
+
+                # print path
+                allPaths = []
+                listPaths(root, [], allPaths)
+                return allPaths
+
+            def test_CreateString(self):
+                input = [["a"], ["c"], ["d"], ["a", "b"], ["c", "b"], ["d", "a"]]
+                result = self.deleteDuplicateFolder(input)
+                print(result)
             if len(root.children) == 0:
                 allPaths.append(currPath.copy())
             else:
                 for child in root.children.values():
                     listPaths(child, currPath, allPaths)
-
-            if root.val != "/":
-                currPath.pop()
-            return
-
-        root = buildTrie(paths)
-        keyToList = defaultdict(list)
-        categorizeByKey(root, keyToList)
-
-        # mark duplicate
-        for nodeList in keyToList.values():
-            if len(nodeList) >= 2:
-                for node in nodeList:
-                    node.isDuplicated = True
-
-                    # traverse trie to delete node
-        traverseAndDelete(root)
-
-        # print path
-        allPaths = []
-        listPaths(root, [], allPaths)
-        return allPaths
-
-    def test_CreateString(self):
-        input = [["a"],["c"],["d"],["a","b"],["c","b"],["d","a"]]
-        result = self.deleteDuplicateFolder(input)
-        print(result)
-
-if __name__ == '__main__':
     unittest.main()

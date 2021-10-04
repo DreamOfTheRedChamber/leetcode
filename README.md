@@ -34,6 +34,7 @@
     - [Two Pointers](#two-pointers)
       - [Sliding window](#sliding-window)
       - [Begin and end type](#begin-and-end-type)
+        - [Greedy](#greedy)
       - [Partition type](#partition-type)
       - [Slow and fast](#slow-and-fast)
       - [Window type](#window-type)
@@ -116,7 +117,7 @@
       - [Random Pick](#random-pick)
       - [Combinatorics](#combinatorics)
       - [Numerical Theory](#numerical-theory)
-    - [Greedy](#greedy)
+    - [Greedy](#greedy-1)
       - [LIS](#lis)
       - [Two-pass distribution](#two-pass-distribution)
       - [Three-pass](#three-pass)
@@ -527,10 +528,8 @@
 [1234.Replace-the-Substring-for-Balanced-String](https://github.com/wisdompeak/LeetCode/tree/master/Two_Pointers/1234.Replace-the-Substring-for-Balanced-String) \(H-\)  
 [1498.Number-of-Subsequences-That-Satisfy-the-Given-Sum-Condition](https://github.com/wisdompeak/LeetCode/tree/master/Two_Pointers/1498.Number-of-Subsequences-That-Satisfy-the-Given-Sum-Condition) \(H-\)  
 [1574.Shortest-Subarray-to-be-Removed-to-Make-Array-Sorted](https://github.com/wisdompeak/LeetCode/tree/master/Two_Pointers/1574.Shortest-Subarray-to-be-Removed-to-Make-Array-Sorted) \(H-\)  
-[1580.Put-Boxes-Into-the-Warehouse-II](https://github.com/wisdompeak/LeetCode/tree/master/Two_Pointers/1580.Put-Boxes-Into-the-Warehouse-II) \(H-\)  
 [1687.Delivering-Boxes-from-Storage-to-Ports](https://github.com/wisdompeak/LeetCode/tree/master/Two_Pointers/1687.Delivering-Boxes-from-Storage-to-Ports) \(H\)  
 [1793.Maximum-Score-of-a-Good-Subarray](https://github.com/wisdompeak/LeetCode/tree/master/Two_Pointers/1793.Maximum-Score-of-a-Good-Subarray) \(M+\)  
-[1798.Maximum-Number-of-Consecutive-Values-You-Can-Make/Readme.md](https://github.com/wisdompeak/LeetCode/blob/master/Greedy/1798.Maximum-Number-of-Consecutive-Values-You-Can-Make) \(H-\)
 
 #### Sliding window
 
@@ -578,6 +577,11 @@ def kSum(kVal: int, target: int, startIndex: int, nums: List[int]) -> List[List[
 
   return result;
 ```
+
+##### Greedy
+* Squeeze the biggest first [1580.Put-Boxes-Into-the-Warehouse-II](https://github.com/wisdompeak/LeetCode/tree/master/Two_Pointers/1580.Put-Boxes-Into-the-Warehouse-II) \(H-\)  
+* Put in the first [1798.Maximum-Number-of-Consecutive-Values-You-Can-Make/Readme.md](https://github.com/wisdompeak/LeetCode/blob/master/Greedy/1798.Maximum-Number-of-Consecutive-Values-You-Can-Make) \(H-\)
+
 
 #### Partition type
 
