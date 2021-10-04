@@ -1,6 +1,4 @@
-# README
-
-- [README](#readme)
+- [Leetcode](#leetcode)
   - [Typical whiteboard coding workflow](#typical-whiteboard-coding-workflow)
     - [Clarify question](#clarify-question)
     - [Give a small but general enough example for discussing algo/DS](#give-a-small-but-general-enough-example-for-discussing-algods)
@@ -126,6 +124,9 @@
       - [Indexing Sort](#indexing-sort)
       - [Parenthesis](#parenthesis)
       - [Intervals](#intervals)
+        - [Maximum number of non-overlapping intervals - sort by ending points](#maximum-number-of-non-overlapping-intervals---sort-by-ending-points)
+          - [Interval + DP + Binary search](#interval--dp--binary-search)
+        - [Minimum number of intervals to cover the whole range - sort by starting points](#minimum-number-of-intervals-to-cover-the-whole-range---sort-by-starting-points)
       - [Constructive Problems](#constructive-problems)
     - [Others](#others-1)
       - [扫描线 / 差分数组](#扫描线--差分数组)
@@ -137,6 +138,7 @@
   - [Online IDE templates](#online-ide-templates)
     - [Coderpad](#coderpad)
 
+# Leetcode
 ## Typical whiteboard coding workflow
 
 ### Clarify question
@@ -2242,7 +2244,6 @@ void generateCombs( List<List<Integer>> allCombs, LinkedList<Integer> oneComb, i
 ### [Greedy](https://github.com/wisdompeak/LeetCode/tree/master/Greedy)
 
 [055.Jump-Game](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/055.Jump-Game) \(E+\)  
-[045.Jump-Game-II](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/045.Jump-Game-II) \(M\)  
 [134.Gas-Station](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/134.Gas-Station) \(H\)  
 [221.Maximal-Square](https://github.com/wisdompeak/LeetCode/tree/master/Dynamic_Programming/221.Maximal-Square) \(H\)  
 [229.Majority-Element-II](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/229.Majority-Element-II) \(H\)  
@@ -2360,22 +2361,35 @@ void generateCombs( List<List<Integer>> allCombs, LinkedList<Integer> oneComb, i
 [1963.minimum-number-of-swaps-to-make-the-string-balanced](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/1963.minimum-number-of-swaps-to-make-the-string-balanced) \(M+\)
 
 #### Intervals
-[435.Non-overlapping-Intervals](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/435.Non-overlapping-Intervals) \(M+\) \(aka. [646.Maximum-Length-of-Pair-Chain](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/646.Maximum-Length-of-Pair-Chain)\)  
-[452.Minimum-Number-of-Arrows-to-Burst-Balloons](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/452.Minimum-Number-of-Arrows-to-Burst-Balloons) \(H-\)  
-[757.Set-Intersection-Size-At-Least-Two](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/757.Set-Intersection-Size-At-Least-Two) \(H\)  
-[1024.Video-Stitching](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/1024.Video-Stitching) \(M+\)  
 [1272.Remove-Interval](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/1272.Remove-Interval) \(M+\)  
-[1288.Remove-Covered-Intervals](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/1288.Remove-Covered-Intervals) \(M+\)  
-[1326.Minimum-Number-of-Taps-to-Open-to-Water-a-Garden](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/1326.Minimum-Number-of-Taps-to-Open-to-Water-a-Garden) \(M+\)  
-[1751.Maximum-Number-of-Events-That-Can-Be-Attended-II](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/1751.Maximum-Number-of-Events-That-Can-Be-Attended-II) \(H\)
 
-##### Interval + DP + Binary search
+##### Maximum number of non-overlapping intervals - sort by ending points
+
+[452.Minimum-Number-of-Arrows-to-Burst-Balloons](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/452.Minimum-Number-of-Arrows-to-Burst-Balloons) \(H-\)  
+
+[435.Non-overlapping-Intervals](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/435.Non-overlapping-Intervals) \(M+\) \(aka. [646.Maximum-Length-of-Pair-Chain](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/646.Maximum-Length-of-Pair-Chain)\)  
+
+[757.Set-Intersection-Size-At-Least-Two](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/757.Set-Intersection-Size-At-Least-Two) \(H\)  
+
+###### Interval + DP + Binary search
 * TODO
   * Use named tuples
   * Limitations of lru_cache
   * Sorted() key word
 
 [1235.Maximum-Profit-in-Job-Scheduling](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/1235.Maximum-Profit-in-Job-Scheduling) \(H-\)  
+
+[1751.Maximum-Number-of-Events-That-Can-Be-Attended-II](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/1751.Maximum-Number-of-Events-That-Can-Be-Attended-II) \(H\)
+
+##### Minimum number of intervals to cover the whole range - sort by starting points
+[045.Jump-Game-II](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/045.Jump-Game-II) \(M\)  
+
+[1024.Video-Stitching](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/1024.Video-Stitching) \(M+\)  
+
+[1288.Remove-Covered-Intervals](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/1288.Remove-Covered-Intervals) \(M+\)  
+
+[1326.Minimum-Number-of-Taps-to-Open-to-Water-a-Garden](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/1326.Minimum-Number-of-Taps-to-Open-to-Water-a-Garden) \(M+\)  
+
 
 #### Constructive Problems
 
