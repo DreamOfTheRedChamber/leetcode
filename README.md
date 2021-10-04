@@ -1,147 +1,152 @@
-- [Leetcode](#leetcode)
-  - [Typical whiteboard coding workflow](#typical-whiteboard-coding-workflow)
-    - [Clarify question](#clarify-question)
-    - [Give a small but general enough example for discussing algo/DS](#give-a-small-but-general-enough-example-for-discussing-algods)
-    - [Come up with a brute force algorithm](#come-up-with-a-brute-force-algorithm)
-    - [Optimize the brute force solution](#optimize-the-brute-force-solution)
-    - [Write test cases](#write-test-cases)
-    - [Write code](#write-code)
-    - [Walk through test cases](#walk-through-test-cases)
-    - [Solve follow up questions](#solve-follow-up-questions)
-  - [Interview mindset](#interview-mindset)
-    - [Understanding what interviewers really wants](#understanding-what-interviewers-really-wants)
-    - [Checklist](#checklist)
-      - [Things to be careful.](#things-to-be-careful)
-      - [Phone interviews](#phone-interviews)
-      - [Onsite interviews](#onsite-interviews)
-    - [Interview mistakes made in past](#interview-mistakes-made-in-past)
-    - [Whiteboard coding pros and cons](#whiteboard-coding-pros-and-cons)
-  - [Practice mindset](#practice-mindset)
-    - [Goal](#goal)
-    - [Attitudes](#attitudes)
-    - [Tools](#tools)
-    - [Strategies](#strategies)
-    - [Leetcode pros and cons](#leetcode-pros-and-cons)
-  - [Python data structures](#python-data-structures)
-    - [Collections \[TODO\]](#collections-todo)
-      - [Compare heapq and SortedList complexity \[TODO\]](#compare-heapq-and-sortedlist-complexity-todo)
-      - [Sort comparator \[TODO\]](#sort-comparator-todo)
-    - [Type conversions](#type-conversions)
-      - [int and char](#int-and-char)
-  - [LeetCode problem types](#leetcode-problem-types)
-    - [Two Pointers](#two-pointers)
-      - [Sliding window](#sliding-window)
-      - [Begin and end type](#begin-and-end-type)
-        - [Greedy](#greedy)
-      - [Partition type](#partition-type)
-      - [Slow and fast](#slow-and-fast)
-      - [Window type](#window-type)
-      - [Sliding window : Distinct Characters](#sliding-window--distinct-characters)
-      - [Two pointers for two seuqences](#two-pointers-for-two-seuqences)
-    - [Binary Search](#binary-search)
-      - [Binary Processing](#binary-processing)
-      - [Binary Search by Value](#binary-search-by-value)
-    - [Hash Table](#hash-table)
-      - [LRU cache implementation](#lru-cache-implementation)
-      - [Hash+Prefix](#hashprefix)
-    - [Heap](#heap)
-    - [Tree](#tree)
-      - [Serialization & Hashing](#serialization--hashing)
-      - [Tree & Sequence](#tree--sequence)
-      - [LCA](#lca)
-      - [N-ary Tree](#n-ary-tree)
-      - [似树非树](#似树非树)
-    - [Segment Tree](#segment-tree)
-      - [Basics](#basics)
-      - [Lazy Tag](#lazy-tag)
-      - [Others](#others)
-    - [\[Binary Index Tree\]](#binary-index-tree)
-    - [Design](#design)
-    - [Stack](#stack)
-      - [monotonic stack](#monotonic-stack)
-      - [parse expression](#parse-expression)
-      - [Calculator](#calculator)
-      - [Parentheses \[TODO\]](#parentheses-todo)
-    - [Deque](#deque)
-    - [Priority Queue](#priority-queue)
-      - [Sort+PQ](#sortpq)
-      - [Arrangement with Stride](#arrangement-with-stride)
-    - [Graph \[TODO\]](#graph-todo)
-      - [Edge list vs Adjacent list vs Adjacent matrix](#edge-list-vs-adjacent-list-vs-adjacent-matrix)
-    - [DFS](#dfs)
-      - [search in an array](#search-in-an-array)
-      - [memorization](#memorization)
-    - [BFS](#bfs)
-      - [Multi State](#multi-state)
-      - [拓扑排序](#拓扑排序)
-      - [Dijkstra \(BFS+PQ\)](#dijkstra-bfspq)
-    - [Trie](#trie)
-      - [Trie and XOR](#trie-and-xor)
-    - [Linked List](#linked-list)
-      - [Dummy node trick](#dummy-node-trick)
-      - [Common tasks](#common-tasks)
-    - [Dynamic Programming](#dynamic-programming)
-      - [基本型 I](#基本型-i)
-      - [基本型 II](#基本型-ii)
-      - [走迷宫型](#走迷宫型)
-      - [背包型](#背包型)
-      - [键盘型](#键盘型)
-      - [To Do or Not To Do](#to-do-or-not-to-do)
-      - [区间型 I](#区间型-i)
-      - [区间型 II](#区间型-ii)
-      - [双序列型](#双序列型)
-      - [状态压缩DP](#状态压缩dp)
-      - [Catalan](#catalan)
-      - [Permutation](#permutation)
-    - [Bit Manipulation](#bit-manipulation)
-      - [Common tasks](#common-tasks-1)
-      - [XOR](#xor)
-      - [Bit Mask](#bit-mask)
-    - [Divide and Conquer](#divide-and-conquer)
-    - [String](#string)
-      - [Rolling Hash](#rolling-hash)
-      - [KMP](#kmp)
-      - [Manacher](#manacher)
-      - [Palindrome](#palindrome)
-    - [Union Find](#union-find)
-      - [Prime Factors](#prime-factors)
-      - [MST](#mst)
-    - [Recursion](#recursion)
-      - [Min-Max Strategy](#min-max-strategy)
-    - [Graph](#graph)
-    - [Math](#math)
-      - [Distances](#distances)
-      - [Geometry](#geometry)
-      - [Random Pick](#random-pick)
-      - [Combinatorics](#combinatorics)
-      - [Numerical Theory](#numerical-theory)
-    - [Greedy](#greedy-1)
-      - [LIS](#lis)
-      - [Two-pass distribution](#two-pass-distribution)
-      - [Three-pass](#three-pass)
-      - [State Machine](#state-machine)
-      - [Sort](#sort)
-      - [Indexing Sort](#indexing-sort)
-      - [Parenthesis](#parenthesis)
-      - [Intervals](#intervals)
-        - [Maximum number of non-overlapping intervals - sort by ending points](#maximum-number-of-non-overlapping-intervals---sort-by-ending-points)
-          - [Interval + DP + Binary search](#interval--dp--binary-search)
-        - [Minimum number of intervals to cover the whole range - sort by starting points](#minimum-number-of-intervals-to-cover-the-whole-range---sort-by-starting-points)
-      - [Constructive Problems](#constructive-problems)
-    - [Others](#others-1)
-      - [扫描线 / 差分数组](#扫描线--差分数组)
-      - [Enumeration](#enumeration)
-      - [Presum](#presum)
-      - [Quick Select](#quick-select)
-    - [LeetCode Cup](#leetcode-cup)
-    - [Templates](#templates)
-  - [Online IDE templates](#online-ide-templates)
-    - [Coderpad](#coderpad)
+# leetcode/README.md at master · DreamOfTheRedChamber/leetcode
 
-# Leetcode
-## Typical whiteboard coding workflow
 
-### Clarify question
+
+* Leetcode
+  * Typical whiteboard coding workflow
+    * Clarify question
+    * Give a small but general enough example for discussing algo/DS
+    * Come up with a brute force algorithm
+    * Optimize the brute force solution
+    * Write test cases
+    * Write code
+    * Walk through test cases
+    * Solve follow up questions
+  * Interview mindset
+    * Understanding what interviewers really wants
+    * Checklist
+      * Things to be careful.
+      * Phone interviews
+      * Onsite interviews
+    * Interview mistakes made in past
+    * Whiteboard coding pros and cons
+  * Practice mindset
+    * Goal
+    * Attitudes
+    * Tools
+    * Strategies
+    * Leetcode pros and cons
+  * Python data structures
+    * Collections \[TODO\]
+      * Compare heapq and SortedList complexity \[TODO\]
+      * Sort comparator \[TODO\]
+    * Type conversions
+      * int and char
+  * LeetCode problem types
+    * Two Pointers
+      * Sliding window
+      * Begin and end type
+        * Greedy
+      * Partition type
+      * Slow and fast
+      * Window type
+      * Sliding window : Distinct Characters
+      * Two pointers for two seuqences
+    * Binary Search
+      * Binary Processing
+      * Binary Search by Value
+    * Hash Table
+      * LRU cache implementation
+      * Hash+Prefix
+    * Heap
+    * Tree
+      * Serialization & Hashing
+      * Tree & Sequence
+      * LCA
+      * N-ary Tree
+      * 似树非树
+    * Segment Tree
+      * Basics
+      * Lazy Tag
+      * Others
+    * \[Binary Index Tree\]
+    * Design
+    * Stack
+      * monotonic stack
+      * parse expression
+      * Calculator
+      * Parentheses \[TODO\]
+    * Deque
+    * Priority Queue
+      * Sort+PQ
+      * Arrangement with Stride
+    * Graph \[TODO\]
+      * Edge list vs Adjacent list vs Adjacent matrix
+    * DFS
+      * search in an array
+      * memorization
+    * BFS
+      * Multi State
+      * 拓扑排序
+      * Dijkstra \(BFS+PQ\)
+    * Trie
+      * Trie and XOR
+    * Linked List
+      * Dummy node trick
+      * Common tasks
+    * Dynamic Programming
+      * 基本型 I
+      * 基本型 II
+      * 走迷宫型
+      * 背包型
+      * 键盘型
+      * To Do or Not To Do
+      * 区间型 I
+      * 区间型 II
+      * 双序列型
+      * 状态压缩DP
+      * Catalan
+      * Permutation
+    * Bit Manipulation
+      * Common tasks
+      * XOR
+      * Bit Mask
+    * Divide and Conquer
+    * String
+      * Rolling Hash
+      * KMP
+      * Manacher
+      * Palindrome
+    * Union Find
+      * Prime Factors
+      * MST
+    * Recursion
+      * Min-Max Strategy
+    * Graph
+    * Math
+      * Distances
+      * Geometry
+      * Random Pick
+      * Combinatorics
+      * Numerical Theory
+    * Greedy
+      * LIS
+      * Two-pass distribution
+      * Three-pass
+      * State Machine
+      * Sort
+      * Indexing Sort
+      * Parenthesis
+      * Intervals
+        * Maximum number of non-overlapping intervals - sort by ending points
+          * Interval + DP + Binary search
+        * Minimum number of intervals to cover the whole range - sort by starting points
+      * Constructive Problems
+    * Others
+      * 扫描线 / 差分数组
+      * Enumeration
+      * Presum
+      * Quick Select
+    * LeetCode Cup
+    * Templates
+  * Online IDE templates
+    * Coderpad
+
+## Leetcode
+
+### Typical whiteboard coding workflow
+
+#### Clarify question
 
 1. Define public APIs to be implemented:
    * Things to define - Input type
@@ -194,11 +199,11 @@
        * Whether duplicate entries exist
    * Edge cases: "_**If input is like this, then what should I output?**_"
 
-### Give a small but general enough example for discussing algo/DS
+#### Give a small but general enough example for discussing algo/DS
 
 * Usually a size of 4~5 is enough.
 
-### Come up with a brute force algorithm
+#### Come up with a brute force algorithm
 
 1. Synchronize with interviewer "_**Let's come up with a brute force solution first.**_"
 2. Unstuck strategy:
@@ -211,7 +216,7 @@
 4. Talk about the algorithm to be used.
 5. Calc time/space complexity: "_**The time complexity of the algorithm is O\(XXX\) and space complexity is O\(XXX\)**_"
 
-### Optimize the brute force solution
+#### Optimize the brute force solution
 
 1. Synchronize with interviewer "_**The time/space complexity of the brute force solution is too high and will be impractical.**_"
 2. Consider the typical optimizing patterns below:
@@ -226,7 +231,7 @@
    2. Be keen to what interviewer is saying: Every word the interviewer is saying has its meanings. ""
 5. Synchronize with interviewer "_**Do you have any concerns for the proposed algorithm? Should we write code for this**_."
 
-### Write test cases
+#### Write test cases
 
 * In general, the following types of test cases should be considered 
   * The normal case: e.g. array length of even or odd in sorting algo
@@ -251,7 +256,7 @@
     * List/Array of even length
     * List/Array of odd length
 
-### Write code
+#### Write code
 
 1. Synchronize with interviewer "_**There are XXX steps in this algorithm. The first is XXX. The second....**_"
 2. Check input validity \(already discussed thoroughly before\)
@@ -264,7 +269,7 @@
    * When need double check trivials \(like +1 or plus two, loop termination conditions \): 
      * "_**Not sure whether my loop should have "&lt;" or "&lt;=". Write a checkmark to remind yourself to figure out the details at the end.**_""
 
-### Walk through test cases
+#### Walk through test cases
 
 1. Synchronize with interviewer: "_**Then I would usually check my code against tests**_" 
 2. Check the code by myself
@@ -285,7 +290,7 @@
      * Global variables
 4. Synchronize with interviewer: "_**I think I am done with the problem**_".
 
-### Solve follow up questions
+#### Solve follow up questions
 
 * Typical follow-up questions
   * No duplicates -&gt; duplicates exist
@@ -294,9 +299,9 @@
   * How to avoid global variables
   * How to improve performance
 
-## Interview mindset
+### Interview mindset
 
-### Understanding what interviewers really wants
+#### Understanding what interviewers really wants
 
 * Evaluation criteria
   * Can s/he explain technical solutions well?
@@ -310,18 +315,18 @@
   <thead>
     <tr>
       <th style="text-align:left">What they ask</th>
-      <th style="text-align:center">Wrong response</th>
-      <th style="text-align:right">What they really want</th>
+      <th style="text-align:left">Wrong response</th>
+      <th style="text-align:left">What they really want</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td style="text-align:left">Tell me what you did for this project</td>
-      <td style="text-align:center">
+      <td style="text-align:left">
         <p>Describe the process in chronological order</p>
         <p>Recites what&apos;s on their resume</p>
       </td>
-      <td style="text-align:right">
+      <td style="text-align:left">
         <p>What are you able to do after completing this project4</p>
         <p>How did you overcome obstacles</p>
         <p>Details that are not on your resume</p>
@@ -329,11 +334,11 @@
     </tr>
     <tr>
       <td style="text-align:left">Tell me what you did for this job</td>
-      <td style="text-align:center">
+      <td style="text-align:left">
         <p>Describe major projects</p>
         <p>Describe daily tasks</p>
       </td>
-      <td style="text-align:right">
+      <td style="text-align:left">
         <p>Were you able to learn quickly</p>
         <p>Did you add enough value at your previous job to prove that you can add
           value for me</p>
@@ -341,11 +346,11 @@
     </tr>
     <tr>
       <td style="text-align:left">Compare data structure A and B</td>
-      <td style="text-align:center">
+      <td style="text-align:left">
         <p>Explain what A and B are respectively</p>
         <p>List 1 difference between them</p>
       </td>
-      <td style="text-align:right">
+      <td style="text-align:left">
         <p>Does your explanation show that you have actually used them in a real
           project</p>
         <p>Explain real situations where you would use A vs B.</p>
@@ -353,11 +358,11 @@
     </tr>
     <tr>
       <td style="text-align:left">Write code to solve problem</td>
-      <td style="text-align:center">
+      <td style="text-align:left">
         <p>Jumps into writing code</p>
         <p>Awkward silence</p>
       </td>
-      <td style="text-align:right">
+      <td style="text-align:left">
         <p>Would I want to work with them everyday</p>
         <p>Have they actually written production grade code</p>
         <p>What do they do when stuck</p>
@@ -365,8 +370,8 @@
     </tr>
     <tr>
       <td style="text-align:left">Maybe you could try this ...</td>
-      <td style="text-align:center">Take advice without serious thinking</td>
-      <td style="text-align:right">
+      <td style="text-align:left">Take advice without serious thinking</td>
+      <td style="text-align:left">
         <p>Do they think independently</p>
         <p>How fast can they absord new information</p>
         <p>Do they take advice/directions well</p>
@@ -376,22 +381,22 @@
   </tbody>
 </table>
 
-### Checklist
+#### Checklist
 
-#### Things to be careful.
+**Things to be careful.**
 
 * Do not just give "yes" or "no" answers. Limit initial explanation to short summaries and allow the interviewer to ask follow up questions.
 * Your tone of voice and word choice. Interviewers use voice to judge how believable you are. Posture really have impact on your mind.
 * Eye contact and shake hands. Say thanks to interviewers at last. 
 
-#### Phone interviews
+**Phone interviews**
 
 * Test the online coding environment.
 * Make sure your cellphone has enough battery.
 * Have a copy of resume in front of you.
 * Take notes and write a follow up thank you email with details from the discussion.
 
-#### Onsite interviews
+**Onsite interviews**
 
 * Show up 15 minutes early and have the interviewer's phone number for last minute changes.
 * Things to bring with you
@@ -403,7 +408,7 @@
   * A piece of pen and paper. Take notes when an interviewer speaks to help yourself focus and ask more specific questions. 
   * Computers for last minute warm-up. 
 
-### Interview mistakes made in past
+#### Interview mistakes made in past
 
 * Too nervous: When I become too nervous, I just could not speak. This is the number one red flag during interviews. No one wants to work with people who cannot speak.
 * Ignore first impression importance: Don't smile/handshake/look into interviewers' eyes.
@@ -416,7 +421,7 @@
 * When interviewers keep interrupting me, do not be nervous. They are trying to help me!!! Always stay in calm and take their hints. No matter whether I could finish my current solution. Communication is the most important thing. 
 * Preparing interview: What really matters is how many times you practice the leetcode problem, rather than how long you spend during a single practice round.
 
-### Whiteboard coding pros and cons
+#### Whiteboard coding pros and cons
 
 * Pros
   * Every software engineer knows algo and data structures. It provides a common domain for interviewers and interviewees to discuss.
@@ -428,28 +433,28 @@
   * The optimization process in algorithm questions is kind of over-optimization. In practice, only improve performance when necessary.
   * Stand and write code on whiteboard is really exhausting if lasting for 4-5 hours.
 
-## Practice mindset
+### Practice mindset
 
-### Goal
+#### Goal
 
 * Proficiency: Given an original Leetcode problem you should be able to finish it no more than 10 minutes no matter what its difficulty level is.
 * Understanding: You should be able to start from brute force solution, discuss tradeoffs along the way and optimize to a solution the interviewer is satisfied with.
 * Cleaness: No interview code should be longer than 100 lines. In most cases it is within 50 lines. Keep optimizing your code until it is short enough. 
 
-### Attitudes
+#### Attitudes
 
 * This might be the last time in my life that I spent so much time and efforts in algorithm questions. Next time when I hunt for jobs, either HRs will invite me or I will have far less time to prepare.
 * An interview is a matter of preparation. To enable yourself explain solutions well and code in a bug free way, you need to practice a lot. 
 * The way an engineer approach a algorithm problem can reflect their efficiency at work. 
 * Hiring system is broken. But currently there is no better way to do it.
 
-### Tools
+#### Tools
 
 * Task planning: Use tags \( TO\_START, TO\_HURRY, TO\_TEST \) to manage algorithm question status and prioritize important tasks
 * Feedbacks: Use git commit number per day as feedback for progress
 * Summarizing lessons: Use git commit message as a place to learn from mistakes and summarize lessons
 
-### Strategies
+#### Strategies
 
 * Chunk it up
   * Focus on recently popular, medium to hard questions.
@@ -462,7 +467,7 @@
   * Interview a lot. 
   * Reflection on what I do good and bad
 
-### Leetcode pros and cons
+#### Leetcode pros and cons
 
 * Pros
   * Latest interview questions
@@ -481,9 +486,9 @@
     * Could not search problems by specifying multiple tags
     * Function names do not follow best practices, which makes variables naming kind of difficult.
 
-## Python data structures
+### Python data structures
 
-### Collections \[TODO\]
+#### Collections \[TODO\]
 
 | `data type` | `Original` | `Improved` |
 | :--- | :---: | ---: |
@@ -492,23 +497,23 @@
 | deque | deque |  |
 | dictionary | dict | defaultdict |
 
-#### Compare heapq and SortedList complexity \[TODO\]
+**Compare heapq and SortedList complexity \[TODO\]**
 
-#### Sort comparator \[TODO\]
+**Sort comparator \[TODO\]**
 
 * Pass comparator to Sorted\(\) and sort\(\)
 * Pass comparator to SortedContainers 
 
-### Type conversions
+#### Type conversions
 
-#### int and char
+**int and char**
 
 * ord: int to char
 * char: char to int
 
-## LeetCode problem types
+### LeetCode problem types
 
-### [Two Pointers](https://github.com/wisdompeak/LeetCode/tree/master/Two_Pointers)
+#### [Two Pointers](https://github.com/wisdompeak/LeetCode/tree/master/Two_Pointers)
 
 [011.Container-With-Most-Water](https://github.com/wisdompeak/LeetCode/tree/master/Two_Pointers/011.Container-With-Most-Water) \(M+\)  
 [015.3Sum](https://github.com/wisdompeak/LeetCode/tree/master/Two_Pointers/015.3Sum) \(M\)  
@@ -531,9 +536,9 @@
 [1498.Number-of-Subsequences-That-Satisfy-the-Given-Sum-Condition](https://github.com/wisdompeak/LeetCode/tree/master/Two_Pointers/1498.Number-of-Subsequences-That-Satisfy-the-Given-Sum-Condition) \(H-\)  
 [1574.Shortest-Subarray-to-be-Removed-to-Make-Array-Sorted](https://github.com/wisdompeak/LeetCode/tree/master/Two_Pointers/1574.Shortest-Subarray-to-be-Removed-to-Make-Array-Sorted) \(H-\)  
 [1687.Delivering-Boxes-from-Storage-to-Ports](https://github.com/wisdompeak/LeetCode/tree/master/Two_Pointers/1687.Delivering-Boxes-from-Storage-to-Ports) \(H\)  
-[1793.Maximum-Score-of-a-Good-Subarray](https://github.com/wisdompeak/LeetCode/tree/master/Two_Pointers/1793.Maximum-Score-of-a-Good-Subarray) \(M+\)  
+[1793.Maximum-Score-of-a-Good-Subarray](https://github.com/wisdompeak/LeetCode/tree/master/Two_Pointers/1793.Maximum-Score-of-a-Good-Subarray) \(M+\)
 
-#### Sliding window
+**Sliding window**
 
 [532.K-diff-Pairs-in-an-Array](https://github.com/wisdompeak/LeetCode/tree/master/Two_Pointers/532.K-diff-Pairs-in-an-Array) \(H-\)  
 [611.Valid-Triangle-Number](https://github.com/wisdompeak/LeetCode/tree/master/Two_Pointers/611.Valid-Triangle-Number) \(M+\)  
@@ -543,7 +548,7 @@
 [395.Longest-Substring-with-At-Least-K-Repeating-Characters](https://github.com/wisdompeak/LeetCode/tree/master/Recursion/395.Longest-Substring-with-At-Least-K-Repeating-Characters) \(H\)  
 [1763.Longest-Nice-Substring](https://github.com/wisdompeak/LeetCode/tree/master/Two_Pointers/1763.Longest-Nice-Substring) \(H\)
 
-#### Begin and end type
+**Begin and end type**
 
 * example problems: two sum \(sorted\), three sum, four sum, three sum closest, three sum smaller
 
@@ -580,12 +585,12 @@ def kSum(kVal: int, target: int, startIndex: int, nums: List[int]) -> List[List[
   return result;
 ```
 
-##### Greedy
+**Greedy**
+
 * Squeeze the biggest first [1580.Put-Boxes-Into-the-Warehouse-II](https://github.com/wisdompeak/LeetCode/tree/master/Two_Pointers/1580.Put-Boxes-Into-the-Warehouse-II) \(H-\)  
 * Put in the first [1798.Maximum-Number-of-Consecutive-Values-You-Can-Make/Readme.md](https://github.com/wisdompeak/LeetCode/blob/master/Greedy/1798.Maximum-Number-of-Consecutive-Values-You-Can-Make) \(H-\)
 
-
-#### Partition type
+**Partition type**
 
 * example problems: two sum \(sorted\), three sum, four sum, three sum closest, three sum smaller
 
@@ -605,12 +610,12 @@ while i <= j:
         j--;
 ```
 
-#### Slow and fast
+**Slow and fast**
 
 * Find the middle of linked list
 * Find linked list cycle
 
-#### Window type
+**Window type**
 
 * Improve naive two level for loop to for-outer loop + while inner loop
 * E.g. minimum window substring, minimum size subarray sum, Longest substring with at most K distinct characters, Longest substring without repeating characters
@@ -627,7 +632,7 @@ for i in range(n):
 }
 ```
 
-#### Sliding window : Distinct Characters
+**Sliding window : Distinct Characters**
 
 [076.Minimum-Window-Substring](https://github.com/wisdompeak/LeetCode/tree/master/Two_Pointers/076.Minimum-Window-Substring) \(M+\)  
 [003.Longest-Substring-Without-Repeating-Character](https://github.com/wisdompeak/LeetCode/tree/master/Two_Pointers/003.Longest%20Substring%20Without%20Repeating%20Characters) \(E+\)  
@@ -635,7 +640,7 @@ for i in range(n):
 [340.Longest-Substring-with-At-Most-K-Distinct-Characters](https://github.com/wisdompeak/LeetCode/tree/master/Two_Pointers/340.Longest-Substring-with-At-Most-K-Distinct-Characters) \(H\)  
 [992.Subarrays-with-K-Different-Integers](https://github.com/wisdompeak/LeetCode/tree/master/Two_Pointers/992.Subarrays-with-K-Different-Integers) \(H-\)
 
-#### Two pointers for two seuqences
+**Two pointers for two seuqences**
 
 [986.Interval-List-Intersections](https://github.com/wisdompeak/LeetCode/tree/master/Two_Pointers/986.Interval-List-Intersections) \(M\)  
 [1229.Meeting-Scheduler](https://github.com/wisdompeak/LeetCode/tree/master/Two_Pointers/1229.Meeting-Scheduler) \(M+\)  
@@ -644,7 +649,7 @@ for i in range(n):
 [1775.Equal-Sum-Arrays-With-Minimum-Number-of-Operations](https://github.com/wisdompeak/LeetCode/tree/master/Two_Pointers/1775.Equal-Sum-Arrays-With-Minimum-Number-of-Operations) \(M+\)  
 [1868.Product-of-Two-Run-Length-Encoded-Arrays](https://github.com/wisdompeak/LeetCode/tree/master/Two_Pointers/1868.Product-of-Two-Run-Length-Encoded-Arrays) \(M+\)
 
-### [Binary Search](https://github.com/wisdompeak/LeetCode/tree/master/Binary_Search)
+#### [Binary Search](https://github.com/wisdompeak/LeetCode/tree/master/Binary_Search)
 
 [004.Median-of-Two-Sorted-Arrays](https://github.com/wisdompeak/LeetCode/tree/master/Priority_Queue/004.Median-of-Two-Sorted-Arrays) \(H\)  
 [153.Find-Minimum-in-Rotated-Sorted-Array](https://github.com/wisdompeak/LeetCode/tree/master/Binary_Search/153.Find-Minimum-in-Rotated-Sorted-Array) \(M+\)  
@@ -670,12 +675,12 @@ for i in range(n):
 [1889.Minimum-Space-Wasted-From-Packaging](https://github.com/wisdompeak/LeetCode/tree/master/Binary_Search/1889.Minimum-Space-Wasted-From-Packaging) \(H-\)  
 [1901.Find-a-Peak-Element-II](https://github.com/wisdompeak/LeetCode/tree/master/Binary_Search/1901.Find-a-Peak-Element-II) \(H\)
 
-#### Binary Processing
+**Binary Processing**
 
 [1483.Kth-Ancestor-of-a-Tree-Node](https://github.com/wisdompeak/LeetCode/tree/master/Binary_Search/1483.Kth-Ancestor-of-a-Tree-Node) \(H\)  
 [1922.Count-Good-Numbers](https://github.com/wisdompeak/LeetCode/tree/master/Binary_Search/1922.Count-Good-Numbers) \(M\)
 
-#### Binary Search by Value
+**Binary Search by Value**
 
 [215.Kth-Largest-Element-in-an-Array](https://github.com/wisdompeak/LeetCode/tree/master/Binary_Search/215.Kth-Largest-Element-in-an-Array) \(M\)  
 [287.Find-the-Duplicate-Number](https://github.com/wisdompeak/LeetCode/tree/master/Binary_Search/287.Find-the-Duplicate-Number) \(H-\)  
@@ -707,7 +712,7 @@ for i in range(n):
 [1891.Cutting-Ribbons](https://github.com/wisdompeak/LeetCode/tree/master/Binary_Search/1891.Cutting-Ribbons) \(E\)  
 [1918.Kth-Smallest-Subarray-Sum](https://github.com/wisdompeak/LeetCode/tree/master/Binary_Search/1918.Kth-Smallest-Subarray-Sum) \(M+\)
 
-### [Hash Table](https://github.com/wisdompeak/LeetCode/tree/master/Hash)
+#### [Hash Table](https://github.com/wisdompeak/LeetCode/tree/master/Hash)
 
 [049.Group-Anagrams](https://github.com/wisdompeak/LeetCode/tree/master/Hash/049.Group-Anagrams) \(M+\)  
 [149.Max-Points-on-a-Line](https://github.com/wisdompeak/LeetCode/tree/master/Hash/149.Max-Points-on-a-Line) \(H\)  
@@ -735,7 +740,7 @@ for i in range(n):
 [1487.Making-File-Names-Unique](https://github.com/wisdompeak/LeetCode/tree/master/Hash/1487.Making-File-Names-Unique) \(M+\)  
 [1573.Number-of-Ways-to-Split-a-String](https://github.com/wisdompeak/LeetCode/tree/master/Hash/1573.Number-of-Ways-to-Split-a-String) \(M\)
 
-#### LRU cache implementation
+**LRU cache implementation**
 
 * HashMap + DDL
 * LinkedHashMap + manual removing oldest entry and reset
@@ -747,7 +752,7 @@ for i in range(n):
   * removeEldestEntry\(Entry\)
     * This method is called with the eldest entry whenever an element is added to the map. Eldest means the element which is returned last when iterating over the map. So the notion of eldest is influenced by accessOrder set on the map. The removeEldestElement in its default implementation just returns false to indicate, that nothing should happen. An extension of the LinkedHashMap may overwrite the default implementation to do whatever would be required:
 
-#### Hash+Prefix
+**Hash+Prefix**
 
 [525.Contiguous-Array](https://github.com/wisdompeak/LeetCode/tree/master/Hash/525.Contiguous-Array) \(M\)  
 [930.Binary-Subarrays-With-Sum](https://github.com/wisdompeak/LeetCode/tree/master/Hash/930.Binary-Subarrays-With-Sum) \(M\)  
@@ -761,7 +766,7 @@ for i in range(n):
 [1915.Number-of-Wonderful-Substrings](https://github.com/wisdompeak/LeetCode/tree/master/Hash/1915.Number-of-Wonderful-Substrings) \(M+\)  
 [1983.Widest-Pair-of-Indices-With-Equal-Range-Sum](https://github.com/wisdompeak/LeetCode/tree/master/Hash/1983.Widest-Pair-of-Indices-With-Equal-Range-Sum) \(M+\)
 
-### [Heap](https://github.com/wisdompeak/LeetCode/tree/master/Heap)
+#### [Heap](https://github.com/wisdompeak/LeetCode/tree/master/Heap)
 
 [220.Contains-Duplicate-III](https://github.com/wisdompeak/LeetCode/tree/master/Heap/220.Contains-Duplicate-III) \(M\)  
 [295.Find-Median-from-Data-Stream](https://github.com/wisdompeak/LeetCode/tree/master/Heap/295.Find-Median-from-Data-Stream) \(M\)  
@@ -783,7 +788,7 @@ for i in range(n):
 [1847.Closest-Room](https://github.com/wisdompeak/LeetCode/tree/master/Heap/1847.Closest-Room) \(M+\)  
 [1912.Design-Movie-Rental-System](https://github.com/wisdompeak/LeetCode/tree/master/Heap/1912.Design-Movie-Rental-System) \(M+\)
 
-### [Tree](https://github.com/wisdompeak/LeetCode/tree/master/Tree)
+#### [Tree](https://github.com/wisdompeak/LeetCode/tree/master/Tree)
 
 [144.Binary-Tree-Preorder-Traversal](https://github.com/wisdompeak/LeetCode/tree/master/Tree/144.Binary-Tree-Preorder-Traversal) \(M+\)  
 [145.Binary-Tree-Postorder-Traversal](https://github.com/wisdompeak/LeetCode/tree/master/Tree/145.Binary-Tree-Postorder-Traversal) \(H-\)  
@@ -828,7 +833,7 @@ for i in range(n):
 [1932.Merge-BSTs-to-Create-Single-BST](https://github.com/wisdompeak/LeetCode/tree/master/Tree/1932.Merge-BSTs-to-Create-Single-BST) \(H\)  
 [2003.Smallest-Missing-Genetic-Value-in-Each-Subtree](https://github.com/wisdompeak/LeetCode/tree/master/Tree/2003.Smallest-Missing-Genetic-Value-in-Each-Subtree) \(H\)
 
-#### Serialization & Hashing
+**Serialization & Hashing**
 
 [297.Serialize-and-Deserialize-Binary-Tree](https://github.com/wisdompeak/LeetCode/tree/master/Tree/297.Serialize-and-Deserialize-Binary-Tree) （H-）  
 [652.Find-Duplicate-Subtrees](https://github.com/wisdompeak/LeetCode/tree/master/Tree/652.Find-Duplicate-Subtrees) \(H\)  
@@ -890,7 +895,7 @@ while bfsQueue:
         return successor
 ```
 
-#### Tree & Sequence
+**Tree & Sequence**
 
 [105.Construct-Binary-Tree-from-Preorder-and-Inorder-Traversal](https://github.com/wisdompeak/LeetCode/tree/master/Tree/105.Construct-Binary-Tree-from-Preorder-and-Inorder-Traversal) \(H-\)  
 [106.Construct-Binary-Tree-from-Inorder-and-Postorder-Traversal](https://github.com/wisdompeak/LeetCode/tree/master/Tree/106.Construct-Binary-Tree-from-Inorder-and-Postorder-Traversal) \(M+\)  
@@ -902,47 +907,47 @@ while bfsQueue:
 [1597.Build-Binary-Expression-Tree-From-Infix-Expression](https://github.com/wisdompeak/LeetCode/tree/master/Tree/1597.Build-Binary-Expression-Tree-From-Infix-Expression) \(H\)  
 [1902.Depth-of-BST-Given-Insertion-Order](https://github.com/wisdompeak/LeetCode/tree/master/Tree/1902.Depth-of-BST-Given-Insertion-Order) \(H-\)
 
-#### LCA
+**LCA**
 
 [236.Lowest-Common-Ancestor-of-a-Binary-Tree](https://github.com/wisdompeak/LeetCode/tree/master/Tree/236.Lowest-Common-Ancestor-of-a-Binary-Tree) \(H\)  
 [1676.Lowest-Common-Ancestor-of-a-Binary-Tree-IV](https://github.com/wisdompeak/LeetCode/tree/master/Tree/1676.Lowest-Common-Ancestor-of-a-Binary-Tree-IV) \(M+\)  
 [1740.Find-Distance-in-a-Binary-Tree](https://github.com/wisdompeak/LeetCode/tree/master/Tree/1740.Find-Distance-in-a-Binary-Tree) \(H\)
 
-#### N-ary Tree
+**N-ary Tree**
 
 [428.Serialize-and-Deserialize-N-ary-Tree](https://github.com/wisdompeak/LeetCode/tree/master/Tree/428.Serialize-and-Deserialize-N-ary-Tree) \(H\)  
 [431.Encode-N-ary-Tree-to-Binary-Tree](https://github.com/wisdompeak/LeetCode/tree/master/Tree/431.Encode-N-ary-Tree-to-Binary-Tree) \(H-\)  
 [1516.Move-Sub-Tree-of-N-Ary-Tree](https://github.com/wisdompeak/LeetCode/tree/master/Tree/1516.Move-Sub-Tree-of-N-Ary-Tree) \(H-\)
 
-#### 似树非树
+**似树非树**
 
 [823](https://github.com/wisdompeak/LeetCode/tree/master/Dynamic_Programming/823.Binary-Trees-With-Factors), [1902](https://github.com/wisdompeak/LeetCode/tree/master/Tree/1902.Depth-of-BST-Given-Insertion-Order),
 
-### [Segment Tree](https://github.com/wisdompeak/LeetCode/blob/master/Segment_Tree/)
+#### [Segment Tree](https://github.com/wisdompeak/LeetCode/blob/master/Segment_Tree/)
 
-#### Basics
+**Basics**
 
 [307.Range-Sum-Query-Mutable](https://github.com/wisdompeak/LeetCode/blob/master/Segment_Tree/307.Range-Sum-Query-Mutable/) \(H-\)  
 [1526.Minimum-Number-of-Increments-on-Subarrays-to-Form-a-Target-Array](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/1526.Minimum-Number-of-Increments-on-Subarrays-to-Form-a-Target-Array) \(H-\)  
 [1649.Create-Sorted-Array-through-Instructions](https://github.com/wisdompeak/LeetCode/tree/master/Divide_Conquer/1649.Create-Sorted-Array-through-Instructions) \(H-\)  
 [1157.Online-Majority-Element-In-Subarray](https://github.com/wisdompeak/LeetCode/tree/master/Binary_Search/1157.Online-Majority-Element-In-Subarray) \(H\)
 
-#### Lazy Tag
+**Lazy Tag**
 
 [370.Range-Addition](https://github.com/wisdompeak/LeetCode/tree/master/Segment_Tree/370.Range-Addition) \(H\)  
 [218.The-Skyline-Problem](https://github.com/wisdompeak/LeetCode/blob/master/Segment_Tree/218.The-Skyline-Problem) \(H+\)  
 [699.Falling-Squares](https://github.com/wisdompeak/LeetCode/tree/master/Segment_Tree/699.Falling-Squares) \(H\)
 
-#### Others
+**Others**
 
 [715.Range-Module](https://github.com/wisdompeak/LeetCode/tree/master/Segment_Tree/715.Range-Module) \(H\)
 
-### \[Binary Index Tree\]
+#### \[Binary Index Tree\]
 
 [307.Range-Sum-Query-Mutable](https://github.com/wisdompeak/LeetCode/blob/master/Segment_Tree/307.Range-Sum-Query-Mutable/) \(M\)  
 [1649.Create-Sorted-Array-through-Instructions](https://github.com/wisdompeak/LeetCode/tree/master/Divide_Conquer/1649.Create-Sorted-Array-through-Instructions) \(H\)
 
-### [Design](https://github.com/wisdompeak/LeetCode/tree/master/Design)
+#### [Design](https://github.com/wisdompeak/LeetCode/tree/master/Design)
 
 [146.LRU-Cache](https://github.com/wisdompeak/LeetCode/tree/master/Design/146.LRU-Cache) \(H-\)  
 [460.LFU Cache](https://github.com/wisdompeak/LeetCode/tree/master/Design/460.LFU-Cache) \(H\)  
@@ -962,7 +967,7 @@ while bfsQueue:
 [1418.Display-Table-of-Food-Orders-in-a-Restaurant](https://github.com/wisdompeak/LeetCode/tree/master/Design/1418.Display-Table-of-Food-Orders-in-a-Restaurant) \(H-\)  
 [1622.Fancy-Sequence](https://github.com/wisdompeak/LeetCode/tree/master/Design/1622.Fancy-Sequence) \(H+\)
 
-### [Stack](https://github.com/wisdompeak/LeetCode/tree/master/Stack)
+#### [Stack](https://github.com/wisdompeak/LeetCode/tree/master/Stack)
 
 [032.Longest-Valid-Parentheses](https://github.com/wisdompeak/LeetCode/tree/master/Stack/032.Longest-Valid-Parentheses) \(H\)  
 [155.Min-Stack](https://github.com/wisdompeak/LeetCode/tree/master/Stack/155.Min-Stack) \(M\)  
@@ -979,7 +984,7 @@ while bfsQueue:
 [1209.Remove-All-Adjacent-Duplicates-in-String-II](https://github.com/wisdompeak/LeetCode/tree/master/Stack/1209.Remove-All-Adjacent-Duplicates-in-String-II) \(M+\)  
 [1586.Binary-Search-Tree-Iterator-II](https://github.com/wisdompeak/LeetCode/tree/master/Stack/1586.Binary-Search-Tree-Iterator-II) \(H\)
 
-#### monotonic stack
+**monotonic stack**
 
 [042.Trapping-Rain-Water](https://github.com/wisdompeak/LeetCode/tree/master/Others/042.Trapping-Rain-Water) \(H\)  
 [084.Largest-Rectangle-in-Histogram](https://github.com/wisdompeak/LeetCode/tree/master/Stack/084.Largest-Rectangle-in-Histogram) \(H\)  
@@ -1005,7 +1010,7 @@ while bfsQueue:
 [1950.Maximum-of-Minimum-Values-in-All=Subarrays](https://github.com/wisdompeak/LeetCode/tree/master/Stack/1950.Maximum-of-Minimum-Values-in-All-Subarrays) \(H-\)  
 [1966.Binary-Searchable-Numbers-in-an-Unsorted-Array](https://github.com/wisdompeak/LeetCode/tree/master/Stack/1966.Binary-Searchable-Numbers-in-an-Unsorted-Array) \(M+\)
 
-#### parse expression
+**parse expression**
 
 [071.Simplify-Path](https://github.com/wisdompeak/LeetCode/tree/master/Stack/071.Simplify-Path) \(M\)  
 [224.Basic-Calculator](https://github.com/wisdompeak/LeetCode/tree/master/Stack/224.Basic-Calculator)\(H-\)  
@@ -1020,7 +1025,7 @@ while bfsQueue:
 [1106.Parsing-A-Boolean-Expression](https://github.com/wisdompeak/LeetCode/tree/master/Stack/1106.Parsing-A-Boolean-Expression) \(H-\)  
 [1896.Minimum-Cost-to-Change-the-Final-Value-of-Expression](https://github.com/wisdompeak/LeetCode/tree/master/Stack/1896.Minimum-Cost-to-Change-the-Final-Value-of-Expression) \(H+\)
 
-#### Calculator
+**Calculator**
 
 * Evaluate infix expression. The problem can have various follow-ups
   * How to define input: String s or String\[\] tokens. If input is defined as String s and numbers might include negative numbers, then parsing negative numbers can be kind of cumbersome. When possible, define input as String\[\] tokens. Even when required to define input as String s, double check whether we need to deal with negative numbers.
@@ -1072,7 +1077,7 @@ while bfsQueue:
         return operand2 / operand1
 ```
 
-#### Parentheses \[TODO\]
+**Parentheses \[TODO\]**
 
 * Check if string s contains valid parenthese
   * Questions to confirm
@@ -1158,7 +1163,7 @@ boolean isValid( String s )
 }
 ```
 
-### [Deque](https://github.com/wisdompeak/LeetCode/tree/master/Deque)
+#### [Deque](https://github.com/wisdompeak/LeetCode/tree/master/Deque)
 
 [239.Sliding-Window-Maximum](https://github.com/wisdompeak/LeetCode/tree/master/Deque/239.Sliding-Window-Maximum) \(H-\)  
 [862.Shortest-Subarray-with-Sum-at-Least-K](https://github.com/wisdompeak/LeetCode/tree/master/Deque/862.Shortest-Subarray-with-Sum-at-Least-K) \(H\)  
@@ -1169,7 +1174,7 @@ boolean isValid( String s )
 [1696.Jump-Game-VI](https://github.com/wisdompeak/LeetCode/tree/master/Deque/1696.Jump-Game-VI) \(M+\)  
 [1776.Car-Fleet-II](https://github.com/wisdompeak/LeetCode/tree/master/Deque/1776.Car-Fleet-II) \(H\)
 
-### [Priority Queue](https://github.com/wisdompeak/LeetCode/tree/master/Priority_Queue)
+#### [Priority Queue](https://github.com/wisdompeak/LeetCode/tree/master/Priority_Queue)
 
 [004.Median-of-Two-Sorted-Arrays](https://github.com/wisdompeak/LeetCode/tree/master/Priority_Queue/004.Median-of-Two-Sorted-Arrays) \(H\)  
 [378.Kth-Smallest-Element-in-a-Sorted-Matrix](https://github.com/wisdompeak/LeetCode/tree/master/Priority_Queue/378.Kth-Smallest-Element-in-a-Sorted-Matrix) \(H-\)  
@@ -1187,7 +1192,7 @@ boolean isValid( String s )
 [1882.Process-Tasks-Using-Servers](https://github.com/wisdompeak/LeetCode/tree/master/Priority_Queue/1882.Process-Tasks-Using-Servers) \(H\)  
 [1942.The-Number-of-the-Smallest-Unoccupied-Chair](https://github.com/wisdompeak/LeetCode/tree/master/Priority_Queue/1942.The-Number-of-the-Smallest-Unoccupied-Chair) \(M+\)
 
-#### Sort+PQ
+**Sort+PQ**
 
 [502.IPO](https://github.com/wisdompeak/LeetCode/blob/master/Priority_Queue/502.IPO/) （M+）  
 [630.Course-Schedule-III](https://github.com/wisdompeak/LeetCode/tree/master/Priority_Queue/630.Course-Schedule-III) \(H\)  
@@ -1197,7 +1202,7 @@ boolean isValid( String s )
 [1834.Single-Threaded-CPU](https://github.com/wisdompeak/LeetCode/tree/master/Priority_Queue/1834.Single-Threaded-CPU) \(M\)  
 [1851.Minimum-Interval-to-Include-Each-Query](https://github.com/wisdompeak/LeetCode/tree/master/Priority_Queue/1851.Minimum-Interval-to-Include-Each-Query) \(H\)
 
-#### Arrangement with Stride
+**Arrangement with Stride**
 
 [767.Reorganize-String](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/767.Reorganize-String) \(M+\)  
 [1054.Distant-Barcodes](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/1054.Distant-Barcodes) \(M+\)  
@@ -1207,9 +1212,9 @@ boolean isValid( String s )
 [1405.Longest-Happy-String](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/1405.Longest-Happy-String) \(H-\)  
 [1953.Maximum-Number-of-Weeks-for-Which-You-Can-Work](https://github.com/wisdompeak/LeetCode/tree/master/Priority_Queue/1953.Maximum-Number-of-Weeks-for-Which-You-Can-Work) \(M+\)
 
-### Graph \[TODO\]
+#### Graph \[TODO\]
 
-#### Edge list vs Adjacent list vs Adjacent matrix
+**Edge list vs Adjacent list vs Adjacent matrix**
 
 * Time complexity comparison between different graph representation
   * Use cases for different representations
@@ -1322,7 +1327,7 @@ private boolean hasCycle( GraphNode root, Set<GraphNode> isDiscovered, Set<Graph
 }
 ```
 
-### [DFS](https://github.com/wisdompeak/LeetCode/tree/master/DFS)
+#### [DFS](https://github.com/wisdompeak/LeetCode/tree/master/DFS)
 
 [037.Sudoku-Solver](https://github.com/wisdompeak/LeetCode/tree/master/DFS/037.Sudoku-Solver) \(M+\)  
 [040.Combination-Sum-II](https://github.com/wisdompeak/LeetCode/tree/master/DFS/040.Combination-Sum-II) \(M+\)  
@@ -1344,7 +1349,7 @@ private boolean hasCycle( GraphNode root, Set<GraphNode> isDiscovered, Set<Graph
 [1766.Tree-of-Coprimes](https://github.com/wisdompeak/LeetCode/tree/master/DFS/1766.Tree-of-Coprimes) \(H-\)  
 [1778.Shortest-Path-in-a-Hidden-Grid](https://github.com/wisdompeak/LeetCode/tree/master/DFS/1778.Shortest-Path-in-a-Hidden-Grid) \(H-\)
 
-#### search in an array
+**search in an array**
 
 [090.Subsets-II](https://github.com/wisdompeak/LeetCode/tree/master/DFS/090.Subsets-II) \(M+\)  
 [301.Remove-Invalid-Parentheses](https://github.com/wisdompeak/LeetCode/tree/master/DFS/301.Remove-Invalid-Parentheses) \(H\)  
@@ -1356,7 +1361,7 @@ private boolean hasCycle( GraphNode root, Set<GraphNode> isDiscovered, Set<Graph
 [1593.Split-a-String-Into-the-Max-Number-of-Unique-Substrings](https://github.com/wisdompeak/LeetCode/tree/master/DFS/1593.Split-a-String-Into-the-Max-Number-of-Unique-Substrings) \(M\)  
 [1681.Minimum-Incompatibility](https://github.com/wisdompeak/LeetCode/tree/master/Dynamic_Programming/1681.Minimum-Incompatibility) \(H\)
 
-#### memorization
+**memorization**
 
 [329.Longest-Increasing-Path-in-a-Matrix](https://github.com/wisdompeak/LeetCode/tree/master/DFS/329.Longest-Increasing-Path-in-a-Matrix) \(M\)  
 [638.Shopping-Offers](https://github.com/wisdompeak/LeetCode/tree/master/DFS/638.Shopping-Offers) \(M+\)  
@@ -1366,7 +1371,7 @@ private boolean hasCycle( GraphNode root, Set<GraphNode> isDiscovered, Set<Graph
 [1340.Jump-Game-V](https://github.com/wisdompeak/LeetCode/tree/master/DFS/1340.Jump-Game-V) \(M+\)  
 [1815.Maximum-Number-of-Groups-Getting-Fresh-Donuts](https://github.com/wisdompeak/LeetCode/tree/master/DFS/1815.Maximum-Number-of-Groups-Getting-Fresh-Donuts) \(H-\)
 
-### [BFS](https://github.com/wisdompeak/LeetCode/tree/master/BFS)
+#### [BFS](https://github.com/wisdompeak/LeetCode/tree/master/BFS)
 
 [127.Word-Ladder](https://github.com/wisdompeak/LeetCode/tree/master/BFS/127.Word-Ladder) \(M+\)  
 [126.Word-Ladder-II](https://github.com/wisdompeak/LeetCode/tree/master/BFS/126.Word-Ladder-II) \(M+\)  
@@ -1395,13 +1400,13 @@ private boolean hasCycle( GraphNode root, Set<GraphNode> isDiscovered, Set<Graph
 [1654.Minimum-Jumps-to-Reach-Home](https://github.com/wisdompeak/LeetCode/tree/master/BFS/1654.Minimum-Jumps-to-Reach-Home) \(H-\)  
 [1905.Count-Sub-Islands](https://github.com/wisdompeak/LeetCode/tree/master/BFS/1905.Count-Sub-Islands) \(M+\)
 
-#### Multi State
+**Multi State**
 
 [913.Cat-and-Mouse](https://github.com/wisdompeak/LeetCode/tree/master/BFS/913.Cat-and-Mouse) \(H+\)  
 [1728.Cat-and-Mouse-II](https://github.com/wisdompeak/LeetCode/tree/master/BFS/1728.Cat-and-Mouse-II) \(H+\)  
 [1928.Minimum-Cost-to-Reach-Destination-in-Time](https://github.com/wisdompeak/LeetCode/tree/master/BFS/1928.Minimum-Cost-to-Reach-Destination-in-Time) \(H-\)
 
-#### 拓扑排序
+**拓扑排序**
 
 [207.Course-Schedule](https://github.com/wisdompeak/LeetCode/tree/master/BFS/207.Course-Schedule) \(H-\)  
 [210.Course-Schedule-II](https://github.com/wisdompeak/LeetCode/tree/master/BFS/210.Course-Schedule-II) \(M\)  
@@ -1437,17 +1442,17 @@ private boolean hasCycle( GraphNode root, Set<GraphNode> isDiscovered, Set<Graph
 
     * @return whether a cycle is detected
 
-      \*/ 
+      \*/
 
       private boolean topoSort \( Map&gt; graph, Integer startNode, Set discovered, Set visited \)
 
       {
 
-       discovered.add\( startNode \);
+      discovered.add\( startNode \);
 
-       for \( Integer neighbor : graph.get\( startNode \) \)
+      for \( Integer neighbor : graph.get\( startNode \) \)
 
-       {
+      {
 
       ```text
        if ( !discovered.contains( neighbor ) )
@@ -1469,17 +1474,17 @@ private boolean hasCycle( GraphNode root, Set<GraphNode> isDiscovered, Set<Graph
        }
       ```
 
-       }
+      }
 
-       visited.add\( startNode \);
+      visited.add\( startNode \);
 
-       return false;
+      return false;
 
       }
 
       \`\`\`
 
-#### Dijkstra \(BFS+PQ\)
+**Dijkstra \(BFS+PQ\)**
 
 [743.Network-Delay-Time](https://github.com/wisdompeak/LeetCode/tree/master/BFS/743.Network-Delay-Time) \(H\)  
 [407.Trapping-Rain-Water-II](https://github.com/wisdompeak/LeetCode/tree/master/BFS/407.Trapping-Rain-Water-II) \(H\)  
@@ -1496,7 +1501,7 @@ private boolean hasCycle( GraphNode root, Set<GraphNode> isDiscovered, Set<Graph
 [1810.Minimum-Path-Cost-in-a-Hidden-Grid](https://github.com/wisdompeak/LeetCode/tree/master/BFS/1810.Minimum-Path-Cost-in-a-Hidden-Grid) \(M+\)  
 [1976.Number-of-Ways-to-Arrive-at-Destination](https://github.com/wisdompeak/LeetCode/tree/master/BFS/1976.Number-of-Ways-to-Arrive-at-Destination) \(H-\)
 
-### [Trie](https://github.com/wisdompeak/LeetCode/tree/master/Trie)
+#### [Trie](https://github.com/wisdompeak/LeetCode/tree/master/Trie)
 
 [208.Implement-Trie--Prefix-Tree](https://github.com/wisdompeak/LeetCode/tree/master/Trie/208.Implement-Trie--Prefix-Tree) \(M+\)  
 \[1804.Implement-Trie-II-\(Prefix-Tree\)\]\([https://github.com/wisdompeak/LeetCode/tree/master/Trie/1804.Implement-Trie-II-\(Prefix-Tree](https://github.com/wisdompeak/LeetCode/tree/master/Trie/1804.Implement-Trie-II-%28Prefix-Tree)\)\) \(M+\)  
@@ -1514,14 +1519,14 @@ private boolean hasCycle( GraphNode root, Set<GraphNode> isDiscovered, Set<Graph
 1032. Stream of Characters \(TBD\)  
 [1858.Longest-Word-With-All-Prefixes](https://github.com/wisdompeak/LeetCode/tree/master/Trie/1858.Longest-Word-With-All-Prefixes) \(M\)
 
-#### Trie and XOR
+**Trie and XOR**
 
 [421.Maximum-XOR-of-Two-Numbers-in-an-Array](https://github.com/wisdompeak/LeetCode/tree/master/Trie/421.Maximum-XOR-of-Two-Numbers-in-an-Array) \(H-\)  
 [1707.Maximum-XOR-With-an-Element-From-Array](https://github.com/wisdompeak/LeetCode/tree/master/Trie/1707.Maximum-XOR-With-an-Element-From-Array) \(H-\)  
 [1803.Count-Pairs-With-XOR-in-a-Range](https://github.com/wisdompeak/LeetCode/tree/master/Trie/1803.Count-Pairs-With-XOR-in-a-Range) \(H\)  
 [1938.Maximum-Genetic-Difference-Query](https://github.com/wisdompeak/LeetCode/tree/master/Trie/1938.Maximum-Genetic-Difference-Query) \(H\)
 
-### [Linked List](https://github.com/wisdompeak/LeetCode/tree/master/Linked_List)
+#### [Linked List](https://github.com/wisdompeak/LeetCode/tree/master/Linked_List)
 
 [025.Reverse-Nodes-in-k-Group](https://github.com/wisdompeak/LeetCode/tree/master/Linked_List/025.Reverse-Nodes-in-k-Group) \(H-\)  
 [061.Rotate-List](https://github.com/wisdompeak/LeetCode/tree/master/Linked_List/061.Rotate-List) \(M\)  
@@ -1539,7 +1544,7 @@ private boolean hasCycle( GraphNode root, Set<GraphNode> isDiscovered, Set<Graph
 [1670.Design-Front-Middle-Back-Queue](https://github.com/wisdompeak/LeetCode/tree/master/Linked_List/1670.Design-Front-Middle-Back-Queue) \(M+\)  
 [1756.Design-Most-Recently-Used-Queue](https://github.com/wisdompeak/LeetCode/tree/master/Linked_List/1756.Design-Most-Recently-Used-Queue) \(H\)
 
-#### Dummy node trick
+**Dummy node trick**
 
 * Dummy Node trick: Maintain a list dummy head and actual tail pointer
   * Used across all linked list modification operations
@@ -1556,13 +1561,13 @@ tail = appendedNode;
 return dummy.next; // pointing to the actual list head
 ```
 
-#### Common tasks
+**Common tasks**
 
 * Find median
 * Reverse list
 * Merge sorted list
 
-### [Dynamic Programming](https://github.com/wisdompeak/LeetCode/tree/master/Dynamic_Programming)
+#### [Dynamic Programming](https://github.com/wisdompeak/LeetCode/tree/master/Dynamic_Programming)
 
 [264.Ugly-Number-II](https://github.com/wisdompeak/LeetCode/tree/master/Dynamic_Programming/264.Ugly-Number-II) \(H-\)  
 [313.Super-Ugly-Number](https://github.com/wisdompeak/LeetCode/tree/master/Dynamic_Programming/313.Super-Ugly-Number) \(H-\)  
@@ -1601,7 +1606,7 @@ return dummy.next; // pointing to the actual list head
 [1937.Maximum-Number-of-Points-with-Cost](https://github.com/wisdompeak/LeetCode/tree/master/Dynamic_Programming/1937.Maximum-Number-of-Points-with-Cost) \(H-\)  
 [1955.Count-Number-of-Special-Subsequences](https://github.com/wisdompeak/LeetCode/tree/master/Dynamic_Programming/1955.Count-Number-of-Special-Subsequences) \(H-\)
 
-#### 基本型 I
+**基本型 I**
 
 [198.House-Robber](https://github.com/wisdompeak/LeetCode/tree/master/Dynamic_Programming/198.House-Robber) \(E\)  
 [213.House-Robber-II](https://github.com/wisdompeak/LeetCode/tree/master/Dynamic_Programming/213.House-Robber-II) \(M+\)  
@@ -1628,7 +1633,7 @@ return dummy.next; // pointing to the actual list head
 [1839.Longest-Substring-Of-All-Vowels-in-Order](https://github.com/wisdompeak/LeetCode/tree/master/Dynamic_Programming/1839.Longest-Substring-Of-All-Vowels-in-Order) \(M\)  
 [1883.Minimum-Skips-to-Arrive-at-Meeting-On-Time](https://github.com/wisdompeak/LeetCode/tree/master/Dynamic_Programming/1883.Minimum-Skips-to-Arrive-at-Meeting-On-Time) \(H\)
 
-#### 基本型 II
+**基本型 II**
 
 [368.Largest-Divisible-Subset](https://github.com/wisdompeak/LeetCode/tree/master/Dynamic_Programming/368.Largest-Divisible-Subset) \(M+\)  
 [300.Longest-Increasing-Subsequence](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/300.Longest-Increasing-Subsequence) \(M+\)  
@@ -1643,7 +1648,7 @@ return dummy.next; // pointing to the actual list head
 [1626.Best-Team-With-No-Conflicts](https://github.com/wisdompeak/LeetCode/tree/master/Dynamic_Programming/1626.Best-Team-With-No-Conflicts) \(M\)  
 [1691.Maximum-Height-by-Stacking-Cuboids](https://github.com/wisdompeak/LeetCode/tree/master/Dynamic_Programming/1691.Maximum-Height-by-Stacking-Cuboids) \(H\)
 
-#### 走迷宫型
+**走迷宫型**
 
 [120.Triangle](https://github.com/wisdompeak/LeetCode/tree/master/Dynamic_Programming/120.Triangle) \(E\)  
 [174.Dungeon-Game](https://github.com/wisdompeak/LeetCode/tree/master/Dynamic_Programming/174.Dungeon-Game) \(H-\)  
@@ -1655,7 +1660,7 @@ return dummy.next; // pointing to the actual list head
 [1301.Number-of-Paths-with-Max-Score](https://github.com/wisdompeak/LeetCode/tree/master/Dynamic_Programming/1301.Number-of-Paths-with-Max-Score) \(M+\)  
 [1594.Maximum-Non-Negative-Product-in-a-Matrix](https://github.com/wisdompeak/LeetCode/tree/master/Dynamic_Programming/1594.Maximum-Non-Negative-Product-in-a-Matrix) \(M\)
 
-#### 背包型
+**背包型**
 
 [322.Coin-Change](https://github.com/wisdompeak/LeetCode/tree/master/Dynamic_Programming/322.Coin-Change) \(M\)  
 [416.Partition-Equal-Subset-Sum](https://github.com/wisdompeak/LeetCode/tree/master/Dynamic_Programming/416.Partition-Equal-Subset-Sum) \(M+\)  
@@ -1669,21 +1674,21 @@ return dummy.next; // pointing to the actual list head
 [1449.Form-Largest-Integer-With-Digits-That-Add-up-to-Target](https://github.com/wisdompeak/LeetCode/tree/master/Dynamic_Programming/1449.Form-Largest-Integer-With-Digits-That-Add-up-to-Target) \(H-\)  
 [1981.Minimize-the-Difference-Between-Target-and-Chosen-Elements](https://github.com/wisdompeak/LeetCode/tree/master/Dynamic_Programming/1981.Minimize-the-Difference-Between-Target-and-Chosen-Elements) \(M+\)
 
-#### 键盘型
+**键盘型**
 
 [650.2-Keys-Keyboard](https://github.com/wisdompeak/LeetCode/blob/master/Dynamic_Programming/650.2-Keys-Keyboard) \(M+\)  
 [651.4-Keys-Keyboard](https://github.com/wisdompeak/LeetCode/tree/master/Dynamic_Programming/651.4-Keys-Keyboard) \(M+\)  
 [935.Knight-Dialer](https://github.com/wisdompeak/LeetCode/tree/master/Dynamic_Programming/935.Knight-Dialer) \(M\)  
 [1320.Minimum-Distance-to-Type-a-Word-Using-Two-Fingers](https://github.com/wisdompeak/LeetCode/tree/master/Dynamic_Programming/1320.Minimum-Distance-to-Type-a-Word-Using-Two-Fingers) \(H\)
 
-#### To Do or Not To Do
+**To Do or Not To Do**
 
 [487.Max-Consecutive-Ones-II](https://github.com/wisdompeak/LeetCode/tree/master/Dynamic_Programming/487.Max-Consecutive-Ones-II) \(H-\)  
 [1186.Maximum-Subarray-Sum-with-One-Deletion](https://github.com/wisdompeak/LeetCode/tree/master/Dynamic_Programming/1186.Maximum-Subarray-Sum-with-One-Deletion) \(H-\)  
 [1187.Make-Array-Strictly-Increasing](https://github.com/wisdompeak/LeetCode/tree/master/Dynamic_Programming/1187.Make-Array-Strictly-Increasing) \(H-\)  
 [1909.Remove-One-Element-to-Make-the-Array-Strictly-Increasing](https://github.com/wisdompeak/LeetCode/tree/master/Dynamic_Programming/1909.Remove-One-Element-to-Make-the-Array-Strictly-Increasing) \(H-\)
 
-#### 区间型 I
+**区间型 I**
 
 [132.Palindrome-Partitioning-II](https://github.com/wisdompeak/LeetCode/tree/master/Dynamic_Programming/132.Palindrome-Partitioning-II) \(H-\)  
 [410.Split-Array-Largest-Sum](https://github.com/wisdompeak/LeetCode/tree/master/Dynamic_Programming/410.Split-Array-Largest-Sum) \(H\)  
@@ -1693,7 +1698,7 @@ return dummy.next; // pointing to the actual list head
 [1478.Allocate-Mailboxes](https://github.com/wisdompeak/LeetCode/tree/master/Dynamic_Programming/1478.Allocate-Mailboxes) \(H\)  
 [1977.Number-of-Ways-to-Separate-Numbers](https://github.com/wisdompeak/LeetCode/tree/master/Dynamic_Programming/1977.Number-of-Ways-to-Separate-Numbers) \(H\)
 
-#### 区间型 II
+**区间型 II**
 
 [131.Palindrome-Partitioning](https://github.com/wisdompeak/LeetCode/tree/master/Dynamic_Programming/131.Palindrome-Partitioning) \(M+\)  
 [312.Burst-Balloons](https://github.com/wisdompeak/LeetCode/tree/master/DFS/312.Burst-Balloons) \(H-\)  
@@ -1713,7 +1718,7 @@ return dummy.next; // pointing to the actual list head
 [1745.Palindrome-Partitioning-IV](https://github.com/wisdompeak/LeetCode/tree/master/Dynamic_Programming/1745.Palindrome-Partitioning-IV) \(M\)  
 [1770.Maximum-Score-from-Performing-Multiplication-Operations](https://github.com/wisdompeak/LeetCode/tree/master/Dynamic_Programming/1770.Maximum-Score-from-Performing-Multiplication-Operations) \(H-\)
 
-#### 双序列型
+**双序列型**
 
 [010.Regular-Expression-Matching](https://github.com/wisdompeak/LeetCode/tree/master/Dynamic_Programming/010.Regular-Expression-Matching) \(H\)  
 [044.Wildcard-Matching](https://github.com/wisdompeak/LeetCode/tree/master/Dynamic_Programming/044.Wildcard-Matching) \(H-\)  
@@ -1732,7 +1737,7 @@ return dummy.next; // pointing to the actual list head
 [1458.Max-Dot-Product-of-Two-Subsequences](https://github.com/wisdompeak/LeetCode/tree/master/Dynamic_Programming/1458.Max-Dot-Product-of-Two-Subsequences) \(M\)  
 [1771.Maximize-Palindrome-Length-From-Subsequences](https://github.com/wisdompeak/LeetCode/tree/master/Dynamic_Programming/1771.Maximize-Palindrome-Length-From-Subsequences) \(H\)
 
-#### 状态压缩DP
+**状态压缩DP**
 
 [465.Optimal-Account-Balancing](https://github.com/wisdompeak/LeetCode/tree/master/Dynamic_Programming/465.Optimal-Account-Balancing) \(H\)  
 [691.Stickers-to-Spell-Word](https://github.com/wisdompeak/LeetCode/tree/master/Dynamic_Programming/691.Stickers-to-Spell-Word) \(H\)  
@@ -1761,18 +1766,18 @@ return dummy.next; // pointing to the actual list head
 [1879.Minimum-XOR-Sum-of-Two-Arrays](https://github.com/wisdompeak/LeetCode/tree/master/BFS/1879.Minimum-XOR-Sum-of-Two-Arrays) \(H\)  
 [1947.Maximum-Compatibility-Score-Sum](https://github.com/wisdompeak/LeetCode/tree/master/Dynamic_Programming/1947.Maximum-Compatibility-Score-Sum) \(H\)
 
-#### Catalan
+**Catalan**
 
 [096.Unique-Binary-Search-Trees](https://github.com/wisdompeak/LeetCode/tree/master/Dynamic_Programming/096.Unique-Binary-Search-Trees) \(M+\)  
-\[1259.Handshakes-That-Don't-Cross\]\([https://github.com/wisdompeak/LeetCode/tree/master/Dynamic\_Programming/1259.Handshakes-That-Don't-Cross](https://github.com/wisdompeak/LeetCode/tree/master/Dynamic_Programming/1259.Handshakes-That-Don't-Cross)\) \(M+\)
+\[1259.Handshakes-That-Don't-Cross\]\(\[[https://github.com/wisdompeak/LeetCode/tree/master/Dynamic\_Programming/1259.Handshakes-That-Don't-Cross\]\(https://github.com/wisdompeak/LeetCode/tree/master/Dynamic\_Programming/1259.Handshakes-That-Don't-Cross\)\](https://github.com/wisdompeak/LeetCode/tree/master/Dynamic_Programming/1259.Handshakes-That-Don't-Cross]%28https://github.com/wisdompeak/LeetCode/tree/master/Dynamic_Programming/1259.Handshakes-That-Don't-Cross%29\)\) \(M+\)
 
-#### Permutation
+**Permutation**
 
 [629.K-Inverse-Pairs-Array](https://github.com/wisdompeak/LeetCode/tree/master/Dynamic_Programming/629.K-Inverse-Pairs-Array) \(H\)  
 [903.Valid-Permutations-for-DI-Sequence](https://github.com/wisdompeak/LeetCode/tree/master/Dynamic_Programming/903.Valid-Permutations-for-DI-Sequence) \(H\)  
 [1866.Number-of-Ways-to-Rearrange-Sticks-With-K-Sticks-Visible](https://github.com/wisdompeak/LeetCode/tree/master/Math/1866.Number-of-Ways-to-Rearrange-Sticks-With-K-Sticks-Visible) \(H\)
 
-### [Bit Manipulation](https://github.com/wisdompeak/LeetCode/tree/master/Bit_Manipulation)
+#### [Bit Manipulation](https://github.com/wisdompeak/LeetCode/tree/master/Bit_Manipulation)
 
 [137.Single-Number-II](https://github.com/wisdompeak/LeetCode/tree/master/Bit_Manipulation/137.Single-Number-II) \(H-\)  
 [260.Single-Number-III](https://github.com/wisdompeak/LeetCode/tree/master/Bit_Manipulation/260.Single-Number-III) \(H\)  
@@ -1783,7 +1788,7 @@ return dummy.next; // pointing to the actual list head
 1461.Check-If-a-String-Contains-All-Binary-Codes-of-Size-K \(TBD\)  
 [1521.Find-a-Value-of-a-Mysterious-Function-Closest-to-Target](https://github.com/wisdompeak/LeetCode/tree/master/Bit_Manipulation/1521.Find-a-Value-of-a-Mysterious-Function-Closest-to-Target) \(H-\)
 
-#### Common tasks
+**Common tasks**
 
 * get bit, set bit, clear bit and update bit
 
@@ -1823,15 +1828,12 @@ int updateBit(int num, int i, boolean bitIs1)
 { 
   int value = bitIs1 ? 1 : 0; 
   int mask = ~(1 << i); 
-  
+
   return (num & mask) | (value << i); 
 }
-
 ```
 
-
-
-#### XOR
+**XOR**
 
 [136.Single-Number](https://github.com/wisdompeak/LeetCode/tree/master/Bit_Manipulation/136.Single-Number) \(M\)  
 [268.Missing-Number](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/268.Missing-Number) \(H-\)  
@@ -1842,7 +1844,7 @@ int updateBit(int num, int i, boolean bitIs1)
 [1738.Find-Kth-Largest-XOR-Coordinate-Value](https://github.com/wisdompeak/LeetCode/tree/master/Bit_Manipulation/1738.Find-Kth-Largest-XOR-Coordinate-Value) \(M+\)  
 [1835.Find-XOR-Sum-of-All-Pairs-Bitwise-AND](https://github.com/wisdompeak/LeetCode/tree/master/Bit_Manipulation/1835.Find-XOR-Sum-of-All-Pairs-Bitwise-AND) \(M\)
 
-#### Bit Mask
+**Bit Mask**
 
 [1239.Maximum-Length-of-a-Concatenated-String-with-Unique-Characters](https://github.com/wisdompeak/LeetCode/tree/master/Bit_Manipulation/1239.Maximum-Length-of-a-Concatenated-String-with-Unique-Characters) \(M+\)  
 [1284.Minimum-Number-of-Flips-to-Convert-Binary-Matrix-to-Zero-Matrix](https://github.com/wisdompeak/LeetCode/tree/master/Bit_Manipulation/1284.Minimum-Number-of-Flips-to-Convert-Binary-Matrix-to-Zero-Matrix) \(M+\)  
@@ -1852,14 +1854,14 @@ int updateBit(int num, int i, boolean bitIs1)
 [1774.Closest-Dessert-Cost](https://github.com/wisdompeak/LeetCode/tree/master/Bit_Manipulation/1774.Closest-Dessert-Cost) \(M\)  
 [2002.Maximum-Product-of-the-Length-of-Two-Palindromic-Subsequences](https://github.com/wisdompeak/LeetCode/tree/master/Bit_Manipulation/2002.Maximum-Product-of-the-Length-of-Two-Palindromic-Subsequences)
 
-### [Divide and Conquer](https://github.com/wisdompeak/LeetCode/tree/master/Divide_Conquer)
+#### [Divide and Conquer](https://github.com/wisdompeak/LeetCode/tree/master/Divide_Conquer)
 
 [315.Count-of-Smaller-Numbers-After-Self](https://github.com/wisdompeak/LeetCode/tree/master/Divide_Conquer/315.Count-of-Smaller-Numbers-After-Self) \(H-\)  
 [327.Count-of-Range-Sum](https://github.com/wisdompeak/LeetCode/tree/master/Divide_Conquer/327.Count-of-Range-Sum) \(H-\)  
 [493.Reverse-Pairs](https://github.com/wisdompeak/LeetCode/tree/master/Divide_Conquer/493.Reverse-Pairs) \(M+\)  
 [1649.Create-Sorted-Array-through-Instructions](https://github.com/wisdompeak/LeetCode/tree/master/Divide_Conquer/1649.Create-Sorted-Array-through-Instructions) \(H\)
 
-### [String](https://github.com/wisdompeak/LeetCode/tree/master/String)
+#### [String](https://github.com/wisdompeak/LeetCode/tree/master/String)
 
 [006.ZigZag-Conversion](https://github.com/wisdompeak/LeetCode/tree/master/String/006.ZigZag-Conversion) \(M+\)  
 [336.Palindrome-Pairs](https://github.com/wisdompeak/LeetCode/tree/master/String/336.Palindrome-Pairs) \(H-\)  
@@ -1881,7 +1883,7 @@ int updateBit(int num, int i, boolean bitIs1)
 [1754.Largest-Merge-Of-Two-Strings](https://github.com/wisdompeak/LeetCode/tree/master/String/1754.Largest-Merge-Of-Two-Strings) \(M+\)  
 [1849.Splitting-a-String-Into-Descending-Consecutive-Values](https://github.com/wisdompeak/LeetCode/tree/master/String/1849.Splitting-a-String-Into-Descending-Consecutive-Values) \(M+\)
 
-#### Rolling Hash
+**Rolling Hash**
 
 [1044.Longest-Duplicate-Substring](https://github.com/wisdompeak/LeetCode/tree/master/String/1044.Longest-Duplicate-Substring) \(H\)  
 [1062.Longest-Repeating-Substring](https://github.com/wisdompeak/LeetCode/tree/master/String/1062.Longest-Repeating-Substring) \(H-\)  
@@ -1889,7 +1891,7 @@ int updateBit(int num, int i, boolean bitIs1)
 [1698.Number-of-Distinct-Substrings-in-a-String](https://github.com/wisdompeak/LeetCode/tree/master/String/1698.Number-of-Distinct-Substrings-in-a-String) \(H-\)  
 [1923.Longest-Common-Subpath](https://github.com/wisdompeak/LeetCode/tree/master/String/1923.Longest-Common-Subpath) \(H\)
 
-#### KMP
+**KMP**
 
 [1392.Longest-Happy-Prefix](https://github.com/wisdompeak/LeetCode/tree/master/String/1392.Longest-Happy-Prefix) \(H\)  
 [028.Implement-strStr](https://github.com/wisdompeak/LeetCode/tree/master/String/028.Implement-strStr) \(H\)  
@@ -1900,21 +1902,21 @@ int updateBit(int num, int i, boolean bitIs1)
 1397.Find All Good Strings \(TBD\)  
 [1764.Form-Array-by-Concatenating-Subarrays-of-Another-Array](https://github.com/wisdompeak/LeetCode/tree/master/String/1764.Form-Array-by-Concatenating-Subarrays-of-Another-Array) \(H\)
 
-#### Manacher
+**Manacher**
 
 [005.Longest-Palindromic-Substring](https://github.com/wisdompeak/LeetCode/tree/master/String/005.Longest-Palindromic-Substring) \(H\)  
 [214.Shortest-Palindrome](https://github.com/wisdompeak/LeetCode/blob/master/String/214.Shortest-Palindrome) \(H\)  
 [647.Palindromic-Substrings](https://github.com/wisdompeak/LeetCode/tree/master/String/647.Palindromic-Substrings) \(M+\)  
 [1960.Maximum-Product-of-the-Length-of-Two-Palindromic-Substrings](https://github.com/wisdompeak/LeetCode/tree/master/String/1960.Maximum-Product-of-the-Length-of-Two-Palindromic-Substrings) \(H\)
 
-#### Palindrome
+**Palindrome**
 
 * Several ways to solve the Longest palindrome substring problem
   * DP-based solution: O\(n^2\) space and time, if need to storing palindrome result, this is always better \(e.g. palindrome partitioning\)
   * Start looping from middle: O\(n^2\) time
   * Manacher's algorithm: O\(n\) time, not generic enough.
 
-### [Union Find](https://github.com/wisdompeak/LeetCode/tree/master/Union_Find)
+#### [Union Find](https://github.com/wisdompeak/LeetCode/tree/master/Union_Find)
 
 [547.Friend-Circles](https://github.com/wisdompeak/LeetCode/tree/master/Union_Find/547.Friend-Circles) \(M\)  
 [200.Number-of-Islands](https://github.com/wisdompeak/LeetCode/tree/master/DFS/200.Number-of-Islands) \(H-\)  
@@ -1949,7 +1951,6 @@ int updateBit(int num, int i, boolean bitIs1)
   * Example problems: Number of Island II, find weakly connected components in directed graph, find connected components in undirected graph
 
 ```java
-
 int find( int x ) 
 { 
     int parent = x; 
@@ -1957,7 +1958,7 @@ int find( int x )
     { 
         parent = father.get( parent ); 
     } 
-    
+
     return parent; 
 }
 
@@ -1969,19 +1970,16 @@ void union( int x, int y )
     { 
         father.put( fa_x, fa_y );
     } 
-}   
-
+}
 ```
 
-
-
-#### Prime Factors
+**Prime Factors**
 
 [952.Largest-Component-Size-by-Common-Factor](https://github.com/wisdompeak/LeetCode/tree/master/Union_Find/952.Largest-Component-Size-by-Common-Factor) \(H\)  
 [1627.Graph-Connectivity-With-Threshold](https://github.com/wisdompeak/LeetCode/tree/master/Union_Find/1627.Graph-Connectivity-With-Threshold) \(M+\)  
 [1998.GCD-Sort-of-an-Array](https://github.com/wisdompeak/LeetCode/tree/master/Union_Find/1998.GCD-Sort-of-an-Array) \(H-\)
 
-#### MST
+**MST**
 
 [1135.Connecting-Cities-With-Minimum-Cost](https://github.com/wisdompeak/LeetCode/tree/master/Union_Find/1135.Connecting-Cities-With-Minimum-Cost) \(M+\)  
 [1168.Optimize-Water-Distribution-in-a-Village](https://github.com/wisdompeak/LeetCode/tree/master/Union_Find/1168.Optimize-Water-Distribution-in-a-Village) \(H-\)  
@@ -1989,7 +1987,7 @@ void union( int x, int y )
 [1579.Remove-Max-Number-of-Edges-to-Keep-Graph-Fully-Traversable](https://github.com/wisdompeak/LeetCode/tree/master/Union_Find/1579.Remove-Max-Number-of-Edges-to-Keep-Graph-Fully-Traversable) \(H-\)  
 [1584.Min-Cost-to-Connect-All-Points](https://github.com/wisdompeak/LeetCode/tree/master/Union_Find/1584.Min-Cost-to-Connect-All-Points) \(H-\)
 
-### [Recursion](https://github.com/wisdompeak/LeetCode/tree/master/Recursion)
+#### [Recursion](https://github.com/wisdompeak/LeetCode/tree/master/Recursion)
 
 [087.Scramble-String](https://github.com/wisdompeak/LeetCode/tree/master/Recursion/087.Scramble-String) \(H-\)  
 [133.Clone-Graph](https://github.com/wisdompeak/LeetCode/tree/master/Recursion/133.Clone-Graph) \(M+\)  
@@ -2017,7 +2015,7 @@ void union( int x, int y )
 [1553.Minimum-Number-of-Days-to-Eat-N-Oranges](https://github.com/wisdompeak/LeetCode/tree/master/Recursion/1553.Minimum-Number-of-Days-to-Eat-N-Oranges) \(H\)  
 [1611.Minimum-One-Bit-Operations-to-Make-Integers-Zero](https://github.com/wisdompeak/LeetCode/tree/master/Recursion/1611.Minimum-One-Bit-Operations-to-Make-Integers-Zero) \(H\)
 
-#### Min-Max Strategy
+**Min-Max Strategy**
 
 [464.Can-I-Win](https://github.com/wisdompeak/LeetCode/tree/master/Recursion/464.Can-I-Win) \(M+\)  
 [877.Stone-Game](https://github.com/wisdompeak/LeetCode/tree/master/Recursion/877.Stone-Game) \(M+\) \(aka. 486.Predict-the-Winner\)  
@@ -2026,7 +2024,7 @@ void union( int x, int y )
 [1510.Stone-Game-IV](https://github.com/wisdompeak/LeetCode/tree/master/Recursion/1510.Stone-Game-IV) \(M\)  
 [1563.Stone-Game-V](https://github.com/wisdompeak/LeetCode/tree/master/Dynamic_Programming/1563.Stone-Game-V) \(H-\)
 
-### [Graph](https://github.com/wisdompeak/LeetCode/tree/master/Graph/)
+#### [Graph](https://github.com/wisdompeak/LeetCode/tree/master/Graph/)
 
 [332.Reconstruct-Itinerary](https://github.com/wisdompeak/LeetCode/tree/master/DFS/332.Reconstruct-Itinerary) \(H\)  
 [753.Cracking-the-Safe](https://github.com/wisdompeak/LeetCode/tree/master/Hash/753.Cracking-the-Safe) \(H\)  
@@ -2039,7 +2037,7 @@ void union( int x, int y )
 [1782.Count-Pairs-Of-Nodes](https://github.com/wisdompeak/LeetCode/tree/master/Graph/1782.Count-Pairs-Of-Nodes) \(H\)  
 [1820.Maximum-Number-of-Accepted-Invitations](https://github.com/wisdompeak/LeetCode/tree/master/Graph/1820.Maximum-Number-of-Accepted-Invitations) \(H\)
 
-### [Math](https://github.com/wisdompeak/LeetCode/tree/master/Math)
+#### [Math](https://github.com/wisdompeak/LeetCode/tree/master/Math)
 
 [089.Gray-Code](https://github.com/wisdompeak/LeetCode/tree/master/Math/089.Gray-Code) \(M+\) \(aka. 1238. Circular Permutation in Binary Representation\)  
 [233.Number-of-Digit-One](https://github.com/wisdompeak/LeetCode/tree/master/Math/233.Number-of-Digit-One) \(H-\)  
@@ -2072,7 +2070,7 @@ void union( int x, int y )
 [1806.Minimum-Number-of-Operations-to-Reinitialize-a-Permutation](https://github.com/wisdompeak/LeetCode/tree/master/Math/1806.Minimum-Number-of-Operations-to-Reinitialize-a-Permutation) \(H\)  
 [1969.Minimum-Non-Zero-Product-of-the-Array-Elements](https://github.com/wisdompeak/LeetCode/tree/master/Math/1969.Minimum-Non-Zero-Product-of-the-Array-Elements) \(M+\)
 
-#### Distances
+**Distances**
 
 [296.Best-Meeting-Point](https://github.com/wisdompeak/LeetCode/tree/master/Math/296.Best-Meeting-Point) \(M+\)  
 [1131.Maximum-of-Absolute-Value-Expression](https://github.com/wisdompeak/LeetCode/tree/master/Math/1131.Maximum-of-Absolute-Value-Expression) \(H\)  
@@ -2080,7 +2078,7 @@ void union( int x, int y )
 [1703.Minimum-Adjacent-Swaps-for-K-Consecutive-Ones](https://github.com/wisdompeak/LeetCode/tree/master/Math/1703.Minimum-Adjacent-Swaps-for-K-Consecutive-Ones) \(H\)  
 [1956.Minimum-Time-For-K-Virus-Variants-to-Spread](https://github.com/wisdompeak/LeetCode/tree/master/Math/1956.Minimum-Time-For-K-Virus-Variants-to-Spread) \(H+\)
 
-#### Geometry
+**Geometry**
 
 [223.Rectangle-Area](https://github.com/wisdompeak/LeetCode/tree/master/Math/223.Rectangle-Area) \(M+\)  
 [335.Self-Crossing](https://github.com/wisdompeak/LeetCode/tree/master/Math/335.Self-Crossing) \(H\)  
@@ -2092,7 +2090,7 @@ void union( int x, int y )
 [1453.Maximum-Number-of-Darts-Inside-of-a-Circular-Dartboard](https://github.com/wisdompeak/LeetCode/tree/master/Math/1453.Maximum-Number-of-Darts-Inside-of-a-Circular-Dartboard) \(H\)  
 [1610.Maximum-Number-of-Visible-Points](https://github.com/wisdompeak/LeetCode/tree/master/Math/1610.Maximum-Number-of-Visible-Points) \(H\)
 
-#### Random Pick
+**Random Pick**
 
 [382.Linked-List-Random-Node](https://github.com/wisdompeak/LeetCode/tree/master/Math/382.Linked-List-Random-Node) \(H\)  
 [470.Implement-Rand10\(\)-Using-Rand7\(\)](https://github.com/wisdompeak/LeetCode/tree/master/Math/470.Implement-Rand10--Using-Rand7) \(M+\)  
@@ -2137,7 +2135,7 @@ public List<Integer> sample( List<Integer> list, int k )
 }
 ```
 
-#### Combinatorics
+**Combinatorics**
 
 [046.Permutations](https://github.com/wisdompeak/LeetCode/tree/master/Math/046.Permutations) \(M+\)  
 [047.Permutations-II](https://github.com/wisdompeak/LeetCode/tree/master/Math/047.Permutations-II) \(H\)  
@@ -2235,13 +2233,13 @@ void generateCombs( List<List<Integer>> allCombs, LinkedList<Integer> oneComb, i
 }
 ```
 
-#### Numerical Theory
+**Numerical Theory**
 
 [343.Integer-Break](https://github.com/wisdompeak/LeetCode/tree/master/Math/343.Integer-Break) \(H-\)  
 [365.Water-and-Jug-Problem](https://github.com/wisdompeak/LeetCode/tree/master/Math/365.Water-and-Jug-Problem) \(H\)  
 [1808.Maximize-Number-of-Nice-Divisors](https://github.com/wisdompeak/LeetCode/tree/master/Math/1808.Maximize-Number-of-Nice-Divisors) \(H-\)
 
-### [Greedy](https://github.com/wisdompeak/LeetCode/tree/master/Greedy)
+#### [Greedy](https://github.com/wisdompeak/LeetCode/tree/master/Greedy)
 
 [055.Jump-Game](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/055.Jump-Game) \(E+\)  
 [134.Gas-Station](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/134.Gas-Station) \(H\)  
@@ -2293,20 +2291,20 @@ void generateCombs( List<List<Integer>> allCombs, LinkedList<Integer> oneComb, i
 [1911.Maximum-Alternating-Subsequence-Sum](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/1911.Maximum-Alternating-Subsequence-Sum) \(M+\)  
 [1982.Find-Array-Given-Subset-Sums](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/1982.Find-Array-Given-Subset-Sums) \(H\)
 
-#### LIS
+**LIS**
 
 [300.Longest-Increasing-Subsequence](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/300.Longest-Increasing-Subsequence) \(M+\)  
 [354.Russian-Doll-Envelopes](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/354.Russian-Doll-Envelopes) \(H-\)  
 [1713.Minimum-Operations-to-Make-a-Subsequence](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/1713.Minimum-Operations-to-Make-a-Subsequence) \(H-\)  
 [1964.Find-the-Longest-Valid-Obstacle-Course-at-Each-Position](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/1964.Find-the-Longest-Valid-Obstacle-Course-at-Each-Position) \(M+\)
 
-#### Two-pass distribution
+**Two-pass distribution**
 
 [135.Candy](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/135.Candy) \(M+\)  
 [1840.Maximum-Building-Height](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/1840.Maximum-Building-Height) \(H\)  
 [1846.Maximum-Element-After-Decreasing-and-Rearranging](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/1846.Maximum-Element-After-Decreasing-and-Rearranging) \(M+\)
 
-#### Three-pass
+**Three-pass**
 
 [042.Trapping-Rain-Water](https://github.com/wisdompeak/LeetCode/tree/master/Others/042.Trapping-Rain-Water) \(H-\)  
 [334.Increasing-Triplet-Subsequence](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/334.Increasing-Triplet-Subsequence) \(H-\)  
@@ -2319,14 +2317,14 @@ void generateCombs( List<List<Integer>> allCombs, LinkedList<Integer> oneComb, i
 [1769.Minimum-Number-of-Operations-to-Move-All-Balls-to-Each-Box](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/1769.Minimum-Number-of-Operations-to-Move-All-Balls-to-Each-Box) \(M+\)  
 [1888.Minimum-Number-of-Flips-to-Make-the-Binary-String-Alternating](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/1888.Minimum-Number-of-Flips-to-Make-the-Binary-String-Alternating) \(M+\)
 
-#### State Machine
+**State Machine**
 
 [524.Longest-Word-in-Dictionary-through-Deleting](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/524.Longest-Word-in-Dictionary-through-Deleting) \(M+\)  
 [727.Minimum-Window-Subsequence](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/727.Minimum-Window-Subsequence) \(H-\)  
 [792.Number-of-Matching-Subsequences](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/792.Number-of-Matching-Subsequences) \(H-\)  
 [1055.Shortest-Way-to-Form-String](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/1055.Shortest-Way-to-Form-String) \(M+\)
 
-#### Sort
+**Sort**
 
 164.Maximum-Gap \(H\)  
 [179.Largest-Number](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/179.Largest-Number) \(H-\)  
@@ -2343,7 +2341,7 @@ void generateCombs( List<List<Integer>> allCombs, LinkedList<Integer> oneComb, i
 [1686.Stone-Game-VI](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/1686.Stone-Game-VI) \(H-\)  
 [1996.The-Number-of-Weak-Characters-in-the-Game](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/1996.The-Number-of-Weak-Characters-in-the-Game) \(M+\)
 
-#### Indexing Sort
+**Indexing Sort**
 
 [041.First-Missing-Positive](https://github.com/wisdompeak/LeetCode/blob/master/Greedy/041.First-Missing-Positive/Readme.md) \(H\)  
 [268.Missing-Number](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/268.Missing-Number) \(H-\)  
@@ -2352,7 +2350,7 @@ void generateCombs( List<List<Integer>> allCombs, LinkedList<Integer> oneComb, i
 [448.Find-All-Numbers-Disappeared-in-an-Array](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/448.Find-All-Numbers-Disappeared-in-an-Array) \(M\)  
 [645.Set-Mismatch](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/645.Set-Mismatch) \(M\)
 
-#### Parenthesis
+**Parenthesis**
 
 [921.Minimum-Add-to-Make-Parentheses-Valid](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/921.Minimum-Add-to-Make-Parentheses-Valid) \(M+\)  
 [1249.Minimum-Remove-to-Make-Valid-Parentheses](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/1249.Minimum-Remove-to-Make-Valid-Parentheses) \(M+\)  
@@ -2360,44 +2358,46 @@ void generateCombs( List<List<Integer>> allCombs, LinkedList<Integer> oneComb, i
 [678.Valid-Parenthesis-String](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/678.Valid-Parenthesis-String) \(H-\)  
 [1963.minimum-number-of-swaps-to-make-the-string-balanced](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/1963.minimum-number-of-swaps-to-make-the-string-balanced) \(M+\)
 
-#### Intervals
-[1272.Remove-Interval](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/1272.Remove-Interval) \(M+\)  
+**Intervals**
 
-##### Maximum number of non-overlapping intervals - sort by ending points
+[1272.Remove-Interval](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/1272.Remove-Interval) \(M+\)
 
-[452.Minimum-Number-of-Arrows-to-Burst-Balloons](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/452.Minimum-Number-of-Arrows-to-Burst-Balloons) \(H-\)  
+**Maximum number of non-overlapping intervals - sort by ending points**
 
-[435.Non-overlapping-Intervals](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/435.Non-overlapping-Intervals) \(M+\) \(aka. [646.Maximum-Length-of-Pair-Chain](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/646.Maximum-Length-of-Pair-Chain)\)  
+[452.Minimum-Number-of-Arrows-to-Burst-Balloons](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/452.Minimum-Number-of-Arrows-to-Burst-Balloons) \(H-\)
 
-[757.Set-Intersection-Size-At-Least-Two](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/757.Set-Intersection-Size-At-Least-Two) \(H\)  
+[435.Non-overlapping-Intervals](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/435.Non-overlapping-Intervals) \(M+\) \(aka. [646.Maximum-Length-of-Pair-Chain](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/646.Maximum-Length-of-Pair-Chain)\)
 
-###### Interval + DP + Binary search
+[757.Set-Intersection-Size-At-Least-Two](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/757.Set-Intersection-Size-At-Least-Two) \(H\)
+
+**Interval + DP + Binary search**
+
 * TODO
   * Use named tuples
-  * Limitations of lru_cache
-  * Sorted() key word
+  * Limitations of lru\_cache
+  * Sorted\(\) key word
 
-[1235.Maximum-Profit-in-Job-Scheduling](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/1235.Maximum-Profit-in-Job-Scheduling) \(H-\)  
+[1235.Maximum-Profit-in-Job-Scheduling](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/1235.Maximum-Profit-in-Job-Scheduling) \(H-\)
 
 [1751.Maximum-Number-of-Events-That-Can-Be-Attended-II](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/1751.Maximum-Number-of-Events-That-Can-Be-Attended-II) \(H\)
 
-##### Minimum number of intervals to cover the whole range - sort by starting points
-[045.Jump-Game-II](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/045.Jump-Game-II) \(M\)  
+**Minimum number of intervals to cover the whole range - sort by starting points**
 
-[1024.Video-Stitching](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/1024.Video-Stitching) \(M+\)  
+[045.Jump-Game-II](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/045.Jump-Game-II) \(M\)
 
-[1288.Remove-Covered-Intervals](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/1288.Remove-Covered-Intervals) \(M+\)  
+[1024.Video-Stitching](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/1024.Video-Stitching) \(M+\)
 
-[1326.Minimum-Number-of-Taps-to-Open-to-Water-a-Garden](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/1326.Minimum-Number-of-Taps-to-Open-to-Water-a-Garden) \(M+\)  
+[1288.Remove-Covered-Intervals](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/1288.Remove-Covered-Intervals) \(M+\)
 
+[1326.Minimum-Number-of-Taps-to-Open-to-Water-a-Garden](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/1326.Minimum-Number-of-Taps-to-Open-to-Water-a-Garden) \(M+\)
 
-#### Constructive Problems
+**Constructive Problems**
 
 [324.Wiggle-Sort-II](https://github.com/wisdompeak/LeetCode/tree/master/Others/324.Wiggle-Sort-II) \(H\)  
 [667.Beautiful-Arrangement-II](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/667.Beautiful-Arrangement-II) \(M\)  
 [932.Beautiful-Array](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/932.Beautiful-Array) \(H\)
 
-### [Others](https://github.com/wisdompeak/LeetCode/tree/master/Others)
+#### [Others](https://github.com/wisdompeak/LeetCode/tree/master/Others)
 
 [007.Reverse-Integer](https://github.com/wisdompeak/LeetCode/tree/master/Others/007.Reverse-Integer) \(M\)  
 [048.Rotate-Image](https://github.com/wisdompeak/LeetCode/tree/master/Others/048.Rotate-Image) \(M+\)  
@@ -2436,7 +2436,7 @@ void generateCombs( List<List<Integer>> allCombs, LinkedList<Integer> oneComb, i
 [1904.The-Number-of-Full-Rounds-You-Have-Played](https://github.com/wisdompeak/LeetCode/tree/master/Others/1904.The-Number-of-Full-Rounds-You-Have-Played) \(M\)  
 [1997.First-Day-Where-You-Have-Been-in-All-the-Rooms](https://github.com/wisdompeak/LeetCode/tree/master/Others/1997.First-Day-Where-You-Have-Been-in-All-the-Rooms) \(H\)
 
-#### 扫描线 / 差分数组
+**扫描线 / 差分数组**
 
 [252.Meeting-Rooms](https://github.com/wisdompeak/LeetCode/tree/master/Others/252.Meeting-Rooms) \(M\)  
 [253.Meeting-Rooms-II](https://github.com/wisdompeak/LeetCode/tree/master/Others/253.Meeting-Rooms-II) \(M+\)  
@@ -2499,7 +2499,7 @@ boolean isOverlapping( Interval o1, Interval o2 )
   pairList.sort( (o1, o2) -> (o1.start-o2.start) );
   ```
 
-#### Enumeration
+**Enumeration**
 
 [479.Largest-Palindrome-Product](https://github.com/wisdompeak/LeetCode/tree/master/Others/479.Largest-Palindrome-Product) \(M+\)  
 [866.Prime-Palindrome](https://github.com/wisdompeak/LeetCode/tree/master/Others/866.Prime-Palindrome) \(H-\)  
@@ -2509,19 +2509,19 @@ boolean isOverlapping( Interval o1, Interval o2 )
 [1714.Sum-Of-Special-Evenly-Spaced-Elements-In-Array](https://github.com/wisdompeak/LeetCode/tree/master/Others/1714.Sum-Of-Special-Evenly-Spaced-Elements-In-Array) \(H\)  
 [1737.Change-Minimum-Characters-to-Satisfy-One-of-Three-Conditions](https://github.com/wisdompeak/LeetCode/tree/master/Others/1737.Change-Minimum-Characters-to-Satisfy-One-of-Three-Conditions) \(M+\)
 
-#### Presum
+**Presum**
 
 [1878.Get-Biggest-Three-Rhombus-Sums-in-a-Grid](https://github.com/wisdompeak/LeetCode/tree/master/Others/1878.Get-Biggest-Three-Rhombus-Sums-in-a-Grid) \(M+\)  
 [1906.Minimum-Absolute-Difference-Queries](https://github.com/wisdompeak/LeetCode/tree/master/Others/1906.Minimum-Absolute-Difference-Queries) \(M+\)
 
-#### Quick Select
+**Quick Select**
 
 [215.Kth-Largest-Element-in-an-Array](https://github.com/wisdompeak/LeetCode/tree/master/Binary_Search/215.Kth-Largest-Element-in-an-Array) \(M\)  
 [347.Top-K-Frequent-Elements](https://github.com/wisdompeak/LeetCode/tree/master/Others/347.Top-K-Frequent-Elements) \(M+\)  
 [973.K-Closest-Points-to-Origin](https://github.com/wisdompeak/LeetCode/tree/master/Others/973.K-Closest-Points-to-Origin) \(M\)  
 [324.Wiggle-Sort-II](https://github.com/wisdompeak/LeetCode/tree/master/Others/324.Wiggle-Sort-II) \(H\)
 
-### [LeetCode Cup](https://github.com/wisdompeak/LeetCode/tree/master/LCCUP)
+#### [LeetCode Cup](https://github.com/wisdompeak/LeetCode/tree/master/LCCUP)
 
 [LCP23.魔术排列](https://github.com/wisdompeak/LeetCode/tree/master/LCCUP/2020Fall/LCP23.%E9%AD%94%E6%9C%AF%E6%8E%92%E5%88%97)  
 [LCP24.数字游戏](https://github.com/wisdompeak/LeetCode/tree/master/LCCUP/2020Fall/LCP24.%E6%95%B0%E5%AD%97%E6%B8%B8%E6%88%8F)  
@@ -2531,7 +2531,7 @@ boolean isOverlapping( Interval o1, Interval o2 )
 [LCP36.最多牌组数](https://github.com/wisdompeak/LeetCode/tree/master/LCCUP/2021Spring/LCP36.%E6%9C%80%E5%A4%9A%E7%89%8C%E7%BB%84%E6%95%B0)  
 [LCP43.十字路口的交通](https://github.com/wisdompeak/LeetCode/tree/master/LCCUP/2021Fall/LCP43.%E5%8D%81%E5%AD%97%E8%B7%AF%E5%8F%A3%E7%9A%84%E4%BA%A4%E9%80%9A)
 
-### [Templates](https://github.com/wisdompeak/LeetCode/tree/master/Template)
+#### [Templates](https://github.com/wisdompeak/LeetCode/tree/master/Template)
 
 [Math](https://github.com/wisdompeak/LeetCode/tree/master/Template/Math)  
 [Binary\_Index\_Tree](https://github.com/wisdompeak/LeetCode/tree/master/Template/Binary_Index_Tree)  
@@ -2543,9 +2543,9 @@ boolean isOverlapping( Interval o1, Interval o2 )
 [RB\_Tree](https://github.com/wisdompeak/LeetCode/tree/master/Template/RB_Tree)  
 [IO](https://github.com/wisdompeak/LeetCode/tree/master/Template/IO)
 
-## Online IDE templates
+### Online IDE templates
 
-### Coderpad
+#### Coderpad
 
 ```java
 import org.junit.*;
