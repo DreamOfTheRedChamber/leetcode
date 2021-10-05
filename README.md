@@ -1,146 +1,58 @@
-# leetcode/README.md at master · DreamOfTheRedChamber/leetcode
-
-
-
-* Leetcode
-  * Typical whiteboard coding workflow
-    * Clarify question
-    * Give a small but general enough example for discussing algo/DS
-    * Come up with a brute force algorithm
-    * Optimize the brute force solution
-    * Write test cases
-    * Write code
-    * Walk through test cases
-    * Solve follow up questions
-  * Interview mindset
-    * Understanding what interviewers really wants
-    * Checklist
-      * Things to be careful.
-      * Phone interviews
-      * Onsite interviews
-    * Interview mistakes made in past
-    * Whiteboard coding pros and cons
-  * Practice mindset
-    * Goal
-    * Attitudes
-    * Tools
-    * Strategies
-    * Leetcode pros and cons
-  * Python data structures
-    * Collections \[TODO\]
-      * Compare heapq and SortedList complexity \[TODO\]
-      * Sort comparator \[TODO\]
-    * Type conversions
-      * int and char
-  * LeetCode problem types
-    * Two Pointers
-      * Sliding window
-      * Begin and end type
-        * Greedy
-      * Partition type
-      * Slow and fast
-      * Window type
-      * Sliding window : Distinct Characters
-      * Two pointers for two seuqences
-    * Binary Search
-      * Binary Processing
-      * Binary Search by Value
-    * Hash Table
-      * LRU cache implementation
-      * Hash+Prefix
-    * Heap
-    * Tree
-      * Serialization & Hashing
-      * Tree & Sequence
-      * LCA
-      * N-ary Tree
-      * 似树非树
-    * Segment Tree
-      * Basics
-      * Lazy Tag
-      * Others
-    * \[Binary Index Tree\]
-    * Design
-    * Stack
-      * monotonic stack
-      * parse expression
-      * Calculator
-      * Parentheses \[TODO\]
-    * Deque
-    * Priority Queue
-      * Sort+PQ
-      * Arrangement with Stride
-    * Graph \[TODO\]
-      * Edge list vs Adjacent list vs Adjacent matrix
-    * DFS
-      * search in an array
-      * memorization
-    * BFS
-      * Multi State
-      * 拓扑排序
-      * Dijkstra \(BFS+PQ\)
-    * Trie
-      * Trie and XOR
-    * Linked List
-      * Dummy node trick
-      * Common tasks
-    * Dynamic Programming
-      * 基本型 I
-      * 基本型 II
-      * 走迷宫型
-      * 背包型
-      * 键盘型
-      * To Do or Not To Do
-      * 区间型 I
-      * 区间型 II
-      * 双序列型
-      * 状态压缩DP
-      * Catalan
-      * Permutation
-    * Bit Manipulation
-      * Common tasks
-      * XOR
-      * Bit Mask
-    * Divide and Conquer
-    * String
-      * Rolling Hash
-      * KMP
-      * Manacher
-      * Palindrome
-    * Union Find
-      * Prime Factors
-      * MST
-    * Recursion
-      * Min-Max Strategy
-    * Graph
-    * Math
-      * Distances
-      * Geometry
-      * Random Pick
-      * Combinatorics
-      * Numerical Theory
-    * Greedy
-      * LIS
-      * Two-pass distribution
-      * Three-pass
-      * State Machine
-      * Sort
-      * Indexing Sort
-      * Parenthesis
-      * Intervals
-        * Maximum number of non-overlapping intervals - sort by ending points
-          * Interval + DP + Binary search
-        * Minimum number of intervals to cover the whole range - sort by starting points
-      * Constructive Problems
-    * Others
-      * 扫描线 / 差分数组
-      * Enumeration
-      * Presum
-      * Quick Select
-    * LeetCode Cup
-    * Templates
-  * Online IDE templates
-    * Coderpad
+- [Leetcode](#leetcode)
+  - [Typical whiteboard coding workflow](#typical-whiteboard-coding-workflow)
+    - [Clarify question](#clarify-question)
+    - [Give a small but general enough example for discussing algo/DS](#give-a-small-but-general-enough-example-for-discussing-algods)
+    - [Come up with a brute force algorithm](#come-up-with-a-brute-force-algorithm)
+    - [Optimize the brute force solution](#optimize-the-brute-force-solution)
+    - [Write test cases](#write-test-cases)
+    - [Write code](#write-code)
+    - [Walk through test cases](#walk-through-test-cases)
+    - [Solve follow up questions](#solve-follow-up-questions)
+  - [Interview mindset](#interview-mindset)
+    - [Understanding what interviewers really wants](#understanding-what-interviewers-really-wants)
+    - [Checklist](#checklist)
+    - [Interview mistakes made in past](#interview-mistakes-made-in-past)
+    - [Whiteboard coding pros and cons](#whiteboard-coding-pros-and-cons)
+  - [Practice mindset](#practice-mindset)
+    - [Goal](#goal)
+    - [Attitudes](#attitudes)
+    - [Tools](#tools)
+    - [Strategies](#strategies)
+    - [Leetcode pros and cons](#leetcode-pros-and-cons)
+  - [Python data structures](#python-data-structures)
+    - [Collections \[TODO\]](#collections-todo)
+    - [Type conversions](#type-conversions)
+  - [LeetCode problem types](#leetcode-problem-types)
+    - [Two Pointers](#two-pointers)
+    - [Binary Search](#binary-search)
+    - [Hash Table](#hash-table)
+    - [Heap](#heap)
+    - [Tree](#tree)
+    - [Segment Tree](#segment-tree)
+    - [\[Binary Index Tree\]](#binary-index-tree)
+    - [Design](#design)
+    - [Stack](#stack)
+    - [Deque](#deque)
+    - [Priority Queue](#priority-queue)
+    - [Graph \[TODO\]](#graph-todo)
+    - [DFS](#dfs)
+    - [BFS](#bfs)
+    - [Trie](#trie)
+    - [Linked List](#linked-list)
+    - [Dynamic Programming](#dynamic-programming)
+    - [Bit Manipulation](#bit-manipulation)
+    - [Divide and Conquer](#divide-and-conquer)
+    - [String](#string)
+    - [Union Find](#union-find)
+    - [Recursion](#recursion)
+    - [Graph](#graph)
+    - [Math](#math)
+    - [Greedy](#greedy)
+    - [Others](#others)
+    - [LeetCode Cup](#leetcode-cup)
+    - [Templates](#templates)
+  - [Online IDE templates](#online-ide-templates)
+    - [Coderpad](#coderpad)
 
 ## Leetcode
 
