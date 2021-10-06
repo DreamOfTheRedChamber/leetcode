@@ -2285,6 +2285,38 @@ void generateCombs( List<List<Integer>> allCombs, LinkedList<Integer> oneComb, i
 
 [757.Set-Intersection-Size-At-Least-Two](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/757.Set-Intersection-Size-At-Least-Two) \(H\)  
 
+```python
+# Pattern1: For loop based
+    def eraseOverlapIntervals(self, intervals: List[List[int]]) -> int:
+        if len(intervals) == 0:
+            return 0
+        
+        # calc max number of non-overlapping, then substract
+        sortedInter = sorted(intervals, key=lambda x: (x[1], -x[0]))
+        curr = sortedInter[0]
+        numOverlapped = 0
+        for i in range(1, len(sortedInter)):
+            if sortedInter[i][0] < curr[1]:
+                numOverlapped += 1
+            else:
+                curr = sortedInter[i]
+        
+        return numOverlapped       
+
+# Pattern2: Two while loop, the return value overlaps with the above
+    def findLongestChain(self, pairs: List[List[int]]) -> int:
+        sortedIn = sorted(pairs, key=lambda x: (x[1], x[0]))
+        i = 0
+        result = 0
+        while i < len(sortedIn):
+            j = i + 1
+            result += 1
+            while j < len(sortedIn) and sortedIn[j][0] <= sortedIn[i][1]:
+                j += 1
+            i = j
+        return result
+```
+
 ###### Interval + DP + Binary search
 * TODO
   * Use named tuples
