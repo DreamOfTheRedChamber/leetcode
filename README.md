@@ -2286,7 +2286,7 @@ void generateCombs( List<List<Integer>> allCombs, LinkedList<Integer> oneComb, i
 [757.Set-Intersection-Size-At-Least-Two](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/757.Set-Intersection-Size-At-Least-Two) \(H\)  
 
 ```python
-# Pattern1: For loop based
+# Sample Pattern1: For loop based
     def eraseOverlapIntervals(self, intervals: List[List[int]]) -> int:
         if len(intervals) == 0:
             return 0
@@ -2303,7 +2303,7 @@ void generateCombs( List<List<Integer>> allCombs, LinkedList<Integer> oneComb, i
         
         return numOverlapped       
 
-# Pattern2: Two while loop, the return value overlaps with the above
+# Sample Pattern2: Two while loop (the return value is the opposite per problem description)
     def findLongestChain(self, pairs: List[List[int]]) -> int:
         sortedIn = sorted(pairs, key=lambda x: (x[1], x[0]))
         i = 0
