@@ -109,6 +109,8 @@
 ## LeetCode problem types
 
 ### Amortized analysis
+* https://www.youtube.com/watch?v=OwMhWDOxX94&ab_channel=HuaHua
+
 #### Input Size V.S. Time Complexity
 * https://www.youtube.com/watch?v=eG99FDBeuJo&ab_channel=HuaHua
 
