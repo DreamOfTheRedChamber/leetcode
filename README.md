@@ -1,4 +1,6 @@
 - [LeetCode problem types](#leetcode-problem-types)
+  - [Amortized analysis](#amortized-analysis)
+    - [Input Size V.S. Time Complexity](#input-size-vs-time-complexity)
   - [Two Pointers](#two-pointers)
     - [Sliding window](#sliding-window)
     - [Begin and end type](#begin-and-end-type)
@@ -105,6 +107,10 @@
   - [Coderpad](#coderpad)
 
 ## LeetCode problem types
+
+### Amortized analysis
+#### Input Size V.S. Time Complexity
+* https://www.youtube.com/watch?v=eG99FDBeuJo&ab_channel=HuaHua
 
 ### [Two Pointers](https://github.com/wisdompeak/LeetCode/tree/master/Two_Pointers)
 
