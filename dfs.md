@@ -1,0 +1,47 @@
+- [DFS](#dfs)
+  - [search in an array](#search-in-an-array)
+  - [memorization](#memorization)
+
+# [DFS](https://github.com/wisdompeak/LeetCode/tree/master/DFS)
+
+[037.Sudoku-Solver](https://github.com/wisdompeak/LeetCode/tree/master/DFS/037.Sudoku-Solver) \(M+\)  
+[040.Combination-Sum-II](https://github.com/wisdompeak/LeetCode/tree/master/DFS/040.Combination-Sum-II) \(M+\)  
+[051.N-Queens](https://github.com/wisdompeak/LeetCode/tree/master/DFS/051.N-Queens) \(M\)  
+[131.Palindrome-Partitioning](https://github.com/wisdompeak/LeetCode/tree/master/Dynamic_Programming/131.Palindrome-Partitioning) \(M+\)  
+[291.Word-Pattern-II](https://github.com/wisdompeak/LeetCode/tree/master/DFS/291.Word-Pattern-II) \(M\)  
+[417.Pacific-Atlantic-Water-Flow](https://github.com/wisdompeak/LeetCode/tree/master/DFS/417.Pacific-Atlantic-Water-Flow) \(M\)  
+[200.Number-of-Islands](https://github.com/wisdompeak/LeetCode/tree/master/DFS/200.Number-of-Islands) \(M\)  
+[282.Expression-Add-Operators](https://github.com/wisdompeak/LeetCode/tree/master/DFS/282.Expression-Add-Operators) \(H\)  
+[312.Burst-Balloons](https://github.com/wisdompeak/LeetCode/tree/master/DFS/312.Burst-Balloons) \(H-\)  
+[351.Android-Unlock-Patterns](https://github.com/wisdompeak/LeetCode/tree/master/DFS/351.Android-Unlock-Patterns) \(H-\)  
+[399.Evaluate-Division](https://github.com/wisdompeak/LeetCode/tree/master/DFS/399.Evaluate-Division) \(H-\)  
+[488.Zuma-Game](https://github.com/wisdompeak/LeetCode/tree/master/DFS/488.Zuma-Game) \(H-\)  
+[425.Word-Squares](https://github.com/wisdompeak/LeetCode/tree/master/DFS/425.Word-Squares) \(H-\)  
+[959.Regions-Cut-By-Slashes](https://github.com/wisdompeak/LeetCode/tree/master/DFS/959.Regions-Cut-By-Slashes) \(M+\)  
+[1306.Jump-Game-III](https://github.com/wisdompeak/LeetCode/tree/master/DFS/1306.Jump-Game-III) \(M\)  
+[1718.Construct-the-Lexicographically-Largest-Valid-Sequence](https://github.com/wisdompeak/LeetCode/tree/master/DFS/1718.Construct-the-Lexicographically-Largest-Valid-Sequence) \(H-\)  
+[1723.Find-Minimum-Time-to-Finish-All-Jobs](https://github.com/wisdompeak/LeetCode/tree/master/Dynamic_Programming/1723.Find-Minimum-Time-to-Finish-All-Jobs) \(H-\)  
+[1766.Tree-of-Coprimes](https://github.com/wisdompeak/LeetCode/tree/master/DFS/1766.Tree-of-Coprimes) \(H-\)  
+[1778.Shortest-Path-in-a-Hidden-Grid](https://github.com/wisdompeak/LeetCode/tree/master/DFS/1778.Shortest-Path-in-a-Hidden-Grid) \(H-\)
+
+## search in an array
+
+[090.Subsets-II](https://github.com/wisdompeak/LeetCode/tree/master/DFS/090.Subsets-II) \(M+\)  
+[301.Remove-Invalid-Parentheses](https://github.com/wisdompeak/LeetCode/tree/master/DFS/301.Remove-Invalid-Parentheses) \(H\)  
+[473.Matchsticks-to-Square](https://github.com/wisdompeak/LeetCode/tree/master/DFS/473.Matchsticks-to-Square) \(M+\)  
+[491.Increasing-Subsequences](https://github.com/wisdompeak/LeetCode/tree/master/DFS/491.Increasing-Subsequences) \(M\)  
+[698.Partition-to-K-Equal-Sum-Subsets](https://github.com/wisdompeak/LeetCode/tree/master/DFS/698.Partition-to-K-Equal-Sum-Subsets) \(H-\)  
+[996.Number-of-Squareful-Arrays](https://github.com/wisdompeak/LeetCode/tree/master/DFS/996.Number-of-Squareful-Arrays) \(H-\)  
+[1307.Verbal-Arithmetic-Puzzle](https://github.com/wisdompeak/LeetCode/tree/master/DFS/1307.Verbal-Arithmetic-Puzzle) \(H\)  
+[1593.Split-a-String-Into-the-Max-Number-of-Unique-Substrings](https://github.com/wisdompeak/LeetCode/tree/master/DFS/1593.Split-a-String-Into-the-Max-Number-of-Unique-Substrings) \(M\)  
+[1681.Minimum-Incompatibility](https://github.com/wisdompeak/LeetCode/tree/master/Dynamic_Programming/1681.Minimum-Incompatibility) \(H\)
+
+## memorization
+
+[329.Longest-Increasing-Path-in-a-Matrix](https://github.com/wisdompeak/LeetCode/tree/master/DFS/329.Longest-Increasing-Path-in-a-Matrix) \(M\)  
+[638.Shopping-Offers](https://github.com/wisdompeak/LeetCode/tree/master/DFS/638.Shopping-Offers) \(M+\)  
+[403.Frog-Jump](https://github.com/wisdompeak/LeetCode/tree/master/DFS/403.Frog-Jump) \(M+\)  
+[489.Robot-Room-Cleaner](https://github.com/wisdompeak/LeetCode/blob/master/DFS/489.Robot-Room-Cleaner) \(H\)  
+[546.Remove-Boxes](https://github.com/wisdompeak/LeetCode/tree/master/DFS/546.Remove-Boxes) \(H+\)  
+[1340.Jump-Game-V](https://github.com/wisdompeak/LeetCode/tree/master/DFS/1340.Jump-Game-V) \(M+\)  
+[1815.Maximum-Number-of-Groups-Getting-Fresh-Donuts](https://github.com/wisdompeak/LeetCode/tree/master/DFS/1815.Maximum-Number-of-Groups-Getting-Fresh-Donuts) \(H-\)
