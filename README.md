@@ -453,69 +453,6 @@ void generateCombs( List<List<Integer>> allCombs, LinkedList<Integer> oneComb, i
 [1904.The-Number-of-Full-Rounds-You-Have-Played](https://github.com/wisdompeak/LeetCode/tree/master/Others/1904.The-Number-of-Full-Rounds-You-Have-Played) \(M\)  
 [1997.First-Day-Where-You-Have-Been-in-All-the-Rooms](https://github.com/wisdompeak/LeetCode/tree/master/Others/1997.First-Day-Where-You-Have-Been-in-All-the-Rooms) \(H\)
 
-#### 扫描线 / 差分数组
-
-[252.Meeting-Rooms](https://github.com/wisdompeak/LeetCode/tree/master/Others/252.Meeting-Rooms) \(M\)  
-[253.Meeting-Rooms-II](https://github.com/wisdompeak/LeetCode/tree/master/Others/253.Meeting-Rooms-II) \(M+\)  
-[056.Merge-Intervals](https://github.com/wisdompeak/LeetCode/tree/master/Others/056.Merge-Intervals) \(M\)  
-[057.Insert-Intervals](https://github.com/wisdompeak/LeetCode/tree/master/Others/057.Insert-Interval) \(M\)  
-[732.My-Calendar-III](https://github.com/wisdompeak/LeetCode/tree/master/Others/732.My-Calendar-III) \(M\)  
-[759.Employee-Free-Time](https://github.com/wisdompeak/LeetCode/tree/master/Others/759.Employee-Free-Time) \(M+\)  
-[798.Smallest-Rotation-with-Highest-Score](https://github.com/wisdompeak/LeetCode/tree/master/Others/798.Smallest-Rotation-with-Highest-Score) \(H\)  
-[995.Minimum-Number-of-K-Consecutive-Bit-Flips](https://github.com/wisdompeak/LeetCode/tree/master/Others/995.Minimum-Number-of-K-Consecutive-Bit-Flips) \(H-\)  
-[1094.Car-Pooling](https://github.com/wisdompeak/LeetCode/tree/master/Others/1094.Car-Pooling) \(E\)  
-[1109.Corporate-Flight-Bookings](https://github.com/wisdompeak/LeetCode/tree/master/Others/1109.Corporate-Flight-Bookings) \(M\)  
-[1589.Maximum-Sum-Obtained-of-Any-Permutation](https://github.com/wisdompeak/LeetCode/tree/master/Others/1589.Maximum-Sum-Obtained-of-Any-Permutation) \(M\)  
-[1674.Minimum-Moves-to-Make-Array-Complementary](https://github.com/wisdompeak/LeetCode/tree/master/Others/1674.Minimum-Moves-to-Make-Array-Complementary) \(H\)  
-[1871.Jump-Game-VII](https://github.com/wisdompeak/LeetCode/tree/master/Others/1871.Jump-Game-VII) \(M+\)  
-1893.Check if All the Integers in a Range Are Covered \(E\)  
-[850.Rectangle-Area-II](https://github.com/wisdompeak/LeetCode/tree/master/Others/850.Rectangle-Area-II) \(H\)  
-[1943.Describe-the-Painting](https://github.com/wisdompeak/LeetCode/tree/master/Others/1943.Describe-the-Painting) \(H-\)
-
-**Interval**
-
-* Interval-related
-  * Judge whether intervals overlap
-
-```java
-boolean isOverlapping( Interval o1, Interval o2 )
-{
-  if ( o1.start >= o2.end || o2.start >= o1.end )
-  {
-    return false;
-  }
-  else
-  {
-    return true;
-  }
-}
-```
-
-* Sort intervals
-
-  ```java
-  List<Interval> list = //...
-  // sort according to starting point
-  list.sort( (o1,o2) -> o1.start - o2.start );
-  // or sort according to ending point
-  list.sort( (o1,o2) -> o1.end - o2.end );
-  // sort according to both starting and ending point
-  list.sort( (o1,o2) -> o1.start != o2.start ? o1.start - o2.start : o1.end - o2.end );
-  ```
-
-* Split intervals into Pair\(int start, boolean isStart\), Pair\(int end, boolean isEnd\)
-
-  ```java
-  List<Interval> intervalList = //...
-  List<Pair> pairList = //...
-  for ( Interval interval : intervalList )
-  {
-  pairList.add( new Pair(interval.start, true) );
-  pairList.add( new Pair(interval.end, false) );
-  }
-  pairList.sort( (o1, o2) -> (o1.start-o2.start) );
-  ```
-
 #### Enumeration
 
 [479.Largest-Palindrome-Product](https://github.com/wisdompeak/LeetCode/tree/master/Others/479.Largest-Palindrome-Product) \(M+\)  
