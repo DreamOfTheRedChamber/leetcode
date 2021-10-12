@@ -1,8 +1,8 @@
 - [Intervals](#intervals)
   - [Basics](#basics)
-  - [Maximum number of non-overlapping intervals - sort by ending points](#maximum-number-of-non-overlapping-intervals---sort-by-ending-points)
+  - [Max number of non-overlapping intervals inside a range - sort by ending points](#max-number-of-non-overlapping-intervals-inside-a-range---sort-by-ending-points)
     - [Interval + DP + Binary search](#interval--dp--binary-search)
-  - [Minimum number of intervals to cover the whole range - sort by starting points](#minimum-number-of-intervals-to-cover-the-whole-range---sort-by-starting-points)
+  - [Min number of intervals to cover the whole range - sort by starting points](#min-number-of-intervals-to-cover-the-whole-range---sort-by-starting-points)
   - [Sweepline](#sweepline)
 
 # Intervals
@@ -39,7 +39,7 @@ boolean isOverlapping( Interval o1, Interval o2 )
   list.sort( (o1,o2) -> o1.start != o2.start ? o1.start - o2.start : o1.end - o2.end );
   ```
 
-## Maximum number of non-overlapping intervals - sort by ending points
+## Max number of non-overlapping intervals inside a range - sort by ending points
 
 [452.Minimum-Number-of-Arrows-to-Burst-Balloons](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/452.Minimum-Number-of-Arrows-to-Burst-Balloons) \(H-\)  
 
@@ -89,7 +89,7 @@ boolean isOverlapping( Interval o1, Interval o2 )
 
 [1751.Maximum-Number-of-Events-That-Can-Be-Attended-II](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/1751.Maximum-Number-of-Events-That-Can-Be-Attended-II) \(H\)
 
-## Minimum number of intervals to cover the whole range - sort by starting points
+## Min number of intervals to cover the whole range - sort by starting points
 [045.Jump-Game-II](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/045.Jump-Game-II) \(M\)  
 
 [1024.Video-Stitching](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/1024.Video-Stitching) \(M+\)  
