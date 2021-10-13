@@ -1,24 +1,8 @@
 # interview_checklist
 
-* Typical whiteboard coding workflow
-  * Clarify question
-  * Give a small but general enough example for discussing algo/DS
-  * Come up with a brute force algorithm
-  * Optimize the brute force solution
-  * Write test cases
-  * Write code
-  * Walk through test cases
-  * Solve follow up questions
-* Interview mindset
-  * Understanding what interviewers really wants
-  * Checklist
-    * Things to be careful.
-    * Phone interviews
-    * Onsite interviews
+## Typical whiteboard coding workflow
 
-### Typical whiteboard coding workflow
-
-#### Clarify question
+### Clarify question
 
 1. Define public APIs to be implemented:
    * Things to define - Input type
@@ -71,11 +55,11 @@
        * Whether duplicate entries exist
    * Edge cases: "_**If input is like this, then what should I output?**_"
 
-#### Give a small but general enough example for discussing algo/DS
+### Give a small but general enough example for discussing algo/DS
 
 * Usually a size of 4\~5 is enough.
 
-#### Come up with a brute force algorithm
+### Come up with a brute force algorithm
 
 1. Synchronize with interviewer "_**Let's come up with a brute force solution first.**_"
 2. Unstuck strategy:
@@ -88,7 +72,7 @@
 4. Talk about the algorithm to be used.
 5. Calc time/space complexity: "_**The time complexity of the algorithm is O(XXX) and space complexity is O(XXX)**_"
 
-#### Optimize the brute force solution
+### Optimize the brute force solution
 
 1. Synchronize with interviewer "_**The time/space complexity of the brute force solution is too high and will be impractical.**_"
 2. Consider the typical optimizing patterns below:
@@ -103,7 +87,7 @@
    2. Be keen to what interviewer is saying: Every word the interviewer is saying has its meanings. ""
 5. Synchronize with interviewer "_**Do you have any concerns for the proposed algorithm? Should we write code for this**_."
 
-#### Write test cases
+### Write test cases
 
 * In general, the following types of test cases should be considered
   * The normal case: e.g. array length of even or odd in sorting algo
@@ -128,7 +112,7 @@
     * List/Array of even length
     * List/Array of odd length
 
-#### Write code
+### Write code
 
 1. Synchronize with interviewer "_**There are XXX steps in this algorithm. The first is XXX. The second....**_"
 2. Check input validity (already discussed thoroughly before)
@@ -141,7 +125,7 @@
    * When need double check trivials (like +1 or plus two, loop termination conditions ):
      * "_**Not sure whether my loop should have "<" or "<=". Write a checkmark to remind yourself to figure out the details at the end.**_""
 
-#### Walk through test cases
+### Walk through test cases
 
 1. Synchronize with interviewer: "_**Then I would usually check my code against tests**_"
 2. Check the code by myself
@@ -162,7 +146,7 @@
      * Global variables
 4. Synchronize with interviewer: "_**I think I am done with the problem**_".
 
-#### Solve follow up questions
+### Solve follow up questions
 
 * Typical follow-up questions
   * No duplicates -> duplicates exist
@@ -171,9 +155,9 @@
   * How to avoid global variables
   * How to improve performance
 
-### Interview mindset
+## Interview mindset
 
-#### Understanding what interviewers really wants
+### Understanding what interviewers really wants
 
 * Evaluation criteria
   * Can s/he explain technical solutions well?
@@ -191,22 +175,22 @@
 | Write code to solve problem           | <p>Jumps into writing code</p><p>Awkward silence</p>                                    | <p>Would I want to work with them everyday</p><p>Have they actually written production grade code</p><p>What do they do when stuck</p>                                  |
 | Maybe you could try this ...          | Take advice without serious thinking                                                    | <p>Do they think independently</p><p>How fast can they absord new information</p><p>Do they take advice/directions well</p><p>Do they learn quickly and run with it</p> |
 
-#### Checklist
+### Checklist
 
-**Things to be careful.**
+### Things to be careful.
 
 * Do not just give "yes" or "no" answers. Limit initial explanation to short summaries and allow the interviewer to ask follow up questions.
 * Your tone of voice and word choice. Interviewers use voice to judge how believable you are. Posture really have impact on your mind.
 * Eye contact and shake hands. Say thanks to interviewers at last.
 
-**Phone interviews**
+### Phone interviews
 
 * Test the online coding environment.
 * Make sure your cellphone has enough battery.
 * Have a copy of resume in front of you.
 * Take notes and write a follow up thank you email with details from the discussion.
 
-**Onsite interviews**
+### Onsite interviews
 
 * Show up 15 minutes early and have the interviewer's phone number for last minute changes.
 * Things to bring with you
@@ -216,4 +200,4 @@
   * Tea/Coffee.
   * Whiteboard pen and erasers.
   * A piece of pen and paper. Take notes when an interviewer speaks to help yourself focus and ask more specific questions.
-  * Computers for last minute warm-up
+  * Computers for last minute warm-up.

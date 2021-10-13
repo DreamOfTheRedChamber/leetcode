@@ -1,16 +1,29 @@
 # README
 
-## LeetCode problem types
+* LeetCode problem types
+  * Amortized analysis
+    * Input Size V.S. Time Complexity
+  * Design
+  * Others
+    * Enumeration
+    * Presum
+    * Quick Select
+  * LeetCode Cup
+  * Templates
+* Online IDE templates
+  * Coderpad
 
-### Amortized analysis
+### LeetCode problem types
+
+#### Amortized analysis
 
 * https://www.youtube.com/watch?v=OwMhWDOxX94\&ab_channel=HuaHua
 
-#### Input Size V.S. Time Complexity
+**Input Size V.S. Time Complexity**
 
 * https://www.youtube.com/watch?v=eG99FDBeuJo\&ab_channel=HuaHua
 
-### [Design](https://github.com/wisdompeak/LeetCode/tree/master/Design)
+#### [Design](https://github.com/wisdompeak/LeetCode/tree/master/Design)
 
 [146.LRU-Cache](https://github.com/wisdompeak/LeetCode/tree/master/Design/146.LRU-Cache) (H-)\
 [460.LFU Cache](https://github.com/wisdompeak/LeetCode/tree/master/Design/460.LFU-Cache) (H)\
@@ -30,7 +43,7 @@
 [1418.Display-Table-of-Food-Orders-in-a-Restaurant](https://github.com/wisdompeak/LeetCode/tree/master/Design/1418.Display-Table-of-Food-Orders-in-a-Restaurant) (H-)\
 [1622.Fancy-Sequence](https://github.com/wisdompeak/LeetCode/tree/master/Design/1622.Fancy-Sequence) (H+)
 
-### [Others](https://github.com/wisdompeak/LeetCode/tree/master/Others)
+#### [Others](https://github.com/wisdompeak/LeetCode/tree/master/Others)
 
 [007.Reverse-Integer](https://github.com/wisdompeak/LeetCode/tree/master/Others/007.Reverse-Integer) (M)\
 [048.Rotate-Image](https://github.com/wisdompeak/LeetCode/tree/master/Others/048.Rotate-Image) (M+)\
@@ -69,7 +82,7 @@
 [1904.The-Number-of-Full-Rounds-You-Have-Played](https://github.com/wisdompeak/LeetCode/tree/master/Others/1904.The-Number-of-Full-Rounds-You-Have-Played) (M)\
 [1997.First-Day-Where-You-Have-Been-in-All-the-Rooms](https://github.com/wisdompeak/LeetCode/tree/master/Others/1997.First-Day-Where-You-Have-Been-in-All-the-Rooms) (H)
 
-### Enumeration
+**Enumeration**
 
 [479.Largest-Palindrome-Product](https://github.com/wisdompeak/LeetCode/tree/master/Others/479.Largest-Palindrome-Product) (M+)\
 [866.Prime-Palindrome](https://github.com/wisdompeak/LeetCode/tree/master/Others/866.Prime-Palindrome) (H-)\
@@ -79,19 +92,19 @@
 [1714.Sum-Of-Special-Evenly-Spaced-Elements-In-Array](https://github.com/wisdompeak/LeetCode/tree/master/Others/1714.Sum-Of-Special-Evenly-Spaced-Elements-In-Array) (H)\
 [1737.Change-Minimum-Characters-to-Satisfy-One-of-Three-Conditions](https://github.com/wisdompeak/LeetCode/tree/master/Others/1737.Change-Minimum-Characters-to-Satisfy-One-of-Three-Conditions) (M+)
 
-### Presum
+**Presum**
 
 [1878.Get-Biggest-Three-Rhombus-Sums-in-a-Grid](https://github.com/wisdompeak/LeetCode/tree/master/Others/1878.Get-Biggest-Three-Rhombus-Sums-in-a-Grid) (M+)\
 [1906.Minimum-Absolute-Difference-Queries](https://github.com/wisdompeak/LeetCode/tree/master/Others/1906.Minimum-Absolute-Difference-Queries) (M+)
 
-### Quick Select
+**Quick Select**
 
 [215.Kth-Largest-Element-in-an-Array](https://github.com/wisdompeak/LeetCode/tree/master/Binary_Search/215.Kth-Largest-Element-in-an-Array) (M)\
 [347.Top-K-Frequent-Elements](https://github.com/wisdompeak/LeetCode/tree/master/Others/347.Top-K-Frequent-Elements) (M+)\
 [973.K-Closest-Points-to-Origin](https://github.com/wisdompeak/LeetCode/tree/master/Others/973.K-Closest-Points-to-Origin) (M)\
 [324.Wiggle-Sort-II](https://github.com/wisdompeak/LeetCode/tree/master/Others/324.Wiggle-Sort-II) (H)
 
-### [LeetCode Cup](https://github.com/wisdompeak/LeetCode/tree/master/LCCUP)
+#### [LeetCode Cup](https://github.com/wisdompeak/LeetCode/tree/master/LCCUP)
 
 [LCP23.魔术排列](https://github.com/wisdompeak/LeetCode/tree/master/LCCUP/2020Fall/LCP23.%E9%AD%94%E6%9C%AF%E6%8E%92%E5%88%97)\
 [LCP24.数字游戏](https://github.com/wisdompeak/LeetCode/tree/master/LCCUP/2020Fall/LCP24.%E6%95%B0%E5%AD%97%E6%B8%B8%E6%88%8F)\
@@ -101,7 +114,7 @@
 [LCP36.最多牌组数](https://github.com/wisdompeak/LeetCode/tree/master/LCCUP/2021Spring/LCP36.%E6%9C%80%E5%A4%9A%E7%89%8C%E7%BB%84%E6%95%B0)\
 [LCP43.十字路口的交通](https://github.com/wisdompeak/LeetCode/tree/master/LCCUP/2021Fall/LCP43.%E5%8D%81%E5%AD%97%E8%B7%AF%E5%8F%A3%E7%9A%84%E4%BA%A4%E9%80%9A)
 
-### [Templates](https://github.com/wisdompeak/LeetCode/tree/master/Template)
+#### [Templates](https://github.com/wisdompeak/LeetCode/tree/master/Template)
 
 [Math](https://github.com/wisdompeak/LeetCode/tree/master/Template/Math)\
 [Binary_Index_Tree](https://github.com/wisdompeak/LeetCode/tree/master/Template/Binary_Index_Tree)\
@@ -113,9 +126,9 @@
 [RB_Tree](https://github.com/wisdompeak/LeetCode/tree/master/Template/RB_Tree)\
 [IO](https://github.com/wisdompeak/LeetCode/tree/master/Template/IO)
 
-## Online IDE templates
+### Online IDE templates
 
-### Coderpad
+#### Coderpad
 
 ```java
 import org.junit.*;
