@@ -1,163 +1,219 @@
-- [LeetCode problem types](#leetcode-problem-types)
-  - [Amortized analysis](#amortized-analysis)
-    - [Input Size V.S. Time Complexity](#input-size-vs-time-complexity)
-  - [Design](#design)
-  - [Others](#others)
-    - [Enumeration](#enumeration)
-    - [Presum](#presum)
-    - [Quick Select](#quick-select)
-  - [LeetCode Cup](#leetcode-cup)
-  - [Templates](#templates)
-- [Online IDE templates](#online-ide-templates)
-  - [Coderpad](#coderpad)
+# interview_checklist
 
-## LeetCode problem types
+* Typical whiteboard coding workflow
+  * Clarify question
+  * Give a small but general enough example for discussing algo/DS
+  * Come up with a brute force algorithm
+  * Optimize the brute force solution
+  * Write test cases
+  * Write code
+  * Walk through test cases
+  * Solve follow up questions
+* Interview mindset
+  * Understanding what interviewers really wants
+  * Checklist
+    * Things to be careful.
+    * Phone interviews
+    * Onsite interviews
 
-### Amortized analysis
-* https://www.youtube.com/watch?v=OwMhWDOxX94&ab_channel=HuaHua
+### Typical whiteboard coding workflow
 
-#### Input Size V.S. Time Complexity
-* https://www.youtube.com/watch?v=eG99FDBeuJo&ab_channel=HuaHua
+#### Clarify question
 
-### [Design](https://github.com/wisdompeak/LeetCode/tree/master/Design)
+1. Define public APIs to be implemented:
+   * Things to define - Input type
+   * Things to define - Number of input arguments
+   * Things to define - Output type
+     * boolean: Whether solutions exist or not
+     * int: the number of solutions
+     * List\<?> : solutions themselves
+     * List\<?>: solutions without duplicates
+     * List\<?>: solutions with specific order
+2. Clarify ambiguous problem statements / Gather all requirements
+   * Solution existence: "_**What if no solution exists? How should I handle that?**_"
+   * Solution uniqueness: "_**Whether there are multiple solutions?**_"
+   * Input emptiness: "_**How should I handle null pointers and input of size zero?**_"
+   * Input validity: "_**Could I assume input is always invalid?**_"
+   * Input types:
+     * Typical scenarios
+       * In most cases, one single public API
+       * Multiple public APIs inside a class
+       * Two associated APIs, like serialize and deserialize
+     * Input - Field types
+       * Integer or double
+       * Positive or negative, non-positive or non-negative
+     * Input - Array
+       * Sorted or unsorted, sorted increasingly or decreasingly
+       * Given two arrays, which one's size is bigger
+       * Whether could modify entries inside array
+     * Input - String
+       * Whether the string contains space
+       * How are tokens separated, using comma, slash or something else
+       * Alphabetic characters(lower/upper case), ascii characters, or unicode characters
+     * Input - LinkedList
+       * Doubly or singly linkedlist
+     * Input - Tree
+       * Binary tree
+       * Binary search tree
+       * Complete tree
+     * Input - Graph
+       * Directed or undirected
+       * Weighted or not
+       * Connected or not
+   * Problem types:
+     * Sort
+       * Stable or not
+       * External or internal
+       * Input almost sorted or not
+       * Input range
+       * Increasing/Decreasing order
+     * Search
+       * Whether duplicate entries exist
+   * Edge cases: "_**If input is like this, then what should I output?**_"
 
-[146.LRU-Cache](https://github.com/wisdompeak/LeetCode/tree/master/Design/146.LRU-Cache) \(H-\)  
-[460.LFU Cache](https://github.com/wisdompeak/LeetCode/tree/master/Design/460.LFU-Cache) \(H\)  
-[432.All-O-one-Data-Structure](https://github.com/wisdompeak/LeetCode/tree/master/Design/432.All-O-one-Data-Structure) \(H\)  
-[380.Insert-Delete-GetRandom-O\(1\)](https://github.com/wisdompeak/LeetCode/tree/master/Design/380.Insert-Delete-GetRandom-O-1/) \(M+\)  
-[381.Insert-Delete-GetRandom-O1-Duplicates-allowed](https://github.com/wisdompeak/LeetCode/tree/master/Design/381.Insert-Delete-GetRandom-O1-Duplicates-allowed) \(H-\)  
-[716.Max-Stack](https://github.com/wisdompeak/LeetCode/tree/master/Design/716.Max-Stack) \(M+\)  
-[355.Design-Twitter](https://github.com/wisdompeak/LeetCode/tree/master/Design/355.Design-Twitter) \(H\)  
-[535.Encode-and-Decode-TinyURL](https://github.com/wisdompeak/LeetCode/tree/master/Design/535.Encode-and-Decode-TinyURL) \(M\)  
-[631.Design-Excel-Sum-Formula](https://github.com/wisdompeak/LeetCode/tree/master/Design/631.Design-Excel-Sum-Formula) \(H\)  
-[642.Design-Search-Autocomplete-System](https://github.com/wisdompeak/LeetCode/tree/master/Design/642.Design-Search-Autocomplete-System) \(M+\)  
-[895.Maximum-Frequency-Stack](https://github.com/wisdompeak/LeetCode/tree/master/Design/895.Maximum-Frequency-Stack) \(H\)  
-[1146.Snapshot-Array](https://github.com/wisdompeak/LeetCode/tree/master/Design/1146.Snapshot-Array) \(H\)  
-[1172.Dinner-Plate-Stacks](https://github.com/wisdompeak/LeetCode/tree/master/Design/1172.Dinner-Plate-Stacks) \(H\)  
-[1381.Design-a-Stack-With-Increment-Operation](https://github.com/wisdompeak/LeetCode/tree/master/Design/1381.Design-a-Stack-With-Increment-Operation) \(H-\)  
-[1352.Product-of-the-Last-K-Numbers](https://github.com/wisdompeak/LeetCode/tree/master/Design/1352.Product-of-the-Last-K-Numbers) \(M+\)  
-[1418.Display-Table-of-Food-Orders-in-a-Restaurant](https://github.com/wisdompeak/LeetCode/tree/master/Design/1418.Display-Table-of-Food-Orders-in-a-Restaurant) \(H-\)  
-[1622.Fancy-Sequence](https://github.com/wisdompeak/LeetCode/tree/master/Design/1622.Fancy-Sequence) \(H+\)
+#### Give a small but general enough example for discussing algo/DS
 
+* Usually a size of 4\~5 is enough.
 
-### [Others](https://github.com/wisdompeak/LeetCode/tree/master/Others)
+#### Come up with a brute force algorithm
 
-[007.Reverse-Integer](https://github.com/wisdompeak/LeetCode/tree/master/Others/007.Reverse-Integer) \(M\)  
-[048.Rotate-Image](https://github.com/wisdompeak/LeetCode/tree/master/Others/048.Rotate-Image) \(M+\)  
-[065.Valid-Number](https://github.com/wisdompeak/LeetCode/tree/master/Others/065.Valid-Number) \(H-\)  
-[158.Read-N-Characters-Given-Read4-II-Call-multiple-times](https://github.com/wisdompeak/LeetCode/tree/master/Others/158.Read-N-Characters-Given-Read4-II-Call-multiple-times) \(H-\)  
-[240.Search-a-2D-Matrix-II](https://github.com/wisdompeak/LeetCode/tree/master/Others/240.Search-a-2D-Matrix-II) \(M+\)  
-[277.Find-the-Celebrity](https://github.com/wisdompeak/LeetCode/tree/master/Others/277.Find-the-Celebrity) \(H-\)  
-[311.Sparse-Matrix-Multiplication](https://github.com/wisdompeak/LeetCode/tree/master/Others/311.Sparse-Matrix-Multiplication) \(M\)  
-168.Excel-Sheet-Column-Title \(H\)  
-453.Minimum-Moves-to-Equal-Array-Elements \(M\)  
-689.Maximum-Sum-of-3-Non-Overlapping-Subarrays \(M+\)  
-[782.Transform-to-Chessboard](https://github.com/wisdompeak/LeetCode/tree/master/Others/782.Transform-to-Chessboard) \(H+\)  
-[466.Count-The-Repetitions](https://github.com/wisdompeak/LeetCode/tree/master/Others/466.Count-The-Repetitions) \(H\)  
-[810.Chalkboard-XOR-Game](https://github.com/wisdompeak/LeetCode/tree/master/Others/810.Chalkboard-XOR-Game) \(H\)  
-420.Strong-Password-Checker \(H\)  
-[775.Global-and-Local-Inversions](https://github.com/wisdompeak/LeetCode/tree/master/Others/775.Global-and-Local-Inversions) \(M\)  
-[348.Design-Tic-Tac-Toe](https://github.com/wisdompeak/LeetCode/tree/master/Others/348.Design-Tic-Tac-Toe) \(M\)  
-[794.Valid-Tic-Tac-Toe-State](https://github.com/wisdompeak/LeetCode/tree/master/Others/794.Valid-Tic-Tac-Toe-State) \(M+\)  
-825.Friends-Of-Appropriate-Ages \(M+\)  
-[835.Image-Overlap](https://github.com/wisdompeak/LeetCode/tree/master/Others/835.Image-Overlap) \(H\)  
-[843.Guess-the-Word](https://github.com/wisdompeak/LeetCode/tree/master/Others/843.Guess-the-Word) \(M\)  
-855.Exam-Room \(M+\)  
-918.Maximum-Sum-Circular-Subarray \(H-\)  
-[927.Three-Equal-Parts](https://github.com/wisdompeak/LeetCode/tree/master/Others/927.Three-Equal-Parts) \(M\)  
-[978.Longest-Turbulent-Subarray](https://github.com/wisdompeak/LeetCode/tree/master/Others/978.Longest-Turbulent-Subarray) \(H-\)  
-1067.Digit-Count-in-Range \(H\)  
-1183.Maximum-Number-of-Ones \(H\)  
-[1267.Count-Servers-that-Communicate](https://github.com/wisdompeak/LeetCode/tree/master/Others/1267.Count-Servers-that-Communicate) \(M+\)  
-[1538.Guess-the-Majority-in-a-Hidden-Array](https://github.com/wisdompeak/LeetCode/tree/master/Others/1538.Guess-the-Majority-in-a-Hidden-Array) \(M+\)  
-[1706.Where-Will-the-Ball-Fall](https://github.com/wisdompeak/LeetCode/tree/master/Others/1706.Where-Will-the-Ball-Fall) \(M+\)  
-[1749.Maximum-Absolute-Sum-of-Any-Subarray](https://github.com/wisdompeak/LeetCode/tree/master/Others/1749.Maximum-Absolute-Sum-of-Any-Subarray) \(M+\)  
-[1752.Check-if-Array-Is-Sorted-and-Rotated](https://github.com/wisdompeak/LeetCode/tree/master/Others/1752.Check-if-Array-Is-Sorted-and-Rotated) \(M\)  
-[1826.Faulty-Sensor](https://github.com/wisdompeak/LeetCode/tree/master/Others/1826.Faulty-Sensor) \(M+\)  
-[1861.Rotating-the-Box](https://github.com/wisdompeak/LeetCode/tree/master/Others/1861.Rotating-the-Box) \(M\)  
-[1862.Sum-of-Floored-Pairs](https://github.com/wisdompeak/LeetCode/tree/master/Others/1862.Sum-of-Floored-Pairs) \(M+\)  
-[1904.The-Number-of-Full-Rounds-You-Have-Played](https://github.com/wisdompeak/LeetCode/tree/master/Others/1904.The-Number-of-Full-Rounds-You-Have-Played) \(M\)  
-[1997.First-Day-Where-You-Have-Been-in-All-the-Rooms](https://github.com/wisdompeak/LeetCode/tree/master/Others/1997.First-Day-Where-You-Have-Been-in-All-the-Rooms) \(H\)
+1. Synchronize with interviewer "_**Let's come up with a brute force solution first.**_"
+2. Unstuck strategy:
+   1. The most straightforward way to list all possible solutions
+   2. Whether I could decompose the problem into subproblems and solve them individually
+      * Divide and conquer "_**The problem could be decomposed into X subproblems.**_"
+   3. Brainstorm DS/Algo which might be used / Give it a try
+      * Give it a try: "_**Let's try a graph-based solution**_"
+3. Talk about the data structures to be used.
+4. Talk about the algorithm to be used.
+5. Calc time/space complexity: "_**The time complexity of the algorithm is O(XXX) and space complexity is O(XXX)**_"
 
-#### Enumeration
+#### Optimize the brute force solution
 
-[479.Largest-Palindrome-Product](https://github.com/wisdompeak/LeetCode/tree/master/Others/479.Largest-Palindrome-Product) \(M+\)  
-[866.Prime-Palindrome](https://github.com/wisdompeak/LeetCode/tree/master/Others/866.Prime-Palindrome) \(H-\)  
-[906.Super-Palindromes](https://github.com/wisdompeak/LeetCode/tree/master/Others/906.Super-Palindromes) \(H-\)  
-[795.Number-of-Subarrays-with-Bounded-Maximum](https://github.com/wisdompeak/LeetCode/tree/master/Others/795.Number-of-Subarrays-with-Bounded-Maximum) \(M+\)  
-[1625.Lexicographically-Smallest-String-After-Applying-Operations](https://github.com/wisdompeak/LeetCode/tree/master/Others/1625.Lexicographically-Smallest-String-After-Applying-Operations) \(H-\)  
-[1714.Sum-Of-Special-Evenly-Spaced-Elements-In-Array](https://github.com/wisdompeak/LeetCode/tree/master/Others/1714.Sum-Of-Special-Evenly-Spaced-Elements-In-Array) \(H\)  
-[1737.Change-Minimum-Characters-to-Satisfy-One-of-Three-Conditions](https://github.com/wisdompeak/LeetCode/tree/master/Others/1737.Change-Minimum-Characters-to-Satisfy-One-of-Three-Conditions) \(M+\)
+1. Synchronize with interviewer "_**The time/space complexity of the brute force solution is too high and will be impractical.**_"
+2. Consider the typical optimizing patterns below:
+   1. Where the bottleneck is: "_**The bottleneck of the algorithm lies in this section of code**_"
+   2. What the time complexity upper bound is: "_**Theoretically, the best time complexity I could achieve is O(n) because I need to look through all items.**_"
+   3. Whether space complexity is acceptable or not: "_**algo with linear space complexity is usually acceptable.**_"
+   4. Repetitive computation: "_**We solve a lot of repetitive problems. If we could cache the solutions, it will be much more efficient.**_"
+   5. Additional rounds of iterating input: "_**We iterate through input twice. If we could reduce it to once, it will boost performance twice.**_"
+3. Synchronize with interviewer "_**The reason we could do better is XXX**_."
+4. Ask for help when being stuck
+   1. Show interviewer all the approaches you tried and difficulties. ""
+   2. Be keen to what interviewer is saying: Every word the interviewer is saying has its meanings. ""
+5. Synchronize with interviewer "_**Do you have any concerns for the proposed algorithm? Should we write code for this**_."
 
-#### Presum
+#### Write test cases
 
-[1878.Get-Biggest-Three-Rhombus-Sums-in-a-Grid](https://github.com/wisdompeak/LeetCode/tree/master/Others/1878.Get-Biggest-Three-Rhombus-Sums-in-a-Grid) \(M+\)  
-[1906.Minimum-Absolute-Difference-Queries](https://github.com/wisdompeak/LeetCode/tree/master/Others/1906.Minimum-Absolute-Difference-Queries) \(M+\)
+* In general, the following types of test cases should be considered
+  * The normal case: e.g. array length of even or odd in sorting algo
+  * The extremes: e.g. empty array, one element array, extremely large one array
+  * Nulls and "illegal" input: e.g. input is negative when positive is expected
+  * Strange input: an array already sorted
+* Typical test cases for different input types
+  * Integer
+    * Integer.MAX_VALUE, Integer.MIN_VALUE
+    * 0
+    * Positive/negative numbers
+  * String
+    * NULL
+    * Single character
+    * Two characters
+    * Contains duplicated characters
+    * Contains space, tab or other separators
+  * Array/List \<?> list
+    * NULL
+    * One element List/Array
+    * List/Array entry is NULL
+    * List/Array of even length
+    * List/Array of odd length
 
-#### Quick Select
+#### Write code
 
-[215.Kth-Largest-Element-in-an-Array](https://github.com/wisdompeak/LeetCode/tree/master/Binary_Search/215.Kth-Largest-Element-in-an-Array) \(M\)  
-[347.Top-K-Frequent-Elements](https://github.com/wisdompeak/LeetCode/tree/master/Others/347.Top-K-Frequent-Elements) \(M+\)  
-[973.K-Closest-Points-to-Origin](https://github.com/wisdompeak/LeetCode/tree/master/Others/973.K-Closest-Points-to-Origin) \(M\)  
-[324.Wiggle-Sort-II](https://github.com/wisdompeak/LeetCode/tree/master/Others/324.Wiggle-Sort-II) \(H\)
+1. Synchronize with interviewer "_**There are XXX steps in this algorithm. The first is XXX. The second....**_"
+2. Check input validity (already discussed thoroughly before)
+3. Use // or empty line to separate different steps and a place to synchronize with interviewer.
+4. Just get the general algorithm down first and avoid getting caught up in trivialities
+   * When forget some language-specific trivial
+     * "_**I do not remember exactly how the interface looks like, but I'd guess it has an API like this.**_"
+   * When need implement a large code block, or nested for/while loop, or repeated needed util methods, consider using a subroutine
+     * "_**I am going to use a subroutine with the following interface. I will implement later**_".
+   * When need double check trivials (like +1 or plus two, loop termination conditions ):
+     * "_**Not sure whether my loop should have "<" or "<=". Write a checkmark to remind yourself to figure out the details at the end.**_""
 
-### [LeetCode Cup](https://github.com/wisdompeak/LeetCode/tree/master/LCCUP)
+#### Walk through test cases
 
-[LCP23.魔术排列](https://github.com/wisdompeak/LeetCode/tree/master/LCCUP/2020Fall/LCP23.%E9%AD%94%E6%9C%AF%E6%8E%92%E5%88%97)  
-[LCP24.数字游戏](https://github.com/wisdompeak/LeetCode/tree/master/LCCUP/2020Fall/LCP24.%E6%95%B0%E5%AD%97%E6%B8%B8%E6%88%8F)  
-[LCP25.古董键盘](https://github.com/wisdompeak/LeetCode/tree/master/LCCUP/2020Fall/LCP25.%E5%8F%A4%E8%91%A3%E9%94%AE%E7%9B%98)  
-[LCP32.批量处理任务](https://github.com/wisdompeak/LeetCode/tree/master/LCCUP/2021Spring/LCP32.%E6%89%B9%E9%87%8F%E5%A4%84%E7%90%86%E4%BB%BB%E5%8A%A1)  
-[LCP35.电动车游城市](https://github.com/wisdompeak/LeetCode/tree/master/LCCUP/2021Spring/LCP35.%E7%94%B5%E5%8A%A8%E8%BD%A6%E6%B8%B8%E5%9F%8E%E5%B8%82)  
-[LCP36.最多牌组数](https://github.com/wisdompeak/LeetCode/tree/master/LCCUP/2021Spring/LCP36.%E6%9C%80%E5%A4%9A%E7%89%8C%E7%BB%84%E6%95%B0)  
-[LCP43.十字路口的交通](https://github.com/wisdompeak/LeetCode/tree/master/LCCUP/2021Fall/LCP43.%E5%8D%81%E5%AD%97%E8%B7%AF%E5%8F%A3%E7%9A%84%E4%BA%A4%E9%80%9A)
+1. Synchronize with interviewer: "_**Then I would usually check my code against tests**_"
+2. Check the code by myself
+   * Check steps:
+     1. Look for typos
+     2. Look for unused variables, counters, unnecessary edge case checkings, boundaries index overflow/underflow
+     3. Look for unhandled problem assumptions
+     4. Use small test cases to test different logical branches of the code
+   * When there is a bug: do not rush to change. Identify the root cause first.
+     * "_**Give me a moment, I feel there is a bug here. Let's have a double check.**_"
+     * "_**The root cause of the problem is XXX.**_"
+3. Explain shortcuts I have taken: Talk about sections which could be refactored/improved, but was done in a certain way in an interview setting
+   * Bad smells for refactoring and optimization
+     * Code/function length > 100
+     * Too many if statement checking for boundary cases
+     * Code do not generalize well. Only work for current problem. e.g. merge 2 sorted list -> merge k sorted List
+     * Nested while loops ( really error prone )
+     * Global variables
+4. Synchronize with interviewer: "_**I think I am done with the problem**_".
 
-### [Templates](https://github.com/wisdompeak/LeetCode/tree/master/Template)
+#### Solve follow up questions
 
-[Math](https://github.com/wisdompeak/LeetCode/tree/master/Template/Math)  
-[Binary\_Index\_Tree](https://github.com/wisdompeak/LeetCode/tree/master/Template/Binary_Index_Tree)  
-[Segment Tree](https://github.com/wisdompeak/LeetCode/tree/master/Template/SegmentTree)  
-[Inverse\_Element](https://github.com/wisdompeak/LeetCode/tree/master/Template/Inverse_Element)  
-[Graph](https://github.com/wisdompeak/LeetCode/tree/master/Template/Graph)  
-[Bit\_Manipulation](https://github.com/wisdompeak/LeetCode/tree/master/Template/Bit_manipulation)  
-[Combination-Number](https://github.com/wisdompeak/LeetCode/tree/master/Template/Combination-Number)  
-[RB\_Tree](https://github.com/wisdompeak/LeetCode/tree/master/Template/RB_Tree)  
-[IO](https://github.com/wisdompeak/LeetCode/tree/master/Template/IO)
+* Typical follow-up questions
+  * No duplicates -> duplicates exist
+  * Whether result exist -> return all results
+  * One dimension -> two dimension
+  * How to avoid global variables
+  * How to improve performance
 
-## Online IDE templates
+### Interview mindset
 
-### Coderpad
+#### Understanding what interviewers really wants
 
-```java
-import org.junit.*;
-import org.junit.runner.*;
-import java.io.*;
-import java.util.*;
+* Evaluation criteria
+  * Can s/he explain technical solutions well?
+  * Does s/he understand basic concepts well?
+  * Does s/he has a good grasp of past project experiences?
+  * How is his/her attitude?
+  * Is s/he a good coder? (proficiency in leetcode and whether error-prone)
+* What are interviewers really asking
 
-public class Solution 
-{
+| What they ask                         | Wrong response                                                                          | What they really want                                                                                                                                                   |
+| ------------------------------------- | --------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Tell me what you did for this project | <p>Describe the process in chronological order</p><p>Recites what's on their resume</p> | <p>What are you able to do after completing this project4</p><p>How did you overcome obstacles</p><p>Details that are not on your resume</p>                            |
+| Tell me what you did for this job     | <p>Describe major projects</p><p>Describe daily tasks</p>                               | <p>Were you able to learn quickly</p><p>Did you add enough value at your previous job to prove that you can add value for me</p>                                        |
+| Compare data structure A and B        | <p>Explain what A and B are respectively</p><p>List 1 difference between them</p>       | <p>Does your explanation show that you have actually used them in a real project</p><p>Explain real situations where you would use A vs B.</p>                          |
+| Write code to solve problem           | <p>Jumps into writing code</p><p>Awkward silence</p>                                    | <p>Would I want to work with them everyday</p><p>Have they actually written production grade code</p><p>What do they do when stuck</p>                                  |
+| Maybe you could try this ...          | Take advice without serious thinking                                                    | <p>Do they think independently</p><p>How fast can they absord new information</p><p>Do they take advice/directions well</p><p>Do they learn quickly and run with it</p> |
 
-    @Test
-    public void test1()
-    {
-      /* 
+#### Checklist
 
-      */
-    }    
+**Things to be careful.**
 
-    @Ignore
-    @Test
-    public void test3()
-    {
-        /* 
+* Do not just give "yes" or "no" answers. Limit initial explanation to short summaries and allow the interviewer to ask follow up questions.
+* Your tone of voice and word choice. Interviewers use voice to judge how believable you are. Posture really have impact on your mind.
+* Eye contact and shake hands. Say thanks to interviewers at last.
 
-        */
-    }
+**Phone interviews**
 
-    public static void main(String[] args) 
-    {
-        JUnitCore.main("Solution");
-    }    
+* Test the online coding environment.
+* Make sure your cellphone has enough battery.
+* Have a copy of resume in front of you.
+* Take notes and write a follow up thank you email with details from the discussion.
 
-}
-```
+**Onsite interviews**
 
+* Show up 15 minutes early and have the interviewer's phone number for last minute changes.
+* Things to bring with you
+  * Identity card.
+  * Bring extra copies of your resume with you - for the interviewer and your own reference.
+  * Notes on the detailed schedule. Put interviewers' names and interview topic on a sticker and bring it with me.
+  * Tea/Coffee.
+  * Whiteboard pen and erasers.
+  * A piece of pen and paper. Take notes when an interviewer speaks to help yourself focus and ask more specific questions.
+  * Computers for last minute warm-up
