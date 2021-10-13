@@ -42,7 +42,7 @@ boolean isOverlapping( Interval o1, Interval o2 )
     list.sort( (o1,o2) -> o1.start != o2.start ? o1.start - o2.start : o1.end - o2.end );
     ```
 
-### Max number of non-overlapping intervals inside a range - sort by ending points
+### Sort by ending points - Max num of non-overlapping intervals inside a range
 
 [452.Minimum-Number-of-Arrows-to-Burst-Balloons](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/452.Minimum-Number-of-Arrows-to-Burst-Balloons) (H-)
 
@@ -93,48 +93,51 @@ boolean isOverlapping( Interval o1, Interval o2 )
 
 [1751.Maximum-Number-of-Events-That-Can-Be-Attended-II](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/1751.Maximum-Number-of-Events-That-Can-Be-Attended-II) (H)
 
-### Min number of intervals to cover the whole range - sort by starting points
-
-![Algorithm: to cover the black interval,  for a given blue interval, pick the overlapping red interval which has the farthest ending point. ](<.gitbook/assets/image (1).png>)
+### Sort by starting points - Min num of intervals to cover the range
 
 ```python
 # Using leetcode 1326 as an example.
-    def minTaps(self, n: int, ranges: List[int]) -> int:
-        intervals = [[i - r, i + r] for i, r in enumerate(ranges)]
-        sortedIntervals = sorted(intervals, key=lambda x : (x[0], -x[1])) 
+def minTaps(self, n: int, ranges: List[int]) -> int:
+    intervals = [[i - r, i + r] for i, r in enumerate(ranges)]
+    sortedIntervals = sorted(intervals, key=lambda x : (x[0], -x[1])) 
         
-        nextEnd = currEnd = currIndex = 0
-        numTaps = 0
-        while currIndex < len(sortedIntervals) and currEnd < n:
-            # for intervals overlapping with current interval,
-            # pick the one which has farthest reach
-            nextIndex = currIndex
-            while nextIndex < len(sortedIntervals) and sortedIntervals[nextIndex][0] <= currEnd:
+    nextEnd = currEnd = currIndex = 0
+    numTaps = 0
+    while currIndex < len(sortedIntervals) and currEnd < n:
+        # for intervals overlapping with current interval,
+        # pick the one which has farthest reach
+        nextIndex = currIndex
+        while nextIndex < len(sortedIntervals) and sortedIntervals[nextIndex][0] <= currEnd:
 
-                # greedily pick the overlapping intervals 
-                nextEnd = max(sortedIntervals[nextIndex][1], nextEnd)
-                nextIndex += 1
+            # greedily pick the overlapping intervals 
+            nextEnd = max(sortedIntervals[nextIndex][1], nextEnd)
+            nextIndex += 1
                 
-            if nextIndex == currIndex:
-                return -1
-            else:            
-                numTaps += 1                
-                currIndex = nextIndex
-                currEnd = nextEnd
+        if nextIndex == currIndex:
+            return -1
+        else:            
+            numTaps += 1                
+            currIndex = nextIndex
+            currEnd = nextEnd
                 
-        return numTaps if currEnd >= n else -1       
-    
-    
-    
+    return numTaps if currEnd >= n else -1       
 ```
 
 [045.Jump-Game-II](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/045.Jump-Game-II) (M)
 
 [1024.Video-Stitching](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/1024.Video-Stitching) (M+)
 
+[1326.Minimum-Number-of-Taps-to-Open-to-Water-a-Garden](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/1326.Minimum-Number-of-Taps-to-Open-to-Water-a-Garden) (M+)
+
+### Sort either by start or endpoint
+
 [1288.Remove-Covered-Intervals](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/1288.Remove-Covered-Intervals) (M+)
 
-[1326.Minimum-Number-of-Taps-to-Open-to-Water-a-Garden](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/1326.Minimum-Number-of-Taps-to-Open-to-Water-a-Garden) (M+)
+```python
+# using leetcode 1288 as an example
+# Greedily pick the interval which has the earliest starting point and biggest length
+
+```
 
 ### Sweepline
 
