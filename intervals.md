@@ -1,17 +1,8 @@
 # intervals
 
-* [Intervals](intervals.md#intervals)
-  * [Basics](intervals.md#basics)
-  * [Max number of non-overlapping intervals inside a range - sort by ending points](intervals.md#max-number-of-non-overlapping-intervals-inside-a-range---sort-by-ending-points)
-    * [Interval + DP + Binary search](intervals.md#interval--dp--binary-search)
-  * [Min number of intervals to cover the whole range - sort by starting points](intervals.md#min-number-of-intervals-to-cover-the-whole-range---sort-by-starting-points)
-  * [Sweepline](intervals.md#sweepline)
-
-## Intervals
-
 [1272.Remove-Interval](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/1272.Remove-Interval) (M+)
 
-### Basics
+## Basics
 
 * Interval-related
   * Judge whether intervals overlap
@@ -30,19 +21,19 @@ boolean isOverlapping( Interval o1, Interval o2 )
 }
 ```
 
-*   Sort intervals
+* Sort intervals
 
-    ```java
-    List<Interval> list = //...
-    // sort according to starting point
-    list.sort( (o1,o2) -> o1.start - o2.start );
-    // or sort according to ending point
-    list.sort( (o1,o2) -> o1.end - o2.end );
-    // sort according to both starting and ending point
-    list.sort( (o1,o2) -> o1.start != o2.start ? o1.start - o2.start : o1.end - o2.end );
-    ```
+```java
+List<Interval> list = //...
+// sort according to starting point
+list.sort( (o1,o2) -> o1.start - o2.start );
+// or sort according to ending point
+list.sort( (o1,o2) -> o1.end - o2.end );
+// sort according to both starting and ending point
+list.sort( (o1,o2) -> o1.start != o2.start ? o1.start - o2.start : o1.end - o2.end );
+```
 
-### Sort by ending points - Max num of non-overlapping intervals inside a range
+## Sort by ending points - Max num of non-overlapping intervals inside a range
 
 [452.Minimum-Number-of-Arrows-to-Burst-Balloons](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/452.Minimum-Number-of-Arrows-to-Burst-Balloons) (H-)
 
@@ -93,7 +84,7 @@ boolean isOverlapping( Interval o1, Interval o2 )
 
 [1751.Maximum-Number-of-Events-That-Can-Be-Attended-II](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/1751.Maximum-Number-of-Events-That-Can-Be-Attended-II) (H)
 
-### Sort by starting points - Min num of intervals to cover the range
+## Sort by starting points - Min num of intervals to cover the range
 
 ```python
 # Using leetcode 1326 as an example.
@@ -129,30 +120,40 @@ def minTaps(self, n: int, ranges: List[int]) -> int:
 
 [1326.Minimum-Number-of-Taps-to-Open-to-Water-a-Garden](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/1326.Minimum-Number-of-Taps-to-Open-to-Water-a-Garden) (M+)
 
-### Sort either by start or endpoint
+## Sort either by start or endpoint
 
 [1288.Remove-Covered-Intervals](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/1288.Remove-Covered-Intervals) (M+)
 
 ```python
 # using leetcode 1288 as an example
 # Greedily pick the interval which has the earliest starting point and biggest length
-
+def removeCoveredIntervals(self, intervals: List[List[int]]) -> int:    
+    sortedInter = sorted(intervals, key=lambda x: (x[0], -x[1]))
+    numRemoved = 0
+    i = 0
+    while i < len(sortedInter):
+        j = i + 1
+        while j < len(sortedInter) and sortedInter[j][1] <= sortedInter[i][1]:
+           j += 1
+           numRemoved += 1
+        i = j
+    return len(intervals) - numRemoved
 ```
 
-### Sweepline
+## Sweepline
 
-*   Split intervals into Pair(int start, boolean isStart), Pair(int end, boolean isEnd)
+* Split intervals into Pair(int start, boolean isStart), Pair(int end, boolean isEnd)
 
-    ```java
-    List<Interval> intervalList = //...
-    List<Pair> pairList = //...
-    for ( Interval interval : intervalList )
-    {
-    pairList.add( new Pair(interval.start, true) );
-    pairList.add( new Pair(interval.end, false) );
-    }
-    pairList.sort( (o1, o2) -> (o1.start-o2.start) );
-    ```
+```java
+List<Interval> intervalList = //...
+List<Pair> pairList = //...
+for ( Interval interval : intervalList )
+{
+pairList.add( new Pair(interval.start, true) );
+pairList.add( new Pair(interval.end, false) );
+}
+pairList.sort( (o1, o2) -> (o1.start-o2.start) );
+```
 
 [252.Meeting-Rooms](https://github.com/wisdompeak/LeetCode/tree/master/Others/252.Meeting-Rooms) (M)\
 [253.Meeting-Rooms-II](https://github.com/wisdompeak/LeetCode/tree/master/Others/253.Meeting-Rooms-II) (M+)\
