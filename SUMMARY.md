@@ -1,7 +1,7 @@
 # Table of contents
 
-* [interview_checklist](README.md)
-* [README](readme-1.md)
+* [README](README.md)
+* [interview_checklist](readme-1.md)
 * [beauty_of_python](beauty_of_python.md)
 * [bfs](bfs.md)
 * [binary_search](binary_search.md)
