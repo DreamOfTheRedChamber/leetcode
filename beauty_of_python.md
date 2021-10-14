@@ -155,3 +155,4 @@ for i, flavor in enumerate(flavor_list, 1):
 ## References
 * Effective Python: 59 Ways to write better Python code
 * [Python probably the best language for interview](https://www.kunxi.org/2020/01/python-probably-best-language-for-interview/) 
+* [Youtube video for Python Beginners](https://m.youtube.com/channel/UC46xhU1EH7aywEgvA9syS3w)
