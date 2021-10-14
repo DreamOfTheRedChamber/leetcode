@@ -1,8 +1,12 @@
 # intervals
 
+## Removal
+
 [1272.Remove-Interval](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/1272.Remove-Interval) (M+)
 
-## Basics
+One key description is that the intervals are disjoint sorted intervals 
+
+## Merge
 
 * Interval-related
   * Judge whether intervals overlap
@@ -42,35 +46,18 @@ list.sort( (o1,o2) -> o1.start != o2.start ? o1.start - o2.start : o1.end - o2.e
 [757.Set-Intersection-Size-At-Least-Two](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/757.Set-Intersection-Size-At-Least-Two) (H)
 
 ```python
-# Sample Pattern1: For loop based
-    def eraseOverlapIntervals(self, intervals: List[List[int]]) -> int:
-        if len(intervals) == 0:
-            return 0
-        
-        # calc max number of non-overlapping, then substract
-        sortedInter = sorted(intervals, key=lambda x: (x[1], -x[0]))
-        curr = sortedInter[0]
-        numOverlapped = 0
-        for i in range(1, len(sortedInter)):
-            if sortedInter[i][0] < curr[1]:
-                numOverlapped += 1
-            else:
-                curr = sortedInter[i]
-        
-        return numOverlapped       
-
-# Sample Pattern2: Two while loop (the return value is the opposite per problem description)
-    def findLongestChain(self, pairs: List[List[int]]) -> int:
-        sortedIn = sorted(pairs, key=lambda x: (x[1], x[0]))
-        i = 0
-        result = 0
-        while i < len(sortedIn):
-            j = i + 1
-            result += 1
-            while j < len(sortedIn) and sortedIn[j][0] <= sortedIn[i][1]:
-                j += 1
-            i = j
-        return result
+# Sample Pattern: Two while loop (the return value is the opposite per problem description)
+def findLongestChain(self, pairs: List[List[int]]) -> int:
+    sortedIn = sorted(pairs, key=lambda x: (x[1], x[0]))
+    i = 0
+    result = 0
+    while i < len(sortedIn):
+        j = i + 1
+        result += 1
+        while j < len(sortedIn) and sortedIn[j][0] <= sortedIn[i][1]:
+            j += 1
+        i = j
+    return result
 ```
 
 #### Interval + DP + Binary search
@@ -85,6 +72,8 @@ list.sort( (o1,o2) -> o1.start != o2.start ? o1.start - o2.start : o1.end - o2.e
 [1751.Maximum-Number-of-Events-That-Can-Be-Attended-II](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/1751.Maximum-Number-of-Events-That-Can-Be-Attended-II) (H)
 
 ## Sort by starting points - Min num of intervals to cover the range
+
+[1326.Minimum-Number-of-Taps-to-Open-to-Water-a-Garden](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/1326.Minimum-Number-of-Taps-to-Open-to-Water-a-Garden) (M+)
 
 ```python
 # Using leetcode 1326 as an example.
@@ -118,8 +107,6 @@ def minTaps(self, n: int, ranges: List[int]) -> int:
 
 [1024.Video-Stitching](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/1024.Video-Stitching) (M+)
 
-[1326.Minimum-Number-of-Taps-to-Open-to-Water-a-Garden](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/1326.Minimum-Number-of-Taps-to-Open-to-Water-a-Garden) (M+)
-
 ## Sort either by start or endpoint
 
 [1288.Remove-Covered-Intervals](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/1288.Remove-Covered-Intervals) (M+)
@@ -130,13 +117,13 @@ def minTaps(self, n: int, ranges: List[int]) -> int:
 def removeCoveredIntervals(self, intervals: List[List[int]]) -> int:    
     sortedInter = sorted(intervals, key=lambda x: (x[0], -x[1]))
     numRemoved = 0
-    i = 0
-    while i < len(sortedInter):
-        j = i + 1
-        while j < len(sortedInter) and sortedInter[j][1] <= sortedInter[i][1]:
-           j += 1
+    currIndex = 0
+    while currIndex < len(sortedInter):
+        nextStart = currIndex + 1
+        while nextStart < len(sortedInter) and sortedInter[nextStart][1] <= sortedInter[currIndex][1]:
+           nextStart += 1
            numRemoved += 1
-        i = j
+        currIndex = nextStart
     return len(intervals) - numRemoved
 ```
 
