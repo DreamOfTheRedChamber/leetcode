@@ -1,42 +1,5 @@
 # intervals
 
-## Removal
-
-[1272.Remove-Interval](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/1272.Remove-Interval) (M+)
-
-One key description is that the intervals are disjoint sorted intervals 
-
-## Merge
-
-* Interval-related
-  * Judge whether intervals overlap
-
-```java
-boolean isOverlapping( Interval o1, Interval o2 )
-{
-  if ( o1.start >= o2.end || o2.start >= o1.end )
-  {
-    return false;
-  }
-  else
-  {
-    return true;
-  }
-}
-```
-
-* Sort intervals
-
-```java
-List<Interval> list = //...
-// sort according to starting point
-list.sort( (o1,o2) -> o1.start - o2.start );
-// or sort according to ending point
-list.sort( (o1,o2) -> o1.end - o2.end );
-// sort according to both starting and ending point
-list.sort( (o1,o2) -> o1.start != o2.start ? o1.start - o2.start : o1.end - o2.end );
-```
-
 ## Sort by ending points - Max num of non-overlapping intervals inside a range
 
 [452.Minimum-Number-of-Arrows-to-Burst-Balloons](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/452.Minimum-Number-of-Arrows-to-Burst-Balloons) (H-)
@@ -131,17 +94,32 @@ def removeCoveredIntervals(self, intervals: List[List[int]]) -> int:
 
 * Split intervals into Pair(int start, boolean isStart), Pair(int end, boolean isEnd)
 
-```java
-List<Interval> intervalList = //...
-List<Pair> pairList = //...
-for ( Interval interval : intervalList )
-{
-pairList.add( new Pair(interval.start, true) );
-pairList.add( new Pair(interval.end, false) );
-}
-pairList.sort( (o1, o2) -> (o1.start-o2.start) );
-```
+```python
+class Solution:
+    def merge(self, intervals: List[List[int]]) -> List[List[int]]:
+        boundaryPoints = []
+        for interval in intervals:
+            boundaryPoints.append((interval[0], 1))
+            boundaryPoints.append((interval[1], -1))
+        boundaryPoints.sort(key=lambda x: (x[0], -x[1]))
 
+        result = []
+        start, end = 0, 0
+        count = 0
+        for point in boundaryPoints:
+            if point[1] == 1:
+                count += 1
+                if count == 1:
+                    start = point[0]
+            else:
+                count -= 1
+                if count == 0:
+                    end = point[0]
+                    result.append([start, end])
+
+        return result
+```
+[1272.Remove-Interval](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/1272.Remove-Interval) (M+)
 [252.Meeting-Rooms](https://github.com/wisdompeak/LeetCode/tree/master/Others/252.Meeting-Rooms) (M)\
 [253.Meeting-Rooms-II](https://github.com/wisdompeak/LeetCode/tree/master/Others/253.Meeting-Rooms-II) (M+)\
 [056.Merge-Intervals](https://github.com/wisdompeak/LeetCode/tree/master/Others/056.Merge-Intervals) (M)\
