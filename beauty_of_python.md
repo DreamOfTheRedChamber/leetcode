@@ -14,6 +14,9 @@
   - [List comprehension](#list-comprehension)
     - [Number of expressions](#number-of-expressions)
     - [Generator expressions](#generator-expressions)
+      - [Yield](#yield)
+      - [Yield from](#yield-from)
+      - [Example](#example)
   - [Iterator](#iterator)
     - [Iterables](#iterables)
     - [Enumerate over range](#enumerate-over-range)
@@ -112,6 +115,27 @@ filtered = [[x for x in row if x % 3 == 0] for row in matrix if sum(row) >= 10]
 ### Generator expressions
 * The problem with list comprehension is that they may create a whole new list containing one item for each value in the input sequence. This is fine for small inputs, but for large inputs this could consume significant amounts of memory. 
 
+#### Yield
+* yield keyword returns a generator that could be iterated upon. 
+  * What the yield keyword does is as follows: Each time you iterate, Python runs the code until it encounters a yield statement inside the function. Then, it sends the yielded value and pauses the function in that state without exiting. When the function is invoked the next time, the state at which it was last paused is remembered and execution is continued from that point onwards. This continues until the generator is exhausted.
+  * How is it different from return keyword: Had you used return in place of yield, the function would have returned the respective value, all the local variable values that the function had earlier computed would be cleared off and the next time the function is called, the function execution will start fresh.
+
+#### Yield from
+
+
+#### Example
+
+```py
+def pre_order_traverse(root: TreeNode):
+    if root is None: return
+    yield root.val
+    yield from root.left
+    yield from root.right
+
+# Materialize the generator with list
+list(pre_order_traverse(root))
+```
+
 ## Iterator
 ### Iterables
 
@@ -130,4 +154,4 @@ for i, flavor in enumerate(flavor_list, 1):
 
 ## References
 * Effective Python: 59 Ways to write better Python code
-* 花花酱 Python Weekly: 
+* [Python probably the best language for interview](https://www.kunxi.org/2020/01/python-probably-best-language-for-interview/) 
