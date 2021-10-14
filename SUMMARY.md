@@ -9,8 +9,8 @@
 * [deque](deque.md)
 * [dfs](dfs.md)
 * [dynamic_programming](dynamic_programming.md)
+* [design](design.md)
 * [graph](graph.md)
-* [greedy](greedy.md)
 * [hashtable](hashtable.md)
 * [intervals](intervals.md)
 * [linked_list](linked_list.md)
@@ -22,4 +22,8 @@
 * [tree](tree.md)
 * [trie](trie.md)
 * [two_pointers](two_pointers.md)
-* [union_find](union_find.md)
+
+## algorithm
+
+* [greedy](algorithm/greedy.md)
+* [union_find](algorithm/union_find.md)
