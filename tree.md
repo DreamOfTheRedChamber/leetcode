@@ -2,6 +2,9 @@
   - [Serialization & Hashing](#serialization--hashing)
   - [Tree & Sequence](#tree--sequence)
   - [LCA](#lca)
+    - [Problem and BF](#problem-and-bf)
+    - [Improved solution thoughts](#improved-solution-thoughts)
+    - [Example problems](#example-problems)
   - [N-ary Tree](#n-ary-tree)
   - [似树非树](#似树非树)
 - [Segment Tree](#segment-tree)
@@ -130,6 +133,36 @@ while bfsQueue:
 [1902.Depth-of-BST-Given-Insertion-Order](https://github.com/wisdompeak/LeetCode/tree/master/Tree/1902.Depth-of-BST-Given-Insertion-Order) \(H-\)
 
 ## LCA
+### Problem and BF
+* Generic problem: Find lowest common ancestor for M nodes in a N-ary tree
+* BF solution: Find root to node paths for M nodes as M list. Then compare M list together to find the first diff element. 
+  * T.C. : build path O(M * SIZE(tree)) and find common LCA O(SIZE(tree) * M)
+  * S.C. : O(M * SIZE(tree))
+
+### Improved solution thoughts
+
+```py
+# pseudo code:
+# Find the first node whose children + itself covers the entire target during the tree DFS process
+(resultContained, resultNode) = recursion(root, [target1, ..., targetN])
+  resultContained = 0
+  resultNode = None
+  for child in root.children:
+    childContained, childResult = recursion(child, [target1, ..., targetN])
+    if childContained == len(targetSet):
+      return (childContained, childResult)
+    else:
+      resultContained += childContained
+  
+  if root.value in targetSet:
+    resultContained += 1
+    if resultContained == len(targetSet):
+      resultNode = root
+  return (resultContained, resultNode)
+
+```
+
+### Example problems
 
 [236.Lowest-Common-Ancestor-of-a-Binary-Tree](https://github.com/wisdompeak/LeetCode/tree/master/Tree/236.Lowest-Common-Ancestor-of-a-Binary-Tree) \(H\)  
 [1676.Lowest-Common-Ancestor-of-a-Binary-Tree-IV](https://github.com/wisdompeak/LeetCode/tree/master/Tree/1676.Lowest-Common-Ancestor-of-a-Binary-Tree-IV) \(M+\)  
