@@ -1,29 +1,39 @@
 # Table of contents
 
 * [README](README.md)
-* [interview_checklist](readme-1.md)
-* [beauty_of_python](beauty_of_python.md)
-* [bfs](bfs.md)
-* [binary_search](binary_search.md)
-* [bit_operation](bit_operation.md)
-* [deque](deque.md)
-* [dfs](dfs.md)
-* [dynamic_programming](dynamic_programming.md)
-* [design](design.md)
-* [graph](graph.md)
-* [hashtable](hashtable.md)
-* [intervals](intervals.md)
-* [linked_list](linked_list.md)
-* [math](math.md)
-* [priority_queue](priority_queue.md)
-* [recursion](recursion.md)
-* [stack](stack.md)
-* [string](string.md)
-* [tree](tree.md)
-* [trie](trie.md)
-* [two_pointers](two_pointers.md)
+
+## Templates
+
+* [interview_checklist](templates/readme-1.md)
+* [beauty_of_python](templates/beauty_of_python.md)
+
+## Data structures
+
+* [bit_operation](data-structures/bit_operation.md)
+* [deque](data-structures/deque.md)
+* [hashtable](data-structures/hashtable.md)
+* [linked_list](data-structures/linked_list.md)
+* [priority_queue](data-structures/priority_queue.md)
+* [stack](data-structures/stack.md)
+* [string](data-structures/string.md)
+* [intervals](data-structures/intervals.md)
+* [trie](data-structures/trie.md)
+* [graph](data-structures/graph.md)
+* [tree](data-structures/tree.md)
 
 ## algorithm
 
+* [bfs](algorithm/bfs.md)
+* [binary_search](algorithm/binary_search.md)
+* [dfs](algorithm/dfs.md)
+* [dynamic_programming](algorithm/dynamic_programming.md)
 * [greedy](algorithm/greedy.md)
 * [union_find](algorithm/union_find.md)
+* [recursion](algorithm/recursion.md)
+* [two_pointers](algorithm/two_pointers.md)
+
+## Other
+
+* [design](other/design.md)
+* [everything](other/everything.md)
+* [math](other/math.md)
