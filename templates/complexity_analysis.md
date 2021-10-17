@@ -1,9 +1,13 @@
 - [Time complexity analysis](#time-complexity-analysis)
   - [Amortized analysis](#amortized-analysis)
-  - [Operation complexity for python collections](#operation-complexity-for-python-collections)
-    - [List](#list)
-    - [Dictionary](#dictionary)
-    - [Set](#set)
+  - [List operations](#list-operations)
+  - [Dictionary operations](#dictionary-operations)
+  - [Set operations](#set-operations)
+  - [Sorted container inner working](#sorted-container-inner-working)
+    - [Compare with tree based impl](#compare-with-tree-based-impl)
+  - [SortedList operations](#sortedlist-operations)
+  - [SortedSet operations](#sortedset-operations)
+  - [SortedDict operations](#sorteddict-operations)
   - [References](#references)
 
 # Time complexity analysis
@@ -15,9 +19,7 @@
 
 ![](../.gitbook/assets/timecomplexity.png)
 
-## Operation complexity for python collections
-
-### List
+## List operations
 * Inner working: Python lists are internally represented as arrays. The idea used is similar to implementation of vectors in C++ or ArrayList in Java. The costly operations are inserting and deleting items near the beginning (as everything has to be moved). Insert at the end also becomes costly if preallocated space becomes full.
 
 | Operation          | Examples       | Amortized complexity |
@@ -41,7 +43,7 @@
 | `Sort`             | l.sort()       | O(N\*log(N))         |
 | `Store`            | l\[i]=item     | O(1)                 |
 
-### Dictionary
+## Dictionary operations
 
 | Operation          | Examples       | Amortized complexity |
 | ----------------------------- | --------------- | ---------------------- |
@@ -56,7 +58,7 @@
 | `Returning Views`             | d.keys()        | O(1)                   |
 | `Fromkeys`                    | d.fromkeys(seq) | O(len(seq))            |
 
-### Set
+## Set operations
 * Inner working: Set in Python can be defined as the collection of items. In Python, these are basically used to include membership testing and eliminating duplicate entries. The data structure used in this is Hashing, a popular technique to perform insertion, deletion and traversal in O(1) on average. The operations on Hash Table are some what similar to Linked List. Sets in python are unordered list with duplicate elements removed.
 
 | Operation          | Examples       | Amortized complexity |
@@ -77,6 +79,29 @@
 | `Pop`                  | s.pop()                  | O(1)                     |
 | `Union`                | s1                       | s2                       |
 | `Symmetric Difference` | s1^s2                    | len(s1)                  |
+
+## Sorted container inner working
+* Inner implementation: http://www.grantjenks.com/docs/sortedcontainers/implementation.html
+* First impl intuition:
+  *  The first is that Python’s list is fast, really fast. Lists have great characteristics for memory management and random access. 
+  *  The second is that bisect.insort is fast. This is somewhat counter-intuitive since it involves shifting a series of items in a list
+* Second impl intuition: But using only one list and bisect.insort would produce sluggish behavior for lengths exceeding ten thousand. So the implementation of Sorted List uses a list of lists to store elements. In this way, inserting or deleting is most often performed on a short list. Only rarely does a new list need to be added or deleted.
+
+### Compare with tree based impl
+* Traditional tree-based designs have better big-O notation but that ignores the realities of today’s software and hardware. For a more in-depth analysis, read Performance at Scale. Compared to tree-based implementations, using lists of lists has a few advantages based on memory usage. 
+  1. Most insertion/deletion doesn’t require allocating or freeing memory. This can be a big win as it takes a lot of strain off the garbage collector and memory system.
+  2. Pointers to elements are packed densely. A traditional tree-based implementation would require two pointers (left/right) to child nodes. Lists have no such overhead. This benefits the hardware’s memory architecture and more efficiently utilizies caches.
+  3. The memory overhead per item is effectively a pointer to the item. Binary tree implementations must add at least two more pointers per item.
+  4. Iteration is extremely fast as sequentially indexing lists is a strength of modern processors.
+
+## SortedList operations
+* http://www.grantjenks.com/docs/sortedcontainers/sortedlist.html
+
+## SortedSet operations
+* http://www.grantjenks.com/docs/sortedcontainers/sortedset.html
+
+## SortedDict operations
+* http://www.grantjenks.com/docs/sortedcontainers/sorteddict.html
 
 ## References
 * [Python built-in container operations](https://www.geeksforgeeks.org/complexity-cheat-sheet-for-python-operations/)
