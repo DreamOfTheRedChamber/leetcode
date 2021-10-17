@@ -1,3 +1,21 @@
+- [interview_checklist](#interview_checklist)
+  - [Typical whiteboard coding workflow](#typical-whiteboard-coding-workflow)
+    - [Clarify question](#clarify-question)
+    - [Clarify the input size](#clarify-the-input-size)
+    - [Give a small but general enough example for discussing algo/DS](#give-a-small-but-general-enough-example-for-discussing-algods)
+    - [Come up with a brute force algorithm](#come-up-with-a-brute-force-algorithm)
+    - [Optimize the brute force solution](#optimize-the-brute-force-solution)
+    - [Write test cases](#write-test-cases)
+    - [Write code](#write-code)
+    - [Walk through test cases](#walk-through-test-cases)
+    - [Solve follow up questions](#solve-follow-up-questions)
+  - [Interview mindset](#interview-mindset)
+    - [Understanding what interviewers really wants](#understanding-what-interviewers-really-wants)
+    - [Checklist](#checklist)
+    - [Things to be careful.](#things-to-be-careful)
+    - [Phone interviews](#phone-interviews)
+    - [Onsite interviews](#onsite-interviews)
+
 # interview_checklist
 
 ## Typical whiteboard coding workflow
@@ -54,6 +72,15 @@
      * Search
        * Whether duplicate entries exist
    * Edge cases: "_**If input is like this, then what should I output?**_"
+
+### Clarify the input size
+* As of today, a single 2GHz CPU could process 2*10^9 OPS/second
+* 
+
+| `Problem type`  |  `Algorithm complexity`  | `Applicable input size`  |
+|---|---|---|
+| `Permutation`  | O(n!)  |  1-10 |
+| `Combination`  | O(2^n)  |   |
 
 ### Give a small but general enough example for discussing algo/DS
 
