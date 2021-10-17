@@ -77,10 +77,18 @@
 * As of today, a single 2GHz CPU could process 2*10^9 OPS/second
 * 
 
-| `Problem type`  |  `Algorithm complexity`  | `Applicable input size`  |
+| `Sample Problem type`  |  `Algorithm complexity`  | `Applicable input size`  |
 |---|---|---|
 | `Permutation`  | O(n!)  |  1-10 |
-| `Combination`  | O(2^n)  |   |
+| `Combination`  | O(2^n)  |  1-20 |
+| `All pairs, dense graph / DP`  | O(n^4)  |  10-50 |
+| `All pairs, shortest path / DP`  | O(n^3)  |  10-100 |
+| `DP`  | O(n^2)  |  100-1000 |
+| `Sorting based(Greedy) / heap / divide & conquer`  | O(nlogn)  |  1000-10^6 |
+| `DP, graph traversal / topological sort (V+E) / tree traversal`  | O(n)  |  1000-10^6 |
+| `Prime, square sum`  | O(sqrt(n))  |  10^4-10^9 |
+| `Binary search`  | O(sqrt(n))  |  10^5-10^9 |
+| `Math`  | O(1)  |  10^6-10^9 |
 
 ### Give a small but general enough example for discussing algo/DS
 
