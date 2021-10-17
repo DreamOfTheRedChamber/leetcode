@@ -7,6 +7,7 @@
 * [interview_checklist](templates/readme.md)
 * [beauty_of_python](templates/beauty_of_python.md)
 * [online IDE templates](templates/online_ide_templates.md)
+* [time complexity analysis](templates/complexity_analysis.md)
 
 ## Data structures
 
