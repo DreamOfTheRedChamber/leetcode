@@ -40,37 +40,36 @@
 
 ## Dictionary
 
-Dictionary Operations
-Operation|Examples|Complexity class
-Average case|Amortised Worst case
-Clear|d.clear()|O(1)|O(1)
-Construction|dict(…)|O(len(d))|O(len(d))
-Delete|del d[k]|O(1)|O(N)
-Get|d.get()|O(1)|O(N)
-Iteration(key, value, item)|for item in d:|O(N)|O(N)
-Length|len(d)|O(1)|O(1)
-Pop|d.pop(item)|O(1)|O(N)
-Pop Item|d.popitem()|O(1)|O(1)
-Returning Views|d.keys()|O(1)|O(1)
-Fromkeys|d.fromkeys(seq)|O(len(seq))|O(len(seq))
+| `Operation`| `Examples`| `Amortized complexity` | 
+|---|---|---|
+|`Clear`|d.clear()|O(1)|O(1)
+|`Construction`|dict(…)|O(len(d))|O(len(d))
+|`Delete`|del d[k]|O(1)|O(N)
+|`Get`|d.get()|O(1)|O(N)
+|`Iteration(key, value, item)`|for item in d:|O(N)|O(N)
+|`Length`|len(d)|O(1)|O(1)
+|`Pop`|d.pop(item)|O(1)|O(N)
+|`Pop Item`|d.popitem()|O(1)|O(1)
+|`Returning Views`|d.keys()|O(1)|O(1)
+|`Fromkeys`|d.fromkeys(seq)|O(len(seq))|O(len(seq))
 
 ## Set
 
-Operation|Examples|Complexity class
-Average case|Amortised Worst case
-Add|s.add(item)|O(1)|O(N)
-Clear|s.clear()|O(1)|O(1)
-Copy|s.copy()|O(N)|O(N)
-Containment|item in/not in s|O(1)|O(N)
-Creation|set(…)|O(len(s))|O(len(s))
-Discard|s.discard(item)|O(1)|O(N)
-Difference|s1-s2|O(len(s1))|O(len(s1))
-Difference Update|s1.difference_update(s2)|O(len(s2))|–
-Equality|s1==s2, s1!=s2|O(min(len(s1), len(s2)))|O(min(len(s1), len(s2)))
-Intersection|s1 & s2|O(min(len(s1), len(s2)))|O(min(len(s1), len(s2)))
-Iteration|for item in s:|O(N)|O(N)
-Is Subset|s1<=s2|O(len(s1))|O(len(s1))
-Is Superset|s1>=s2|O(len(s2))|O(len(s1))
-Pop|s.pop()|O(1)|O(N)
-Union|s1|s2|O(len(s1)+len(s2))|–
-Symmetric Difference|s1^s2|len(s1)|O(len(s1)*len(s2))
+| `Operation`| `Examples`| `Amortized complexity` | 
+|---|---|---|
+|`Add`|s.add(item)|O(1)|
+|`Clear`|s.clear()|O(1)|
+|`Copy`|s.copy()|O(N)|
+|`Containment`|item in/not in s|O(1)|
+|`Creation`|set(…)|O(len(s))|
+|`Discard`|s.discard(item)|O(1)|
+|`Difference`|s1-s2|O(len(s1))|
+|`Difference Update`|s1.difference_update(s2)|O(len(s2))|
+|`Equality`|s1==s2, s1!=s2|O(min(len(s1), len(s2)))|
+|`Intersection`|s1 & s2|O(min(len(s1), len(s2)))|
+|`Iteration`|for item in s:|O(N)|
+|`Is Subset`|s1<=s2|O(len(s1))|
+|`Is Superset`|s1>=s2|O(len(s2))|
+|`Pop`|s.pop()|O(1)|
+|`Union`|s1|s2|O(len(s1)+len(s2))|
+|`Symmetric Difference`|s1^s2|len(s1)|
