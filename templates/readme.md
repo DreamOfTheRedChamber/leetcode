@@ -75,20 +75,24 @@
 
 ### Clarify the input size
 * As of today, a single 2GHz CPU could process 2*10^9 OPS/second
-* 
+* When the following factors are considered, a single 2GHz CPU could perform 10^6-10^7 ops/sec.
+  * Overhead of memory access
+  * Overhead of branching
+  * Large constant factors
+* The input size could give an intuition on the best algorithm's type. 
 
-| `Sample Problem type`  |  `Algorithm complexity`  | `Applicable input size`  |
-|---|---|---|
-| `Permutation`  | O(n!)  |  1-10 |
-| `Combination`  | O(2^n)  |  1-20 |
-| `All pairs, dense graph / DP`  | O(n^4)  |  10-50 |
-| `All pairs, shortest path / DP`  | O(n^3)  |  10-100 |
-| `DP`  | O(n^2)  |  100-1000 |
-| `Sorting based(Greedy) / heap / divide & conquer`  | O(nlogn)  |  1000-10^6 |
-| `DP, graph traversal / topological sort (V+E) / tree traversal`  | O(n)  |  1000-10^6 |
-| `Prime, square sum`  | O(sqrt(n))  |  10^4-10^9 |
-| `Binary search`  | O(sqrt(n))  |  10^5-10^9 |
-| `Math`  | O(1)  |  10^6-10^9 |
+| `Sample Problem Type`  |  `Algorithm complexity`  | `Applicable input size`  | `Calculation using upper bound` |
+|---|---|---|---|
+| `Permutation`  | O(n!)  |  1-10 | 10! = 3628800 |
+| `Combination`  | O(2^n)  |  1-20 | 2^20 = 10^6 | 
+| `All pairs, dense graph / DP`  | O(n^4)  |  10-50 | 50^4 = 6.25*10^6 |
+| `All pairs, shortest path / DP`  | O(n^3)  |  10-100 | 100^3 = 10^6 |
+| `DP`  | O(n^2)  |  100-1000 | 1000 ^ 2 = 10^6 |
+| `Sorting based(Greedy) / heap / divide & conquer`  | O(nlogn)  |  1000-10^6 | 10^6 * log(10^6) = 10^6 |
+| `DP, graph traversal / topological sort (V+E) / tree traversal`  | O(n)  |  1000-10^6 | 10^6 |
+| `Prime, square sum`  | O(sqrt(n))  |  10^4-10^9 | 10^6  | 
+| `Binary search`  | O(log(n))  |  10^5-10^9 | 10^6 |
+| `Math`  | O(1)  |  10^6-10^9 | 10^6 |
 
 ### Give a small but general enough example for discussing algo/DS
 
