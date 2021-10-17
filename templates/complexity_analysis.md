@@ -18,6 +18,7 @@
 ## Operation complexity for python collections
 
 ### List
+* Inner working: Python lists are internally represented as arrays. The idea used is similar to implementation of vectors in C++ or ArrayList in Java. The costly operations are inserting and deleting items near the beginning (as everything has to be moved). Insert at the end also becomes costly if preallocated space becomes full.
 
 | Operation          | Examples       | Amortized complexity |
 | ------------------ | -------------- | -------------------- |
@@ -40,13 +41,10 @@
 | `Sort`             | l.sort()       | O(N\*log(N))         |
 | `Store`            | l\[i]=item     | O(1)                 |
 
-#### Inter working
-
 ### Dictionary
 
-|                               |                 |                        |
+| Operation          | Examples       | Amortized complexity |
 | ----------------------------- | --------------- | ---------------------- |
-| `Operation`                   | `Examples`      | `Amortized complexity` |
 | `Clear`                       | d.clear()       | O(1)                   |
 | `Construction`                | dict(…)         | O(len(d))              |
 | `Delete`                      | del d\[k]       | O(1)                   |
@@ -59,10 +57,10 @@
 | `Fromkeys`                    | d.fromkeys(seq) | O(len(seq))            |
 
 ### Set
+* Inner working: Set in Python can be defined as the collection of items. In Python, these are basically used to include membership testing and eliminating duplicate entries. The data structure used in this is Hashing, a popular technique to perform insertion, deletion and traversal in O(1) on average. The operations on Hash Table are some what similar to Linked List. Sets in python are unordered list with duplicate elements removed.
 
-|                        |                          |                          |
+| Operation          | Examples       | Amortized complexity |
 | ---------------------- | ------------------------ | ------------------------ |
-| `Operation`            | `Examples`               | `Amortized complexity`   |
 | `Add`                  | s.add(item)              | O(1)                     |
 | `Clear`                | s.clear()                | O(1)                     |
 | `Copy`                 | s.copy()                 | O(N)                     |
@@ -79,3 +77,7 @@
 | `Pop`                  | s.pop()                  | O(1)                     |
 | `Union`                | s1                       | s2                       |
 | `Symmetric Difference` | s1^s2                    | len(s1)                  |
+
+## References
+* [Python built-in container operations](https://www.geeksforgeeks.org/complexity-cheat-sheet-for-python-operations/)
+* [Inter working of Python List](https://www.geeksforgeeks.org/internal-working-of-list-in-python/)
