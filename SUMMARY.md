@@ -6,6 +6,7 @@
 
 * [interview_checklist](templates/readme.md)
 * [beauty_of_python](templates/beauty_of_python.md)
+* [online IDE templates](templates/online_ide_templates.md)
 
 ## Data structures
 
