@@ -4,7 +4,7 @@
 
 ## Templates
 
-* [interview_checklist](templates/readme-1.md)
+* [interview_checklist](templates/readme.md)
 * [beauty_of_python](templates/beauty_of_python.md)
 
 ## Data structures
