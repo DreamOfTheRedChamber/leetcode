@@ -1,12 +1,12 @@
-# time complexity analysis
+- [Time complexity analysis](#time-complexity-analysis)
+  - [Amortized analysis](#amortized-analysis)
+  - [Operation complexity for python collections](#operation-complexity-for-python-collections)
+    - [List](#list)
+    - [Dictionary](#dictionary)
+    - [Set](#set)
+  - [References](#references)
 
-* [Amortized analysis](complexity_analysis.md#amortized-analysis)
-* [Operation complexity for python collections](complexity_analysis.md#operation-complexity-for-python-collections)
-  * [List](complexity_analysis.md#list)
-    * [Inter working](complexity_analysis.md#inter-working)
-  * [Dictionary](complexity_analysis.md#dictionary)
-  * [Set](complexity_analysis.md#set)
-
+# Time complexity analysis
 ## Amortized analysis
 
 * Amortized Analysis is used for algorithms where an occasional operation is very slow, but most of the other operations are faster.
