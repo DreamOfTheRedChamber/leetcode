@@ -1,6 +1,7 @@
+- [design](#design)
+  - [Cache](#cache)
+
 # design
-[146.LRU-Cache](https://github.com/wisdompeak/LeetCode/tree/master/Design/146.LRU-Cache) (H-)\
-[460.LFU Cache](https://github.com/wisdompeak/LeetCode/tree/master/Design/460.LFU-Cache) (H)\
 [432.All-O-one-Data-Structure](https://github.com/wisdompeak/LeetCode/tree/master/Design/432.All-O-one-Data-Structure) (H)\
 [380.Insert-Delete-GetRandom-O(1)](https://github.com/wisdompeak/LeetCode/tree/master/Design/380.Insert-Delete-GetRandom-O-1/) (M+)\
 [381.Insert-Delete-GetRandom-O1-Duplicates-allowed](https://github.com/wisdompeak/LeetCode/tree/master/Design/381.Insert-Delete-GetRandom-O1-Duplicates-allowed) (H-)\
@@ -17,6 +18,20 @@
 [1418.Display-Table-of-Food-Orders-in-a-Restaurant](https://github.com/wisdompeak/LeetCode/tree/master/Design/1418.Display-Table-of-Food-Orders-in-a-Restaurant) (H-)\
 [1622.Fancy-Sequence](https://github.com/wisdompeak/LeetCode/tree/master/Design/1622.Fancy-Sequence) (H+)
 
-# References
-* https://www.kunxi.org/2014/05/lru-cache-in-python/
-* https://www.kunxi.org/2016/12/lfu-cache-in-python/
+## Cache
+* [146.LRU-Cache](https://github.com/wisdompeak/LeetCode/tree/master/Design/146.LRU-Cache) (H-)\
+  * Brute force: Use a single dictionary impl, key -> (value, frequency)
+    * Get: O(1)
+    * Set: O(n) because need to pop out elements if exceed maximum capacity
+  * Complexity optimal: Dictionary + LinkedList
+    * Get: O(1)
+    * Set: O(1)
+  * Simplest: Use the Python bulit-in OrderedDict impl (not SortedDict which order items based on keys) https://www.kunxi.org/2014/05/lru-cache-in-python/
+    * Get: O(1)
+    * Set: O(1)
+
+* [460.LFU Cache](https://github.com/wisdompeak/LeetCode/tree/master/Design/460.LFU-Cache) (H)\
+  * 
+  * Most intuitive: https://www.kunxi.org/2016/12/lfu-cache-in-python/
+    * Get: O(1)
+    * Set: O(1)
