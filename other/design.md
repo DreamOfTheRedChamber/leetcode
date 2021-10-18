@@ -1,5 +1,5 @@
 - [design](#design)
-  - [Cache](#cache)
+  - [Cache - [TODO]](#cache---todo)
 
 # design
 [432.All-O-one-Data-Structure](https://github.com/wisdompeak/LeetCode/tree/master/Design/432.All-O-one-Data-Structure) (H)\
@@ -18,9 +18,9 @@
 [1418.Display-Table-of-Food-Orders-in-a-Restaurant](https://github.com/wisdompeak/LeetCode/tree/master/Design/1418.Display-Table-of-Food-Orders-in-a-Restaurant) (H-)\
 [1622.Fancy-Sequence](https://github.com/wisdompeak/LeetCode/tree/master/Design/1622.Fancy-Sequence) (H+)
 
-## Cache
+## Cache - [TODO]
 * [146.LRU-Cache](https://github.com/wisdompeak/LeetCode/tree/master/Design/146.LRU-Cache) (H-)\
-  * Brute force: Use a single dictionary impl, key -> (value, frequency)
+  * Brute force: Use a single dictionary impl, key -> (value, timestamp)
     * Get: O(1)
     * Set: O(n) because need to pop out elements if exceed maximum capacity
   * Complexity optimal: Dictionary + LinkedList
@@ -31,7 +31,16 @@
     * Set: O(1)
 
 * [460.LFU Cache](https://github.com/wisdompeak/LeetCode/tree/master/Design/460.LFU-Cache) (H)\
-  * 
-  * Most intuitive: https://www.kunxi.org/2016/12/lfu-cache-in-python/
+  * Brute force: Use a single dictionary impl, key -> (value, frequency)
+    * Get: O(1)
+    * Set: O(nlogn)
+  * Direct inherit from LRU: Dictionary + linkedlist. Sort linkedlist using bubblesort https://www.kunxi.org/2016/12/lfu-cache-in-python/
+    * Get: O(1)
+    * Set: O(N) in LRU there is no sorting needed, but in LFU there is. 
+  * Dictionary + BST tree:
+    * Get: O(1) + log(N) because BST needs to be balanced
+    * Set: O(1) + log(N) because BST needs to delete element
+  * MY original solution: https://www.kunxi.org/2016/12/lfu-cache-in-python/
+    * One dictionary: key -> freq, another dictionary freq -> defaultdict(ordereddict)
     * Get: O(1)
     * Set: O(1)
