@@ -1,6 +1,7 @@
 - [Time complexity analysis](#time-complexity-analysis)
   - [Amortized analysis](#amortized-analysis)
   - [List operations](#list-operations)
+  - [Deque](#deque)
   - [Dictionary operations](#dictionary-operations)
   - [Set operations](#set-operations)
   - [Sorted container inner working](#sorted-container-inner-working)
@@ -42,6 +43,20 @@
 | `Slice`            | l\[x:y]        | O(y-x)               |
 | `Sort`             | l.sort()       | O(N\*log(N))         |
 | `Store`            | l\[i]=item     | O(1)                 |
+
+## Deque
+* Deque is implemented using a doubly linked list inside.  If you need to add/remove at both ends, consider using a collections.deque instead of list. 
+
+| Operation          | Examples       | Amortized complexity |
+| ------------------ | -------------- | -------------------- |
+| `Copy`           | l.copy() | O(1)                 |
+| `append`            | l.append()      | O(1)                 |
+| `appendLeft`     | l.appendleft    | O(1)                 |
+| `pop`             | l.pop()       | O(1)                 |
+| `popleft`           | l.popleft()      | O(1)                 |
+| `extend`           | l.extend(…)    | O(K)                 |
+| `extendleft`           | l.extendleft(…)    | O(K)                 |
+| `remove`           | l.remove(…)    | O(n)                 |
 
 ## Dictionary operations
 
