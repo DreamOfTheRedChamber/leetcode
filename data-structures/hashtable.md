@@ -1,6 +1,5 @@
 
 - [Hash Table](#hash-table)
-  - [LRU cache implementation](#lru-cache-implementation)
   - [Hash+Prefix](#hashprefix)
 
 # [Hash Table](https://github.com/wisdompeak/LeetCode/tree/master/Hash)
@@ -30,18 +29,6 @@
 1224.Maximum-Equal-Frequency \(H-\)  
 [1487.Making-File-Names-Unique](https://github.com/wisdompeak/LeetCode/tree/master/Hash/1487.Making-File-Names-Unique) \(M+\)  
 [1573.Number-of-Ways-to-Split-a-String](https://github.com/wisdompeak/LeetCode/tree/master/Hash/1573.Number-of-Ways-to-Split-a-String) \(M\)
-
-## LRU cache implementation
-
-* HashMap + DDL
-* LinkedHashMap + manual removing oldest entry and reset
-* LinkedHashMap \( access order + removeEldestEntry\(\) \)
-  * Access order
-    * When specified: The accessOrder flag is set when creating the LinkedHashMap instance using the LinkedHashMap\(int initialCapacity, float loadFactor, boolean accessOrder\) constructor
-    * accessOrder=true: The elements are ordered according to their access: When iterating over the map the most recently accessed entry is returned first and the least recently accessed element is returned last. Only the get, put, and putAll methods influence this ordering.
-    * accessOrder=false: The elements are ordered according to their insertion. This is the default if any of the other LinkedHashMap constructors is used. In this ordering read access to the map has no influence on element ordering.
-  * removeEldestEntry\(Entry\)
-    * This method is called with the eldest entry whenever an element is added to the map. Eldest means the element which is returned last when iterating over the map. So the notion of eldest is influenced by accessOrder set on the map. The removeEldestElement in its default implementation just returns false to indicate, that nothing should happen. An extension of the LinkedHashMap may overwrite the default implementation to do whatever would be required:
 
 ## Hash+Prefix
 
