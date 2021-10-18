@@ -4,6 +4,29 @@
 
 # [Union Find](https://github.com/wisdompeak/LeetCode/tree/master/Union_Find)
 
+```py
+def findRoot(node: int, nodeToParent: dict) -> int:
+  root = nodeToParent[node]
+  while root != nodeToParent[root]:
+    root = nodeToParent[root]
+  return root
+
+def union(nodeX: int, nodeY: int, nodeToParent: dict) -> bool:
+  rootX = findRoot(nodeX, nodeToParent)
+  rootY = findRoot(nodeY, nodeToParent)
+  if rootX != rootY:
+    nodeToParent[rootX] = rootY
+    return True
+  else:
+    return False
+
+# use dictionary instead of array to represent the parent mapping
+nodeToParent = {x:x for x in range(n)}
+
+# calculate number of components in the graph
+numComponents = sum([1 for k,v in nodeToParent.items() if k == v])
+```
+
 [547.Friend-Circles](https://github.com/wisdompeak/LeetCode/tree/master/Union_Find/547.Friend-Circles) \(M\)  
 [200.Number-of-Islands](https://github.com/wisdompeak/LeetCode/tree/master/DFS/200.Number-of-Islands) \(H-\)  
 [305.Number-of-Islands-II](https://github.com/wisdompeak/LeetCode/tree/master/Union_Find/305.Number-of-Islands-II) \(H-\)  
