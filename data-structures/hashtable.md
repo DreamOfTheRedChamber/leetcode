@@ -1,6 +1,8 @@
 
 - [Hash Table](#hash-table)
   - [Hash+Prefix](#hashprefix)
+    - [Reviewed](#reviewed)
+    - [Todo](#todo)
 
 # [Hash Table](https://github.com/wisdompeak/LeetCode/tree/master/Hash)
 
@@ -32,7 +34,31 @@
 
 ## Hash+Prefix
 
+```python
+# using LC 525 as an example
+class Solution:
+    def findMaxLength(self, nums: List[int]) -> int:
+
+        prefixSumToIndex = dict()
+        prefixSumToIndex[0] = -1
+
+        longest = 0
+        prefixSum = 0
+        for i in range(len(nums)):
+            prefixSum += -1 if nums[i] == 0 else 1
+            if prefixSum in prefixSumToIndex:
+                longest = max(longest, i - prefixSumToIndex[prefixSum])
+            else:
+                prefixSumToIndex[prefixSum] = i
+
+        return longest
+```
+
+### Reviewed
+
 [525.Contiguous-Array](https://github.com/wisdompeak/LeetCode/tree/master/Hash/525.Contiguous-Array) \(M\)  
+
+### Todo
 [930.Binary-Subarrays-With-Sum](https://github.com/wisdompeak/LeetCode/tree/master/Hash/930.Binary-Subarrays-With-Sum) \(M\)  
 [1442.Count-Triplets-That-Can-Form-Two-Arrays-of-Equal-XOR](https://github.com/wisdompeak/LeetCode/tree/master/Bit_Manipulation/1442.Count-Triplets-That-Can-Form-Two-Arrays-of-Equal-XOR) \(H-\)  
 [1524.Number-of-Sub-arrays-With-Odd-Sum ](https://github.com/wisdompeak/LeetCode/tree/master/Hash/1524.Number-of-Sub-arrays-With-Odd-Sum) \(M\)  

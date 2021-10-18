@@ -1,4 +1,6 @@
 - [Union Find](#union-find)
+  - [Reviewed](#reviewed)
+  - [TODO](#todo)
   - [Prime Factors](#prime-factors)
   - [MST](#mst)
 
@@ -27,7 +29,10 @@ nodeToParent = {x:x for x in range(n)}
 numComponents = sum([1 for k,v in nodeToParent.items() if k == v])
 ```
 
+## Reviewed
 [547.Friend-Circles](https://github.com/wisdompeak/LeetCode/tree/master/Union_Find/547.Friend-Circles) \(M\)  
+
+## TODO
 [200.Number-of-Islands](https://github.com/wisdompeak/LeetCode/tree/master/DFS/200.Number-of-Islands) \(H-\)  
 [305.Number-of-Islands-II](https://github.com/wisdompeak/LeetCode/tree/master/Union_Find/305.Number-of-Islands-II) \(H-\)  
 [130.Surrounded-Regions](https://github.com/wisdompeak/LeetCode/tree/master/Union_Find/130.Surrounded-Regions) \(H-\)  
