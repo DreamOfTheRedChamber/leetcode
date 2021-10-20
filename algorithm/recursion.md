@@ -1,6 +1,8 @@
 - [Divide and Conquer](#divide-and-conquer)
 - [Recursion](#recursion)
   - [Min-Max Strategy](#min-max-strategy)
+    - [Reviewed](#reviewed)
+    - [TODO](#todo)
 
 # [Divide and Conquer](https://github.com/wisdompeak/LeetCode/tree/master/Divide_Conquer)
 
@@ -40,7 +42,14 @@
 
 ## Min-Max Strategy
 
+```
+```
+
+### Reviewed
+
 [464.Can-I-Win](https://github.com/wisdompeak/LeetCode/tree/master/Recursion/464.Can-I-Win) \(M+\)  
+
+### TODO
 [877.Stone-Game](https://github.com/wisdompeak/LeetCode/tree/master/Recursion/877.Stone-Game) \(M+\) \(aka. 486.Predict-the-Winner\)  
 [1140.Stone-Game-II](https://github.com/wisdompeak/LeetCode/tree/master/Recursion/1140.Stone-Game-II) \(M\)  
 [1406.Stone-Game-III](https://github.com/wisdompeak/LeetCode/tree/master/Recursion/1406.Stone-Game-III) \(M+\)  
