@@ -1,4 +1,19 @@
-# intervals
+- [Intervals](#intervals)
+  - [Sort by ending points - Max num of non-overlapping intervals inside a range](#sort-by-ending-points---max-num-of-non-overlapping-intervals-inside-a-range)
+    - [Sort by ending points - Max num of non-overlapping intervals inside a range](#sort-by-ending-points---max-num-of-non-overlapping-intervals-inside-a-range-1)
+      - [Interval + DP + Binary search](#interval--dp--binary-search)
+    - [Sort by starting points - Min num of intervals to cover the range](#sort-by-starting-points---min-num-of-intervals-to-cover-the-range)
+  - [Sort by starting points - Min num of intervals to cover the range](#sort-by-starting-points---min-num-of-intervals-to-cover-the-range-1)
+  - [Sort either by start or endpoint](#sort-either-by-start-or-endpoint)
+  - [DP - TODO](#dp---todo)
+  - [Sweepline](#sweepline)
+  - [Other](#other)
+  - [Template: Merge interval](#template-merge-interval)
+    - [OPTIONS 1: PriorityQueue](#options-1-priorityqueue)
+    - [OPTIONS 2: Sort intervals by start and merge](#options-2-sort-intervals-by-start-and-merge)
+    - [OPTIONS 3: Sweepline](#options-3-sweepline)
+
+# Intervals
 
 ## Sort by ending points - Max num of non-overlapping intervals inside a range
 
@@ -165,3 +180,50 @@ class Solution:
 ## Other
 
 436\. Find Right Interval - binary search + map - \[TODO]
+
+## Template: Merge interval
+### OPTIONS 1: PriorityQueue
+* Here PriorityQueue is also used for sorting purpose but in-house implementation. 
+* A more complicated solution when compared with OPTIONS 2
+
+### OPTIONS 2: Sort intervals by start and merge
+* Sort intervals using T/S Complexity: O(nlogn)
+
+```
+sorted(intervals, key=lambda interval: (interval.start, interval.end))
+```
+
+### OPTIONS 3: Sweepline
+* Count interval start as +1, count interval end as -1
+
+```python
+"""
+# Definition for an Interval.
+class Interval:
+    def __init__(self, start: int = None, end: int = None):
+        self.start = start
+        self.end = end
+"""
+class Solution:
+    def employeeFreeTime(self, schedule: '[[Interval]]') -> '[Interval]':
+        points = []
+        for intervalList in schedule:
+            for interval in intervalList:
+                points.append((interval.start, 1))
+                points.append((interval.end, -1))
+                
+        # when start and end occurs at the same point
+        # start should come first
+        sortedPoints = sorted(points, key=lambda x: (x[0], -x[1]))
+        
+        result = []
+        counter = 0
+        prevPoint = float('-inf')
+        for point in sortedPoints:
+            if counter == 0 and prevPoint != point[0] and point[0] != point[1] and prevPoint != float('-inf'):
+                result.append(Interval(prevPoint, point[0]))
+            
+            counter = counter + (1 if point[1] == 1 else -1)
+            prevPoint = point[0]
+        return result
+```
