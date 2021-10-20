@@ -23,7 +23,7 @@
 * [graph](data-structures/graph.md)
 * [tree](data-structures/tree.md)
 
-## algorithm
+## Algorithm
 
 * [bfs](algorithm/bfs.md)
 * [binary_search](algorithm/binary_search.md)
@@ -39,3 +39,7 @@
 * [design](other/design.md)
 * [everything](other/everything.md)
 * [math](other/math.md)
+
+## Company
+
+* [Tree](company-specific/tree.md)
