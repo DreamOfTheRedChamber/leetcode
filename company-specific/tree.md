@@ -1,4 +1,9 @@
 
+
+- [Tree](#tree)
+  - [Compare tree](#compare-tree)
+
+# Tree
 ## Compare tree
 
 * Problem description
@@ -18,5 +23,4 @@ def compute_diff(old_tree: TreeNode, new_tree: TreeNode) -> int:
 3. 如果node key不同，则视为完全不同的两棵树，答案应该返回这两棵树里一共有多少节点。
 4. children数组里的顺序无关。
 
-* Solution
-
+* Solution: Recursion. Please see [tree.py](./tree.py) inside github repo. 

@@ -85,7 +85,7 @@ class Tree(unittest.TestCase):
         node2_2.addChild(node5_2)
         node2_2.addChild(node6_2)
 
-        self.assertEqual(6, self.compute_diff(node1, node1_2))
+        self.assertEqual(5, self.compute_diff(node1, node1_2))
 
     def compute_diff(self, root1: TreeNode, root2: TreeNode) -> int:
 
