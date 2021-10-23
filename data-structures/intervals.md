@@ -228,6 +228,34 @@ class Solution:
 ### DP: O(N^2) Sort by start, based on whether selecting ith job or not
 * https://leetcode.com/problems/maximum-profit-in-job-scheduling/discuss/733167/Thinking-process-Top-down-DP-Bottom-up-DP
 
+```python
+# Time limit exceeded
+class Solution:
+    def jobScheduling(self, startTime: List[int], endTime: List[int], profit: List[int]) -> int:        
+        # max profit by using from start to end
+        @lru_cache(maxsize=None)
+        def maxProfit(begin: int) -> int:
+            if begin >= self.end:
+                return 0
+            
+            # job at begin
+            # take 
+            take = self.sortedInter[begin][2]
+            for index, zipTuple in enumerate(self.sortedInter[begin+1:], begin+1):
+                if zipTuple[0] >= self.sortedInter[begin][1]:
+                    take += maxProfit(index)
+                    break                    
+            
+            # not take
+            notTake = maxProfit(begin + 1)            
+
+            return max(take, notTake)
+        
+        self.sortedInter = sorted(zip(startTime, endTime, profit))
+        self.end = len(self.sortedInter)
+        return maxProfit(0)
+```
+
 ### DP: O(N^2) Sort by end, based on how many jobs has been completed
 * https://github.com/wisdompeak/LeetCode/tree/master/Greedy/1235.Maximum-Profit-in-Job-Scheduling
 

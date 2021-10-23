@@ -144,8 +144,12 @@ list(pre_order_traverse(root))
 * You can supply a second parameter to enumerate to specify the number from which to begin counting. 
 
 ```py
-for i, flavor in enumerate(flavor_list, 1):
-    print('%d: %s' % (i, flavor))
+l = ['Alice', 'Bob', 'Charlie']
+for i, name in enumerate(l, 1):
+    print(i, name)
+# 1 Alice
+# 2 Bob
+# 3 Charlie
 ```
 
 ### Zip for iterators in parallel
