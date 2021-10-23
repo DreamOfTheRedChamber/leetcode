@@ -21,6 +21,7 @@
     - [Iterables](#iterables)
     - [Enumerate over range](#enumerate-over-range)
     - [Zip for iterators in parallel](#zip-for-iterators-in-parallel)
+      - [Star + zip](#star--zip)
   - [References](#references)
 
 # Beauty of Python
@@ -147,6 +148,7 @@ list(pre_order_traverse(root))
 l = ['Alice', 'Bob', 'Charlie']
 for i, name in enumerate(l, 1):
     print(i, name)
+
 # 1 Alice
 # 2 Bob
 # 3 Charlie
@@ -155,6 +157,18 @@ for i, name in enumerate(l, 1):
 ### Zip for iterators in parallel
 * The zip built-in function can be used to iterate over multiple iterators in parallel. 
 * In Python 3, zip is a lazy generator that produces tuples. 
+
+#### Star + zip
+
+```python
+a = [3, 2, 1,]
+b = ['a', 'b', 'c']
+ret = zip(a, b)
+the_list = sorted(ret)  
+# the_list >> [(1, 'c'), (2, 'b'), (3, 'a')]
+zip(*the_list)
+# [(1, 2, 3), ('c', 'b', 'a')]
+```
 
 ## References
 * Effective Python: 59 Ways to write better Python code
