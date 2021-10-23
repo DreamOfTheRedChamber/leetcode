@@ -4,18 +4,18 @@
 
 ## Templates
 
-* [interview_checklist](templates/readme.md)
-* [beauty_of_python](templates/beauty_of_python.md)
-* [online IDE templates](templates/online_ide_templates.md)
-* [time complexity analysis](templates/complexity_analysis.md)
+* [interview\_checklist](templates/readme.md)
+* [🥰 beauty\_of\_python](templates/beauty\_of\_python.md)
+* [online IDE templates](templates/online\_ide\_templates.md)
+* [time complexity analysis](templates/complexity\_analysis.md)
 
 ## Data structures
 
-* [bit_operation](data-structures/bit_operation.md)
+* [bit\_operation](data-structures/bit\_operation.md)
 * [deque](data-structures/deque.md)
 * [hashtable](data-structures/hashtable.md)
-* [linked_list](data-structures/linked_list.md)
-* [priority_queue](data-structures/priority_queue.md)
+* [linked\_list](data-structures/linked\_list.md)
+* [priority\_queue](data-structures/priority\_queue.md)
 * [stack](data-structures/stack.md)
 * [string](data-structures/string.md)
 * [intervals](data-structures/intervals.md)
@@ -26,13 +26,13 @@
 ## Algorithm
 
 * [bfs](algorithm/bfs.md)
-* [binary_search](algorithm/binary_search.md)
+* [binary\_search](algorithm/binary\_search.md)
 * [dfs](algorithm/dfs.md)
-* [dynamic_programming](algorithm/dynamic_programming.md)
+* [dynamic\_programming](algorithm/dynamic\_programming.md)
 * [greedy](algorithm/greedy.md)
-* [union_find](algorithm/union_find.md)
+* [union\_find](algorithm/union\_find.md)
 * [recursion](algorithm/recursion.md)
-* [two_pointers](algorithm/two_pointers.md)
+* [two\_pointers](algorithm/two\_pointers.md)
 
 ## Other
 
