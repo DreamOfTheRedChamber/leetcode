@@ -1,7 +1,6 @@
 - [Intervals](#intervals)
   - [Sort by ending points - Max num of non-overlapping intervals inside a range](#sort-by-ending-points---max-num-of-non-overlapping-intervals-inside-a-range)
     - [Sort by ending points - Max num of non-overlapping intervals inside a range](#sort-by-ending-points---max-num-of-non-overlapping-intervals-inside-a-range-1)
-      - [Interval + DP + Binary search](#interval--dp--binary-search)
     - [Sort by starting points - Min num of intervals to cover the range](#sort-by-starting-points---min-num-of-intervals-to-cover-the-range)
   - [Sort by starting points - Min num of intervals to cover the range](#sort-by-starting-points---min-num-of-intervals-to-cover-the-range-1)
   - [Sort either by start or endpoint](#sort-either-by-start-or-endpoint)
@@ -12,6 +11,10 @@
     - [OPTIONS 1: PriorityQueue](#options-1-priorityqueue)
     - [OPTIONS 2: Sort intervals by start and merge](#options-2-sort-intervals-by-start-and-merge)
     - [OPTIONS 3: Sweepline](#options-3-sweepline)
+  - [Complicated problem: Maximum profit of scheduled jobs](#complicated-problem-maximum-profit-of-scheduled-jobs)
+    - [DP: O(N^2) Sort by start, based on whether selecting ith job or not](#dp-on2-sort-by-start-based-on-whether-selecting-ith-job-or-not)
+    - [DP: O(N^2) Sort by end, based on how many jobs has been completed](#dp-on2-sort-by-end-based-on-how-many-jobs-has-been-completed)
+    - [Greedy](#greedy)
 
 # Intervals
 
@@ -39,15 +42,6 @@ def findLongestChain(self, pairs: List[List[int]]) -> int:
         i = j
     return result
 ```
-
-#### Interval + DP + Binary search
-
-* TODO
-  * Use named tuples
-  * Limitations of lru_cache
-  * Sorted() key word
-
-[1235.Maximum-Profit-in-Job-Scheduling](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/1235.Maximum-Profit-in-Job-Scheduling) (H-)
 
 [1751.Maximum-Number-of-Events-That-Can-Be-Attended-II](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/1751.Maximum-Number-of-Events-That-Can-Be-Attended-II) (H)
 
@@ -227,3 +221,22 @@ class Solution:
             prevPoint = point[0]
         return result
 ```
+
+## Complicated problem: Maximum profit of scheduled jobs
+[1235.Maximum-Profit-in-Job-Scheduling](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/1235.Maximum-Profit-in-Job-Scheduling) (H-)
+
+### DP: O(N^2) Sort by start, based on whether selecting ith job or not
+* https://leetcode.com/problems/maximum-profit-in-job-scheduling/discuss/733167/Thinking-process-Top-down-DP-Bottom-up-DP
+
+### DP: O(N^2) Sort by end, based on how many jobs has been completed
+* https://github.com/wisdompeak/LeetCode/tree/master/Greedy/1235.Maximum-Profit-in-Job-Scheduling
+
+### Greedy
+
+* Interval + DP + Binary search
+
+* TODO
+  * Use named tuples
+  * Limitations of lru_cache
+  * Sorted() key word
+
