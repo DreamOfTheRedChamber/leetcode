@@ -1,11 +1,16 @@
 
 
 - [Tree](#tree)
-  - [Compare tree](#compare-tree)
-  - [Door dash menu](#door-dash-menu)
+  - [Tree differences](#tree-differences)
+    - [Compare tree](#compare-tree)
+    - [Door dash menu](#door-dash-menu)
+      - [Problem itself](#problem-itself)
+      - [Clarifying questions](#clarifying-questions)
+    - [Possible solutions](#possible-solutions)
 
 # Tree
-## Compare tree
+## Tree differences
+### Compare tree
 
 * Problem description
 
@@ -24,9 +29,8 @@ def compute_diff(old_tree: TreeNode, new_tree: TreeNode) -> int:
 3. 如果node key不同，则视为完全不同的两棵树，答案应该返回这两棵树里一共有多少节点。
 4. children数组里的顺序无关。
 
-* Solution: Recursion. Please see [tree.py](./tree.py) inside github repo. 
-
-## Door dash menu
+### Door dash menu
+#### Problem itself
 https://leetcode.com/discuss/interview-question/1367130/doordash-phone-interview/1026887
 
 ```
@@ -56,3 +60,15 @@ d(4, T) e(5, T)   f(6, T)
                \
                f(66, T)
 ```
+
+#### Clarifying questions
+* If that node or its sub-children are null, we will treat them ALL as inactive. There are no duplicate nodes with the same key.
+  * Will all nodes in original tree exist in the new tree? According to the example, original nodes might be set to NULL (b case) or False (c case) 
+  * Will all nodes in original tree active? No, think about a menu which gets deprecated over time and there might be entry marked as obsolete. 
+* Either value change or the active status change means the node has been changed.
+  * What if keys get changed? According to the description, a node is identified by the key and key change means tree structure changes
+
+### Possible solutions
+1. See [CompareTree.py](./CompareTree.py)
+1. Recursion
+2. 
