@@ -28,6 +28,7 @@
 * [bfs](algorithm/bfs.md)
 * [binary\_search](algorithm/binary\_search.md)
 * [dfs](algorithm/dfs.md)
+* [topological sort](algorithm/topological_sort.md)
 * [dynamic\_programming](algorithm/dynamic\_programming.md)
 * [greedy](algorithm/greedy.md)
 * [union\_find](algorithm/union\_find.md)
