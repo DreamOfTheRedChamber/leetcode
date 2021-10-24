@@ -1,8 +1,7 @@
 - [Intervals](#intervals)
-  - [Sort by ending points - Max num of non-overlapping intervals inside a range](#sort-by-ending-points---max-num-of-non-overlapping-intervals-inside-a-range)
-    - [Sort by ending points - Max num of non-overlapping intervals inside a range](#sort-by-ending-points---max-num-of-non-overlapping-intervals-inside-a-range-1)
-    - [Sort by starting points - Min num of intervals to cover the range](#sort-by-starting-points---min-num-of-intervals-to-cover-the-range)
-  - [Sort by starting points - Min num of intervals to cover the range](#sort-by-starting-points---min-num-of-intervals-to-cover-the-range-1)
+  - [Greedy: Sort by ending points - Max num of non-overlapping intervals inside a range](#greedy-sort-by-ending-points---max-num-of-non-overlapping-intervals-inside-a-range)
+    - [757.Set-Intersection-Size-At-Least-Two](#757set-intersection-size-at-least-two)
+  - [Greedy: Sort by starting points - Min num of intervals to cover the range](#greedy-sort-by-starting-points---min-num-of-intervals-to-cover-the-range)
   - [Sort either by start or endpoint](#sort-either-by-start-or-endpoint)
   - [DP - TODO](#dp---todo)
   - [Sweepline](#sweepline)
@@ -11,20 +10,22 @@
     - [OPTIONS 1: PriorityQueue](#options-1-priorityqueue)
     - [OPTIONS 2: Sort intervals by start and merge](#options-2-sort-intervals-by-start-and-merge)
     - [OPTIONS 3: Sweepline](#options-3-sweepline)
-  - [Complicated problem: Maximum profit of scheduled jobs](#complicated-problem-maximum-profit-of-scheduled-jobs)
-    - [DP: O(N^2) Sort by start, based on whether selecting ith job or not](#dp-on2-sort-by-start-based-on-whether-selecting-ith-job-or-not)
-    - [DP: O(N^2) Sort by end, based on how many jobs has been completed](#dp-on2-sort-by-end-based-on-how-many-jobs-has-been-completed)
+  - [DP: 1235.Maximum-Profit-in-Job-Scheduling](#dp-1235maximum-profit-in-job-scheduling)
+    - [Sort by start, based on whether selecting ith job or not](#sort-by-start-based-on-whether-selecting-ith-job-or-not)
+      - [Naive implementation: O(N^2)](#naive-implementation-on2)
+      - [Optimize with binary search: O(NlogN) and zip/unzip](#optimize-with-binary-search-onlogn-and-zipunzip)
+    - [Sort by end, based on how many jobs has been completed](#sort-by-end-based-on-how-many-jobs-has-been-completed)
     - [Greedy](#greedy)
 
 # Intervals
 
-## Sort by ending points - Max num of non-overlapping intervals inside a range
+## Greedy: Sort by ending points - Max num of non-overlapping intervals inside a range
 
 [452.Minimum-Number-of-Arrows-to-Burst-Balloons](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/452.Minimum-Number-of-Arrows-to-Burst-Balloons) (H-)
 
 [435.Non-overlapping-Intervals](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/435.Non-overlapping-Intervals) (M+) (aka. [646.Maximum-Length-of-Pair-Chain](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/646.Maximum-Length-of-Pair-Chain))
 
-### Sort by ending points - Max num of non-overlapping intervals inside a range
+### 757.Set-Intersection-Size-At-Least-Two
 
 [757.Set-Intersection-Size-At-Least-Two](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/757.Set-Intersection-Size-At-Least-Two) (H)
 
@@ -45,9 +46,7 @@ def findLongestChain(self, pairs: List[List[int]]) -> int:
 
 [1751.Maximum-Number-of-Events-That-Can-Be-Attended-II](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/1751.Maximum-Number-of-Events-That-Can-Be-Attended-II) (H)
 
-### Sort by starting points - Min num of intervals to cover the range
-
-## Sort by starting points - Min num of intervals to cover the range
+## Greedy: Sort by starting points - Min num of intervals to cover the range
 
 [1326.Minimum-Number-of-Taps-to-Open-to-Water-a-Garden](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/1326.Minimum-Number-of-Taps-to-Open-to-Water-a-Garden) (M+)
 
@@ -222,11 +221,13 @@ class Solution:
         return result
 ```
 
-## Complicated problem: Maximum profit of scheduled jobs
+## DP: 1235.Maximum-Profit-in-Job-Scheduling
 [1235.Maximum-Profit-in-Job-Scheduling](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/1235.Maximum-Profit-in-Job-Scheduling) (H-)
 
-### DP: O(N^2) Sort by start, based on whether selecting ith job or not
+### Sort by start, based on whether selecting ith job or not
 * https://leetcode.com/problems/maximum-profit-in-job-scheduling/discuss/733167/Thinking-process-Top-down-DP-Bottom-up-DP
+
+#### Naive implementation: O(N^2)
 
 ```python
 # Time limit exceeded
@@ -256,8 +257,38 @@ class Solution:
         return maxProfit(0)
 ```
 
-### DP: O(N^2) Sort by end, based on how many jobs has been completed
+#### Optimize with binary search: O(NlogN) and zip/unzip
+
+```python
+class Solution:
+    def jobScheduling(self, startTime: List[int], endTime: List[int], profit: List[int]) -> int:        
+        # max profit by using from start to end
+        @lru_cache(maxsize=None)
+        def maxProfit(pos: int) -> int:
+            if pos >= self.end:
+                return 0
+            
+            # job at pos
+            # take 
+            take = self.sortedProfit[pos]
+            index = bisect.bisect_left(self.sortedStart, self.sortedEnd[pos], pos + 1)
+            take += maxProfit(index)
+                
+            # not take
+            notTake = maxProfit(pos + 1)            
+
+            return max(take, notTake)
+        
+        self.sortedStart, self.sortedEnd, self.sortedProfit = zip(*sorted(zip(startTime, endTime, profit)))
+        self.end = len(self.sortedStart)
+        return maxProfit(0)
+```
+
+### Sort by end, based on how many jobs has been completed
 * https://github.com/wisdompeak/LeetCode/tree/master/Greedy/1235.Maximum-Profit-in-Job-Scheduling
+
+```
+```
 
 ### Greedy
 
