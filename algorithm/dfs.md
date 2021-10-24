@@ -2,6 +2,8 @@
     - [Topological sort](#topological-sort)
   - [search in an array](#search-in-an-array)
   - [memorization](#memorization)
+    - [Reviewed](#reviewed)
+    - [TODO](#todo)
 
 # [DFS](https://github.com/wisdompeak/LeetCode/tree/master/DFS)
 
@@ -103,7 +105,40 @@
 
 ## memorization
 
+### Reviewed
 [329.Longest-Increasing-Path-in-a-Matrix](https://github.com/wisdompeak/LeetCode/tree/master/DFS/329.Longest-Increasing-Path-in-a-Matrix) \(M\)  
+
+```python
+class Solution:
+    def longestIncreasingPath(self, matrix: List[List[int]]) -> int:
+        
+        @lru_cache(maxsize=None)
+        def dfs(x: int, y: int) -> int:
+            directions = [[0, -1], [-1, 0], [1, 0], [0, 1]]
+            
+            result = 1
+            for direction in directions:
+                nextX = x + direction[0]
+                nextY = y + direction[1]
+                if 0 <= nextX < height and 0 <= nextY < width and matrix[nextX][nextY] > matrix[x][y]:
+                    result = max(result, 1 + dfs(nextX, nextY))
+                
+            return result
+        
+        if len(matrix) == 0 or len(matrix[0]) == 0:
+            return 0
+
+        height = len(matrix)
+        width = len(matrix[0])
+        result = 0
+        for i in range(height):
+            for j in range(width):
+                result = max(dfs(i, j), result)
+        
+        return result
+```
+
+### TODO
 [638.Shopping-Offers](https://github.com/wisdompeak/LeetCode/tree/master/DFS/638.Shopping-Offers) \(M+\)  
 [403.Frog-Jump](https://github.com/wisdompeak/LeetCode/tree/master/DFS/403.Frog-Jump) \(M+\)  
 [489.Robot-Room-Cleaner](https://github.com/wisdompeak/LeetCode/blob/master/DFS/489.Robot-Room-Cleaner) \(H\)  
