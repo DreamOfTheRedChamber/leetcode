@@ -5,7 +5,7 @@
 ## Templates
 
 * [interview\_checklist](templates/readme.md)
-* [🥰 beauty\_of\_python](templates/beauty\_of\_python.md)
+* [🥰 beauty of python](templates/beauty\_of\_python.md)
 * [online IDE templates](templates/online\_ide\_templates.md)
 * [time complexity analysis](templates/complexity\_analysis.md)
 
