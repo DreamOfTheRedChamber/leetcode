@@ -69,3 +69,45 @@ private boolean topoSort(Map graph, Integer startNode, Set discovered, Set visit
 ```
 
 ## BFS
+
+```python
+# 329. Longest Increasing Path in a Matrix
+class Solution:
+    def longestIncreasingPath(self, matrix: List[List[int]]) -> int:
+        if len(matrix) == 0 or len(matrix[0]) == 0:
+            return 0
+        
+        # build graph first
+        nodeToIndegree = defaultdict(lambda: 0)
+        height, width = len(matrix), len(matrix[0])
+        directions = [[1, 0], [0, 1], [-1, 0], [0, -1]]
+        for x in range(height):
+            for y in range(width):
+                for direction in directions:
+                    nextX, nextY = x + direction[0], y + direction[1]                    
+                    if 0 <= nextX < height and 0 <= nextY < width and matrix[x][y] < matrix[nextX][nextY]:
+                        nodeToIndegree[(nextX, nextY)] += 1
+                                        
+        # do topological sort on graph
+        bfsQueue = deque()
+        for x in range(height):
+            for y in range(width):
+                if nodeToIndegree[(x,y)] == 0:
+                    bfsQueue.append((x,y))
+
+        depth = 0                    
+        while bfsQueue:
+            levelSize = len(bfsQueue)
+            for i in range(levelSize):
+                x, y = bfsQueue.popleft()
+                for direction in directions:
+                    nextX, nextY = x + direction[0], y + direction[1]                    
+                    if 0 <= nextX < height and 0 <= nextY < width and matrix[x][y] < matrix[nextX][nextY]:
+                        nodeToIndegree[(nextX, nextY)] -= 1
+                        if nodeToIndegree[(nextX, nextY)] == 0:
+                            bfsQueue.append((nextX, nextY))
+            depth += 1
+
+        return depth
+        
+```
