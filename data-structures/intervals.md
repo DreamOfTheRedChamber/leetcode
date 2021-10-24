@@ -233,7 +233,7 @@ class Solution:
 # Time limit exceeded
 class Solution:
     def jobScheduling(self, startTime: List[int], endTime: List[int], profit: List[int]) -> int:        
-        # max profit by using from start to end
+        # max profit by using from begin to self.end
         @lru_cache(maxsize=None)
         def maxProfit(begin: int) -> int:
             if begin >= self.end:
@@ -262,7 +262,7 @@ class Solution:
 ```python
 class Solution:
     def jobScheduling(self, startTime: List[int], endTime: List[int], profit: List[int]) -> int:        
-        # max profit by using from start to end
+        # max profit by using from pos to self.end - 1
         @lru_cache(maxsize=None)
         def maxProfit(pos: int) -> int:
             if pos >= self.end:
@@ -286,8 +286,30 @@ class Solution:
 
 ### Sort by end, based on how many jobs has been completed
 * https://github.com/wisdompeak/LeetCode/tree/master/Greedy/1235.Maximum-Profit-in-Job-Scheduling
+* Similar thought as above
 
-```
+```python
+class Solution:
+    def jobScheduling(self, startTime: List[int], endTime: List[int], profit: List[int]) -> int:
+        
+        # maximum profit from 0 to pos
+        @lru_cache(maxsize=None)
+        def maxProfit(pos: int) -> int:
+            if pos < 0:
+                return 0
+                        
+            notTake = maxProfit(pos - 1)
+            take = self.sortedProfit[pos]            
+
+            # here need to use bisect_right
+            index = bisect.bisect_right(self.sortedEnd, self.sortedStart[pos])
+            take += maxProfit(index - 1)
+            
+            return max(take, notTake)
+        
+        self.sortedEnd, self.sortedStart, self.sortedProfit = zip(*sorted(zip(endTime, startTime, profit)))
+        return maxProfit(len(self.sortedEnd) - 1)
+
 ```
 
 ### Greedy
