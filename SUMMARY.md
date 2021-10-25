@@ -44,3 +44,4 @@
 ## Company
 
 * [Tree](company-specific/tree.md)
+* [BinarySearch](company-specific/binarySearch.md)
