@@ -1,4 +1,8 @@
 
+- [Binary Search](#binary-search)
+  - [Enhancement of LT1779](#enhancement-of-lt1779)
+    - [Clarification questions:](#clarification-questions)
+    - [Solutions](#solutions)
 
 # Binary Search 
 
@@ -16,6 +20,8 @@ def GetClosestCity(cityNames: List[str], cityX: List[int], cityY: List[int], que
 2. Will there be multiple closest city with multiple result?
 3. What's the scale of input
     * Suppose cityNames length O(N), queriedCity length O(Q) and maxNumber of nodes with same x/y is O(K)
+4. Will there be duplicates in incoming queries? How could we cache their result for faster processing ???
+    * Could establish a LRU cache ? 
 
 ### Solutions
 1. Brute force: for each queried city, pass through the cityNames, compute the distance, compare with minimum and swap if needed
@@ -24,6 +30,7 @@ def GetClosestCity(cityNames: List[str], cityX: List[int], cityY: List[int], que
 2. Map x => set(pointName), Map y => set(pointName), calculate intersection first; Then calculate manhattan distance with queried node (by priorityQueue) and find the min
     * T.C.: O(N) + O(QKlogK)
     * S.C.: O(N)
-3. Preprocessing: Preprocess the cityX and cityY so that given an (x,y), the closest could be found in O(logK)
+3. Preprocessing (balance space and time): Preprocess the cityX and cityY so that given an (x,y), the closest could be found in O(logK)
     * T.C.: O(N/K*K*logK) + O(Q*logK)
     * S.C.: O(N)
+4. Preprocessing (prioritize time): Assume that queried city always exist inside cityX/Y. Then could calculate all distances in advance. 
