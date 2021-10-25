@@ -69,6 +69,12 @@ d(4, T) e(5, T)   f(6, T)
   * What if keys get changed? According to the description, a node is identified by the key and key change means tree structure changes
 
 ### Possible solutions
-1. See [CompareTree.py](./CompareTree.py)
-1. Recursion
-2. 
+* Recursion: Possible cases
+    * One node is null or inactive, look at the other node. 
+    * Both node are non-null and active, 
+       * Compare key, if not same count nodes
+       * Plus Result of Compare children
+* See [CompareTree.py](./CompareTree.py) / [DoordashMenu.py](DoordashMenu.py)
+* Complexity: 
+    * T.C. O(n) = O((n-1)/M) * M = O(N^2)
+    * S.C. O(n) size of the tree

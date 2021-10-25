@@ -98,9 +98,9 @@ class DoorDashMenu(unittest.TestCase):
                     result += countNodes(child)
                 return result
 
-        if root1 is None:
+        if root1 is None or root1.active is False:
             return countNodes(root2)
-        elif root2 is None:
+        elif root2 is None or root2.active is False:
             return countNodes(root1)
         elif root1.key != root2.key:
             return countNodes(root1) + countNodes(root2)
@@ -111,16 +111,17 @@ class DoorDashMenu(unittest.TestCase):
 
             root1Children = {x.key: x for x in root1.children}
             root2Children = {x.key: x for x in root2.children}
-            for key, value in root1Children.items():
-                if key in root2Children:
-                    result = result + self.compute_diff(root1Children[key], root2Children[key])
+            keyIntersection = root2Children.keys() & root1Children.keys()
+
+            for key in keyIntersection:
+                result = result + self.compute_diff(root1Children[key], root2Children[key])
 
             for key, value in root1Children.items():
-                if key not in root2Children:
+                if key not in keyIntersection:
                     result = result + countNodes(root1Children[key])
 
             for key, value in root2Children.items():
-                if key not in root1Children:
+                if key not in keyIntersection:
                     result = result + countNodes(root2Children[key])
 
             return result
