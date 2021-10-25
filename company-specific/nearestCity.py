@@ -37,9 +37,9 @@ class NearestCity(unittest.TestCase):
 
         # Process
         # For each queried city, find its closest city by binary search x and y list
-        priorityQueue = SortedList(key=lambda x: (x[0], len(x[1])))
+        result = []
         for queryX, queryY in zip(queriedCityX, queriedCityY):
-
+            priorityQueue = SortedList(key=lambda x: (x[0], len(x[1])))
             if len(xToYList[queryX]) > 0:
                 searchIndex = bisect.bisect_left(xToYList[queryX], queryY)
                 if searchIndex < len(xToYList[queryX]):
@@ -58,13 +58,11 @@ class NearestCity(unittest.TestCase):
                     closetX = yToXList[queryY][searchIndex-1]
                     priorityQueue.add((abs(queryX - closetX), coorToName[(closetX, queryY)]))
 
-        minDis, city = priorityQueue.pop(0)
-        result = [city]
-        for distance, city in priorityQueue:
-            if distance == minDis and len(city) == len(result[-1]):
-                result.append(city)
+            if len(priorityQueue) == 0:
+                result.append(None)
             else:
-                break
+                minDis, city = priorityQueue.pop(0)
+                result.append(city)
         return result
 
 if __name__ == '__main__':
