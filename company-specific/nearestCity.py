@@ -16,6 +16,7 @@ class NearestCity(unittest.TestCase):
         return
 
     def GetClosestCity(cityNames: List[str], cityX: List[int], cityY: List[int], queriedCityX: List[int], queriedCityY: List[int]) -> List[str]:
+
         # Preprocess
         # Map x => List((Y)) and ..: used for binary search queried city
         xToYList = defaultdict(lambda: [])
@@ -40,6 +41,8 @@ class NearestCity(unittest.TestCase):
         result = []
         for queryX, queryY in zip(queriedCityX, queriedCityY):
             priorityQueue = SortedList(key=lambda x: (x[0], len(x[1])))
+
+            # TODO: Refactor to remove duplicates inside code
             if len(xToYList[queryX]) > 0:
                 searchIndex = bisect.bisect_left(xToYList[queryX], queryY)
                 if searchIndex < len(xToYList[queryX]):
