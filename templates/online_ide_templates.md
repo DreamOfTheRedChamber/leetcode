@@ -2,6 +2,7 @@
 - [Coding templates](#coding-templates)
 - [Online IDE templates](#online-ide-templates)
   - [Coderpad](#coderpad)
+  - [Online courses](#online-courses)
 
 # [Coding templates](https://github.com/wisdompeak/LeetCode/tree/master/Template)
 
@@ -52,3 +53,6 @@ public class Solution
 
 }
 ```
+
+## Online courses
+* 中文：https://learn.1point3acres.com/courses/succeed-in-google-interview/
