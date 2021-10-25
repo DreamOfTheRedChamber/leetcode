@@ -2,6 +2,8 @@
 - [Coding templates](#coding-templates)
 - [Online IDE templates](#online-ide-templates)
   - [Coderpad](#coderpad)
+    - [Java](#java)
+    - [Python](#python)
   - [Online courses](#online-courses)
 
 # [Coding templates](https://github.com/wisdompeak/LeetCode/tree/master/Template)
@@ -19,7 +21,7 @@
 # Online IDE templates
 
 ## Coderpad
-
+### Java
 ```java
 import org.junit.*;
 import org.junit.runner.*;
@@ -52,6 +54,31 @@ public class Solution
     }    
 
 }
+```
+
+### Python
+```python
+import unittest
+
+# Non-threadsafe imports
+from collections import deque
+from collections import defaultdict
+#from sortedcontainers import SortedList, SortedSet, SortedDict
+
+import heapq
+import re
+
+class OnlineHackerRankCodePair(unittest.TestCase):
+
+    @unittest.skip
+    def test_Test1(self):
+        self.assertEqual("a", "a")
+
+    def test_Test2(self):
+        self.assertFalse(False)
+        
+if __name__ == '__main__':
+    unittest.main()
 ```
 
 ## Online courses
