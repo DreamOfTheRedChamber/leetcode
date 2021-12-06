@@ -19,30 +19,30 @@ A = [3,2,1,0,4], return false
 
 public class JumpGame 
 {
- public boolean canJump( int[] nums )
- {
- 	if ( nums.length == 0 )
- 	{
- 		return true;
- 	}
- 	
- 	int maxPos = 0;
- 	for ( int i = 0; i < nums.length; i++ )
- 	{
- 		if ( maxPos < i )
- 		{
- 			return false;
- 		}
- 		
- 		maxPos = Math.max( maxPos, i + nums[i] );
- 	}
- 	
- 	return maxPos >= nums.length - 1;
- }
- 
- @Test
- public void test()
- {
- 	assertEquals( false, canJump( new int[]{ 0, 1 } ) );
- }
+    public boolean canJump( int[] nums )
+    {
+    	if ( nums.length == 0 )
+    	{
+    		return true;
+    	}
+    	
+    	int maxPos = 0;
+    	for ( int i = 0; i < nums.length; i++ )
+    	{
+    		if ( maxPos < i )
+    		{
+    			return false;
+    		}
+    		
+    		maxPos = Math.max( maxPos, i + nums[i] );
+    	}
+    	
+    	return maxPos >= nums.length - 1;
+    }
+    
+    @Test
+    public void test()
+    {
+    	assertEquals( false, canJump( new int[]{ 0, 1 } ) );
+    }
 }

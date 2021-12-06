@@ -12,8 +12,8 @@ The order of keys used matters.
 //TO_HURRY
 public class AndroidUnlockPatterns
 {
- public int numberOfPatterns(int m, int n) 
- {
-  return 0;
- }
+    public int numberOfPatterns(int m, int n) 
+    {
+        return 0;
+    }
 }

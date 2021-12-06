@@ -1,10 +1,10 @@
 {
- "plugins": [ "page-toc" ],
- "pluginsConfig": {
-   "page-toc": {
-  "selector": ".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4",
-  "position": "before-first",
-  "showByDefault": true
-   }
- }
+    "plugins": [ "page-toc" ],
+    "pluginsConfig": {
+      "page-toc": {
+        "selector": ".markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4",
+        "position": "before-first",
+        "showByDefault": true
+      }
+    }
   }

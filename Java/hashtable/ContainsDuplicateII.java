@@ -12,21 +12,21 @@ import java.util.Map;
 public class ContainsDuplicateII
 {
 
- public boolean containsNearbyDuplicate(int[] nums, int k) 
- {
- 	Map<Integer, Integer> numToLatestPos = new HashMap<>();
- 	for ( int i = 0; i < nums.length; i++ )
- 	{
- 		int num = nums[i];
- 		if ( numToLatestPos.containsKey( num ) 
- 				&& i - numToLatestPos.get( num ) <= k)
- 		{
- 			return true;
- 		}
- 		
- 		numToLatestPos.put( num, i );
- 	}
- 	return false;
- }
+    public boolean containsNearbyDuplicate(int[] nums, int k) 
+    {
+    	Map<Integer, Integer> numToLatestPos = new HashMap<>();
+    	for ( int i = 0; i < nums.length; i++ )
+    	{
+    		int num = nums[i];
+    		if ( numToLatestPos.containsKey( num ) 
+    				&& i - numToLatestPos.get( num ) <= k)
+    		{
+    			return true;
+    		}
+    		
+    		numToLatestPos.put( num, i );
+    	}
+    	return false;
+    }
 
 }

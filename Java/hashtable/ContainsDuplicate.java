@@ -10,16 +10,16 @@ import java.util.Set;
 
 public class ContainsDuplicate
 {
- public boolean containsDuplicate(int[] nums) 
- {
- 	Set<Integer> appearedNums = new HashSet<>();
- 	for ( int num : nums )
- 	{
- 		if ( !appearedNums.add( num ) )
- 		{
- 			return true;
- 		} 		
- 	}
- 	return false;
- }
+    public boolean containsDuplicate(int[] nums) 
+    {
+    	Set<Integer> appearedNums = new HashSet<>();
+    	for ( int num : nums )
+    	{
+    		if ( !appearedNums.add( num ) )
+    		{
+    			return true;
+    		}    		
+    	}
+    	return false;
+    }
 }

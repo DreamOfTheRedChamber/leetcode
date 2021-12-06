@@ -1,7 +1,7 @@
 - [Two Pointers](#two-pointers)
   - [Sliding window](#sliding-window)
   - [Begin and end type](#begin-and-end-type)
- - [Greedy](#greedy)
+    - [Greedy](#greedy)
   - [Partition type](#partition-type)
   - [Slow and fast](#slow-and-fast)
   - [Window type](#window-type)
@@ -65,17 +65,17 @@ else:
 def kSum(kVal: int, target: int, startIndex: int, nums: List[int]) -> List[List[int]]:
   result = []
   if kVal == 0:
- if target == 0:
-   result.append([]);
- return result;
+    if target == 0:
+      result.append([]);
+    return result;
 
   for i in range(startIndex, len(nums) - kVal + 1):
- if (i > startIndex) and (nums[i] == nums[i - 1]):
-   continue;
+    if (i > startIndex) and (nums[i] == nums[i - 1]):
+      continue;
 
- for partialResult in kSum( kVal - 1, target - nums[i], i + 1, nums )
-  partialResult.add( 0, nums[i] );
-  result.add( partialResult );
+    for partialResult in kSum( kVal - 1, target - nums[i], i + 1, nums )
+        partialResult.add( 0, nums[i] );
+        result.add( partialResult );
 
   return result;
 ```
@@ -93,16 +93,16 @@ def kSum(kVal: int, target: int, startIndex: int, nums: List[int]) -> List[List[
 # int[] input, int left, int right
 pivot = input[(left+right)/2];
 while i <= j:
- while input[i] < pivot:
-  i++
+    while input[i] < pivot:
+        i++
 
- while input[j] > pivot:
-  j--
+    while input[j] > pivot:
+        j--
 
- if i <= j:
-  swap(data, i, j);
-  i++;
-  j--;
+    if i <= j:
+        swap(data, i, j);
+        i++;
+        j--;
 ```
 
 ## Slow and fast
@@ -118,11 +118,11 @@ while i <= j:
 ```python
 for i in range(n):
   while j < n:
- # update j status
- if satisfy some condition:
-   j++
- else:
-   break
+    # update j status
+    if satisfy some condition:
+      j++
+    else:
+      break
   }
 }
 ```

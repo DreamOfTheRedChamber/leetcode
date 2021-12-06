@@ -18,42 +18,42 @@ Could you solve it in O(n2) runtime?
 
 public class ThreeSumSmaller
 {
- public int threeSumSmaller( int[] nums, int target )
- {
- 	if ( nums.length < 3 )
- 	{
- 		return 0;
- 	}
- 	
- 	Arrays.sort( nums );
- 	int totalNum = 0;
- 	for ( int i = 0; i < nums.length - 2; i++ )
- 	{ 		
- 		totalNum += twoSumSmaller( nums, target - nums[i], i + 1 );
- 	}
- 	return totalNum;
- }
- 
- private int twoSumSmaller( int[] nums, int target, int start )
- {
- 	int totalNum = 0;
- 	
- 	int left = start;
- 	int right = nums.length - 1;
- 	while ( left < right )
- 	{
- 		int sum = nums[left] + nums[right];
- 		if ( sum < target )
- 		{
- 			totalNum += right - left;
- 			left++;
- 		}
- 		else
- 		{
- 			right--;
- 		}
- 	}
- 	
- 	return totalNum;
- }
+    public int threeSumSmaller( int[] nums, int target )
+    {
+    	if ( nums.length < 3 )
+    	{
+    		return 0;
+    	}
+    	
+    	Arrays.sort( nums );
+    	int totalNum = 0;
+    	for ( int i = 0; i < nums.length - 2; i++ )
+    	{    		
+    		totalNum += twoSumSmaller( nums, target - nums[i], i + 1 );
+    	}
+    	return totalNum;
+    }
+    
+    private int twoSumSmaller( int[] nums, int target, int start )
+    {
+    	int totalNum = 0;
+    	
+    	int left = start;
+    	int right = nums.length - 1;
+    	while ( left < right )
+    	{
+    		int sum = nums[left] + nums[right];
+    		if ( sum < target )
+    		{
+    			totalNum += right - left;
+    			left++;
+    		}
+    		else
+    		{
+    			right--;
+    		}
+    	}
+    	
+    	return totalNum;
+    }
 }

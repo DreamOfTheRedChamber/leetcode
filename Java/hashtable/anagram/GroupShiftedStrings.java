@@ -29,39 +29,39 @@ A solution is:
 public class GroupShiftedStrings
 {
 
- public List<List<String>> groupStrings(String[] strings) 
- {
-  Map<String, List<String>> groupedStrings = new HashMap<>();
+    public List<List<String>> groupStrings(String[] strings) 
+    {
+        Map<String, List<String>> groupedStrings = new HashMap<>();
 
-  for ( String originalStr : strings )
-  {
-  	String shiftedStr = shiftString( originalStr );
-  	groupedStrings.putIfAbsent( shiftedStr, new ArrayList<>() );
-  	groupedStrings.get( shiftedStr ).add( originalStr );
-  }
-  
-  return groupedStrings.values( )
-  					.stream( )
-  					.collect( Collectors.toList( ) );
- }
+        for ( String originalStr : strings )
+        {
+        	String shiftedStr = shiftString( originalStr );
+        	groupedStrings.putIfAbsent( shiftedStr, new ArrayList<>() );
+        	groupedStrings.get( shiftedStr ).add( originalStr );
+        }
+        
+        return groupedStrings.values( )
+        					.stream( )
+        					.collect( Collectors.toList( ) );
+    }
 
- private String shiftString( String originalStr )
- {
- 	StringBuilder shiftedStr = new StringBuilder();
- 	int shiftDist = originalStr.charAt( 0 ) - 'a' ;
- 	for ( char ch : originalStr.toCharArray( ) )
- 	{
- 		// map shifted char into 0-25
- 		int shiftedInteger = ( ch - 'a' - shiftDist + 26 ) % 26;
- 		char shiftedCh = (char) ( 'a' + shiftedInteger );
- 		shiftedStr.append( shiftedCh );
- 	}
- 	return shiftedStr.toString( );
- }
- 
- @Test
- public void test()
- {
- 	System.out.println( groupStrings( new String[]{"abc", "bcd", "acef", "xyz", "az", "ba", "a", "z"}) );
- }
+    private String shiftString( String originalStr )
+    {
+    	StringBuilder shiftedStr = new StringBuilder();
+    	int shiftDist = originalStr.charAt( 0 ) - 'a' ;
+    	for ( char ch : originalStr.toCharArray( ) )
+    	{
+    		// map shifted char into 0-25
+    		int shiftedInteger = ( ch - 'a' - shiftDist + 26 ) % 26;
+    		char shiftedCh = (char) ( 'a' + shiftedInteger );
+    		shiftedStr.append( shiftedCh );
+    	}
+    	return shiftedStr.toString( );
+    }
+    
+    @Test
+    public void test()
+    {
+    	System.out.println( groupStrings( new String[]{"abc", "bcd", "acef", "xyz", "az", "ba", "a", "z"}) );
+    }
 }

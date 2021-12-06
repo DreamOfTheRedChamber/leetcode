@@ -1,8 +1,8 @@
 
 - [Hash Table](#hash-table)
   - [Hash+Prefix](#hashprefix)
- - [Reviewed](#reviewed)
- - [Todo](#todo)
+    - [Reviewed](#reviewed)
+    - [Todo](#todo)
 
 # [Hash Table](https://github.com/wisdompeak/LeetCode/tree/master/Hash)
 
@@ -37,21 +37,21 @@
 ```python
 # using LC 525 as an example
 class Solution:
- def findMaxLength(self, nums: List[int]) -> int:
+    def findMaxLength(self, nums: List[int]) -> int:
 
-  prefixSumToIndex = dict()
-  prefixSumToIndex[0] = -1
+        prefixSumToIndex = dict()
+        prefixSumToIndex[0] = -1
 
-  longest = 0
-  prefixSum = 0
-  for i in range(len(nums)):
-   prefixSum += -1 if nums[i] == 0 else 1
-   if prefixSum in prefixSumToIndex:
-    longest = max(longest, i - prefixSumToIndex[prefixSum])
-   else:
-    prefixSumToIndex[prefixSum] = i
+        longest = 0
+        prefixSum = 0
+        for i in range(len(nums)):
+            prefixSum += -1 if nums[i] == 0 else 1
+            if prefixSum in prefixSumToIndex:
+                longest = max(longest, i - prefixSumToIndex[prefixSum])
+            else:
+                prefixSumToIndex[prefixSum] = i
 
-  return longest
+        return longest
 ```
 
 ### Reviewed

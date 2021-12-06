@@ -25,8 +25,8 @@ import java.util.List;
 
 public class BinaryWatch
 {
- public List<String> readBinaryWatch(int num )
- {
-  return new ArrayList<>();
- }
+    public List<String> readBinaryWatch(int num )
+    {
+        return new ArrayList<>();
+    }
 }

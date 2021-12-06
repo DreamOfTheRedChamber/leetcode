@@ -19,8 +19,8 @@ A solution is ["cats and dog", "cat sand dog"].
 //TO_START
 public class WordBreakII
 {
- public List<String> wordBreak(String s, Set<String> wordDict)
- {
-  return new ArrayList<>();
- }
+    public List<String> wordBreak(String s, Set<String> wordDict)
+    {
+        return new ArrayList<>();
+    }
 }

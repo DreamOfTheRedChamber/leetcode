@@ -19,88 +19,88 @@ Follow up: Could you improve it to O(n log n) time complexity?
 // TODO: improve complexity to nlogn
 public class LongestIncreasingSubsequence
 {
- public int lengthOfLIS( int[] nums )
- {
- 	if ( nums.length == 0 )
- 	{
- 		return 0;
- 	}
- 	
- 	int[] longestSubseq = new int[nums.length];
- 	longestSubseq[0] = 1;
- 	for ( int i = 1; i < nums.length; i++ )
- 	{
- 		longestSubseq[i] = 1;
- 		for ( int j = 0; j < i; j++ )
- 		{
- 			if ( nums[i] > nums[j] )
- 			{
- 				longestSubseq[i] = Math.max( longestSubseq[i], 1 + longestSubseq[j] );
- 			}
- 		}
- 	}
- 	
- 	int longestLength = 0;
- 	for ( int i = 0; i < longestSubseq.length; i++ )
- 	{
- 		longestLength = Math.max( longestLength, longestSubseq[i] );
- 	}
- 	return longestLength;
- }
- 
- public int lengthOfLISBinarySearch( int[] nums )
- {
- 	int[] minLast = new int[nums.length + 1];
- 	minLast[0] = Integer.MIN_VALUE;
- 	for ( int i = 1; i <= nums.length; i++ )
- 	{
- 		minLast[i] = Integer.MAX_VALUE;
- 	}
- 	
- 	for ( int i = 0; i < nums.length; i++ )
- 	{
- 		// find the first number in minLast > nums[i]
- 		int index = binarySearch( minLast, nums[i] );
- 		minLast[index] = nums[i];
- 	}
- 	
- 	for ( int i = nums.length; i >= 1; i-- )
- 	{
- 		if ( minLast[i] != Integer.MAX_VALUE )
- 		{
- 			return i;
- 		}
- 	}
- 	
- 	return 0;
- }
- 
- private int binarySearch( int[] minLast, int num )
- {
- 	int start = 0, end = minLast.length - 1;
- 	while ( start + 1 < end )
- 	{
- 		int mid = ( end - start ) / 2 + start;
- 		if ( minLast[mid] < num )
- 		{
- 			start = mid;
- 		}
- 		else
- 		{
- 			end = mid;
- 		}
- 	}
- 	
- 	if ( minLast[start] > num )
- 	{
- 		return start;
- 	}
- 	return end;
- }
- 
- @Test
- public void test()
- {
- 	assertEquals( 6, lengthOfLIS( new int[]{ 1, 3, 6, 7, 9, 4, 10, 5, 6 } ) );
- }
+    public int lengthOfLIS( int[] nums )
+    {
+    	if ( nums.length == 0 )
+    	{
+    		return 0;
+    	}
+    	
+    	int[] longestSubseq = new int[nums.length];
+    	longestSubseq[0] = 1;
+    	for ( int i = 1; i < nums.length; i++ )
+    	{
+    		longestSubseq[i] = 1;
+    		for ( int j = 0; j < i; j++ )
+    		{
+    			if ( nums[i] > nums[j] )
+    			{
+    				longestSubseq[i] = Math.max( longestSubseq[i], 1 + longestSubseq[j] );
+    			}
+    		}
+    	}
+    	
+    	int longestLength = 0;
+    	for ( int i = 0; i < longestSubseq.length; i++ )
+    	{
+    		longestLength = Math.max( longestLength, longestSubseq[i] );
+    	}
+    	return longestLength;
+    }
+    
+    public int lengthOfLISBinarySearch( int[] nums )
+    {
+    	int[] minLast = new int[nums.length + 1];
+    	minLast[0] = Integer.MIN_VALUE;
+    	for ( int i = 1; i <= nums.length; i++ )
+    	{
+    		minLast[i] = Integer.MAX_VALUE;
+    	}
+    	
+    	for ( int i = 0; i < nums.length; i++ )
+    	{
+    		// find the first number in minLast > nums[i]
+    		int index = binarySearch( minLast, nums[i] );
+    		minLast[index] = nums[i];
+    	}
+    	
+    	for ( int i = nums.length; i >= 1; i-- )
+    	{
+    		if ( minLast[i] != Integer.MAX_VALUE )
+    		{
+    			return i;
+    		}
+    	}
+    	
+    	return 0;
+    }
+    
+    private int binarySearch( int[] minLast, int num )
+    {
+    	int start = 0, end = minLast.length - 1;
+    	while ( start + 1 < end )
+    	{
+    		int mid = ( end - start ) / 2 + start;
+    		if ( minLast[mid] < num )
+    		{
+    			start = mid;
+    		}
+    		else
+    		{
+    			end = mid;
+    		}
+    	}
+    	
+    	if ( minLast[start] > num )
+    	{
+    		return start;
+    	}
+    	return end;
+    }
+    
+    @Test
+    public void test()
+    {
+    	assertEquals( 6, lengthOfLIS( new int[]{ 1, 3, 6, 7, 9, 4, 10, 5, 6 } ) );
+    }
 }

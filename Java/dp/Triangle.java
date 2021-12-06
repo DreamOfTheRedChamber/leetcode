@@ -8,8 +8,8 @@ Given a triangle, find the minimum path sum from top to bottom. Each step you ma
 
 For example, given the following triangle
 [
-  [2],
- [3,4],
+     [2],
+    [3,4],
    [6,5,7],
   [4,1,8,3]
 ]
@@ -21,8 +21,8 @@ Bonus point if you are able to do this using only O(n) extra space, where n is t
 //TO_START
 public class Triangle
 {
- public int minimumTotal(List<List<Integer>> triangle)
- {
-  return 0;
- }
+    public int minimumTotal(List<List<Integer>> triangle)
+    {
+        return 0;
+    }
 }

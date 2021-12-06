@@ -24,8 +24,8 @@ Output:
 
 public class EliminationGame 
 {
- public int lastRemaining( int n ) 
- {
-  return 0;
- }
+    public int lastRemaining( int n ) 
+    {
+        return 0;
+    }
 }

@@ -25,36 +25,36 @@ Output:
  * */
 public class CombinationSumIII 
 {
- public List<List<Integer>> combinationSum3( int k, int n ) 
- {
- 	List<List<Integer>> allCombs = new LinkedList<>();
- 	LinkedList<Integer> oneComb = new LinkedList<>();
- 	generateCombs( allCombs, oneComb, k, n, 1, 9 );
- 	return allCombs;
- }
- 
- private void generateCombs( List<List<Integer>> allCombs, LinkedList<Integer> oneComb, int targetNum, int targetSum, int startPos, int endPos )
- {
- 	// recursion base
- 	if ( oneComb.size() > targetNum 
- 			|| targetSum < 0 )
- 	{
- 		return;
- 	}
- 	
- 	if ( oneComb.size( ) == targetNum
- 			&& targetSum == 0 )
- 	{
- 		allCombs.add( new LinkedList<>( oneComb ) );
- 		return;
- 	}
- 	
- 	// recursion
- 	for ( int i = startPos; i <= endPos; i++ )
- 	{
- 		oneComb.addLast( i );
- 		generateCombs( allCombs, oneComb, targetNum, targetSum - i, i + 1, endPos );
- 		oneComb.removeLast( );
- 	}
- }
+    public List<List<Integer>> combinationSum3( int k, int n ) 
+    {
+    	List<List<Integer>> allCombs = new LinkedList<>();
+    	LinkedList<Integer> oneComb = new LinkedList<>();
+    	generateCombs( allCombs, oneComb, k, n, 1, 9 );
+    	return allCombs;
+    }
+    
+    private void generateCombs( List<List<Integer>> allCombs, LinkedList<Integer> oneComb, int targetNum, int targetSum, int startPos, int endPos )
+    {
+    	// recursion base
+    	if ( oneComb.size() > targetNum 
+    			|| targetSum < 0 )
+    	{
+    		return;
+    	}
+    	
+    	if ( oneComb.size( ) == targetNum
+    			&& targetSum == 0 )
+    	{
+    		allCombs.add( new LinkedList<>( oneComb ) );
+    		return;
+    	}
+    	
+    	// recursion
+    	for ( int i = startPos; i <= endPos; i++ )
+    	{
+    		oneComb.addLast( i );
+    		generateCombs( allCombs, oneComb, targetNum, targetSum - i, i + 1, endPos );
+    		oneComb.removeLast( );
+    	}
+    }
 }

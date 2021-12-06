@@ -40,32 +40,32 @@ Same with other integers chosen by the first player, the second player will alwa
 public class CanIWin 
 {
 	
- public boolean canIWin( int maxChoosableInteger, int desiredTotal ) 
- { 	
- 	return true;
- }
-  
- @Test
- public void test()
- {
- 	assertFalse( canIWin( 10, 11 ) ); 	
-  	assertTrue( canIWin( 10, 0 ) );
-  	assertTrue( canIWin( 4, 6 ) );  	
- }
- 
- public boolean canIWinUsedOnce( int maxChoosableInteger, int desiredTotal )
- {
- 	if ( desiredTotal <= 0 )
- 	{
- 		return true;
- 	}
- 	if ( maxChoosableInteger * ( maxChoosableInteger + 1 ) / 2 < desiredTotal )
- 	{
- 		return false;
- 	}
- 	return canIWinUsedOnce( desiredTotal, new int[maxChoosableInteger], new HashMap<>() );
- }
- 
+    public boolean canIWin( int maxChoosableInteger, int desiredTotal ) 
+    {    	
+    	return true;
+    }
+        
+    @Test
+    public void test()
+    {
+    	assertFalse( canIWin( 10, 11 ) );    	
+     	assertTrue( canIWin( 10, 0 ) );
+     	assertTrue( canIWin( 4, 6 ) );     	
+    }
+    
+    public boolean canIWinUsedOnce( int maxChoosableInteger, int desiredTotal )
+    {
+    	if ( desiredTotal <= 0 )
+    	{
+    		return true;
+    	}
+    	if ( maxChoosableInteger * ( maxChoosableInteger + 1 ) / 2 < desiredTotal )
+    	{
+    		return false;
+    	}
+    	return canIWinUsedOnce( desiredTotal, new int[maxChoosableInteger], new HashMap<>() );
+    }
+    
 	private boolean canIWinUsedOnce( int total, int[] state, HashMap<String, Boolean> hashMap ) 
 	{
 		String curr = Arrays.toString ( state );

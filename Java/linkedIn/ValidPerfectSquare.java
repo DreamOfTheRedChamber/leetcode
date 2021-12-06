@@ -17,37 +17,37 @@ Returns: False
 
 public class ValidPerfectSquare 
 {
- public boolean isPerfectSquare( int num )
- {
- 	if ( num <= 0 )
- 	{
- 		return false;
- 	}
- 	
- 	// whether can find perfect sqrt root
- 	int start = 1;
- 	int end = num;
- 	while ( start + 1 < end )
- 	{
- 		int mid = ( end - start ) / 2 + start;
- 		if ( num / mid < mid )
- 		{
- 			end = mid;
- 		}
- 		else
- 		{
- 			start = mid;
- 		}
- 	}
- 	
- 	if ( start * start == num 
- 			|| end * end == num )
- 	{
- 		return true;
- 	}
- 	else
- 	{
- 		return false;
- 	}
- }
+    public boolean isPerfectSquare( int num )
+    {
+    	if ( num <= 0 )
+    	{
+    		return false;
+    	}
+    	
+    	// whether can find perfect sqrt root
+    	int start = 1;
+    	int end = num;
+    	while ( start + 1 < end )
+    	{
+    		int mid = ( end - start ) / 2 + start;
+    		if ( num / mid < mid )
+    		{
+    			end = mid;
+    		}
+    		else
+    		{
+    			start = mid;
+    		}
+    	}
+    	
+    	if ( start * start == num 
+    			|| end * end == num )
+    	{
+    		return true;
+    	}
+    	else
+    	{
+    		return false;
+    	}
+    }
 }

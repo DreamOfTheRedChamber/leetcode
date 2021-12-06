@@ -16,8 +16,8 @@ In this question, we represent the board using a 2D array. In principle, the boa
 // TO_HURRY
 public class GameOfLife
 {
- public void gameOfLife(int[][] board) 
- {
-  
- }
+    public void gameOfLife(int[][] board) 
+    {
+        
+    }
 }

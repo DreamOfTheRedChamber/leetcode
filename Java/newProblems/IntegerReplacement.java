@@ -33,8 +33,8 @@ or
 
 public class IntegerReplacement 
 {
- public int integerReplacement( int n ) 
- {
-  return 1;
- }
+    public int integerReplacement( int n ) 
+    {
+        return 1;
+    }
 }

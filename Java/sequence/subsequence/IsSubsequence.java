@@ -25,37 +25,37 @@ If there are lots of incoming S, say S1, S2, ... , Sk where k >= 1B, and you wan
 // TODO: Optimize to thousands case by using trie/binary search/dynamic programming
 public class IsSubsequence 
 {
- public boolean isSubsequence( String s, String t )
- {
- 	if ( s == null 
- 			|| t == null )
- 	{
- 		throw new IllegalArgumentException();
- 	} 	
- 	
- 	int tPointer = 0;
- 	int sPointer = 0;
- 	while ( tPointer < t.length()
- 			&& sPointer < s.length() )
- 	{
- 		if ( s.charAt( sPointer ) == t.charAt( tPointer ) )
- 		{
- 			sPointer++;
- 			tPointer++;
- 		}
- 		else
- 		{
- 			tPointer++;
- 		}
- 	}
- 	
- 	if ( sPointer == s.length() )
- 	{
- 		return true;
- 	}
- 	else
- 	{
- 		return false;
- 	}
- }
+    public boolean isSubsequence( String s, String t )
+    {
+    	if ( s == null 
+    			|| t == null )
+    	{
+    		throw new IllegalArgumentException();
+    	}    	
+    	
+    	int tPointer = 0;
+    	int sPointer = 0;
+    	while ( tPointer < t.length()
+    			&& sPointer < s.length() )
+    	{
+    		if ( s.charAt( sPointer ) == t.charAt( tPointer ) )
+    		{
+    			sPointer++;
+    			tPointer++;
+    		}
+    		else
+    		{
+    			tPointer++;
+    		}
+    	}
+    	
+    	if ( sPointer == s.length() )
+    	{
+    		return true;
+    	}
+    	else
+    	{
+    		return false;
+    	}
+    }
 }

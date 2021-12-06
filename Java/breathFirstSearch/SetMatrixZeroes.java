@@ -14,8 +14,8 @@ Could you devise a constant space solution?
 
 public class SetMatrixZeroes
 {
- public void setZeroes( int[][] matrix )
- {
+    public void setZeroes( int[][] matrix )
+    {
 		boolean firstRowZero = false;
 		boolean firstColumnZero = false;
 
@@ -75,5 +75,5 @@ public class SetMatrixZeroes
 			for ( int i = 0; i < matrix[0].length; i++ )
 				matrix[0][i] = 0;
 		}
- }
+    }
 }

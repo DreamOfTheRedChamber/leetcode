@@ -77,29 +77,29 @@
 ```java
 public List<Integer> sample( List<Integer> list, int k )
 {
- final List<Integer> samples = new ArrayList<Integer>( k );
- int count = 0;
- final Random random = new Random();
- for ( Integer item : list ) 
- {
-  if ( count < k ) 
-  {
-   samples.add( item );
-  } 
-  else 
-  {
-   // http://en.wikipedia.org/wiki/Reservoir_sampling
-   // In effect, for all i, the ith element of S is chosen to be included in the reservoir with probability
-   // k/i.
-   int randomPos = random.nextInt( count );
-   if ( randomPos < k ) 
-   {
-    samples.set( randomPos, item );
-   }
-  }
-  count++;
- }
- return samples;
+    final List<Integer> samples = new ArrayList<Integer>( k );
+    int count = 0;
+    final Random random = new Random();
+    for ( Integer item : list ) 
+    {
+        if ( count < k ) 
+        {
+            samples.add( item );
+        } 
+        else 
+        {
+            // http://en.wikipedia.org/wiki/Reservoir_sampling
+            // In effect, for all i, the ith element of S is chosen to be included in the reservoir with probability
+            // k/i.
+            int randomPos = random.nextInt( count );
+            if ( randomPos < k ) 
+            {
+                samples.set( randomPos, item );
+            }
+        }
+        count++;
+    }
+    return samples;
 }
 ```
 
@@ -123,28 +123,28 @@ public List<Integer> sample( List<Integer> list, int k )
 
 ```java
 void generatePerms( List<List<Integer>> allPerms, List<Integer> onePerm, int[] nums, boolean[] isUsed )
-{  
+{     
   if ( onePerm.size() == nums.length )
   {
- allPerms.add( new LinkedList<>( onePerm ) );
- return;
+    allPerms.add( new LinkedList<>( onePerm ) );
+    return;
   }
 
   for ( int i = 0 ; i < nums.length; i++ )
-  {    
- if ( !isUsed[i] )
- {
-   if ( i > 0 && nums[i] == nums[i-1] && !isUsed[i-1] )
-   {
-  continue;
-   }
+  {       
+    if ( !isUsed[i] )
+    {
+      if ( i > 0 && nums[i] == nums[i-1] && !isUsed[i-1] )
+      {
+        continue;
+      }
 
-   isUsed[i] = true;
-   onePerm.add( nums[i] );
-   generatePerms( allPerms, onePerm, nums, isUsed );
-   onePerm.remove( onePerm.size( ) - 1 );
-   isUsed[i] = false;
- }
+      isUsed[i] = true;
+      onePerm.add( nums[i] );
+      generatePerms( allPerms, onePerm, nums, isUsed );
+      onePerm.remove( onePerm.size( ) - 1 );
+      isUsed[i] = false;
+    }
   }
 }
 ```
@@ -156,22 +156,22 @@ void generateSubsets( List<List<Integer>> allSubsets, LinkedList<Integer> oneSub
 {
   if ( startPos > nums.length )
   {
- return;
+    return;
   }
 
   allSubsets.add( new LinkedList<>( oneSubset ) );
 
   for ( int i = startPos; i < nums.length; i++ )
   {
- if ( i > startPos 
-  && nums[i] == nums[i-1] )
- {
-   continue;
- }
+    if ( i > startPos 
+        && nums[i] == nums[i-1] )
+    {
+      continue;
+    }
 
- oneSubset.addLast( nums[i] );
- generateSubsets( allSubsets, oneSubset, nums, i + 1 );
- oneSubset.removeLast( );
+    oneSubset.addLast( nums[i] );
+    generateSubsets( allSubsets, oneSubset, nums, i + 1 );
+    oneSubset.removeLast( );
   }
 }
 ```
@@ -183,20 +183,20 @@ void generateCombs( List<List<Integer>> allCombs, LinkedList<Integer> oneComb, i
 {
   if ( targetSum < 0 || startPos >= nums.length )
   {
- return;
+    return;
   }
 
   if ( targetSum == 0 )
   {
- allCombs.add( new LinkedList<>( oneComb ) );
- return;
+    allCombs.add( new LinkedList<>( oneComb ) );
+    return;
   }
 
   for ( int i = startPos; i < nums.length; i++ )
   {
- oneComb.addLast( nums[i] );
- generateCombs( allCombs, oneComb, nums, i, targetSum - nums[i] );
- oneComb.removeLast( );
+    oneComb.addLast( nums[i] );
+    generateCombs( allCombs, oneComb, nums, i, targetSum - nums[i] );
+    oneComb.removeLast( );
   }
 }
 ```

@@ -18,13 +18,13 @@ n = 5, return true.
  */
 
 public class CoinInALineI {
- /**
-  * @param n: an integer
-  * @return: a boolean which equals to true if the first player will win
-  */
- public boolean firstWillWin( int n )
- {
-  // write your code here
-  return true;
- }
+    /**
+     * @param n: an integer
+     * @return: a boolean which equals to true if the first player will win
+     */
+    public boolean firstWillWin( int n )
+    {
+        // write your code here
+        return true;
+    }
 }

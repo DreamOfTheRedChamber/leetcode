@@ -16,8 +16,8 @@ If each character occurs even number of times, then it must be a palindrome. How
 // TO_IMME
 public class PalindromePermutation 
 {
- public boolean canPermutePalindrome(String s) 
- {
-  return true;
- }
+    public boolean canPermutePalindrome(String s) 
+    {
+        return true;
+    }
 }

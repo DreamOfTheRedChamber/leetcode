@@ -16,15 +16,15 @@ Return 2.
 
 public class KSum 
 {
- /**
-  * @param A: an integer array.
-  * @param k: a positive integer (k <= length(A))
-  * @param target: a integer
-  * @return an integer
-  */
- public int kSum( int A[], int k, int target ) 
- {
-  // write your code here
-  return 0;
- }
+    /**
+     * @param A: an integer array.
+     * @param k: a positive integer (k <= length(A))
+     * @param target: a integer
+     * @return an integer
+     */
+    public int kSum( int A[], int k, int target ) 
+    {
+        // write your code here
+        return 0;
+    }
 }

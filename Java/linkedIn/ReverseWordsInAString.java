@@ -27,46 +27,46 @@ Reduce them to a single space in the reversed string.
 
 public class ReverseWordsInAString 
 {
- public String reverseWords( String s )
- {
- 	if ( s == null || s.length() == 0 )
- 	{
- 		return "";
- 	}
- 	
- 	String[] words = s.split( " " );
- 	StringBuilder result = new StringBuilder();
- 	for ( int i = words.length - 1; i >= 0; i-- )
- 	{
- 		if ( !words[i].equals( "" ) )
- 		{
- 			result.append( words[i] ).append( " " );
- 		}
- 	}
- 	
- 	if ( result.length() != 0 )
- 	{
- 		result.deleteCharAt( result.length() - 1 );
- 	}
- 	return result.toString();
- }
- 
- @Test
- public void test()
- {   
- 	// strange input
- 	assertEquals( "", reverseWords( " " ) );
- 	assertEquals( "word", reverseWords( "word" ) );
- 	
- 	// extremes
- 	assertEquals( "a", reverseWords( "a " ) );
- 	assertEquals( "", reverseWords( " " ) );
- 	
- 	// normal cases
- 	assertEquals( "blue is sky the", reverseWords( "the sky is  blue" ) );
- 	
- 	// illegal input, leading/trailing spaces handled properly
- 	assertEquals( "blue is sky the", reverseWords( "  the sky is blue  " ) );
- }
- 
+    public String reverseWords( String s )
+    {
+    	if ( s == null || s.length() == 0 )
+    	{
+    		return "";
+    	}
+    	
+    	String[] words = s.split( " " );
+    	StringBuilder result = new StringBuilder();
+    	for ( int i = words.length - 1; i >= 0; i-- )
+    	{
+    		if ( !words[i].equals( "" ) )
+    		{
+    			result.append( words[i] ).append( " " );
+    		}
+    	}
+    	
+    	if ( result.length() != 0 )
+    	{
+    		result.deleteCharAt( result.length() - 1 );
+    	}
+    	return result.toString();
+    }
+    
+    @Test
+    public void test()
+    {   
+    	// strange input
+    	assertEquals( "", reverseWords( "    " ) );
+    	assertEquals( "word", reverseWords( "word" ) );
+    	
+    	// extremes
+    	assertEquals( "a", reverseWords( "a " ) );
+    	assertEquals( "", reverseWords( " " ) );
+    	
+    	// normal cases
+    	assertEquals( "blue is sky the", reverseWords( "the sky is  blue" ) );
+    	
+    	// illegal input, leading/trailing spaces handled properly
+    	assertEquals( "blue is sky the", reverseWords( "  the sky is blue  " ) );
+    }
+    
 }

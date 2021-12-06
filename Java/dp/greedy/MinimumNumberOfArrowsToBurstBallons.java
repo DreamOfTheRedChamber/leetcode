@@ -19,8 +19,8 @@ One way is to shoot one arrow for example at x = 6 (bursting the balloons [2,8] 
 
 public class MinimumNumberOfArrowsToBurstBallons
 {
- public int findMinArrowShots( int[][] points )
- {
-  
- }
+    public int findMinArrowShots( int[][] points )
+    {
+        
+    }
 }

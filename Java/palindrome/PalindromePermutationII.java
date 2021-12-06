@@ -20,7 +20,7 @@ import java.util.List;
 
 // TO_IMME
 public class PalindromePermutationII {
- public List<String> generatePalindromes(String s) {
-  return new ArrayList<>();
- }
+    public List<String> generatePalindromes(String s) {
+        return new ArrayList<>();
+    }
 }

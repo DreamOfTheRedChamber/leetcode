@@ -44,34 +44,34 @@ Note that 'A' and 'a' are treated as two different characters.
 
 public class SortCharactersByFrequency
 {
- public String frequencySort( String s )
- {
- 	if ( s == null || s.length() == 0 )
- 	{
- 		return "";
- 	}
- 	
- 	Map<Character, Integer> histogram = new HashMap<>();
- 	for ( Character ch : s.toCharArray() )
- 	{
- 		histogram.put( ch, histogram.getOrDefault( ch, 0 ) + 1 );
- 	}
- 	
- 	PriorityQueue<Map.Entry<Character,Integer>> maxQueue = new PriorityQueue<>( ( o1, o2 ) -> o2.getValue() - o1.getValue() );
- 	for ( Map.Entry<Character, Integer> entry : histogram.entrySet() )
- 	{
- 		maxQueue.offer( entry );
- 	}
- 	
- 	StringBuilder result = new StringBuilder();
- 	while ( !maxQueue.isEmpty() )
- 	{
- 		Map.Entry<Character, Integer> entry = maxQueue.poll();
- 		for ( int i = 0; i < entry.getValue(); i++ )
- 		{
- 			result.append( entry.getKey() );
- 		}
- 	}
- 	return result.toString();
- } 
+    public String frequencySort( String s )
+    {
+    	if ( s == null || s.length() == 0 )
+    	{
+    		return "";
+    	}
+    	
+    	Map<Character, Integer> histogram = new HashMap<>();
+    	for ( Character ch : s.toCharArray() )
+    	{
+    		histogram.put( ch, histogram.getOrDefault( ch, 0 ) + 1 );
+    	}
+    	
+    	PriorityQueue<Map.Entry<Character,Integer>> maxQueue = new PriorityQueue<>( ( o1, o2 ) -> o2.getValue() - o1.getValue() );
+    	for ( Map.Entry<Character, Integer> entry : histogram.entrySet() )
+    	{
+    		maxQueue.offer( entry );
+    	}
+    	
+    	StringBuilder result = new StringBuilder();
+    	while ( !maxQueue.isEmpty() )
+    	{
+    		Map.Entry<Character, Integer> entry = maxQueue.poll();
+    		for ( int i = 0; i < entry.getValue(); i++ )
+    		{
+    			result.append( entry.getKey() );
+    		}
+    	}
+    	return result.toString();
+    }    
 }

@@ -20,49 +20,49 @@ Your algorithm should run in O(n) complexity.
  */
 public class LongestConsecutiveSequence
 {
- public int longestConsecutive( int[] nums )
- {
- 	if ( nums == null || nums.length == 0 )
- 	{
- 		return 0;
- 	} 	
- 	
- 	Set<Integer> numSet = new HashSet<>();
- 	for ( int num : nums )
- 	{
- 		numSet.add( num );
- 	}
- 	
- 	int longestLength = 0;
- 	for ( int num : nums )
- 	{
- 		if ( !numSet.contains( num ) )
- 		{
- 			continue;
- 		}
- 		
- 		numSet.remove( num );
-	 	int currLength = 1; 	
-	 		
-	 	for ( int nextBigger = num + 1; numSet.contains( nextBigger ); nextBigger += 1 )
-	 	{
-	 		currLength++;
-	 		numSet.remove( nextBigger );
-	 	}	 			 		
-	 	for ( int nextSmaller = num - 1; numSet.contains( nextSmaller ); nextSmaller -= 1 )
-	 	{
-	 		currLength++;
-	 		numSet.remove( nextSmaller );	 			
-	 	}
-	 		
-	 	longestLength = Math.max( longestLength, currLength );
- 	}
- 	return longestLength;
-  }
- 
- @Test
- public void test()
- {
- 	assertEquals( 3, longestConsecutive( new int[]{ 1, 0, -1} ) );
- }
+    public int longestConsecutive( int[] nums )
+    {
+    	if ( nums == null || nums.length == 0 )
+    	{
+    		return 0;
+    	}    	
+    	
+    	Set<Integer> numSet = new HashSet<>();
+    	for ( int num : nums )
+    	{
+    		numSet.add( num );
+    	}
+    	
+    	int longestLength = 0;
+    	for ( int num : nums )
+    	{
+    		if ( !numSet.contains( num ) )
+    		{
+    			continue;
+    		}
+    		
+    		numSet.remove( num );
+	    	int currLength = 1;    	
+	    		
+	    	for ( int nextBigger = num + 1; numSet.contains( nextBigger ); nextBigger += 1 )
+	    	{
+	    		currLength++;
+	    		numSet.remove( nextBigger );
+	    	}	    			    		
+	    	for ( int nextSmaller = num - 1; numSet.contains( nextSmaller ); nextSmaller -= 1 )
+	    	{
+	    		currLength++;
+	    		numSet.remove( nextSmaller );	    			
+	    	}
+	    		
+	    	longestLength = Math.max( longestLength, currLength );
+    	}
+    	return longestLength;
+     }
+    
+    @Test
+    public void test()
+    {
+    	assertEquals( 3, longestConsecutive( new int[]{ 1, 0, -1} ) );
+    }
 }

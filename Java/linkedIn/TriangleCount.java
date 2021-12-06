@@ -22,11 +22,11 @@ http://wxx5433.github.io/valid-triangles.html
 public class TriangleCount
 {
 	 /**
-  * @param S: A list of integers
-  * @return: An integer
-  */
- public int triangleCount(int S[]) {
-  // write your code here
-  return 0;
- }
+     * @param S: A list of integers
+     * @return: An integer
+     */
+    public int triangleCount(int S[]) {
+        // write your code here
+        return 0;
+    }
 }

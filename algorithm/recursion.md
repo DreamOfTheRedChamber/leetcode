@@ -1,8 +1,8 @@
 - [Divide and Conquer](#divide-and-conquer)
 - [Recursion](#recursion)
   - [Min-Max Strategy](#min-max-strategy)
- - [Reviewed](#reviewed)
- - [TODO](#todo)
+    - [Reviewed](#reviewed)
+    - [TODO](#todo)
 
 # [Divide and Conquer](https://github.com/wisdompeak/LeetCode/tree/master/Divide_Conquer)
 

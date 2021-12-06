@@ -23,13 +23,13 @@ Other two examples:
 
 public class StoneGame 
 {
- /**
-  * @param A an integer array
-  * @return an integer
-  */
- public int stoneGame( int[] A )
- {
-  // Write your code here
-  return 0;
- }
+    /**
+     * @param A an integer array
+     * @return an integer
+     */
+    public int stoneGame( int[] A )
+    {
+        // Write your code here
+        return 0;
+    }
 }

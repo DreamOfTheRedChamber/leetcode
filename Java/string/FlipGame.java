@@ -20,8 +20,8 @@ If there is no valid move, return an empty list [].
 
 public class FlipGame 
 {
- public List<String> generatePossibleNextMoves( String s ) 
- {
- 	return new ArrayList<>();
- }
+    public List<String> generatePossibleNextMoves( String s ) 
+    {
+    	return new ArrayList<>();
+    }
 }

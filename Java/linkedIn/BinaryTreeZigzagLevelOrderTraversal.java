@@ -14,10 +14,10 @@ Given a binary tree, return the zigzag level order traversal of its nodes' value
 
 For example:
 Given binary tree [3,9,20,null,null,15,7],
- 3
+    3
    / \
   9  20
- /  \
+    /  \
    15   7
 return its zigzag level order traversal as:
 [
@@ -44,58 +44,58 @@ public class BinaryTreeZigzagLevelOrderTraversal
 		System.out.println( zigzagLevelOrder( root ) );
 	}
 	
- public List<List<Integer>> zigzagLevelOrder( TreeNode root )
- {
- 	List<List<Integer>> result = new ArrayList<>();
- 	if ( root == null )
- 	{
- 		return result;
- 	}
- 	
- 	Stack<TreeNode> currLayer = new Stack<>();
- 	currLayer.push( root );
- 	Stack<TreeNode> nextLayer = new Stack<>();
- 	List<Integer> layerOutput = new ArrayList<>();
- 	int direction = 0;
- 	
- 	while ( !currLayer.isEmpty() )
- 	{
- 		TreeNode node = currLayer.pop();
- 		layerOutput.add( node.val );
- 		if ( direction == 0 )
- 		{
- 			if ( node.left != null )
- 			{
- 				nextLayer.push( node.left );
- 			}
- 			if ( node.right != null )
- 			{
- 				nextLayer.push( node.right );
- 			}
- 		}
- 		else
- 		{
- 			if ( node.right != null )
- 			{
- 				nextLayer.push( node.right );
- 			}
- 			if ( node.left != null )
- 			{
- 				nextLayer.push( node.left );
- 			}
- 		}
- 		
- 		if ( currLayer.isEmpty() )
- 		{
- 			result.add( layerOutput );
- 			layerOutput = new ArrayList<>();
- 			currLayer = nextLayer;
- 			nextLayer = new Stack<>();
- 			
- 			direction ^= 1;
- 		}
- 	}
- 	return result; 	
- }
+    public List<List<Integer>> zigzagLevelOrder( TreeNode root )
+    {
+    	List<List<Integer>> result = new ArrayList<>();
+    	if ( root == null )
+    	{
+    		return result;
+    	}
+    	
+    	Stack<TreeNode> currLayer = new Stack<>();
+    	currLayer.push( root );
+    	Stack<TreeNode> nextLayer = new Stack<>();
+    	List<Integer> layerOutput = new ArrayList<>();
+    	int direction = 0;
+    	
+    	while ( !currLayer.isEmpty() )
+    	{
+    		TreeNode node = currLayer.pop();
+    		layerOutput.add( node.val );
+    		if ( direction == 0 )
+    		{
+    			if ( node.left != null )
+    			{
+    				nextLayer.push( node.left );
+    			}
+    			if ( node.right != null )
+    			{
+    				nextLayer.push( node.right );
+    			}
+    		}
+    		else
+    		{
+    			if ( node.right != null )
+    			{
+    				nextLayer.push( node.right );
+    			}
+    			if ( node.left != null )
+    			{
+    				nextLayer.push( node.left );
+    			}
+    		}
+    		
+    		if ( currLayer.isEmpty() )
+    		{
+    			result.add( layerOutput );
+    			layerOutput = new ArrayList<>();
+    			currLayer = nextLayer;
+    			nextLayer = new Stack<>();
+    			
+    			direction ^= 1;
+    		}
+    	}
+    	return result;    	
+    }
 
 }

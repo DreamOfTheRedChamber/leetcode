@@ -1,20 +1,20 @@
 - [interview_checklist](#interview_checklist)
   - [Typical whiteboard coding workflow](#typical-whiteboard-coding-workflow)
- - [Clarify question](#clarify-question)
- - [Clarify the input size](#clarify-the-input-size)
- - [Give a small but general enough example for discussing algo/DS](#give-a-small-but-general-enough-example-for-discussing-algods)
- - [Come up with a brute force algorithm](#come-up-with-a-brute-force-algorithm)
- - [Optimize the brute force solution](#optimize-the-brute-force-solution)
- - [Write test cases](#write-test-cases)
- - [Write code](#write-code)
- - [Walk through test cases](#walk-through-test-cases)
- - [Solve follow up questions](#solve-follow-up-questions)
+    - [Clarify question](#clarify-question)
+    - [Clarify the input size](#clarify-the-input-size)
+    - [Give a small but general enough example for discussing algo/DS](#give-a-small-but-general-enough-example-for-discussing-algods)
+    - [Come up with a brute force algorithm](#come-up-with-a-brute-force-algorithm)
+    - [Optimize the brute force solution](#optimize-the-brute-force-solution)
+    - [Write test cases](#write-test-cases)
+    - [Write code](#write-code)
+    - [Walk through test cases](#walk-through-test-cases)
+    - [Solve follow up questions](#solve-follow-up-questions)
   - [Interview mindset](#interview-mindset)
- - [Understanding what interviewers really wants](#understanding-what-interviewers-really-wants)
- - [Checklist](#checklist)
- - [Things to be careful.](#things-to-be-careful)
- - [Phone interviews](#phone-interviews)
- - [Onsite interviews](#onsite-interviews)
+    - [Understanding what interviewers really wants](#understanding-what-interviewers-really-wants)
+    - [Checklist](#checklist)
+    - [Things to be careful.](#things-to-be-careful)
+    - [Phone interviews](#phone-interviews)
+    - [Onsite interviews](#onsite-interviews)
 
 # interview_checklist
 
@@ -26,51 +26,51 @@
    * Things to define - Input type
    * Things to define - Number of input arguments
    * Things to define - Output type
-  * boolean: Whether solutions exist or not
-  * int: the number of solutions
-  * List\<?> : solutions themselves
-  * List\<?>: solutions without duplicates
-  * List\<?>: solutions with specific order
+     * boolean: Whether solutions exist or not
+     * int: the number of solutions
+     * List\<?> : solutions themselves
+     * List\<?>: solutions without duplicates
+     * List\<?>: solutions with specific order
 2. Clarify ambiguous problem statements / Gather all requirements
    * Solution existence: "_**What if no solution exists? How should I handle that?**_"
    * Solution uniqueness: "_**Whether there are multiple solutions?**_"
    * Input emptiness: "_**How should I handle null pointers and input of size zero?**_"
    * Input validity: "_**Could I assume input is always invalid?**_"
    * Input types:
-  * Typical scenarios
-    * In most cases, one single public API
-    * Multiple public APIs inside a class
-    * Two associated APIs, like serialize and deserialize
-  * Input - Field types
-    * Integer or double
-    * Positive or negative, non-positive or non-negative
-  * Input - Array
-    * Sorted or unsorted, sorted increasingly or decreasingly
-    * Given two arrays, which one's size is bigger
-    * Whether could modify entries inside array
-  * Input - String
-    * Whether the string contains space
-    * How are tokens separated, using comma, slash or something else
-    * Alphabetic characters(lower/upper case), ascii characters, or unicode characters
-  * Input - LinkedList
-    * Doubly or singly linkedlist
-  * Input - Tree
-    * Binary tree
-    * Binary search tree
-    * Complete tree
-  * Input - Graph
-    * Directed or undirected
-    * Weighted or not
-    * Connected or not
+     * Typical scenarios
+       * In most cases, one single public API
+       * Multiple public APIs inside a class
+       * Two associated APIs, like serialize and deserialize
+     * Input - Field types
+       * Integer or double
+       * Positive or negative, non-positive or non-negative
+     * Input - Array
+       * Sorted or unsorted, sorted increasingly or decreasingly
+       * Given two arrays, which one's size is bigger
+       * Whether could modify entries inside array
+     * Input - String
+       * Whether the string contains space
+       * How are tokens separated, using comma, slash or something else
+       * Alphabetic characters(lower/upper case), ascii characters, or unicode characters
+     * Input - LinkedList
+       * Doubly or singly linkedlist
+     * Input - Tree
+       * Binary tree
+       * Binary search tree
+       * Complete tree
+     * Input - Graph
+       * Directed or undirected
+       * Weighted or not
+       * Connected or not
    * Problem types:
-  * Sort
-    * Stable or not
-    * External or internal
-    * Input almost sorted or not
-    * Input range
-    * Increasing/Decreasing order
-  * Search
-    * Whether duplicate entries exist
+     * Sort
+       * Stable or not
+       * External or internal
+       * Input almost sorted or not
+       * Input range
+       * Increasing/Decreasing order
+     * Search
+       * Whether duplicate entries exist
    * Edge cases: "_**If input is like this, then what should I output?**_"
 
 ### Clarify the input size
@@ -104,9 +104,9 @@
 2. Unstuck strategy:
    1. The most straightforward way to list all possible solutions
    2. Whether I could decompose the problem into subproblems and solve them individually
-   * Divide and conquer "_**The problem could be decomposed into X subproblems.**_"
+      * Divide and conquer "_**The problem could be decomposed into X subproblems.**_"
    3. Brainstorm DS/Algo which might be used / Give it a try
-   * Give it a try: "_**Let's try a graph-based solution**_"
+      * Give it a try: "_**Let's try a graph-based solution**_"
 3. Talk about the data structures to be used.
 4. Talk about the algorithm to be used.
 5. Calc time/space complexity: "_**The time complexity of the algorithm is O(XXX) and space complexity is O(XXX)**_"
@@ -135,21 +135,21 @@
   * Strange input: an array already sorted
 * Typical test cases for different input types
   * Integer
- * Integer.MAX_VALUE, Integer.MIN_VALUE
- * 0
- * Positive/negative numbers
+    * Integer.MAX_VALUE, Integer.MIN_VALUE
+    * 0
+    * Positive/negative numbers
   * String
- * NULL
- * Single character
- * Two characters
- * Contains duplicated characters
- * Contains space, tab or other separators
+    * NULL
+    * Single character
+    * Two characters
+    * Contains duplicated characters
+    * Contains space, tab or other separators
   * Array/List \<?> list
- * NULL
- * One element List/Array
- * List/Array entry is NULL
- * List/Array of even length
- * List/Array of odd length
+    * NULL
+    * One element List/Array
+    * List/Array entry is NULL
+    * List/Array of even length
+    * List/Array of odd length
 
 ### Write code
 
@@ -158,31 +158,31 @@
 3. Use // or empty line to separate different steps and a place to synchronize with interviewer.
 4. Just get the general algorithm down first and avoid getting caught up in trivialities
    * When forget some language-specific trivial
-  * "_**I do not remember exactly how the interface looks like, but I'd guess it has an API like this.**_"
+     * "_**I do not remember exactly how the interface looks like, but I'd guess it has an API like this.**_"
    * When need implement a large code block, or nested for/while loop, or repeated needed util methods, consider using a subroutine
-  * "_**I am going to use a subroutine with the following interface. I will implement later**_".
+     * "_**I am going to use a subroutine with the following interface. I will implement later**_".
    * When need double check trivials (like +1 or plus two, loop termination conditions ):
-  * "_**Not sure whether my loop should have "<" or "<=". Write a checkmark to remind yourself to figure out the details at the end.**_""
+     * "_**Not sure whether my loop should have "<" or "<=". Write a checkmark to remind yourself to figure out the details at the end.**_""
 
 ### Walk through test cases
 
 1. Synchronize with interviewer: "_**Then I would usually check my code against tests**_"
 2. Check the code by myself
    * Check steps:
-  1. Look for typos
-  2. Look for unused variables, counters, unnecessary edge case checkings, boundaries index overflow/underflow
-  3. Look for unhandled problem assumptions
-  4. Use small test cases to test different logical branches of the code
+     1. Look for typos
+     2. Look for unused variables, counters, unnecessary edge case checkings, boundaries index overflow/underflow
+     3. Look for unhandled problem assumptions
+     4. Use small test cases to test different logical branches of the code
    * When there is a bug: do not rush to change. Identify the root cause first.
-  * "_**Give me a moment, I feel there is a bug here. Let's have a double check.**_"
-  * "_**The root cause of the problem is XXX.**_"
+     * "_**Give me a moment, I feel there is a bug here. Let's have a double check.**_"
+     * "_**The root cause of the problem is XXX.**_"
 3. Explain shortcuts I have taken: Talk about sections which could be refactored/improved, but was done in a certain way in an interview setting
    * Bad smells for refactoring and optimization
-  * Code/function length > 100
-  * Too many if statement checking for boundary cases
-  * Code do not generalize well. Only work for current problem. e.g. merge 2 sorted list -> merge k sorted List
-  * Nested while loops ( really error prone )
-  * Global variables
+     * Code/function length > 100
+     * Too many if statement checking for boundary cases
+     * Code do not generalize well. Only work for current problem. e.g. merge 2 sorted list -> merge k sorted List
+     * Nested while loops ( really error prone )
+     * Global variables
 4. Synchronize with interviewer: "_**I think I am done with the problem**_".
 
 ### Solve follow up questions
@@ -206,13 +206,13 @@
   * Is s/he a good coder? (proficiency in leetcode and whether error-prone)
 * What are interviewers really asking
 
-| What they ask       | Wrong response                    | What they really want                                       |
+| What they ask                         | Wrong response                                                                          | What they really want                                                                                                                                                   |
 | ------------------------------------- | --------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Tell me what you did for this project | <p>Describe the process in chronological order</p><p>Recites what's on their resume</p> | <p>What are you able to do after completing this project4</p><p>How did you overcome obstacles</p><p>Details that are not on your resume</p>       |
-| Tell me what you did for this job  | <p>Describe major projects</p><p>Describe daily tasks</p>          | <p>Were you able to learn quickly</p><p>Did you add enough value at your previous job to prove that you can add value for me</p>          |
-| Compare data structure A and B  | <p>Explain what A and B are respectively</p><p>List 1 difference between them</p>    | <p>Does your explanation show that you have actually used them in a real project</p><p>Explain real situations where you would use A vs B.</p>        |
-| Write code to solve problem     | <p>Jumps into writing code</p><p>Awkward silence</p>         | <p>Would I want to work with them everyday</p><p>Have they actually written production grade code</p><p>What do they do when stuck</p>          |
-| Maybe you could try this ...    | Take advice without serious thinking             | <p>Do they think independently</p><p>How fast can they absord new information</p><p>Do they take advice/directions well</p><p>Do they learn quickly and run with it</p> |
+| Tell me what you did for this project | <p>Describe the process in chronological order</p><p>Recites what's on their resume</p> | <p>What are you able to do after completing this project4</p><p>How did you overcome obstacles</p><p>Details that are not on your resume</p>                            |
+| Tell me what you did for this job     | <p>Describe major projects</p><p>Describe daily tasks</p>                               | <p>Were you able to learn quickly</p><p>Did you add enough value at your previous job to prove that you can add value for me</p>                                        |
+| Compare data structure A and B        | <p>Explain what A and B are respectively</p><p>List 1 difference between them</p>       | <p>Does your explanation show that you have actually used them in a real project</p><p>Explain real situations where you would use A vs B.</p>                          |
+| Write code to solve problem           | <p>Jumps into writing code</p><p>Awkward silence</p>                                    | <p>Would I want to work with them everyday</p><p>Have they actually written production grade code</p><p>What do they do when stuck</p>                                  |
+| Maybe you could try this ...          | Take advice without serious thinking                                                    | <p>Do they think independently</p><p>How fast can they absord new information</p><p>Do they take advice/directions well</p><p>Do they learn quickly and run with it</p> |
 
 ### Checklist
 

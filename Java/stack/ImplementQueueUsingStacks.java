@@ -19,11 +19,11 @@ public class ImplementQueueUsingStacks
 	Stack<Integer> inbox = new Stack<>();
 	Stack<Integer> outbox = new Stack<>();
 	
- // Push element x to the back of queue.
- public void push( int x ) 
- {
- 	inbox.push( x );
- }
+    // Push element x to the back of queue.
+    public void push( int x ) 
+    {
+    	inbox.push( x );
+    }
 
 	// Removes the element from in front of queue.
 	public int pop()

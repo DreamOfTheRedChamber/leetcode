@@ -18,61 +18,61 @@ You may assume no duplicate exists in the array.
 
 public class SearchInRotatedSortedArray 
 {
- public int search( int[] nums, int target )
- {
- 	if ( nums.length == 0 )
- 	{
- 		return -1;
- 	}
- 	
- 	int start = 0;
- 	int end = nums.length - 1;
- 	while ( start + 1 < end )
- 	{
- 		int mid = ( end - start ) / 2 + start;
- 		if ( nums[mid] < nums[end] )	// pivot point inside [start,mid]
- 		{
- 			if ( target > nums[mid] 
- 					&& target <= nums[end] )
- 			{
- 				start = mid;
- 			}
- 			else
- 			{
- 				end = mid;
- 			}
- 		}
- 		else	// pivot point inside [mid, end]
- 		{
- 			if ( target < nums[mid] 
- 					&& target >= nums[start] )
- 			{
- 				end = mid;
- 			}
- 			else
- 			{
- 				start = mid;
- 			}
- 		}
- 	}
- 	
- 	if ( nums[start] == target )
- 	{
- 		return start;
- 	}
- 	else if ( nums[end] == target )
- 	{
- 		return end;
- 	}
- 	else
- 	{
- 		return -1;
- 	}
- }
+    public int search( int[] nums, int target )
+    {
+    	if ( nums.length == 0 )
+    	{
+    		return -1;
+    	}
+    	
+    	int start = 0;
+    	int end = nums.length - 1;
+    	while ( start + 1 < end )
+    	{
+    		int mid = ( end - start ) / 2 + start;
+    		if ( nums[mid] < nums[end] )	// pivot point inside [start,mid]
+    		{
+    			if ( target > nums[mid] 
+    					&& target <= nums[end] )
+    			{
+    				start = mid;
+    			}
+    			else
+    			{
+    				end = mid;
+    			}
+    		}
+    		else	// pivot point inside [mid, end]
+    		{
+    			if ( target < nums[mid] 
+    					&& target >= nums[start] )
+    			{
+    				end = mid;
+    			}
+    			else
+    			{
+    				start = mid;
+    			}
+    		}
+    	}
+    	
+    	if ( nums[start] == target )
+    	{
+    		return start;
+    	}
+    	else if ( nums[end] == target )
+    	{
+    		return end;
+    	}
+    	else
+    	{
+    		return -1;
+    	}
+    }
 
- @Test
- public void test()
- {
- 	assertEquals( 1, search( new int[]{3, 5, 1}, 1 ) );
- }
+    @Test
+    public void test()
+    {
+    	assertEquals( 1, search( new int[]{3, 5, 1}, 1 ) );
+    }
 }

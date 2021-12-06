@@ -10,17 +10,17 @@
 def findRoot(node: int, nodeToParent: dict) -> int:
   root = nodeToParent[node]
   while root != nodeToParent[root]:
- root = nodeToParent[root]
+    root = nodeToParent[root]
   return root
 
 def union(nodeX: int, nodeY: int, nodeToParent: dict) -> bool:
   rootX = findRoot(nodeX, nodeToParent)
   rootY = findRoot(nodeY, nodeToParent)
   if rootX != rootY:
- nodeToParent[rootX] = rootY
- return True
+    nodeToParent[rootX] = rootY
+    return True
   else:
- return False
+    return False
 
 # use dictionary instead of array to represent the parent mapping
 nodeToParent = {x:x for x in range(n)}
@@ -68,23 +68,23 @@ numComponents = sum([1 for k,v in nodeToParent.items() if k == v])
 
 int find( int x ) 
 { 
- int parent = x; 
- while ( parent != father.get( parent ) ) 
- { 
-  parent = father.get( parent ); 
- } 
- 
- return parent; 
+    int parent = x; 
+    while ( parent != father.get( parent ) ) 
+    { 
+        parent = father.get( parent ); 
+    } 
+    
+    return parent; 
 }
 
 void union( int x, int y ) 
 { 
- int fa_x = find( x ); 
- int fa_y = find( y ); 
- if ( fa_x != fa_y ) 
- { 
-  father.put( fa_x, fa_y );
- } 
+    int fa_x = find( x ); 
+    int fa_y = find( y ); 
+    if ( fa_x != fa_y ) 
+    { 
+        father.put( fa_x, fa_y );
+    } 
 }   
 
 ```

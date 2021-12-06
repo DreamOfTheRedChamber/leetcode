@@ -19,8 +19,8 @@ Note: Given n will be between 1 and 9 inclusive.
 // TO_HURRY
 public class PermutationSequence 
 {
- public String getPermutation(int n, int k) 
- {
-  return "";
- }
+    public String getPermutation(int n, int k) 
+    {
+        return "";
+    }
 }

@@ -54,8 +54,8 @@ Return false. Because two of the rectangles overlap with each other.
 
 public class PerfectRectangle 
 {
- public boolean isRectangleCover( int[][] rectangles )
- {
-  return true;
- }
+    public boolean isRectangleCover( int[][] rectangles )
+    {
+        return true;
+    }
 }

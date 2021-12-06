@@ -8,7 +8,7 @@ flip it upside down and turn it into a tree where the original right nodes turne
 
 For example:
 Given a binary tree {1,2,3,4,5},
- 1
+    1
    / \
   2   3
  / \
@@ -17,7 +17,7 @@ return the root of the binary tree [4,5,2,#,#,3,1].
    4
   / \
  5   2
- / \
+    / \
    3   1  
  */
 public class BinaryTreeUpsideDown
@@ -59,38 +59,38 @@ public class BinaryTreeUpsideDown
 		return newRoot;
 	}
 	
- public TreeNode upsideDownBinaryTree( TreeNode root )
- {
- 	if ( root == null )
- 	{
- 		return null;
- 	}
- 	
- 	TreeNode newRoot = root;
- 	while( newRoot.left != null )
- 	{
- 		newRoot = newRoot.left;
- 	}
- 	
- 	upsideDownBinaryTree( root, null );
- 	return newRoot;
- }
- 
- private void upsideDownBinaryTree( TreeNode root, TreeNode parent )
- {
- 	if ( root.left != null )
- 	{
- 		 upsideDownBinaryTree( root.left, root );
- 	}
- 	
+    public TreeNode upsideDownBinaryTree( TreeNode root )
+    {
+    	if ( root == null )
+    	{
+    		return null;
+    	}
+    	
+    	TreeNode newRoot = root;
+    	while( newRoot.left != null )
+    	{
+    		newRoot = newRoot.left;
+    	}
+    	
+    	upsideDownBinaryTree( root, null );
+    	return newRoot;
+    }
+    
+    private void upsideDownBinaryTree( TreeNode root, TreeNode parent )
+    {
+    	if ( root.left != null )
+    	{
+    		 upsideDownBinaryTree( root.left, root );
+    	}
+    	
 		root.right = parent;
- 	if ( parent != null )
- 	{
-  	root.left = parent.right;   		
- 	}
- 	else
- 	{
- 		root.left = null;
- 	}
- }
+    	if ( parent != null )
+    	{
+        	root.left = parent.right;   		
+    	}
+    	else
+    	{
+    		root.left = null;
+    	}
+    }
 }

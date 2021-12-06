@@ -21,26 +21,26 @@
 ## Cache - [TODO]
 * [146.LRU-Cache](https://github.com/wisdompeak/LeetCode/tree/master/Design/146.LRU-Cache) (H-)\
   * Brute force: Use a single dictionary impl, key -> (value, timestamp)
- * Get: O(1)
- * Set: O(n) because need to pop out elements if exceed maximum capacity
+    * Get: O(1)
+    * Set: O(n) because need to pop out elements if exceed maximum capacity
   * Complexity optimal: Dictionary + LinkedList
- * Get: O(1)
- * Set: O(1)
+    * Get: O(1)
+    * Set: O(1)
   * Simplest: Use the Python bulit-in OrderedDict impl (not SortedDict which order items based on keys) https://www.kunxi.org/2014/05/lru-cache-in-python/
- * Get: O(1)
- * Set: O(1)
+    * Get: O(1)
+    * Set: O(1)
 
 * [460.LFU Cache](https://github.com/wisdompeak/LeetCode/tree/master/Design/460.LFU-Cache) (H)\
   * Brute force: Use a single dictionary impl, key -> (value, frequency)
- * Get: O(1)
- * Set: O(nlogn)
+    * Get: O(1)
+    * Set: O(nlogn)
   * Direct inherit from LRU: Dictionary + linkedlist. Sort linkedlist using bubblesort https://www.kunxi.org/2016/12/lfu-cache-in-python/
- * Get: O(1)
- * Set: O(N) in LRU there is no sorting needed, but in LFU there is. 
+    * Get: O(1)
+    * Set: O(N) in LRU there is no sorting needed, but in LFU there is. 
   * Dictionary + BST tree:
- * Get: O(1) + log(N) because BST needs to be balanced
- * Set: O(1) + log(N) because BST needs to delete element
+    * Get: O(1) + log(N) because BST needs to be balanced
+    * Set: O(1) + log(N) because BST needs to delete element
   * MY original solution: https://www.kunxi.org/2016/12/lfu-cache-in-python/
- * One dictionary: key -> freq, another dictionary freq -> defaultdict(ordereddict)
- * Get: O(1)
- * Set: O(1)
+    * One dictionary: key -> freq, another dictionary freq -> defaultdict(ordereddict)
+    * Get: O(1)
+    * Set: O(1)

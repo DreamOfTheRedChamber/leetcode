@@ -25,58 +25,58 @@ You may assume that you have an infinite number of each kind of coin.
 // TODO: refactor
 public class CoinChange
 {
- public int coinChange( int[] coins, int amount )
- {
- 	if ( amount < 0 
- 			|| coins.length == 0 )
- 	{
- 		throw new IllegalArgumentException("");
- 	} 	
- 	if ( amount == 0 )
- 	{
- 		return 0;
- 	}
- 	
- 	Set<Integer> coinSet = new HashSet<>();
- 	for ( Integer coin : coins )
- 	{
- 		coinSet.add( coin );
- 	}
- 	if ( coinSet.contains( amount ) )
- 	{
- 		return 1;
- 	}
- 	
- 	int[] minNum = new int[amount + 1];
- 	for ( int i = 1; i <= amount; i++ )
- 	{ 		
- 		if ( coinSet.contains( i ) )
- 		{
- 			minNum[i] = 1;
- 			continue;
- 		}
- 		minNum[i] = Integer.MAX_VALUE;
- 		for ( Integer coin : coins )
- 		{
- 			if ( i - coin > 0 
- 					&& minNum[i - coin] > 0 )
- 			{
- 				minNum[i] = Math.min( minNum[i], minNum[i - coin] + 1 );
- 			}
- 		}
- 		if ( minNum[i] == Integer.MAX_VALUE )
- 		{
- 			minNum[i] = -1;
- 		}
- 	}
- 	
- 	return minNum[amount];
- }
- 
- @Test
- public void test()
- {
- 	assertEquals( 3, coinChange( new int[]{ 1, 2, 5 }, 11 ) );
- 	assertEquals( -1, coinChange( new int[]{ 2 }, 3) );
- }
+    public int coinChange( int[] coins, int amount )
+    {
+    	if ( amount < 0 
+    			|| coins.length == 0 )
+    	{
+    		throw new IllegalArgumentException("");
+    	}    	
+    	if ( amount == 0 )
+    	{
+    		return 0;
+    	}
+    	
+    	Set<Integer> coinSet = new HashSet<>();
+    	for ( Integer coin : coins )
+    	{
+    		coinSet.add( coin );
+    	}
+    	if ( coinSet.contains( amount ) )
+    	{
+    		return 1;
+    	}
+    	
+    	int[] minNum = new int[amount + 1];
+    	for ( int i = 1; i <= amount; i++ )
+    	{    		
+    		if ( coinSet.contains( i ) )
+    		{
+    			minNum[i] = 1;
+    			continue;
+    		}
+    		minNum[i] = Integer.MAX_VALUE;
+    		for ( Integer coin : coins )
+    		{
+    			if ( i - coin > 0 
+    					&& minNum[i - coin] > 0 )
+    			{
+    				minNum[i] = Math.min( minNum[i], minNum[i - coin] + 1 );
+    			}
+    		}
+    		if ( minNum[i] == Integer.MAX_VALUE )
+    		{
+    			minNum[i] = -1;
+    		}
+    	}
+    	
+    	return minNum[amount];
+    }
+    
+    @Test
+    public void test()
+    {
+    	assertEquals( 3, coinChange( new int[]{ 1, 2, 5 }, 11 ) );
+    	assertEquals( -1, coinChange( new int[]{ 2 }, 3) );
+    }
 }

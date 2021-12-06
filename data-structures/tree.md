@@ -2,9 +2,9 @@
   - [Serialization & Hashing](#serialization--hashing)
   - [Tree & Sequence](#tree--sequence)
   - [LCA](#lca)
- - [Problem and BF](#problem-and-bf)
- - [Improved solution thoughts](#improved-solution-thoughts)
- - [Example problems](#example-problems)
+    - [Problem and BF](#problem-and-bf)
+    - [Improved solution thoughts](#improved-solution-thoughts)
+    - [Example problems](#example-problems)
   - [N-ary Tree](#n-ary-tree)
   - [似树非树](#似树非树)
 - [Segment Tree](#segment-tree)
@@ -75,9 +75,9 @@ while bfsQueue:
   head = bfsQueue.popleft()
   // do stuff
   if head.left is not None:
- bfsQueue.append(head.left)
+    bfsQueue.append(head.left)
   if head.right is not None:
- bfsQueue.append(head.right)
+    bfsQueue.append(head.right)
 ```
 
 * Special tree level order traversal with O\(1\) space: example problem \(populate next right pointers in each node II\)
@@ -85,39 +85,39 @@ while bfsQueue:
 **Get inorder traversal predecessor/successor**
 
 ```python
- def getPredecessor(root: TreeNode, target: TreeNode) -> TreeNode:
-   if target.left:
-  currNode = target.left
-  while currNode.right:
-    currNode = currNode.right
-  return currNode
-   else:
-  predecessor = None
-  currNode = root
-  while currNode != target:
-    if currNode.val >= target.val:
-   currNode = currNode.left
-    else:
-   predecessor = currNode
-   currNode = currNode.right
-  return predecessor
+    def getPredecessor(root: TreeNode, target: TreeNode) -> TreeNode:
+      if target.left:
+        currNode = target.left
+        while currNode.right:
+          currNode = currNode.right
+        return currNode
+      else:
+        predecessor = None
+        currNode = root
+        while currNode != target:
+          if currNode.val >= target.val:
+            currNode = currNode.left
+          else:
+            predecessor = currNode
+            currNode = currNode.right
+        return predecessor
 
- def getSuccessor(root: TreeNode, target: TreeNode) -> TreeNode:
-   if target.right:
-  currNode = target.right
-  while currNode.left != null:
-    currNode = currNode.left
-  return currNode
-   else:
-  successor = None
-  currNode = root
-  while currNode != target:
-    if currNode.val >= target.val:
-   successor = currNode
-   currNode = currNode.left
-    else:
-   currNode = currNode.right
-  return successor
+    def getSuccessor(root: TreeNode, target: TreeNode) -> TreeNode:
+      if target.right:
+        currNode = target.right
+        while currNode.left != null:
+          currNode = currNode.left
+        return currNode
+      else:
+        successor = None
+        currNode = root
+        while currNode != target:
+          if currNode.val >= target.val:
+            successor = currNode
+            currNode = currNode.left
+          else:
+            currNode = currNode.right
+        return successor
 ```
 
 ## Tree & Sequence
@@ -148,16 +148,16 @@ while bfsQueue:
   resultContained = 0
   resultNode = None
   for child in root.children:
- childContained, childResult = recursion(child, [target1, ..., targetN])
- if childContained == len(targetSet):
-   return (childContained, childResult)
- else:
-   resultContained += childContained
+    childContained, childResult = recursion(child, [target1, ..., targetN])
+    if childContained == len(targetSet):
+      return (childContained, childResult)
+    else:
+      resultContained += childContained
   
   if root.value in targetSet:
- resultContained += 1
- if resultContained == len(targetSet):
-   resultNode = root
+    resultContained += 1
+    if resultContained == len(targetSet):
+      resultNode = root
   return (resultContained, resultNode)
 
 ```

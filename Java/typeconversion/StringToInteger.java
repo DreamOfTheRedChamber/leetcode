@@ -31,64 +31,64 @@ If no valid conversion could be performed, a zero value is returned. If the corr
 public class StringToInteger
 {
 
- public int myAtoi( String str )
- {
- 	if ( str == null || str.length() == 0 )
- 	{
- 		return 0;
- 	}
- 	
- 	// trim beginning and trailing spaces
- 	str = str.trim();
- 	int index = 0;
- 	
- 	// apply sign
- 	int sign = 1;
- 	if ( str.charAt( index ) == '-' )
- 	{
- 		index++;
- 		sign = -1;
- 	}
- 	else if ( str.charAt( index ) == '+' )
- 	{
- 		index++;
- 		sign = 1;
- 	}
- 	
- 	// calculate result
- 	long result = 0;
- 	for ( int i = index; i < str.length(); i++ )
- 	{
- 		if ( str.charAt( i ) < '0' || str.charAt( i ) > '9' )
- 		{
- 			break;
- 		}
- 		result = result * 10 + ( str.charAt( i ) - '0' );
- 		if ( result > Integer.MAX_VALUE )
- 		{
- 			break;
- 		}
- 	}
- 	
- 	// return result
- 	if ( result * sign >= Integer.MAX_VALUE )
- 	{
- 		return Integer.MAX_VALUE;
- 	}
- 	if ( result * sign <= Integer.MIN_VALUE )
- 	{
- 		return Integer.MIN_VALUE;
- 	}
- 	return ( int ) result * sign;
- }
- 
- @Test
- public void test()
- {
- 	assertEquals( 0, myAtoi( "-" ) );
- 	assertEquals( 1, myAtoi( "+1" ) );
- 	assertEquals( -1, myAtoi( "-1" ) );
- 	assertEquals( 10, myAtoi( "   010" ) );
- 	assertEquals( Integer.MAX_VALUE, myAtoi( "9223372036854775809" ) );
- }
+    public int myAtoi( String str )
+    {
+    	if ( str == null || str.length() == 0 )
+    	{
+    		return 0;
+    	}
+    	
+    	// trim beginning and trailing spaces
+    	str = str.trim();
+    	int index = 0;
+    	
+    	// apply sign
+    	int sign = 1;
+    	if ( str.charAt( index ) == '-' )
+    	{
+    		index++;
+    		sign = -1;
+    	}
+    	else if ( str.charAt( index ) == '+' )
+    	{
+    		index++;
+    		sign = 1;
+    	}
+    	
+    	// calculate result
+    	long result = 0;
+    	for ( int i = index; i < str.length(); i++ )
+    	{
+    		if ( str.charAt( i ) < '0' || str.charAt( i ) > '9' )
+    		{
+    			break;
+    		}
+    		result = result * 10 + ( str.charAt( i ) - '0' );
+    		if ( result > Integer.MAX_VALUE )
+    		{
+    			break;
+    		}
+    	}
+    	
+    	// return result
+    	if ( result * sign >= Integer.MAX_VALUE )
+    	{
+    		return Integer.MAX_VALUE;
+    	}
+    	if ( result * sign <= Integer.MIN_VALUE )
+    	{
+    		return Integer.MIN_VALUE;
+    	}
+    	return ( int ) result * sign;
+    }
+    
+    @Test
+    public void test()
+    {
+    	assertEquals( 0, myAtoi( "-" ) );
+    	assertEquals( 1, myAtoi( "+1" ) );
+    	assertEquals( -1, myAtoi( "-1" ) );
+    	assertEquals( 10, myAtoi( "   010" ) );
+    	assertEquals( Integer.MAX_VALUE, myAtoi( "9223372036854775809" ) );
+    }
 }

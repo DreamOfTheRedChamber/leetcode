@@ -14,8 +14,8 @@ You should return the indices: [0,9].
 
 public class SubstringConcatenationOfAllWords
 {
- public List<Integer> findSubstring(String s, String[] words)
- {
-  return new ArrayList<>();
- }
+    public List<Integer> findSubstring(String s, String[] words)
+    {
+        return new ArrayList<>();
+    }
 }

@@ -15,8 +15,8 @@ Note: You may assume the string contain only lowercase letters.
 
 public class FindUniqueCharacterInAString 
 {
- public int firstUniqChar( String s )
- {
+    public int firstUniqChar( String s )
+    {
 		int freq[] = new int[26];
 		for ( int i = 0; i < s.length(); i++ )
 		{
@@ -30,5 +30,5 @@ public class FindUniqueCharacterInAString
 			}
 		}
 		return -1;
- }
+    }
 }

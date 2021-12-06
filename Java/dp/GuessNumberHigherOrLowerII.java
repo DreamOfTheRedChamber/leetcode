@@ -25,8 +25,8 @@ Given a particular n ≥ 1, find out how much money you need to have to guarante
 
 public class GuessNumberHigherOrLowerII
 {
- public int getMoneyAmount(int n) 
- {
-  return 1;
- }
+    public int getMoneyAmount(int n) 
+    {
+        return 1;
+    }
 }

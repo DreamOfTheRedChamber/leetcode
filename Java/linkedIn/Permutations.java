@@ -21,44 +21,44 @@ For example,
  * */
 public class Permutations 
 {
- public List<List<Integer>> permute( int[] nums ) 
- {
- 	List<List<Integer>> allPerms = new LinkedList<>();
- 	LinkedList<Integer> onePerm = new LinkedList<>();
- 	boolean[] isUsed = new boolean[nums.length];
- 	generatePermutation( allPerms, onePerm, nums, isUsed ); 	
- 	return allPerms;
- }
- 
- public void generatePermutation( List<List<Integer>> allPerms, LinkedList<Integer> onePerm, int[] nums, boolean[] isUsed )
- {
- 	if ( onePerm.size() == nums.length )
- 	{
- 		allPerms.add( new LinkedList<>( onePerm ) );
- 		return;
- 	}
- 	
- 	for ( int i = 0; i < nums.length; i++ )
- 	{
- 		if ( !isUsed[i] )
- 		{
- 			isUsed[i] = true;
- 			onePerm.addLast( nums[i] );
- 			this.generatePermutation( allPerms, onePerm, nums, isUsed );
- 			onePerm.removeLast();
- 			isUsed[i] = false;
- 		}
- 	}
- }
- 
- public static void main( String[] args )
- {
- 	
- }
- 
- @Test
- public void test()
- {
- 	System.out.println( permute( new int[]{ 1, 2, 3 } ) );
- }
+    public List<List<Integer>> permute( int[] nums ) 
+    {
+    	List<List<Integer>> allPerms = new LinkedList<>();
+    	LinkedList<Integer> onePerm = new LinkedList<>();
+    	boolean[] isUsed = new boolean[nums.length];
+    	generatePermutation( allPerms, onePerm, nums, isUsed );    	
+    	return allPerms;
+    }
+    
+    public void generatePermutation( List<List<Integer>> allPerms, LinkedList<Integer> onePerm, int[] nums, boolean[] isUsed )
+    {
+    	if ( onePerm.size() == nums.length )
+    	{
+    		allPerms.add( new LinkedList<>( onePerm ) );
+    		return;
+    	}
+    	
+    	for ( int i = 0; i < nums.length; i++ )
+    	{
+    		if ( !isUsed[i] )
+    		{
+    			isUsed[i] = true;
+    			onePerm.addLast( nums[i] );
+    			this.generatePermutation( allPerms, onePerm, nums, isUsed );
+    			onePerm.removeLast();
+    			isUsed[i] = false;
+    		}
+    	}
+    }
+    
+    public static void main( String[] args )
+    {
+    	
+    }
+    
+    @Test
+    public void test()
+    {
+    	System.out.println( permute( new int[]{ 1, 2, 3 } ) );
+    }
 }

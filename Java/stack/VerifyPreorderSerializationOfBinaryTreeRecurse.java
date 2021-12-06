@@ -9,9 +9,9 @@ import org.junit.Test;
 One way to serialize a binary tree is to use pre-order traversal. 
 When we encounter a non-null node, we record the node's value. If it is a null node, we record using a sentinel value such as #.
 
-  _9_
- /   \
-   3  2
+     _9_
+    /   \
+   3     2
   / \   / \
  4   1  #  6
 / \ / \   / \
@@ -51,45 +51,45 @@ public class VerifyPreorderSerializationOfBinaryTreeRecurse
 	}
 	
 	public boolean isValidSerialization( String preorder )
- {
- 	if ( preorder == null )
- 	{
- 		throw new NullPointerException("");
- 	} 			
- 	if ( preorder.length() == 0 )
- 	{
- 		return true;
- 	}
- 	
- 	int[] currPos = new int[1];
- 	String[] nodeValues = preorder.split( "," );
- 	if ( !isValidSerialization( nodeValues, currPos ) )
- 	{ 
- 		return false;
- 	}
- 	return currPos[0] == nodeValues.length;
- }
- 
- /**
-  * 
-  * @param nodeValues  parsed tree node values
-  * @param currPos  position inside nodeValues
-  * @return	whether nodeValues is enough to build a binary tree
-  */
- private boolean isValidSerialization( String[] nodeValues, int[] currPos )
- {
- 	if ( currPos[0] >= nodeValues.length )
- 	{
- 		return false;
- 	} 	
- 	if ( nodeValues[currPos[0]].equals( "#" ) )
- 	{
-  	currPos[0] += 1;
- 		return true;
- 	}
- 	
- 	currPos[0] += 1;
- 	return isValidSerialization( nodeValues, currPos )
- 			&& isValidSerialization( nodeValues, currPos );
- }
+    {
+    	if ( preorder == null )
+    	{
+    		throw new NullPointerException("");
+    	}    			
+    	if ( preorder.length() == 0 )
+    	{
+    		return true;
+    	}
+    	
+    	int[] currPos = new int[1];
+    	String[] nodeValues = preorder.split( "," );
+    	if ( !isValidSerialization( nodeValues, currPos ) )
+    	{ 
+    		return false;
+    	}
+    	return currPos[0] == nodeValues.length;
+    }
+    
+    /**
+     * 
+     * @param nodeValues  parsed tree node values
+     * @param currPos  position inside nodeValues
+     * @return	whether nodeValues is enough to build a binary tree
+     */
+    private boolean isValidSerialization( String[] nodeValues, int[] currPos )
+    {
+    	if ( currPos[0] >= nodeValues.length )
+    	{
+    		return false;
+    	}    	
+    	if ( nodeValues[currPos[0]].equals( "#" ) )
+    	{
+        	currPos[0] += 1;
+    		return true;
+    	}
+    	
+    	currPos[0] += 1;
+    	return isValidSerialization( nodeValues, currPos )
+    			&& isValidSerialization( nodeValues, currPos );
+    }
 }

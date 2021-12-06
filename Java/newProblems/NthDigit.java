@@ -27,8 +27,8 @@ The 11th digit of the sequence 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, ... is a 0, wh
 
 public class NthDigit 
 {
- public int findNthDigit( int n )
- {
-  return 0;
- }
+    public int findNthDigit( int n )
+    {
+        return 0;
+    }
 }
