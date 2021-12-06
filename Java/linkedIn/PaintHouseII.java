@@ -16,39 +16,39 @@ Could you solve it in O(nk) runtime?
  */
 public class PaintHouseII
 {
-    public int minCostII( int[][] costs )
-    {
-    	if ( costs.length == 0 || costs[0].length == 0 )
-    	{
-    		return 0;
-    	}
-    	int numHouse = costs.length;
-    	int numColor = costs[0].length;
-    	
-    	int prevMin = 0, prevSecondMin = 0, prevMinIndex = 0;
-    	for ( int i = 0; i < numHouse; i++ )
-    	{
-    		int currMin = Integer.MAX_VALUE;
-    		int currMinIndex = 0;
-    		int currSecondMin = Integer.MAX_VALUE;
-    		for ( int j = 0; j < numColor; j++ )
-    		{
-    			int cost = costs[i][j] + ( prevMinIndex != j ? prevMin : prevSecondMin );
-    			if ( cost < currMin )
-    			{
-    				currSecondMin = currMin;
-    				currMin = cost;
-    				currMinIndex = j;
-    			}
-    			else
-    			{
-    				currSecondMin = Math.min( currSecondMin, cost );
-    			}
-    		}
-    		prevMin = currMin;
-    		prevSecondMin = currSecondMin;
-    		prevMinIndex = currMinIndex;
-    	}
-    	return prevMin;
-    }
+ public int minCostII( int[][] costs )
+ {
+ 	if ( costs.length == 0 || costs[0].length == 0 )
+ 	{
+ 		return 0;
+ 	}
+ 	int numHouse = costs.length;
+ 	int numColor = costs[0].length;
+ 	
+ 	int prevMin = 0, prevSecondMin = 0, prevMinIndex = 0;
+ 	for ( int i = 0; i < numHouse; i++ )
+ 	{
+ 		int currMin = Integer.MAX_VALUE;
+ 		int currMinIndex = 0;
+ 		int currSecondMin = Integer.MAX_VALUE;
+ 		for ( int j = 0; j < numColor; j++ )
+ 		{
+ 			int cost = costs[i][j] + ( prevMinIndex != j ? prevMin : prevSecondMin );
+ 			if ( cost < currMin )
+ 			{
+ 				currSecondMin = currMin;
+ 				currMin = cost;
+ 				currMinIndex = j;
+ 			}
+ 			else
+ 			{
+ 				currSecondMin = Math.min( currSecondMin, cost );
+ 			}
+ 		}
+ 		prevMin = currMin;
+ 		prevSecondMin = currSecondMin;
+ 		prevMinIndex = currMinIndex;
+ 	}
+ 	return prevMin;
+ }
 }

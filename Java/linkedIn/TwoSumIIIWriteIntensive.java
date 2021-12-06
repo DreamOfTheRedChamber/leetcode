@@ -21,13 +21,13 @@ public class TwoSumIIIWriteIntensive
 {
 	private Map<Integer, Integer> histogram = new HashMap<>();
 	
-    // Add the number to an internal data structure.
+ // Add the number to an internal data structure.
 	public void add( int number )
 	{
 		histogram.put( number, 1 + histogram.getOrDefault( number, 0 )  );
 	}
 
-    // Find if there exists any pair of numbers which sum is equal to the value.
+ // Find if there exists any pair of numbers which sum is equal to the value.
 	public boolean find( int value ) 
 	{
 		for ( int numOne : histogram.keySet() )

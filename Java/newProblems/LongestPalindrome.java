@@ -22,8 +22,8 @@ One longest palindrome that can be built is "dccaccd", whose length is 7.
 
 public class LongestPalindrome 
 {
-    public int longestPalindrome( String s )
-    {
-        return 0;
-    }
+ public int longestPalindrome( String s )
+ {
+  return 0;
+ }
 }

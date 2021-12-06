@@ -13,8 +13,8 @@ import java.util.List;
 
 public class LexicographicalNumbers
 {
-    public List<Integer> lexicalOrder(int n )
-    {
-        return new ArrayList<>();
-    }
+ public List<Integer> lexicalOrder(int n )
+ {
+  return new ArrayList<>();
+ }
 }

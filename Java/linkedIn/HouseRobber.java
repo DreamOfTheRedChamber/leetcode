@@ -9,28 +9,28 @@ Given a list of non-negative integers representing the amount of money of each h
 
 public class HouseRobber
 {
-    public int rob( int[] nums )
-    {
-        if ( nums.length == 0 )
-        {
-        	return 0;
-        }
-        if ( nums.length == 1 )
-        {
-        	return nums[0];
-        }
-        if ( nums.length == 2 )
-        {
-        	return Math.max( nums[0], nums[1] );
-        }
-        
-        int[] maxAmountLocal = new int[nums.length + 1]; 
-        maxAmountLocal[1] = nums[0];
-        maxAmountLocal[2] = nums[1];
-        for ( int i = 2; i < nums.length; i++ )
-        {
-        	maxAmountLocal[i+1] = Math.max( maxAmountLocal[i - 1], maxAmountLocal[i - 2] ) + nums[i];
-        }
-        return Math.max( maxAmountLocal[maxAmountLocal.length - 1], maxAmountLocal[maxAmountLocal.length - 2] );
-    }
+ public int rob( int[] nums )
+ {
+  if ( nums.length == 0 )
+  {
+  	return 0;
+  }
+  if ( nums.length == 1 )
+  {
+  	return nums[0];
+  }
+  if ( nums.length == 2 )
+  {
+  	return Math.max( nums[0], nums[1] );
+  }
+  
+  int[] maxAmountLocal = new int[nums.length + 1]; 
+  maxAmountLocal[1] = nums[0];
+  maxAmountLocal[2] = nums[1];
+  for ( int i = 2; i < nums.length; i++ )
+  {
+  	maxAmountLocal[i+1] = Math.max( maxAmountLocal[i - 1], maxAmountLocal[i - 2] ) + nums[i];
+  }
+  return Math.max( maxAmountLocal[maxAmountLocal.length - 1], maxAmountLocal[maxAmountLocal.length - 2] );
+ }
 }

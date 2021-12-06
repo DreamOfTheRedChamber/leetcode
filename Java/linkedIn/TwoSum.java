@@ -16,8 +16,8 @@ The return format had been changed to zero-based indices. Please read the above 
 
 public class TwoSum 
 {
-    public int[] twoSum( int[] nums, int target )
-    {
-        return new int[0];
-    }
+ public int[] twoSum( int[] nums, int target )
+ {
+  return new int[0];
+ }
 }

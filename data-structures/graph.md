@@ -43,15 +43,15 @@ public Map<Integer, Set<Integer>> buildGraph( int n, int[][] edges )
   // build vertex
   for ( int i = 0; i < n; i++ )
   {
-    graph.put( i, new HashSet<>() );
+ graph.put( i, new HashSet<>() );
   }
 
   // build edges
   for ( int[] edge : edges  )
   {
-    // undirected graph needs to add the edge twice
-    graph.get( edge[0] ).add( edge[1] );
-    graph.get( edge[1] ).add( edge[0] );
+ // undirected graph needs to add the edge twice
+ graph.get( edge[0] ).add( edge[1] );
+ graph.get( edge[1] ).add( edge[0] );
   }
 }
 ```
@@ -75,16 +75,16 @@ private boolean hasCycle( GraphNode root, Set<GraphNode> isDiscovered )
 {
   if ( isDiscovered.contains( root ) )
   {
-    return true;
+ return true;
   }
 
   isDiscovered.add( root );
   for ( List<GraphNode> neighbor : root.neighbors )
   {
-    if ( hasCycle( neighbor, isVisited  ) )
-    {
-      return true;
-    }
+ if ( hasCycle( neighbor, isVisited  ) )
+ {
+   return true;
+ }
   }
 
   return false;
@@ -112,20 +112,20 @@ private boolean hasCycle( GraphNode root, Set<GraphNode> isDiscovered, Set<Graph
 {
   if ( isVisited.contains( root ) )
   {
-    return false;
+ return false;
   }
   if ( isDiscovered.contains( root ) && !isVisited.contains( root ) )
   {
-    return true;
+ return true;
   }
 
   isDiscovered.add( root );
   for ( List<GraphNode> neighbor : root.neighbors )
   {
-    if ( hasCycle( neighbor, isDiscovered, isVisited  ) )
-    {
-      return true;
-    }
+ if ( hasCycle( neighbor, isDiscovered, isVisited  ) )
+ {
+   return true;
+ }
   }
   isVisited.add( root );
   return false;

@@ -31,64 +31,64 @@ public class KthSmallestElementInABST
 		}
 	}
 	
-    public int kthSmallest( TreeNode root, int k )
-    {
-    	if ( root == null 
-    			|| k <= 0 )
-    	{
-    		throw new IllegalArgumentException("");
-    	}
-    	
-    	ResultWrapper result = kthSmallestRecurse( root, k );
-    	return result.kthNode.val;
-    }
-    
-    private ResultWrapper kthSmallestRecurse( TreeNode root, int kth )
-    {
-    	int totalNumNodes = 0;    	
-    	if ( root.left != null )
-    	{
-    		ResultWrapper leftChildResult = kthSmallestRecurse( root.left, kth );
-    		if ( leftChildResult.isKthNodeFound )
-    		{
-    			// kth node exist in left subtree
-    			return leftChildResult;
-    		}
-    		else
-    		{
-    			totalNumNodes += leftChildResult.numNodes;
-    		}
-    	}
-    	
-    	// kth node is root
-    	totalNumNodes += 1;
-    	if ( totalNumNodes == kth )
-    	{
-    		return new ResultWrapper( root, kth, true );
-    	}    	
-    	
-    	if ( root.right != null )
-    	{
-    		ResultWrapper rightChildResult = kthSmallestRecurse( root.right, kth - totalNumNodes );
-    		if ( rightChildResult.isKthNodeFound )
-    		{
-    			return rightChildResult;
-    		}
-    		else
-    		{	
-    			totalNumNodes += rightChildResult.numNodes;
-    		}
-    	}
-    	
-    	return new ResultWrapper( null, totalNumNodes, false );
-    }
-    
-    @Test
-    public void test()
-    {
-    	TreeNode node1 = new TreeNode( 2 );
-    	TreeNode node2 = new TreeNode( 1 );
-    	node1.left = node2;
-    	assertEquals( 2, kthSmallest( node1, 2 ) );
-    }
+ public int kthSmallest( TreeNode root, int k )
+ {
+ 	if ( root == null 
+ 			|| k <= 0 )
+ 	{
+ 		throw new IllegalArgumentException("");
+ 	}
+ 	
+ 	ResultWrapper result = kthSmallestRecurse( root, k );
+ 	return result.kthNode.val;
+ }
+ 
+ private ResultWrapper kthSmallestRecurse( TreeNode root, int kth )
+ {
+ 	int totalNumNodes = 0; 	
+ 	if ( root.left != null )
+ 	{
+ 		ResultWrapper leftChildResult = kthSmallestRecurse( root.left, kth );
+ 		if ( leftChildResult.isKthNodeFound )
+ 		{
+ 			// kth node exist in left subtree
+ 			return leftChildResult;
+ 		}
+ 		else
+ 		{
+ 			totalNumNodes += leftChildResult.numNodes;
+ 		}
+ 	}
+ 	
+ 	// kth node is root
+ 	totalNumNodes += 1;
+ 	if ( totalNumNodes == kth )
+ 	{
+ 		return new ResultWrapper( root, kth, true );
+ 	} 	
+ 	
+ 	if ( root.right != null )
+ 	{
+ 		ResultWrapper rightChildResult = kthSmallestRecurse( root.right, kth - totalNumNodes );
+ 		if ( rightChildResult.isKthNodeFound )
+ 		{
+ 			return rightChildResult;
+ 		}
+ 		else
+ 		{	
+ 			totalNumNodes += rightChildResult.numNodes;
+ 		}
+ 	}
+ 	
+ 	return new ResultWrapper( null, totalNumNodes, false );
+ }
+ 
+ @Test
+ public void test()
+ {
+ 	TreeNode node1 = new TreeNode( 2 );
+ 	TreeNode node2 = new TreeNode( 1 );
+ 	node1.left = node2;
+ 	assertEquals( 2, kthSmallest( node1, 2 ) );
+ }
 }

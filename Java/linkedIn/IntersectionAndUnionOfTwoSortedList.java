@@ -22,11 +22,11 @@ Write a program to find the node at which the intersection of two singly linked 
 
 For example, the following two linked lists:
 
-A:          a1 → a2
-                   ↘
-                     c1 → c2 → c3
-                   ↗            
-B:     b1 → b2 → b3
+A:    a1 → a2
+       ↘
+      c1 → c2 → c3
+       ↗   
+B:  b1 → b2 → b3
 begin to intersect at node c1.
 
 
@@ -47,8 +47,8 @@ linked list焦点问题，面经里很多，考虑相交不相交，有环无环
 
 public class IntersectionAndUnionOfTwoSortedList 
 {
-    public ListNode getIntersectionNode( ListNode headA, ListNode headB ) 
-    {
-        return null;
-    }
+ public ListNode getIntersectionNode( ListNode headA, ListNode headB ) 
+ {
+  return null;
+ }
 }

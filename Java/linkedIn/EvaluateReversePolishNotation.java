@@ -24,41 +24,41 @@ public class EvaluateReversePolishNotation
 		assertEquals( 6, evalRPN( new String[]{"4", "13", "5", "/", "+"} ) );
 	}
 	
-    public int evalRPN( String[] tokens ) 
-    {
-    	Stack<Integer> operandStack = new Stack<>();
-    	for ( String token : tokens )
-    	{
-    		if ( token.equals( "+" )
-    				|| token.equals( "-" )
-    				|| token.equals( "*" ) 
-    				|| token.equals( "/" ) )
-    		{
-    			int operand2 = operandStack.pop( );
-    			int operand1 = operandStack.pop( );
-    			if ( token.equals( "+" ) )
-    			{
-    				operandStack.push( operand1 + operand2 );
-    			}
-    			else if ( token.equals( "-" ) )
-    			{
-    				operandStack.push( operand1 - operand2 );
-    			}
-    			else if ( token.equals( "*" ) )
-    			{
-    				operandStack.push( operand1 * operand2 );
-    			}
-    			else
-    			{
-    				operandStack.push( operand1 / operand2 );
-    			}
-    		}
-    		else
-    		{
-    			operandStack.push( Integer.valueOf( token ) );
-    		}
-    	}
-    	
-    	return operandStack.pop( );
-    }
+ public int evalRPN( String[] tokens ) 
+ {
+ 	Stack<Integer> operandStack = new Stack<>();
+ 	for ( String token : tokens )
+ 	{
+ 		if ( token.equals( "+" )
+ 				|| token.equals( "-" )
+ 				|| token.equals( "*" ) 
+ 				|| token.equals( "/" ) )
+ 		{
+ 			int operand2 = operandStack.pop( );
+ 			int operand1 = operandStack.pop( );
+ 			if ( token.equals( "+" ) )
+ 			{
+ 				operandStack.push( operand1 + operand2 );
+ 			}
+ 			else if ( token.equals( "-" ) )
+ 			{
+ 				operandStack.push( operand1 - operand2 );
+ 			}
+ 			else if ( token.equals( "*" ) )
+ 			{
+ 				operandStack.push( operand1 * operand2 );
+ 			}
+ 			else
+ 			{
+ 				operandStack.push( operand1 / operand2 );
+ 			}
+ 		}
+ 		else
+ 		{
+ 			operandStack.push( Integer.valueOf( token ) );
+ 		}
+ 	}
+ 	
+ 	return operandStack.pop( );
+ }
 }

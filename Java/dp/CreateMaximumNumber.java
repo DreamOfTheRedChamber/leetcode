@@ -7,9 +7,9 @@ package dp;
 public class CreateMaximumNumber
 {
 
-    public int[] maxNumber(int[] nums1, int[] nums2, int k) 
-    {
-        return new int[0];
-    }
+ public int[] maxNumber(int[] nums1, int[] nums2, int k) 
+ {
+  return new int[0];
+ }
 
 }

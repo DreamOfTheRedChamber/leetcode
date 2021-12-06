@@ -16,7 +16,7 @@ There is a more generic way of solving this problem.
  * */
 // TO_IMME
 public class PalindromeNumber {
-    public boolean isPalindrome(int x) {
-        return true;
-    }
+ public boolean isPalindrome(int x) {
+  return true;
+ }
 }

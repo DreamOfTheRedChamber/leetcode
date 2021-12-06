@@ -17,9 +17,9 @@ Could you do better than O(n2)?
 public class LineReflection
 {
 
-    public boolean isReflected(int[][] points) 
-    {
-        return true;
-    }
+ public boolean isReflected(int[][] points) 
+ {
+  return true;
+ }
 
 }

@@ -23,8 +23,8 @@ Return false.
 
 public class ValidWordAbbreviation 
 {
-    public boolean validWordAbbreviation( String word, String abbr ) 
-    {
-        return true;
-    }
+ public boolean validWordAbbreviation( String word, String abbr ) 
+ {
+  return true;
+ }
 }

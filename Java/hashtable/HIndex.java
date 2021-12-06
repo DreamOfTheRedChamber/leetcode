@@ -19,56 +19,56 @@ Note: If there are several possible values for h, the maximum one is taken as th
 public class HIndex
 {
 
-    public int hIndex( int[] citations )
-    {
-    	// citation from 0 to Math.min(citations.length, Math.max(int[] citations)) 
-    	int startPos = 0;
-    	int endPos = citations.length;
+ public int hIndex( int[] citations )
+ {
+ 	// citation from 0 to Math.min(citations.length, Math.max(int[] citations)) 
+ 	int startPos = 0;
+ 	int endPos = citations.length;
    	
-    	// binary search between startpos to endPos
-    	while ( startPos + 1 < endPos )
-    	{
-    		int midPos = ( endPos - startPos ) / 2 + startPos;
-    		int numQualified = calcNumPapersWithHigherCitations( citations, midPos );
-    		if ( numQualified < midPos )
-    		{
-    			endPos = midPos;
-    		}
-    		else
-    		{
-    			startPos = midPos;
-    		}
-    	}
-    	
-    	// always take the bigger when possible
-    	int numQualified = calcNumPapersWithHigherCitations( citations, endPos );
-    	if ( numQualified == endPos )
-    	{
-    		return endPos;
-    	}
-    	else
-    	{
-    		return startPos;
-    	}
-    }
+ 	// binary search between startpos to endPos
+ 	while ( startPos + 1 < endPos )
+ 	{
+ 		int midPos = ( endPos - startPos ) / 2 + startPos;
+ 		int numQualified = calcNumPapersWithHigherCitations( citations, midPos );
+ 		if ( numQualified < midPos )
+ 		{
+ 			endPos = midPos;
+ 		}
+ 		else
+ 		{
+ 			startPos = midPos;
+ 		}
+ 	}
+ 	
+ 	// always take the bigger when possible
+ 	int numQualified = calcNumPapersWithHigherCitations( citations, endPos );
+ 	if ( numQualified == endPos )
+ 	{
+ 		return endPos;
+ 	}
+ 	else
+ 	{
+ 		return startPos;
+ 	}
+ }
 
-    private int calcNumPapersWithHigherCitations( int[] citations, int target )
-    {
-    	int numQualifiedPapers = 0;
-    	for ( int num : citations )
-    	{
-    		if ( num >= target )
-    		{
-    			numQualifiedPapers++;
-    		}
-    	}
-    	return numQualifiedPapers;
-    }
-    
-    @Test
-    public void test()
-    {
-    	assertEquals( 1, hIndex( new int[]{ 1, 1 } ) );
-    	assertEquals( 3, hIndex( new int[]{ 3, 0, 6, 1, 5} ) );
-    }
+ private int calcNumPapersWithHigherCitations( int[] citations, int target )
+ {
+ 	int numQualifiedPapers = 0;
+ 	for ( int num : citations )
+ 	{
+ 		if ( num >= target )
+ 		{
+ 			numQualifiedPapers++;
+ 		}
+ 	}
+ 	return numQualifiedPapers;
+ }
+ 
+ @Test
+ public void test()
+ {
+ 	assertEquals( 1, hIndex( new int[]{ 1, 1 } ) );
+ 	assertEquals( 3, hIndex( new int[]{ 3, 0, 6, 1, 5} ) );
+ }
 }

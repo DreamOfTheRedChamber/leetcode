@@ -16,8 +16,8 @@ Subarray Hash Table
 
 public class SubarraySum
 {
-    public ArrayList<Integer> subarraySum(int[] nums) 
-    {
-        return new ArrayList<>();
-    }
+ public ArrayList<Integer> subarraySum(int[] nums) 
+ {
+  return new ArrayList<>();
+ }
 }

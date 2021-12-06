@@ -30,86 +30,86 @@ public class NumberOfIslands
 {	
 	private int[][] directions = new int[][]{ {0, 1}, {0, -1}, {1, 0}, {-1, 0} };
 	
-    public int numIslands(char[][] grid) 
-    {
-    	if ( grid.length == 0
-    			|| grid[0].length == 0 )
-    	{
-    		return 0;
-    	}
-    	
-    	int height = grid.length;
-    	int width = grid[0].length;
-    	int numIsland = 0;
-    	boolean[][] isVisited = new boolean[height][width];
-    	for ( int i = 0; i < height; i++ )
-    	{
-    		for ( int j = 0; j < width; j++ )
-    		{
-    			if ( grid[i][j] == '1' && !isVisited[i][j] )
-    			{
-    				numIsland++;
-    				visitIslandBFS( grid, isVisited, i, j );
-    			}
-    		}
-    	}
-    	
-    	return numIsland;
-    }
-    
-    private class Pair
-    {
-    	public final int x;
-    	public final int y;
-    	public Pair( int x, int y )
-    	{
-    		this.x = x;
-    		this.y = y;
-    	}
-    }
-    
-    private void visitIslandDFS( char[][] grid, boolean[][] isDiscovered, int xStart, int yStart)
-    {
-    	int height = grid.length;
-    	int width = grid[0].length;
-    	if ( xStart < 0 || xStart >= height || yStart < 0 || yStart >= width || isDiscovered[xStart][yStart])
-    	{
-    		return;
-    	}
-    	
-    	isDiscovered[xStart][yStart] = true;
-    	visitIslandDFS( grid, isDiscovered, xStart + 1, yStart );
-    	visitIslandDFS( grid, isDiscovered, xStart - 1, yStart );
-    	visitIslandDFS( grid, isDiscovered, xStart, yStart + 1 );
-    	visitIslandDFS( grid, isDiscovered, xStart, yStart - 1 );    	
-    }
-    
-    private void visitIslandBFS( char[][] grid, boolean[][] isDiscovered, int xStart, int yStart )
-    {
-    	Queue<Pair> bfsQueue = new LinkedList<>();
-    	bfsQueue.offer( new Pair( xStart, yStart ) );
-    	isDiscovered[xStart][yStart] = true;
-    	
-    	int height = grid.length;
-    	int width = grid[0].length;
-    	while ( !bfsQueue.isEmpty() )
-    	{
-    		Pair qHead = bfsQueue.poll();
-    		for ( int[] direction : directions )
-    		{
-    			int neighborX = qHead.x + direction[0];
-    			int neighborY = qHead.y + direction[1];
-    			if ( neighborX >= 0 
-    					&& neighborX < height 
-    					&& neighborY >= 0 
-    					&& neighborY < width 
-    					&& !isDiscovered[neighborX][neighborY] 
-    					&& grid[neighborX][neighborY] == '1'		)
-    			{
-    				isDiscovered[neighborX][neighborY] = true;
-    				bfsQueue.offer( new Pair( neighborX, neighborY ) );
-    			}
-    		}
-    	}
-    }
+ public int numIslands(char[][] grid) 
+ {
+ 	if ( grid.length == 0
+ 			|| grid[0].length == 0 )
+ 	{
+ 		return 0;
+ 	}
+ 	
+ 	int height = grid.length;
+ 	int width = grid[0].length;
+ 	int numIsland = 0;
+ 	boolean[][] isVisited = new boolean[height][width];
+ 	for ( int i = 0; i < height; i++ )
+ 	{
+ 		for ( int j = 0; j < width; j++ )
+ 		{
+ 			if ( grid[i][j] == '1' && !isVisited[i][j] )
+ 			{
+ 				numIsland++;
+ 				visitIslandBFS( grid, isVisited, i, j );
+ 			}
+ 		}
+ 	}
+ 	
+ 	return numIsland;
+ }
+ 
+ private class Pair
+ {
+ 	public final int x;
+ 	public final int y;
+ 	public Pair( int x, int y )
+ 	{
+ 		this.x = x;
+ 		this.y = y;
+ 	}
+ }
+ 
+ private void visitIslandDFS( char[][] grid, boolean[][] isDiscovered, int xStart, int yStart)
+ {
+ 	int height = grid.length;
+ 	int width = grid[0].length;
+ 	if ( xStart < 0 || xStart >= height || yStart < 0 || yStart >= width || isDiscovered[xStart][yStart])
+ 	{
+ 		return;
+ 	}
+ 	
+ 	isDiscovered[xStart][yStart] = true;
+ 	visitIslandDFS( grid, isDiscovered, xStart + 1, yStart );
+ 	visitIslandDFS( grid, isDiscovered, xStart - 1, yStart );
+ 	visitIslandDFS( grid, isDiscovered, xStart, yStart + 1 );
+ 	visitIslandDFS( grid, isDiscovered, xStart, yStart - 1 ); 	
+ }
+ 
+ private void visitIslandBFS( char[][] grid, boolean[][] isDiscovered, int xStart, int yStart )
+ {
+ 	Queue<Pair> bfsQueue = new LinkedList<>();
+ 	bfsQueue.offer( new Pair( xStart, yStart ) );
+ 	isDiscovered[xStart][yStart] = true;
+ 	
+ 	int height = grid.length;
+ 	int width = grid[0].length;
+ 	while ( !bfsQueue.isEmpty() )
+ 	{
+ 		Pair qHead = bfsQueue.poll();
+ 		for ( int[] direction : directions )
+ 		{
+ 			int neighborX = qHead.x + direction[0];
+ 			int neighborY = qHead.y + direction[1];
+ 			if ( neighborX >= 0 
+ 					&& neighborX < height 
+ 					&& neighborY >= 0 
+ 					&& neighborY < width 
+ 					&& !isDiscovered[neighborX][neighborY] 
+ 					&& grid[neighborX][neighborY] == '1'		)
+ 			{
+ 				isDiscovered[neighborX][neighborY] = true;
+ 				bfsQueue.offer( new Pair( neighborX, neighborY ) );
+ 			}
+ 		}
+ 	}
+ }
 }

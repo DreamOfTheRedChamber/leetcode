@@ -1,9 +1,9 @@
 - [DFS](#dfs)
-    - [Topological sort](#topological-sort)
+ - [Topological sort](#topological-sort)
   - [search in an array](#search-in-an-array)
   - [memorization](#memorization)
-    - [Reviewed](#reviewed)
-    - [TODO](#todo)
+ - [Reviewed](#reviewed)
+ - [TODO](#todo)
 
 # [DFS](https://github.com/wisdompeak/LeetCode/tree/master/DFS)
 
@@ -32,64 +32,64 @@
 * There are basically two categories of methods for topological sort. The first one is greedy algorithm with O\(\|V\|^2 + \|E\|\) time complexity. The second is based on depth first search with O\(\|V\| + \|E\|\) time complexity. Here only discusses DFS based approach. 
 * When using DFS based approach, there are two cases which should be taken care of. The first one is what if there exists no topological order at all. The second is how to return topological order.
   * What if there exists no topological order - a cycle is detected. 
-    * How to detect cycle: use UNDISCOVERED, DISCOVERED, VISITED to represent three possible states of graph nodes. Use a Set&lt;?&gt; isDiscovered and Set&lt;?&gt; isVisited to record all history info. If met up with a node which has been discovered but not visited, then a cycle is detected. 
-    * How to handle cycle: return a boolean value \(preferred\) or throw an exception \(not really suitable because they are expected cases\)
+ * How to detect cycle: use UNDISCOVERED, DISCOVERED, VISITED to represent three possible states of graph nodes. Use a Set&lt;?&gt; isDiscovered and Set&lt;?&gt; isVisited to record all history info. If met up with a node which has been discovered but not visited, then a cycle is detected. 
+ * How to handle cycle: return a boolean value \(preferred\) or throw an exception \(not really suitable because they are expected cases\)
   * What if need to return topological order
 
-    * If do not need to detect cycle, could simply use a Stack&lt;&gt; order to record the visited node, namely using Set&lt;?&gt; discovered, Stack&lt;?&gt; visited 
-    * If need to detect cycle, namely using Set&lt;?&gt; discovered, LinkedHashSet&lt;?&gt; visited
+ * If do not need to detect cycle, could simply use a Stack&lt;&gt; order to record the visited node, namely using Set&lt;?&gt; discovered, Stack&lt;?&gt; visited 
+ * If need to detect cycle, namely using Set&lt;?&gt; discovered, LinkedHashSet&lt;?&gt; visited
 
-      \`\`\`java public int\[\] getTopoOrder\(Map&gt; graph\) { Set discovered = new HashSet&lt;&gt;\(\); Set visited = new LinkedHashSet&lt;&gt;\(\); for \( Integer node : graph.keySet\(\) \) { if \( !discoverd.contains\( node \) \) { if \( !topoSort\( graph, node, discovered, visited \) \) { // a cycle is detected....error handling } } }
+   \`\`\`java public int\[\] getTopoOrder\(Map&gt; graph\) { Set discovered = new HashSet&lt;&gt;\(\); Set visited = new LinkedHashSet&lt;&gt;\(\); for \( Integer node : graph.keySet\(\) \) { if \( !discoverd.contains\( node \) \) { if \( !topoSort\( graph, node, discovered, visited \) \) { // a cycle is detected....error handling } } }
 
-      return visited.stream\(\).reverse\(\).collect\( Collectors.toL\); int\[\] topoOrder = new int\[visited.size\(\)\]; int pos = topoOrder.length - 1; for \( Integer node : visited \) { topoOrder\[pos\] = node; pos--; }
+   return visited.stream\(\).reverse\(\).collect\( Collectors.toL\); int\[\] topoOrder = new int\[visited.size\(\)\]; int pos = topoOrder.length - 1; for \( Integer node : visited \) { topoOrder\[pos\] = node; pos--; }
 
-      return topoOrder; }
+   return topoOrder; }
 
-    /\*\*
+ /\*\*
 
-    * @return whether a cycle is detected
+ * @return whether a cycle is detected
 
-      \*/ 
+   \*/ 
 
-      private boolean topoSort \( Map&gt; graph, Integer startNode, Set discovered, Set visited \)
+   private boolean topoSort \( Map&gt; graph, Integer startNode, Set discovered, Set visited \)
 
-      {
+   {
 
-       discovered.add\( startNode \);
+    discovered.add\( startNode \);
 
-       for \( Integer neighbor : graph.get\( startNode \) \)
+    for \( Integer neighbor : graph.get\( startNode \) \)
 
-       {
+    {
 
-      ```text
-       if ( !discovered.contains( neighbor ) )
-       {
-           if ( topoSort( graph, neighbor, discovered, visited ) )
-           {
-               return true;
-           }
-       }
-       else if ( discovered.contains( neighbor ) 
-               && !visited.contains( neighbor ) )
-       {
-           return true;
-       }
-       else
-       {
-           // already visited, do nothing
-           ;
-       }
-      ```
+   ```text
+    if ( !discovered.contains( neighbor ) )
+    {
+     if ( topoSort( graph, neighbor, discovered, visited ) )
+     {
+      return true;
+     }
+    }
+    else if ( discovered.contains( neighbor ) 
+      && !visited.contains( neighbor ) )
+    {
+     return true;
+    }
+    else
+    {
+     // already visited, do nothing
+     ;
+    }
+   ```
 
-       }
+    }
 
-       visited.add\( startNode \);
+    visited.add\( startNode \);
 
-       return false;
+    return false;
 
-      }
+   }
 
-      \`\`\`
+   \`\`\`
 
 ## search in an array
 
@@ -110,32 +110,32 @@
 
 ```python
 class Solution:
-    def longestIncreasingPath(self, matrix: List[List[int]]) -> int:
-        
-        @lru_cache(maxsize=None)
-        def dfs(x: int, y: int) -> int:
-            directions = [[0, -1], [-1, 0], [1, 0], [0, 1]]
-            
-            result = 1
-            for direction in directions:
-                nextX = x + direction[0]
-                nextY = y + direction[1]
-                if 0 <= nextX < height and 0 <= nextY < width and matrix[nextX][nextY] > matrix[x][y]:
-                    result = max(result, 1 + dfs(nextX, nextY))
-                
-            return result
-        
-        if len(matrix) == 0 or len(matrix[0]) == 0:
-            return 0
+ def longestIncreasingPath(self, matrix: List[List[int]]) -> int:
+  
+  @lru_cache(maxsize=None)
+  def dfs(x: int, y: int) -> int:
+   directions = [[0, -1], [-1, 0], [1, 0], [0, 1]]
+   
+   result = 1
+   for direction in directions:
+    nextX = x + direction[0]
+    nextY = y + direction[1]
+    if 0 <= nextX < height and 0 <= nextY < width and matrix[nextX][nextY] > matrix[x][y]:
+     result = max(result, 1 + dfs(nextX, nextY))
+    
+   return result
+  
+  if len(matrix) == 0 or len(matrix[0]) == 0:
+   return 0
 
-        height = len(matrix)
-        width = len(matrix[0])
-        result = 0
-        for i in range(height):
-            for j in range(width):
-                result = max(dfs(i, j), result)
-        
-        return result
+  height = len(matrix)
+  width = len(matrix[0])
+  result = 0
+  for i in range(height):
+   for j in range(width):
+    result = max(dfs(i, j), result)
+  
+  return result
 ```
 
 ### TODO

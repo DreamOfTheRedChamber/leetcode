@@ -11,13 +11,13 @@ Given S = "rabbbit", T = "rabbit", return 3.
 
 public class DistinctSubsequence 
 {
-    /**
-     * @param S, T: Two string.
-     * @return: Count the number of distinct subsequences
-     */
-    public int numDistinct( String S, String T )
-    {
-        // write your code here
-        return 0;
-    }
+ /**
+  * @param S, T: Two string.
+  * @return: Count the number of distinct subsequences
+  */
+ public int numDistinct( String S, String T )
+ {
+  // write your code here
+  return 0;
+ }
 }

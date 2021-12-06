@@ -27,46 +27,46 @@ public class EditDistance
 		assertEquals( 27, minDistance( "pneumonoultramicroscopicsilicovolcanoconiosis", "ultramicroscopically" ));
 	}
 	
-    public int minDistance( String word1, String word2 )
-    {
-    	if ( word1 == null 
-    			|| word2 == null )
-    	{
-    		throw new IllegalArgumentException("...");
-    	}
-    	if ( word1.length() == 0 )
-    	{
-    		return word2.length();
-    	}
-    	if ( word2.length() == 0 )
-    	{
-    		return word1.length();
-    	}
-    	
-    	int height = word1.length() + 1;
-    	int width = word2.length() + 1;
-    	int[][] distance = new int[height][width];
-    	// init dp table
-    	for ( int i = 1; i < height; i++ )
-    	{
-    		distance[i][0] = i;
-    	}
-    	for ( int j = 1; j < width; j++ )
-    	{
-    		distance[0][j] = j;
-    	}
-    	
-    	// fill dp table
-    	for ( int i = 1; i < height; i++ )
-    	{
-    		for ( int j = 1; j < width; j++ )
-    		{
-    			distance[i][j] = Math.min( Math.min( distance[i-1][j], distance[i][j-1]) + 1, 
-    											distance[i-1][j-1] + ( word1.charAt( i - 1 ) == word2.charAt( j - 1 ) ? 0 : 1));
-    		}
-    	}
-    	
-    	return distance[height-1][width-1];
-    }
+ public int minDistance( String word1, String word2 )
+ {
+ 	if ( word1 == null 
+ 			|| word2 == null )
+ 	{
+ 		throw new IllegalArgumentException("...");
+ 	}
+ 	if ( word1.length() == 0 )
+ 	{
+ 		return word2.length();
+ 	}
+ 	if ( word2.length() == 0 )
+ 	{
+ 		return word1.length();
+ 	}
+ 	
+ 	int height = word1.length() + 1;
+ 	int width = word2.length() + 1;
+ 	int[][] distance = new int[height][width];
+ 	// init dp table
+ 	for ( int i = 1; i < height; i++ )
+ 	{
+ 		distance[i][0] = i;
+ 	}
+ 	for ( int j = 1; j < width; j++ )
+ 	{
+ 		distance[0][j] = j;
+ 	}
+ 	
+ 	// fill dp table
+ 	for ( int i = 1; i < height; i++ )
+ 	{
+ 		for ( int j = 1; j < width; j++ )
+ 		{
+ 			distance[i][j] = Math.min( Math.min( distance[i-1][j], distance[i][j-1]) + 1, 
+ 											distance[i-1][j-1] + ( word1.charAt( i - 1 ) == word2.charAt( j - 1 ) ? 0 : 1));
+ 		}
+ 	}
+ 	
+ 	return distance[height-1][width-1];
+ }
 
 }

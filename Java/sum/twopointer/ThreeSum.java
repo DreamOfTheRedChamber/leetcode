@@ -20,36 +20,36 @@ A solution set is:
 
 public class ThreeSum 
 {
-    public List<List<Integer>> threeSum( int[] nums )
-    {
-        Arrays.sort( nums );
-        return kSum( 3, 0, 0, nums );
-    }
-    
-    private List<List<Integer>> kSum( int kVal, int target, int startIndex, int[] nums ) 
-    {
-        List<List<Integer>> result = new LinkedList<>();
-        if ( kVal == 0 ) 
-        {
-            if ( target == 0 )
-            {
-                result.add( new LinkedList<>() );
-            }
-            return result;
-        }
-        
-        for ( int i = startIndex; i < nums.length - kVal + 1; i++ ) 
-        {
-            if ( ( i > startIndex ) && ( nums[i] == nums[i - 1] ) ) 
-            {
-                continue;
-            }
-            for ( List<Integer> partialResult : kSum( kVal - 1, target - nums[i], i + 1, nums ) )
-            {
-                partialResult.add( 0, nums[i] );
-                result.add( partialResult );
-            }
-        }
-        return result;
-    }
+ public List<List<Integer>> threeSum( int[] nums )
+ {
+  Arrays.sort( nums );
+  return kSum( 3, 0, 0, nums );
+ }
+ 
+ private List<List<Integer>> kSum( int kVal, int target, int startIndex, int[] nums ) 
+ {
+  List<List<Integer>> result = new LinkedList<>();
+  if ( kVal == 0 ) 
+  {
+   if ( target == 0 )
+   {
+    result.add( new LinkedList<>() );
+   }
+   return result;
+  }
+  
+  for ( int i = startIndex; i < nums.length - kVal + 1; i++ ) 
+  {
+   if ( ( i > startIndex ) && ( nums[i] == nums[i - 1] ) ) 
+   {
+    continue;
+   }
+   for ( List<Integer> partialResult : kSum( kVal - 1, target - nums[i], i + 1, nums ) )
+   {
+    partialResult.add( 0, nums[i] );
+    result.add( partialResult );
+   }
+  }
+  return result;
+ }
 }

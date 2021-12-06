@@ -24,8 +24,8 @@ Output: False
 public class WaterAndJugProblem
 {
 
-    public boolean canMeasureWater(int x, int y, int z) 
-    {
-        return true;
-    }
+ public boolean canMeasureWater(int x, int y, int z) 
+ {
+  return true;
+ }
 }

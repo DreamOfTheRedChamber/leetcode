@@ -19,8 +19,8 @@ Examples:
 
 public class MinimumUniqueWordAbbreviation 
 {
-    public String minAbbreviation( String target, String[] dictionary ) 
-    {
-        return "";
-    }
+ public String minAbbreviation( String target, String[] dictionary ) 
+ {
+  return "";
+ }
 }

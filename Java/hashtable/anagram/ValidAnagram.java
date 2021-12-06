@@ -17,27 +17,27 @@ What if the inputs contain unicode characters? How would you adapt your solution
 public class ValidAnagram
 {
 	private final static int CHARSET_SIZE = 26;
-    public boolean isAnagram(String s, String t) 
-    {
-    	int[] sHistogram = new int[CHARSET_SIZE];
-    	for ( char ch : s.toCharArray( ) )
-    	{
-    		sHistogram[ch - 'a'] = sHistogram[ch - 'a'] + 1;
-    	}
-    	
-    	int[] tHistogram = new int[CHARSET_SIZE];
-    	for ( char ch : t.toCharArray( ) )
-    	{
-    		tHistogram[ch - 'a'] = tHistogram[ch - 'a'] + 1;
-    	}
-    	
-    	for ( int i = 0; i < CHARSET_SIZE; i++ )
-    	{
-    		if ( sHistogram[i] != tHistogram[i] )
-    		{
-    			return false;
-    		}
-    	}
-    	return true;
-    }
+ public boolean isAnagram(String s, String t) 
+ {
+ 	int[] sHistogram = new int[CHARSET_SIZE];
+ 	for ( char ch : s.toCharArray( ) )
+ 	{
+ 		sHistogram[ch - 'a'] = sHistogram[ch - 'a'] + 1;
+ 	}
+ 	
+ 	int[] tHistogram = new int[CHARSET_SIZE];
+ 	for ( char ch : t.toCharArray( ) )
+ 	{
+ 		tHistogram[ch - 'a'] = tHistogram[ch - 'a'] + 1;
+ 	}
+ 	
+ 	for ( int i = 0; i < CHARSET_SIZE; i++ )
+ 	{
+ 		if ( sHistogram[i] != tHistogram[i] )
+ 		{
+ 			return false;
+ 		}
+ 	}
+ 	return true;
+ }
 }

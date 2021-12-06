@@ -18,8 +18,8 @@ s = "2[abc]3[cd]ef", return "abcabccdcdcdef".
 
 public class DecodeString 
 {
-    public String decodeString( String s ) 
-    {
-    	return "";
-    }
+ public String decodeString( String s ) 
+ {
+ 	return "";
+ }
 }

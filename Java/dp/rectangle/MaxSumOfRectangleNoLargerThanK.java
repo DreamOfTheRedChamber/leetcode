@@ -18,8 +18,8 @@ What if the number of rows is much larger than the number of columns?
 //TO_START
 public class MaxSumOfRectangleNoLargerThanK
 {
-    public int maxSumSubmatrix(int[][] matrix, int k) 
-    {
-        return 0;
-    }
+ public int maxSumSubmatrix(int[][] matrix, int k) 
+ {
+  return 0;
+ }
 }

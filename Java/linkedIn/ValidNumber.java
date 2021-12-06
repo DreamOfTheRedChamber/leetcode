@@ -28,69 +28,69 @@ Fourthly, no other character is allowed
  * */
 public class ValidNumber
 {
-    public boolean isNumber( String s )
-    {
-    	// skip leading white spaces
-        int left = 0;
-        while ( left < s.length() && Character.isWhitespace( s.charAt( left ) ) )
-        {
-        	left++;
-        }
-        if ( left >= s.length() )
-        {
-        	return false;
-        }
-        int right = s.length() - 1;
-        while ( right >= left && Character.isWhitespace( s.charAt( right ) ) )
-        {
-        	right--;
-        }
-        // skip leading +/-
-        if ( s.charAt( left ) == '+' || s.charAt( left ) == '-' )
-        {
-        	left++;
-        }
-        
-        boolean isDigit = false;
-        boolean isDot = false;
-        boolean isExp = false;
-        while ( left <= right )
-        {
-        	char c = s.charAt( left );
-        	if ( Character.isDigit( c ) )
-        	{
-        		isDigit = true;
-        	}
-        	else if ( c == '.' )
-        	{
-        		if ( isExp || isDot )
-        		{
-        			return false;
-        		}
-        		isDot = true;
-        	}
-        	else if ( c == 'e' )
-        	{
-        		if ( isExp || !isDigit )
-        		{
-        			return false;
-        		}
-        		isExp = true;
-        		isDigit = false;
-        	}
-        	else if ( c == '+' || c == '-' )
-        	{
-        		if ( s.charAt( left - 1 ) != 'e' )
-        		{
-        			return false;
-        		}
-        	}
-        	else
-        	{
-        		return false;
-        	}
-        	left++;
-        }
-        return isDigit;
-    }
+ public boolean isNumber( String s )
+ {
+ 	// skip leading white spaces
+  int left = 0;
+  while ( left < s.length() && Character.isWhitespace( s.charAt( left ) ) )
+  {
+  	left++;
+  }
+  if ( left >= s.length() )
+  {
+  	return false;
+  }
+  int right = s.length() - 1;
+  while ( right >= left && Character.isWhitespace( s.charAt( right ) ) )
+  {
+  	right--;
+  }
+  // skip leading +/-
+  if ( s.charAt( left ) == '+' || s.charAt( left ) == '-' )
+  {
+  	left++;
+  }
+  
+  boolean isDigit = false;
+  boolean isDot = false;
+  boolean isExp = false;
+  while ( left <= right )
+  {
+  	char c = s.charAt( left );
+  	if ( Character.isDigit( c ) )
+  	{
+  		isDigit = true;
+  	}
+  	else if ( c == '.' )
+  	{
+  		if ( isExp || isDot )
+  		{
+  			return false;
+  		}
+  		isDot = true;
+  	}
+  	else if ( c == 'e' )
+  	{
+  		if ( isExp || !isDigit )
+  		{
+  			return false;
+  		}
+  		isExp = true;
+  		isDigit = false;
+  	}
+  	else if ( c == '+' || c == '-' )
+  	{
+  		if ( s.charAt( left - 1 ) != 'e' )
+  		{
+  			return false;
+  		}
+  	}
+  	else
+  	{
+  		return false;
+  	}
+  	left++;
+  }
+  return isDigit;
+ }
 }

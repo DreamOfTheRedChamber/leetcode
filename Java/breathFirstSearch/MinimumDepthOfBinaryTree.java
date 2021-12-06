@@ -8,8 +8,8 @@ import utility.TreeNode;
 
 public class MinimumDepthOfBinaryTree
 {
-    public int minDepth(TreeNode root) 
-    {
-    	return 0;
-    }
+ public int minDepth(TreeNode root) 
+ {
+ 	return 0;
+ }
 }

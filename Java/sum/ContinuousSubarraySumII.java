@@ -15,12 +15,12 @@ import java.util.ArrayList;
 
 public class ContinuousSubarraySumII
 {
-    /**
-     * @param A an integer array
-     * @return  A list of integers includes the index of the first number and the index of the last number
-     */
-    public ArrayList<Integer> continuousSubarraySumII(int[] A) 
-    {
-        return new ArrayList<>();
-    }
+ /**
+  * @param A an integer array
+  * @return  A list of integers includes the index of the first number and the index of the last number
+  */
+ public ArrayList<Integer> continuousSubarraySumII(int[] A) 
+ {
+  return new ArrayList<>();
+ }
 }

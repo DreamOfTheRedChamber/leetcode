@@ -14,8 +14,8 @@ Given [1,2,3,4] and interval = [1,3], return 4. The possible answers are:
 
 public class SubarraySumII
 {
-    public int subarraySumII(int[] A, int start, int end) 
-    {
-    	return 0;
-    }
+ public int subarraySumII(int[] A, int start, int end) 
+ {
+ 	return 0;
+ }
 }

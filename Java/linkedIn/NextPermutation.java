@@ -15,8 +15,8 @@ Here are some examples. Inputs are in the left-hand column and its corresponding
 
 public class NextPermutation 
 {
-    public void nextPermutation(int[] nums) 
-    {
-        
-    }
+ public void nextPermutation(int[] nums) 
+ {
+  
+ }
 }

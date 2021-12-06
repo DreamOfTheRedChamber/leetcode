@@ -25,8 +25,8 @@ Explanation: Remove all the digits from the number and it is left with nothing w
 
 public class RemoveKDigits 
 {
-    public String removeKdigits( String num, int k )
-    {
-        return "";
-    }
+ public String removeKdigits( String num, int k )
+ {
+  return "";
+ }
 }

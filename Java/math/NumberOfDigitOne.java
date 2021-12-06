@@ -7,8 +7,8 @@ package math;
 public class NumberOfDigitOne
 {
 
-    public int countDigitOne(int n) {
-        return 0;
-    }
+ public int countDigitOne(int n) {
+  return 0;
+ }
 
 }

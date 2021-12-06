@@ -21,14 +21,14 @@ A solution set is:
 public class CombinationSum 
 {
 	public List<List<Integer>> combinationSum(int[] candidates, int target) 
-    {
+ {
 		List<List<Integer>> allCombs = new LinkedList<>();
 		LinkedList<Integer> oneComb = new LinkedList<>();
 		
 		generateCombs( allCombs, oneComb, candidates, 0, target );
 		
 		return allCombs;
-    }
+ }
 	
 	private void generateCombs( List<List<Integer>> allCombs, LinkedList<Integer> oneComb, int[] nums, int startPos, int targetSum )
 	{

@@ -20,7 +20,7 @@ L: 16.
 
 Return the formatted lines as:
 [
-   "This    is    an",
+   "This is an",
    "example  of text",
    "justification.  "
 ]
@@ -65,7 +65,7 @@ public class TextJustification
  	   }
  	   int average = numSpaces / ( numWords - 1 );
  	   int residual = numSpaces % ( numWords - 1 );
- 	       	   
+ 	    	   
  	   StringBuilder currLine = new StringBuilder();
  	   for ( int i = 0; i < numWords - 1; i++ )
  	   {
@@ -74,7 +74,7 @@ public class TextJustification
  		   for ( int j = 0; j < average; j++ )
  		   {
  			   currLine.append(' ');
- 		   }	    		   
+ 		   }	 		   
  		   if ( residual > 0 )
  		   {
  			   currLine.append(' ');
@@ -98,29 +98,29 @@ public class TextJustification
 		return numWords;
 	}
 	
-    public List<String> fullJustify( String[] words, int maxWidth )
-    {
-       List<String> result = new ArrayList<>();
-       
-       for ( int endPos = 0; endPos < words.length; )
-       {    	       	   
-    	   // calculate num of words in this line
-    	   int startPos = endPos;
-    	   int numWords = calcNumWords( endPos, words, maxWidth );
-    	   endPos += numWords;
+ public List<String> fullJustify( String[] words, int maxWidth )
+ {
+    List<String> result = new ArrayList<>();
+    
+    for ( int endPos = 0; endPos < words.length; )
+    { 	    	   
+ 	   // calculate num of words in this line
+ 	   int startPos = endPos;
+ 	   int numWords = calcNumWords( endPos, words, maxWidth );
+ 	   endPos += numWords;
 
-    	   // handle edge case: single word a line or last line
-    	   if ( numWords == 1 
-    			   || endPos == words.length )
-    	   {
-    		   leftAlign( result, words, startPos, numWords, maxWidth );
-    	   }
-    	   else
-    	   {
-    		   evenlyDisperse( result, words, startPos, numWords, maxWidth );
-    	   }
-       }
-       
-       return result;
+ 	   // handle edge case: single word a line or last line
+ 	   if ( numWords == 1 
+ 			   || endPos == words.length )
+ 	   {
+ 		   leftAlign( result, words, startPos, numWords, maxWidth );
+ 	   }
+ 	   else
+ 	   {
+ 		   evenlyDisperse( result, words, startPos, numWords, maxWidth );
+ 	   }
     }
+    
+    return result;
+ }
 }

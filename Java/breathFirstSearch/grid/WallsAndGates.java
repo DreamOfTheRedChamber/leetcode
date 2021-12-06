@@ -38,50 +38,50 @@ public class WallsAndGates
 	}
 	
 	public void wallsAndGates( int[][] rooms )
-    {
-    	if ( rooms == null
-    			|| rooms.length == 0 
-    			|| rooms[0].length == 0 )
-    	{
-    		return;
-    	}
-    	
-    	int height = rooms.length;
-    	int width = rooms[0].length;
+ {
+ 	if ( rooms == null
+ 			|| rooms.length == 0 
+ 			|| rooms[0].length == 0 )
+ 	{
+ 		return;
+ 	}
+ 	
+ 	int height = rooms.length;
+ 	int width = rooms[0].length;
 
-    	// enqueue all gates
-    	Queue<Coor> bfsQueue = new LinkedList<>();
-    	for ( int i = 0; i < height; i++ )
-    	{
-    		for ( int j = 0; j < width; j++ )
-    		{
-    			if ( rooms[i][j] == 0 )
-    			{
-    				bfsQueue.offer( new Coor( i, j ) );
-    			}
-    		}
-    	}
+ 	// enqueue all gates
+ 	Queue<Coor> bfsQueue = new LinkedList<>();
+ 	for ( int i = 0; i < height; i++ )
+ 	{
+ 		for ( int j = 0; j < width; j++ )
+ 		{
+ 			if ( rooms[i][j] == 0 )
+ 			{
+ 				bfsQueue.offer( new Coor( i, j ) );
+ 			}
+ 		}
+ 	}
 
-    	int[][] directions = new int[][]{ {0, 1}, {1, 0}, {0, -1}, {-1, 0}};
-    	
-    	while ( !bfsQueue.isEmpty() )
-    	{
-    		Coor qHead = bfsQueue.poll();
-    		for ( int[] direction : directions )
-    		{
-    			int nextX = qHead.xCoor + direction[0];
-    			int nextY = qHead.yCoor + direction[1];
-    			if ( nextX >= 0 
-    					&& nextY >= 0
-    					&& nextX < height 
-    					&& nextY < width
-    					&& rooms[nextX][nextY] == Integer.MAX_VALUE )
-    			{
-    				rooms[nextX][nextY] = rooms[qHead.xCoor][qHead.yCoor] + 1;
-    				bfsQueue.offer( new Coor( nextX, nextY ) );
-    			}
-    		}
-    	}    	
-    }
-    
+ 	int[][] directions = new int[][]{ {0, 1}, {1, 0}, {0, -1}, {-1, 0}};
+ 	
+ 	while ( !bfsQueue.isEmpty() )
+ 	{
+ 		Coor qHead = bfsQueue.poll();
+ 		for ( int[] direction : directions )
+ 		{
+ 			int nextX = qHead.xCoor + direction[0];
+ 			int nextY = qHead.yCoor + direction[1];
+ 			if ( nextX >= 0 
+ 					&& nextY >= 0
+ 					&& nextX < height 
+ 					&& nextY < width
+ 					&& rooms[nextX][nextY] == Integer.MAX_VALUE )
+ 			{
+ 				rooms[nextX][nextY] = rooms[qHead.xCoor][qHead.yCoor] + 1;
+ 				bfsQueue.offer( new Coor( nextX, nextY ) );
+ 			}
+ 		}
+ 	} 	
+ }
+ 
 }

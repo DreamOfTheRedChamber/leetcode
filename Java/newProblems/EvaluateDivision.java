@@ -20,8 +20,8 @@ The input is always valid. You may assume that evaluating the queries will resul
 
 public class EvaluateDivision 
 {
-    public double[] calcEquation( String[][] equations, double[] values, String[][] queries )
-    {
-        return new double[0];
-    }
+ public double[] calcEquation( String[][] equations, double[] values, String[][] queries )
+ {
+  return new double[0];
+ }
 }

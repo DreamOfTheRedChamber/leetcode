@@ -15,8 +15,8 @@ public class PhoneDirectory
 	 * Initialize your data structure here
 	 * 
 	 * @param maxNumbers
-	 *            - The maximum numbers that can be stored in the phone
-	 *            directory.
+	 *   - The maximum numbers that can be stored in the phone
+	 *   directory.
 	 */
 	public PhoneDirectory( int maxNumbers )
 	{

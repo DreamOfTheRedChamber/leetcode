@@ -39,47 +39,47 @@ All possible pairs are returned from the sequence:
 
 public class FindKPairsWithSmallestSums 
 {
-    public List<int[]> kSmallestPairs(int[] nums1, int[] nums2, int k) 
-    {    	
-        List<int[]> result = new ArrayList<>();
-        if ( nums1.length == 0 
-        		|| nums2.length == 0 )
-        {
-        	return result;
-        }
-        
-        // enqueue all pairs
-        PriorityQueue<Pair> minQueue = new PriorityQueue<>( ( o1, o2 ) -> o1.sum - o2.sum );
-        for ( int i = 0; i < nums1.length; i++ )
-        {
-        	minQueue.offer( new Pair( i, 0, nums1[i] + nums2[0] ) );
-        }
-        
-        // take the smallest k pairs
-        int numPairs = 0;
-        while ( numPairs < k
-        		&& !minQueue.isEmpty() )
-        {
-        	Pair qHead = minQueue.remove();        	
-        	result.add( new int[]{ nums1[qHead.index1], nums2[qHead.index2 ] } );
-        	if ( qHead.index2 < nums2.length - 1 )
-        	{
-        		minQueue.offer( new Pair( qHead.index1, qHead.index2 + 1, nums1[qHead.index1] + nums2[qHead.index2 + 1] ) );
-        	}
-        	numPairs++;
-        }
-        return result;
-    }
-    
-    @Test
-    public void test()
-    {
-    	List<int[]> result = kSmallestPairs( new int[]{1, 1, 2}, new int[]{1, 2, 3}, 10 );
-    	for (int[] num : result )
-    	{
-    		System.out.println( Arrays.toString( num ));
-    	}
-    }
+ public List<int[]> kSmallestPairs(int[] nums1, int[] nums2, int k) 
+ { 	
+  List<int[]> result = new ArrayList<>();
+  if ( nums1.length == 0 
+  		|| nums2.length == 0 )
+  {
+  	return result;
+  }
+  
+  // enqueue all pairs
+  PriorityQueue<Pair> minQueue = new PriorityQueue<>( ( o1, o2 ) -> o1.sum - o2.sum );
+  for ( int i = 0; i < nums1.length; i++ )
+  {
+  	minQueue.offer( new Pair( i, 0, nums1[i] + nums2[0] ) );
+  }
+  
+  // take the smallest k pairs
+  int numPairs = 0;
+  while ( numPairs < k
+  		&& !minQueue.isEmpty() )
+  {
+  	Pair qHead = minQueue.remove();  	
+  	result.add( new int[]{ nums1[qHead.index1], nums2[qHead.index2 ] } );
+  	if ( qHead.index2 < nums2.length - 1 )
+  	{
+  		minQueue.offer( new Pair( qHead.index1, qHead.index2 + 1, nums1[qHead.index1] + nums2[qHead.index2 + 1] ) );
+  	}
+  	numPairs++;
+  }
+  return result;
+ }
+ 
+ @Test
+ public void test()
+ {
+ 	List<int[]> result = kSmallestPairs( new int[]{1, 1, 2}, new int[]{1, 2, 3}, 10 );
+ 	for (int[] num : result )
+ 	{
+ 		System.out.println( Arrays.toString( num ));
+ 	}
+ }
 }
 
 class Pair

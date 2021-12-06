@@ -26,8 +26,8 @@ So the maximum value of F(0), F(1), F(2), F(3) is F(3) = 26.
 
 public class RotateFunction 
 {
-    public int maxRotateFunction( int[] A ) 
-    {
-        return 0;
-    }
+ public int maxRotateFunction( int[] A ) 
+ {
+  return 0;
+ }
 }

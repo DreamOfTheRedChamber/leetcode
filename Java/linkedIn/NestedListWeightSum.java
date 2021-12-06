@@ -22,28 +22,28 @@ Given the list [1,[4,[6]]], return 27. (one 1 at depth 1, one 4 at depth 2, and 
 
 public class NestedListWeightSum
 {
-    public int depthSum( List<NestedInteger> nestedList )
-    {
-    	return depthSum( nestedList, 1 );
-    }
-    
-    private int depthSum( List<NestedInteger> nestedList, int depth )
-    {
-    	int totalSum = 0;
-    	for ( NestedInteger nestedInteger : nestedList )
-    	{
-    		if ( nestedInteger.isInteger() )
-    		{
-    			totalSum += nestedInteger.getInteger() * depth;
-    		}
-    		else
-    		{
-    			totalSum += depthSum( nestedInteger.getList(), depth + 1 );
-    		}
-    	}
-    	return totalSum;
-    }
-    
+ public int depthSum( List<NestedInteger> nestedList )
+ {
+ 	return depthSum( nestedList, 1 );
+ }
+ 
+ private int depthSum( List<NestedInteger> nestedList, int depth )
+ {
+ 	int totalSum = 0;
+ 	for ( NestedInteger nestedInteger : nestedList )
+ 	{
+ 		if ( nestedInteger.isInteger() )
+ 		{
+ 			totalSum += nestedInteger.getInteger() * depth;
+ 		}
+ 		else
+ 		{
+ 			totalSum += depthSum( nestedInteger.getList(), depth + 1 );
+ 		}
+ 	}
+ 	return totalSum;
+ }
+ 
 	public int depthSumBFS( List<NestedInteger> nestedList )
 	{
 		Queue<NestedInteger> bfsQueue = new LinkedList<>();
@@ -77,36 +77,36 @@ public class NestedListWeightSum
 			bfsQueue.offer( nestedInteger );
 		}
 	}
-    
-    public int depthSumIterative( List<NestedInteger> nestedList )
-    {
-    	Stack<Iterator<NestedInteger>> stackIter = new Stack<>();
-    	Stack<Integer> stackDepth = new Stack<>();
-    	stackIter.push( nestedList.iterator() );
-    	stackDepth.push( 1 );
-    	int totalSum = 0;
-    	while ( !stackIter.isEmpty() )
-    	{
-    		Iterator<NestedInteger> iterator = stackIter.pop();
-    		int depth = stackDepth.pop();
-    		while ( iterator.hasNext() )
-    		{
-    			NestedInteger next = iterator.next();
-    			if ( next.isInteger() )
-    			{
-    				totalSum += depth * next.getInteger();
-    			}
-    			else
-    			{
-    				stackDepth.push( depth );
-    				stackIter.push( iterator );
-    				stackDepth.push( depth + 1 );
-    				stackIter.push( next.getList().iterator() );
-    				break;
-    			}
-    		}
-    	}
-    	return totalSum;    	
-    }
-    
+ 
+ public int depthSumIterative( List<NestedInteger> nestedList )
+ {
+ 	Stack<Iterator<NestedInteger>> stackIter = new Stack<>();
+ 	Stack<Integer> stackDepth = new Stack<>();
+ 	stackIter.push( nestedList.iterator() );
+ 	stackDepth.push( 1 );
+ 	int totalSum = 0;
+ 	while ( !stackIter.isEmpty() )
+ 	{
+ 		Iterator<NestedInteger> iterator = stackIter.pop();
+ 		int depth = stackDepth.pop();
+ 		while ( iterator.hasNext() )
+ 		{
+ 			NestedInteger next = iterator.next();
+ 			if ( next.isInteger() )
+ 			{
+ 				totalSum += depth * next.getInteger();
+ 			}
+ 			else
+ 			{
+ 				stackDepth.push( depth );
+ 				stackIter.push( iterator );
+ 				stackDepth.push( depth + 1 );
+ 				stackIter.push( next.getList().iterator() );
+ 				break;
+ 			}
+ 		}
+ 	}
+ 	return totalSum; 	
+ }
+ 
 }

@@ -25,8 +25,8 @@ After the rain, water are trapped between the blocks. The total volume of water 
 
 public class TrappingRainWaterII 
 {
-    public int trapRainWater( int[][] heightMap )
-    {
-        return 1;
-    }
+ public int trapRainWater( int[][] heightMap )
+ {
+  return 1;
+ }
 }

@@ -10,17 +10,17 @@ Given a binary tree, check whether it is a mirror of itself (ie, symmetric aroun
 
 For example, this binary tree [1,2,2,3,4,4,3] is symmetric:
 
-    1
+ 1
    / \
   2   2
  / \ / \
 3  4 4  3
 But the following [1,2,2,null,3,null,3] is not:
-    1
+ 1
    / \
   2   2
    \   \
-   3    3
+   3 3
    
  要把一棵树转换成它的镜像
  */
@@ -58,22 +58,22 @@ public class SymmetricTree
 		return true;
 	}
 	
-    public boolean isSymmetric( TreeNode root )
-    {
-    	if ( root == null )
-    	{
-    		return true;
-    	}
-    	
-    	return isSymmetricRecurse( root.left, root.right );
-    }
-    
-    private boolean isSymmetricRecurse( TreeNode left, TreeNode right )
-    {
-    	if ( left == null || right == null )
-    	{
-    		return left == right;
-    	}
-    	return left.val == right.val && isSymmetricRecurse( left.left, right.right ) && isSymmetricRecurse( left.right, right.left );
-    }
+ public boolean isSymmetric( TreeNode root )
+ {
+ 	if ( root == null )
+ 	{
+ 		return true;
+ 	}
+ 	
+ 	return isSymmetricRecurse( root.left, root.right );
+ }
+ 
+ private boolean isSymmetricRecurse( TreeNode left, TreeNode right )
+ {
+ 	if ( left == null || right == null )
+ 	{
+ 		return left == right;
+ 	}
+ 	return left.val == right.val && isSymmetricRecurse( left.left, right.right ) && isSymmetricRecurse( left.right, right.left );
+ }
 }

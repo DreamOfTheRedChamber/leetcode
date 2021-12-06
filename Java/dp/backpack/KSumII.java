@@ -20,15 +20,15 @@ import java.util.List;
 
 public class KSumII
 {
-    /**
-     * @param A: an integer array.
-     * @param k: a positive integer (k <= length(A))
-     * @param target: a integer
-     * @return a list of lists of integer 
-     */ 
-    public List<List<Integer>> kSumII(int[] A, int k, int target )
-    {
-        // write your code here
-        return new ArrayList<>();
-    }
+ /**
+  * @param A: an integer array.
+  * @param k: a positive integer (k <= length(A))
+  * @param target: a integer
+  * @return a list of lists of integer 
+  */ 
+ public List<List<Integer>> kSumII(int[] A, int k, int target )
+ {
+  // write your code here
+  return new ArrayList<>();
+ }
 }

@@ -15,9 +15,9 @@ return [3, 4].
 public class SearchForARange 
 {
 	public int[] searchRange( int[] nums, int target )
-    {
+ {
 		return searchRangeRecurse( nums, target, 0, nums.length - 1 );
-    }
+ }
 	
 	private int[] searchRangeRecurse( int[] nums, int target, int start, int end )
 	{
@@ -44,9 +44,9 @@ public class SearchForARange
 		{
 			int[] leftRange = searchRangeRecurse( nums, target, start, mid - 1 );
 			int[] rightRange = searchRangeRecurse( nums, target, mid + 1, end );
-	        int leftEnd = (leftRange[0] == -1 ? mid : leftRange[0]);
-	        int rightEnd = (rightRange[1] == -1 ? mid : rightRange[1]);
-	        return new int[]{leftEnd, rightEnd};
+	  int leftEnd = (leftRange[0] == -1 ? mid : leftRange[0]);
+	  int rightEnd = (rightRange[1] == -1 ? mid : rightRange[1]);
+	  return new int[]{leftEnd, rightEnd};
 		}
 	}
 }

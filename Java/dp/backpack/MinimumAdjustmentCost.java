@@ -20,14 +20,14 @@ import java.util.List;
 
 public class MinimumAdjustmentCost
 {
-    /**
-     * @param A: An integer array.
-     * @param target: An integer.
-     */
-    public int MinAdjustmentCost(List<Integer> A, int target )
-    {
-        // write your code here
-        return 0;
-    }
+ /**
+  * @param A: An integer array.
+  * @param target: An integer.
+  */
+ public int MinAdjustmentCost(List<Integer> A, int target )
+ {
+  // write your code here
+  return 0;
+ }
 
 }

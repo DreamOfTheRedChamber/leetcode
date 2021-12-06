@@ -25,8 +25,8 @@ Can you do it in O(n) time?
 public class WiggleSubsequence
 {
 
-    public int wiggleMaxLength(int[] nums) {
-        return 0;
-    }
+ public int wiggleMaxLength(int[] nums) {
+  return 0;
+ }
 
 }

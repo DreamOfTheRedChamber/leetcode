@@ -34,26 +34,26 @@ public class MaximumSizeSubarraySumEqualsK
 		assertEquals( 2, maxSubArrayLen( new int[]{ 1, 1, 0}, 1 ) );
 	}
 	
-    public int maxSubArrayLen( int[] nums, int k )
-    {
-    	if ( nums == null || nums.length == 0 )
-    	{
-    		return 0;
-    	}
-    	
-    	Map<Integer,Integer> prefixSumToIndex = new HashMap<>();
-    	prefixSumToIndex.put( 0, -1 );
-    	int maxLength = 0;
-    	int prefixSum = 0;
-    	for ( int i = 0; i < nums.length; i++ )
-    	{
-    		prefixSum += nums[i];
-    		if ( prefixSumToIndex.containsKey( prefixSum - k ) )
-    		{
-    			maxLength = Math.max( maxLength, i - prefixSumToIndex.get( prefixSum - k ) );    			
-    		}
-    		prefixSumToIndex.putIfAbsent( prefixSum, i );
-    	}
-    	return maxLength;
-    }
+ public int maxSubArrayLen( int[] nums, int k )
+ {
+ 	if ( nums == null || nums.length == 0 )
+ 	{
+ 		return 0;
+ 	}
+ 	
+ 	Map<Integer,Integer> prefixSumToIndex = new HashMap<>();
+ 	prefixSumToIndex.put( 0, -1 );
+ 	int maxLength = 0;
+ 	int prefixSum = 0;
+ 	for ( int i = 0; i < nums.length; i++ )
+ 	{
+ 		prefixSum += nums[i];
+ 		if ( prefixSumToIndex.containsKey( prefixSum - k ) )
+ 		{
+ 			maxLength = Math.max( maxLength, i - prefixSumToIndex.get( prefixSum - k ) ); 			
+ 		}
+ 		prefixSumToIndex.putIfAbsent( prefixSum, i );
+ 	}
+ 	return maxLength;
+ }
 }

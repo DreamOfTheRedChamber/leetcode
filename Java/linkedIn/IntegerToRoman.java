@@ -50,36 +50,36 @@ M: 1000
 
 public class IntegerToRoman
 {
-    public String intToRoman( int num )
-    {
-    	if ( num <= 0 || num > 3999 )
-    	{
-    		throw new IllegalArgumentException("");
-    	}
-    	
-    	String[] dictionary = { "M","CM","D","CD","C","XC","L","XL","X","IX","V","IV","I" };
-    	int[] value = { 1000,900,500,400,100,90,50,40,10,9,5,4,1 };
-    	StringBuilder result = new StringBuilder();
-    	for ( int i = 0; i < value.length; i++ )
-    	{
-    		if ( num >= value[i] )
-    		{
-    			int count = num / value[i];
-    			for ( int j = 0; j < count; j++ )
-    			{
-    				result.append( dictionary[i] );
-    			}
-    			num -= count * value[i];
-    		}
-    	}
-    	return result.toString();
-    }
-    
-    @Test
-    public void test()
-    {
-    	assertEquals( "M", intToRoman( 1000 ) );
-    	assertEquals( "DC", intToRoman( 600 ) );
-    	assertEquals( "MMMCMLXXVIII", intToRoman( 3978 ) );
-    }
+ public String intToRoman( int num )
+ {
+ 	if ( num <= 0 || num > 3999 )
+ 	{
+ 		throw new IllegalArgumentException("");
+ 	}
+ 	
+ 	String[] dictionary = { "M","CM","D","CD","C","XC","L","XL","X","IX","V","IV","I" };
+ 	int[] value = { 1000,900,500,400,100,90,50,40,10,9,5,4,1 };
+ 	StringBuilder result = new StringBuilder();
+ 	for ( int i = 0; i < value.length; i++ )
+ 	{
+ 		if ( num >= value[i] )
+ 		{
+ 			int count = num / value[i];
+ 			for ( int j = 0; j < count; j++ )
+ 			{
+ 				result.append( dictionary[i] );
+ 			}
+ 			num -= count * value[i];
+ 		}
+ 	}
+ 	return result.toString();
+ }
+ 
+ @Test
+ public void test()
+ {
+ 	assertEquals( "M", intToRoman( 1000 ) );
+ 	assertEquals( "DC", intToRoman( 600 ) );
+ 	assertEquals( "MMMCMLXXVIII", intToRoman( 3978 ) );
+ }
 }

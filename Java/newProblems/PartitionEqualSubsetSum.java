@@ -24,8 +24,8 @@ Explanation: The array cannot be partitioned into equal sum subsets.
 
 public class PartitionEqualSubsetSum 
 {
-    public boolean canPartition( int[] nums )
-    {
-        return true;
-    }
+ public boolean canPartition( int[] nums )
+ {
+  return true;
+ }
 }

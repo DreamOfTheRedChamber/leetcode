@@ -18,9 +18,9 @@ The distance is calculated using Manhattan Distance, where distance(p1, p2) = |p
 For example, given three buildings at (0,0), (0,4), (2,2), and an obstacle at (0,2):
 
 1 – 0 – 2 – 0 – 1
-|    |     |     |    |
+| |  |  | |
 0 – 0 – 0 – 0 – 0
-|     |     |     |    |
+|  |  |  | |
 0 – 0 – 1 – 0 – 0
 The point (1,2) is an ideal empty land to build a house, as the total travel distance of 3+3+1=7 is minimal. So return 7.
 
@@ -31,52 +31,52 @@ There will be at least one building. If it is not possible to build such house a
 public class ShortestDistanceFromAllBuildings
 {
 
-    public int shortestDistance(int[][] grid)
-    {   
-    	if ( grid == null || grid.length == 0 || grid[0].length == 0 )
-    	{
-    		return -1;
-    	}
-    	
-    	int heighth = grid.length;
-    	int width = grid[0].length;
-    	int[][] distSum = new int[heighth][width];
-    	int[][] numReached = new int[heighth][width];     	// num buildings reached from current land
-    	int houseNum = 0;
-    	
-    	for ( int i = 0; i < heighth; i++ )
-    	{
-    		for ( int j = 0; j < width; j++ )
-    		{
-    			// start bfs from each building
-    			if ( grid[i][j] == 1 )
-    			{
-    				houseNum++;
-    				bfs( distSum, numReached, grid, i, j );
-    			}
-    		}    		
-    	}
-    	
-    	int minDist = Integer.MAX_VALUE;
-    	for ( int i = 0; i < heighth; i++ )
-    	{
-    		for ( int j = 0; j < width; j++ )
-    		{
-    			if ( grid[i][j] == 0 
-    					&& numReached[i][j] == houseNum )
-    			{
-    				minDist = Math.min( minDist, distSum[i][j] );
-    			}
-    		}
-    	}
-    	return minDist == Integer.MAX_VALUE ? -1 : minDist;
-    }
-    
-    private void bfs( int[][] distSum, int[][] numReached, int[][] grid, int xStart, int yStart )
-    {
-    	int height = distSum.length;
-    	int width = distSum[0].length;
-    	int[][] directions = new int[][]{ { -1, 0 }, { 1, 0 }, { 0, 1 }, { 0, -1 } };
+ public int shortestDistance(int[][] grid)
+ {   
+ 	if ( grid == null || grid.length == 0 || grid[0].length == 0 )
+ 	{
+ 		return -1;
+ 	}
+ 	
+ 	int heighth = grid.length;
+ 	int width = grid[0].length;
+ 	int[][] distSum = new int[heighth][width];
+ 	int[][] numReached = new int[heighth][width];  	// num buildings reached from current land
+ 	int houseNum = 0;
+ 	
+ 	for ( int i = 0; i < heighth; i++ )
+ 	{
+ 		for ( int j = 0; j < width; j++ )
+ 		{
+ 			// start bfs from each building
+ 			if ( grid[i][j] == 1 )
+ 			{
+ 				houseNum++;
+ 				bfs( distSum, numReached, grid, i, j );
+ 			}
+ 		} 		
+ 	}
+ 	
+ 	int minDist = Integer.MAX_VALUE;
+ 	for ( int i = 0; i < heighth; i++ )
+ 	{
+ 		for ( int j = 0; j < width; j++ )
+ 		{
+ 			if ( grid[i][j] == 0 
+ 					&& numReached[i][j] == houseNum )
+ 			{
+ 				minDist = Math.min( minDist, distSum[i][j] );
+ 			}
+ 		}
+ 	}
+ 	return minDist == Integer.MAX_VALUE ? -1 : minDist;
+ }
+ 
+ private void bfs( int[][] distSum, int[][] numReached, int[][] grid, int xStart, int yStart )
+ {
+ 	int height = distSum.length;
+ 	int width = distSum[0].length;
+ 	int[][] directions = new int[][]{ { -1, 0 }, { 1, 0 }, { 0, 1 }, { 0, -1 } };
 		int bfsLevel = 0;
 		boolean[][] visited = new boolean[height][width];
 		Queue<Integer> bfsQueue = new LinkedList<>();
@@ -112,38 +112,38 @@ public class ShortestDistanceFromAllBuildings
 			}
 			bfsLevel++;
 		}
-    }
-    
-    @Test
-    public void singleSpace()
-    {
-    	assertEquals( -1, shortestDistance( new int[][]{ { 1 } } ) );
-    	assertEquals( -1, shortestDistance( new int[][]{ { 2 } } ) );
-    	assertEquals( 0, shortestDistance( new int[][]{ { 0 } } ) );
-    }
-    
-    @Test
-    public void singleBuilding()
-    {
-    	assertEquals( 1, shortestDistance( new int[][]{ {0, 0, 1} }) );
-    }
-    
-    @Test
-    public void noSpace()
-    {
-    	assertEquals( -1, shortestDistance( new int[][]{ { 1, 1, 1} } ) );
-    }
-    
-    @Test
-    public void notAllReacheable()
-    {
-    	assertEquals( -1, shortestDistance( new int[][]{ {1, 2, 0} } ) );
-    	assertEquals( -1, shortestDistance( new int[][]{ {0, 2, 1}, {1, 0, 2}, {0, 1, 0} } ) );
-    }
-    
-    @Test
-    public void normalElem()
-    {
-    	assertEquals( 7, shortestDistance( new int[][]{ {1, 0, 2, 0, 1}, {0, 0, 0, 0, 0}, {0, 0, 1, 0, 0} } ) );
-    }    
+ }
+ 
+ @Test
+ public void singleSpace()
+ {
+ 	assertEquals( -1, shortestDistance( new int[][]{ { 1 } } ) );
+ 	assertEquals( -1, shortestDistance( new int[][]{ { 2 } } ) );
+ 	assertEquals( 0, shortestDistance( new int[][]{ { 0 } } ) );
+ }
+ 
+ @Test
+ public void singleBuilding()
+ {
+ 	assertEquals( 1, shortestDistance( new int[][]{ {0, 0, 1} }) );
+ }
+ 
+ @Test
+ public void noSpace()
+ {
+ 	assertEquals( -1, shortestDistance( new int[][]{ { 1, 1, 1} } ) );
+ }
+ 
+ @Test
+ public void notAllReacheable()
+ {
+ 	assertEquals( -1, shortestDistance( new int[][]{ {1, 2, 0} } ) );
+ 	assertEquals( -1, shortestDistance( new int[][]{ {0, 2, 1}, {1, 0, 2}, {0, 1, 0} } ) );
+ }
+ 
+ @Test
+ public void normalElem()
+ {
+ 	assertEquals( 7, shortestDistance( new int[][]{ {1, 0, 2, 0, 1}, {0, 0, 0, 0, 0}, {0, 0, 1, 0, 0} } ) );
+ } 
 }

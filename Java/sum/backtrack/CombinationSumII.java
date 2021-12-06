@@ -24,39 +24,39 @@ A solution set is:
  * */
 public class CombinationSumII 
 {
-    public List<List<Integer>> combinationSum2( int[] candidates, int target )
-    {
-    	List<List<Integer>> allCombs = new LinkedList<>();
-    	LinkedList<Integer> oneComb = new LinkedList<>();
-    	Arrays.sort( candidates );
-    	generateCombs( allCombs, oneComb, candidates, 0, target );
-    	return allCombs;   	
-    }
-    
-    private void generateCombs( List<List<Integer>> allCombs, LinkedList<Integer> oneComb, int[] candidates, int startPos, int targetSum )
-    {
-    	// if candidates all positive, then could avoid unnecessary scannings
-    	if ( targetSum < 0 )
-    	{
-    		return;
-    	}
-    	
-    	if ( targetSum == 0 )
-    	{
-    		allCombs.add( new LinkedList<>( oneComb ) );
-    		return;
-    	}
-    	
-    	for ( int i = startPos; i < candidates.length; i++ )
-    	{
-    		if ( i > startPos
-    				&& candidates[i] == candidates[i-1] )
-    		{
-    			continue;
-    		}
-    		oneComb.addLast( candidates[i] );
-    		generateCombs( allCombs, oneComb, candidates, i + 1, targetSum - candidates[i] );
-    		oneComb.removeLast();
-    	}
-    }    
+ public List<List<Integer>> combinationSum2( int[] candidates, int target )
+ {
+ 	List<List<Integer>> allCombs = new LinkedList<>();
+ 	LinkedList<Integer> oneComb = new LinkedList<>();
+ 	Arrays.sort( candidates );
+ 	generateCombs( allCombs, oneComb, candidates, 0, target );
+ 	return allCombs;   	
+ }
+ 
+ private void generateCombs( List<List<Integer>> allCombs, LinkedList<Integer> oneComb, int[] candidates, int startPos, int targetSum )
+ {
+ 	// if candidates all positive, then could avoid unnecessary scannings
+ 	if ( targetSum < 0 )
+ 	{
+ 		return;
+ 	}
+ 	
+ 	if ( targetSum == 0 )
+ 	{
+ 		allCombs.add( new LinkedList<>( oneComb ) );
+ 		return;
+ 	}
+ 	
+ 	for ( int i = startPos; i < candidates.length; i++ )
+ 	{
+ 		if ( i > startPos
+ 				&& candidates[i] == candidates[i-1] )
+ 		{
+ 			continue;
+ 		}
+ 		oneComb.addLast( candidates[i] );
+ 		generateCombs( allCombs, oneComb, candidates, i + 1, targetSum - candidates[i] );
+ 		oneComb.removeLast();
+ 	}
+ } 
 }

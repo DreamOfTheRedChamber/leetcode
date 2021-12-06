@@ -17,13 +17,13 @@ return [(1,1), (2,2)]
 
 public class SubmatrixSum
 {
-    /**
-     * @param matrix an integer matrix
-     * @return the coordinate of the left-up and right-down number
-     */
-    public int[][] submatrixSum(int[][] matrix) 
-    {
-        // Write your code here
-        return new int[0][0];
-    }
+ /**
+  * @param matrix an integer matrix
+  * @return the coordinate of the left-up and right-down number
+  */
+ public int[][] submatrixSum(int[][] matrix) 
+ {
+  // Write your code here
+  return new int[0][0];
+ }
 }

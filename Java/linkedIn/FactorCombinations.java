@@ -42,42 +42,42 @@ output:
  * */
 public class FactorCombinations 
 {
-    public List<List<Integer>> getFactors( int n )
-    {
-    	List<List<Integer>> allResults = new LinkedList<>();
-    	LinkedList<Integer> oneResult = new LinkedList<>();
-    	getFactors( allResults, oneResult, n, 2 );
-    	return allResults;
-    }
-    
-    private void getFactors( List<List<Integer>> allResults, LinkedList<Integer> oneResult, int n, int startVal )
-    {
-    	if ( n == 1 )
-    	{
-    		if ( oneResult.size() > 1 )
-    		{
-    			allResults.add( new LinkedList<>( oneResult ) );
-    		}
-    		return;
-    	}
-    	
-    	for ( int i = startVal; i <= n; i++ )
-    	{
-    		if ( n % i == 0 )
-    		{
-    			oneResult.addLast( i );
-    			getFactors( allResults, oneResult, n / i, i );
-    			oneResult.removeLast();
-    		}
-    	}
-    }
-    
-    @Test
-    public void test()
-    {
-    	for ( List<Integer> list : getFactors( 12 ) )
-    	{
-    		System.out.println( list );
-    	}
-    }
+ public List<List<Integer>> getFactors( int n )
+ {
+ 	List<List<Integer>> allResults = new LinkedList<>();
+ 	LinkedList<Integer> oneResult = new LinkedList<>();
+ 	getFactors( allResults, oneResult, n, 2 );
+ 	return allResults;
+ }
+ 
+ private void getFactors( List<List<Integer>> allResults, LinkedList<Integer> oneResult, int n, int startVal )
+ {
+ 	if ( n == 1 )
+ 	{
+ 		if ( oneResult.size() > 1 )
+ 		{
+ 			allResults.add( new LinkedList<>( oneResult ) );
+ 		}
+ 		return;
+ 	}
+ 	
+ 	for ( int i = startVal; i <= n; i++ )
+ 	{
+ 		if ( n % i == 0 )
+ 		{
+ 			oneResult.addLast( i );
+ 			getFactors( allResults, oneResult, n / i, i );
+ 			oneResult.removeLast();
+ 		}
+ 	}
+ }
+ 
+ @Test
+ public void test()
+ {
+ 	for ( List<Integer> list : getFactors( 12 ) )
+ 	{
+ 		System.out.println( list );
+ 	}
+ }
 }

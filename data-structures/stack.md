@@ -70,57 +70,57 @@
   * Whether need to deal with parentheses
 
 ```python
-    def calculate(s: str) -> int:
-      valStack = []
-      opStack = []
-      for i in range(s.length()):
-        char token = s[i]
-        if token == " ":
-          continue
-        elif token == "(":
-          opStack.append(token)
-        elif token == ")":
-          while opStack[-1] != "(":
-            valStack.append( calc( opStack.pop(), valStack.pop(), valStack.pop() ) )
-          opStack.pop()
-        elif token.isnumeric():
-          start = i
-          while i + 1 < s.len() and s[i+1].isnumeric():
-            i++
-          valStack.append(int(s[start:i + 1]))
-        else:
-          while !opStack.isEmpty() and isLowerPrece(token, opStack[-1]):
-            valStack.append( calc( opStack.pop(), valStack.pop(), valStack.pop() ) )
-          opStack.append( token )
+ def calculate(s: str) -> int:
+   valStack = []
+   opStack = []
+   for i in range(s.length()):
+  char token = s[i]
+  if token == " ":
+    continue
+  elif token == "(":
+    opStack.append(token)
+  elif token == ")":
+    while opStack[-1] != "(":
+   valStack.append( calc( opStack.pop(), valStack.pop(), valStack.pop() ) )
+    opStack.pop()
+  elif token.isnumeric():
+    start = i
+    while i + 1 < s.len() and s[i+1].isnumeric():
+   i++
+    valStack.append(int(s[start:i + 1]))
+  else:
+    while !opStack.isEmpty() and isLowerPrece(token, opStack[-1]):
+   valStack.append( calc( opStack.pop(), valStack.pop(), valStack.pop() ) )
+    opStack.append( token )
 
-      while opStack:
-        valStack.append(calc( opStack.pop(), valStack.pop(), valStack.pop() ))
+   while opStack:
+  valStack.append(calc( opStack.pop(), valStack.pop(), valStack.pop() ))
 
-      return valStack.pop()
-    }
+   return valStack.pop()
+ }
 
-    def isLowerPrece(curr: str, toBeCompared: str ) -> bool:
-      return toBeCompared == '*' or toBeCompared == '/'
-          or ( toBeCompared == '-' and ( curr == '+' or curr == '-' ) )
+ def isLowerPrece(curr: str, toBeCompared: str ) -> bool:
+   return toBeCompared == '*' or toBeCompared == '/'
+    or ( toBeCompared == '-' and ( curr == '+' or curr == '-' ) )
 
-    def calc(operator: str, operand1: int, operand2: int) -> int:
-      if operator == '+':
-        return operand2 + operand1
-      elif operator == '-':
-        return operand2 - operand1
-      elif operator == '*':
-        return operand2 * operand1
-      else
-        return operand2 / operand1
+ def calc(operator: str, operand1: int, operand2: int) -> int:
+   if operator == '+':
+  return operand2 + operand1
+   elif operator == '-':
+  return operand2 - operand1
+   elif operator == '*':
+  return operand2 * operand1
+   else
+  return operand2 / operand1
 ```
 
 ## Parentheses \[TODO\]
 
 * Check if string s contains valid parenthese
   * Questions to confirm
-    * Whether the string contains non-parentheses characters
-    * Whether the string contains curly braces, brackets or parentheses
-    * Need to calculate the invalid number or just judge it is valid or not
+ * Whether the string contains non-parentheses characters
+ * Whether the string contains curly braces, brackets or parentheses
+ * Need to calculate the invalid number or just judge it is valid or not
 
 ```java
 // Case 1: When only contains parentheses
@@ -130,19 +130,19 @@ boolean isValid( String s )
   int count = 0;
   for ( char ch : s.toCharArray() )
   {
-    if ( ch == '(' )
-    {
-      count++;
-    }
-    else if ( ch == ')' )
-    {
-      if ( count == 0 )
-      {
-        return false;
-      }
-      count--;
-    }
-    // for non-parenthese chars, we will not process them
+ if ( ch == '(' )
+ {
+   count++;
+ }
+ else if ( ch == ')' )
+ {
+   if ( count == 0 )
+   {
+  return false;
+   }
+   count--;
+ }
+ // for non-parenthese chars, we will not process them
   }
   return count == 0;
 }
@@ -151,21 +151,21 @@ int calcNumInvalid( String s )
   Stack<Character> stack = new Stack<>();
   for ( char ch : s.toCharArray() )
   {
-    if ( ch == '(' ) 
-    {
-      stack.push( ch );
-    }
-    else if ( ch == ')' )
-    {
-      if ( !stack.isEmpty() && stack.peek() == '(' )
-      {
-        stack.pop();
-      }
-      else
-      {
-        stack.push( ch );
-      }
-    }
+ if ( ch == '(' ) 
+ {
+   stack.push( ch );
+ }
+ else if ( ch == ')' )
+ {
+   if ( !stack.isEmpty() && stack.peek() == '(' )
+   {
+  stack.pop();
+   }
+   else
+   {
+  stack.push( ch );
+   }
+ }
   }
   return stack.size();
 }
@@ -182,18 +182,18 @@ boolean isValid( String s )
 
   for ( char ch : s.toCharArray() )
   {
-    if ( openToClose.containsKey( ch ) )
-    {
-      stack.push( ch );
-    }
-    else if ( openToClose.values.contains( ch ))
-    {
-      if ( stack.isEmpty() || ch != openToClose.get( stack.peek() ) )
-      {
-        return false;
-      }
-      stack.pop();
-    }
+ if ( openToClose.containsKey( ch ) )
+ {
+   stack.push( ch );
+ }
+ else if ( openToClose.values.contains( ch ))
+ {
+   if ( stack.isEmpty() || ch != openToClose.get( stack.peek() ) )
+   {
+  return false;
+   }
+   stack.pop();
+ }
   }
 
   return stack.size() == 0;

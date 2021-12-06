@@ -15,14 +15,14 @@ Table: Orders.
 +----+------------+
 | Id | CustomerId |
 +----+------------+
-| 1  | 3          |
-| 2  | 1          |
+| 1  | 3    |
+| 2  | 1    |
 +----+------------+
 Using the above tables as example, return the following:
 
 +-----------+
 | Customers |
 +-----------+
-| Henry     |
-| Max       |
+| Henry  |
+| Max    |
 +-----------+

@@ -57,8 +57,8 @@ The character '-' signifies an empty space on the screen.
 
 public class SentenceScreenFitting 
 {
-    public int wordsTyping( String[] sentence, int rows, int cols )
-    {
-        return 0;
-    }
+ public int wordsTyping( String[] sentence, int rows, int cols )
+ {
+  return 0;
+ }
 }

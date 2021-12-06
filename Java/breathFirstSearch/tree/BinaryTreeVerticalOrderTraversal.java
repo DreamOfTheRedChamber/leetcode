@@ -22,7 +22,7 @@ Given binary tree [3,9,20,null,null,15,7],
   /\
  /  \
  9  20
-    /\
+ /\
    /  \
   15   7
 return its vertical order traversal as:
@@ -33,8 +33,8 @@ return its vertical order traversal as:
   [7]
 ]
 Given binary tree [3,9,8,4,0,1,7],
-     3
-    /\
+  3
+ /\
    /  \
    9   8
   /\  /\
@@ -49,14 +49,14 @@ return its vertical order traversal as:
   [7]
 ]
 Given binary tree [3,9,8,4,0,1,7,null,null,null,2,5] (0's right child is 2 and 1's left child is 5),
-     3
-    /\
+  3
+ /\
    /  \
    9   8
   /\  /\
  /  \/  \
  4  01   7
-    /\
+ /\
    /  \
    5   2
 return its vertical order traversal as:
@@ -73,55 +73,55 @@ return its vertical order traversal as:
 
 public class BinaryTreeVerticalOrderTraversal
 {
-    public List<List<Integer>> verticalOrder( TreeNode root )
-    {
-    	if ( root == null )
-    	{
-    		return new ArrayList<>();
-    	}
-    	
-    	// traverse the tree
-    	int minLevel = 0;
-    	int maxLevel = 0;
-    	Map<Integer, List<Integer>> orderToVal = new HashMap<>();
-    	Queue<Pair> bfsQueue = new LinkedList<>();
-    	bfsQueue.offer( new Pair( root, 0 ) );
-    	while ( !bfsQueue.isEmpty() )
-    	{
-    		Pair head = bfsQueue.poll();
-    		
-    		minLevel = Math.min( minLevel, head.col );
-    		maxLevel = Math.max( maxLevel, head.col );
-    		
-    		orderToVal.putIfAbsent( head.col, new ArrayList<>() );
-    		orderToVal.get( head.col ).add( head.node.val );
-    		if ( head.node.left != null )
-    		{
-    			bfsQueue.offer( new Pair( head.node.left, head.col - 1 ) );
-    		}
-    		if ( head.node.right != null )
-    		{
-    			bfsQueue.offer( new Pair( head.node.right, head.col + 1 ) );
-    		}
-    	}
-    	
-    	List<List<Integer>> result = new ArrayList<>();
-    	for ( int i = minLevel; i <= maxLevel; i++ )
-    	{
-    		result.add( orderToVal.get( i ) );
-    	}
-    	return result;
-    }
-    
-    class Pair
-    {
-    	public final TreeNode node;
-    	public final int col;
-    	public Pair( TreeNode node, int col )
-    	{
-    		this.node = node;
-    		this.col = col;
-    	}
-    }
+ public List<List<Integer>> verticalOrder( TreeNode root )
+ {
+ 	if ( root == null )
+ 	{
+ 		return new ArrayList<>();
+ 	}
+ 	
+ 	// traverse the tree
+ 	int minLevel = 0;
+ 	int maxLevel = 0;
+ 	Map<Integer, List<Integer>> orderToVal = new HashMap<>();
+ 	Queue<Pair> bfsQueue = new LinkedList<>();
+ 	bfsQueue.offer( new Pair( root, 0 ) );
+ 	while ( !bfsQueue.isEmpty() )
+ 	{
+ 		Pair head = bfsQueue.poll();
+ 		
+ 		minLevel = Math.min( minLevel, head.col );
+ 		maxLevel = Math.max( maxLevel, head.col );
+ 		
+ 		orderToVal.putIfAbsent( head.col, new ArrayList<>() );
+ 		orderToVal.get( head.col ).add( head.node.val );
+ 		if ( head.node.left != null )
+ 		{
+ 			bfsQueue.offer( new Pair( head.node.left, head.col - 1 ) );
+ 		}
+ 		if ( head.node.right != null )
+ 		{
+ 			bfsQueue.offer( new Pair( head.node.right, head.col + 1 ) );
+ 		}
+ 	}
+ 	
+ 	List<List<Integer>> result = new ArrayList<>();
+ 	for ( int i = minLevel; i <= maxLevel; i++ )
+ 	{
+ 		result.add( orderToVal.get( i ) );
+ 	}
+ 	return result;
+ }
+ 
+ class Pair
+ {
+ 	public final TreeNode node;
+ 	public final int col;
+ 	public Pair( TreeNode node, int col )
+ 	{
+ 		this.node = node;
+ 		this.col = col;
+ 	}
+ }
 }
 

@@ -13,22 +13,22 @@ Given [4, 1, 5, 10]
 Return 270
 
 nums = [4, 1, 5, 10] burst 1, get coins 4 * 1 * 5 = 20
-nums = [4, 5, 10]    burst 5, get coins 4 * 5 * 10 = 200 
-nums = [4, 10]       burst 4, get coins 1 * 4 * 10 = 40
-nums = [10]          burst 10, get coins 1 * 10 * 1 = 10
+nums = [4, 5, 10] burst 5, get coins 4 * 5 * 10 = 200 
+nums = [4, 10]    burst 4, get coins 1 * 4 * 10 = 40
+nums = [10]    burst 10, get coins 1 * 10 * 1 = 10
 
 Total coins 20 + 200 + 40 + 10 = 270
  * */
 
 public class BurstBalloons 
 {
-    /**
-     * @param nums a list of integer
-     * @return an integer, maximum coins
-     */
-    public int maxCoins( int[] nums ) 
-    {
-        // Write your code here
-        return 0;
-    }
+ /**
+  * @param nums a list of integer
+  * @return an integer, maximum coins
+  */
+ public int maxCoins( int[] nums ) 
+ {
+  // Write your code here
+  return 0;
+ }
 }

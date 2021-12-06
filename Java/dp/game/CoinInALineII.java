@@ -14,12 +14,12 @@ Given A = [1,2,4], return false.
 public class CoinInALineII 
 {
 	/**
-     * @param values: an array of integers
-     * @return: a boolean which equals to true if the first player will win
-     */
-    public boolean firstWillWin( int[] values )
-    {
-        // write your code here
-        return true;
-    }
+  * @param values: an array of integers
+  * @return: a boolean which equals to true if the first player will win
+  */
+ public boolean firstWillWin( int[] values )
+ {
+  // write your code here
+  return true;
+ }
 }

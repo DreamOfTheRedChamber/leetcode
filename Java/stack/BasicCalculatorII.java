@@ -32,85 +32,85 @@ public class BasicCalculatorII
 		assertEquals( -24, calculate("1*2-3/4+5*6-7*8+9/10"));
 	}
 	
-    public int calculate( String s )
-    {
-    	if ( s == null 
-    			|| s.length() == 0 )
-    	{
-    		throw new IllegalArgumentException("");
-    	}
-    	// assertions on validity
-    	
-    	Stack<Integer> valStack = new Stack<>();
-    	Stack<Character> opStack = new Stack<>();
-    	for ( int i = 0; i < s.length( ); i++ )
-    	{
-    		char token = s.charAt( i );
-    		if ( token == ' ' )
-    		{
-    			continue;
-    		}
-    		else if ( token == '(' )
-    		{
-    			opStack.push( token );
-    		}
-    		else if ( token == ')' )
-    		{
-    			while ( opStack.peek() != '(' )
-    			{
-    				valStack.push( calc( opStack.pop(), valStack.pop(), valStack.pop() ) );
-    			}
-    			opStack.pop();
-    		}
-    		else if ( Character.isDigit( token ) )
-    		{
-    			int start = i;
-    			while ( i + 1 < s.length() && Character.isDigit( s.charAt( i + 1 ) ) )
-    			{	
-    				i++;
-    			}
-    			valStack.push( Integer.parseInt( s.substring( start, i + 1 ) ) );
-    		}
-    		else
-    		{
-	    		while ( !opStack.isEmpty() && isLowerPrece( token, opStack.peek() ) )
-	    		{
-	    			valStack.push( calc( opStack.pop(), valStack.pop(), valStack.pop() ) );
-	    		}
-	    		opStack.push( token );
-    		}
-    	}
-    	
-    	while ( !opStack.isEmpty( ) )
-    	{
-    		valStack.push( calc( opStack.pop(), valStack.pop(), valStack.pop() ) );
-    	}
-    	return valStack.pop();    	
-    }
-        
-    private boolean isLowerPrece( char curr, char toBeCompared )
-    {
-    	return ( toBeCompared == '*' || toBeCompared == '/' ) 
-    			|| ( toBeCompared == '-' && ( curr == '+' || curr == '-' ) );
-    }
-    
-    private int calc( char operator, int operand1, int operand2 )
-    {
-    	if ( operator == '+' )
-    	{
-    		return operand2 + operand1;
-    	}
-    	else if ( operator == '-' )
-    	{
-    		return operand2 - operand1;
-    	}
-    	else if ( operator == '*' )
-    	{
-    		return operand2 * operand1;
-    	}
-    	else
-    	{
-    		return operand2 / operand1;
-    	}
-    }
+ public int calculate( String s )
+ {
+ 	if ( s == null 
+ 			|| s.length() == 0 )
+ 	{
+ 		throw new IllegalArgumentException("");
+ 	}
+ 	// assertions on validity
+ 	
+ 	Stack<Integer> valStack = new Stack<>();
+ 	Stack<Character> opStack = new Stack<>();
+ 	for ( int i = 0; i < s.length( ); i++ )
+ 	{
+ 		char token = s.charAt( i );
+ 		if ( token == ' ' )
+ 		{
+ 			continue;
+ 		}
+ 		else if ( token == '(' )
+ 		{
+ 			opStack.push( token );
+ 		}
+ 		else if ( token == ')' )
+ 		{
+ 			while ( opStack.peek() != '(' )
+ 			{
+ 				valStack.push( calc( opStack.pop(), valStack.pop(), valStack.pop() ) );
+ 			}
+ 			opStack.pop();
+ 		}
+ 		else if ( Character.isDigit( token ) )
+ 		{
+ 			int start = i;
+ 			while ( i + 1 < s.length() && Character.isDigit( s.charAt( i + 1 ) ) )
+ 			{	
+ 				i++;
+ 			}
+ 			valStack.push( Integer.parseInt( s.substring( start, i + 1 ) ) );
+ 		}
+ 		else
+ 		{
+	 		while ( !opStack.isEmpty() && isLowerPrece( token, opStack.peek() ) )
+	 		{
+	 			valStack.push( calc( opStack.pop(), valStack.pop(), valStack.pop() ) );
+	 		}
+	 		opStack.push( token );
+ 		}
+ 	}
+ 	
+ 	while ( !opStack.isEmpty( ) )
+ 	{
+ 		valStack.push( calc( opStack.pop(), valStack.pop(), valStack.pop() ) );
+ 	}
+ 	return valStack.pop(); 	
+ }
+  
+ private boolean isLowerPrece( char curr, char toBeCompared )
+ {
+ 	return ( toBeCompared == '*' || toBeCompared == '/' ) 
+ 			|| ( toBeCompared == '-' && ( curr == '+' || curr == '-' ) );
+ }
+ 
+ private int calc( char operator, int operand1, int operand2 )
+ {
+ 	if ( operator == '+' )
+ 	{
+ 		return operand2 + operand1;
+ 	}
+ 	else if ( operator == '-' )
+ 	{
+ 		return operand2 - operand1;
+ 	}
+ 	else if ( operator == '*' )
+ 	{
+ 		return operand2 * operand1;
+ 	}
+ 	else
+ 	{
+ 		return operand2 / operand1;
+ 	}
+ }
 }

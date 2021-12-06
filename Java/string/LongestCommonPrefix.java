@@ -2,8 +2,8 @@ package string;
 
 public class LongestCommonPrefix 
 {
-    public String longestCommonPrefix(String[] strs) 
-    {
-        return "";
-    }
+ public String longestCommonPrefix(String[] strs) 
+ {
+  return "";
+ }
 }

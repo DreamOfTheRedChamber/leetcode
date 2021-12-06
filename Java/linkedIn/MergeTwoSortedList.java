@@ -9,8 +9,8 @@ import utility.ListNode;
 
 public class MergeTwoSortedList
 {
-    public ListNode mergeTwoLists( ListNode l1, ListNode l2 )
-    {
-        return null;
-    }
+ public ListNode mergeTwoLists( ListNode l1, ListNode l2 )
+ {
+  return null;
+ }
 }

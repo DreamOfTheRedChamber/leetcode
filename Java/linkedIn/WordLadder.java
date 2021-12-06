@@ -61,62 +61,62 @@ public class WordLadder
 		assertEquals(  -1, ladderLength( "hot", "dog", words2 ) );				
 	}
 	
-    public int ladderLength( String beginWord, String endWord, Set<String> wordList )
-    {    	
-    	if ( beginWord == null || endWord == null )
-    	{
-    		throw new IllegalArgumentException();
-    	}
-    	if ( beginWord.equals( endWord ) )
-    	{
-    		return 0;
-    	}
-    	if ( wordList.size() == 0 )
-    	{
-    		return -1;
-    	}
-    	
-    	Set<String> toBeVisited = new HashSet<>( wordList );
-    	toBeVisited.add( endWord );
-    	toBeVisited.remove( beginWord );
-    	Queue<String> bfsQueue = new LinkedList<>();
-    	bfsQueue.add( beginWord );
-    	int level = 0;
-    	while ( !bfsQueue.isEmpty() )
-    	{
-    		int size = bfsQueue.size();
-    		for ( int i = 0; i < size; i++ )
-    		{
-    			String head = bfsQueue.poll();
-    			if ( head.equals( endWord ) )
-    			{
-    				return level + 1;
-    			}
-    			generateNextLevel( head, bfsQueue, toBeVisited );
-    		}    		
+ public int ladderLength( String beginWord, String endWord, Set<String> wordList )
+ { 	
+ 	if ( beginWord == null || endWord == null )
+ 	{
+ 		throw new IllegalArgumentException();
+ 	}
+ 	if ( beginWord.equals( endWord ) )
+ 	{
+ 		return 0;
+ 	}
+ 	if ( wordList.size() == 0 )
+ 	{
+ 		return -1;
+ 	}
+ 	
+ 	Set<String> toBeVisited = new HashSet<>( wordList );
+ 	toBeVisited.add( endWord );
+ 	toBeVisited.remove( beginWord );
+ 	Queue<String> bfsQueue = new LinkedList<>();
+ 	bfsQueue.add( beginWord );
+ 	int level = 0;
+ 	while ( !bfsQueue.isEmpty() )
+ 	{
+ 		int size = bfsQueue.size();
+ 		for ( int i = 0; i < size; i++ )
+ 		{
+ 			String head = bfsQueue.poll();
+ 			if ( head.equals( endWord ) )
+ 			{
+ 				return level + 1;
+ 			}
+ 			generateNextLevel( head, bfsQueue, toBeVisited );
+ 		} 		
 			level++;
-    	}
-    	return 0;
-    }
-    
-    private void generateNextLevel( String currWord, Queue<String> bfsQueue, Set<String> toBeVisited )
-    {
+ 	}
+ 	return 0;
+ }
+ 
+ private void generateNextLevel( String currWord, Queue<String> bfsQueue, Set<String> toBeVisited )
+ {
 		char[] word = currWord.toCharArray();
-    	for ( int i = 0; i < currWord.length(); i++ )
-    	{
-    		char chBeforeChange = word[i];
-    		for ( char ch = 'a'; ch <= 'z'; ch++ )
-    		{
-    			word[i] = ch;
-    			String nextStr = new String( word );
-    			if ( toBeVisited.contains( nextStr ) )
-    			{
-    				bfsQueue.add( nextStr );
-    				toBeVisited.remove( nextStr );
-    			}
-    		}
-    		word[i] = chBeforeChange;
-    	}
-    }
-    
+ 	for ( int i = 0; i < currWord.length(); i++ )
+ 	{
+ 		char chBeforeChange = word[i];
+ 		for ( char ch = 'a'; ch <= 'z'; ch++ )
+ 		{
+ 			word[i] = ch;
+ 			String nextStr = new String( word );
+ 			if ( toBeVisited.contains( nextStr ) )
+ 			{
+ 				bfsQueue.add( nextStr );
+ 				toBeVisited.remove( nextStr );
+ 			}
+ 		}
+ 		word[i] = chBeforeChange;
+ 	}
+ }
+ 
 }

@@ -1,21 +1,21 @@
 - [Intervals](#intervals)
   - [Greedy: Sort by ending points - Max num of non-overlapping intervals inside a range](#greedy-sort-by-ending-points---max-num-of-non-overlapping-intervals-inside-a-range)
-    - [757.Set-Intersection-Size-At-Least-Two](#757set-intersection-size-at-least-two)
+ - [757.Set-Intersection-Size-At-Least-Two](#757set-intersection-size-at-least-two)
   - [Greedy: Sort by starting points - Min num of intervals to cover the range](#greedy-sort-by-starting-points---min-num-of-intervals-to-cover-the-range)
   - [Sort either by start or endpoint](#sort-either-by-start-or-endpoint)
   - [DP - TODO](#dp---todo)
   - [Sweepline](#sweepline)
   - [Other](#other)
   - [Template: Merge interval](#template-merge-interval)
-    - [OPTIONS 1: PriorityQueue](#options-1-priorityqueue)
-    - [OPTIONS 2: Sort intervals by start and merge](#options-2-sort-intervals-by-start-and-merge)
-    - [OPTIONS 3: Sweepline](#options-3-sweepline)
+ - [OPTIONS 1: PriorityQueue](#options-1-priorityqueue)
+ - [OPTIONS 2: Sort intervals by start and merge](#options-2-sort-intervals-by-start-and-merge)
+ - [OPTIONS 3: Sweepline](#options-3-sweepline)
   - [DP: 1235.Maximum-Profit-in-Job-Scheduling](#dp-1235maximum-profit-in-job-scheduling)
-    - [Sort by start, based on whether selecting ith job or not](#sort-by-start-based-on-whether-selecting-ith-job-or-not)
-      - [Naive implementation: O(N^2)](#naive-implementation-on2)
-      - [Optimize with binary search: O(NlogN) and zip/unzip](#optimize-with-binary-search-onlogn-and-zipunzip)
-    - [Sort by end, based on how many jobs has been completed](#sort-by-end-based-on-how-many-jobs-has-been-completed)
-    - [Greedy](#greedy)
+ - [Sort by start, based on whether selecting ith job or not](#sort-by-start-based-on-whether-selecting-ith-job-or-not)
+   - [Naive implementation: O(N^2)](#naive-implementation-on2)
+   - [Optimize with binary search: O(NlogN) and zip/unzip](#optimize-with-binary-search-onlogn-and-zipunzip)
+ - [Sort by end, based on how many jobs has been completed](#sort-by-end-based-on-how-many-jobs-has-been-completed)
+ - [Greedy](#greedy)
 
 # Intervals
 
@@ -32,16 +32,16 @@
 ```python
 # Sample Pattern: Two while loop (the return value is the opposite per problem description)
 def findLongestChain(self, pairs: List[List[int]]) -> int:
-    sortedIn = sorted(pairs, key=lambda x: (x[1], x[0]))
-    i = 0
-    result = 0
-    while i < len(sortedIn):
-        j = i + 1
-        result += 1
-        while j < len(sortedIn) and sortedIn[j][0] <= sortedIn[i][1]:
-            j += 1
-        i = j
-    return result
+ sortedIn = sorted(pairs, key=lambda x: (x[1], x[0]))
+ i = 0
+ result = 0
+ while i < len(sortedIn):
+  j = i + 1
+  result += 1
+  while j < len(sortedIn) and sortedIn[j][0] <= sortedIn[i][1]:
+   j += 1
+  i = j
+ return result
 ```
 
 [1751.Maximum-Number-of-Events-That-Can-Be-Attended-II](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/1751.Maximum-Number-of-Events-That-Can-Be-Attended-II) (H)
@@ -53,29 +53,29 @@ def findLongestChain(self, pairs: List[List[int]]) -> int:
 ```python
 # Using leetcode 1326 as an example.
 def minTaps(self, n: int, ranges: List[int]) -> int:
-    intervals = [[i - r, i + r] for i, r in enumerate(ranges)]
-    sortedIntervals = sorted(intervals, key=lambda x : (x[0], -x[1])) 
-        
-    nextEnd = currEnd = currIndex = 0
-    numTaps = 0
-    while currIndex < len(sortedIntervals) and currEnd < n:
-        # for intervals overlapping with current interval,
-        # pick the one which has farthest reach
-        nextIndex = currIndex
-        while nextIndex < len(sortedIntervals) and sortedIntervals[nextIndex][0] <= currEnd:
+ intervals = [[i - r, i + r] for i, r in enumerate(ranges)]
+ sortedIntervals = sorted(intervals, key=lambda x : (x[0], -x[1])) 
+  
+ nextEnd = currEnd = currIndex = 0
+ numTaps = 0
+ while currIndex < len(sortedIntervals) and currEnd < n:
+  # for intervals overlapping with current interval,
+  # pick the one which has farthest reach
+  nextIndex = currIndex
+  while nextIndex < len(sortedIntervals) and sortedIntervals[nextIndex][0] <= currEnd:
 
-            # greedily pick the overlapping intervals 
-            nextEnd = max(sortedIntervals[nextIndex][1], nextEnd)
-            nextIndex += 1
-                
-        if nextIndex == currIndex:
-            return -1
-        else:            
-            numTaps += 1                
-            currIndex = nextIndex
-            currEnd = nextEnd
-                
-    return numTaps if currEnd >= n else -1       
+   # greedily pick the overlapping intervals 
+   nextEnd = max(sortedIntervals[nextIndex][1], nextEnd)
+   nextIndex += 1
+    
+  if nextIndex == currIndex:
+   return -1
+  else:   
+   numTaps += 1    
+   currIndex = nextIndex
+   currEnd = nextEnd
+    
+ return numTaps if currEnd >= n else -1    
 ```
 
 [045.Jump-Game-II](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/045.Jump-Game-II) (M)
@@ -89,17 +89,17 @@ def minTaps(self, n: int, ranges: List[int]) -> int:
 ```python
 # using leetcode 1288 as an example
 # Greedily pick the interval which has the earliest starting point and biggest length
-def removeCoveredIntervals(self, intervals: List[List[int]]) -> int:    
-    sortedInter = sorted(intervals, key=lambda x: (x[0], -x[1]))
-    numRemoved = 0
-    currIndex = 0
-    while currIndex < len(sortedInter):
-        nextStart = currIndex + 1
-        while nextStart < len(sortedInter) and sortedInter[nextStart][1] <= sortedInter[currIndex][1]:
-           nextStart += 1
-           numRemoved += 1
-        currIndex = nextStart
-    return len(intervals) - numRemoved
+def removeCoveredIntervals(self, intervals: List[List[int]]) -> int: 
+ sortedInter = sorted(intervals, key=lambda x: (x[0], -x[1]))
+ numRemoved = 0
+ currIndex = 0
+ while currIndex < len(sortedInter):
+  nextStart = currIndex + 1
+  while nextStart < len(sortedInter) and sortedInter[nextStart][1] <= sortedInter[currIndex][1]:
+     nextStart += 1
+     numRemoved += 1
+  currIndex = nextStart
+ return len(intervals) - numRemoved
 ```
 
 ## DP - TODO
@@ -112,28 +112,28 @@ def removeCoveredIntervals(self, intervals: List[List[int]]) -> int:
 
 ```python
 class Solution:
-    def merge(self, intervals: List[List[int]]) -> List[List[int]]:
-        boundaryPoints = []
-        for interval in intervals:
-            boundaryPoints.append((interval[0], 1))
-            boundaryPoints.append((interval[1], -1))
-        boundaryPoints.sort(key=lambda x: (x[0], -x[1]))
+ def merge(self, intervals: List[List[int]]) -> List[List[int]]:
+  boundaryPoints = []
+  for interval in intervals:
+   boundaryPoints.append((interval[0], 1))
+   boundaryPoints.append((interval[1], -1))
+  boundaryPoints.sort(key=lambda x: (x[0], -x[1]))
 
-        result = []
-        start, end = 0, 0
-        count = 0
-        for point in boundaryPoints:
-            if point[1] == 1:
-                count += 1
-                if count == 1:
-                    start = point[0]
-            else:
-                count -= 1
-                if count == 0:
-                    end = point[0]
-                    result.append([start, end])
+  result = []
+  start, end = 0, 0
+  count = 0
+  for point in boundaryPoints:
+   if point[1] == 1:
+    count += 1
+    if count == 1:
+     start = point[0]
+   else:
+    count -= 1
+    if count == 0:
+     end = point[0]
+     result.append([start, end])
 
-        return result
+  return result
 ```
 
 [252.Meeting-Rooms](https://github.com/wisdompeak/LeetCode/tree/master/Others/252.Meeting-Rooms) (M)\
@@ -193,32 +193,32 @@ sorted(intervals, key=lambda interval: (interval.start, interval.end))
 """
 # Definition for an Interval.
 class Interval:
-    def __init__(self, start: int = None, end: int = None):
-        self.start = start
-        self.end = end
+ def __init__(self, start: int = None, end: int = None):
+  self.start = start
+  self.end = end
 """
 class Solution:
-    def employeeFreeTime(self, schedule: '[[Interval]]') -> '[Interval]':
-        points = []
-        for intervalList in schedule:
-            for interval in intervalList:
-                points.append((interval.start, 1))
-                points.append((interval.end, -1))
-                
-        # when start and end occurs at the same point
-        # start should come first
-        sortedPoints = sorted(points, key=lambda x: (x[0], -x[1]))
-        
-        result = []
-        counter = 0
-        prevPoint = float('-inf')
-        for point in sortedPoints:
-            if counter == 0 and prevPoint != point[0] and point[0] != point[1] and prevPoint != float('-inf'):
-                result.append(Interval(prevPoint, point[0]))
-            
-            counter = counter + (1 if point[1] == 1 else -1)
-            prevPoint = point[0]
-        return result
+ def employeeFreeTime(self, schedule: '[[Interval]]') -> '[Interval]':
+  points = []
+  for intervalList in schedule:
+   for interval in intervalList:
+    points.append((interval.start, 1))
+    points.append((interval.end, -1))
+    
+  # when start and end occurs at the same point
+  # start should come first
+  sortedPoints = sorted(points, key=lambda x: (x[0], -x[1]))
+  
+  result = []
+  counter = 0
+  prevPoint = float('-inf')
+  for point in sortedPoints:
+   if counter == 0 and prevPoint != point[0] and point[0] != point[1] and prevPoint != float('-inf'):
+    result.append(Interval(prevPoint, point[0]))
+   
+   counter = counter + (1 if point[1] == 1 else -1)
+   prevPoint = point[0]
+  return result
 ```
 
 ## DP: 1235.Maximum-Profit-in-Job-Scheduling
@@ -232,56 +232,56 @@ class Solution:
 ```python
 # Time limit exceeded
 class Solution:
-    def jobScheduling(self, startTime: List[int], endTime: List[int], profit: List[int]) -> int:        
-        # max profit by using from begin to self.end
-        @lru_cache(maxsize=None)
-        def maxProfit(begin: int) -> int:
-            if begin >= self.end:
-                return 0
-            
-            # job at begin
-            # take 
-            take = self.sortedInter[begin][2]
-            for index, zipTuple in enumerate(self.sortedInter[begin+1:], begin+1):
-                if zipTuple[0] >= self.sortedInter[begin][1]:
-                    take += maxProfit(index)
-                    break                    
-            
-            # not take
-            notTake = maxProfit(begin + 1)            
+ def jobScheduling(self, startTime: List[int], endTime: List[int], profit: List[int]) -> int:  
+  # max profit by using from begin to self.end
+  @lru_cache(maxsize=None)
+  def maxProfit(begin: int) -> int:
+   if begin >= self.end:
+    return 0
+   
+   # job at begin
+   # take 
+   take = self.sortedInter[begin][2]
+   for index, zipTuple in enumerate(self.sortedInter[begin+1:], begin+1):
+    if zipTuple[0] >= self.sortedInter[begin][1]:
+     take += maxProfit(index)
+     break     
+   
+   # not take
+   notTake = maxProfit(begin + 1)   
 
-            return max(take, notTake)
-        
-        self.sortedInter = sorted(zip(startTime, endTime, profit))
-        self.end = len(self.sortedInter)
-        return maxProfit(0)
+   return max(take, notTake)
+  
+  self.sortedInter = sorted(zip(startTime, endTime, profit))
+  self.end = len(self.sortedInter)
+  return maxProfit(0)
 ```
 
 #### Optimize with binary search: O(NlogN) and zip/unzip
 
 ```python
 class Solution:
-    def jobScheduling(self, startTime: List[int], endTime: List[int], profit: List[int]) -> int:        
-        # max profit by using from pos to self.end - 1
-        @lru_cache(maxsize=None)
-        def maxProfit(pos: int) -> int:
-            if pos >= self.end:
-                return 0
-            
-            # job at pos
-            # take 
-            take = self.sortedProfit[pos]
-            index = bisect.bisect_left(self.sortedStart, self.sortedEnd[pos], pos + 1)
-            take += maxProfit(index)
-                
-            # not take
-            notTake = maxProfit(pos + 1)            
+ def jobScheduling(self, startTime: List[int], endTime: List[int], profit: List[int]) -> int:  
+  # max profit by using from pos to self.end - 1
+  @lru_cache(maxsize=None)
+  def maxProfit(pos: int) -> int:
+   if pos >= self.end:
+    return 0
+   
+   # job at pos
+   # take 
+   take = self.sortedProfit[pos]
+   index = bisect.bisect_left(self.sortedStart, self.sortedEnd[pos], pos + 1)
+   take += maxProfit(index)
+    
+   # not take
+   notTake = maxProfit(pos + 1)   
 
-            return max(take, notTake)
-        
-        self.sortedStart, self.sortedEnd, self.sortedProfit = zip(*sorted(zip(startTime, endTime, profit)))
-        self.end = len(self.sortedStart)
-        return maxProfit(0)
+   return max(take, notTake)
+  
+  self.sortedStart, self.sortedEnd, self.sortedProfit = zip(*sorted(zip(startTime, endTime, profit)))
+  self.end = len(self.sortedStart)
+  return maxProfit(0)
 ```
 
 ### Sort by end, based on how many jobs has been completed
@@ -290,25 +290,25 @@ class Solution:
 
 ```python
 class Solution:
-    def jobScheduling(self, startTime: List[int], endTime: List[int], profit: List[int]) -> int:
-        
-        # maximum profit from 0 to pos
-        @lru_cache(maxsize=None)
-        def maxProfit(pos: int) -> int:
-            if pos < 0:
-                return 0
-                        
-            notTake = maxProfit(pos - 1)
-            take = self.sortedProfit[pos]            
+ def jobScheduling(self, startTime: List[int], endTime: List[int], profit: List[int]) -> int:
+  
+  # maximum profit from 0 to pos
+  @lru_cache(maxsize=None)
+  def maxProfit(pos: int) -> int:
+   if pos < 0:
+    return 0
+      
+   notTake = maxProfit(pos - 1)
+   take = self.sortedProfit[pos]   
 
-            # here need to use bisect_right
-            index = bisect.bisect_right(self.sortedEnd, self.sortedStart[pos])
-            take += maxProfit(index - 1)
-            
-            return max(take, notTake)
-        
-        self.sortedEnd, self.sortedStart, self.sortedProfit = zip(*sorted(zip(endTime, startTime, profit)))
-        return maxProfit(len(self.sortedEnd) - 1)
+   # here need to use bisect_right
+   index = bisect.bisect_right(self.sortedEnd, self.sortedStart[pos])
+   take += maxProfit(index - 1)
+   
+   return max(take, notTake)
+  
+  self.sortedEnd, self.sortedStart, self.sortedProfit = zip(*sorted(zip(endTime, startTime, profit)))
+  return maxProfit(len(self.sortedEnd) - 1)
 
 ```
 

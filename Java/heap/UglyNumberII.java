@@ -10,8 +10,8 @@ Note that 1 is typically treated as an ugly number.
 //TO_HURRY
 public class UglyNumberII
 {
-    public int nthUglyNumber(int n) 
-    {
-        return 0;
-    }
+ public int nthUglyNumber(int n) 
+ {
+  return 0;
+ }
 }

@@ -2,8 +2,8 @@
 - [Coding templates](#coding-templates)
 - [Online IDE templates](#online-ide-templates)
   - [Coderpad](#coderpad)
-    - [Java](#java)
-    - [Python](#python)
+ - [Java](#java)
+ - [Python](#python)
   - [Online courses](#online-courses)
 
 # [Coding templates](https://github.com/wisdompeak/LeetCode/tree/master/Template)
@@ -31,27 +31,27 @@ import java.util.*;
 public class Solution 
 {
 
-    @Test
-    public void test1()
-    {
-      /* 
+ @Test
+ public void test1()
+ {
+   /* 
 
-      */
-    }    
+   */
+ } 
 
-    @Ignore
-    @Test
-    public void test3()
-    {
-        /* 
+ @Ignore
+ @Test
+ public void test3()
+ {
+  /* 
 
-        */
-    }
+  */
+ }
 
-    public static void main(String[] args) 
-    {
-        JUnitCore.main("Solution");
-    }    
+ public static void main(String[] args) 
+ {
+  JUnitCore.main("Solution");
+ } 
 
 }
 ```
@@ -70,15 +70,15 @@ import re
 
 class OnlineHackerRankCodePair(unittest.TestCase):
 
-    @unittest.skip
-    def test_Test1(self):
-        self.assertEqual("a", "a")
+ @unittest.skip
+ def test_Test1(self):
+  self.assertEqual("a", "a")
 
-    def test_Test2(self):
-        self.assertFalse(False)
-        
+ def test_Test2(self):
+  self.assertFalse(False)
+  
 if __name__ == '__main__':
-    unittest.main()
+ unittest.main()
 ```
 
 ## Online courses

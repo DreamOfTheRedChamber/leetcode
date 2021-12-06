@@ -16,37 +16,37 @@ Could you solve it with constant space complexity? (Note: The output array does 
  */
 public class ProductOfArrayExceptSelf
 {
-    public int[] productExceptSelf( int[] nums )
-    {
-    	if ( nums == null || nums.length <= 1 )
-    	{
-    		return new int[0];
-    	}
-    	
-        int[] result = new int[nums.length];
+ public int[] productExceptSelf( int[] nums )
+ {
+ 	if ( nums == null || nums.length <= 1 )
+ 	{
+ 		return new int[0];
+ 	}
+ 	
+  int[] result = new int[nums.length];
 
-        int prefixProduct = 1;
-        result[0] = 1;
-        for ( int i = 1; i < result.length; i++ )
-        {
-        	prefixProduct *= nums[i-1];
-        	result[i] = prefixProduct;
-        }
-        
-        int suffixProduct = 1;
-        result[nums.length-1] = prefixProduct;
-        for ( int i = nums.length - 2; i >= 0; i-- )
-        {
-        	suffixProduct *= nums[i+1];
-        	result[i] *= suffixProduct;
-        }
-        
-        return result;
-    }
-    
-    @Test
-    public void test()
-    {
-    	System.out.println( Arrays.toString( productExceptSelf( new int[]{ 1, 2, 3, 4} ) ) );
-    }
+  int prefixProduct = 1;
+  result[0] = 1;
+  for ( int i = 1; i < result.length; i++ )
+  {
+  	prefixProduct *= nums[i-1];
+  	result[i] = prefixProduct;
+  }
+  
+  int suffixProduct = 1;
+  result[nums.length-1] = prefixProduct;
+  for ( int i = nums.length - 2; i >= 0; i-- )
+  {
+  	suffixProduct *= nums[i+1];
+  	result[i] *= suffixProduct;
+  }
+  
+  return result;
+ }
+ 
+ @Test
+ public void test()
+ {
+ 	System.out.println( Arrays.toString( productExceptSelf( new int[]{ 1, 2, 3, 4} ) ) );
+ }
 }

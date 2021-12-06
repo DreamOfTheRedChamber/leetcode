@@ -7,9 +7,9 @@ package math;
 public class FactorialTrailingZeroes
 {
 
-    public int trailingZeroes(int n) 
-    {
-        return 0;
-    }
+ public int trailingZeroes(int n) 
+ {
+  return 0;
+ }
 
 }

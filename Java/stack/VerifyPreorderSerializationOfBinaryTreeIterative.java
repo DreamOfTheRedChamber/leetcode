@@ -12,9 +12,9 @@ import org.junit.Test;
 One way to serialize a binary tree is to use pre-order traversal. 
 When we encounter a non-null node, we record the node's value. If it is a null node, we record using a sentinel value such as #.
 
-     _9_
-    /   \
-   3     2
+  _9_
+ /   \
+   3  2
   / \   / \
  4   1  #  6
 / \ / \   / \
@@ -55,7 +55,7 @@ public class VerifyPreorderSerializationOfBinaryTreeIterative
 	}
 	
 	public boolean isValidSerialization( String preorder )
-    {
+ {
 		if ( preorder == null ) 
 		{
 			throw new IllegalArgumentException("");
@@ -81,5 +81,5 @@ public class VerifyPreorderSerializationOfBinaryTreeIterative
 		}
 		return preorderStack.size() == 1 
 				&& preorderStack.get( 0 ).equals( "#" );
-    }
+ }
 }

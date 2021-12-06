@@ -17,7 +17,7 @@ public class HitCounter
 	 * Record a hit.
 	 * 
 	 * @param timestamp
-	 *            - The current timestamp (in seconds granularity).
+	 *   - The current timestamp (in seconds granularity).
 	 */
 	public void hit( int timestamp )
 	{
@@ -28,7 +28,7 @@ public class HitCounter
 	 * Return the number of hits in the past 5 minutes.
 	 * 
 	 * @param timestamp
-	 *            - The current timestamp (in seconds granularity).
+	 *   - The current timestamp (in seconds granularity).
 	 */
 	public int getHits( int timestamp )
 	{

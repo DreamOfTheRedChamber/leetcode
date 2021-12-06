@@ -7,8 +7,8 @@ For 1-byte character, the first bit is a 0, followed by its unicode code.
 For n-bytes character, the first n-bits are all one's, the n+1 bit is 0, followed by n-1 bytes with most significant 2 bits being 10.
 This is how the UTF-8 encoding would work:
 
-   Char. number range  |        UTF-8 octet sequence
-      (hexadecimal)    |              (binary)
+   Char. number range  |  UTF-8 octet sequence
+   (hexadecimal) |     (binary)
    --------------------+---------------------------------------------
    0000 0000-0000 007F | 0xxxxxxx
    0000 0080-0000 07FF | 110xxxxx 10xxxxxx
@@ -37,8 +37,8 @@ But the second continuation byte does not start with 10, so it is invalid.
 
 public class UTF8Validation 
 {
-    public boolean validUtf8( int[] data ) 
-    {
-        return true;
-    }
+ public boolean validUtf8( int[] data ) 
+ {
+  return true;
+ }
 }

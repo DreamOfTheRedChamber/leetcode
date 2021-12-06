@@ -34,8 +34,8 @@ the gap between the 5th and 6th stone is too large.
  * */
 public class FrogJump 
 {
-    public boolean canCross( int[] stones )
-    {
-        return true;
-    }
+ public boolean canCross( int[] stones )
+ {
+  return true;
+ }
 }

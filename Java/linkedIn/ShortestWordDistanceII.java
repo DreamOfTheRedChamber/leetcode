@@ -28,45 +28,45 @@ public class ShortestWordDistanceII
 
 	private Map<String, List<Integer>> wordToIndexes;
 	
-    public ShortestWordDistanceII(String[] words)
-    {
-        wordToIndexes = new HashMap<>();
-        for ( int i = 0; i < words.length; i++ )
-        {
-        	wordToIndexes.putIfAbsent( words[i], new ArrayList<>() );
-        	wordToIndexes.get( words[i] ).add( i );
-        }
-    }
+ public ShortestWordDistanceII(String[] words)
+ {
+  wordToIndexes = new HashMap<>();
+  for ( int i = 0; i < words.length; i++ )
+  {
+  	wordToIndexes.putIfAbsent( words[i], new ArrayList<>() );
+  	wordToIndexes.get( words[i] ).add( i );
+  }
+ }
 
-    public int shortest(String word1, String word2) 
-    {
-    	List<Integer> indexes1 = wordToIndexes.get( word1 );
-    	List<Integer> indexes2 = wordToIndexes.get( word2 );
-    	if (	indexes1 == null 
-    			|| indexes2 == null 
-    			|| indexes1.size() == 0 
-    			|| indexes2.size() == 0 )
-    	{
-    		throw new IllegalArgumentException(""); 
-    	}
-    	
-    	int index1 = 0;
-    	int index2 = 0;
-    	int minDis = Integer.MAX_VALUE;
-    	while ( index1 < indexes1.size() 
-    			&& index2 < indexes2.size() )
-    	{
-    		minDis = Math.min( minDis, Math.abs( indexes1.get( index1 ) - indexes2.get( index2 ) ) );
-    		if ( indexes1.get( index1 ) < indexes2.get( index2 ) )
-    		{
-    			index1++;
-    		}
-    		else
-    		{
-    			index2++;
-    		}
-    	}
-    	return minDis;
-    }
+ public int shortest(String word1, String word2) 
+ {
+ 	List<Integer> indexes1 = wordToIndexes.get( word1 );
+ 	List<Integer> indexes2 = wordToIndexes.get( word2 );
+ 	if (	indexes1 == null 
+ 			|| indexes2 == null 
+ 			|| indexes1.size() == 0 
+ 			|| indexes2.size() == 0 )
+ 	{
+ 		throw new IllegalArgumentException(""); 
+ 	}
+ 	
+ 	int index1 = 0;
+ 	int index2 = 0;
+ 	int minDis = Integer.MAX_VALUE;
+ 	while ( index1 < indexes1.size() 
+ 			&& index2 < indexes2.size() )
+ 	{
+ 		minDis = Math.min( minDis, Math.abs( indexes1.get( index1 ) - indexes2.get( index2 ) ) );
+ 		if ( indexes1.get( index1 ) < indexes2.get( index2 ) )
+ 		{
+ 			index1++;
+ 		}
+ 		else
+ 		{
+ 			index2++;
+ 		}
+ 	}
+ 	return minDis;
+ }
 
 }

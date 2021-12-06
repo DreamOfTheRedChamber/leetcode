@@ -16,9 +16,9 @@ Return 4.
 public class MaximalSquare
 {
 
-    public int maximalSquare(char[][] matrix) 
-    {
-        return 0;
-    }
+ public int maximalSquare(char[][] matrix) 
+ {
+  return 0;
+ }
 
 }

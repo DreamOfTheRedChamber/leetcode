@@ -51,69 +51,69 @@ public class InsertDeleteGetRandomII
 	private Map<Integer, Set<Integer>> valToIndexes;	
 	private Random random;
 	
-    /** Initialize your data structure here. */
-    public InsertDeleteGetRandomII() 
-    {
-        list = new ArrayList<>();
-        valToIndexes = new HashMap<>();
-        random = new Random();
-    }
-    
-    /** Inserts a value to the collection. Returns true if the collection did not already contain the specified element. */
-    public boolean insert( int val )
-    {
-    	valToIndexes.putIfAbsent( val, new HashSet<>() );
-    	valToIndexes.get( val ).add( list.size() );
-    	list.add( val );
-    	return valToIndexes.get( val ).size() == 1;
-    }
-    
-    /** Removes a value from the collection. Returns true if the collection contained the specified element. */
-    public boolean remove( int val )
-    {
-    	Set<Integer> indexes = valToIndexes.get( val );
-    	if ( indexes == null || indexes.size() == 0 )
-    	{
-    		return false;
-    	}
-    	
-    	int indexToRemove = indexes.iterator().next();
-    	indexes.remove( indexToRemove );    	
-    	Set<Integer> indexesSwapped = valToIndexes.get( list.get( list.size() - 1 ) );
-    	indexesSwapped.add( indexToRemove );	// add operation comes before remove
-    	indexesSwapped.remove( list.size() - 1 );
-    	
-    	Collections.swap( list, indexToRemove, list.size() - 1 );
-    	list.remove( list.size() - 1 );
-    	return true;
-     }
-    
-    /** Get a random element from the collection. */
-    public int getRandom()
-    {
-    	return list.get( random.nextInt( list.size() ) );
-    }
+ /** Initialize your data structure here. */
+ public InsertDeleteGetRandomII() 
+ {
+  list = new ArrayList<>();
+  valToIndexes = new HashMap<>();
+  random = new Random();
+ }
+ 
+ /** Inserts a value to the collection. Returns true if the collection did not already contain the specified element. */
+ public boolean insert( int val )
+ {
+ 	valToIndexes.putIfAbsent( val, new HashSet<>() );
+ 	valToIndexes.get( val ).add( list.size() );
+ 	list.add( val );
+ 	return valToIndexes.get( val ).size() == 1;
+ }
+ 
+ /** Removes a value from the collection. Returns true if the collection contained the specified element. */
+ public boolean remove( int val )
+ {
+ 	Set<Integer> indexes = valToIndexes.get( val );
+ 	if ( indexes == null || indexes.size() == 0 )
+ 	{
+ 		return false;
+ 	}
+ 	
+ 	int indexToRemove = indexes.iterator().next();
+ 	indexes.remove( indexToRemove ); 	
+ 	Set<Integer> indexesSwapped = valToIndexes.get( list.get( list.size() - 1 ) );
+ 	indexesSwapped.add( indexToRemove );	// add operation comes before remove
+ 	indexesSwapped.remove( list.size() - 1 );
+ 	
+ 	Collections.swap( list, indexToRemove, list.size() - 1 );
+ 	list.remove( list.size() - 1 );
+ 	return true;
+  }
+ 
+ /** Get a random element from the collection. */
+ public int getRandom()
+ {
+ 	return list.get( random.nextInt( list.size() ) );
+ }
 
-    /*
+ /*
 ["RandomizedCollection","insert","insert","insert","insert","insert",
 						"remove","remove","remove","remove"]
 [[],[4],[3],[4],[2],[4],
 [4],[3],[4],[4]]
-     * */
+  * */
 
-    @Test
-    public void test()
-    {
-    	InsertDeleteGetRandomII result = new InsertDeleteGetRandomII();
-    	assertTrue( result.insert( 4 ) );
-    	assertTrue( result.insert( 3 ) );
-    	assertTrue( !result.insert( 4 ) );
-    	assertTrue( result.insert( 2 ) );
-    	assertTrue( !result.insert( 4 ) );
-    	
-    	assertTrue( result.remove( 4 ) );
-    	assertTrue( result.remove( 3 ) );
-    	assertTrue( result.remove( 4 ) );
-    	assertTrue( result.remove( 4 ) );    	    	
-    }
+ @Test
+ public void test()
+ {
+ 	InsertDeleteGetRandomII result = new InsertDeleteGetRandomII();
+ 	assertTrue( result.insert( 4 ) );
+ 	assertTrue( result.insert( 3 ) );
+ 	assertTrue( !result.insert( 4 ) );
+ 	assertTrue( result.insert( 2 ) );
+ 	assertTrue( !result.insert( 4 ) );
+ 	
+ 	assertTrue( result.remove( 4 ) );
+ 	assertTrue( result.remove( 3 ) );
+ 	assertTrue( result.remove( 4 ) );
+ 	assertTrue( result.remove( 4 ) ); 	 	
+ }
 }

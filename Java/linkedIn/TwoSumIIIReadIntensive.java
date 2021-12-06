@@ -8,7 +8,7 @@ public class TwoSumIIIReadIntensive
 	private Set<Integer> existingNums = new HashSet<>();
 	private Set<Integer> existingSums = new HashSet<>();
 	
-    // Add the number to an internal data structure.
+ // Add the number to an internal data structure.
 	public void add( int number )
 	{
 		if ( existingNums.contains ( number ) )
@@ -25,9 +25,9 @@ public class TwoSumIIIReadIntensive
 		}
 	}
 
-    // Find if there exists any pair of numbers which sum is equal to the value.
+ // Find if there exists any pair of numbers which sum is equal to the value.
 	public boolean find( int value )
 	{
-	    return existingSums.contains ( value );
+	 return existingSums.contains ( value );
 	}
 }

@@ -31,31 +31,31 @@ Does a hash table work? Why or why not? How about a Trie? If you would like to l
  */
 public class WordSearchII
 {
-    public List<String> findWords( char[][] board, String[] words ) 
-    {
-    	List<String> result = new LinkedList<>();
-    	Trie wordsTrie = buildDicTrie( words );
-    	
-    	boolean[][] isVisited = new boolean[board.length][board[0].length];    	
-    	for ( int i = 0; i < board.length; i++ )
-    	{
-    		for ( int j = 0; j < board[0].length; j++ )
-    		{
-    			dfs( result, board, new StringBuilder(), i, j, wordsTrie, isVisited );
-    		}
-    	}
-    	
-    	return result.stream( )
-    				   .distinct( )
-    				   .collect( Collectors.toList( ) );
-    }
-    
-    private void dfs( List<String> result, char[][] board, StringBuilder currPath, int xCoor, int yCoor, Trie trie, boolean[][] isVisited )
-    {
-    	if ( xCoor < 0 || xCoor >= board.length || yCoor < 0 || yCoor >= board[0].length || isVisited[xCoor][yCoor] )
-    	{
-    		return;
-    	}
+ public List<String> findWords( char[][] board, String[] words ) 
+ {
+ 	List<String> result = new LinkedList<>();
+ 	Trie wordsTrie = buildDicTrie( words );
+ 	
+ 	boolean[][] isVisited = new boolean[board.length][board[0].length]; 	
+ 	for ( int i = 0; i < board.length; i++ )
+ 	{
+ 		for ( int j = 0; j < board[0].length; j++ )
+ 		{
+ 			dfs( result, board, new StringBuilder(), i, j, wordsTrie, isVisited );
+ 		}
+ 	}
+ 	
+ 	return result.stream( )
+ 				   .distinct( )
+ 				   .collect( Collectors.toList( ) );
+ }
+ 
+ private void dfs( List<String> result, char[][] board, StringBuilder currPath, int xCoor, int yCoor, Trie trie, boolean[][] isVisited )
+ {
+ 	if ( xCoor < 0 || xCoor >= board.length || yCoor < 0 || yCoor >= board[0].length || isVisited[xCoor][yCoor] )
+ 	{
+ 		return;
+ 	}
 
 		isVisited[xCoor][yCoor] = true;
 		currPath.append( board[xCoor][yCoor] );
@@ -76,31 +76,31 @@ public class WordSearchII
 		
 		currPath.deleteCharAt( currPath.length() - 1 );
 		isVisited[xCoor][yCoor] = false;
-    }
-        
-    private Trie buildDicTrie( String[] words )
-    {
-    	Trie wordsTrie = new Trie();
-    	for ( String word : words )
-    	{
-    		wordsTrie.insert( word );
-    	}
-    	return wordsTrie;
-    }
+ }
+  
+ private Trie buildDicTrie( String[] words )
+ {
+ 	Trie wordsTrie = new Trie();
+ 	for ( String word : words )
+ 	{
+ 		wordsTrie.insert( word );
+ 	}
+ 	return wordsTrie;
+ }
 	
-    private class TrieNode
-    {
-      public final int CHARSET_SIZE = 26;
-      public char val;
-      public Map<Character, TrieNode> children;     
-      public boolean isLeaf;
-      public TrieNode( char val )
-      {
-        this.val = val;
-        children = new HashMap<>( CHARSET_SIZE );
-      }     
-    }
-    
+ private class TrieNode
+ {
+   public final int CHARSET_SIZE = 26;
+   public char val;
+   public Map<Character, TrieNode> children;  
+   public boolean isLeaf;
+   public TrieNode( char val )
+   {
+  this.val = val;
+  children = new HashMap<>( CHARSET_SIZE );
+   }  
+ }
+ 
 	class Trie
 	{
 		public TrieNode root;

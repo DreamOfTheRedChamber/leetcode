@@ -6,41 +6,41 @@ description: Python is the best language for interview
 
 * [Beauty of Python](beauty\_of\_python.md#beauty-of-python)
   * [Collections \[TODO\]](beauty\_of\_python.md#collections-todo)
-    * [Compare heapq and SortedList complexity \[TODO\]](beauty\_of\_python.md#compare-heapq-and-sortedlist-complexity-todo)
-    * [Sort comparator \[TODO\]](beauty\_of\_python.md#sort-comparator-todo)
+ * [Compare heapq and SortedList complexity \[TODO\]](beauty\_of\_python.md#compare-heapq-and-sortedlist-complexity-todo)
+ * [Sort comparator \[TODO\]](beauty\_of\_python.md#sort-comparator-todo)
   * [Type conversions](beauty\_of\_python.md#type-conversions)
-    * [int and char](beauty\_of\_python.md#int-and-char)
+ * [int and char](beauty\_of\_python.md#int-and-char)
   * [f-string](beauty\_of\_python.md#f-string)
   * [Walrus operator :=](beauty\_of\_python.md#walrus-operator-)
-    * [used in assignment expressions](beauty\_of\_python.md#used-in-assignment-expressions)
-    * [Used in list comprehension](beauty\_of\_python.md#used-in-list-comprehension)
+ * [used in assignment expressions](beauty\_of\_python.md#used-in-assignment-expressions)
+ * [Used in list comprehension](beauty\_of\_python.md#used-in-list-comprehension)
   * [Decorator](beauty\_of\_python.md#decorator)
   * [Slicing](beauty\_of\_python.md#slicing)
-    * [Stride syntax](beauty\_of\_python.md#stride-syntax)
+ * [Stride syntax](beauty\_of\_python.md#stride-syntax)
   * [List comprehension](beauty\_of\_python.md#list-comprehension)
-    * [Number of expressions](beauty\_of\_python.md#number-of-expressions)
-    * [Generator expressions](beauty\_of\_python.md#generator-expressions)
-      * [Yield](beauty\_of\_python.md#yield)
-      * [Yield from](beauty\_of\_python.md#yield-from)
-      * [Example](beauty\_of\_python.md#example)
+ * [Number of expressions](beauty\_of\_python.md#number-of-expressions)
+ * [Generator expressions](beauty\_of\_python.md#generator-expressions)
+   * [Yield](beauty\_of\_python.md#yield)
+   * [Yield from](beauty\_of\_python.md#yield-from)
+   * [Example](beauty\_of\_python.md#example)
   * [Iterator](beauty\_of\_python.md#iterator)
-    * [Iterables](beauty\_of\_python.md#iterables)
-    * [Enumerate over range](beauty\_of\_python.md#enumerate-over-range)
-    * [Zip for iterators in parallel](beauty\_of\_python.md#zip-for-iterators-in-parallel)
-      * [Star + zip](beauty\_of\_python.md#star--zip)
+ * [Iterables](beauty\_of\_python.md#iterables)
+ * [Enumerate over range](beauty\_of\_python.md#enumerate-over-range)
+ * [Zip for iterators in parallel](beauty\_of\_python.md#zip-for-iterators-in-parallel)
+   * [Star + zip](beauty\_of\_python.md#star--zip)
   * [References](beauty\_of\_python.md#references)
 
 ## Beauty of Python
 
 ### Collections \[TODO]
 
-|                      |                  |             |
+|       |      |    |
 | -------------------- | :--------------: | ----------: |
-| `data type`          |    `Original`    |  `Improved` |
-| priorityQueue        | heapq.\* methods |  SortedList |
-| list / stack / queue |        \[]       |             |
-| deque                |       deque      |             |
-| dictionary           |       dict       | defaultdict |
+| `data type`    | `Original` |  `Improved` |
+| priorityQueue  | heapq.\* methods |  SortedList |
+| list / stack / queue |  \[]    |    |
+| deque    |    deque   |    |
+| dictionary     |    dict    | defaultdict |
 
 #### Compare heapq and SortedList complexity \[TODO]
 
@@ -65,11 +65,11 @@ description: Python is the best language for interview
 ```py
 n = len(a)
 if n > 10:
-    print(f"List is too long ({n} elements, expected <= 10)")
+ print(f"List is too long ({n} elements, expected <= 10)")
 
 # need parenthese because its priority order is low
-if (x := len(a)) > 10:     
-    print(f"List is too long ({x} elements, expected <= 10)")
+if (x := len(a)) > 10:  
+ print(f"List is too long ({x} elements, expected <= 10)")
 ```
 
 #### Used in list comprehension
@@ -142,10 +142,10 @@ filtered = [[x for x in row if x % 3 == 0] for row in matrix if sum(row) >= 10]
 
 ```py
 def pre_order_traverse(root: TreeNode):
-    if root is None: return
-    yield root.val
-    yield from root.left
-    yield from root.right
+ if root is None: return
+ yield root.val
+ yield from root.left
+ yield from root.right
 
 # Materialize the generator with list
 list(pre_order_traverse(root))
@@ -163,7 +163,7 @@ list(pre_order_traverse(root))
 ```py
 l = ['Alice', 'Bob', 'Charlie']
 for i, name in enumerate(l, 1):
-    print(i, name)
+ print(i, name)
 
 # 1 Alice
 # 2 Bob

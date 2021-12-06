@@ -52,64 +52,64 @@ public class InsertIntervals
 		}
 	}
 		
-    public List<Interval> insert( List<Interval> intervals, Interval newInterval )
-    {
-    	if ( newInterval == null )
-    	{
-    		throw new IllegalArgumentException("");
-    	}
-    	
-    	List<Interval> result = new ArrayList<>();
-    	if ( intervals == null || intervals.size() == 0 )
-    	{
-    		result.add( newInterval );
-    		return result;
-    	}
-    	
-    	Interval curr = newInterval;
-    	for ( Interval interval : intervals )
-    	{
-    		if ( isOverlap( interval, curr ) )
-    		{
-    			curr = new Interval( Math.min( curr.start, interval.start ), Math.max( curr.end, interval.end ) );
-    		}
-    		else if ( isEarlier( interval, curr ) )
-    		{
-    			result.add( interval );
-    		}
-    		else
-    		{
-    			result.add( curr );
-    			curr = interval;
-    		}
-    	}
-    	
-    	result.add( curr );
-    	return result;
-    }
-    
-    private boolean isEarlier( Interval o1, Interval o2 )
-    {
-    	if ( o1.start != o2.start )
-    	{
-    		return o1.start < o2.start;
-    	}
-    	else
-    	{
-    		return o1.end < o2.start;
-    	}
-    }
-    
-    private boolean isOverlap( Interval o1, Interval o2 )
-    {
-    	if ( o1.start > o2.end || o2.start > o1.end )
-    	{
-    		return false;
-    	}
-    	else
-    	{
-    		return true;
-    	}
-    }
+ public List<Interval> insert( List<Interval> intervals, Interval newInterval )
+ {
+ 	if ( newInterval == null )
+ 	{
+ 		throw new IllegalArgumentException("");
+ 	}
+ 	
+ 	List<Interval> result = new ArrayList<>();
+ 	if ( intervals == null || intervals.size() == 0 )
+ 	{
+ 		result.add( newInterval );
+ 		return result;
+ 	}
+ 	
+ 	Interval curr = newInterval;
+ 	for ( Interval interval : intervals )
+ 	{
+ 		if ( isOverlap( interval, curr ) )
+ 		{
+ 			curr = new Interval( Math.min( curr.start, interval.start ), Math.max( curr.end, interval.end ) );
+ 		}
+ 		else if ( isEarlier( interval, curr ) )
+ 		{
+ 			result.add( interval );
+ 		}
+ 		else
+ 		{
+ 			result.add( curr );
+ 			curr = interval;
+ 		}
+ 	}
+ 	
+ 	result.add( curr );
+ 	return result;
+ }
+ 
+ private boolean isEarlier( Interval o1, Interval o2 )
+ {
+ 	if ( o1.start != o2.start )
+ 	{
+ 		return o1.start < o2.start;
+ 	}
+ 	else
+ 	{
+ 		return o1.end < o2.start;
+ 	}
+ }
+ 
+ private boolean isOverlap( Interval o1, Interval o2 )
+ {
+ 	if ( o1.start > o2.end || o2.start > o1.end )
+ 	{
+ 		return false;
+ 	}
+ 	else
+ 	{
+ 		return true;
+ 	}
+ }
 }
 

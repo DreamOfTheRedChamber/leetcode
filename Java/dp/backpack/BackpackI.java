@@ -16,14 +16,14 @@ You function should return the max size we can fill in the given backpack.
 
 public class BackpackI 
 {
-    /**
-     * @param m: An integer m denotes the size of a backpack
-     * @param A: Given n items with size A[i]
-     * @return: The maximum size
-     */
-    public int backPack( int m, int[] A ) 
-    {
-        // write your code here
-        return 0;
-    }
+ /**
+  * @param m: An integer m denotes the size of a backpack
+  * @param A: Given n items with size A[i]
+  * @return: The maximum size
+  */
+ public int backPack( int m, int[] A ) 
+ {
+  // write your code here
+  return 0;
+ }
 }
