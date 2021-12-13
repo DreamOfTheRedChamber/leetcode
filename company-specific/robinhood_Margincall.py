@@ -49,4 +49,121 @@
     # the corresponding output would be
 
     # [["CASH", "25"], ["AAPL", "5"], ["AAPLO", "5"], ["GOOG", "3"]
-    
+
+import bisect
+import heapq
+import math
+import unittest
+from collections import defaultdict
+from typing import List
+
+from sortedcontainers import SortedList
+
+
+class MarginCall(unittest.TestCase):
+
+    def getPortfolio(self, portfolioMap: dict) -> List[List[str]]:
+        # return sorted result
+        result = []
+        result.append(["cash", str(portfolioMap["cash"])])
+        for key in sorted(portfolioMap.keys()):
+            if key != "cash":
+                result.append([key, str(portfolioMap[key])])
+        return result
+
+    def calculatePortfolio(self, tradeLists: List[str]) -> List[str]:
+        # dict and initialize
+        portfolio = defaultdict(lambda: 0)
+        portfolio["cash"] = 1000
+
+        # loop through trade
+        for ts, symbol, type, quantity, price in tradeLists:
+            start = 1 if type == "B" else -1
+            portfolio[symbol] += start * int(quantity)
+            portfolio["cash"] += -start * int(quantity) * int(price)
+
+        # return sorted result
+        return self.getPortfolio(portfolio)
+
+    def calculatePortfolioWithMargin(self, tradeLists: List[str]) -> List[str]:
+        def getHighestPrice(symbolToPrice: dict) -> str:
+            reverseSorted = sorted(symbolToPrice.keys(), key=lambda k: symbolToPrice[k], reverse=True)
+            return reverseSorted[0] if reverseSorted[0] != "cash" else reverseSorted[1]
+
+        # use heap to find margin call target
+        symbolToNum = defaultdict(lambda: 0)
+        cs = "cash"
+        symbolToNum[cs] = 1000
+        symbolToPrice = {}
+
+        # loop through trade
+        for ts, symbol, type, quantity, price in tradeLists:
+            start = 1 if type == "B" else -1
+            priceInt = int(price)
+            quantityInt = int(quantity)
+
+            symbolToNum[cs] += -start * quantityInt * priceInt
+
+            while symbolToNum[cs] < 0:
+                toSell = getHighestPrice(symbolToPrice)
+                numToSell = min(math.ceil(abs(symbolToNum[cs]) / symbolToPrice[toSell]), symbolToNum[toSell])
+                symbolToNum[cs] += numToSell * symbolToPrice[toSell]
+                symbolToNum[toSell] -= numToSell
+                if symbolToNum[toSell] == 0:
+                    del symbolToNum[toSell]
+                    del symbolToPrice[toSell]
+
+            symbolToNum[symbol] += start * quantityInt
+            symbolToPrice[symbol] = priceInt
+
+        # return sorted result
+        return self.getPortfolio(symbolToNum)
+
+    def calculatePortfolioWithCollateral(self, tradeLists: List[str]) -> List[str]:
+
+        return []
+
+    @unittest.skip
+    def test_original(self):
+        tradeLists = [["1", "AAPL", "B", "10", "10"], ["3", "GOOG", "B", "20", "5"], ["10", "AAPL", "S", "5", "15"]]
+        print(self.calculatePortfolio(tradeLists))
+
+    @unittest.skip
+    def test_margin_1(self):
+        tradeLists = [["1", "APPL", "B", "10", "100"], ["2", "APPL", "S", "2", "80"], ["3", "GOOG", "B", "15", "20"]]
+
+        print(self.calculatePortfolioWithMargin(tradeLists))
+
+    @unittest.skip
+    def test_margin_2(self):
+        # special test by myself
+        tradeLists = [["1", "APPL", "B", "10", "100"], ["2", "APPL", "S", "2", "80"], ["3", "APPL", "B", "15", "20"]]
+
+        print(self.calculatePortfolioWithMargin(tradeLists))
+
+    @unittest.skip
+    def test_margin_3(self):
+        # has tie on price, take alpha first
+        tradeLists = [["1", "AAPL", "B", "5", "100"], ["2", "ABPL", "B", "5", "100"], ["3", "AAPL", "S", "2", "80"], ["4", "ABPL", "S", "2", "80"], ["5", "GOOG", "B", "15", "30"]]
+        print(self.calculatePortfolioWithMargin(tradeLists))
+
+    @unittest.skip
+    def test_margin_4(self):
+        # pick high price first
+        tradeLists = [["1", "AAPL", "B", "5", "100"], ["2", "ABPL", "B", "5", "100"], ["3", "AAPL", "S", "2", "80"], ["4", "ABPL", "S", "2", "120"], ["5", "GOOG", "B", "15", "30"]]
+        print(self.calculatePortfolioWithMargin(tradeLists))
+
+    @unittest.skip
+    def test_margin_5(self):
+        # need to sell multiple stocks
+        tradeLists = [["1", "AAPL", "B", "5", "100"], ["2", "ABPL", "B", "5", "100"], ["3", "AAPL", "S", "2", "80"], ["4", "ABPL", "S", "2", "120"], ["5", "GOOG", "B", "10", "80"]]
+        print(self.calculatePortfolioWithMargin(tradeLists))
+
+    @unittest.skip
+    def test_collateral(self):
+        tradeLists = [["1", "AAPL", "B", "5", "100"], ["2", "GOOG", "B", "5", "75"], ["3", "AAPLO", "B", "5", "50"]]
+        print(self.calculatePortfolioWithCollateral(tradeLists))
+        return
+
+if __name__ == '__main__':
+    unittest.main()
