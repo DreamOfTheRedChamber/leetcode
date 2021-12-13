@@ -24,6 +24,30 @@ class HouseStreetTrade(unittest.TestCase):
 
         return sorted(result)
 
+    def findUnmatchedExactFuzzyTrades(self, houseTrades: List[str], streetTrades: List[str]) -> List[str]:
+
+        def removeMatch(houseToTypeId: dict, streetToTypeId: dict, type: str):
+            intersectKeys = houseToTypeId.keys() & streetToTypeId.keys()
+
+
+            return []
+
+        def buildUnmatchedTrades(houseToTypeId: dict, streetToTypeId: dict) -> List[str]:
+
+            return []
+
+        # build map "symbol+quantity" => "type+ID"
+        houseToTypeId = defaultdict(lambda: [])
+        for symbol, type, quantity, id in houseTrades:
+            houseToTypeId[symbol+","+quantity].append(type+","+id)
+
+        streetToTypeId = defaultdict(lambda: [])
+        for symbol, type, quantity, id in streetTrades:
+            streetToTypeId[symbol+","+quantity].append(type+","+id)
+
+        result = buildUnmatchedTrades(houseToTypeId, streetToTypeId)
+        return result
+
     def test_FindExactMatch(self):
         houseTrades = ["AAPL,B,0100,ABC123", "AAPL,B,0100,ABC123", "GOOG,S,0050,CDC333"]
         streetTrades = ["  FB,B,0100,GBGGGG", "AAPL,B,0100,ABC123"]
