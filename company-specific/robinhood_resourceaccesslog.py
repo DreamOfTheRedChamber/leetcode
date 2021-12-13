@@ -11,20 +11,23 @@ class ResourceAccess(unittest.TestCase):
     def highestNumAccessPerResourceIn5Minutes(self, input: List[List[str]]):
         resourceToAccessTs = defaultdict(lambda: [])
         for entry in input:
-            resourceToAccessTs[entry[1]].append(int(entry[0]))
+            resourceToAccessTs[entry[2]].append(int(entry[0]))
         for key, value in resourceToAccessTs.items():
             resourceToAccessTs[key] = sorted(value)
 
         result = 0
+        resultResource = ""
         for key, value in resourceToAccessTs.items():
             queue = deque()
             for i in value:
                 while queue and queue[0] + 60 * 5 < i:
                     queue.popleft()
                 queue.append(i)
-                result = max(result, len(queue))
+                if len(queue) > result:
+                    result = max(result, len(queue))
+                    resultResource = key
 
-        return result
+        return resultResource + "," + str(result)
 
     @unittest.skip
     def test_minMaxAccess(self):
