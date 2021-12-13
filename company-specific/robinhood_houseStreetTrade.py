@@ -63,14 +63,16 @@ class HouseStreetTrade(unittest.TestCase):
         def buildUnmatchedTrades(houseToTypeId: dict, streetToTypeId: dict) -> List[str]:
             result = []
 
-            for key, value in houseToTypeId.items():
+            for key, valueList in houseToTypeId.items():
                 symbol, quantity = key.split(",")
-                type, id = value.split(",")
-                result.append(symbol+","+type+","+quantity+","+id)
-            for key, value in streetToTypeId.items():
+                for item in valueList:
+                    type, id = item.split(",")
+                    result.append(symbol+","+type+","+quantity+","+id)
+            for key, valueList in streetToTypeId.items():
                 symbol, quantity = key.split(",")
-                type, id = value.split(",")
-                result.append(symbol+","+type+","+quantity+","+id)
+                for item in valueList:
+                    type, id = item.split(",")
+                    result.append(symbol+","+type+","+quantity+","+id)
 
             sortedResult = sorted(result)
             return sortedResult
@@ -100,9 +102,17 @@ class HouseStreetTrade(unittest.TestCase):
         print(self.findUnmatchedExactTrades(houseTrades, streetTrades))
         return
 
-    def test_FindExactFuzzyMatch(self):
+    @unittest.skip
+    def test1_FindExactFuzzyMatch(self):
         houseTrades = ["AAPL,S,0010,ZYX444", "AAPL,S,0010,ZYX444", "AAPL,B,0010,ABC123", "GOOG,S,0050,GHG545"]
         streetTrades = ["GOOG,S,0050,GHG545", "AAPL,S,0010,ZYX444", "AAPL,B,0010,TTT222"]
+
+        print(self.findUnmatchedExactFuzzyTrades(houseTrades, streetTrades))
+        return
+
+    def test2_FindExactFuzzyMatch(self):
+        houseTrades = ["AAPL,B,0010,ABC123", "AAPL,S,0015,ZYX444", "AAPL,S,0015,ZYX444", "GOOG,S,0050,GHG545"]
+        streetTrades = ["GOOG,S,0050,GHG545", "AAPL,S,0015,ZYX444", "AAPL,B,0500,TTT222"]
 
         print(self.findUnmatchedExactFuzzyTrades(houseTrades, streetTrades))
         return
