@@ -29,8 +29,8 @@ class HouseStreetTrade(unittest.TestCase):
         def removeMatch(houseToTypeId: dict, streetToTypeId: dict, type: str):
             intersectKeys = houseToTypeId.keys() & streetToTypeId.keys()
             for key in intersectKeys:
-                houseList = houseToTypeId[key]
-                streetList = streetToTypeId[key]
+                houseList = sorted(houseToTypeId[key])
+                streetList = sorted(streetToTypeId[key])
                 houseAfterRemoving = []
                 streetAfterRemoving = []
                 i = 0
@@ -80,12 +80,12 @@ class HouseStreetTrade(unittest.TestCase):
         # build map "symbol+quantity" => "type+ID"
         houseToTypeId = defaultdict(lambda: [])
         for trade in houseTrades:
-            symbol, quantity, type, id = trade.split(",")
+            symbol, type, quantity, id = trade.split(",")
             houseToTypeId[symbol+","+quantity].append(type+","+id)
 
         streetToTypeId = defaultdict(lambda: [])
         for trade in streetTrades:
-            symbol, quantity, type, id = trade.split(",")
+            symbol, type, quantity, id = trade.split(",")
             streetToTypeId[symbol+","+quantity].append(type+","+id)
 
         removeMatch(houseToTypeId, streetToTypeId, "exact")
@@ -102,7 +102,6 @@ class HouseStreetTrade(unittest.TestCase):
         print(self.findUnmatchedExactTrades(houseTrades, streetTrades))
         return
 
-    @unittest.skip
     def test1_FindExactFuzzyMatch(self):
         houseTrades = ["AAPL,S,0010,ZYX444", "AAPL,S,0010,ZYX444", "AAPL,B,0010,ABC123", "GOOG,S,0050,GHG545"]
         streetTrades = ["GOOG,S,0050,GHG545", "AAPL,S,0010,ZYX444", "AAPL,B,0010,TTT222"]
@@ -110,6 +109,7 @@ class HouseStreetTrade(unittest.TestCase):
         print(self.findUnmatchedExactFuzzyTrades(houseTrades, streetTrades))
         return
 
+    @unittest.skip
     def test2_FindExactFuzzyMatch(self):
         houseTrades = ["AAPL,B,0010,ABC123", "AAPL,S,0015,ZYX444", "AAPL,S,0015,ZYX444", "GOOG,S,0050,GHG545"]
         streetTrades = ["GOOG,S,0050,GHG545", "AAPL,S,0015,ZYX444", "AAPL,B,0500,TTT222"]
