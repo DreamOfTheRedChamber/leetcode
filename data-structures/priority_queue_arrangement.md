@@ -54,6 +54,44 @@ class Solution:
 ```
 
 ## [621.Task-Scheduler](https://github.com/wisdompeak/LeetCode/tree/master/Priority_Queue/621.Task-Scheduler) \(H-\)  
+* My original ideas:
+  1. Calculate histogram. If current len(histogram) > n then no idle otherwise use idle to pad the missing entries. 
+     * Error1: cool down period n is actually smaller than interval
+
+```py
+class Solution:
+    def leastInterval(self, tasks: List[str], n: int) -> int:
+        # calculate histogram
+        histogram = collections.Counter(tasks)
+        maxHeap = []
+        for key, value in histogram.items():
+            heapq.heappush(maxHeap, (-value, key))
+        
+        n += 1
+        # repeat the loop until maxHeap becomes empty
+        result = 0
+        while maxHeap:
+            thisRound = 0
+            fromHeap = min(len(maxHeap), n)
+            # for each round take first n items from heap
+            # decrement and put back
+            queue = []
+            result += fromHeap
+            for i in range(fromHeap):
+                negValue, key = heapq.heappop(maxHeap)
+                if negValue + 1 != 0:
+                    queue.append((negValue + 1, key))
+            
+            for item in queue:
+                heapq.heappush(maxHeap, item)
+            
+            if fromHeap < n and len(maxHeap) > 0:
+                # when the heap size is smaller than n, use idle to pad
+                result += n - fromHeap
+                           
+        return result
+```
+
 ## [984.String-Without-AAA-or-BBB](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/984.String-Without-AAA-or-BBB) \(M+\)  
 * My original ideas:
   1. Get stuck with 1405 so want to try a simpler verison of it. 
