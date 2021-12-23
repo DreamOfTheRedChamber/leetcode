@@ -55,6 +55,42 @@ class Solution:
 
 ## [621.Task-Scheduler](https://github.com/wisdompeak/LeetCode/tree/master/Priority_Queue/621.Task-Scheduler) \(H-\)  
 ## [984.String-Without-AAA-or-BBB](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/984.String-Without-AAA-or-BBB) \(M+\)  
+* My original ideas:
+  1. Get stuck with 1405 so want to try a simpler verison of it. 
+  2. Only two letters, maybe not need a PQ? If just use a PQ, the original solution won't work. 
+     1. The idea is (suppose a > b) to construct the result as aab, aab, ..., then followed by abab...ab, or aa only
+        * However, this solution does not work because given an example of a=4, b=1, aabaa 
+     2. Optimize with three steps, aab...aab, ab...ab, aa
+
+```py
+class Solution:
+    def strWithout3a3b(self, a: int, b: int) -> str:
+        big, bigNum = "a", a
+        small, smallNum = "b", b
+        if bigNum < smallNum:
+            bigNum, smallNum = smallNum, bigNum
+            big, small = small, big
+        
+        result = ""
+        
+        # first stage, construct aab, if b > 0
+        diff = bigNum - smallNum
+        result = result + min(diff, smallNum) * (big + big + small) # need to prove two big exist
+        bigNum -= 2 * min(diff, smallNum)
+        smallNum -= min(diff, smallNum)
+        
+        # second stage, construct ab if num(b) > 0
+        if smallNum > 0:
+            result = result + smallNum * (big + small)
+            bigNum -= smallNum
+            
+        # third stage, construct remaining a
+        if bigNum > 0:
+            result = result + bigNum * big
+        
+        return result
+```
+
 ## [1405.Longest-Happy-String](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/1405.Longest-Happy-String) \(H-\)  
 
 ## [1953.Maximum-Number-of-Weeks-for-Which-You-Can-Work](https://github.com/wisdompeak/LeetCode/tree/master/Priority_Queue/1953.Maximum-Number-of-Weeks-for-Which-You-Can-Work) \(M+\)
