@@ -11,6 +11,16 @@
 ## [767.Reorganize-String](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/767.Reorganize-String) \(M+\)  
 ## [1054.Distant-Barcodes](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/1054.Distant-Barcodes) \(M+\)  
 ## [358.Rearrange-String-k-Distance-Apart](https://github.com/wisdompeak/LeetCode/tree/master/Priority_Queue/358.Rearrange-String-k-Distance-Apart) \(H-\)  
+* My original ideas:
+  1. Put items in PQ, each time take out K items; Decrement each count value and then put back; Edge condition: Total number of items in count, count remaining ones
+     1. Error1: Missed the edge case on K == 0
+     2. Error2: Did not handle the edge case: "abb", 2 - Output: "ab", expected "bab"
+* Read my previous answer, the basic idea is correct. However, edge cases (two above) are not handled correctly. 
+
+```py
+
+```
+
 ## [621.Task-Scheduler](https://github.com/wisdompeak/LeetCode/tree/master/Priority_Queue/621.Task-Scheduler) \(H-\)  
 ## [984.String-Without-AAA-or-BBB](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/984.String-Without-AAA-or-BBB) \(M+\)  
 ## [1405.Longest-Happy-String](https://github.com/wisdompeak/LeetCode/tree/master/Greedy/1405.Longest-Happy-String) \(H-\)  
