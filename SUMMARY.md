@@ -17,6 +17,7 @@
 * [linked\_list](data-structures/linked\_list.md)
 * [priority\_queue](data-structures/priority\_queue.md)
   * [Arrangement](data-structures/priority_queue_arrangement.md)
+  * [Sort+PQ](data-structures/priority_queue_sortPlusPQ.md)
 * [stack](data-structures/stack.md)
 * [string](data-structures/string.md)
 * [intervals](data-structures/intervals.md)
