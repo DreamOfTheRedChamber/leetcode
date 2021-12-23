@@ -18,6 +18,38 @@
 * Read my previous answer, the basic idea is correct. However, edge cases (two above) are not handled correctly. 
 
 ```py
+class Solution:
+    def rearrangeString(self, s: str, k: int) -> str:
+        if k == 0:
+            return s
+        
+        # calculate histogram counter
+        charToFreq = collections.Counter(s)
+        maxHeap = []
+        for key, value in charToFreq.items():
+            heapq.heappush(maxHeap, (-value, key))
+                    
+        # take items from maxHeap and append them behind result
+        result = "" 
+        while len(maxHeap) > 0:            
+            if len(maxHeap) < k:
+                negFreq, char = heapq.heappop(maxHeap)
+                if abs(negFreq) > 1:
+                    break
+                heapq.heappush(maxHeap, (negFreq, char))
+                
+            roundLength = min(k, len(maxHeap))
+            queue = []
+            for i in range(roundLength):
+                negFreq, char = heapq.heappop(maxHeap)
+                result += char
+                if negFreq + 1 != 0:
+                    queue.append((negFreq + 1, char))
+            
+            while queue:
+                heapq.heappush(maxHeap, queue.pop())
+            
+        return result
 
 ```
 
