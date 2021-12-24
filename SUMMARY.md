@@ -36,6 +36,7 @@
 * [union\_find](algorithm/union\_find.md)
 * [recursion](algorithm/recursion.md)
 * [two\_pointers](algorithm/two\_pointers.md)
+* [Offline processing](algorithm/offline_processing.md)
 
 ## Other
 

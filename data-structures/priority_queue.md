@@ -20,7 +20,6 @@
 [1606.Find-Servers-That-Handled-Most-Number-of-Requests](https://github.com/wisdompeak/LeetCode/tree/master/Heap/1606.Find-Servers-That-Handled-Most-Number-of-Requests) \(M\)  
 1797.Design Authentication Manager \(M\)  
 [1825.Finding-MK-Average](https://github.com/wisdompeak/LeetCode/tree/master/Heap/1825.Finding-MK-Average) \(H\)  
-[1847.Closest-Room](https://github.com/wisdompeak/LeetCode/tree/master/Heap/1847.Closest-Room) \(M+\)  
 [1912.Design-Movie-Rental-System](https://github.com/wisdompeak/LeetCode/tree/master/Heap/1912.Design-Movie-Rental-System) \(M+\)
 
 # [Priority Queue](https://github.com/wisdompeak/LeetCode/tree/master/Priority_Queue)
