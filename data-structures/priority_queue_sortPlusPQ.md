@@ -43,5 +43,39 @@ class Solution:
 
 ## [1834.Single-Threaded-CPU](https://github.com/wisdompeak/LeetCode/tree/master/Priority_Queue/1834.Single-Threaded-CPU) \(M\)  
 
+* 15 min come up with solution: https://expl.ai/TXGGTSP
+* Four attempts before reaching the correct solution ......
+  1. Did not handle the case where cpu could be idle 
+  2. When cpu is idle, increment the timer instead of directly jumping to the correct ts, resulting in TLE. 
+  3. Similar to 2, but only set the start time, not update time. 
+
+```py
+class Solution:
+    def getOrder(self, tasks: List[List[int]]) -> List[int]:
+        if len(tasks) == 0:
+            return []
+        
+        tupleList = []
+        for i in range(len(tasks)):
+            tupleList.append((tasks[i][0], tasks[i][1], i))
+        sortedT = sorted(tupleList)
+        ptr = 0
+        currT = sortedT[0][0]
+        minHeap = []
+        result = []
+
+        while len(result) < len(tasks):
+            while ptr < len(sortedT) and sortedT[ptr][0] <= currT:
+                heapq.heappush(minHeap, (sortedT[ptr][1], sortedT[ptr][2]))
+                ptr += 1
+            if len(minHeap) != 0: 
+                proTime, index = heapq.heappop(minHeap)
+                result.append(index)
+                currT += proTime
+            else: 
+                currT = max(currT, sortedT[ptr][0])
+        return result
+```
+
 ## [1851.Minimum-Interval-to-Include-Each-Query](https://github.com/wisdompeak/LeetCode/tree/master/Priority_Queue/1851.Minimum-Interval-to-Include-Each-Query) \(H\)
 
