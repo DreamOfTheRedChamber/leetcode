@@ -1,5 +1,6 @@
 - [Heap](#heap)
 - [Priority Queue](#priority-queue)
+- [1705.Maximum-Number-of-Eaten-Apples \(M+\)](#1705maximum-number-of-eaten-apples-m)
 
 # [Heap](https://github.com/wisdompeak/LeetCode/tree/master/Heap)
 
@@ -34,7 +35,35 @@
 [1167.Minimum-Cost-to-Connect-Sticks](https://github.com/wisdompeak/LeetCode/tree/master/Priority_Queue/1167.Minimum-Cost-to-Connect-Sticks) \(H-\)  
 [1439.Find-the-Kth-Smallest-Sum-of-a-Matrix-With-Sorted-Rows](https://github.com/wisdompeak/LeetCode/tree/master/Priority_Queue/1439.Find-the-Kth-Smallest-Sum-of-a-Matrix-With-Sorted-Rows) \(H-\)  
 [1642.Furthest-Building-You-Can-Reach](https://github.com/wisdompeak/LeetCode/tree/master/Priority_Queue/1642.Furthest-Building-You-Can-Reach) \(H-\)  
-[1705.Maximum-Number-of-Eaten-Apples](https://github.com/wisdompeak/LeetCode/tree/master/Priority_Queue/1705.Maximum-Number-of-Eaten-Apples) \(M+\)  
+
+# [1705.Maximum-Number-of-Eaten-Apples](https://github.com/wisdompeak/LeetCode/tree/master/Priority_Queue/1705.Maximum-Number-of-Eaten-Apples) \(M+\)  
+* Greedy with Heap. Always eat apples with earliest rotten date. 
+  * Error1: Calculate rotten days in a wrong way -_- by just accumulating previous days. 
+
+```py
+class Solution:
+    def eatenApples(self, A, D) -> int:
+        if len(D) == 0:
+            return 0
+                
+        currDay = 0
+        numEaten = 0
+        minHeap = []
+        while currDay < len(A) or minHeap: 
+            if currDay < len(A) and A[currDay] > 0:                   
+                heapq.heappush(minHeap, [currDay + D[currDay], A[currDay]])
+        
+            while minHeap and (minHeap[0][0] <= currDay or minHeap[0][1] == 0):
+                top = heapq.heappop(minHeap)
+                
+            if minHeap:
+                minHeap[0][1] -= 1
+                numEaten += 1
+            
+            currDay += 1
+        return numEaten
+```
+
 [1792.Maximum-Average-Pass-Ratio](https://github.com/wisdompeak/LeetCode/tree/master/Priority_Queue/1792.Maximum-Average-Pass-Ratio) \(M+\)  
 [1801.Number-of-Orders-in-the-Backlog](https://github.com/wisdompeak/LeetCode/tree/master/Priority_Queue/1801.Number-of-Orders-in-the-Backlog) \(M\)  
 [1882.Process-Tasks-Using-Servers](https://github.com/wisdompeak/LeetCode/tree/master/Priority_Queue/1882.Process-Tasks-Using-Servers) \(H\)  
