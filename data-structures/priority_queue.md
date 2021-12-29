@@ -1,6 +1,7 @@
 - [Heap](#heap)
 - [Priority Queue](#priority-queue)
-- [1705.Maximum-Number-of-Eaten-Apples \(M+\)](#1705maximum-number-of-eaten-apples-m)
+- [Greedy](#greedy)
+  - [1705.Maximum-Number-of-Eaten-Apples \(M+\)](#1705maximum-number-of-eaten-apples-m)
 
 # [Heap](https://github.com/wisdompeak/LeetCode/tree/master/Heap)
 
@@ -36,7 +37,8 @@
 [1439.Find-the-Kth-Smallest-Sum-of-a-Matrix-With-Sorted-Rows](https://github.com/wisdompeak/LeetCode/tree/master/Priority_Queue/1439.Find-the-Kth-Smallest-Sum-of-a-Matrix-With-Sorted-Rows) \(H-\)  
 [1642.Furthest-Building-You-Can-Reach](https://github.com/wisdompeak/LeetCode/tree/master/Priority_Queue/1642.Furthest-Building-You-Can-Reach) \(H-\)  
 
-# [1705.Maximum-Number-of-Eaten-Apples](https://github.com/wisdompeak/LeetCode/tree/master/Priority_Queue/1705.Maximum-Number-of-Eaten-Apples) \(M+\)  
+# Greedy
+## [1705.Maximum-Number-of-Eaten-Apples](https://github.com/wisdompeak/LeetCode/tree/master/Priority_Queue/1705.Maximum-Number-of-Eaten-Apples) \(M+\)  
 * Greedy with Heap. Always eat apples with earliest rotten date. 
   * Error1: Calculate rotten days in a wrong way -_- by just accumulating previous days. 
 

@@ -1,5 +1,6 @@
 
 - [Hash Table](#hash-table)
+  - [1573.Number-of-Ways-to-Split-a-String \(M\)](#1573number-of-ways-to-split-a-string-m)
   - [Hash+Prefix](#hashprefix)
     - [Reviewed](#reviewed)
     - [Todo](#todo)
@@ -30,7 +31,32 @@
 [1074.Number-of-Submatrices-That-Sum-to-Target](https://github.com/wisdompeak/LeetCode/tree/master/Hash/1074.Number-of-Submatrices-That-Sum-to-Target) \(M+\)  
 1224.Maximum-Equal-Frequency \(H-\)  
 [1487.Making-File-Names-Unique](https://github.com/wisdompeak/LeetCode/tree/master/Hash/1487.Making-File-Names-Unique) \(M+\)  
-[1573.Number-of-Ways-to-Split-a-String](https://github.com/wisdompeak/LeetCode/tree/master/Hash/1573.Number-of-Ways-to-Split-a-String) \(M\)
+
+## [1573.Number-of-Ways-to-Split-a-String](https://github.com/wisdompeak/LeetCode/tree/master/Hash/1573.Number-of-Ways-to-Split-a-String) \(M\)
+* Think out solution in 10 minutes. https://expl.ai/MYVQNNA
+* Have the following error message:
+  1. Does not mod number in edge case
+  2. Whether expected result is integer or float
+
+```py
+class Solution:
+    def numWays(self, s: str) -> int:
+        histogram = defaultdict(lambda: 0)
+        counter = 0
+        for i in range(len(s)):
+            counter += 1 if s[i] == "1" else 0
+            histogram[counter] += 1
+
+        modNum = 10 ** 9 + 7            
+        if counter == 0:
+            return (len(s) - 1) * (len(s) - 2) // 2 % modNum
+
+        if counter % 3 != 0:
+            return 0
+        else:
+            divided = counter // 3
+            return histogram[divided * 2] * histogram[divided] % modNum
+```
 
 ## Hash+Prefix
 
