@@ -2,6 +2,8 @@
 - [Priority Queue](#priority-queue)
 - [Greedy](#greedy)
   - [1705.Maximum-Number-of-Eaten-Apples \(M+\)](#1705maximum-number-of-eaten-apples-m)
+  - [PQ + hashmap](#pq--hashmap)
+    - [2007. Find Original Array From Doubled Array](#2007-find-original-array-from-doubled-array)
 
 # [Heap](https://github.com/wisdompeak/LeetCode/tree/master/Heap)
 
@@ -71,3 +73,8 @@ class Solution:
 [1882.Process-Tasks-Using-Servers](https://github.com/wisdompeak/LeetCode/tree/master/Priority_Queue/1882.Process-Tasks-Using-Servers) \(H\)  
 [1942.The-Number-of-the-Smallest-Unoccupied-Chair](https://github.com/wisdompeak/LeetCode/tree/master/Priority_Queue/1942.The-Number-of-the-Smallest-Unoccupied-Chair) \(M+\)
 
+## PQ + hashmap 
+* Python does not have a DS as treemap
+
+### [2007. Find Original Array From Doubled Array](https://leetcode.com/problems/find-original-array-from-doubled-array/)
+* https://expl.ai/CUUMUEM
