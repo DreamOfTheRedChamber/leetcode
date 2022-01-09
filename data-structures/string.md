@@ -3,6 +3,7 @@
   - [KMP](#kmp)
   - [Manacher](#manacher)
   - [Palindrome](#palindrome)
+  - [833. Find And Replace in String](#833-find-and-replace-in-string)
 
 # [String](https://github.com/wisdompeak/LeetCode/tree/master/String)
 
@@ -58,3 +59,9 @@
   * DP-based solution: O\(n^2\) space and time, if need to storing palindrome result, this is always better \(e.g. palindrome partitioning\)
   * Start looping from middle: O\(n^2\) time
   * Manacher's algorithm: O\(n\) time, not generic enough.
+
+## [833. Find And Replace in String](https://leetcode.com/problems/find-and-replace-in-string/)
+* https://expl.ai/APDFXTD
+* String corner cases: 
+  * Whether there will be overlapping
+  * Whether sources/indexes will be sorted
