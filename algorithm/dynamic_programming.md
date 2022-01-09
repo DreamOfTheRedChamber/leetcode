@@ -1,4 +1,5 @@
 - [Dynamic Programming](#dynamic-programming)
+    - [1937.Maximum-Number-of-Points-with-Cost \(H-\)](#1937maximum-number-of-points-with-cost-h-)
   - [基本型 I](#基本型-i)
   - [基本型 II](#基本型-ii)
   - [走迷宫型](#走迷宫型)
@@ -50,7 +51,10 @@
 [1787.Make-the-XOR-of-All-Segments-Equal-to-Zero](https://github.com/wisdompeak/LeetCode/tree/master/Dynamic_Programming/1787.Make-the-XOR-of-All-Segments-Equal-to-Zero) \(H\)  
 [1872.Stone-Game-VIII](https://github.com/wisdompeak/LeetCode/tree/master/Dynamic_Programming/1872.Stone-Game-VIII) \(H-\)  
 [1900.The-Earliest-and-Latest-Rounds-Where-Players-Compete](https://github.com/wisdompeak/LeetCode/tree/master/Dynamic_Programming/1900.The-Earliest-and-Latest-Rounds-Where-Players-Compete) \(H\)  
-[1937.Maximum-Number-of-Points-with-Cost](https://github.com/wisdompeak/LeetCode/tree/master/Dynamic_Programming/1937.Maximum-Number-of-Points-with-Cost) \(H-\)  
+
+### [1937.Maximum-Number-of-Points-with-Cost](https://github.com/wisdompeak/LeetCode/tree/master/Dynamic_Programming/1937.Maximum-Number-of-Points-with-Cost) \(H-\)  
+* Google DP: https://expl.ai/USLKFRP
+
 [1955.Count-Number-of-Special-Subsequences](https://github.com/wisdompeak/LeetCode/tree/master/Dynamic_Programming/1955.Count-Number-of-Special-Subsequences) \(H-\)
 
 ## 基本型 I
