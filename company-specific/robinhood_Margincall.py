@@ -83,29 +83,25 @@ from typing import List
 
 from sortedcontainers import SortedList
 
-
 class MarginCall(unittest.TestCase):
 
-    def calculatePortfolio(self, tradeLists: List[str]) -> List[str]:
+    def tradeWithoutMargin(self, orderList: List[str]) -> List[str]:
         # dict and initialize
         portfolio = defaultdict(lambda: 0)
-        portfolio["cash"] = 1000
+        currBalance = 1000
 
-        # loop through trade
-        for ts, symbol, type, quantity, price in tradeLists:
+        for _, symbol, type, quantity, price in orderList:
             start = 1 if type == "B" else -1
             portfolio[symbol] += start * int(quantity)
-            portfolio["cash"] += -start * int(quantity) * int(price)
+            currBalance += -start * int(quantity) * int(price)
 
-        # return sorted result
-        return self.getPortfolio(portfolio)
+        return self.buildPortfolio(portfolio, currBalance)
 
-    def buildPortfolio(self, portfolioMap: dict, currCash: int) -> List[List[str]]:
-        # return sorted result
+    def buildPortfolio(self, symbolToShareNum: dict, cashBalance: int) -> List[List[str]]:
         result = []
-        result.append(["cash", str(currCash)])
-        for key in sorted(portfolioMap.keys()):
-            result.append([key, str(portfolioMap[key])])
+        result.append(["cash", str(cashBalance)])
+        for key in sorted(symbolToShareNum.keys()):
+            result.append([key, str(symbolToShareNum[key])])
         return result
 
     def getSymbolToSell(self, negBalance: int, symbolToLastPrice: dict, symbolToShareNum: dict) -> (str, int):
@@ -126,21 +122,17 @@ class MarginCall(unittest.TestCase):
                 del symbolToLastPrice[symbolToSell]
         return cashBalance
 
-    def trade(self, cashBalance: int, order: List[str], symbolToShareNum: dict) -> int:
-        _, symbol, category, quantity, price = order
-        priceInt = int(price)
-        quantityInt = int(quantity)
+    def placeOrder(self, cashBalance: int, order: List[str], symbolToShareNum: dict) -> int:
+        symbol, category, quantity, price = order[1], order[2], int(order[3]), int(order[4])
         if category == "B":
-            cashBalance -= quantityInt * priceInt
-            symbolToShareNum[symbol] += quantityInt
+            cashBalance -= quantity * price
+            symbolToShareNum[symbol] += quantity
         else:
-            cashBalance += quantityInt * priceInt
-            symbolToShareNum[symbol] -= quantityInt
+            cashBalance += quantity * price
+            symbolToShareNum[symbol] -= quantity
         return cashBalance
 
     def tradeWithMargin(self, orderList: List[List[str]]) -> List[str]:
-
-        # use heap to find margin call target
         symbolToShareNum = defaultdict(lambda: 0)
         cashBalance = 1000
         symbolToLastPrice = {}
@@ -148,24 +140,24 @@ class MarginCall(unittest.TestCase):
         for index, order in enumerate(orderList):
             symbol, lastPrice = order[1], int(order[-1])
 
-            cashBalance = self.trade(cashBalance, order, symbolToShareNum)
+            cashBalance = self.placeOrder(cashBalance, order, symbolToShareNum)
             cashBalance = self.marginCall(cashBalance, symbolToLastPrice, symbolToShareNum)
 
             symbolToLastPrice[symbol] = lastPrice
 
-        # return sorted result
         return self.buildPortfolio(symbolToShareNum, cashBalance)
 
     @unittest.skip
     def test_original(self):
-        tradeLists = [["1", "AAPL", "B", "10", "10"], ["3", "GOOG", "B", "20", "5"], ["10", "AAPL", "S", "5", "15"]]
-        print(self.calculatePortfolio(tradeLists))
+        orderList = [["1", "AAPL", "B", "10", "10"], ["3", "GOOG", "B", "20", "5"], ["10", "AAPL", "S", "5", "15"]]
+        print(self.tradeWithoutMargin(orderList))
 
     @unittest.skip
     def test_margin_1(self):
         orderList = [["1", "APPL", "B", "10", "100"], ["2", "APPL", "S", "2", "80"], ["3", "GOOG", "B", "15", "20"]]
         print(self.tradeWithMargin(orderList))
 
+    @unittest.skip
     def test_margin_2(self):
         # special test by myself
         # Assumption: When buy one stock A, if not enough cash, it could even sell A according to the past price
