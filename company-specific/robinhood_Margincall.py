@@ -126,7 +126,7 @@ class MarginCall(unittest.TestCase):
                 del symbolToLastPrice[symbolToSell]
         return cashBalance
 
-    def trade(self, cashBalance: int, order: List[str], symbolToLastPrice: dict, symbolToShareNum: dict) -> int:
+    def trade(self, cashBalance: int, order: List[str], symbolToShareNum: dict) -> int:
         _, symbol, category, quantity, price = order
         priceInt = int(price)
         quantityInt = int(quantity)
@@ -136,7 +136,6 @@ class MarginCall(unittest.TestCase):
         else:
             cashBalance += quantityInt * priceInt
             symbolToShareNum[symbol] -= quantityInt
-        symbolToLastPrice[symbol] = priceInt
         return cashBalance
 
     def tradeWithMargin(self, orderList: List[List[str]]) -> List[str]:
@@ -147,8 +146,12 @@ class MarginCall(unittest.TestCase):
         symbolToLastPrice = {}
 
         for index, order in enumerate(orderList):
-            cashBalance = self.trade(cashBalance, order, symbolToLastPrice, symbolToShareNum)
+            symbol, lastPrice = order[1], int(order[-1])
+
+            cashBalance = self.trade(cashBalance, order, symbolToShareNum)
             cashBalance = self.marginCall(cashBalance, symbolToLastPrice, symbolToShareNum)
+
+            symbolToLastPrice[symbol] = lastPrice
 
         # return sorted result
         return self.buildPortfolio(symbolToShareNum, cashBalance)
@@ -158,37 +161,37 @@ class MarginCall(unittest.TestCase):
         tradeLists = [["1", "AAPL", "B", "10", "10"], ["3", "GOOG", "B", "20", "5"], ["10", "AAPL", "S", "5", "15"]]
         print(self.calculatePortfolio(tradeLists))
 
+    @unittest.skip
     def test_margin_1(self):
         orderList = [["1", "APPL", "B", "10", "100"], ["2", "APPL", "S", "2", "80"], ["3", "GOOG", "B", "15", "20"]]
         print(self.tradeWithMargin(orderList))
 
-    @unittest.skip
     def test_margin_2(self):
         # special test by myself
-        tradeLists = [["1", "APPL", "B", "10", "100"], ["2", "APPL", "S", "2", "80"], ["3", "APPL", "B", "15", "20"]]
-
-        print(self.calculatePortfolioWithMargin(tradeLists))
+        # Assumption: When buy one stock A, if not enough cash, it could even sell A according to the past price
+        orderList = [["1", "APPL", "B", "10", "100"], ["2", "APPL", "S", "2", "80"], ["3", "APPL", "B", "15", "20"]]
+        print(self.tradeWithMargin(orderList))
 
     @unittest.skip
     def test_margin_3(self):
         # has tie on price, take alpha first
         tradeLists = [["1", "AAPL", "B", "5", "100"], ["2", "ABPL", "B", "5", "100"], ["3", "AAPL", "S", "2", "80"],
                       ["4", "ABPL", "S", "2", "80"], ["5", "GOOG", "B", "15", "30"]]
-        print(self.calculatePortfolioWithMargin(tradeLists))
+        print(self.tradeWithMargin(tradeLists))
 
     @unittest.skip
     def test_margin_4(self):
         # pick high price first
         tradeLists = [["1", "AAPL", "B", "5", "100"], ["2", "ABPL", "B", "5", "100"], ["3", "AAPL", "S", "2", "80"],
                       ["4", "ABPL", "S", "2", "120"], ["5", "GOOG", "B", "15", "30"]]
-        print(self.calculatePortfolioWithMargin(tradeLists))
+        print(self.tradeWithMargin(tradeLists))
 
     @unittest.skip
     def test_margin_5(self):
         # need to sell multiple stocks
         tradeLists = [["1", "AAPL", "B", "5", "100"], ["2", "ABPL", "B", "5", "100"], ["3", "AAPL", "S", "2", "80"],
                       ["4", "ABPL", "S", "2", "120"], ["5", "GOOG", "B", "10", "80"]]
-        print(self.calculatePortfolioWithMargin(tradeLists))
+        print(self.tradeWithMargin(tradeLists))
 
     @unittest.skip
     def test_collateral(self):
