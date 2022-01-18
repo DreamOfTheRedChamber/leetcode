@@ -77,6 +77,7 @@
 import bisect
 import heapq
 import math
+import sys
 import unittest
 from collections import defaultdict
 from typing import List
@@ -104,17 +105,37 @@ class MarginCall(unittest.TestCase):
             result.append([key, str(symbolToShareNum[key])])
         return result
 
-    def getSymbolToSell(self, negBalance: int, symbolToLastPrice: dict, symbolToShareNum: dict) -> (str, int):
+    def maxSellableWithCollateral(self, symbol: str, symbolToShareNum: dict) -> int:
+        collateral = symbol + "O"
+        if symbol.endswith("O") or collateral not in symbolToShareNum:
+            return symbolToShareNum[symbol]
+        elif collateral in symbolToShareNum and symbolToShareNum[collateral] < symbolToShareNum[symbol]:
+            return symbolToShareNum[symbol] - symbolToShareNum[collateral]
+        else:
+            return 0
+
+    def getSymbolToSell(self, negBalance: int, symbolToLastPrice: dict, symbolToShareNum: dict, supportCollateral: bool) -> (str, int):
         symbolInPriceDescOrder = sorted(symbolToLastPrice.keys(), key=lambda k: symbolToLastPrice[k], reverse=True)
         symbolToSell = symbolInPriceDescOrder[0]
+        numToSell = sys.maxsize
+
+        if supportCollateral == True:
+            # Find symbol to sell / num of shares according to collateral rule
+            for symbol in symbolInPriceDescOrder:
+                maxUnderCollateral = self.maxSellableWithCollateral(symbol, symbolToShareNum)
+                if maxUnderCollateral != 0:
+                    symbolToSell = symbolToSell
+                    numToSell = maxUnderCollateral
+                    break
+
         neededNum = math.ceil(abs(negBalance) / symbolToLastPrice[symbolToSell])
         availableNum = symbolToShareNum[symbolToSell]
-        numToSell = min(neededNum, availableNum)
+        numToSell = min(neededNum, availableNum, numToSell)
         return (symbolToSell, numToSell)
 
-    def marginCall(self, cashBalance: int, symbolToLastPrice: dict, symbolToShareNum: dict) -> int:
+    def marginCall(self, cashBalance: int, symbolToLastPrice: dict, symbolToShareNum: dict, supportCollateral: bool) -> int:
         while cashBalance < 0:
-            symbolToSell, numToSell = self.getSymbolToSell(cashBalance, symbolToLastPrice, symbolToShareNum)
+            symbolToSell, numToSell = self.getSymbolToSell(cashBalance, symbolToLastPrice, symbolToShareNum, supportCollateral)
             cashBalance += numToSell * symbolToLastPrice[symbolToSell]
             symbolToShareNum[symbolToSell] -= numToSell
             if symbolToShareNum[symbolToSell] == 0:
@@ -132,17 +153,17 @@ class MarginCall(unittest.TestCase):
             symbolToShareNum[symbol] -= quantity
         return cashBalance
 
-    def tradeWithMargin(self, orderList: List[List[str]]) -> List[str]:
+    # Assume input is always valid
+    def tradeWithMargin(self, orderList: List[List[str]], supportCollateral: bool) -> List[str]:
         symbolToShareNum = defaultdict(lambda: 0)
         cashBalance = 1000
         symbolToLastPrice = {}
 
         for index, order in enumerate(orderList):
-            symbol, lastPrice = order[1], int(order[-1])
-
             cashBalance = self.placeOrder(cashBalance, order, symbolToShareNum)
-            cashBalance = self.marginCall(cashBalance, symbolToLastPrice, symbolToShareNum)
+            cashBalance = self.marginCall(cashBalance, symbolToLastPrice, symbolToShareNum, supportCollateral)
 
+            symbol, lastPrice = order[1], int(order[-1])
             symbolToLastPrice[symbol] = lastPrice
 
         return self.buildPortfolio(symbolToShareNum, cashBalance)
@@ -155,40 +176,41 @@ class MarginCall(unittest.TestCase):
     @unittest.skip
     def test_margin_1(self):
         orderList = [["1", "APPL", "B", "10", "100"], ["2", "APPL", "S", "2", "80"], ["3", "GOOG", "B", "15", "20"]]
-        print(self.tradeWithMargin(orderList))
+        print(self.tradeWithMargin(orderList, False))
 
     @unittest.skip
     def test_margin_2(self):
         # special test by myself
         # Assumption: When buy one stock A, if not enough cash, it could even sell A according to the past price
+        #             Whether a margin call could happen on a stock itself, NO.
+
         orderList = [["1", "APPL", "B", "10", "100"], ["2", "APPL", "S", "2", "80"], ["3", "APPL", "B", "15", "20"]]
-        print(self.tradeWithMargin(orderList))
+        print(self.tradeWithMargin(orderList, False))
 
     @unittest.skip
     def test_margin_3(self):
         # has tie on price, take alpha first
         tradeLists = [["1", "AAPL", "B", "5", "100"], ["2", "ABPL", "B", "5", "100"], ["3", "AAPL", "S", "2", "80"],
                       ["4", "ABPL", "S", "2", "80"], ["5", "GOOG", "B", "15", "30"]]
-        print(self.tradeWithMargin(tradeLists))
+        print(self.tradeWithMargin(tradeLists, False))
 
     @unittest.skip
     def test_margin_4(self):
         # pick high price first
         tradeLists = [["1", "AAPL", "B", "5", "100"], ["2", "ABPL", "B", "5", "100"], ["3", "AAPL", "S", "2", "80"],
                       ["4", "ABPL", "S", "2", "120"], ["5", "GOOG", "B", "15", "30"]]
-        print(self.tradeWithMargin(tradeLists))
+        print(self.tradeWithMargin(tradeLists, False))
 
     @unittest.skip
     def test_margin_5(self):
         # need to sell multiple stocks
         tradeLists = [["1", "AAPL", "B", "5", "100"], ["2", "ABPL", "B", "5", "100"], ["3", "AAPL", "S", "2", "80"],
                       ["4", "ABPL", "S", "2", "120"], ["5", "GOOG", "B", "10", "80"]]
-        print(self.tradeWithMargin(tradeLists))
+        print(self.tradeWithMargin(tradeLists, False))
 
-    @unittest.skip
     def test_collateral(self):
         tradeLists = [["1", "AAPL", "B", "5", "100"], ["2", "GOOG", "B", "5", "75"], ["3", "AAPLO", "B", "5", "50"]]
-        print(self.calculatePortfolioWithCollateral(tradeLists))
+        print(self.tradeWithMargin(tradeLists, True))
         return
 
 if __name__ == '__main__':
