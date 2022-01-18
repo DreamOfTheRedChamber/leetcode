@@ -79,75 +79,67 @@ class HouseStreetTrade(unittest.TestCase):
 
         return sorted(result)
 
+    def buildTradeDict(self, trades: List[str]) -> dict:
+        # build map "symbol+quantity" => "type+ID"
+        symbolQuanToTypeId = defaultdict(lambda: [])
+        for trade in trades:
+            symbol, type, quantity, id = trade.split(",")
+            symbolQuanToTypeId[(symbol, quantity)].append((type, id))
+        return symbolQuanToTypeId
+
+    def buildUnmatchedResult(self, tradeDict: dict) -> List[str]:
+        result = []
+        for key, valueList in tradeDict.items():
+            symbol, quantity = key
+            for item in valueList:
+                type, id = item
+                result.append(",".join([symbol, type, quantity, id]))
+        return result
+
+    def removeEntries(self, originalList: List, indexesToRemove: set) -> List:
+        result = []
+        for index, value in enumerate(originalList):
+            if index not in indexesToRemove:
+                result.append(value)
+        return result
+
+    def removeMatch(self, houseToTypeId: dict, streetToTypeId: dict, type: str):
+        intersectKeys = houseToTypeId.keys() & streetToTypeId.keys()
+        for key in intersectKeys:
+            houseList = sorted(houseToTypeId[key])
+            streetList = sorted(streetToTypeId[key])
+            hIndexToRemove = set()
+            sIndexToRemove = set()
+            for i in range(len(houseList)):
+                for j in range(len(streetList)):
+                    if j in sIndexToRemove:
+                        continue
+
+                    if type == "exact" and houseList[i] == streetList[j]:
+                        hIndexToRemove.add(i)
+                        sIndexToRemove.add(j)
+                        break
+                    elif type == "fuzzy" and houseList[i][0] == streetList[j][0]:
+                        hIndexToRemove.add(i)
+                        sIndexToRemove.add(j)
+                        break
+            houseToTypeId[key] = self.removeEntries(houseList, hIndexToRemove)
+            streetToTypeId[key] = self.removeEntries(streetList, sIndexToRemove)
+        return
+
     def findUnmatchedExactFuzzyTrades(self, houseTrades: List[str], streetTrades: List[str]) -> List[str]:
 
-        def removeMatch(houseToTypeId: dict, streetToTypeId: dict, type: str):
-            intersectKeys = houseToTypeId.keys() & streetToTypeId.keys()
-            for key in intersectKeys:
-                houseList = sorted(houseToTypeId[key])
-                streetList = sorted(streetToTypeId[key])
-                houseAfterRemoving = []
-                streetAfterRemoving = []
-                i = 0
-                j = 0
-                while i < len(houseList) and j < len(streetList):
-                    if houseList[i] == streetList[j] and type == "exact":
-                        i += 1
-                        j += 1
-                    elif houseList[i][0] == streetList[j][0] and type == "fuzzy":
-                        i += 1
-                        j += 1
-                    elif houseList[i][0] == "B" and streetList[j][0] == "S":
-                        houseAfterRemoving.append(houseList[i])
-                        i += 1
-                    else:
-                        streetAfterRemoving.append(streetList[j])
-                        j += 1
-                while i < len(houseList):
-                    houseAfterRemoving.append(houseList[i])
-                    i += 1
-                while j < len(streetList):
-                    streetAfterRemoving.append(streetList[j])
-                    j += 1
-
-                houseToTypeId[key] = houseAfterRemoving
-                streetToTypeId[key] = streetAfterRemoving
-
-            return
-
-        def buildUnmatchedTrades(houseToTypeId: dict, streetToTypeId: dict) -> List[str]:
-            result = []
-
-            for key, valueList in houseToTypeId.items():
-                symbol, quantity = key.split(",")
-                for item in valueList:
-                    type, id = item.split(",")
-                    result.append(symbol+","+type+","+quantity+","+id)
-            for key, valueList in streetToTypeId.items():
-                symbol, quantity = key.split(",")
-                for item in valueList:
-                    type, id = item.split(",")
-                    result.append(symbol+","+type+","+quantity+","+id)
-
-            sortedResult = sorted(result)
-            return sortedResult
-
         # build map "symbol+quantity" => "type+ID"
-        houseToTypeId = defaultdict(lambda: [])
-        for trade in houseTrades:
-            symbol, type, quantity, id = trade.split(",")
-            houseToTypeId[symbol+","+quantity].append(type+","+id)
+        houseTradeMap = self.buildTradeDict(houseTrades)
+        streetTradeMap = self.buildTradeDict(streetTrades)
 
-        streetToTypeId = defaultdict(lambda: [])
-        for trade in streetTrades:
-            symbol, type, quantity, id = trade.split(",")
-            streetToTypeId[symbol+","+quantity].append(type+","+id)
+        self.removeMatch(houseTradeMap, streetTradeMap, "exact")
+        self.removeMatch(houseTradeMap, streetTradeMap, "fuzzy")
+        # removeMatch(houseTradeMap, streetTradeMap, "offset")
 
-        removeMatch(houseToTypeId, streetToTypeId, "exact")
-        removeMatch(houseToTypeId, streetToTypeId, "fuzzy")
-
-        result = buildUnmatchedTrades(houseToTypeId, streetToTypeId)
-        return result
+        result = self.buildUnmatchedResult(houseTradeMap)
+        result.extend(self.buildUnmatchedResult(streetTradeMap))
+        return sorted(result)
 
     @unittest.skip
     def test_FindExactMatch(self):
@@ -157,6 +149,7 @@ class HouseStreetTrade(unittest.TestCase):
         print(self.findUnmatchedExactTrades(houseTrades, streetTrades))
         return
 
+    @unittest.skip
     def test1_FindExactFuzzyMatch(self):
         houseTrades = ["AAPL,S,0010,ZYX444", "AAPL,S,0010,ZYX444", "AAPL,B,0010,ABC123", "GOOG,S,0050,GHG545"]
         streetTrades = ["GOOG,S,0050,GHG545", "AAPL,S,0010,ZYX444", "AAPL,B,0010,TTT222"]
@@ -164,10 +157,37 @@ class HouseStreetTrade(unittest.TestCase):
         print(self.findUnmatchedExactFuzzyTrades(houseTrades, streetTrades))
         return
 
-    @unittest.skip
     def test2_FindExactFuzzyMatch(self):
-        houseTrades = ["AAPL,B,0010,ABC123", "AAPL,S,0015,ZYX444", "AAPL,S,0015,ZYX444", "GOOG,S,0050,GHG545"]
-        streetTrades = ["GOOG,S,0050,GHG545", "AAPL,S,0015,ZYX444", "AAPL,B,0500,TTT222"]
+        # houseTrades = ["AAPL,B,0010,ABC123", "AAPL,S,0015,ZYX444", "AAPL,S,0015,ZYX444", "GOOG,S,0050,GHG545"]
+        # streetTrades = ["GOOG,S,0050,GHG545", "AAPL,S,0015,ZYX444", "AAPL,B,0010,TTT222"]
+        houseTrades = ["AAPL,B,0010,ABC123",  "AAPL,S,0015,ZYX444"]
+        streetTrades = ["AAPL,B,0010,TTT222"]
+
+        print(self.findUnmatchedExactFuzzyTrades(houseTrades, streetTrades))
+        return
+
+    @unittest.skip
+    def test3_FindExactFuzzyMatch(self):
+        houseTrades = ["AAPL,B,0100,ABC123", "AAPL,B,0100,ABC123", "AAPL,B,0100,ABC123", "GOOG,S,0050,CDC333"]
+        streetTrades = ["  FB,B,0100,GBGGG", "AAPL,B,0100,ABC123", "AAPL,B,0100,ABC123", "GOOG,S,0050,CDC333"]
+
+        print(self.findUnmatchedExactFuzzyTrades(houseTrades, streetTrades))
+        return
+
+    @unittest.skip
+    def test4_FindExactFuzzyMatch(self):
+        houseTrades = ["AAPL,B,0100,ABC123", "AAPL,B,0100,ABC123", "AAPL,B,0100,ABC123", "GOOG,S,0050,CDC333"]
+        streetTrades = ["  FB,B,0100,GBGGG", "AAPL,B,0100,ABC123", "AAPL,B,0100,ABC123", "GOOG,S,0050,CDC333", "AAPL,S,0100,ABC124"]
+
+        print(self.findUnmatchedExactFuzzyTrades(houseTrades, streetTrades))
+        return
+
+    @unittest.skip
+    def test5_FindExactFuzzyMatch_offset(self):
+        houseTrades = ["AAPL,B,0010,ABC123", "AAPL,S,0015,ZYX444", "AAPL,S,0015,ZYX444", "AAPL,S,0015,ZYX444", "AAPL,S,0015,ZYX444", "AAPL,S,0015,ZYX444", "GOOG,S,0050,GHG545"]
+        streetTrades = ["GOOG,S,0050,GHG545", "AAPL,S,0015,ZYX444", "AAPL,S,0015,ZYX444", "AAPL,S,0015,ZYX444", "AAPL,S,0015,ZYX444", "AAPL,B,0500,TTT222"]
+        houseTrades2 = ["AAPL,B,0010,ABC123", "AAPL,S,0015,ZYX444"]
+        streetTrades2 = ["AAPL,B,0500,TTT222"]
 
         print(self.findUnmatchedExactFuzzyTrades(houseTrades, streetTrades))
         return
