@@ -4,9 +4,6 @@ import unittest
 from collections import defaultdict
 from typing import List
 
-from sortedcontainers import SortedList
-
-
 class CandleStick(unittest.TestCase):
 
     def calcCandleStick(self, input: str) -> List[List[int]]:
@@ -26,15 +23,20 @@ class CandleStick(unittest.TestCase):
                 if timestamp > self.lastPrice[0]:
                     self.lastPrice = (timestamp, price)
 
-        priceTsPairs = input.split(",")
-        startToInterval = defaultdict(lambda: Interval())
+        def recordEntries(priceToPairs: str) -> dict:
+            priceTsPairs = input.split(",")
+            startToInterval = defaultdict(lambda: Interval())
 
-        for pair in priceTsPairs:
-            price, time = pair.split(":")
-            price = int(price)
-            time = int(time)
-            floorS = time // 10
-            startToInterval[floorS].add(time, price)
+            for pair in priceTsPairs:
+                price, time = pair.split(":")
+                price = int(price)
+                time = int(time)
+                floorS = time // 10
+                startToInterval[floorS].add(time, price)
+
+            return startToInterval
+
+        startToInterval = recordEntries(input)
 
         start = min(startToInterval.keys())
         end = max(startToInterval.keys())
