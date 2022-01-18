@@ -124,7 +124,7 @@ class MarginCall(unittest.TestCase):
             for symbol in symbolInPriceDescOrder:
                 maxUnderCollateral = self.maxSellableWithCollateral(symbol, symbolToShareNum)
                 if maxUnderCollateral != 0:
-                    symbolToSell = symbolToSell
+                    symbolToSell = symbol
                     numToSell = maxUnderCollateral
                     break
 
