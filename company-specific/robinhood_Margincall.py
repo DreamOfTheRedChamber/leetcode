@@ -4,11 +4,13 @@
 # out of cash (through a process called a "margin call", which we'll define later). We’re looking for clean code,
 # good naming, testing, etc. We're not particularly looking for the most performant solution. **Step 1 (tests 1-4):
 # Parse trades and build a customer portfolio** Your input will be a list of trades, each of which is itself a list
-# of strings in the form [timestamp, symbol, B/S (for buy/sell), quantity, price], e.g. [["1", "AAPL", "B", "10",
-# "10"], ["3", "GOOG", "B", "20", "5"], ["10", "AAPL", "S", "5", "15"]] is equivalent to buying 10 shares (i.e.
-# units) of AAPL for 5 each at timestamp 3, and selling 5 shares of AAPL for $15 at timestamp 10. **Input
-# assumptions:**
-
+# of strings in the form
+# [timestamp, symbol, B/S (for buy/sell), quantity, price], e.g.
+# [["1", "AAPL", "B", "10","10"],
+# ["3", "GOOG", "B", "20", "5"],
+# ["10", "AAPL", "S", "5", "15"]] is equivalent to buying 10 shares
+# (i.e. units) of AAPL for 5 each at timestamp 3, and selling 5 shares of AAPL for $15 at timestamp 10.
+# **Input assumptions:**
 # - The input is sorted by timestamp
 # - All numerical values are nonnegative integers
 # - Trades will always be valid (i.e. a customer will never sell more of a stock than they own).
@@ -84,15 +86,6 @@ from sortedcontainers import SortedList
 
 class MarginCall(unittest.TestCase):
 
-    def getPortfolio(self, portfolioMap: dict) -> List[List[str]]:
-        # return sorted result
-        result = []
-        result.append(["cash", str(portfolioMap["cash"])])
-        for key in sorted(portfolioMap.keys()):
-            if key != "cash":
-                result.append([key, str(portfolioMap[key])])
-        return result
-
     def calculatePortfolio(self, tradeLists: List[str]) -> List[str]:
         # dict and initialize
         portfolio = defaultdict(lambda: 0)
@@ -107,15 +100,34 @@ class MarginCall(unittest.TestCase):
         # return sorted result
         return self.getPortfolio(portfolio)
 
+    def calcFinalPortfolio(self, portfolioMap: dict, currCash: int) -> List[List[str]]:
+        # return sorted result
+        result = []
+        result.append(["cash", str(currCash)])
+        for key in sorted(portfolioMap.keys()):
+            result.append([key, str(portfolioMap[key])])
+        return result
+
+    def getHighestPrice(self, symbolToPrice: dict) -> str:
+        reverseSorted = sorted(symbolToPrice.keys(), key=lambda k: symbolToPrice[k], reverse=True)
+        return reverseSorted[0] if reverseSorted[0] != "cash" else reverseSorted[1]
+
+    def marginCall(self, symbolToPrice: dict, symbolToNum: dict, inputCash: int) -> int:
+        while inputCash < 0:
+            toSell = self.getHighestPrice(symbolToPrice)
+            numToSell = min(math.ceil(abs(inputCash) / symbolToPrice[toSell]), symbolToNum[toSell])
+            inputCash += numToSell * symbolToPrice[toSell]
+            symbolToNum[toSell] -= numToSell
+            if symbolToNum[toSell] == 0:
+                del symbolToNum[toSell]
+                del symbolToPrice[toSell]
+        return inputCash
+
     def calculatePortfolioWithMargin(self, tradeLists: List[str]) -> List[str]:
-        def getHighestPrice(symbolToPrice: dict) -> str:
-            reverseSorted = sorted(symbolToPrice.keys(), key=lambda k: symbolToPrice[k], reverse=True)
-            return reverseSorted[0] if reverseSorted[0] != "cash" else reverseSorted[1]
 
         # use heap to find margin call target
         symbolToNum = defaultdict(lambda: 0)
-        cs = "cash"
-        symbolToNum[cs] = 1000
+        currCash = 1000
         symbolToPrice = {}
 
         # loop through trade
@@ -124,22 +136,14 @@ class MarginCall(unittest.TestCase):
             priceInt = int(price)
             quantityInt = int(quantity)
 
-            symbolToNum[cs] += -start * quantityInt * priceInt
-
-            while symbolToNum[cs] < 0:
-                toSell = getHighestPrice(symbolToPrice)
-                numToSell = min(math.ceil(abs(symbolToNum[cs]) / symbolToPrice[toSell]), symbolToNum[toSell])
-                symbolToNum[cs] += numToSell * symbolToPrice[toSell]
-                symbolToNum[toSell] -= numToSell
-                if symbolToNum[toSell] == 0:
-                    del symbolToNum[toSell]
-                    del symbolToPrice[toSell]
+            currCash += -start * quantityInt * priceInt
+            currCash = self.marginCall(symbolToPrice, symbolToNum, currCash)
 
             symbolToNum[symbol] += start * quantityInt
             symbolToPrice[symbol] = priceInt
 
         # return sorted result
-        return self.getPortfolio(symbolToNum)
+        return self.calcFinalPortfolio(symbolToNum, currCash)
 
     def calculatePortfolioWithCollateral(self, tradeLists: List[str]) -> List[str]:
 
@@ -170,7 +174,6 @@ class MarginCall(unittest.TestCase):
                       ["4", "ABPL", "S", "2", "80"], ["5", "GOOG", "B", "15", "30"]]
         print(self.calculatePortfolioWithMargin(tradeLists))
 
-    @unittest.skip
     def test_margin_4(self):
         # pick high price first
         tradeLists = [["1", "AAPL", "B", "5", "100"], ["2", "ABPL", "B", "5", "100"], ["3", "AAPL", "S", "2", "80"],
