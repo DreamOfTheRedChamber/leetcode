@@ -1,4 +1,4 @@
-# Definition for a binary tree node.
+# https://www.1point3acres.com/bbs/thread-819383-1-1.html.
 import bisect
 import collections
 import unittest
