@@ -149,7 +149,6 @@ class HouseStreetTrade(unittest.TestCase):
         print(self.findUnmatchedExactTrades(houseTrades, streetTrades))
         return
 
-    @unittest.skip
     def test1_FindExactFuzzyMatch(self):
         houseTrades = ["AAPL,S,0010,ZYX444", "AAPL,S,0010,ZYX444", "AAPL,B,0010,ABC123", "GOOG,S,0050,GHG545"]
         streetTrades = ["GOOG,S,0050,GHG545", "AAPL,S,0010,ZYX444", "AAPL,B,0010,TTT222"]
@@ -157,6 +156,7 @@ class HouseStreetTrade(unittest.TestCase):
         print(self.findUnmatchedExactFuzzyTrades(houseTrades, streetTrades))
         return
 
+    @unittest.skip
     def test2_FindExactFuzzyMatch(self):
         # houseTrades = ["AAPL,B,0010,ABC123", "AAPL,S,0015,ZYX444", "AAPL,S,0015,ZYX444", "GOOG,S,0050,GHG545"]
         # streetTrades = ["GOOG,S,0050,GHG545", "AAPL,S,0015,ZYX444", "AAPL,B,0010,TTT222"]
@@ -165,13 +165,26 @@ class HouseStreetTrade(unittest.TestCase):
 
         print(self.findUnmatchedExactFuzzyTrades(houseTrades, streetTrades))
         return
-
     @unittest.skip
     def test3_FindExactFuzzyMatch(self):
-        houseTrades = ["AAPL,B,0100,ABC123", "AAPL,B,0100,ABC123", "AAPL,B,0100,ABC123", "GOOG,S,0050,CDC333"]
-        streetTrades = ["  FB,B,0100,GBGGG", "AAPL,B,0100,ABC123", "AAPL,B,0100,ABC123", "GOOG,S,0050,CDC333"]
+        house_trades = ["AAPL,B,0100,ABC123",  "AAPL,B,0100,ABC123",  "AAPL,B,0100,ABC123",  "GOOG,S,0050,CDC333"]
+        street_trades = ["  FB,B,0100,GBGGGG",  "AAPL,B,0100,ABC123"]
 
-        print(self.findUnmatchedExactFuzzyTrades(houseTrades, streetTrades))
+        print(self.findUnmatchedExactFuzzyTrades(house_trades, street_trades))
+        return
+
+    @unittest.skip
+    def test3_4_FindExactFuzzyMatch(self):
+        house_trades = ["AAPL,B,0010,ABC123",  "AAPL,S,0015,ZYX444",  "AAPL,S,0015,ZYX444",  "GOOG,S,0050,GHG545"]
+        street_trades = ["GOOG,S,0050,GHG545",  "AAPL,S,0015,ZYX444",  "AAPL,B,0500,TTT222"]
+
+        print(self.findUnmatchedExactFuzzyTrades(house_trades, street_trades))
+        return
+
+    def test3_5_FindExactFuzzyMatch(self):
+        house_trades= ["AAPL,B,0100,ABC123",  "AAPL,B,0100,ABC123",  "AAPL,B,0100,ABC123",  "GOOG,S,0050,CDC333"]
+        street_trades =["  FB,B,0100,GBGGGG",  "AAPL,B,0100,ABC123"]
+        print(self.findUnmatchedExactFuzzyTrades(house_trades, street_trades))
         return
 
     @unittest.skip
