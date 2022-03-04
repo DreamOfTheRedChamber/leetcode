@@ -75,5 +75,19 @@ class TestDataStructuresSortedContainers(unittest.TestCase):
         # removing all elements from the dict
         sorted_dict.clear()
 
+    def test_SortedDict_IncDecOrder(self):
+
+        # pop out keys in increasing order
+        sorted_dict = SortedDict({'a': 3, 'c': 1, 'b': 2, 'd': 4})
+        while sorted_dict:
+            print(sorted_dict.peekitem(0))
+
+        print("\n")
+
+        # pop out keys in decreasing order
+        sorted_dict = SortedDict({'a': 3, 'c': 1, 'b': 2, 'd': 4})
+        while sorted_dict:
+            print(sorted_dict.popitem(-1))
+
 if __name__ == '__main__':
     unittest.main()
