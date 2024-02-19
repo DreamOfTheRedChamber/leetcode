@@ -9,21 +9,16 @@ test('adds 1 + 2 to equal 3', () => {
 });
  */
 
-const sum = require('./rangelist');
-//import RangeList from './rangelist';
+import RangeList from './rangelist';
 
 describe("FizzBuzz", () => {
-    test('adds 1 + 2 to equal 3', () => {
-        expect(sum(1, 2)).toBe(3);
-    });
 
-    test('adds 3 + 4 to equal 7', () => {
-        expect(sum(3, 4)).toBe(7);
-    });
+    /* could not use class from another file here.
+    Jest will complain the following:
 
-    /*
-    test('test rangelist print', () => {
-        var abc = new RangeList();
-    });
-     */
+    Jest encountered an unexpected token
+    Jest failed to parse a file. This happens e.g. when your code or its dependencies use non-standard JavaScript syntax, or when Jest is not configured to support such syntax.
+    Out of the box Jest supports Babel, which will be used to transform your files into valid JS based on your Babel configuration.    By default "node_modules" folder is ignored by transformers.
+    * */
+
 });
