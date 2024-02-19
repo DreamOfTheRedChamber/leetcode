@@ -67,9 +67,9 @@ class RangeList
      remove(toBeRemoved)
      {
         let newRanges = [];
-        for (let currRange in this.ranges)
+        for (let currRange of this.ranges)
         {
-            if (currRange[0] >= toBeRemoved[1] || currRange[1] >= toBeRemoved[0])
+            if (!this.#isOverlapping(currRange, toBeRemoved))
             {
                 newRanges.push(currRange);
             }
