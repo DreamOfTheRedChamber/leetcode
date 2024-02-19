@@ -4,5 +4,8 @@
   },
   "scripts": {
     "test": "jest"
+  },
+  "jest": {
+    "testRegex": "(.*|(\\.|/)(defg|spec))\\.js?$"
   }
 }
