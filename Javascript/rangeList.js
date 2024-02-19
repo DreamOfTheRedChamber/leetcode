@@ -87,24 +87,46 @@ class RangeList
      }
  }
 
-const rl = new RangeList();
-rl.add([1, 5]);
-rl.print(); // 输出: [1, 5)
-rl.add([10, 20]);
-rl.print(); // 输出: [1, 5) [10, 20)
-rl.add([20, 20]);
-rl.print(); // 输出: [1, 5) [10, 20)
-rl.add([20, 21]);
-rl.print(); // 输出: [1, 5) [10, 21)
-rl.add([2, 4]);
-rl.print(); // 输出: [1, 5) [10, 21)
-rl.add([3, 8]);
-rl.print(); // 输出: [1, 8) [10, 21)
-rl.remove([10, 10]);
-rl.print(); // 输出: [1, 8) [10, 21)
-rl.remove([10, 11]);
-rl.print(); // 输出: [1, 8) [11, 21)
-rl.remove([15, 17]);
-rl.print(); // 输出: [1, 8) [11, 15) [17, 21)
-rl.remove([3, 19]);
-rl.print(); // 输出: [1, 3) [19, 21)
+function testRemove(original, toBeRemoved)
+{
+    let result = new RangeList();
+    for (let entry of original)
+    {
+        result.add(entry);
+    }
+    result.print();
+    result.remove(toBeRemoved);
+    result.print();
+}
+
+function testAdd(toBeAdded)
+{
+    let result = new RangeList();
+    for (let entry of toBeAdded)
+    {
+        result.add(entry);
+    }
+    result.print();
+}
+
+
+// expect: [-1, 3], [6, 9]
+testAdd([[1, 2], [-1, 3], [6, 9]]);
+
+// expect: [-1, 9]
+testAdd([[-1, 9], [-1, 3], [6, 9]]);
+
+// expect: [1, 2], [3, 9]
+testAdd([[1, 2], [3, 9], [10, 10]]);
+
+// expect: [1, 8], [10, 21]
+testAdd([[1, 5], [10, 20], [20, 20], [20, 21], [2, 4], [3, 8]]);
+
+// expect: [1, 8], [11, 21]
+testRemove([[1, 8], [10, 21]], [10, 11])
+
+// expect: []
+testRemove([[1, 8], [10, 21]], [-1, 22])
+
+// expect: [1, 3], [19, 21]
+testRemove([[1, 8], [10, 21]], [3, 19])
