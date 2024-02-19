@@ -64,9 +64,30 @@ class RangeList
         this.ranges = newRanges;
      }
 
-     remove(range)
+     remove(toBeRemoved)
      {
+        let newRanges = [];
+        for (let currRange in this.ranges)
+        {
+            if (currRange[0] >= toBeRemoved[1] || currRange[1] >= toBeRemoved[0])
+            {
+                newRanges.push(currRange);
+            }
+            else
+            {
+                if (currRange[0] < toBeRemoved[0])
+                {
+                    newRanges.push([currRange[0], Math.min(currRange[1], toBeRemoved[0])]);
+                }
 
+                if (currRange[1] > toBeRemoved[1])
+                {
+                    newRanges.push([Math.max(toBeRemoved[1], currRange[0]), currRange[1]]);
+                }
+            }
+        }
+
+        this.ranges = newRanges;
      }
 
      print()
@@ -79,14 +100,7 @@ class RangeList
 
      #isOverlapping(range1, range2)
      {
-         if (range1[1] < range2[0] || range2[1] < range1[0])
-         {
-            return false;
-         }
-         else
-         {
-             return true;
-         }
+         return !(range1[1] < range2[0] || range2[1] < range1[0]);
      }
  }
 
