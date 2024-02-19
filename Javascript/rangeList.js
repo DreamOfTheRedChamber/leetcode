@@ -8,7 +8,7 @@ class RangeList
 
      add(range)
      {
-         if (!Array.isArray(range) || this.ranges.length !== 2)
+         if (!Array.isArray(range) || range.length !== 2)
          {
             console.error('Invalid input: input must be an array of size 2.');
             return;
@@ -27,9 +27,9 @@ class RangeList
         }
 
         let newRanges = []
-        let currRange = this.ranges[0];
+        let currRange = range;
         let inserted = false;
-        for (let i = 1; i < this.ranges.length; i++)
+        for (let i = 0; i < this.ranges.length; i++)
         {
             if (inserted)
             {
@@ -58,7 +58,7 @@ class RangeList
 
         if (!inserted)
         {
-            newRanges.push(range)
+            newRanges.push(currRange);
         }
 
         this.ranges = newRanges;
@@ -92,10 +92,13 @@ class RangeList
 
      print()
      {
-        for (var i = 0; i < this.ranges.length; i++)
+        let result = ""
+        for (let i = 0; i < this.ranges.length; i++)
         {
-            console.log(this.ranges[i][0]+" "+this.ranges[i][1])
+            result = result.concat(" ",  "["+this.ranges[i][0]+","+this.ranges[i][1]+")");
         }
+
+        console.log(result);
      }
 
      #isOverlapping(range1, range2)
