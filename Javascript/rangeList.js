@@ -28,38 +28,25 @@ class RangeList
 
         let newRanges = []
         let currRange = range;
-        let inserted = false;
         for (let i = 0; i < this.ranges.length; i++)
         {
-            if (inserted)
-            {
-                newRanges.push(this.ranges[i]);
-            }
-
             if (this.#isOverlapping(currRange, this.ranges[i]))
             {
                 currRange = [Math.min(currRange[0], this.ranges[i][0]),
                             Math.max(currRange[1], this.ranges[i][1])];
             }
+            else if (currRange[0] > this.ranges[i][1])
+            {
+                newRanges.push(this.ranges[i]);
+            }
             else
             {
-                if (currRange[0] > this.ranges[i][1])
-                {
-                    newRanges.push(this.ranges[i]);
-                }
-                else
-                {
-                    newRanges.push(currRange);
-                    newRanges.push(this.ranges[i]);
-                    inserted = true;
-                }
+                newRanges.push(currRange);
+                currRange = this.ranges[i];
             }
         }
 
-        if (!inserted)
-        {
-            newRanges.push(currRange);
-        }
+        newRanges.push(currRange);
 
         this.ranges = newRanges;
      }
