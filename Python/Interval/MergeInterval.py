@@ -1,9 +1,7 @@
 # Definition for a binary tree node.
 import unittest
-
 # Read about enumerate in python
 from typing import List
-
 
 class MergeInterval(unittest.TestCase):
 
