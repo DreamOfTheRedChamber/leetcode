@@ -14,26 +14,28 @@ class NextBiggerPalindrome(unittest.TestCase):
 
     def nextBigger(self, palindrome: int) -> int:
         palinStr = str(palindrome)
-        if len(palinStr) < 9:
+        if palindrome < 9 :
             return palindrome + 1
 
         for i in reversed(range(len(palinStr))):
 ### assume that bits bigger than i does not need to change
-            newPalinStr = palinStr
-            biggestNumStr = palinStr
-
+            newPalinStr = list(palinStr)
+            biggestNumStr = list(palinStr)
             for j in range(i, len(palinStr)):
                 newPalinStr[j] = newPalinStr[len(palinStr) - 1 - j]
                 biggestNumStr[j] = '9'
-            newPalinInt = int(newPalinStr)
-            biggestNumInt = int(biggestNumStr)
+            newPalinInt = int(''.join(newPalinStr))
+            biggestNumInt = int(''.join(biggestNumStr))
 
             while newPalinInt <= biggestNumInt:
-                if self.isPalindrome(str(newPalinInt)):
+                if self.isPalindrome(str(newPalinInt)) and newPalinInt > palindrome:
                     return newPalinInt
                 newPalinInt += 1
 
-        return -1
+        palindrome += 1
+        while not self.isPalindrome(str(palindrome)):
+            palindrome += 1
+        return palindrome
 
     def isPalindrome(self, value: str):
         for i in range(len(value)):
