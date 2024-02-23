@@ -5,7 +5,6 @@ from dataclasses import dataclass
 
 class TestDataStructuresBinaryAlgo(unittest.TestCase):
 
-    @unittest.skip
     def test_binaryInsertNativeNumber(self):
         result = []
         bisect.insort(result, 4)
@@ -15,7 +14,9 @@ class TestDataStructuresBinaryAlgo(unittest.TestCase):
         print(result)
         return
 
+    @unittest.skip
     def test_binaryInsertObject(self):
+
         @dataclass
         class Person:
             first_name: str
