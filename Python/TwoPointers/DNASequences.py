@@ -40,38 +40,28 @@ GCACG
 import sys
 import unittest
 
-class TwoSum(unittest.TestCase):
+class findHighCGRatio(unittest.TestCase):
 
-    def findHighCGRatio(self, sequence: str, winSize: int) -> str:
-        cCount = 0
-        gCount = 0
+    def findHighCGRatio(self, seq: str, winSize: int) -> str:
+        count = 0
         pos = 0
-        while pos < winSize:
-            if sequence[pos] == 'C':
-                cCount += 1
-            elif sequence[pos] == 'G':
-                gCount += 1
-            pos += 1
+        sub = seq[:winSize]
+        cgCount = sub.count('C') + sub.count('G')
 
-        gcRatio = (cCount + gCount) / winSize
-        result = sequence[:winSize]
-        while pos < len(sequence):
-            if sequence[pos] == 'C':
-                cCount += 1
-            elif sequence[pos] == 'G':
-                gCount += 1
+        gcRatio = cgCount / winSize
+        result = seq[:winSize]
+        for pos in range(winSize, len(seq)):
+            if seq[pos] == 'C' or seq[pos] == 'G':
+                cgCount += 1
 
-            if sequence[pos - winSize] == 'C':
-                cCount -= 1
-            elif sequence[pos - winSize] == 'G':
-                gCount -= 1
+            if seq[pos - winSize] == 'C' or seq[pos - winSize] == 'G':
+                cgCount -= 1
 
-            if (cCount + gCount) / winSize > gcRatio:
-                result = sequence[pos - winSize+1:pos+1]
-                gcRatio = (cCount + gCount) / winSize
+            if cgCount / winSize > gcRatio:
+                result = seq[pos - winSize + 1: pos + 1]
+                gcRatio = cgCount / winSize
 
-            pos += 1
-
+        print(result)
         return result
 
     def test_GCSequence(self):
