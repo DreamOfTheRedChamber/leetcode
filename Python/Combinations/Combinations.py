@@ -25,26 +25,23 @@ Explanation: There is 1 choose 1 = 1 total combination.
 class TestCombinations(unittest.TestCase):
 
 
-    def dfs(self, k: int, visited: List[bool], oneResult: List[int], allResults: List[List[int]]):
+    def dfs(self, k: int, start: int, end: int, oneResult: List[int], allResults: List[List[int]]):
         if len(oneResult) > k:
             return
         elif len(oneResult) == k:
             allResults.append(oneResult.copy())
             return
 
-        for i in range(len(oneResult), len(visited)):
-            if not visited[i]:
-                visited[i] = True
-                oneResult.append(i + 1)
-                self.dfs(k, visited, oneResult, allResults)
-                oneResult.pop()
-                visited[i] = False
+        for i in range(start, end + 1):
+            oneResult.append(i)
+            self.dfs(k, i + 1, end, oneResult, allResults)
+            oneResult.pop()
 
         return
 
     def combine(self, n: int, k: int) -> List[List[int]]:
         allResults = []
-        self.dfs(k, [False] * n, [], allResults)
+        self.dfs(k, 1, n, [], allResults)
         return allResults
 
     def test_combinations(self):
