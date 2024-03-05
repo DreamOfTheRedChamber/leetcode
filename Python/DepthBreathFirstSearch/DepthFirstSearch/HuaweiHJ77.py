@@ -1,24 +1,26 @@
 
 # https://www.nowcoder.com/practice/97ba57c35e9f4749826dc3befaeae109?tpId=37&tqId=21300&rp=1&ru=/exam/oj/ta&qru=/exam/oj/ta&sourceUrl=%2Fexam%2Foj%2Fta%3FtpId%3D37&difficulty=undefined&judgeStatus=undefined&tags=&title=hj77
-
-import sys
+from collections import deque
 from typing import List
 
-def dfs(trains: List[int], pos: int, stack: List[int], oneResult: List[int], allResults: List[List[int]]):
-    if pos == len(trains):
-        result = oneResult.copy()
-        for i in reversed(range(len(stack))):
-            result.append(stack[i])
-        allResults.append(result)
+def dfs(trains: deque, stack: List[int], oneResult: List[int], allResults: List[List[int]]):
+    if len(trains) == 0 and len(stack) == 0:
+        allResults.append(oneResult)
         return
 
-    stack.append(trains[pos])
-    dfs(trains, pos + 1, stack, oneResult, allResults)
-    stack.pop()
+    if len(trains) > 0:
+        train = trains.popleft()
+        oneResult.append(train)
+        dfs(trains, stack, oneResult, allResults)
+        oneResult.pop()
 
-    oneResult.append(trains[pos])
-    dfs(trains, pos + 1, stack, oneResult, allResults)
-    oneResult.pop()
+    if len(stack) > 0:
+        train = stack.pop()
+        oneResult.append(train)
+        dfs(trains, stack, oneResult, allResults)
+        oneResult.pop()
+
+    return
 
 """
 numTrains = int(input())

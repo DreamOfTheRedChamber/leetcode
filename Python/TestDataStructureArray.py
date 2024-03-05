@@ -3,17 +3,19 @@ import bisect
 import unittest
 from dataclasses import dataclass
 
-class TestMath(unittest.TestCase):
+class TestDataStructureArray(unittest.TestCase):
 
-    def test_math(self):
+    def test_createArray(self):
 
-        # integer divide
-        abc = 1 // 2
-        print("a // b = " + str(abc))
+        # create 1d array
+        oneD = [0] * 10
 
-        # decimal divide
-        efg = 1 / 2
-        print("a / b = " + str(efg))
+        # create 2d array
+        twoD = [[0] * 4] * 3
+
+        # range with different values
+        diffValues = [x for x in range(10)]
+
         return
 
 if __name__ == '__main__':
