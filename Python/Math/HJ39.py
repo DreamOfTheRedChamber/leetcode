@@ -20,15 +20,11 @@ def isIpValid(input: List[int]) -> bool:
 def decToBin(input: List[int]) -> str:
     binStr = ""
     for seg in input:
-        segStr = ''
-        while seg != 0:
-            residual = seg % 2
-            seg = seg // 2
-            segStr = segStr + str(residual)
+        segStr = str(bin(seg)).replace("0b", "")
         if len(segStr) < 8:
-            segStr = segStr + '0' * (8 - len(segStr))
-
+            segStr = "0" * (8 - len(segStr)) + segStr
         binStr = binStr + segStr
+
     return binStr
 
 def binAnd(ip: str, mask: str) -> str:
@@ -67,7 +63,7 @@ ip2 = input().strip()
 
 """
 
-"""
+
 mask = "255.255.255.0"
 ip1 = "192.168.224.256"
 ip2 = "192.168.10.4"
@@ -82,8 +78,6 @@ mask = "255.255.255.0"
 ip1 = "192.168.0.254"
 ip2 = "192.168.0.1"
 print(calculate(mask, ip1, ip2)) # 0
-
-"""
 
 mask = "255.0.0.0"
 ip1 = "92.24.244.54"
