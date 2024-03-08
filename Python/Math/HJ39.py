@@ -41,41 +41,51 @@ def binAnd(ip: str, mask: str) -> str:
 
     return result
 
-mask = list(map(int, input().strip().split('.')))
-ip1 = list(map(int, input().strip().split('.')))
-ip2 = list(map(int, input().strip().split('.')))
+def calculate(mask: str, ip1: str, ip2: str) -> int:
+    mask = list(map(int, mask.split('.')))
+    ip1 = list(map(int, ip1.split('.')))
+    ip2 = list(map(int, ip2.split('.')))
 
-maskBin = decToBin(mask)
-ip1Bin = decToBin(ip1)
-ip2Bin = decToBin(ip2)
+    maskBin = decToBin(mask)
+    ip1Bin = decToBin(ip1)
+    ip2Bin = decToBin(ip2)
 
-if not isMaskValid(maskBin) or not isIpValid(ip1) or not isIpValid(ip2):
-    print(1)
-
-result1 = binAnd(mask, ip1)
-result2 = binAnd(mask, ip2)
-if result1 == result2:
-    print(0)
-else:
-    print(2)
-
+    if not isMaskValid(maskBin) or not isIpValid(ip1) or not isIpValid(ip2):
+        return 1
+    else:
+        result1 = binAnd(maskBin, ip1Bin)
+        result2 = binAnd(maskBin, ip2Bin)
+        if result1 == result2:
+            return 0
+        else:
+            return 2
 
 """
-255.255.255.0
-192.168.224.256
-192.168.10.4
+mask = input().strip()
+ip1 = input().strip()
+ip2 = input().strip()
 
-1
-
-255.0.0.0
-193.194.202.15
-232.43.7.59
-
-2
-
-255.255.255.0
-192.168.0.254
-192.168.0.1
-
-0
 """
+
+"""
+mask = "255.255.255.0"
+ip1 = "192.168.224.256"
+ip2 = "192.168.10.4"
+print(calculate(mask, ip1, ip2)) # 1
+
+mask = "255.0.0.0"
+ip1 = "193.194.202.15"
+ip2 = "232.43.7.59"
+print(calculate(mask, ip1, ip2)) # 2
+
+mask = "255.255.255.0"
+ip1 = "192.168.0.254"
+ip2 = "192.168.0.1"
+print(calculate(mask, ip1, ip2)) # 0
+
+"""
+
+mask = "255.0.0.0"
+ip1 = "92.24.244.54"
+ip2 = "146.46.253.71"
+print(calculate(mask, ip1, ip2)) # 2
