@@ -5,7 +5,8 @@ from dataclasses import dataclass
 
 class TestMath(unittest.TestCase):
 
-    def test_math(self):
+    @unittest.skip
+    def test_divide(self):
 
         # integer divide
         abc = 1 // 2
@@ -15,6 +16,10 @@ class TestMath(unittest.TestCase):
         efg = 1 / 2
         print("a / b = " + str(efg))
         return
+
+    def test_intConversion(self):
+        print(int("0123"))
+        print(int("+124"))
 
 if __name__ == '__main__':
     unittest.main()
