@@ -1,17 +1,26 @@
+import unittest
 from typing import List
 
-class PathWithMaximumMinimumValue:
+class PathWithMaximumMinimumValue(unittest.TestCase):
 
     def maximumMinimumPath(self, grid: List[List[int]]) -> int:
-        def union(a: int, b: int):
-            ancestors[a] = ancestors[b]
-            return
+        def find(x):
+            if x != root[x]:
+                root[x] = find(root[x])
+            return root[x]
 
-        def find(a: int) -> int:
-            if ancestors[a] == a:
-                return a
-            else:
-                return find(ancestors[a])
+        # Union the roots of x and y.
+        def union(x, y):
+            root_x = find(x)
+            root_y = find(y)
+            if root_x != root_y:
+                if rank[root_x] > rank[root_y]:
+                    root[root_y] = root_x
+                elif rank[root_x] < rank[root_y]:
+                    root[root_x] = root_y
+                else:
+                    root[root_y] = root_x
+                    rank[root_x] += 1
 
         if len(grid) == 0 or len(grid[0]) == 0:
             print("Error")
@@ -20,7 +29,8 @@ class PathWithMaximumMinimumValue:
         width = len(grid[0])
 
         # ds for union-find algorithm
-        ancestors = [i for i in range(height * width)]
+        root = [i for i in range(height * width)]
+        rank = [1 for i in range(height * width)]
 
         cors = []
         for i in range(height):
@@ -42,7 +52,7 @@ class PathWithMaximumMinimumValue:
                 yNext = yCor + dir[1]
                 nextIndex = xNext * width + yNext
 
-                if 0 <= xNext < height and 0 <= yNext < width and not visited[xNext][yNext]:
+                if 0 <= xNext < height and 0 <= yNext < width and visited[xNext][yNext]:
                     union(index, nextIndex)
 
             rootStart = find(0)
@@ -51,3 +61,18 @@ class PathWithMaximumMinimumValue:
                 return grid[xCor][yCor]
 
         return -1
+
+    def test_example1(self):
+        matrix = [[5,4,5],[1,2,6],[7,4,6]]
+        self.assertEqual(4, self.maximumMinimumPath(matrix))
+
+    def test_example2(self):
+        matrix = [[2,2,1,2,2,2],[1,2,2,2,1,2]]
+        self.assertEqual(2, self.maximumMinimumPath(matrix))
+
+    def test_example3(self):
+        matrix = [[3,4,6,3,4],[0,2,1,1,7],[8,8,3,2,7],[3,2,4,9,8],[4,1,2,0,0],[4,6,5,4,3]]
+        self.assertEqual(3, self.maximumMinimumPath(matrix))
+
+if __name__ == '__main__':
+    unittest.main()
