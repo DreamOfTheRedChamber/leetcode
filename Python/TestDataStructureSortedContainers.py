@@ -4,7 +4,6 @@ import unittest
 # Read about enumerate in python
 from sortedcontainers import SortedList, SortedSet, SortedDict
 
-
 class TestDataStructuresSortedContainers(unittest.TestCase):
 
     @unittest.skip
