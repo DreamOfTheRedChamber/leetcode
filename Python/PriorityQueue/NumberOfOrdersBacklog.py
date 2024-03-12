@@ -13,7 +13,7 @@ class NumberOfOrdersBacklog(unittest.TestCase):
         buyMaxHeap = []
         for price, amount, orderType in orders:
             if orderType == 0: # buy order
-                
+
             else:
 
         result = 0
