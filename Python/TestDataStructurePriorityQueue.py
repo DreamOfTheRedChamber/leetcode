@@ -14,7 +14,6 @@ except ImportError:
     # Python3
     import Queue as queue
 
-
 class Element:
     def __init__(self, count, word):
         self.count = count
