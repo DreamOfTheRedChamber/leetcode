@@ -6,11 +6,38 @@ import unittest
 from collections import defaultdict
 from typing import List
 
+from sortedcontainers import SortedDict
+
+
 class NumOfFlowersInFullBloom(unittest.TestCase):
 
     def fullBloomFlowers(self, flowers: List[List[int]], people: List[int]) -> List[int]:
-        
-        return []
+        entries = SortedDict()
+        for flower in flowers:
+            if flower[0] not in entries:
+                entries[flower[0]] = 0
+            if flower[1] + 1 not in entries:
+                entries[flower[1] + 1] = 0
+
+            entries[flower[0]] += 1
+            entries[flower[1] + 1] -= 1
+
+        prefixSum = SortedDict()
+        lastValue = 0
+        for key, value in entries.items():
+            if key not in prefixSum:
+                prefixSum[key] = 0
+            prefixSum[key] = lastValue + value
+            lastValue = prefixSum[key]
+
+        prefixSum[0] = 0
+        result = []
+        for one in people:
+            index = prefixSum.bisect_right(one)
+            key, value = prefixSum.peekitem(index - 1)
+            result.append(value)
+
+        return result
 
     def test_example1(self):
         flowers = [[1, 6], [3, 7], [9, 12], [4, 13]]
