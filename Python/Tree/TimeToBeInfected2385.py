@@ -25,11 +25,8 @@ class TimeToBeInfected(unittest.TestCase):
         else:
             leftDepth, leftNode = self.findNodeDepth(root.left, start)
             rightDepth, rightNode = self.findNodeDepth(root.right, start)
-            if leftNode is None and rightNode is None:
-                return (max(leftDepth, rightDepth) + 1, None)
-            else:
-                resultNode = leftNode if leftNode is not None else rightNode
-                return (max(leftDepth, rightDepth) + 1, resultNode)
+            resultNode = leftNode if leftNode is not None else rightNode
+            return (max(leftDepth, rightDepth) + 1, resultNode)
 
     def amountOfTime(self, root: Optional[TreeNode], start: int) -> int:
         if root is None:
@@ -38,22 +35,17 @@ class TimeToBeInfected(unittest.TestCase):
         leftDepth, leftNode = self.findNodeDepth(root.left, start)
         rightDepth, rightNode = self.findNodeDepth(root.right, start)
 
-        if leftNode is None and rightNode is None:
-            return 0
-        elif root.val == start:
+        result = leftDepth + rightDepth
+        if root.val == start:
             return max(leftDepth, rightDepth)
         else:
             childNode = leftNode if leftNode is not None else rightNode
             subLeftDepth, subLeftNode = self.findNodeDepth(childNode.left, start)
             subRightDepth, subRightNode = self.findNodeDepth(childNode.right, start)
 
-            result = leftDepth + rightDepth
-            if subLeftNode is None and subRightNode is None:
-                return result
-            else:
-                return max(result, max(subLeftDepth, subRightDepth) + 1)
+            return max(result, max(subLeftDepth, subRightDepth) + 1)
 
-    def test_Leetcode(self):
+    def test_example1(self):
         node1 = TreeNode(1)
         node2 = TreeNode(2)
         node3 = TreeNode(3)
@@ -72,6 +64,19 @@ class TimeToBeInfected(unittest.TestCase):
         self.assertEqual(4, self.amountOfTime(node1, 3))
 
         print([1])
+
+    def test_example2(self):
+        # [1,2,null,3,null,4,null,5]
+        # 3
+        # expected: 2
+        return
+
+    def test_example3(self):
+        # [1,2,null,3,null,4,null,5]
+        # 2
+        # expected: 3
+        return
+
 
 if __name__ == '__main__':
     unittest.main()
