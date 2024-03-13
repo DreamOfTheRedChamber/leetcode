@@ -35,7 +35,6 @@ class TimeToBeInfected(unittest.TestCase):
         leftDepth, leftNode = self.findNodeDepth(root.left, start)
         rightDepth, rightNode = self.findNodeDepth(root.right, start)
 
-        result = leftDepth + rightDepth
         if root.val == start:
             return max(leftDepth, rightDepth)
         else:
@@ -43,8 +42,9 @@ class TimeToBeInfected(unittest.TestCase):
             subLeftDepth, subLeftNode = self.findNodeDepth(childNode.left, start)
             subRightDepth, subRightNode = self.findNodeDepth(childNode.right, start)
 
-            return max(result, max(subLeftDepth, subRightDepth) + 1)
-
+            result = leftDepth + rightDepth
+            return max(result, max(subLeftDepth, subRightDepth))
+        
     def test_example1(self):
         node1 = TreeNode(1)
         node2 = TreeNode(2)
