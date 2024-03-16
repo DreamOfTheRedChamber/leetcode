@@ -19,7 +19,7 @@ class ArrayContinuous(unittest.TestCase):
         sortedNums = sorted(unique)
         for i in range(len(sortedNums)):
             pos = bisect.bisect_right(sortedNums, sortedNums[i] + len(sortedNums) - 1)
-            replacedNum = min(replacedNum, i + len(sortedNums) - pos + 1)
+            replacedNum = min(replacedNum, i + len(sortedNums) - pos)
 
         return len(nums) - len(unique) + replacedNum
 
