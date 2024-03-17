@@ -55,7 +55,7 @@ class MaximumSafetyPath(unittest.TestCase):
             for direc in direcs:
                 neighX = x + direc[0]
                 neighY = y + direc[1]
-                if 0 <= neighX < height and 0 <= neighY < width and (neighX, neighY) not in visited and cellSafety[x][y] <= target:
+                if 0 <= neighX < height and 0 <= neighY < width and (neighX, neighY) not in visited and cellSafety[x][y] >= target:
                     visited.add((neighX, neighY))
                     bfsQueue.append((neighX, neighY))
 
@@ -80,10 +80,10 @@ class MaximumSafetyPath(unittest.TestCase):
             else:
                 end = mid
 
-        if self.dfs(grid, cellSafety, end):
-            return end
-        else:
+        if self.dfs(grid, cellSafety, start):
             return start
+        else:
+            return end
 
     def test_example1(self):
         self.assertEqual(0, self.maximumSafenessFactor([[1,0,0],[0,0,0],[0,0,1]]))
