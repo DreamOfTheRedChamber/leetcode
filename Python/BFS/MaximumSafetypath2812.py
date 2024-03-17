@@ -41,25 +41,26 @@ class MaximumSafetyPath(unittest.TestCase):
 
         return cellSafety
 
-    def dfs(self, grid: List[List[int]], cellSafety: List[List[int]], target: int) -> bool:
-        height = len(grid)
-        width = len(grid[0])
+    def find_safeness(self, n, safeness_grid):
+        safeness = min(safeness_grid[0][0], safeness_grid[-1][-1])
+        h = [(-safeness, 0, 0)]
         visited = {(0, 0)}
-        bfsQueue = deque([(0, 0)])
-        direcs = [[0, 1], [1, 0], [0, -1], [-1, 0]]
-        while bfsQueue:
-            x, y = bfsQueue.popleft()
-            if x == height - 1 and y == width - 1:
-                return True
 
-            for direc in direcs:
-                neighX = x + direc[0]
-                neighY = y + direc[1]
-                if 0 <= neighX < height and 0 <= neighY < width and (neighX, neighY) not in visited and cellSafety[x][y] >= target:
-                    visited.add((neighX, neighY))
-                    bfsQueue.append((neighX, neighY))
+        while h:
+            current_safeness, i, j = heapq.heappop(h)
+            current_safeness *= -1
+            if current_safeness < safeness:
+                safeness = current_safeness
 
-        return False
+            for dx, dy in ((-1, 0), (1, 0), (0, -1), (0, 1)):
+                x = i + dx
+                y = j + dy
+                if 0 <= x < n and 0 <= y < n and (x, y) not in visited:
+                    if x == y == n - 1:
+                        return safeness
+                    visited.add((x, y))
+                    new_safeness = safeness_grid[x][y]
+                    heapq.heappush(h, (-new_safeness, x, y))
 
     def maximumSafenessFactor(self, grid: List[List[int]]) -> int:
 
@@ -69,21 +70,10 @@ class MaximumSafetyPath(unittest.TestCase):
         # binary search safetyness
         height = len(grid)
         width = len(grid[0])
-        end = 0
-        for i in range(height):
-            end = max(end, max(cellSafety[i]))
-        start = 0
-        while start + 1 < end:
-            mid = (end - start) // 2 + start
-            if self.dfs(grid, cellSafety, mid):
-                start = mid
-            else:
-                end = mid
+        if grid[0][0] == 1 or grid[height - 1][width - 1] == 1:
+            return 0
 
-        if self.dfs(grid, cellSafety, start):
-            return start
-        else:
-            return end
+        return self.find_safeness(height, cellSafety)
 
     def test_example1(self):
         self.assertEqual(0, self.maximumSafenessFactor([[1,0,0],[0,0,0],[0,0,1]]))
@@ -93,6 +83,16 @@ class MaximumSafetyPath(unittest.TestCase):
 
     def test_example3(self):
         self.assertEqual(2, self.maximumSafenessFactor([[0,0,0,1],[0,0,0,0],[0,0,0,0],[1,0,0,0]]))
+
+    def test_example4(self):
+        self.assertEqual(0, self.maximumSafenessFactor([[0,1,1],[0,1,1],[0,0,1]]))
+
+    def test_example5(self):
+        self.assertEqual(1, self.maximumSafenessFactor([[0,1,1],[0,0,1],[1,0,0]]))
+
+    def test_example6(self):
+        self.assertEqual(2, self.maximumSafenessFactor([[0,0,0,1],[0,0,0,0],[0,0,0,0],[1,0,0,0]]))
+
 
 if __name__ == '__main__':
     unittest.main()
