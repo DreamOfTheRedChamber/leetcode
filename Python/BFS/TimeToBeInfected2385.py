@@ -3,7 +3,7 @@ import heapq
 import unittest
 
 # Read about enumerate in python
-from collections import defaultdict
+from collections import defaultdict, deque
 from typing import List, Optional
 
 
@@ -14,37 +14,48 @@ class TreeNode:
         self.left = left
         self.right = right
 
-
 class TimeToBeInfected(unittest.TestCase):
 
-    def findNodeDepth(self, root: Optional[TreeNode], start: int) -> tuple:
+    def traverse(self, root: TreeNode, graph: dict):
         if root is None:
-            return (0, None)
-        elif root.val == start:
-            return (1, root)
-        else:
-            leftDepth, leftNode = self.findNodeDepth(root.left, start)
-            rightDepth, rightNode = self.findNodeDepth(root.right, start)
-            resultNode = leftNode if leftNode is not None else rightNode
-            return (max(leftDepth, rightDepth) + 1, resultNode)
+            return
+
+        if root.left is not None:
+            graph[root.val].append(root.left.val)
+            graph[root.left.val].append(root.val)
+
+        if root.right is not None:
+            graph[root.val].append(root.right.val)
+            graph[root.right.val].append(root.val)
+
+        return
 
     def amountOfTime(self, root: Optional[TreeNode], start: int) -> int:
-        if root is None:
-            return 0
+        # build graph while traversing tree
+        graph = defaultdict(list)
+        self.traverse(root, graph)
 
-        leftDepth, leftNode = self.findNodeDepth(root.left, start)
-        rightDepth, rightNode = self.findNodeDepth(root.right, start)
+        # perform bfs on the graph, depth is answer
+        bfsQueue = deque()
+        bfsQueue.append(start)
+        visited = set()
+        visited.add(start)
 
-        if root.val == start:
-            return max(leftDepth, rightDepth)
-        else:
-            childNode = leftNode if leftNode is not None else rightNode
-            subLeftDepth, subLeftNode = self.findNodeDepth(childNode.left, start)
-            subRightDepth, subRightNode = self.findNodeDepth(childNode.right, start)
+        depth = 0
+        levelSize = len(bfsQueue)
+        while bfsQueue:
+            for i in range(levelSize):
+                head = bfsQueue.popleft()
+                for neighbor in graph[head]:
+                    if neighbor not in visited:
+                        visited.add(neighbor)
+                        bfsQueue.append(neighbor)
+            levelSize = len(bfsQueue)
+            if levelSize > 0:
+                depth += 1
 
-            result = leftDepth + rightDepth
-            return max(result, max(subLeftDepth, subRightDepth))
-        
+        return depth
+
     def test_example1(self):
         node1 = TreeNode(1)
         node2 = TreeNode(2)
