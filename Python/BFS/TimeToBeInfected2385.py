@@ -23,10 +23,12 @@ class TimeToBeInfected(unittest.TestCase):
         if root.left is not None:
             graph[root.val].append(root.left.val)
             graph[root.left.val].append(root.val)
+            self.traverse(root.left, graph)
 
         if root.right is not None:
             graph[root.val].append(root.right.val)
             graph[root.right.val].append(root.val)
+            self.traverse(root.right, graph)
 
         return
 
