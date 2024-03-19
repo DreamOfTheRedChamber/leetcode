@@ -1,9 +1,10 @@
 # Definition for a binary tree node.
 import heapq
+import sys
 import unittest
 
 # Read about enumerate in python
-from collections import defaultdict
+from collections import defaultdict, deque
 from typing import List, OrderedDict
 
 from sortedcontainers import SortedDict
@@ -11,40 +12,26 @@ from sortedcontainers import SortedDict
 
 class AllPeopleWithSecret(unittest.TestCase):
 
-    def union(self, a: int, b: int, parents: List[int], ranks: List[int]):
-        rootA = self.find(parents, a)
-        rootB = self.find(parents, b)
-        if rootA == rootB:
-            return
-        else:
-            if ranks[rootA] > ranks[rootB]:
-                parents[rootB] = rootA
-                ranks[rootA] = ranks[rootB] + ranks[rootA]
-            else:
-                parents[rootA] = rootB
-                ranks[rootB] = ranks[rootB] + ranks[rootA]
-
-        return
-
-    def find(self, parents: List[int], target: int) -> int:
-        if parents[target] == target:
-            return target
-        else:
-            return self.find(parents, parents[target])
-
     def findAllPeople(self, n: int, meetings: List[List[int]], firstPerson: int) -> List[int]:
-        meetings.sort(key=lambda x: x[2])
-        parents = [i for i in range(n)]
-        ranks = [1 for i in range(n)]
-        self.union(0, firstPerson, parents, ranks)
-
+        personToMeets = defaultdict(list)
         for a, b, ts in meetings:
-            self.union(a, b, parents, ranks)
+            personToMeets[a].append((b, ts))
+            personToMeets[b].append((a, ts))
+
+        personToMeets[0].append((firstPerson, 0))
+        personToMeets[firstPerson].append((0, 0))
+        bfsQueue = deque([(0, 0), (firstPerson, 0)])
+        knowTs = [sys.maxsize for i in range(n)]
+        while bfsQueue:
+            person, ts = bfsQueue.popleft()
+            for neighbor, neighborTs in personToMeets[person]:
+                if neighborTs >= ts and knowTs[neighbor] > neighborTs:
+                    bfsQueue.append((neighbor, neighborTs))
+                    knowTs[neighbor] = neighborTs
 
         result = []
-        source = self.find(parents, firstPerson)
         for i in range(n):
-            if self.find(parents, i) == source:
+            if knowTs[i] != sys.maxsize:
                 result.append(i)
 
         return result
