@@ -11,25 +11,43 @@ from sortedcontainers import SortedDict
 
 class AllPeopleWithSecret(unittest.TestCase):
 
+    def union(self, a: int, b: int, parents: List[int], ranks: List[int]):
+        rootA = self.find(parents, a)
+        rootB = self.find(parents, b)
+        if rootA == rootB:
+            return
+        else:
+            if ranks[rootA] > ranks[rootB]:
+                parents[rootB] = rootA
+                ranks[rootA] = ranks[rootB] + ranks[rootA]
+            else:
+                parents[rootA] = rootB
+                ranks[rootB] = ranks[rootB] + ranks[rootA]
+
+        return
+
+    def find(self, parents: List[int], target: int) -> int:
+        if parents[target] == target:
+            return target
+        else:
+            return self.find(parents, parents[target])
+
     def findAllPeople(self, n: int, meetings: List[List[int]], firstPerson: int) -> List[int]:
         meetings.sort(key=lambda x: x[2])
-        timeToPeople = defaultdict(set)
-        timeToPeople[0] = {0, firstPerson}
-        for meeting in meetings:
-            a, b, ts = meeting
-            if ts not in timeToPeople:
-                timeToPeople[ts] = set()
-            timeToPeople[ts].add(a)
-            timeToPeople[ts].add(b)
+        parents = [i for i in range(n)]
+        ranks = [1 for i in range(n)]
+        self.union(0, firstPerson, parents, ranks)
 
-        initial = {0, firstPerson}
         for a, b, ts in meetings:
-            people = timeToPeople[ts]
-            intersect = initial.intersection(people)
-            if intersect:
-                initial = initial.union(people)
+            self.union(a, b, parents, ranks)
 
-        return initial
+        result = []
+        source = self.find(parents, firstPerson)
+        for i in range(n):
+            if self.find(parents, i) == source:
+                result.append(i)
+
+        return result
 
     def test_example1(self):
         n = 6
