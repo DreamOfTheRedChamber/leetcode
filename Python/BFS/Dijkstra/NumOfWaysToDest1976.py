@@ -23,18 +23,23 @@ class NumOfWaysToDest(unittest.TestCase):
         bfsQueue = [(0, 0)]
         while bfsQueue:
             dist, node = heapq.heappop(bfsQueue)
+            if dist > dists[node]:
+                continue
             for neighborDist, neighborNode in graph[node]:
                 if dists[neighborNode] > dist + neighborDist:
                     numWays[neighborNode] = numWays[node]
-                    dists[neighborNode] = dists[node] + dist
-                    heapq.heappush(bfsQueue, (neighborDist, neighborNode))
+                    dists[neighborNode] = neighborDist + dist
+                    heapq.heappush(bfsQueue, (dists[neighborNode], neighborNode))
                 elif dists[neighborNode] == dist + neighborDist:
-                    numWays[neighborNode] = (numWays[node] + numWays[neighborNode]) % (pow(10, 9) + 7)
+                    numWays[neighborNode] = (numWays[node] + numWays[neighborNode]) % 1_000_000_007
 
         return numWays[n-1]
 
     def test_Leetcode(self):
-        print([1])
+        n = 7
+        roads = [[0, 6, 7], [0, 1, 2], [1, 2, 3], [1, 3, 3], [6, 3, 3], [3, 5, 1], [6, 5, 1], [2, 5, 1],
+                        [0, 4, 5], [4, 6, 2]]
+        self.assertEqual(4, self.countPaths(n, roads))
 
 if __name__ == '__main__':
     unittest.main()
