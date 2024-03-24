@@ -13,14 +13,25 @@ class MeetingRoomsIII(unittest.TestCase):
         # min heap by room index
         available = []
         for i in range(n):
-            heapq.heappush(available, (0, i))
+            heapq.heappush(available, (i, 0))
 
+        # rank by ts first, and then room index
+        unavailable = []
         freqMap = defaultdict(lambda: 0)
         for start, end in meetings:
-            ts, index = heapq.heappop(available)
-            delayedStart = max(ts, start)
-            heapq.heappush(available, (delayedStart + end - start, index))
-            freqMap[index] += 1
+            while unavailable and start >= unavailable[0][0]:
+                ts, index = heapq.heappop(unavailable)
+                heapq.heappush(available, (index, start))
+
+            if not available:
+                ts, index = heapq.heappop(unavailable)
+                currTime = max(ts, start)
+                heapq.heappush(unavailable, (currTime + end - start, index))
+                freqMap[index] += 1
+            else:
+                index, ts = heapq.heappop(available)
+                heapq.heappush(unavailable, (end, index))
+                freqMap[index] += 1
 
         maxFreq = max(freqMap.values())
         for i in range(n):
@@ -38,6 +49,12 @@ class MeetingRoomsIII(unittest.TestCase):
         n = 3
         meetings = [[1, 20], [2, 10], [3, 5], [4, 9], [6, 8]]
         self.assertEqual(1, self.mostBooked(n, meetings))
+
+    def test_example3(self):
+        n = 4
+        meetings = [[18,19],[3,12],[17,19],[2,13],[7,10]]
+        self.assertEqual(0, self.mostBooked(n, meetings))
+
 
 if __name__ == '__main__':
     unittest.main()
