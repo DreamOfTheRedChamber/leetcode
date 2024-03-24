@@ -22,7 +22,7 @@ class MinimumPenaltyForShop(unittest.TestCase):
 
         minPenalty = sys.maxsize
         minTs = 0
-        for i in range(len(customers)):
+        for i in range(len(openPenalty)):
             currPenalty = openPenalty[i] + closePenalty[i]
             if currPenalty < minPenalty:
                 minPenalty = currPenalty
@@ -32,7 +32,11 @@ class MinimumPenaltyForShop(unittest.TestCase):
 
     def test_example1(self):
         self.assertEqual(2, self.bestClosingTime("YYNY"))
+
+    def test_example2(self):
         self.assertEqual(0, self.bestClosingTime("NNNNN"))
+
+    def test_example3(self):
         self.assertEqual(4, self.bestClosingTime("YYYY"))
 
 if __name__ == '__main__':
