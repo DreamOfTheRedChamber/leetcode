@@ -18,7 +18,6 @@ class LongestValidSubstring(unittest.TestCase):
             for checkedStart in range(max(start, end - 9), end + 1):
                 if word[checkedStart:end + 1] in forbiddenSet:
                     start = checkedStart + 1
-                    break
             result = max(result, end - start + 1)
 
         return result
@@ -32,6 +31,11 @@ class LongestValidSubstring(unittest.TestCase):
         word = "leetcode"
         forbidden = ["de", "le", "e"]
         self.assertEqual(4, self.longestValidSubstringBruteForce(word, forbidden))
+
+    def test_example3(self):
+        word = "baabb"
+        forbidden = ["bcbcb", "aab", "baab", "cbc"]
+        self.assertEqual(3, self.longestValidSubstringBruteForce(word, forbidden))
 
 if __name__ == '__main__':
     unittest.main()
