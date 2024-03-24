@@ -14,7 +14,7 @@ class LongestRepeatingCharacterRep(unittest.TestCase):
         freqMap = defaultdict(lambda: 0)
         for right in range(len(s)):
             freqMap[s[right]] += 1
-            replNum = right - left - max(freqMap.values())
+            replNum = right - left + 1 - max(freqMap.values())
 
             while replNum > k:
                 freqMap[s[left]] -= 1
