@@ -22,9 +22,16 @@ class Template(unittest.TestCase):
                     continue
                 minOp[head] = depth
 
-                for next in range(head - (k-1), head + k-1 + 1, 2):
-                    if 0 <= next < n and next not in minOp:
-                        bfsQueue.append(next)
+                minStart = head - (k - 1)
+                while minStart < 0:
+                    minStart += 1
+                maxStart = head
+                while maxStart + k - 1 > n - 1:
+                    maxStart -= 1
+                for start in range(minStart, maxStart + 1):
+                    mirroredPos = start + k - 1 - head
+                    if 0 <= mirroredPos < n and mirroredPos not in minOp:
+                        bfsQueue.append(mirroredPos)
 
             levelSize = len(bfsQueue)
             depth += 1
@@ -65,6 +72,16 @@ class Template(unittest.TestCase):
         k = 1
 
         # [-1,-1,0,-1]
+        result = self.minReverseOperations(n, p, banned, k)
+        print(result)
+
+    def test_example4(self):
+        n = 4
+        p = 0
+        banned = []
+        k = 4
+
+        # [0,-1,-1,1]
         result = self.minReverseOperations(n, p, banned, k)
         print(result)
 
