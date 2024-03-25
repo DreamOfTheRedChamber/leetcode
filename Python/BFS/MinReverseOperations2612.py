@@ -29,7 +29,7 @@ class Template(unittest.TestCase):
                 while maxStart + k - 1 > n - 1:
                     maxStart -= 1
                 for start in range(minStart, maxStart + 1):
-                    mirroredPos = start + k - 1 - head
+                    mirroredPos = start + start + k - 1 - head
                     if 0 <= mirroredPos < n and mirroredPos not in minOp:
                         bfsQueue.append(mirroredPos)
 
@@ -82,6 +82,16 @@ class Template(unittest.TestCase):
         k = 4
 
         # [0,-1,-1,1]
+        result = self.minReverseOperations(n, p, banned, k)
+        print(result)
+
+    def test_example5(self):
+        n = 5
+        p = 0
+        banned = []
+        k = 2
+
+        # [0,1,2,3,4]
         result = self.minReverseOperations(n, p, banned, k)
         print(result)
 
