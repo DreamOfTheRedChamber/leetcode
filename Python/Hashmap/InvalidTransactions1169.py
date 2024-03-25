@@ -9,35 +9,27 @@ from typing import List
 class InvalidTransactions(unittest.TestCase):
 
     def invalidTransactions(self, transactions: List[str]) -> List[str]:
-        invalid = []
-        existingDup = set()
+        invalid = set()
         mapping = defaultdict(list)
 
-        for tran in transactions:
+        for index, tran in enumerate(transactions):
             name, time, amount, city = tran.split(',')
 
             if int(amount) > 1000:
-                invalid.append(tran)
-
+                invalid.add(index)
             elif name in mapping:
-                isInvalid = False
-                for existingTime, existingAmount, existingCity in mapping[name]:
+                for existingTime, existingAmount, existingCity, existingIndex in mapping[name]:
                     if abs(existingTime - int(time)) <= 60 and existingCity != city:
-                        existingEntry = name + ',' + str(existingTime) + ',' + str(existingAmount) + ',' + existingCity
-                        existingDup.add(existingEntry)
-                        isInvalid = True
+                        invalid.add(existingIndex)
+                        invalid.add(index)
 
-                if isInvalid:
-                    invalid.append(tran)
+            mapping[name].append((int(time), int(amount), city, index))
 
-            mapping[name].append((int(time), int(amount), city))
+        result = []
+        for index in invalid:
+            result.append(transactions[index])
+        return result
 
-        for entry in existingDup:
-            invalid.append(entry)
-
-        return invalid
-
-    @unittest.skip
     def test_example1(self):
         transactions = ["alice,20,800,mtv", "alice,50,100,beijing"]
         result = self.invalidTransactions(transactions)
@@ -52,12 +44,25 @@ class InvalidTransactions(unittest.TestCase):
         # ["alice,20,800,mtv","alice,50,100,mtv","alice,51,100,frankfurt"]
         print(result)
 
-    @unittest.skip
     def test_example3(self):
         transactions = ["alice,20,1220,mtv", "alice,20,1220,mtv"]
         result = self.invalidTransactions(transactions)
 
         # ["alice,20,1220,mtv", "alice,20,1220,mtv"]
+        print(result)
+
+    def test_example4(self):
+        transactions = ["alice,20,800,mtv", "bob,50,1200,mtv", "alice,20,800,mtv", "alice,50,1200,mtv", "alice,20,800,mtv", "alice,50,100,beijing"]
+        result = self.invalidTransactions(transactions)
+
+        # ["alice,20,800,mtv","bob,50,1200,mtv","alice,20,800,mtv","alice,50,1200,mtv","alice,20,800,mtv","alice,50,100,beijing"]
+        print(result)
+
+    def test_example5(self):
+        transactions = ["bob,689,1910,barcelona", "alex,696,122,bangkok", "bob,832,1726,barcelona", "bob,820,596,bangkok", "chalicefy,217,669,barcelona", "bob,175,221,amsterdam"]
+        result = self.invalidTransactions(transactions)
+
+        # ["bob,689,1910,barcelona","bob,832,1726,barcelona","bob,820,596,bangkok"]
         print(result)
 
 if __name__ == '__main__':
