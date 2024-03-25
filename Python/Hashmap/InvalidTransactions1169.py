@@ -14,19 +14,18 @@ class InvalidTransactions(unittest.TestCase):
 
         for tran in transactions:
             name, time, amount, city = tran.split(',')
-            key = name + ',' + city
 
             if int(amount) > 1000:
                 invalid.append(tran)
 
-            if key in mapping:
-                for existingTime, existingAmount in mapping[key]:
-                    if abs(existingTime - int(time)) <= 60:
-                        existingEntry = key + ',' + str(existingTime) + ',' + str(existingAmount)
+            if name in mapping:
+                for existingTime, existingAmount, existingCity in mapping[name]:
+                    if abs(existingTime - int(time)) <= 60 and existingCity != city:
+                        existingEntry = name + ',' + str(existingTime) + ',' + str(existingAmount) + ',' + existingCity
                         invalid.append(existingEntry)
                         invalid.append(tran)
 
-            mapping[key].append((int(time), int(amount)))
+            mapping[name].append((int(time), int(amount), city))
 
         return invalid
 
@@ -34,6 +33,7 @@ class InvalidTransactions(unittest.TestCase):
         transactions = ["alice,20,800,mtv","alice,50,100,beijing"]
         # ["alice,20,800,mtv","alice,50,100,beijing"]
         result = self.invalidTransactions(transactions)
+        print(result)
 
 if __name__ == '__main__':
     unittest.main()
