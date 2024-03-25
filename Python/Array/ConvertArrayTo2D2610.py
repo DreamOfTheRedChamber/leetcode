@@ -13,7 +13,7 @@ class ConvertTo2DArray(unittest.TestCase):
         freqMap = collections.Counter(nums)
         totalNum = len(nums)
         result = []
-        while totalNum >= 0:
+        while totalNum > 0:
             newLine = []
             for key, value in freqMap.items():
                 if value > 0:
