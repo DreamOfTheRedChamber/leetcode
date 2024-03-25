@@ -10,9 +10,11 @@ class Template(unittest.TestCase):
 
     def minReverseOperations(self, n: int, p: int, banned: List[int], k: int) -> List[int]:
         minOp = dict()
+        marked = set()
         bfsQueue = deque()
         bannedSet = set(banned)
         bfsQueue.append(p)
+        marked.add(p)
         depth = 0
         levelSize = len(bfsQueue)
         while bfsQueue:
@@ -30,8 +32,9 @@ class Template(unittest.TestCase):
                     maxStart -= 1
                 for start in range(minStart, maxStart + 1):
                     mirroredPos = start + start + k - 1 - head
-                    if 0 <= mirroredPos < n and mirroredPos not in minOp:
+                    if 0 <= mirroredPos < n and mirroredPos not in marked:
                         bfsQueue.append(mirroredPos)
+                        marked.add(mirroredPos)
 
             levelSize = len(bfsQueue)
             depth += 1
@@ -92,6 +95,16 @@ class Template(unittest.TestCase):
         k = 2
 
         # [0,1,2,3,4]
+        result = self.minReverseOperations(n, p, banned, k)
+        print(result)
+
+    def test_example6(self):
+        n = 8
+        p = 6
+        banned = [0]
+        k = 5
+
+        # [-1,-1,1,-1,1,-1,0,-1]
         result = self.minReverseOperations(n, p, banned, k)
         print(result)
 
