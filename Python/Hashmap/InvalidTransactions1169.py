@@ -15,13 +15,13 @@ class InvalidTransactions(unittest.TestCase):
         for index, tran in enumerate(transactions):
             name, time, amount, city = tran.split(',')
 
-            if int(amount) > 1000:
-                invalid.add(index)
-            elif name in mapping:
+            if name in mapping:
                 for existingTime, existingAmount, existingCity, existingIndex in mapping[name]:
                     if abs(existingTime - int(time)) <= 60 and existingCity != city:
                         invalid.add(existingIndex)
                         invalid.add(index)
+            if int(amount) > 1000:
+                invalid.add(index)
 
             mapping[name].append((int(time), int(amount), city, index))
 
@@ -63,6 +63,13 @@ class InvalidTransactions(unittest.TestCase):
         result = self.invalidTransactions(transactions)
 
         # ["bob,689,1910,barcelona","bob,832,1726,barcelona","bob,820,596,bangkok"]
+        print(result)
+
+    def test_example6(self):
+        transactions = ["bob,627,1973,amsterdam","alex,387,885,bangkok","alex,355,1029,barcelona","alex,587,402,bangkok","chalicefy,973,830,barcelona","alex,932,86,bangkok","bob,188,989,amsterdam"]
+        result = self.invalidTransactions(transactions)
+
+        # ["bob,627,1973,amsterdam","alex,387,885,bangkok","alex,355,1029,barcelona"]
         print(result)
 
 if __name__ == '__main__':
