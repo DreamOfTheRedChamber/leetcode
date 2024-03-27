@@ -25,8 +25,9 @@ class MaxEmployeesInvitedInMeeting(unittest.TestCase):
                         visited.add(neighbor)
 
             levelSize = len(bfsQueue)
-            depth += 1
-        return depth - 1
+            if levelSize > 0:
+                depth += 1
+        return depth
 
     def maximumInvitations(self, favorite: List[int]) -> int:
 
@@ -92,6 +93,15 @@ class MaxEmployeesInvitedInMeeting(unittest.TestCase):
         maxTwo = maxTwo + (len(twoLists) - 1) * 2
         return max(maxTwo, maxThree)
 
+    def test_example8(self):
+        # Still wrong for some reason, looks correct on the graph.
+        favorite = [7,0,7,13,11,6,8,5,9,8,9,14,15,7,11,6]
+        self.assertEqual(11, self.maximumInvitations(favorite))
+
+    def test_example4(self):
+        favorite = [1,0,0,2,1,4,7,8,9,6,7,10,8]
+        self.assertEqual(6, self.maximumInvitations(favorite))
+
     def test_example7(self):
         favorite = [1, 0, 3, 2, 5, 6, 7, 4, 9, 8, 11, 10, 11, 12, 10]
         self.assertEqual(11, self.maximumInvitations(favorite))
@@ -110,11 +120,6 @@ class MaxEmployeesInvitedInMeeting(unittest.TestCase):
 
     def test_example3(self):
         favorite = [3, 0, 1, 4, 1]
-        self.assertEqual(4, self.maximumInvitations(favorite))
-
-    @unittest.skip
-    def test_example4(self):
-        favorite = [1,0,0,2,1,4,7,8,9,6,7,10,8]
         self.assertEqual(4, self.maximumInvitations(favorite))
 
     def test_example5(self):
