@@ -10,12 +10,21 @@ class MaxEmployeesInvitedInMeeting(unittest.TestCase):
 
     def findArmLen(self, node: int, forbidNode: int, inEdges: dict) -> int:
         depth = 0
-        currNode = node
-        for neighbor in inEdges[currNode]:
+        firstNext = node
+        for neighbor in inEdges[node]:
             if neighbor != forbidNode:
-                currNode = neighbor
+                firstNext = neighbor
+
+        if firstNext == node:
+            return depth
+        else:
+            currNode = node
+            while currNode in inEdges:
+                for neighbor in inEdges[currNode]:
+                    currNode = neighbor
+                    break
                 depth += 1
-        return depth
+            return depth
 
     def maximumInvitations(self, favorite: List[int]) -> int:
 
@@ -52,7 +61,7 @@ class MaxEmployeesInvitedInMeeting(unittest.TestCase):
             if indegrees[i] == 1:
                 curr = i
                 result = []
-                while indegrees[curr] > 0:
+                while curr not in visited:
                     result.append(curr)
                     visited.add(curr)
                     neighbor = outEdges[curr]
@@ -65,7 +74,7 @@ class MaxEmployeesInvitedInMeeting(unittest.TestCase):
         # for all size bigger than 2
         maxThree = 0
         twoLists = []
-        for key, value in headToCycle:
+        for key, value in headToCycle.items():
             maxThree = max(maxThree, len(value))
             if len(value) == 2:
                 twoLists.append(value)
@@ -73,8 +82,8 @@ class MaxEmployeesInvitedInMeeting(unittest.TestCase):
         # for all size equal to 2, calculate the arm length
         maxTwo = 2
         for nodeA, nodeB in twoLists:
-            aArm = self.findArmLen(nodeA, inEdges)
-            bArm = self.findArmLen(nodeB, inEdges)
+            aArm = self.findArmLen(nodeA, nodeB, inEdges)
+            bArm = self.findArmLen(nodeB, nodeA, inEdges)
             maxTwo = max(maxTwo, aArm + bArm + 2)
 
         return max(maxTwo, maxThree)
