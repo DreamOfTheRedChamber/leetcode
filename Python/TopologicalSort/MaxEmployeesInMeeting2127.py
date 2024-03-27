@@ -10,21 +10,23 @@ class MaxEmployeesInvitedInMeeting(unittest.TestCase):
 
     def findArmLen(self, node: int, forbidNode: int, inEdges: dict) -> int:
         depth = 0
-        firstNext = node
-        for neighbor in inEdges[node]:
-            if neighbor != forbidNode:
-                firstNext = neighbor
+        bfsQueue = deque()
+        bfsQueue.append(node)
+        visited = set()
+        visited.add(forbidNode)
+        visited.add(node)
+        levelSize = len(bfsQueue)
+        while bfsQueue:
+            for i in range(levelSize):
+                head = bfsQueue.popleft()
+                for neighbor in inEdges[head]:
+                    if neighbor not in visited:
+                        bfsQueue.append(neighbor)
+                        visited.add(neighbor)
 
-        if firstNext == node:
-            return depth
-        else:
-            currNode = node
-            while currNode in inEdges:
-                for neighbor in inEdges[currNode]:
-                    currNode = neighbor
-                    break
-                depth += 1
-            return depth
+            levelSize = len(bfsQueue)
+            depth += 1
+        return depth - 1
 
     def maximumInvitations(self, favorite: List[int]) -> int:
 
@@ -44,7 +46,6 @@ class MaxEmployeesInvitedInMeeting(unittest.TestCase):
             if i not in indegrees:
                 bfsQueue.append(i)
                 visited.add(i)
-                break
 
         while bfsQueue:
             head = bfsQueue.popleft()
@@ -75,8 +76,10 @@ class MaxEmployeesInvitedInMeeting(unittest.TestCase):
         maxThree = 0
         twoLists = []
         for key, value in headToCycle.items():
-            maxThree = max(maxThree, len(value))
-            if len(value) == 2:
+            if len(value) > 2:
+                maxThree = max(maxThree, len(value))
+            else:
+                # len(value) == 2:
                 twoLists.append(value)
 
         # for all size equal to 2, calculate the arm length
@@ -87,6 +90,10 @@ class MaxEmployeesInvitedInMeeting(unittest.TestCase):
             maxTwo = max(maxTwo, aArm + bArm + 2)
 
         return max(maxTwo, maxThree)
+
+    def test_example6(self):
+        favorite = [1, 3, 1, 1, 3, 3, 5, 5, 7]
+        self.assertEqual(6, self.maximumInvitations(favorite))
 
     def test_example1(self):
         favorite = [2, 2, 1, 2]
@@ -99,6 +106,15 @@ class MaxEmployeesInvitedInMeeting(unittest.TestCase):
     def test_example3(self):
         favorite = [3, 0, 1, 4, 1]
         self.assertEqual(4, self.maximumInvitations(favorite))
+
+    @unittest.skip
+    def test_example4(self):
+        favorite = [1,0,0,2,1,4,7,8,9,6,7,10,8]
+        self.assertEqual(4, self.maximumInvitations(favorite))
+
+    def test_example5(self):
+        favorite = [1,2,3,4,5,6,2]
+        self.assertEqual(5, self.maximumInvitations(favorite))
 
 if __name__ == '__main__':
     unittest.main()
