@@ -89,7 +89,12 @@ class MaxEmployeesInvitedInMeeting(unittest.TestCase):
             bArm = self.findArmLen(nodeB, nodeA, inEdges)
             maxTwo = max(maxTwo, aArm + bArm + 2)
 
+        maxTwo = maxTwo + (len(twoLists) - 1) * 2
         return max(maxTwo, maxThree)
+
+    def test_example7(self):
+        favorite = [1, 0, 3, 2, 5, 6, 7, 4, 9, 8, 11, 10, 11, 12, 10]
+        self.assertEqual(11, self.maximumInvitations(favorite))
 
     def test_example6(self):
         favorite = [1, 3, 1, 1, 3, 3, 5, 5, 7]
