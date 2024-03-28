@@ -84,13 +84,12 @@ class MaxEmployeesInvitedInMeeting(unittest.TestCase):
                 twoLists.append(value)
 
         # for all size equal to 2, calculate the arm length
-        maxTwo = 2
+        maxTwo = 0
         for nodeA, nodeB in twoLists:
             aArm = self.findArmLen(nodeA, nodeB, inEdges)
             bArm = self.findArmLen(nodeB, nodeA, inEdges)
-            maxTwo = max(maxTwo, aArm + bArm + 2)
+            maxTwo += aArm + bArm + 2
 
-        maxTwo = maxTwo + (len(twoLists) - 1) * 2
         return max(maxTwo, maxThree)
 
     def test_example8(self):
