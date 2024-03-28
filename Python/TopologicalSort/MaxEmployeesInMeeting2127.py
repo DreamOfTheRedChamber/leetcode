@@ -32,12 +32,10 @@ class MaxEmployeesInvitedInMeeting(unittest.TestCase):
     def maximumInvitations(self, favorite: List[int]) -> int:
 
         # Build graphs
-        outEdges = dict()
         indegrees = defaultdict(lambda: 0)
         inEdges = defaultdict(set)
         for index, value in enumerate(favorite):
             indegrees[value] += 1
-            outEdges[index] = value
             inEdges[value].add(index)
 
         # Enqueue the bfs start
@@ -50,7 +48,7 @@ class MaxEmployeesInvitedInMeeting(unittest.TestCase):
 
         while bfsQueue:
             head = bfsQueue.popleft()
-            neighbor = outEdges[head]
+            neighbor = favorite[head]
             if neighbor not in visited:
                 indegrees[neighbor] -= 1
                 if indegrees[neighbor] == 0:
@@ -66,7 +64,7 @@ class MaxEmployeesInvitedInMeeting(unittest.TestCase):
                 while curr not in visited:
                     result.append(curr)
                     visited.add(curr)
-                    neighbor = outEdges[curr]
+                    neighbor = favorite[curr]
                     if neighbor not in visited:
                         indegrees[neighbor] -= 1
                         curr = neighbor
