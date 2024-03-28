@@ -8,68 +8,50 @@ from typing import List
 
 class MaxEmployeesInvitedInMeeting(unittest.TestCase):
 
-    def findArmLen(self, node: int, forbidNode: int, inEdges: dict) -> int:
-        depth = 0
-        bfsQueue = deque()
-        bfsQueue.append(node)
-        visited = set()
-        visited.add(forbidNode)
-        visited.add(node)
-        levelSize = len(bfsQueue)
-        while bfsQueue:
-            for i in range(levelSize):
-                head = bfsQueue.popleft()
-                for neighbor in inEdges[head]:
-                    if neighbor not in visited:
-                        bfsQueue.append(neighbor)
-                        visited.add(neighbor)
-
-            levelSize = len(bfsQueue)
-            if levelSize > 0:
-                depth += 1
-        return depth
-
     def maximumInvitations(self, favorite: List[int]) -> int:
 
         # Build graphs
         indegrees = defaultdict(lambda: 0)
-        inEdges = defaultdict(set)
         for index, value in enumerate(favorite):
             indegrees[value] += 1
-            inEdges[value].add(index)
 
         # Enqueue the bfs start
         bfsQueue = deque()
         visited = set()
+        depthMap = defaultdict(lambda: 0)
         for i in range(len(favorite)):
             if i not in indegrees:
                 bfsQueue.append(i)
                 visited.add(i)
+                depthMap[i] = 0
 
+        depth = 1
+        levelSize = len(bfsQueue)
         while bfsQueue:
-            head = bfsQueue.popleft()
-            neighbor = favorite[head]
-            if neighbor not in visited:
-                indegrees[neighbor] -= 1
-                if indegrees[neighbor] == 0:
-                    bfsQueue.append(neighbor)
-                    visited.add(neighbor)
+            for i in range(levelSize):
+                head = bfsQueue.popleft()
+                neighbor = favorite[head]
+                if neighbor not in visited:
+                    indegrees[neighbor] -= 1
+                    depthMap[neighbor] = depth
+                    if indegrees[neighbor] == 0:
+                        bfsQueue.append(neighbor)
+                        visited.add(neighbor)
+            depth += 1
+            levelSize = len(bfsQueue)
 
-        # Cycle heads
+        # calculate cycle length
         headToCycle = defaultdict(list)
-        for i in range(len(favorite)):
-            if indegrees[i] == 1:
-                curr = i
-                result = []
+        for key, value in indegrees.items():
+            if value == 1:
+                curr = key
                 while curr not in visited:
-                    result.append(curr)
+                    headToCycle[key].append(curr)
                     visited.add(curr)
                     neighbor = favorite[curr]
                     if neighbor not in visited:
                         indegrees[neighbor] -= 1
                         curr = neighbor
-
-                headToCycle[i] = result
 
         # for all size bigger than 2
         maxThree = 0
@@ -84,8 +66,8 @@ class MaxEmployeesInvitedInMeeting(unittest.TestCase):
         # for all size equal to 2, calculate the arm length
         maxTwo = 0
         for nodeA, nodeB in twoLists:
-            aArm = self.findArmLen(nodeA, nodeB, inEdges)
-            bArm = self.findArmLen(nodeB, nodeA, inEdges)
+            aArm = depthMap[nodeA]
+            bArm = depthMap[nodeB]
             maxTwo += aArm + bArm + 2
 
         return max(maxTwo, maxThree)
