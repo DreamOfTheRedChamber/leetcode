@@ -37,11 +37,16 @@ class NumOfHouses(unittest.TestCase):
         for i in range(numRows):
             for j in range(numCols):
                 index = i * numRows + j
+                if grid[i][j] != 1:
+                    continue
+
                 for xDir, yDir in dirs:
                     xNeigh = i + xDir
                     yNeigh = j + yDir
                     neighIndex = xNeigh * numRows + yNeigh
                     if 0 <= xNeigh < numRows and 0 <= yNeigh < numCols:
+                        if grid[xNeigh][yNeigh] != 1:
+                            continue
                         uf.union(index, neighIndex)
 
         numHouses = set()
