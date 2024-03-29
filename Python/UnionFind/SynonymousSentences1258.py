@@ -43,6 +43,7 @@ class SynonymousSentences(unittest.TestCase):
         if textItems[currPos] not in words:
             oneResult.append(textItems[currPos])
             self.dfs(currPos + 1, textItems, rootToWords, words, uf, oneResult, allResult)
+            oneResult.pop()
         else:
             root = uf.find(textItems[currPos])
             for poss in rootToWords[root]:
@@ -68,7 +69,7 @@ class SynonymousSentences(unittest.TestCase):
         textItems = text.split(' ')
         allResults = []
         self.dfs(0, textItems, rootToWords, words, uf, [], allResults)
-        return allResults
+        return sorted(allResults)
 
     def test_example1(self):
         synonyms = [["happy", "joy"], ["sad", "sorrow"],["joy", "cheerful"]]
