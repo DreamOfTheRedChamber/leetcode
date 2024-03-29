@@ -8,28 +8,26 @@ from typing import List
 
 class UnionFind(object):
     def __init__(self, n: int):
-        self.uf = [i for i in range(n)]
+        self.parent = [i for i in range(n)]
         self.size = [1] * n
 
-    def find(self, x):
-        while x != self.uf[x]:
-            self.uf[x] = self.uf[self.uf[x]]
-            x = self.uf[x]
-        return self.uf[x]
-
-    def union(self, x, y):
-        x_root = self.find(x)
-        y_root = self.find(y)
-        if x_root == y_root:
-            return
-        elif self.size[x_root] > self.size[y_root]:
-            self.uf[y_root] = x_root
-            self.size[x_root] += self.size[y_root]
-            self.size[y_root] = 0
+    def find(self, x: int) -> int:
+        if x == self.parent[x]:
+            return x
         else:
-            self.uf[x_root] = y_root
-            self.size[y_root] += self.size[x_root]
-            self.size[x_root] = 0
+            return self.find(self.parent[x])
+
+    def union(self, x: int, y: int):
+        xRoot = self.find(x)
+        yRoot = self.find(y)
+        if xRoot == yRoot:
+            return
+        elif self.size[xRoot] > self.size[yRoot]:
+            self.parent[yRoot] = xRoot
+            self.size[xRoot] += self.size[yRoot]
+        else:
+            self.parent[xRoot] = yRoot
+            self.size[yRoot] += self.size[xRoot]
 
     def getSize(self, x):
         root = self.find(x)
@@ -48,10 +46,16 @@ class CountUnreachablePairsNodes(unittest.TestCase):
                 compSize = uf.getSize(i)
                 comp.append(compSize)
 
+        suffixSum = [0 for i in range(len(comp))]
+        for i in reversed(range(len(comp))):
+            if i == len(comp) - 1:
+                suffixSum[i] = comp[i]
+            else:
+                suffixSum[i] = comp[i] + suffixSum[i + 1]
+                
         result = 0
-        for i in range(len(comp)):
-            for j in range(i + 1, len(comp)):
-                result += comp[i] * comp[j]
+        for i in range(len(comp) - 1):
+            result += comp[i] * suffixSum[i + 1]
         return result
 
     def test_Leetcode(self):
