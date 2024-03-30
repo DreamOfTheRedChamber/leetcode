@@ -11,19 +11,19 @@ class NumOfGoodSubarrays(unittest.TestCase):
     def countGood(self, nums: List[int], k: int) -> int:
         result = 0
         numOfP = 0
-        j = 0
+        j = -1
         freqMap = defaultdict(lambda: 0)
         for i in range(len(nums)):
-            while numOfP < k and j < len(nums):
-                freqMap[nums[j]] += 1
-                numOfP += freqMap[nums[j]] - 1
+            while numOfP < k and j < len(nums) - 1:
                 j += 1
+                numOfP += freqMap[nums[j]]
+                freqMap[nums[j]] += 1
 
             if numOfP >= k:
                 result += len(nums) - j
 
-            freqMap[nums[i]] -= 1
             numOfP -= freqMap[nums[i]] - 1
+            freqMap[nums[i]] -= 1
 
         return result
 
@@ -33,7 +33,7 @@ class NumOfGoodSubarrays(unittest.TestCase):
         self.assertEqual(1, self.countGood(nums, k))
 
     def test_example2(self):
-        nums = [3,1,4,3,2,2,4]
+        nums = [3, 1, 4, 3, 2, 2, 4]
         k = 2
         self.assertEqual(4, self.countGood(nums, k))
 
