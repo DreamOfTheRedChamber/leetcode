@@ -24,7 +24,7 @@ class MaxTastiness(unittest.TestCase):
     def maximumTastiness(self, price: List[int], k: int) -> int:
         price.sort()
         end = max(price) - min(price)
-        start = 1
+        start = 0
         while start + 1 < end:
             mid = (end - start) // 2 + start
             if self.isPossible(mid, price, k):
@@ -51,6 +51,13 @@ class MaxTastiness(unittest.TestCase):
         price = [7, 7, 7, 7]
         k = 2
         self.assertEqual(0, self.maximumTastiness(price, k))
+
+    def test_example4(self):
+        price = [173,11,34,64,28,84,92,129,85,17,150,152,49,191,92,169,37,58]
+        k = 18
+        self.assertEqual(0, self.maximumTastiness(price, k))
+
+
 
 if __name__ == '__main__':
     unittest.main()
