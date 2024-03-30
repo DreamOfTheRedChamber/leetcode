@@ -14,7 +14,7 @@ class MinTimeRepairCars(unittest.TestCase):
         for r in ranks:
             madeNum = floor(sqrt(minTime / r))
             totalNum += madeNum
-        return True if madeNum >= cars else False
+        return True if totalNum >= cars else False
 
     def repairCars(self, ranks: List[int], cars: int) -> int:
         end = max(ranks) * cars * cars
