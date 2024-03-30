@@ -29,7 +29,7 @@ class LargestEvenSum(unittest.TestCase):
             for j in reversed(range(len(nums) - k)):
                 if sortedNums[j] % 2 == 0 and biggestEven == -1:
                     biggestEven = sortedNums[j]
-                if sortedNums[j] % 2 == 1 and smallestOdd == -1:
+                if sortedNums[j] % 2 == 1 and biggestOdd == -1:
                     biggestOdd = sortedNums[j]
                 if biggestEven != -1 and biggestOdd != -1:
                     break
@@ -59,6 +59,11 @@ class LargestEvenSum(unittest.TestCase):
         nums = [1, 3, 5]
         k = 1
         self.assertEqual(-1, self.largestEvenSum(nums, k))
+
+    def test_example4(self):
+        nums = [1, 5, 5, 5, 4]
+        k = 4
+        self.assertEqual(16, self.largestEvenSum(nums, k))
 
 if __name__ == '__main__':
     unittest.main()
