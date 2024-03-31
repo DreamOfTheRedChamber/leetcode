@@ -24,7 +24,8 @@ class CBTInserter:
                 bfsQueue.append(head.right)
 
     def insert(self, val: int) -> int:
-        currIndex = self.size + 1
+        self.size += 1
+        currIndex = self.size
         rpath = []
         while currIndex != 1:
             if currIndex % 2 == 1:
