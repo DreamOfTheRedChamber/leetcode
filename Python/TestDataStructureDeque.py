@@ -6,27 +6,36 @@ from collections import deque
 
 class TestDataStructuresDeque(unittest.TestCase):
 
+    def orderPizza(self, orderPlaced, size):
+        # Write your code here
+        queue = deque()
+        for i in range(size):
+            if orderPlaced[i] < 0:
+                queue.append((orderPlaced[i], i))
+
+        result = []
+        for i in range(size, len(orderPlaced)):
+            if len(queue) > 0:
+                headVal, headPos = queue[0]
+                currStart = i - size
+                if currStart <= headPos <= currStart + size - 1:
+                    result.append(headVal)
+                    if headPos == currStart:
+                        queue.popleft()
+                else:
+                    result.append(0)
+            else:
+                result.append(0)
+
+            if orderPlaced[i] < 0:
+                queue.append((orderPlaced[i], i))
+
+        return result
+
     def test_AppendRemove(self):
-        queue = deque(['name', 'age', 'DOB'])
-        print(queue)
+        result = self.orderPizza([-11, -2, 19, 37, 64, -18], 3)
 
-        queue.append('def')
-        print(queue)
-
-        queue.appendleft('abc')
-        print(queue)
-
-        queue.pop()
-        print(queue)
-
-        queue.popleft()
-        print(queue)
-
-        # Accessing the front element of the deque
-        print("Front element of the deque:", queue[0])
-
-        # Accessing the back element of the deque
-        print("Back element of the deque:", queue[-1])
+        print(" ".join([str(res) for res in result]))
 
 if __name__ == '__main__':
     unittest.main()

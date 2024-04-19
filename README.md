@@ -43,6 +43,10 @@
 1. 380. Insert Delete GetRandom O(1)
 2. 381. Insert-Delete-GetRandom-O1-Duplicates-allowed
 3. 362. Design Hit Counter
+4. 2296. Design a Text Editor
+5. 2043. Simple Bank System
+
+
 
 ## Other
 1. 1291. Sequential Digits (M)
