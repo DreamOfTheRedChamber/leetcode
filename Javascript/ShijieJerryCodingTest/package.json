@@ -1,0 +1,11 @@
+{
+  "name": "shijiejerrycodingtest",
+  "version": "1.0.0",
+  "description": "",
+  "main": "IntensitySegments.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "private": true,
+  "type": "module"
+}
