@@ -4,8 +4,37 @@ import {OrderedMap} from "js-sdsl";
 
 /**
  *
+ * IntensitySegments provides the implementation for intensity segments. The tree
+ * maintains a set of values, sorted by their corresponding keys. The key/value pairs can be
+ * inserted and deleted efficiently in their sorted order as the tree enforces a logn
+ * maximum height. This implementation provides guaranteed log(n) time cost for the
+ * <tt>contains</tt>, <tt>insert</tt> and <tt>remove</tt>
+ * operations.  Algorithms are adaptations of those in Thomas H. Cormen, Charles E. Leiserson,
+ * Ronald L. Rivest, Clifford Stein <I>Introduction to Algorithms, second edition</I>.<p>
+ *
+ * The assymptotic running time for important operations are below:
+ * <pre>
+ *   Method                 big-O
+ * ----------------------------------------------------------------------------
+ * - add                    O(m log(n)) m is the number of entries in [from, to]
+ * - clone                  O(n logn)
+ * - contains               O(logn)
+ * - containsAll            O(m logn) m is the cardinality of the supplied collection
+ * - every                  O(n * O(f)) f is the function supplied as argument
+ * - filter                 O(n * O(f)) f is the function supplied as argument
+ * - forEach                O(n * O(f)) f is the function supplied as argument
+ * - get                    O(logn)
+ * - getValues              O(n)
+ * - insert                 O(logn)
+ * - insertAll              O(m logn) m is the cardinality of the supplied collection
+ * - map                    O(n * O(f)) f is the function supplied as argument
+ * - remove                 O(logn)
+ * - removeAll              O(m logn) m is the cardinality of the supplied collection
+ * - some                   O(n * O(f)) f is the function supplied as argument
+ * - contains               O(n * O(f)) f is the function supplied as argument
+ * </pre>
  */
-class IntensitySegments
+export class IntensitySegments
 {
     /**
      * Constructor for intensity segments.
@@ -28,12 +57,8 @@ class IntensitySegments
     {
         let [prevKey, prevValue] = this.handleFrom(from, amount, true);
 
-        // Handle all intensity between (from, to)
-        // Starting from next element of "from" to bigger elements
         [prevKey, prevValue] = this.handleBetween(from, to, amount, true, prevKey, prevValue);
 
-        // Handle intensity at point [to, to] .
-        // Starting from element which is not smaller than "to".
         this.handleTo(to, amount, prevValue)
 
         this.cleanSkyline();
@@ -48,17 +73,12 @@ class IntensitySegments
      */
     set(from, to, amount)
     {
-        // prevValue represents the last intensity whose value might impact the current segment point
-        // Handle intensity at point [from, from]
         let [prevKey, prevValue] = this.handleFrom(from, amount, false);
 
-        // Handle all intensity between (from, to)
-        // Starting from next element of "from" to bigger elements
         [prevKey, prevValue] = this.handleBetween(from, to, amount, false, prevKey, prevValue);
 
-        // Handle intensity at point [to, to] .
-        // Starting from element which is not smaller than "to".
         this.handleTo(to, amount, prevValue)
+
         this.cleanSkyline();
     }
 
@@ -220,5 +240,3 @@ class IntensitySegments
         return [prevKey, prevValue];
     }
 }
-
-module.exports = {IntensitySegments};
