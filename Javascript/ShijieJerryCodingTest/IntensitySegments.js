@@ -37,30 +37,20 @@ class IntensitySegments
             this.skyline.setElement(prevKey, prevValue + amount);
         }
 
+        // Handle intensity at point [to, to] .
         // Starting from element which is not smaller than "to".
         let firstBigger = this.skyline.upperBound(to);
-        // Handle intensity at point [to, to] .
         if (firstBigger.equals(this.skyline.end()))
         {
-            // When there is no "to" entry in the sorted hashmap (this.skyline)
+            // When "to" is the last element in the sorted hashmap (this.skyline)
 
             this.skyline.setElement(to, 0);
         }
         else
         {
-            let [key, value] = firstBigger.pointer;
-            if (firstBigger.equals(this.skyline.rBegin()) && key === to)
-            {
-                // when "to" exists as the last element in the sorted hashmap
+            // when "to" is not the last element in the sorted hashmap (this.skyline)
 
-                this.skyline.setElement(to, 0);
-            }
-            else
-            {
-                // when "to" is not the last element in the sorted hashmap
-
-                this.skyline.setElement(to, prevValue);
-            }
+            this.skyline.setElement(to, prevValue);
         }
 
         this.cleanSkyline();
