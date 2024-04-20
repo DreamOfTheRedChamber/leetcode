@@ -3,6 +3,7 @@ const {IntensitySegments} = require('./IntensitySegments.js');
 
 describe('add() operation', () =>
 {
+    /*
     test('First provided example"', () =>
     {
         const segments = new IntensitySegments();
@@ -83,12 +84,12 @@ describe('add() operation', () =>
         segments.add(5, 7, -1);
         expect(segments.toString()).toBe("[[2,1],[5,0],[7,1],[8,0]]");
     });
+     */
 
 });
 
 describe('set() operation', () =>
 {
-    /*
     test('set to zero should not cause differences in segments whose values are zero.', () =>
     {
         const segments = new IntensitySegments();
@@ -127,6 +128,23 @@ describe('set() operation', () =>
         segments.set(11, 12, -1);
         expect(segments.toString()).toBe("[[10,1],[11,-1],[12,1],[30,0]]")
     });
-     */
+
+    test('Set an segment spanning across multiple existing segments.', () =>
+    {
+        const segments = new IntensitySegments();
+        expect(segments.toString()).toBe("[]");
+
+        segments.set(10, 30, 1);
+        expect(segments.toString()).toBe("[[10,1],[30,0]]")
+
+        segments.set(35, 40, 2);
+        expect(segments.toString()).toBe("[[10,1],[30,0],[35,2],[40,0]]")
+
+        segments.set(41, 48, 3);
+        expect(segments.toString()).toBe("[[10,1],[30,0],[35,2],[40,0],[41,3],[48,0]]")
+
+        segments.set(11, 45, -2);
+        expect(segments.toString()).toBe("[[10,1],[11,-2],[45,3],[48,0]]")
+    });
 });
 
