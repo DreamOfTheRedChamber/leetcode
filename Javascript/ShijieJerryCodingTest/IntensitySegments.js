@@ -9,9 +9,6 @@ class IntensitySegments
 
     add(from, to, amount)
     {
-        // prevValue represents the last intensity whose value might impact the current segment point
-        // prevValue represents the last intensity whose value might impact the current segment point
-        // Handle intensity at point [from, from]
         let [prevKey, prevValue] = this.handleFrom(from, amount, true);
 
         // Handle all intensity between (from, to)
@@ -94,6 +91,14 @@ class IntensitySegments
         }
     }
 
+    /**
+     * Handle intensity at point "from"
+     * @param from the starting point of the changed segments (inclusive).
+     * @param amount the amount added to the changed segments.
+     * @param isAdd whether it is add() or set() operation
+     * @returns {*[]} the [prevKey, prevValue] pair representing the last intensity whose value might impact the next segment point.
+     * @private
+     */
     handleFrom(from, amount, isAdd)
     {
         // prevValue represents the last intensity whose value might impact the current segment point
@@ -126,6 +131,13 @@ class IntensitySegments
         return [prevKey, prevValue];
     }
 
+    /**
+     * Handle intensity at point "to"
+     * @param to the ending point of the changed segments (exclusive).
+     * @param amount the amount added to the changed segments.
+     * @param prevValue the last intensity value whose value might impact the next segment point.     * @private
+     * @private
+     */
     handleTo(to, amount, prevValue)
     {
         // Handle intensity at point [to, to] .
@@ -147,6 +159,16 @@ class IntensitySegments
         this.cleanSkyline();
     }
 
+    /**
+     * Handle intensity between (from, to)
+     * @param from the starting point of the changed segments (inclusive)
+     * @param to the ending point of the changed segments (exclusive).
+     * @param amount the amount added to the changed segments.
+     * @param isAdd whether it is add() or set() operation
+     * @param prevKey the last intensity time whose value might impact the next segment point.
+     * @param prevValue the last intensity value whose value might impact the next segment point.
+     * @private
+     */
     handleBetween(from, to, amount, isAdd, prevKey, prevValue)
     {
         for (let iterator = this.skyline.find(from).next(); !iterator.equals(this.skyline.end()) && iterator.pointer[0] < to; iterator.next())
