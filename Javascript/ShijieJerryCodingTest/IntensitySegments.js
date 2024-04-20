@@ -31,19 +31,28 @@ class IntensitySegments
 
         // Handle all intensity between (from, to)
         let iterator = this.skyline.find(from).next();
+
+        // Starting from next element of "from" to bigger elements
         while (!iterator.equals(this.skyline.end()))
         {
             let [key, value] = iterator.pointer;
             if ( key >= to )
             {
+                // Next segment is beyond (from,to))
+
                 break;
             }
+            else
+            {
+                // Segments between (from, to)
 
-            [prevKey, prevValue] = iterator.pointer;
-            this.skyline.setElement(key, value + amount);
-            iterator = iterator.next();
+                [prevKey, prevValue] = iterator.pointer;
+                this.skyline.setElement(prevKey, prevValue + amount);
+                iterator = iterator.next();
+            }
         }
 
+        // Handle intensity at "to" and beyond
         if (iterator.equals(this.skyline.end()))
         {
             // When there is no "to" entry in the sorted hashmap (this.skyline)
