@@ -1,12 +1,29 @@
+//Copyright Thomas Shijie Zhang. All Rights Reserved.
+
 import {OrderedMap} from "js-sdsl";
 
+/**
+ *
+ */
 class IntensitySegments
 {
+    /**
+     * Constructor for intensity segments.
+     * @constructor
+     * @public
+     */
     constructor()
     {
         this.skyline = new OrderedMap();
     }
 
+    /**
+     *
+     * @param from
+     * @param to
+     * @param amount
+     * @public
+     */
     add(from, to, amount)
     {
         let [prevKey, prevValue] = this.handleFrom(from, amount, true);
@@ -22,6 +39,13 @@ class IntensitySegments
         this.cleanSkyline();
     }
 
+    /**
+     *
+     * @param from
+     * @param to
+     * @param amount
+     * @public
+     */
     set(from, to, amount)
     {
         // prevValue represents the last intensity whose value might impact the current segment point
@@ -38,6 +62,11 @@ class IntensitySegments
         this.cleanSkyline();
     }
 
+    /**
+     *
+     * @returns {string}
+     * @private
+     */
     toString()
     {
         let result = "[";
@@ -55,6 +84,10 @@ class IntensitySegments
         return result
     }
 
+    /**
+     *
+     * @private
+     */
     cleanSkyline()
     {
         // Remove the beginning 0 values
