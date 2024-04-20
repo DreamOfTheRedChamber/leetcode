@@ -16,11 +16,7 @@ class IntensitySegments
 
         // Handle all intensity between (from, to)
         // Starting from next element of "from" to bigger elements
-        for (let iterator= this.skyline.find(from).next(); !iterator.equals(this.skyline.end()) && iterator.pointer[0] < to; iterator.next())
-        {
-            [prevKey, prevValue] = iterator.pointer;
-            this.skyline.setElement(prevKey, prevValue + amount);
-        }
+        [prevKey, prevValue] = this.handleBetween(from, to, amount, true, prevKey, prevValue);
 
         // Handle intensity at point [to, to] .
         // Starting from element which is not smaller than "to".
@@ -37,11 +33,7 @@ class IntensitySegments
 
         // Handle all intensity between (from, to)
         // Starting from next element of "from" to bigger elements
-        for (let iterator= this.skyline.find(from).next(); !iterator.equals(this.skyline.end()) && iterator.pointer[0] < to; iterator.next())
-        {
-            [prevKey, prevValue] = iterator.pointer;
-            this.skyline.setElement(prevKey, amount);
-        }
+        [prevKey, prevValue] = this.handleBetween(from, to, amount, false, prevKey, prevValue);
 
         // Handle intensity at point [to, to] .
         // Starting from element which is not smaller than "to".
@@ -153,6 +145,24 @@ class IntensitySegments
         }
 
         this.cleanSkyline();
+    }
+
+    handleBetween(from, to, amount, isAdd, prevKey, prevValue)
+    {
+        for (let iterator = this.skyline.find(from).next(); !iterator.equals(this.skyline.end()) && iterator.pointer[0] < to; iterator.next())
+        {
+            [prevKey, prevValue] = iterator.pointer;
+            if (isAdd)
+            {
+                this.skyline.setElement(prevKey, amount + prevValue);
+            }
+            else
+            {
+                this.skyline.setElement(prevKey, amount);
+            }
+        }
+
+        return [prevKey, prevValue];
     }
 }
 
