@@ -4,40 +4,23 @@ import {OrderedMap} from "js-sdsl";
 
 /**
  *
- * IntensitySegments provides the implementation for intensity segments. The tree
- * maintains a set of values, sorted by their corresponding keys. The key/value pairs can be
- * inserted and deleted efficiently in their sorted order as the tree enforces a logn
- * maximum height. This implementation provides guaranteed log(n) time cost for the
- * <tt>contains</tt>, <tt>insert</tt> and <tt>remove</tt>
- * operations.  Algorithms are adaptations of those in Thomas H. Cormen, Charles E. Leiserson,
- * Ronald L. Rivest, Clifford Stein <I>Introduction to Algorithms, second edition</I>.<p>
+ * IntensitySegments provides the implementation for manages “intensity” by segments. Segments are intervals from -infinity to infinity. Intensities are updated by an integer amount for a given range. All intensity starts with 0.
  *
- * The assymptotic running time for important operations are below:
+ * The implementation is based on a sorted hashmap implementation from package js-sdsl https://github.com/js-sdsl/js-sdsl. The sorted hashmap implementation is based on red-black tree and could guarantee O(n) time complexity for
+ * insert, update, delete and search operations.
+ *
+ * The asymptotic running time for important operations are below:
  * <pre>
  *   Method                 big-O
  * ----------------------------------------------------------------------------
  * - add                    O(m log(n)) m is the number of entries in [from, to]
- * - clone                  O(n logn)
- * - contains               O(logn)
- * - containsAll            O(m logn) m is the cardinality of the supplied collection
- * - every                  O(n * O(f)) f is the function supplied as argument
- * - filter                 O(n * O(f)) f is the function supplied as argument
- * - forEach                O(n * O(f)) f is the function supplied as argument
- * - get                    O(logn)
- * - getValues              O(n)
- * - insert                 O(logn)
- * - insertAll              O(m logn) m is the cardinality of the supplied collection
- * - map                    O(n * O(f)) f is the function supplied as argument
- * - remove                 O(logn)
- * - removeAll              O(m logn) m is the cardinality of the supplied collection
- * - some                   O(n * O(f)) f is the function supplied as argument
- * - contains               O(n * O(f)) f is the function supplied as argument
+ * - set                    O(m log(n)) m is the number of entries in [from, to]
  * </pre>
  */
 export class IntensitySegments
 {
     /**
-     * Constructor for intensity segments.
+     * @description Constructor for intensity segments.
      * @constructor
      * @public
      */
@@ -47,14 +30,19 @@ export class IntensitySegments
     }
 
     /**
-     *
-     * @param from
-     * @param to
-     * @param amount
+     * @description Add amount to segment [from, to).
+     * @param from the starting point of the changed segments (inclusive).
+     * @param to the ending point of the changed segments (exclusive). Integer value.
+     * @param amount the amount of the changed segments.
      * @public
      */
     add(from, to, amount)
     {
+        if (!Number.isInteger(from) || !Number.isInteger(to) || !Number.isInteger(amount))
+        {
+            throw new Error("At least one of input arguments is not a number");
+        }
+
         let [prevKey, prevValue] = this.handleFrom(from, amount, true);
 
         [prevKey, prevValue] = this.handleBetween(from, to, amount, true, prevKey, prevValue);
@@ -65,14 +53,19 @@ export class IntensitySegments
     }
 
     /**
-     *
-     * @param from
-     * @param to
-     * @param amount
+     * @description Set the segment [from, to) to value amount.
+     * @param from the starting point of the changed segments (inclusive).
+     * @param to the ending point of the changed segments (exclusive).
+     * @param amount the amount of the changed segments.
      * @public
      */
     set(from, to, amount)
     {
+        if (!Number.isInteger(from) || !Number.isInteger(to) || !Number.isInteger(amount))
+        {
+            throw new Error("At least one of input arguments is not a number");
+        }
+
         let [prevKey, prevValue] = this.handleFrom(from, amount, false);
 
         [prevKey, prevValue] = this.handleBetween(from, to, amount, false, prevKey, prevValue);
@@ -83,9 +76,9 @@ export class IntensitySegments
     }
 
     /**
-     *
-     * @returns {string}
-     * @private
+     * @description Returns the serialized version of intensity segments.
+     * @returns {string} The serialized result.
+     * @public
      */
     toString()
     {
@@ -105,7 +98,7 @@ export class IntensitySegments
     }
 
     /**
-     *
+     * @description Helper method to clean the unnecessary/redundant segment points
      * @private
      */
     cleanSkyline()
@@ -145,9 +138,9 @@ export class IntensitySegments
     }
 
     /**
-     * Handle intensity at point "from"
+     * @description Helper method to handle intensity at point "from"
      * @param from the starting point of the changed segments (inclusive).
-     * @param amount the amount added to the changed segments.
+     * @param amount the amount of the changed segments.
      * @param isAdd whether it is add() or set() operation
      * @returns {*[]} the [prevKey, prevValue] pair representing the last intensity whose value might impact the next segment point.
      * @private
@@ -187,7 +180,7 @@ export class IntensitySegments
     /**
      * Handle intensity at point "to"
      * @param to the ending point of the changed segments (exclusive).
-     * @param amount the amount added to the changed segments.
+     * @param amount the amount of the changed segments.
      * @param prevValue the last intensity value whose value might impact the next segment point.     * @private
      * @private
      */
@@ -216,7 +209,7 @@ export class IntensitySegments
      * Handle intensity between (from, to)
      * @param from the starting point of the changed segments (inclusive)
      * @param to the ending point of the changed segments (exclusive).
-     * @param amount the amount added to the changed segments.
+     * @param amount the amount of the changed segments.
      * @param isAdd whether it is add() or set() operation
      * @param prevKey the last intensity time whose value might impact the next segment point.
      * @param prevValue the last intensity value whose value might impact the next segment point.
