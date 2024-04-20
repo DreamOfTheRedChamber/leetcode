@@ -82,10 +82,12 @@ export class IntensitySegments
      */
     toString()
     {
-        let result = "[";
+        let result = '';
         for (let it = this.skyline.begin(); !it.equals(this.skyline.end()); it.next())
         {
-            result += "[" + it.pointer[0] + "," + it.pointer[1] + "],"
+            let [key, value] = it.pointer;
+            let segment = '[' + key +',' + value + '],';
+            result += segment;
         }
 
         if (result.length > 1)
@@ -93,8 +95,7 @@ export class IntensitySegments
             result = result.slice(0, result.length - 1)
         }
 
-        result += "]"
-        return result
+        return '[' + result + ']';
     }
 
     /**
