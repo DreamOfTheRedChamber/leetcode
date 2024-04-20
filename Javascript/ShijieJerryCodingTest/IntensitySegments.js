@@ -9,55 +9,42 @@ class IntensitySegments
 
     add(from, to, amount)
     {
+        // prevValue represents the last intensity whose value might impact the current segment point
         let [prevKey, prevValue] = [undefined, undefined];
-        let fromIterator = this.skyline.find(from);
-        if (fromIterator.equals(this.skyline.end()))
+
+        // Handle intensity at point [from, from]
+        let lastSmaller = this.skyline.reverseLowerBound(from);
+        if (lastSmaller.equals(this.skyline.rEnd()))
         {
-            // when there is no key=from entry in the sorted hashmap (this.skyline)
+            // When "from" is not covered by any segment existing in the sorted hashmap (this.skyline)
 
-            let lastSmaller = this.skyline.reverseUpperBound(from);
-            if (lastSmaller.equals(this.skyline.rEnd()))
-            {
-                // When "from" is not covered by any range existing in the sorted hashmap (this.skyline)
-                this.skyline.setElement(from, amount);
-                [prevKey, prevValue] = [from, amount];
-            }
-            else
-            {
-                // When "from" is covered by a range existing in the sorted hashmap (this.skyline)
-
-                let [key, value] = lastSmaller.pointer;
-                [prevKey, prevValue] = [key, value];
-                this.skyline.setElement(from, amount + value);
-            }
+            [prevKey, prevValue] = [from, amount];
+            this.skyline.setElement(from, amount);
         }
         else
         {
-            // When "from" already exists in the sorted hashmap (this.skyline)
+            // When "from" is covered by a segment existing in the sorted hashmap (this.skyline)
 
-            let [key, value] = fromIterator.pointer;
-            [prevKey, prevValue] = [key, value];
-            this.skyline.setElement(key, value + amount);
+            [prevKey, prevValue] = lastSmaller.pointer;
+            this.skyline.setElement(from, amount + prevValue);
         }
 
-        // Handle all entries between (from, to)
-        let it = this.skyline.find(from);
-
-        it = it.next();
-        while (!it.equals(this.skyline.end()))
+        // Handle all intensity between (from, to)
+        let iterator = this.skyline.find(from).next();
+        while (!iterator.equals(this.skyline.end()))
         {
-            let [key, value] = it.pointer;
+            let [key, value] = iterator.pointer;
             if ( key >= to )
             {
                 break;
             }
 
-            [prevKey, prevValue] = it.pointer;
+            [prevKey, prevValue] = iterator.pointer;
             this.skyline.setElement(key, value + amount);
-            it = it.next();
+            iterator = iterator.next();
         }
 
-        if (it.equals(this.skyline.end()))
+        if (iterator.equals(this.skyline.end()))
         {
             // When there is no "to" entry in the sorted hashmap (this.skyline)
 
@@ -65,8 +52,8 @@ class IntensitySegments
         }
         else
         {
-            let [key, value] = it.pointer;
-            if (it.equals(this.skyline.rBegin()) && key === to)
+            let [key, value] = iterator.pointer;
+            if (iterator.equals(this.skyline.rBegin()) && key === to)
             {
                 // when "to" exists as the last element in the sorted hashmap
 
