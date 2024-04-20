@@ -10,24 +10,9 @@ class IntensitySegments
     add(from, to, amount)
     {
         // prevValue represents the last intensity whose value might impact the current segment point
-        let [prevKey, prevValue] = [undefined, undefined];
-
+        // prevValue represents the last intensity whose value might impact the current segment point
         // Handle intensity at point [from, from]
-        let lastSmaller = this.skyline.reverseLowerBound(from);
-        if (lastSmaller.equals(this.skyline.rEnd()))
-        {
-            // When "from" is not covered by any segment existing in the sorted hashmap (this.skyline)
-
-            [prevKey, prevValue] = [from, amount];
-            this.skyline.setElement(from, amount);
-        }
-        else
-        {
-            // When "from" is covered by a segment existing in the sorted hashmap (this.skyline)
-
-            [prevKey, prevValue] = lastSmaller.pointer;
-            this.skyline.setElement(from, amount + prevValue);
-        }
+        let [prevKey, prevValue] = this.handleFrom(from, amount, true);
 
         // Handle all intensity between (from, to)
         // Starting from next element of "from" to bigger elements
@@ -39,19 +24,7 @@ class IntensitySegments
 
         // Handle intensity at point [to, to] .
         // Starting from element which is not smaller than "to".
-        let firstBigger = this.skyline.upperBound(to);
-        if (firstBigger.equals(this.skyline.end()))
-        {
-            // When "to" is the last element in the sorted hashmap (this.skyline)
-
-            this.skyline.setElement(to, 0);
-        }
-        else
-        {
-            // when "to" is not the last element in the sorted hashmap (this.skyline)
-
-            this.skyline.setElement(to, prevValue);
-        }
+        this.handleTo(to, amount, prevValue)
 
         this.cleanSkyline();
     }
@@ -59,24 +32,8 @@ class IntensitySegments
     set(from, to, amount)
     {
         // prevValue represents the last intensity whose value might impact the current segment point
-        let [prevKey, prevValue] = [undefined, undefined];
-
         // Handle intensity at point [from, from]
-        let lastSmaller = this.skyline.reverseLowerBound(from);
-        if (lastSmaller.equals(this.skyline.rEnd()))
-        {
-            // When "from" is not covered by any segment existing in the sorted hashmap (this.skyline)
-
-            [prevKey, prevValue] = [from, amount];
-            this.skyline.setElement(from, amount);
-        }
-        else
-        {
-            // When "from" is covered by a segment existing in the sorted hashmap (this.skyline)
-
-            [prevKey, prevValue] = lastSmaller.pointer;
-            this.skyline.setElement(from, amount);
-        }
+        let [prevKey, prevValue] = this.handleFrom(from, amount, false);
 
         // Handle all intensity between (from, to)
         // Starting from next element of "from" to bigger elements
@@ -88,20 +45,7 @@ class IntensitySegments
 
         // Handle intensity at point [to, to] .
         // Starting from element which is not smaller than "to".
-        let firstBigger = this.skyline.upperBound(to);
-        if (firstBigger.equals(this.skyline.end()))
-        {
-            // When "to" is the last element in the sorted hashmap (this.skyline)
-
-            this.skyline.setElement(to, 0);
-        }
-        else
-        {
-            // when "to" is not the last element in the sorted hashmap (this.skyline)
-
-            this.skyline.setElement(to, prevValue);
-        }
-
+        this.handleTo(to, amount, prevValue)
         this.cleanSkyline();
     }
 
@@ -140,8 +84,8 @@ class IntensitySegments
         }
 
         // For multiple neighboring entries with same value, only the 1st one is kept.
-        let [prevKey, prevValue] = this.skyline.begin().pointer;
-        for (let it = this.skyline.begin().next(); !it.equals(this.skyline.end()); it.next())
+        let [prevKey, prevValue] = [undefined, undefined];
+        for (let it = this.skyline.begin(); !it.equals(this.skyline.end()); it.next())
         {
             let [key, value] = it.pointer;
             if (value === prevValue)
@@ -156,6 +100,59 @@ class IntensitySegments
         {
             this.skyline.eraseElementByKey(key);
         }
+    }
+
+    handleFrom(from, amount, isAdd)
+    {
+        // prevValue represents the last intensity whose value might impact the current segment point
+        let [prevKey, prevValue] = [undefined, undefined];
+
+        // Handle intensity at point [from, from]
+        let lastSmaller = this.skyline.reverseLowerBound(from);
+        if (lastSmaller.equals(this.skyline.rEnd()))
+        {
+            // When "from" is not covered by any segment existing in the sorted hashmap (this.skyline)
+
+            [prevKey, prevValue] = [from, amount];
+            this.skyline.setElement(from, amount);
+        }
+        else
+        {
+            // When "from" is covered by a segment existing in the sorted hashmap (this.skyline)
+
+            [prevKey, prevValue] = lastSmaller.pointer;
+            if (isAdd)
+            {
+                this.skyline.setElement(from, amount + prevValue);
+            }
+            else
+            {
+                this.skyline.setElement(from, amount);
+            }
+        }
+
+        return [prevKey, prevValue];
+    }
+
+    handleTo(to, amount, prevValue)
+    {
+        // Handle intensity at point [to, to] .
+        // Starting from element which is not smaller than "to".
+        let firstBigger = this.skyline.upperBound(to);
+        if (firstBigger.equals(this.skyline.end()))
+        {
+            // When "to" is the last element in the sorted hashmap (this.skyline)
+
+            this.skyline.setElement(to, 0);
+        }
+        else
+        {
+            // when "to" is not the last element in the sorted hashmap (this.skyline)
+
+            this.skyline.setElement(to, prevValue);
+        }
+
+        this.cleanSkyline();
     }
 }
 

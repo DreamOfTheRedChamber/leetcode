@@ -1,10 +1,9 @@
 const { OrderedMap } = require('js-sdsl');
-const {IntensitySegments} = require('./IntensitySegments.js');
+const { IntensitySegments } = require('./IntensitySegments.js');
 
 describe('add() operation', () =>
 {
-    /*
-    test('First provided example"', () =>
+    test('First provided example in PDF.', () =>
     {
         const segments = new IntensitySegments();
         expect(segments.toString()).toBe("[]");
@@ -19,7 +18,7 @@ describe('add() operation', () =>
         expect(segments.toString()).toBe("[[10,-1],[20,0],[30,-1],[40,0]]")
     });
 
-    test('Second provided example"', () =>
+    test('Second provided example in PDF.', () =>
     {
         const segments= new IntensitySegments();
         expect(segments.toString()).toBe("[]");
@@ -84,7 +83,6 @@ describe('add() operation', () =>
         segments.add(5, 7, -1);
         expect(segments.toString()).toBe("[[2,1],[5,0],[7,1],[8,0]]");
     });
-     */
 
 });
 
