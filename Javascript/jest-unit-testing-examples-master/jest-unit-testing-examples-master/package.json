@@ -1,0 +1,25 @@
+{
+  "name": "jest-unit-testing-examples",
+  "version": "0.0.1",
+  "description": "Jest unit testing examples",
+  "main": "index.js",
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-jest": "^23.0.0-alpha.0",
+    "babel-preset-airbnb": "^2.4.0",
+    "jest": "^23.0.0"
+  },
+  "scripts": {
+    "test": "jest --ci",
+    "test:watch": "jest --watch",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
+  },
+  "author": "Jasdeep Khalsa",
+  "license": "MIT",
+  "dependencies": {
+    "npm": "^6.6.0",
+    "snyk": "^1.143.1"
+  },
+  "snyk": true
+}

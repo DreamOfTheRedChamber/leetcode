@@ -1,0 +1,36 @@
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "outDir": "dist",
+    "strict": true,
+    "baseUrl": ".",
+    "esModuleInterop": true,
+    "downlevelIteration": true,
+    "moduleResolution": "Node",
+    "forceConsistentCasingInFileNames": true,
+    "stripInternal": true,
+    "resolveJsonModule": true,
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ]
+    },
+    "plugins": [
+      {
+        "transform": "ts-transform-paths",
+        "afterDeclarations": true
+      },
+      {
+        "transform": "ts-macros"
+      }
+    ]
+  },
+  "exclude": [
+    "./test/IsolationTest/*.ts"
+  ],
+  "ts-node": {
+    "compilerOptions": {
+        "module": "commonjs"
+    }
+  }
+}
