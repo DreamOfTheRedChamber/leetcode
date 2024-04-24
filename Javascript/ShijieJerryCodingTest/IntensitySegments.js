@@ -126,17 +126,24 @@ export class IntensitySegments
             }
         }
 
-        // Remove the trailing 0 values
+        // Remove continuous trailing 0 values, only 1 should be left
         let [prevKey, prevValue] = [undefined, undefined];
-        for (let it = this.skyline.begin(); !it.equals(this.skyline.end()); it.next())
+        for (let it = this.skyline.rBegin(); !it.equals(this.skyline.rEnd()); it.next())
         {
             let [key, value] = it.pointer;
-            if (value === prevValue)
+            if (value !== 0)
             {
-                keyToRemove.add(key);
+                break;
             }
+            else
+            {
+                if (value === prevValue && prevValue === 0)
+                {
+                    keyToRemove.add(prevKey);
+                }
 
-            [prevKey, prevValue] = [key, value];
+                [prevKey, prevValue] = [key, value];
+            }
         }
 
         for (const key of keyToRemove)

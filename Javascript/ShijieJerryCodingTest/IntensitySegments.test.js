@@ -93,10 +93,10 @@ describe('add() operation single interval scenario', () => {
         expect(segments.toString()).toBe("[[10,1],[30,0]]");
 
         segments.add(8, 10, 1);
-        expect(segments.toString()).toBe("[[8,1],[30,0]]");
+        expect(segments.toString()).toBe("[[8,1],[10,1],[30,0]]");
 
         segments.add(25, 30, 1);
-        expect(segments.toString()).toBe("[[8,1],[25,2],[30,0]]");
+        expect(segments.toString()).toBe("[[8,1],[10,1],[25,2],[30,0]]");
     });
 
     test('[from, to) is before existing segment [a,b).', () =>
@@ -137,7 +137,7 @@ describe('add() operation multiple interval scenario', () =>
         expect(segments.toString()).toBe("[[10,2],[15,0],[17,2],[18,0]]");
 
         segments.add(15, 17, 2);
-        expect(segments.toString()).toBe("[[10,2],[18,0]]");
+        expect(segments.toString()).toBe("[[10,2],[15,2],[17,2],[18,0]]");
     });
 
     test('Multiple intervals with same zero values should be output separately.', () =>
@@ -173,7 +173,7 @@ describe('add() operation multiple interval scenario', () =>
         expect(segments.toString()).toBe("[[2,1],[5,0],[7,1],[8,0]]");
 
         segments.add(4, 5, -1);
-        expect(segments.toString()).toBe("[[2,1],[4,0],[7,1],[8,0]]");
+        expect(segments.toString()).toBe("[[2,1],[4,0],[5,0],[7,1],[8,0]]");
     });
 
     test('Add an negative range spanning across positive ranges.', () =>
@@ -213,7 +213,7 @@ describe('set() operation single interval scenario.', () =>
         expect(segments.toString()).toBe("[[10,1],[30,0]]")
 
         segments.set(4, 35, 2);
-        expect(segments.toString()).toBe("[[4,2],[35,0]]")
+        expect(segments.toString()).toBe("[[4,2],[10,2],[30,2],[35,0]]")
     });
 
     test('[from, to) intersect with interval [a, b).', () => {
@@ -224,7 +224,7 @@ describe('set() operation single interval scenario.', () =>
         expect(segments.toString()).toBe("[[10,1],[30,0]]")
 
         segments.set(25, 35, 2);
-        expect(segments.toString()).toBe("[[10,1],[25,2],[35,0]]")
+        expect(segments.toString()).toBe("[[10,1],[25,2],[30,2],[35,0]]")
     });
 
     test('[from, to) endpoints "from" already exists with [a, b).', () => {
@@ -249,10 +249,10 @@ describe('set() operation single interval scenario.', () =>
         expect(segments.toString()).toBe("[[10,1],[30,0]]");
 
         segments.set(8, 10, 1);
-        expect(segments.toString()).toBe("[[8,1],[30,0]]");
+        expect(segments.toString()).toBe("[[8,1],[10,1],[30,0]]");
 
         segments.set(25, 30, 1);
-        expect(segments.toString()).toBe("[[8,1],[30,0]]");
+        expect(segments.toString()).toBe("[[8,1],[10,1],[25,1],[30,0]]");
     });
 });
 
@@ -269,7 +269,7 @@ describe('set() operation multiple interval scenario.', () =>
         expect(segments.toString()).toBe("[[10,2],[15,0],[17,2],[18,0]]");
 
         segments.set(15, 17, 2);
-        expect(segments.toString()).toBe("[[10,2],[18,0]]");
+        expect(segments.toString()).toBe("[[10,2],[15,2],[17,2],[18,0]]");
     });
 
     test('Multiple intervals with same zero values should be output separately.', () =>
@@ -317,6 +317,6 @@ describe('set() operation multiple interval scenario.', () =>
         expect(segments.toString()).toBe("[[10,1],[30,0],[35,2],[40,0],[41,3],[48,0]]")
 
         segments.set(11, 45, -2);
-        expect(segments.toString()).toBe("[[10,1],[11,-2],[45,3],[48,0]]")
+        expect(segments.toString()).toBe("[[10,1],[11,-2],[30,-2],[35,-2],[40,-2],[41,-2],[45,3],[48,0]]")
     });
 });
