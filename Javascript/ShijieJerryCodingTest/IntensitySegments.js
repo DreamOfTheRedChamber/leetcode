@@ -28,7 +28,7 @@ export class IntensitySegments
     constructor()
     {
         // The intensive segments are represented by a sorted hashmap inside memory. 
-        // More specifically, if you imagine a sweep line from -inf to inf, each time there is a changing intensity, there will be a (key, value) pair inside the sorted hashmap. 
+        // A list of segments in format (segment start, intensity).
         this.segments = new OrderedMap();
 
         // Whether the serialization format has changed after the last call of .toString()
@@ -58,7 +58,7 @@ export class IntensitySegments
 
         this.handleTo(to, amount, prevValue);
 
-        this.removeRedundantZeroesAtBeginEnd();
+        this.removeRedundantZeros();
 
         // Since an add() operation is performed, the serialization format mostly has changed.
         this.serializationChanged = true;
@@ -84,7 +84,7 @@ export class IntensitySegments
 
         this.handleTo(to, amount, prevValue)
 
-        this.removeRedundantZeroesAtBeginEnd();
+        this.removeRedundantZeros();
 
         // Since a set() operation is performed, the serialization format mostly has changed.
         this.serializationChanged = true;
@@ -114,7 +114,7 @@ export class IntensitySegments
      * @description Helper method to clean the beginning and trailing 0 values.
      * @private
      */
-    removeRedundantZeroesAtBeginEnd()
+    removeRedundantZeros()
     {
         // Remove the beginning 0 values
         const keyToRemove = new Set();
