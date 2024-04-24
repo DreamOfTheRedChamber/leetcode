@@ -15,6 +15,7 @@ import {OrderedMap} from "js-sdsl";
  * ----------------------------------------------------------------------------
  * - add                    O(m log(n)) m is the number of entries in [from, to]
  * - set                    O(m log(n)) m is the number of entries in [from, to]
+ * - toString               O(n)
  * </pre>
  */
 export class IntensitySegments
@@ -26,6 +27,8 @@ export class IntensitySegments
      */
     constructor()
     {
+        // The intensive segments are represented by a sorted hashmap inside memory. 
+        // More specifically, if you imagine a sweep line from -inf to inf, each time there is a changing intensity, there will be a (key, value) pair inside the sorted hashmap. 
         this.skyline = new OrderedMap();
     }
 
@@ -47,7 +50,7 @@ export class IntensitySegments
 
         [prevKey, prevValue] = this.handleBetween(from, to, amount, true, prevKey, prevValue);
 
-        this.handleTo(to, amount, prevValue)
+        this.handleTo(to, amount, prevValue);
 
         this.cleanSkyline();
     }
@@ -103,7 +106,7 @@ export class IntensitySegments
     }
 
     /**
-     * @description Helper method to clean the unnecessary/redundant segment points
+     * @description Helper method to clean the beginning and trailing 0 values.
      * @private
      */
     cleanSkyline()
@@ -206,8 +209,6 @@ export class IntensitySegments
 
             this.skyline.setElement(to, prevValue);
         }
-
-        this.cleanSkyline();
     }
 
     /**
