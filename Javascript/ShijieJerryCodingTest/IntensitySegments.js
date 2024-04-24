@@ -29,7 +29,7 @@ export class IntensitySegments
     {
         // The intensive segments are represented by a sorted hashmap inside memory. 
         // More specifically, if you imagine a sweep line from -inf to inf, each time there is a changing intensity, there will be a (key, value) pair inside the sorted hashmap. 
-        this.skyline = new OrderedMap();
+        this.segments = new OrderedMap();
     }
 
     /**
@@ -52,7 +52,7 @@ export class IntensitySegments
 
         this.handleTo(to, amount, prevValue);
 
-        this.cleanSkyline();
+        this.removeRedundantZeroesAtBeginEnd();
     }
 
     /**
@@ -75,7 +75,7 @@ export class IntensitySegments
 
         this.handleTo(to, amount, prevValue)
 
-        this.cleanSkyline();
+        this.removeRedundantZeroesAtBeginEnd();
     }
 
     /**
@@ -90,7 +90,7 @@ export class IntensitySegments
         const COMMA = ',';
 
         let result = '';
-        for (let it = this.skyline.begin(); !it.equals(this.skyline.end()); it.next())
+        for (let it = this.segments.begin(); !it.equals(this.segments.end()); it.next())
         {
             let [key, value] = it.pointer;
             let segment = LEFT_BRACKET + key + COMMA + value + RIGHT_BRACKET + COMMA;
@@ -103,17 +103,23 @@ export class IntensitySegments
         }
 
         return LEFT_BRACKET + result + RIGHT_BRACKET;
+
+        /*
+        const arr = Array.from(this.segments);
+        let result2 = JSON.stringify(arr);
+        return result2;
+         */
     }
 
     /**
      * @description Helper method to clean the beginning and trailing 0 values.
      * @private
      */
-    cleanSkyline()
+    removeRedundantZeroesAtBeginEnd()
     {
         // Remove the beginning 0 values
         const keyToRemove = new Set();
-        for (let it = this.skyline.begin(); !it.equals(this.skyline.end()); it.next())
+        for (let it = this.segments.begin(); !it.equals(this.segments.end()); it.next())
         {
             let [key, value] = it.pointer;
             if (value === 0)
@@ -128,7 +134,7 @@ export class IntensitySegments
 
         // Remove continuous trailing 0 values, only 1 should be left
         let [prevKey, prevValue] = [undefined, undefined];
-        for (let it = this.skyline.rBegin(); !it.equals(this.skyline.rEnd()); it.next())
+        for (let it = this.segments.rBegin(); !it.equals(this.segments.rEnd()); it.next())
         {
             let [key, value] = it.pointer;
             if (value !== 0)
@@ -148,7 +154,7 @@ export class IntensitySegments
 
         for (const key of keyToRemove)
         {
-            this.skyline.eraseElementByKey(key);
+            this.segments.eraseElementByKey(key);
         }
     }
 
@@ -165,13 +171,12 @@ export class IntensitySegments
         // prevValue represents the last intensity whose value might impact the current segment point
         let [prevKey, prevValue] = [undefined, undefined];
 
-        // Handle intensity at point [from, from]
-        let lastSmaller = this.skyline.reverseLowerBound(from);
-        if (lastSmaller.equals(this.skyline.rEnd()))
+        let lastSmaller = this.segments.reverseLowerBound(from);
+        if (lastSmaller.equals(this.segments.rEnd()))
         {
             // When "from" is not covered by any segment existing in the sorted hashmap (this.skyline)
 
-            this.skyline.setElement(from, amount);
+            this.segments.setElement(from, amount);
         }
         else
         {
@@ -180,11 +185,11 @@ export class IntensitySegments
             [prevKey, prevValue] = lastSmaller.pointer;
             if (isAdd)
             {
-                this.skyline.setElement(from, amount + prevValue);
+                this.segments.setElement(from, amount + prevValue);
             }
             else
             {
-                this.skyline.setElement(from, amount);
+                this.segments.setElement(from, amount);
             }
         }
 
@@ -200,11 +205,11 @@ export class IntensitySegments
      */
     handleTo(to, amount, prevValue)
     {
-        let toIterator = this.skyline.find(to);
+        let toIterator = this.segments.find(to);
 
         // The value at "to" should not be impacted by add() or set() operation because it is exclusive.
         // Otherwise, set its value to the previous neighboring entry.
-        if (toIterator.equals(this.skyline.end()))
+        if (toIterator.equals(this.segments.end()))
         {
             if (prevValue === undefined)
             {
@@ -212,7 +217,7 @@ export class IntensitySegments
                 prevValue = 0;
             }
 
-            this.skyline.setElement(to, prevValue);
+            this.segments.setElement(to, prevValue);
         }
     }
 
@@ -228,16 +233,16 @@ export class IntensitySegments
      */
     handleBetween(from, to, amount, isAdd, prevKey, prevValue)
     {
-        for (let iterator = this.skyline.find(from).next(); !iterator.equals(this.skyline.end()) && iterator.pointer[0] < to; iterator.next())
+        for (let iterator = this.segments.find(from).next(); !iterator.equals(this.segments.end()) && iterator.pointer[0] < to; iterator.next())
         {
             [prevKey, prevValue] = iterator.pointer;
             if (isAdd)
             {
-                this.skyline.setElement(prevKey, amount + prevValue);
+                this.segments.setElement(prevKey, amount + prevValue);
             }
             else
             {
-                this.skyline.setElement(prevKey, amount);
+                this.segments.setElement(prevKey, amount);
             }
         }
 

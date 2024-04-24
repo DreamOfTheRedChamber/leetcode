@@ -145,14 +145,17 @@ describe('add() operation multiple interval scenario', () =>
         const segments= new IntensitySegments();
         expect(segments.toString()).toBe("[]");
 
-        segments.add(0, 30, 0);
-        expect(segments.toString()).toBe("[]");
+        segments.add(0, 15, 1);
+        expect(segments.toString()).toBe("[[0,1],[15,0]]");
 
         segments.add(20, 30, 1);
-        expect(segments.toString()).toBe("[[20,1],[30,0]]");
+        expect(segments.toString()).toBe("[[0,1],[15,0],[20,1],[30,0]]");
 
-        segments.add(20, 30, -1);
-        expect(segments.toString()).toBe("[]");
+        segments.add(10, 15, -1);
+        expect(segments.toString()).toBe("[[0,1],[10,0],[15,0],[20,1],[30,0]]");
+
+        segments.add(20, 25, -1);
+        expect(segments.toString()).toBe("[[0,1],[10,0],[15,0],[20,0],[25,1],[30,0]]");
     });
 
     test('The redundant zeros in the beginning and end should be trimmed.', () =>
@@ -254,6 +257,30 @@ describe('set() operation single interval scenario.', () =>
         segments.set(25, 30, 1);
         expect(segments.toString()).toBe("[[8,1],[10,1],[25,1],[30,0]]");
     });
+
+    test('[from, to) is before existing segment [a,b).', () =>
+    {
+        const segments= new IntensitySegments();
+        expect(segments.toString()).toBe("[]");
+
+        segments.set(20, 30, 2);
+        expect(segments.toString()).toBe("[[20,2],[30,0]]");
+
+        segments.set(12, 15, 1);
+        expect(segments.toString()).toBe("[[12,1],[15,0],[20,2],[30,0]]");
+    });
+
+    test('[from, to) is after existing segment [a,b).', () =>
+    {
+        const segments= new IntensitySegments();
+        expect(segments.toString()).toBe("[]");
+
+        segments.set(20, 30, 2);
+        expect(segments.toString()).toBe("[[20,2],[30,0]]");
+
+        segments.set(32, 35, 1);
+        expect(segments.toString()).toBe("[[20,2],[30,0],[32,1],[35,0]]");
+    });
 });
 
 describe('set() operation multiple interval scenario.', () =>
@@ -277,17 +304,20 @@ describe('set() operation multiple interval scenario.', () =>
         const segments= new IntensitySegments();
         expect(segments.toString()).toBe("[]");
 
-        segments.set(0, 30, 0);
-        expect(segments.toString()).toBe("[]");
+        segments.set(0, 15, 1);
+        expect(segments.toString()).toBe("[[0,1],[15,0]]");
 
         segments.set(20, 30, 1);
-        expect(segments.toString()).toBe("[[20,1],[30,0]]");
+        expect(segments.toString()).toBe("[[0,1],[15,0],[20,1],[30,0]]");
 
-        segments.set(20, 30, 0);
-        expect(segments.toString()).toBe("[]");
+        segments.set(10, 15, 0);
+        expect(segments.toString()).toBe("[[0,1],[10,0],[15,0],[20,1],[30,0]]");
+
+        segments.set(20, 25, 0);
+        expect(segments.toString()).toBe("[[0,1],[10,0],[15,0],[20,0],[25,1],[30,0]]");
     });
 
-    test('Set to zero should not cause differences in segments whose values are zero.', () =>
+    test('Redundant zeroes at begin and end should be removed.', () =>
     {
         const segments = new IntensitySegments();
         expect(segments.toString()).toBe("[]");
@@ -302,7 +332,7 @@ describe('set() operation multiple interval scenario.', () =>
         expect(segments.toString()).toBe("[[10,1],[30,0]]")
     });
 
-    test('Set an segment spanning across multiple existing segments.', () =>
+    test('Set a negative segment spanning across multiple existing segments.', () =>
     {
         const segments = new IntensitySegments();
         expect(segments.toString()).toBe("[]");
