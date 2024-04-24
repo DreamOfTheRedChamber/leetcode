@@ -126,7 +126,7 @@ export class IntensitySegments
             }
         }
 
-        // For multiple neighboring entries with same value, only the 1st one is kept.
+        // Remove the trailing 0 values
         let [prevKey, prevValue] = [undefined, undefined];
         for (let it = this.skyline.begin(); !it.equals(this.skyline.end()); it.next())
         {
@@ -205,9 +205,13 @@ export class IntensitySegments
         }
         else
         {
-            // when "to" is not the last element in the sorted hashmap (this.skyline)
+            let toExist = this.skyline.find(to);
+            if (toExist.equals(this.skyline.end()))
+            {
+                // when "to" is not the last element in the sorted hashmap (this.skyline)
 
-            this.skyline.setElement(to, prevValue);
+                this.skyline.setElement(to, prevValue);
+            }
         }
     }
 
