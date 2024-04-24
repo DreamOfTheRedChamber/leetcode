@@ -30,6 +30,12 @@ export class IntensitySegments
         // The intensive segments are represented by a sorted hashmap inside memory. 
         // More specifically, if you imagine a sweep line from -inf to inf, each time there is a changing intensity, there will be a (key, value) pair inside the sorted hashmap. 
         this.segments = new OrderedMap();
+
+        // Whether the serialization format has changed after the last call of .toString()
+        this.serializationChanged = true;
+
+        // The serialization format of the segment lists.
+        this.serialization = "";
     }
 
     /**
@@ -53,6 +59,9 @@ export class IntensitySegments
         this.handleTo(to, amount, prevValue);
 
         this.removeRedundantZeroesAtBeginEnd();
+
+        // Since an add() operation is performed, the serialization format mostly has changed.
+        this.serializationChanged = true;
     }
 
     /**
@@ -76,6 +85,9 @@ export class IntensitySegments
         this.handleTo(to, amount, prevValue)
 
         this.removeRedundantZeroesAtBeginEnd();
+
+        // Since a set() operation is performed, the serialization format mostly has changed.
+        this.serializationChanged = true;
     }
 
     /**
@@ -85,30 +97,17 @@ export class IntensitySegments
      */
     toString()
     {
-        const LEFT_BRACKET = '[';
-        const RIGHT_BRACKET = ']';
-        const COMMA = ',';
-
-        let result = '';
-        for (let it = this.segments.begin(); !it.equals(this.segments.end()); it.next())
+        if (this.serializationChanged)
         {
-            let [key, value] = it.pointer;
-            let segment = LEFT_BRACKET + key + COMMA + value + RIGHT_BRACKET + COMMA;
-            result += segment;
+            const arr = Array.from(this.segments);
+            this.serialization = JSON.stringify(arr);
+            this.serializationChanged = false;
+            return this.serialization;
         }
-
-        if (result.length > 1)
+        else
         {
-            result = result.slice(0, result.length - 1)
+            return this.serialization;
         }
-
-        return LEFT_BRACKET + result + RIGHT_BRACKET;
-
-        /*
-        const arr = Array.from(this.segments);
-        let result2 = JSON.stringify(arr);
-        return result2;
-         */
     }
 
     /**
