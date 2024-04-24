@@ -18,7 +18,6 @@ describe('Provided examples in the PDF.', () =>
         expect(segments.toString()).toBe("[[10,-1],[20,0],[30,-1],[40,0]]")
     });
 
-
     test('Second provided example in PDF.', () =>
     {
         const segments= new IntensitySegments();
@@ -98,6 +97,30 @@ describe('add() operation single interval scenario', () => {
 
         segments.add(25, 30, 1);
         expect(segments.toString()).toBe("[[8,1],[25,2],[30,0]]");
+    });
+
+    test('[from, to) is before existing segment [a,b).', () =>
+    {
+        const segments= new IntensitySegments();
+        expect(segments.toString()).toBe("[]");
+
+        segments.add(20, 30, 2);
+        expect(segments.toString()).toBe("[[20,2],[30,0]]");
+
+        segments.add(12, 15, 1);
+        expect(segments.toString()).toBe("[[12,1],[15,0],[20,2],[30,0]]");
+    });
+
+    test('[from, to) is after existing segment [a,b).', () =>
+    {
+        const segments= new IntensitySegments();
+        expect(segments.toString()).toBe("[]");
+
+        segments.add(20, 30, 2);
+        expect(segments.toString()).toBe("[[20,2],[30,0]]");
+
+        segments.add(32, 35, 1);
+        expect(segments.toString()).toBe("[[20,2],[30,0],[32,1],[35,0]]");
     });
 });
 

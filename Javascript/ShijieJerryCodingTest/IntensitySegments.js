@@ -164,7 +164,6 @@ export class IntensitySegments
         {
             // When "from" is not covered by any segment existing in the sorted hashmap (this.skyline)
 
-            [prevKey, prevValue] = [from, amount];
             this.skyline.setElement(from, amount);
         }
         else
@@ -194,24 +193,19 @@ export class IntensitySegments
      */
     handleTo(to, amount, prevValue)
     {
-        // Handle intensity at point [to, to] .
-        // Starting from element which is not smaller than "to".
-        let firstBigger = this.skyline.upperBound(to);
-        if (firstBigger.equals(this.skyline.end()))
-        {
-            // When "to" is the last element in the sorted hashmap (this.skyline)
+        let toIterator = this.skyline.find(to);
 
-            this.skyline.setElement(to, 0);
-        }
-        else
+        // The value at "to" should not be impacted by add() or set() operation because it is exclusive.
+        // Otherwise, set its value to the previous neighboring entry.
+        if (toIterator.equals(this.skyline.end()))
         {
-            let toExist = this.skyline.find(to);
-            if (toExist.equals(this.skyline.end()))
+            if (prevValue === undefined)
             {
-                // when "to" is not the last element in the sorted hashmap (this.skyline)
-
-                this.skyline.setElement(to, prevValue);
+                // There is no existing segments covering "to" endpoint
+                prevValue = 0;
             }
+
+            this.skyline.setElement(to, prevValue);
         }
     }
 
