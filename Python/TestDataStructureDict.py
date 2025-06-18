@@ -6,7 +6,6 @@ from collections import defaultdict
 
 class TestDataStructureDict(unittest.TestCase):
 
-
     @unittest.skip
     def test_CreateDictionary(self):
         # default dictionary for string => string mapping
